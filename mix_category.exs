@@ -1,9 +1,9 @@
-defmodule Kaisen.MixProject do
+defmodule KaisenManpages.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :kaisen,
+      app: :kaisen_manpages,
       version: "1.5.0",
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
