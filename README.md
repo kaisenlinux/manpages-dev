@@ -10,7 +10,7 @@ This project is for:
 run the script :
 
 ```bash
-mix_build.sh
+./mix_build.sh
 # if the command is successful, you can view the doc with your browser
 # firefox doc/index.html (manpages sorted by category)
 # firefox doc/packages/readme.html (manpages sorted by packages A-Z)
@@ -21,7 +21,7 @@ mix_build.sh
 run the script :
 
 ```bash
-mix_build.sh
+./mix_build.sh
 # if the command is successful, you can view the doc with your browser
 # firefox doc/index.html (manpages sorted by category)
 # firefox doc/packages/readme.html (manpages sorted by packages A-Z)
@@ -47,11 +47,6 @@ asdf install elixir latest
 # you have to define a global version for erlang and elixir
 # asdf global elixir 1.11.3-otp-23
 # asdg global erlang 23.2.5 
-```
-
-```bash
-# to get dependancy of the project after the installation
-mix deps.get 
 ```
 
 # Directory definition

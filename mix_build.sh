@@ -1,4 +1,8 @@
 #!/usr/bin/bash
+if [[ ! -f mix.log ]]; then
+    mix deps.get
+    echo "First deps checked" > mix.log
+fi
 
 if [[ -f mix_category.exs ]]; then
     echo "Build of category"
