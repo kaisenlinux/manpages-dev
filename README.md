@@ -3,7 +3,29 @@
 This project is for:
 > Kaisen Linux | Manpages
 
-![kaisen-menu](assets/kaisen_menu.png)
+# How to generate the static html doc
+
+- You can modify a md file in category\ or packages\ then,
+
+run the script :
+
+```bash
+mix_build.sh
+# if the command is successful, you can view the doc with your browser
+# firefox doc/index.html (manpages sorted by category)
+# firefox doc/packages/readme.html (manpages sorted by packages A-Z)
+```
+
+- If you want to add a md file, you have to create a md in category\ or packages\ folder, then add a line in mix_category.exs or mix_packages.exs, then
+
+run the script :
+
+```bash
+mix_build.sh
+# if the command is successful, you can view the doc with your browser
+# firefox doc/index.html (manpages sorted by category)
+# firefox doc/packages/readme.html (manpages sorted by packages A-Z)
+```
 
 # Install the requirements if necessary
 
@@ -48,30 +70,7 @@ mix deps.get
 - `mix category` : configuration for manpages sorted by category with linked md files to build in doc folder
 - `mix packages` : configuration for manpages sorted by packages from A-Z with linked md files to build in doc folder
 
-# How to generate the static html doc
-
-- You can modify a md file in category\ or packages then,
-
-run the script :
-
-```bash
-mix_build.sh
-# if the command is successful, you can view the doc in localhost
-# firefox doc/index.html (manpages sorted by category)
-# firefox doc/packages/index.html (manpages sorted by packages A-Z)
-```
-
-- If you want to add a md file, you have to create a md in category\ or packages\ folder, then add a line in mix_category.exs or mix_packages.exs, then
-
-run the script :
-
-```bash
-mix_build.sh
-# if the command is successful, you can view the doc in localhost
-# firefox doc/index.html (manpages sorted by category)
-# firefox doc/packages/readme.html (manpages sorted by packages A-Z)
-```
-
 # Note
 
-no optimisation post-scripts like sed or other to update page without scrollbar and anchors like h1, h2
+no optimisation post-scripts like sed or other to update manpage desc without horizontal scrollbar and anchors title in h1, h2. 
+no source of how md files are generated.
