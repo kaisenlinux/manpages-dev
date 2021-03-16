@@ -60,15 +60,15 @@ mix deps.get
 - `category` folder : md files to edit for **manpages sorted by category** (used by mix_category.exs)
 - `priv/assets` folder : assets (img, js, css) that are copied in doc folder when generating the doc
     - `priv\assets\doc.css` defines customized kaisen css styles.
-    - `doc-versions.js` defines url dropdown for manpages.
+    - `doc-versions.js` defines url dropdown for manpages.(2files)
 - `doc` folder : Static html documentation is generated in this directory. Folder to put on production webserver.
     - `doc\` contains build html files from mix_category.exs and md category\ folder.
     - `doc\packages` contains build html files from mix_packages.exs and md packages\ folder.
 
 # Configuration
 
-- `mix category` : configuration for manpages sorted by category with linked md files to build in doc folder
-- `mix packages` : configuration for manpages sorted by packages from A-Z with linked md files to build in doc folder
+- `mix_category.exs` : configuration for manpages sorted by category with linked md files to build in doc folder
+- `mix_packages.exs` : configuration for manpages sorted by packages from A-Z with linked md files to build in doc folder
 
 # Note
 
