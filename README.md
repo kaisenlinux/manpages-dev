@@ -3,14 +3,15 @@
 This project is for:
 > Kaisen Linux | Manpages
 
-# How to generate the static html doc
+# How to generate the manpages-documentaion
 
 - You can modify a md file in category\ or packages\ then,
 
 run the script :
 
 ```bash
-./mix_build.sh
+./mix_build.sh # build for website production
+./mix_build.sh --package # build for kaisen-webdocs package
 # if the command is successful, you can view the doc with your browser
 # firefox doc/index.html (manpages sorted by category)
 # firefox doc/packages/readme.html (manpages sorted by packages A-Z)
