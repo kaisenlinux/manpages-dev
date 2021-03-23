@@ -25,7 +25,7 @@ defmodule KaisenManpages.MixProject do
  	 javascript_config_path: "doc-versions.js",
     output: "doc/packages",
          extras: [
-          "packages/README.md",
+          "packages/README.md", [ title: "Manpages by packages"],
           "packages/2ping.md",
           "packages/7z.md",
           "packages/ansible-config.md",

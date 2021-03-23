@@ -24,7 +24,7 @@ defmodule KaisenManpages.MixProject do
          extra_section: "MANUALS",
     javascript_config_path: "doc-versions.js",
          extras: [
-          "category/README.md",
+          "category/README.md", [ title: "Manpages by category"],
           "category/Analysis/dstat.md",
           "category/Analysis/file.md",
           "category/Analysis/memstat.md",
