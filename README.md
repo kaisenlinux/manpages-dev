@@ -70,3 +70,7 @@ asdf install elixir latest
 
 no optimisation post-scripts like sed or other to update manpage desc without horizontal scrollbar and anchors title in h1, h2. 
 no source of how md files are generated.
+
+# version
+
+28/03/2021 - upgrade to v1.6 in mix*.exs
