@@ -1,4 +1,4 @@
-zbackup(1)                                                             General Commands Manual                                                            zbackup(1)
+zbackup(1)                                                                          General Commands Manual                                                                          zbackup(1)
 
 NAME
        zbackup - versatile deduplicating backup tool
@@ -8,8 +8,7 @@ SYNOPSIS
 
        zbackup [--password-file ~/.my_backup_password ] [--threads number_of_threads ] backup /my/backup/repo/backups/backup-`date '+%Y-%m-%d'`
 
-       zbackup   [--password-file   ~/.my_backup_password  [--cache-size  cache_size_in_mb  restore  /my/backup/repo/backups/backup-`date  '+%Y-%m-%d'`  >  /my/pre‐
-       cious/backup-restored.tar
+       zbackup [--password-file ~/.my_backup_password [--cache-size cache_size_in_mb restore /my/backup/repo/backups/backup-`date '+%Y-%m-%d'` > /my/precious/backup-restored.tar
 
 DESCRIPTION
        zbackup init initializes a backup repository for the backup files to be stored.
@@ -46,4 +45,4 @@ AUTHOR
 SEE ALSO
        tar(1) zbackup(5)
 
-                                                                                                                                                          zbackup(1)
+                                                                                                                                                                                     zbackup(1)

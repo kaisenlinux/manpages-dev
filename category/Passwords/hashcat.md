@@ -1,4 +1,4 @@
-Hashcat(1)                                                             General Commands Manual                                                            Hashcat(1)
+Hashcat(1)                                                                          General Commands Manual                                                                          Hashcat(1)
 
 NAME
        hashcat - Advanced CPU-based password recovery utility
@@ -9,11 +9,10 @@ SYNOPSIS
 DESCRIPTION
        Hashcat is the world’s fastest CPU-based password recovery tool.
 
-       While  it's  not as fast as its GPU counterpart oclHashcat, large lists can be easily split in half with a good dictionary and a bit of knowledge of the com‐
-       mand switches.
+       While it's not as fast as its GPU counterpart oclHashcat, large lists can be easily split in half with a good dictionary and a bit of knowledge of the command switches.
 
-       Hashcat is the self-proclaimed world’s fastest CPU-based password recovery tool, Examples of hashcat supported hashing algorithms are  Microsoft  LM  Hashes,
-       MD4, MD5, SHA-family, Unix Crypt formats, MySQL, Cisco PIX.
+       Hashcat  is  the  self-proclaimed world’s fastest CPU-based password recovery tool, Examples of hashcat supported hashing algorithms are Microsoft LM Hashes, MD4, MD5, SHA-family, Unix
+       Crypt formats, MySQL, Cisco PIX.
 
 OPTIONS
        -h, --help
@@ -123,8 +122,7 @@ OPTIONS
               Force RNG seed to NUM
 
        -1, --custom-charset1=CS
-              User-defined charsets example --custom-charset1=?dabcdef : sets charset ?1 to 0123456789abcdef -1 mycharset.hcchr : sets charset ?1 to chars contained
-              in file
+              User-defined charsets example --custom-charset1=?dabcdef : sets charset ?1 to 0123456789abcdef -1 mycharset.hcchr : sets charset ?1 to chars contained in file
 
        -2, --custom-charset2=CS
               User-defined charsets example --custom-charset2=?dabcdef : sets charset ?2 to 0123456789abcdef -2 mycharset.hcchr : sets charset ?2 to chars con$
@@ -488,4 +486,4 @@ AUTHOR
 
        This manual page was written by Daniel Echeverry <epsilon77@gmail.com>, for the Debian project (and may be used by others).
 
-                                                                          February 20 2020                                                                Hashcat(1)
+                                                                                        February 20 2020                                                                             Hashcat(1)

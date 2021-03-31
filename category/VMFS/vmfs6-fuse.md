@@ -1,4 +1,4 @@
-VMFS6-FUSE(8)                                                                vmfs-tools                                                                VMFS6-FUSE(8)
+VMFS6-FUSE(8)                                                                              vmfs-tools                                                                             VMFS6-FUSE(8)
 
 NAME
        vmfs6-fuse - mount VMFS6 file systems
@@ -32,4 +32,4 @@ NOTES
         4. teward@ubuntu.com
            mailto:teward@ubuntu.com
 
-  0.0.0-patched                                                              12/29/2019                                                                VMFS6-FUSE(8)
+  0.0.0-patched                                                                            12/29/2019                                                                             VMFS6-FUSE(8)

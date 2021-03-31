@@ -1,4 +1,4 @@
-NTFSINFO(8)                                                            System Manager's Manual                                                           NTFSINFO(8)
+NTFSINFO(8)                                                                         System Manager's Manual                                                                         NTFSINFO(8)
 
 NAME
        ntfsinfo - dump a file's attributes
@@ -7,13 +7,13 @@ SYNOPSIS
        ntfsinfo [options] device
 
 DESCRIPTION
-       ntfsinfo  will dump the attributes of inode inode-number or the file path-filename and/or information about the mft ( -m option).  Run ntfsinfo without argu‐
-       ments for a full list of options.
+       ntfsinfo  will dump the attributes of inode inode-number or the file path-filename and/or information about the mft ( -m option).  Run ntfsinfo without arguments for a full list of op‐
+       tions.
 
 OPTIONS
-       Below is a summary of all the options that ntfsinfo accepts.  Nearly all options have two equivalent names.  The short name is preceded by  -  and  the  long
-       name  is  preceded  by  --.  Any single letter options, that don't take an argument, can be combined into a single command, e.g.  -fv is equivalent to -f -v.
-       Long named options can be abbreviated to any unique prefix of their name.
+       Below is a summary of all the options that ntfsinfo accepts.  Nearly all options have two equivalent names.  The short name is preceded by - and the long name is preceded by  --.   Any
+       single letter options, that don't take an argument, can be combined into a single command, e.g.  -fv is equivalent to -f -v.  Long named options can be abbreviated to any unique prefix
+       of their name.
 
        -F, --file FILE
               Show information about this file
@@ -47,8 +47,8 @@ BUGS
        ntfs-3g-devel@lists.sf.net
 
 AUTHORS
-       ntfsinfo was written by Matthew J. Fanto, Anton Altaparmakov, Richard Russon, Szabolcs Szakacsits, Yuval Fledel, Yura Pakhuchiy and Cristian Klein.   It  was
-       ported to ntfs-3g by Erik Larsson and Jean-Pierre Andre.
+       ntfsinfo was written by Matthew J. Fanto, Anton Altaparmakov, Richard Russon, Szabolcs Szakacsits, Yuval Fledel, Yura Pakhuchiy and Cristian Klein.  It was ported to  ntfs-3g  by  Erik
+       Larsson and Jean-Pierre Andre.
 
 AVAILABILITY
        ntfsinfo is part of the ntfs-3g package and is available from:
@@ -57,4 +57,4 @@ AVAILABILITY
 SEE ALSO
        ntfsprogs(8)
 
-ntfs-3g 2017.3.23AR.3                                                        April 2006                                                                  NTFSINFO(8)
+ntfs-3g 2017.3.23AR.3                                                                      April 2006                                                                               NTFSINFO(8)

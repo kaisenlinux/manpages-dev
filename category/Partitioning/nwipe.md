@@ -1,4 +1,4 @@
-NWIPE(1)                                                                    User Commands                                                                   NWIPE(1)
+NWIPE(1)                                                                                 User Commands                                                                                 NWIPE(1)
 
 NAME
        nwipe - securely erase disks
@@ -7,10 +7,9 @@ SYNOPSIS
        nwipe [options] [device1] [device2] ...
 
 DESCRIPTION
-       nwipe  is  a  command  that will securely erase disks using a variety of recognised methods.  It is a fork of the dwipe command used by Darik's Boot and Nuke
-       (dban).  nwipe is included with partedmagic if you want a quick and easy bootable CD version.  nwipe was created out of a need to run the DBAN dwipe  command
-       outside  of DBAN, in order to allow its use with any host distribution, thus giving better hardware support.  It is essentially the same as dwipe, with a few
-       changes:
+       nwipe  is  a  command  that will securely erase disks using a variety of recognised methods.  It is a fork of the dwipe command used by Darik's Boot and Nuke (dban).  nwipe is included
+       with partedmagic if you want a quick and easy bootable CD version.  nwipe was created out of a need to run the DBAN dwipe command outside of DBAN, in order to allow its  use  with  any
+       host distribution, thus giving better hardware support.  It is essentially the same as dwipe, with a few changes:
 
        - pthreads is used instead of fork
 
@@ -28,8 +27,8 @@ OPTIONS
               Prints a help summary
 
        --autonuke
-              If no devices have been specified on the command line, starts wiping all devices immediately. If devices have been specified, starts wiping only those
-              specified devices immediately.
+              If  no devices have been specified on the command line, starts wiping all devices immediately. If devices have been specified, starts wiping only those specified devices immedi‐
+              ately.
 
        --autopoweroff
               Power off system on completion of wipe delayed for for one minute. During this one minute delay you can abort the shutdown by typing sudo shutdown -c
@@ -49,8 +48,8 @@ OPTIONS
               Do not show or wipe any USB devices, whether in GUI, --nogui or autonuke mode. (default is to allow USB devices to be shown and wiped).
 
        --nogui
-              Do  not show the GUI interface. Can only be used with the autonuke option.  Nowait option is automatically invoked with the nogui option.  SIGUSR1 can
-              be used to retrieve the current wiping statistics.
+              Do not show the GUI interface. Can only be used with the autonuke option.  Nowait option is automatically invoked with the nogui option.  SIGUSR1 can be  used  to  retrieve  the
+              current wiping statistics.
 
        -v, --verbose
               Log more messages, useful for debugging.
@@ -108,4 +107,4 @@ AUTHOR
 SEE ALSO
        shred(1), dwipe(1), dd(1), dcfldd(1), dc3dd(1)
 
-nwipe version 0.30                                                          December 2020                                                                   NWIPE(1)
+nwipe version 0.30                                                                       December 2020                                                                                 NWIPE(1)

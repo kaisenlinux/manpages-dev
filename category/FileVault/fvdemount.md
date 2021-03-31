@@ -1,4 +1,4 @@
-fvdemount                                                                       LOCAL                                                                      fvdemount
+fvdemount                                                                                    LOCAL                                                                                    fvdemount
 
 NAME
      fvdemount — mounts a FileVault Drive Encrypted (FVDE) volume
@@ -47,8 +47,7 @@ EXAMPLES
      fvdemount 20121113
 
 DIAGNOSTICS
-     Errors, verbose and debug output are printed to stderr when verbose output -v is enabled.  Verbose and debug output are only printed when enabled at compila‐
-     tion.
+     Errors, verbose and debug output are printed to stderr when verbose output -v is enabled.  Verbose and debug output are only printed when enabled at compilation.
 
 BUGS
      Please report bugs of any kind to <joachim.metz@gmail.com> or on the project website: http://code.google.com/p/libfvde/
@@ -57,10 +56,10 @@ AUTHOR
      These man pages were written by Joachim Metz.
 
 COPYRIGHT
-     Copyright (C) 2011-2019, Joachim Metz <joachim.metz@gmail.com>.  This is free software; see the source for copying conditions. There is NO warranty; not even
-     for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+     Copyright (C) 2011-2019, Joachim Metz <joachim.metz@gmail.com>.  This is free software; see the source for copying conditions. There is NO warranty; not even for MERCHANTABILITY or FIT‐
+     NESS FOR A PARTICULAR PURPOSE.
 
 SEE ALSO
      fvdeinfo(1)
 
-libfvde                                                                   January 12, 2014                                                                   libfvde
+libfvde                                                                                 January 12, 2014                                                                                libfvde

@@ -1,4 +1,4 @@
-PDFCRACK(1)                                                            General Commands Manual                                                           PDFCRACK(1)
+PDFCRACK(1)                                                                         General Commands Manual                                                                         PDFCRACK(1)
 
 NAME
        pdfcrack - Password recovery tool for PDF-files
@@ -9,8 +9,8 @@ SYNOPSIS
 DESCRIPTION
        PDFCrack is a tool for recovering passwords and content from PDF-files.
 
-       If aborted with Ctrl-C or by receiving a SIGINT signal, pdfcrack will automatically save current position. The position will be saved in a file called saved‐
-       state.sav in current working directory.
+       If aborted with Ctrl-C or by receiving a SIGINT signal, pdfcrack will automatically save current position. The position will be saved in a file called savedstate.sav in current working
+       directory.
 
        Mandatory arguments for long options are mandatory for short options too.
 
@@ -59,7 +59,7 @@ AUTHOR
 
 COPYRIGHT
        Copyright © 2009 Henning Noren <confusion42@users.sourceforge.net>
-       This is free software.  You may redistribute copies of it under the terms of the GNU General Public License <http://www.gnu.org/licenses/gpl.html>.  There is
-       NO WARRANTY, to the extent permitted by law.
+       This is free software.  You may redistribute copies of it under the terms of the GNU General Public License <http://www.gnu.org/licenses/gpl.html>.  There is NO WARRANTY, to the extent
+       permitted by law.
 
-User Commands                                                               February 2009                                                                PDFCRACK(1)
+User Commands                                                                            February 2009                                                                              PDFCRACK(1)

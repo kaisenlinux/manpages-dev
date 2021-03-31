@@ -1,4 +1,4 @@
-SDMEM(1)                                                               General Commands Manual                                                              SDMEM(1)
+SDMEM(1)                                                                            General Commands Manual                                                                            SDMEM(1)
 
 NAME
        sdmem - secure memory wiper (secure_deletion toolkit)
@@ -7,10 +7,9 @@ SYNOPSIS
        sdmem [-f] [-l] [-l] [-v]
 
 DESCRIPTION
-       sdmem  is  designed to delete data which may lie still in your memory (RAM) in a secure manner which can not be recovered by thiefs, law enforcement or other
-       threats.  Note that with the new SDRAMs, data will not wither away but will be kept static - it is easy to extract the necessary information!  The wipe algo‐
-       rythm  is  based on the paper "Secure Deletion of Data from Magnetic and Solid-State Memory" presented at the 6th Usenix Security Symposium by Peter Gutmann,
-       one of the leading civilian cryptographers.
+       sdmem is designed to delete data which may lie still in your memory (RAM) in a secure manner which can not be recovered by thiefs, law enforcement or other threats.  Note that with the
+       new SDRAMs, data will not wither away but will be kept static - it is easy to extract the necessary information!  The wipe algorythm is based on the paper "Secure Deletion of Data from
+       Magnetic and Solid-State Memory" presented at the 6th Usenix Security Symposium by Peter Gutmann, one of the leading civilian cryptographers.
 
        The secure data deletion process of sdmem goes like this:
 
@@ -41,8 +40,7 @@ BEWARE
        BETA!  sdmem is still beta.
 
 BUGS
-       No bugs. There was never a bug in the secure_deletion package (in contrast to my other tools, whew, good luck ;-) Send me any that  you  find.   Patches  are
-       nice too :)
+       No bugs. There was never a bug in the secure_deletion package (in contrast to my other tools, whew, good luck ;-) Send me any that you find.  Patches are nice too :)
 
 AUTHOR
        van Hauser / THC <vh@thc.org>
@@ -52,13 +50,12 @@ DISTRIBUTION
 
        sdmem and the secure_deletion package is (C) 1997-2003 by van Hauser / THC (vh@thc.org)
 
-       This  program  is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software
-       Foundation; Version 2.
+       This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; Version 2.
 
-       This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
-       A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+       This  program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+       the GNU General Public License for more details.
 
 SEE ALSO
        srm (1), sfill (1), sswap (1)
 
-                                                                                                                                                            SDMEM(1)
+                                                                                                                                                                                       SDMEM(1)

@@ -1,4 +1,4 @@
-vmdkinfo                                                                        LOCAL                                                                       vmdkinfo
+vmdkinfo                                                                                     LOCAL                                                                                     vmdkinfo
 
 NAME
      vmdkinfo — determines information about a VMware Virtual Disk (VMDK) file(s)
@@ -40,8 +40,7 @@ EXAMPLES
              Parent content identifier:      0xffffffff
 
 DIAGNOSTICS
-     Errors, verbose and debug output are printed to stderr when verbose output -v is enabled.  Verbose and debug output are only printed when enabled at compila‐
-     tion.
+     Errors, verbose and debug output are printed to stderr when verbose output -v is enabled.  Verbose and debug output are only printed when enabled at compilation.
 
 BUGS
      Please report bugs of any kind to <joachim.metz@gmail.com> or on the project website: https://github.com/libyal/libvmdk/
@@ -50,8 +49,8 @@ AUTHOR
      These man pages were written by Joachim Metz.
 
 COPYRIGHT
-     Copyright (C) 2009-2020, Joachim Metz <joachim.metz@gmail.com>.  This is free software; see the source for copying conditions. There is NO warranty; not even
-     for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+     Copyright (C) 2009-2020, Joachim Metz <joachim.metz@gmail.com>.  This is free software; see the source for copying conditions. There is NO warranty; not even for MERCHANTABILITY or FIT‐
+     NESS FOR A PARTICULAR PURPOSE.
 
 SEE ALSO
-libvmdk                                                                    March 10, 2019                                                                    libvmdk
+libvmdk                                                                                  March 10, 2019                                                                                 libvmdk

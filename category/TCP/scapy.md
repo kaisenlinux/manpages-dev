@@ -1,4 +1,4 @@
-SCAPY(1)                                                               General Commands Manual                                                              SCAPY(1)
+SCAPY(1)                                                                            General Commands Manual                                                                            SCAPY(1)
 
 NAME
        scapy - Interactive packet manipulation tool
@@ -9,20 +9,18 @@ SYNOPSIS
 DESCRIPTION
        This manual page documents briefly the Scapy tool.
 
-       Scapy  is  a  powerful interactive packet manipulation tool, packet generator, network scanner, network discovery, packet sniffer, etc. It can for the moment
-       replace hping, parts of nmap, arpspoof, arp-sk, arping, tcpdump, tshark, p0f, ...
+       Scapy is a powerful interactive packet manipulation tool, packet generator, network scanner, network discovery, packet sniffer, etc. It can for the moment replace hping, parts of nmap,
+       arpspoof, arp-sk, arping, tcpdump, tshark, p0f, ...
 
-       Scapy uses the Python interpreter as a command board. That means that you can use directly Python language (assign variables, use  loops,  define  functions,
-       etc.) If you give a file a parameter when you run Scapy, your session (variables, functions, instances, ...) will be saved when you leave the interpreter and
-       restored the next time you launch Scapy.
+       Scapy uses the Python interpreter as a command board. That means that you can use directly Python language (assign variables, use loops, define functions, etc.) If you give  a  file  a
+       parameter when you run Scapy, your session (variables, functions, instances, ...) will be saved when you leave the interpreter and restored the next time you launch Scapy.
 
-       The idea is simple. Those kinds of tools do two things : sending packets and receiving answers. That's what Scapy does : you define  a  set  of  packets,  it
-       sends  them, receives answers, matches requests with answers and returns a list of packet couples (request, answer) and a list of unmatched packets. This has
-       the big advantage over tools like nmap or hping that an answer is not reduced to (open/closed/filtered), but is the whole packet.
+       The  idea  is simple. Those kinds of tools do two things : sending packets and receiving answers. That's what Scapy does : you define a set of packets, it sends them, receives answers,
+       matches requests with answers and returns a list of packet couples (request, answer) and a list of unmatched packets. This has the big advantage over tools like nmap or hping  that  an
+       answer is not reduced to (open/closed/filtered), but is the whole packet.
 
-       On top of this can be used to build more high-level functions, for example, one that does traceroutes and give as a result only the start TTL of the  request
-       and  the  source  IP of the answer. One that pings a whole network and gives the list of machines answering. One that does a portscan and returns a LaTeX re‐
-       port.
+       On  top  of  this can be used to build more high-level functions, for example, one that does traceroutes and give as a result only the start TTL of the request and the source IP of the
+       answer. One that pings a whole network and gives the list of machines answering. One that does a portscan and returns a LaTeX report.
 
 OPTIONS
        Options for Scapy are:
@@ -47,20 +45,19 @@ OPTIONS
 COMMANDS
        Only the vital commands to begin are listed here for the moment.
 
-       ls()   lists supported protocol layers.  If a protocol layer is given as parameter, lists its fields and types of fields.  If a string is given as parameter,
-              it is used to filter the layers.
+       ls()   lists supported protocol layers.  If a protocol layer is given as parameter, lists its fields and types of fields.  If a string is given as parameter, it is used to  filter  the
+              layers.
 
        explore()
-              explores  available  protocols.   Allows to look for a layer or protocol through an interactive GUI.  If a Scapy module is given as parameter, explore
-              this specific module.
+              explores available protocols.  Allows to look for a layer or protocol through an interactive GUI.  If a Scapy module is given as parameter, explore this specific module.
 
        lsc()  lists scapy's main user commands.
 
        conf   this object contains the configuration.
 
 FILES
-       $HOME/.scapy_prestart.py This file is run before Scapy core is loaded. Only the conf object is available. This file can be used to manipulate  conf.load_lay‐
-       ers list to choose which layers will be loaded:
+       $HOME/.scapy_prestart.py This file is run before Scapy core is loaded. Only the conf object is available. This file can be used to manipulate conf.load_layers list to choose which lay‐
+       ers will be loaded:
 
        conf.load_layers.remove("bluetooth")
        conf.load_layers.append("new_layer")
@@ -121,8 +118,7 @@ BUGS
 
        May miss packets under heavy load. This is a restriction from python itself
 
-       Session  saving is limited by Python ability to marshal objects. As a consequence, lambda functions and generators can't be saved, which seriously reduce the
-       usefulness of this feature.
+       Session saving is limited by Python ability to marshal objects. As a consequence, lambda functions and generators can't be saved, which seriously reduce the usefulness of this feature.
 
        BPF filters don't work on Point-to-point interfaces.
 
@@ -131,4 +127,4 @@ AUTHOR
 
        This manual page was written by Alberto Gonzalez Iniesta <agi@agi.as> and Philippe Biondi.
 
-                                                                             May 8, 2018                                                                    SCAPY(1)
+                                                                                          May 8, 2018                                                                                  SCAPY(1)

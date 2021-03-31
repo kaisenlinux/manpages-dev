@@ -1,11 +1,11 @@
-IOPING(1)                                                                   User Commands                                                                  IOPING(1)
+IOPING(1)                                                                                User Commands                                                                                IOPING(1)
 
 NAME
        ioping - simple disk I/O latency monitoring tool
 
 SYNOPSYS
-       ioping [-ABCDJLRWGYykq] [-a count] [-c count] [-i interval] [-l speed] [-r rate] [-t time] [-T time] [-s size] [-S wsize] [-o offset] [-w deadline]
-              [-p period] [-P period] directory|file|device
+       ioping [-ABCDJLRWGYykq] [-a count] [-c count] [-i interval] [-l speed] [-r rate] [-t time] [-T time] [-s size] [-S wsize] [-o offset] [-w deadline] [-p period] [-P period]
+              directory|file|device
        ioping -h | -v
 
 DESCRIPTION
@@ -72,13 +72,12 @@ OPTIONS
        -R, -rapid
               Disk seek rate test, or bandwidth test if used together with -linear.
 
-              This option suppress human-readable output for each request (as -quiet), sets default interval to zero (-interval 0), stops measurement after 3
-              seconds (-work-time 3) and increases default working set size to 64m (-work-size 64m).  Working set (-work-size) should be increased accordingly if
-              disk has huge hardware cache.
+              This option suppress human-readable output for each request (as -quiet), sets default interval to zero (-interval 0), stops measurement after 3 seconds (-work-time 3) and
+              increases default working set size to 64m (-work-size 64m).  Working set (-work-size) should be increased accordingly if disk has huge hardware cache.
 
        -W, -write
-              Use writes rather than reads. Safe for temporary file in directory target.  Write I/O gives more reliable results for systems where non-cached reads
-              are not supported or cached at some level.
+              Use writes rather than reads. Safe for temporary file in directory target.  Write I/O gives more reliable results for systems where non-cached reads are not supported or cached
+              at some level.
 
               Might be *DANGEROUS* for file/device: it will shred your data.  In this case should be repeated three times (-WWW).
 
@@ -104,8 +103,7 @@ OPTIONS
               Display version and exit.
 
    Argument suffixes
-       For options that expect time argument (-interval, -print-interval and -work-time), default is seconds, unless you specify one of the following suffixes
-       (case-insensitive):
+       For options that expect time argument (-interval, -print-interval and -work-time), default is seconds, unless you specify one of the following suffixes (case-insensitive):
 
        ns, nsec
               nanoseconds (a billionth of a second, 1 / 1 000 000 000)
@@ -123,8 +121,7 @@ OPTIONS
        h, hour
               hours
 
-       For options that expect "size" argument (-size, -speed-limit, -work-size and -work-offset), default is bytes, unless you specify one of the following
-       suffixes (case-insensitive):
+       For options that expect "size" argument (-size, -speed-limit, -work-size and -work-offset), default is bytes, unless you specify one of the following suffixes (case-insensitive):
 
        sector disk sectors (a sector is always 512).
 
@@ -180,8 +177,8 @@ RAW STATISTICS
 
 EXAMPLES
        ioping .
-              Show disk I/O latency using the default values and the current directory, until interrupted. This command prepares temporary (unlinked/hidden) working
-              file and reads random chunks from it using non-cached read requests.
+              Show disk I/O latency using the default values and the current directory, until interrupted. This command prepares temporary (unlinked/hidden) working file and reads random
+              chunks from it using non-cached read requests.
 
        ioping -c 10 -s 1M /tmp
               Measure latency on /tmp using 10 requests of 1 megabyte each.
@@ -205,4 +202,4 @@ AUTHORS
        This program was written by Konstantin Khlebnikov ⟨koct9i@gmail.com⟩.
        Man-page was written by Kir Kolyshkin ⟨kir@openvz.org⟩.
 
-                                                                              Oct 2014                                                                     IOPING(1)
+                                                                                            Oct 2014                                                                                  IOPING(1)

@@ -1,4 +1,4 @@
-xfs_spaceman(8)                                                        System Manager's Manual                                                       xfs_spaceman(8)
+xfs_spaceman(8)                                                                     System Manager's Manual                                                                     xfs_spaceman(8)
 
 NAME
        xfs_spaceman - show free space information about an XFS filesystem
@@ -11,8 +11,8 @@ DESCRIPTION
        xfs_spaceman reports and controls free space usage in an XFS filesystem.
 
 OPTIONS
-       -c cmd    xfs_spaceman  commands may be run interactively (the default) or as arguments on the command line. Multiple -c arguments may be given. The commands
-                 are run in the sequence given, then the program exits.
+       -c cmd    xfs_spaceman  commands  may  be  run interactively (the default) or as arguments on the command line. Multiple -c arguments may be given. The commands are run in the sequence
+                 given, then the program exits.
 
 COMMANDS
        freesp [ -dgrs ] [-a agno]... [ -b | -e bsize | -h bsize | -m factor ]
@@ -21,8 +21,7 @@ COMMANDS
                  -a agno
                      Collect free space information from this allocation group.  This option can be specified multiple times to collect from multiple groups.
 
-                 -b  This argument establishes that the histogram bin sizes are successive powers of two.  This is the default, and is mutually exclusive  with  the
-                     -e, -h, and -m options.
+                 -b  This argument establishes that the histogram bin sizes are successive powers of two.  This is the default, and is mutually exclusive with the -e, -h, and -m options.
 
                  -d  Print debugging information such as the raw free space extent information.
 
@@ -32,20 +31,18 @@ COMMANDS
                      Set all histogram bin sizes to a specific value.  This option is mutually exclusive with the -b, -h, and -m options.
 
                  -h bsize
-                     Create a histogram bin with a lower bound of this value.  The upper bound of this bin will be one less than the lower bound of the next highest
-                     histogram bin.  This option can be given multiple times to control the exact bin sizes.  This option is mutually exclusive with the -b, -e, and
-                     -m options.
+                     Create a histogram bin with a lower bound of this value.  The upper bound of this bin will be one less than the lower bound of the next highest histogram bin.   This  op‐
+                     tion can be given multiple times to control the exact bin sizes.  This option is mutually exclusive with the -b, -e, and -m options.
 
                  -m factor
-                     Create  each histogram bin with a size that is this many times the size of the prvious bin created.  This option is mutually exclusive with the
-                     -b, -e, and -h options.
+                     Create each histogram bin with a size that is this many times the size of the prvious bin created.  This option is mutually exclusive with the -b, -e, and -h options.
 
                  -r  Query the realtime device for free space information.
 
                  -s  Display a summary of the free space information found.
 
-       info   Displays selected geometry information about the filesystem.  The opened file must be a mount point of a XFS filesystem.  The  output  will  have  the
-              same format that xfs_info(8) prints when querying a filesystem.
+       info   Displays  selected  geometry information about the filesystem.  The opened file must be a mount point of a XFS filesystem.  The output will have the same format that xfs_info(8)
+              prints when querying a filesystem.
 
        health [ -a agno] [ -c ] [ -f ] [ -i inum ] [ -q ] [ paths ]
               Reports the health of the given group of filesystem metadata.
@@ -84,8 +81,8 @@ COMMANDS
        quit   Exit xfs_spaceman.
 
        trim ( -a agno | -f | offset length ) [ -m minlen ]
-              Instructs  the underlying storage device to release all storage that may be backing free space in the filesystem.  The command takes the following op‐
-              tions: (One of -a, -f, or the offset/length pair are required.)
+              Instructs the underlying storage device to release all storage that may be backing free space in the filesystem.  The command takes the following options: (One of -a, -f, or the
+              offset/length pair are required.)
 
                  -a agno
                      Trim free space extents in the given allocation group.  This option is mutually exclusive with the -f option and the offset/length options.
@@ -93,10 +90,10 @@ COMMANDS
                  -f  Trim all free space in the filesystem.  This option is mutually exclusive with the -a option and the offset/length options.
 
                  option, length
-                     Trim all free space within the physical range defined by the offset and length from this filesystem.  Units can be appended to these arguments.
-                     This option is mutually exclusive with the -a and -f options.
+                     Trim  all  free space within the physical range defined by the offset and length from this filesystem.  Units can be appended to these arguments.  This option is mutually
+                     exclusive with the -a and -f options.
 
                  -m minlen
                      Do not trim free space extents shorter than this length.  Units can be appended to this argument.
 
-                                                                                                                                                     xfs_spaceman(8)
+                                                                                                                                                                                xfs_spaceman(8)

@@ -1,4 +1,4 @@
-lxc-snapshot(1)                                                                                                                                      lxc-snapshot(1)
+lxc-snapshot(1)                                                                                                                                                                 lxc-snapshot(1)
 
 NAME
        lxc-snapshot - Snapshot an existing container.
@@ -12,9 +12,9 @@ SYNOPSIS
 DESCRIPTION
        lxc-snapshot creates, lists, and restores container snapshots.
 
-       Snapshots  are stored as snapshotted containers under the container's configuration path. For instance, if the container's configuration path is /var/lib/lxc
-       and the container is c1, then the first snapshot will be stored as container snap0 under the path /var/lib/lxc/c1/snaps.  If /var/lib/lxcsnaps,  as  used  by
-       LXC 1.0, already exists, then it will continue to be used.
+       Snapshots  are  stored  as snapshotted containers under the container's configuration path. For instance, if the container's configuration path is /var/lib/lxc and the container is c1,
+       then the first snapshot will be stored as container snap0 under the path /var/lib/lxc/c1/snaps.  If /var/lib/lxcsnaps, as used by LXC 1.0, already exists, then it will continue  to  be
+       used.
 
 OPTIONS
        -c,--comment comment_file
@@ -33,9 +33,9 @@ OPTIONS
               Restore the named snapshot, meaning a full new container is created which is a copy of the snapshot.
 
        -N, --newname
-              When restoring a snapshot, the last optional argument if not given explicitly via --newname is the name to use for the restored container. If the new‐
-              name is identical to the original name of the container, then the original container will be destroyed and the restored container will take its place.
-              Note that deleting the original snapshot is not possible in the case of overlayfs or zfs backed snapshots.
+              When  restoring  a  snapshot,  the last optional argument if not given explicitly via --newname is the name to use for the restored container. If the newname is identical to the
+              original name of the container, then the original container will be destroyed and the restored container will take its place. Note that deleting the  original  snapshot  is  not
+              possible in the case of overlayfs or zfs backed snapshots.
 
 COMMON OPTIONS
        These options are common to most of lxc commands.
@@ -66,17 +66,16 @@ COMMON OPTIONS
        --rcfile=FILE
               Specify the configuration file to configure the virtualization and isolation functionalities for the container.
 
-              This  configuration  file  if present will be used even if there is already a configuration file present in the previously created container (via lxc-
-              create).
+              This configuration file if present will be used even if there is already a configuration file present in the previously created container (via lxc-create).
 
        --version
               Show the version number.
 
 SEE ALSO
-       lxc(7), lxc-create(1), lxc-copy(1), lxc-destroy(1), lxc-start(1), lxc-stop(1), lxc-execute(1), lxc-console(1),  lxc-monitor(1),  lxc-wait(1),  lxc-cgroup(1),
-       lxc-ls(1), lxc-info(1), lxc-freeze(1), lxc-unfreeze(1), lxc-attach(1), lxc.conf(5)
+       lxc(7),  lxc-create(1), lxc-copy(1), lxc-destroy(1), lxc-start(1), lxc-stop(1), lxc-execute(1), lxc-console(1), lxc-monitor(1), lxc-wait(1), lxc-cgroup(1), lxc-ls(1), lxc-info(1), lxc-
+       freeze(1), lxc-unfreeze(1), lxc-attach(1), lxc.conf(5)
 
 AUTHOR
        Serge Hallyn <serge.hallyn@ubuntu.com >
 
-                                                                             2020-12-30                                                              lxc-snapshot(1)
+                                                                                           2021-01-31                                                                           lxc-snapshot(1)

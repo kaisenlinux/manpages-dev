@@ -1,13 +1,12 @@
-FSARCHIVER(8)                                                          System Manager's Manual                                                         FSARCHIVER(8)
+FSARCHIVER(8)                                                                       System Manager's Manual                                                                       FSARCHIVER(8)
 
 NAME
        fsarchiver - filesystem archiver
 
 DESCRIPTION
-       fsarchiver  is  a system tool that allows you to save the contents of a filesystem to a compressed archive file. The filesystem contents can be restored on a
-       device which has a different size and it can be restored on a different filesystem. Unlike tar/dar, fsarchiver also creates the filesystem when  it  extracts
-       the  data  to  devices. Everything is checksummed in the archive in order to protect the data. If the archive is corrupt, you just lose the current file, not
-       the whole archive.
+       fsarchiver is a system tool that allows you to save the contents of a filesystem to a compressed archive file. The filesystem contents can be restored on a device which has a different
+       size and it can be restored on a different filesystem. Unlike tar/dar, fsarchiver also creates the filesystem when it extracts the data to devices. Everything is checksummed in the ar‐
+       chive in order to protect the data. If the archive is corrupt, you just lose the current file, not the whole archive.
 
 LINKS
    Official project homepage:
@@ -15,9 +14,6 @@ LINKS
 
    Quick Start guide:
        http://www.fsarchiver.org/quickstart/
-
-   Forums where to ask questions:
-       http://www.fsarchiver.org/forums/
 
    Git repository:
        https://github.com/fdupoux/fsarchiver
@@ -41,8 +37,8 @@ SYNOPSIS
 COMMANDS
        savefs Save device filesystem to archive.
 
-       restfs Restore filesystems from archive.  This overwrites the existing data on device.  Zero-based index n indicates the part of the archive to restore.  Op‐
-              tionally, a filesystem may be converted to fstype and extra mkfs options specified.  newlabel and newuuid override values stored in the archive.
+       restfs Restore  filesystems  from archive.  This overwrites the existing data on device.  Zero-based index n indicates the part of the archive to restore.  Optionally, a filesystem may
+              be converted to fstype and extra mkfs options specified.  newlabel and newuuid override values stored in the archive.
 
        savedir
               Save directories to archive (similar to a compressed tarball).
@@ -75,47 +71,45 @@ OPTIONS
               Allow to save filesystems which support is considered experimental in fsarchiver.
 
        -A, --allow-rw-mounted
-              Allow  to  save a filesystem which is mounted in read-write (live backup). By default fsarchiver fails with an error if the device is mounted in read-
-              write mode which allows modifications to be done on the filesystem during the backup. Modifications can drive to inconsistencies in the backup.  Using
-              LVM snapshots is the recommended way to make backups since it will provide consistency, but it is only available for filesystems which are on LVM log‐
-              ical volumes.
+              Allow to save a filesystem which is mounted in read-write (live backup). By default fsarchiver fails with an error if the device is mounted in read-write mode which allows modi‐
+              fications  to  be  done on the filesystem during the backup. Modifications can drive to inconsistencies in the backup. Using LVM snapshots is the recommended way to make backups
+              since it will provide consistency, but it is only available for filesystems which are on LVM logical volumes.
 
        -a, --allow-no-acl-xattr
-              Allow to save a filesystem when ACLs and extended attributes are not supported (or are disabled) by the kernel. By default fsarchiver  fails  with  an
-              error  if it cannot access ACLs and extended attributes, since they would not be saved. If you do not need ACLs and extended attributes preserved then
-              it is safe to use this option.
+              Allow to save a filesystem when ACLs and extended attributes are not supported (or are disabled) by the kernel. By default fsarchiver fails with an error  if  it  cannot  access
+              ACLs and extended attributes, since they would not be saved. If you do not need ACLs and extended attributes preserved then it is safe to use this option.
 
        -e pattern, --exclude=pattern
-              Exclude files and directories that match specified pattern. The pattern can contain shell wildcards such as * and ? or may be either a simple file/dir
-              name  or an absolute file/dir path. You must use quotes around the pattern each time you use wildcards, else it would be interpreted by the shell. The
-              wildcards must be interpreted by fsarchiver. See examples below for more details about this option.
+              Exclude  files  and  directories  that  match  specified  pattern. The pattern can contain shell wildcards such as * and ? or may be either a simple file/dir name or an absolute
+              file/dir path. You must use quotes around the pattern each time you use wildcards, else it would be interpreted by the shell. The wildcards must be  interpreted  by  fsarchiver.
+              See examples below for more details about this option.
 
        -L label, --label=label
-              Set the label of the archive: it is just a comment about its contents. It can be used to remember a particular thing about the archive or the state of
-              the filesystem for instance.
+              Set  the  label  of  the archive: it is just a comment about its contents. It can be used to remember a particular thing about the archive or the state of the filesystem for in‐
+              stance.
 
        -z level, --compress=level
-              Legacy compression levels are between 0 (very fast) and 9 (very good). The memory requirement increases a lot with the best compression levels, and it
-              is multiplied by the number of compression threads (option -j). Level 9 is considered as an extreme compression level and requires an huge  amount  of
-              memory to run. For more details please read this page: http://www.fsarchiver.org/compression/
+              Legacy compression levels are between 0 (very fast) and 9 (very good). The memory requirement increases a lot with the best compression levels, and it is multiplied by the  num‐
+              ber  of  compression  threads  (option -j). Level 9 is considered as an extreme compression level and requires an huge amount of memory to run. For more details please read this
+              page: http://www.fsarchiver.org/compression/
 
        -Z level, --zstd=level
-              Zstd  compression levels are between 1 (very fast) and 22 (very good). The memory requirement increases a lot with the best compression levels, and it
-              is multiplied by the number of compression threads (option -j). Levels above 20 are considered as extreme compression  levels  and  requires  an  huge
-              amount of memory to run. For more details please read this page: http://www.fsarchiver.org/compression/
+              Zstd compression levels are between 1 (very fast) and 22 (very good). The memory requirement increases a lot with the best compression levels, and it is multiplied by the number
+              of  compression threads (option -j). Levels above 20 are considered as extreme compression levels and requires an huge amount of memory to run. For more details please read this
+              page: http://www.fsarchiver.org/compression/
 
        -s mbsize, --split=mbsize
               Split the archive into several files of mbsize megabytes each.
 
        -j count, --jobs=count
-              Create more than one (de)compression thread. Useful on multi-core CPUs. By default fsarchiver will only use one (de)compression thread (-j 1) and then
-              only one logical processor will be used for the task. You should use this option if you have a multi-core CPU or more than one physical  CPU  on  your
-              computer.  The typical way to use it is to specify the number of logical processors available so that all the processing power is used to (de)compress
-              the archive very quickly. You may also want to use all logical processors but one so that your system stays responsive for other applications.
+              Create more than one (de)compression thread. Useful on multi-core CPUs. By default fsarchiver will only use one (de)compression thread (-j 1) and then only one logical processor
+              will  be  used  for the task. You should use this option if you have a multi-core CPU or more than one physical CPU on your computer. The typical way to use it is to specify the
+              number of logical processors available so that all the processing power is used to (de)compress the archive very quickly. You may also want to use all logical processors but one
+              so that your system stays responsive for other applications.
 
        -c password, --cryptpass=password
-              Encrypt/decrypt data in archive. Password length: 6 to 64 characters. You can either provide a real password or a dash (-c -). Use the dash if you  do
-              not want to provide the password in the command line. It will be prompted in the terminal instead.
+              Encrypt/decrypt  data  in  archive.  Password length: 6 to 64 characters. You can either provide a real password or a dash (-c -). Use the dash if you do not want to provide the
+              password in the command line. It will be prompted in the terminal instead.
 
 EXAMPLES
    save only one filesystem (/dev/sda1) to an archive:
@@ -176,7 +170,6 @@ WARNING
        fsarchiver is considered stable for Linux filesystems such as EXT4 and XFS but unstable for NTFS.
 
 AUTHOR
-       fsarchiver was written by Francois Dupoux. It is released under the GPL2 (GNU General Public License version 2). This manpage was written by Ilya Barygin and
-       Francois Dupoux.
+       fsarchiver was written by Francois Dupoux. It is released under the GPL2 (GNU General Public License version 2). This manpage was written by Ilya Barygin and Francois Dupoux.
 
-                                                                          30 December 2009                                                             FSARCHIVER(8)
+                                                                                        30 December 2009                                                                          FSARCHIVER(8)

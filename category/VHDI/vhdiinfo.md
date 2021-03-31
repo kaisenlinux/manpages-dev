@@ -1,4 +1,4 @@
-vhdiinfo                                                                        LOCAL                                                                       vhdiinfo
+vhdiinfo                                                                                     LOCAL                                                                                     vhdiinfo
 
 NAME
      vhdiinfo — determines information about a Virtual Hard Disk (VHD) image file
@@ -40,8 +40,7 @@ EXAMPLES
              Parent filename:        dynamic.vhd
 
 DIAGNOSTICS
-     Errors, verbose and debug output are printed to stderr when verbose output -v is enabled.  Verbose and debug output are only printed when enabled at compila‐
-     tion.
+     Errors, verbose and debug output are printed to stderr when verbose output -v is enabled.  Verbose and debug output are only printed when enabled at compilation.
 
 BUGS
      Please report bugs of any kind to <joachim.metz@gmail.com> or on the project website: https://github.com/libyal/libvhdi/
@@ -50,7 +49,7 @@ AUTHOR
      These man pages were written by Joachim Metz.
 
 COPYRIGHT
-     Copyright (C) 2012-2018, Joachim Metz <joachim.metz@gmail.com>.
+     Copyright (C) 2012-2020, Joachim Metz <joachim.metz@gmail.com>.
 
 SEE ALSO
-libvhdi                                                                   January 19, 2014                                                                   libvhdi
+libvhdi                                                                                  March 9, 2019                                                                                  libvhdi

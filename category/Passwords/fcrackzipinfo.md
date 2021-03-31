@@ -1,4 +1,4 @@
-fcrackzipinfo(1)                                                            User Commands                                                           fcrackzipinfo(1)
+fcrackzipinfo(1)                                                                         User Commands                                                                         fcrackzipinfo(1)
 
 NAME
        fcrackzipinfo - display zip information
@@ -25,8 +25,7 @@ SEE ALSO
 AUTHORS
        Program was written by Marc Lehmann <pcg@goof.com>.
 
-       This manual page was written by Francesco Donadon <francesco.donadon@katamail.com>, for the Debian GNU system (but may be used by others). Updated by Jari
-       Aalto <jari.aalto@cante.net>.  Released under license GNU GPL version 2 or (at your option) any later version. For more information about license, visit
-       <http://www.gnu.org/copyleft/gpl.html>.
+       This manual page was written by Francesco Donadon <francesco.donadon@katamail.com>, for the Debian GNU system (but may be used by others). Updated by Jari Aalto <jari.aalto@cante.net>.
+       Released under license GNU GPL version 2 or (at your option) any later version. For more information about license, visit <http://www.gnu.org/copyleft/gpl.html>.
 
-fcrackzipinfo                                                                2019-12-28                                                             fcrackzipinfo(1)
+fcrackzipinfo                                                                              2021-02-02                                                                          fcrackzipinfo(1)

@@ -1,4 +1,4 @@
-lxc-monitor(1)                                                                                                                                        lxc-monitor(1)
+lxc-monitor(1)                                                                                                                                                                   lxc-monitor(1)
 
 NAME
        lxc-monitor - monitor the container state
@@ -7,17 +7,16 @@ SYNOPSIS
        lxc-monitor [-n name] [-Q name]
 
 DESCRIPTION
-       lxc-monitor  monitors  the  state of containers. The name argument may be used to specify which containers to monitor. It is a regular expression, conforming
-       with posix2, so it is possible to monitor all the containers, several of them or just one. If not specified, name will default to '.*' which will monitor all
-       containers in lxcpath.
+       lxc-monitor  monitors the state of containers. The name argument may be used to specify which containers to monitor. It is a regular expression, conforming with posix2, so it is possi‐
+       ble to monitor all the containers, several of them or just one. If not specified, name will default to '.*' which will monitor all containers in lxcpath.
 
-       The  -P,  --lxcpath=PATH  option  may be specified multiple times to monitor more than one container path. Note however that containers with the same name in
-       multiple paths will be indistinguishable in the output.
+       The -P, --lxcpath=PATH option may be specified multiple times to monitor more than one container path. Note however that containers with the same name in multiple paths will be  indis‐
+       tinguishable in the output.
 
 OPTIONS
        -Q, --quit
-              Ask the lxc-monitord daemon on each given lxcpath to quit. After receiving this command, lxc-monitord will exit immediately  as  soon  as  it  has  no
-              clients instead of waiting the normal 30 seconds for new clients. This is useful if you need to unmount the filesystem lxcpath is on.
+              Ask  the  lxc-monitord daemon on each given lxcpath to quit. After receiving this command, lxc-monitord will exit immediately as soon as it has no clients instead of waiting the
+              normal 30 seconds for new clients. This is useful if you need to unmount the filesystem lxcpath is on.
 
 COMMON OPTIONS
        These options are common to most of lxc commands.
@@ -48,8 +47,7 @@ COMMON OPTIONS
        --rcfile=FILE
               Specify the configuration file to configure the virtualization and isolation functionalities for the container.
 
-              This  configuration  file  if present will be used even if there is already a configuration file present in the previously created container (via lxc-
-              create).
+              This configuration file if present will be used even if there is already a configuration file present in the previously created container (via lxc-create).
 
        --version
               Show the version number.
@@ -75,10 +73,10 @@ SEE ALSO
        regex(7),
 
 SEE ALSO
-       lxc(7), lxc-create(1), lxc-copy(1), lxc-destroy(1), lxc-start(1), lxc-stop(1), lxc-execute(1), lxc-console(1),  lxc-monitor(1),  lxc-wait(1),  lxc-cgroup(1),
-       lxc-ls(1), lxc-info(1), lxc-freeze(1), lxc-unfreeze(1), lxc-attach(1), lxc.conf(5)
+       lxc(7), lxc-create(1), lxc-copy(1), lxc-destroy(1), lxc-start(1), lxc-stop(1), lxc-execute(1), lxc-console(1), lxc-monitor(1), lxc-wait(1), lxc-cgroup(1), lxc-ls(1), lxc-info(1),  lxc-
+       freeze(1), lxc-unfreeze(1), lxc-attach(1), lxc.conf(5)
 
 AUTHOR
        Daniel Lezcano <daniel.lezcano@free.fr>
 
-                                                                             2020-12-30                                                               lxc-monitor(1)
+                                                                                           2021-01-31                                                                            lxc-monitor(1)

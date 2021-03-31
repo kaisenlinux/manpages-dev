@@ -1,4 +1,4 @@
-automysqlbackup(8)                                                   Automatically backup MySQL                                                   automysqlbackup(8)
+automysqlbackup(8)                                                                 Automatically backup MySQL                                                                automysqlbackup(8)
 
 NAME
        automysqlbackup - backup all of your database daily, weekly, and monthly
@@ -80,4 +80,4 @@ ADVANCED OPTIONS
 AUTHOR
        This manual page was written by Jose Luis Tallon <jltallon@adv-solutions.net>.  for the Debian GNU/Linux system, but can be used by others.
 
-wipe_out                                                                     6 Sep 2008                                                           automysqlbackup(8)
+wipe_out                                                                                   6 Sep 2008                                                                        automysqlbackup(8)

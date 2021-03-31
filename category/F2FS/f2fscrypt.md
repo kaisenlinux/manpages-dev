@@ -1,4 +1,4 @@
-F2FSCRYPT(8)                                                           System Manager's Manual                                                          F2FSCRYPT(8)
+F2FSCRYPT(8)                                                                        System Manager's Manual                                                                        F2FSCRYPT(8)
 
 NAME
        f2fscrypt - f2fs filesystem encryption utility
@@ -14,8 +14,8 @@ DESCRIPTION
 
 COMMANDS
        f2fscrypt add_key -S [ -k keyring ] [-v] [-q] [  path ... ]
-              Prompts the user for a passphrase and inserts it into the specified keyring.  If no keyring is specified, f2fscrypt will use the session keyring if it
-              exists or the user session keyring if it does not.
+              Prompts the user for a passphrase and inserts it into the specified keyring.  If no keyring is specified, f2fscrypt will use the session keyring if it exists or the user session
+              keyring if it does not.
 
               If one or more directory paths are specified, f2fscrypt will try to set the policy of those directories to use the key just entered by the user.
 
@@ -26,9 +26,8 @@ COMMANDS
               Give the invoking process (typically a shell) a new session keyring, discarding its old session keyring.
 
        f2fscrypt set_policy policy path ...
-              Sets the policy for the directories specified on the command line.  All directories must be empty to set the policy; if the directory  already  has  a
-              policy  established,  f2fscrypt  will  validate that the policy matches what was specified.  A policy is an encryption key identifier consisting of 16
-              hexadecimal characters.
+              Sets the policy for the directories specified on the command line.  All directories must be empty to set the policy; if the directory already has a policy established, f2fscrypt
+              will validate that the policy matches what was specified.  A policy is an encryption key identifier consisting of 16 hexadecimal characters.
 
 NOTES
        The target directory must be empty.
@@ -80,10 +79,10 @@ EXAMPLE
           529474961 --alsw-v      0     0   \_ logon: f2fs:28e21cc0c4393da1
 
 AUTHOR
-       Written by Kinglong Mee <kinglongmee@gmail.com>, Migrated from  e4crypt  that  Written  by  Michael  Halcrow  <mhalcrow@google.com>,  Ildar  Muslukhov  <mus‐
-       lukhovi@gmail.com>, and Theodore Ts'o <tytso@mit.edu>
+       Written  by Kinglong Mee <kinglongmee@gmail.com>, Migrated from e4crypt that Written by Michael Halcrow <mhalcrow@google.com>, Ildar Muslukhov <muslukhovi@gmail.com>, and Theodore Ts'o
+       <tytso@mit.edu>
 
 SEE ALSO
        keyctl(1), mkfs.f2fs(8), mount(8).
 
-                                                                                                                                                        F2FSCRYPT(8)
+                                                                                                                                                                                   F2FSCRYPT(8)

@@ -1,4 +1,4 @@
-SSLSNIFF(1)                                                            General Commands Manual                                                           SSLSNIFF(1)
+SSLSNIFF(1)                                                                         General Commands Manual                                                                         SSLSNIFF(1)
 
 NAME
        sslsniff - SSL/TLS man-in-the-middle attack tool
@@ -9,8 +9,8 @@ SYNOPSIS
 DESCRIPTION
        This manual page documents briefly the sslsniff command.
 
-       sslsniff  is  designed to create man-in-the-middle (MITM) attacks for SSL/TLS connections, and dynamically generates certs for the domains that are being ac‐
-       cessed on the fly. The new certificates are constructed in a certificate chain that is signed by any certificate that is provided.
+       sslsniff  is  designed  to  create man-in-the-middle (MITM) attacks for SSL/TLS connections, and dynamically generates certs for the domains that are being accessed on the fly. The new
+       certificates are constructed in a certificate chain that is signed by any certificate that is provided.
        sslsniff also supports other attacks like null-prefix or OCSP attacks to achieve silent interceptions of connections when possible.
 
 OPTIONS
@@ -72,4 +72,4 @@ AUTHOR
 
        This manual page was written by Pierre Chifflier <pollux@debian.org>, for the Debian project (and may be used by others).
 
-                                                                           August 16, 2009                                                               SSLSNIFF(1)
+                                                                                        August 16, 2009                                                                             SSLSNIFF(1)

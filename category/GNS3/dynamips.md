@@ -1,4 +1,4 @@
-DYNAMIPS(1)                                                            General Commands Manual                                                           DYNAMIPS(1)
+DYNAMIPS(1)                                                                         General Commands Manual                                                                         DYNAMIPS(1)
 
 NAME
        dynamips - Cisco router simulator
@@ -7,13 +7,12 @@ SYNOPSIS
        dynamips [options] ios_image
 
 DESCRIPTION
-       Emulates  Cisco  routers  on a traditional PC. You can use dynamips to create labs. It uses real Cisco IOS Images, which are not included in this package. Of
-       course, this emulator cannot replace a real router.  It is simply a complementary tool to real labs for administrators of Cisco networks or people wanting to
-       pass their CCNA/CCNP/CCIE exams.
+       Emulates  Cisco routers on a traditional PC. You can use dynamips to create labs. It uses real Cisco IOS Images, which are not included in this package. Of course, this emulator cannot
+       replace a real router.  It is simply a complementary tool to real labs for administrators of Cisco networks or people wanting to pass their CCNA/CCNP/CCIE exams.
        The emulator currently supports Cisco 7200, Cisco 3745, Cisco 3725, Cisco 3600, Cisco 2691, Cisco 2600, and Cisco 1700 series.
        By default, a Cisco 7206VXR with NPE-200 (256 Mb of DRAM) is emulated.
-       To emulate another platform, like the Cisco 3600 series, use the "-P" command line option.  You can change the chassis type with "-t". Don't forget to set it
-       depending on your IOS image, a c3660 image will not run on c3640 hardware and vice-versa.
+       To emulate another platform, like the Cisco 3600 series, use the "-P" command line option.  You can change the chassis type with "-t". Don't forget to set it depending on your IOS  im‐
+       age, a c3660 image will not run on c3640 hardware and vice-versa.
 
 OPTIONS
        A summary of options is included below.
@@ -21,8 +20,7 @@ OPTIONS
        -H <tcp_port>
               Enable hypervisor mode.
               The hypervisor mode of dynamips allows you to run simultaneously many virtual router instances, and to simulate ATM, Ethernet or Frame‐Relay networks.
-              You can connect directly to the TCP control port with telnet, or use dynagen(1), dynagui(1) that will pass commands transparently.  The second  method
-              is highly recommended.
+              You can connect directly to the TCP control port with telnet, or use dynagen(1), dynagui(1) that will pass commands transparently.  The second method is highly recommended.
 
        -l <log_file>
               Set logging file (default is dynamips_log.txt)
@@ -35,14 +33,12 @@ OPTIONS
 
        --idle-pc <pc>
               Set the idle PC (default: disabled)
-              The  "idle  PC" feature allows you to run a router instance without having a 100% CPU load. This implies that you can run a larger number of instances
-              per real machine.
-              To determine the "idle PC", start normally the emulator with your Cisco IOS image, and a totally IOS empty configuration (although not mandatory, this
-              will  give  better  results).  When the image is fully booted, wait for the "Press RETURN to get started!" message prompt, but do not press Enter key.
-              Wait about 5 seconds, then press "Ctrl‐] + i". Some statistics will be gathered during 10 seconds. At the end, the emulator will  display  a  list  of
-              possible values to pass to the "--idle-pc" option. You may have to try some values before finding the good one. To check if the idle PC value is good,
-              just boot the Cisco IOS image, and check your CPU load when the console prompt is available. If it is low, you have found a good value, keep  it  pre‐
-              ciously.
+              The "idle PC" feature allows you to run a router instance without having a 100% CPU load. This implies that you can run a larger number of instances per real machine.
+              To determine the "idle PC", start normally the emulator with your Cisco IOS image, and a totally IOS empty configuration (although not mandatory, this will give better results).
+              When the image is fully booted, wait for the "Press RETURN to get started!" message prompt, but do not press Enter key.  Wait about 5 seconds, then press "Ctrl‐] + i". Some sta‐
+              tistics  will  be  gathered during 10 seconds. At the end, the emulator will display a list of possible values to pass to the "--idle-pc" option. You may have to try some values
+              before finding the good one. To check if the idle PC value is good, just boot the Cisco IOS image, and check your CPU load when the console prompt is available. If  it  is  low,
+              you have found a good value, keep it preciously.
               Important remarks:
               * An "idle PC" value is *specific* to a Cisco IOS image. You cannot boot a different IOS image without proceeding as described above.
               * Do not run the process while having the "autoconfiguration" prompt.
@@ -81,8 +77,8 @@ OPTIONS
 
        -k <clock_div>
               Set the clock divisor (default: 4)
-              Specify  the  clock divider (integer) based on the host clock.  Alter the value to match the CISCO clock with the real time.  The command "show clock"
-              at the IOS' CLI will help you set this value.
+              Specify  the  clock  divider (integer) based on the host clock.  Alter the value to match the CISCO clock with the real time.  The command "show clock" at the IOS' CLI will help
+              you set this value.
 
        -T <port>
               Console is on TCP <port>
@@ -191,12 +187,11 @@ NIO binding to Port Adapter <pa_nio> and Network Modules <nm_nio> :
               host interface for communication
 
               unix:<local_sock>:<remote_sock>
-                     Use unix sockets for local communication.  <local_sock> is created and represents the local NIC.  <remote_sock> is the file used by  the  other
-                     interface.  (ex. "/tmp/local:/tmp/remote")
+                     Use unix sockets for local communication.  <local_sock> is created and represents the local NIC.  <remote_sock> is the file used by the other interface.   (ex.  "/tmp/lo‐
+                     cal:/tmp/remote")
 
               vde:<control_sock>:<local_sock>
-                     For  use  with  UML  (User‐Mode‐Linux)  or  VDE  switches.   VDE  stands  for "Virtual Distributed Ethernet".  Please refer to : http://source‐
-                     forge.net/projects/vde/
+                     For use with UML (User‐Mode‐Linux) or VDE switches.  VDE stands for "Virtual Distributed Ethernet".  Please refer to : http://sourceforge.net/projects/vde/
 
               tap:<tap_name>
                      Use a virtual ethernet device for communication.  <tap_name> is the name of the tap device (ex. "tap0")
@@ -210,9 +205,8 @@ NIO binding to Port Adapter <pa_nio> and Network Modules <nm_nio> :
                      Use a real ethernet device for communication (Linux specific).  <dev_name> is the name of the Ethernet device (ex. "eth0")
 
               udp:<local_port>:<remote_host>:<remote_port>
-                     Use an UDP socket for connection between remote instances. <local_port> is the port we listen to.  <remote_host> is the host listening the port
-                     you  want  to  connect  to.  <remote_port> is the port you want to connect to. (ex. "1000:somehost:2000" and "2000:otherhost:1000" on the other
-                     side)
+                     Use  an  UDP  socket for connection between remote instances. <local_port> is the port we listen to.  <remote_host> is the host listening the port you want to connect to.
+                     <remote_port> is the port you want to connect to. (ex. "1000:somehost:2000" and "2000:otherhost:1000" on the other side)
 
               tcp_cli:<host>:<port>
                      Client side of a tcp connection.  <host> is the ip address of the server.  <port> is the port to connect to.
@@ -240,8 +234,8 @@ VTTY binding to real serial port device <si_desc>
 
               hwflow hardware flow control (0=disable, 1=enable)
                      Note that the device field is mandatory, however other fields are optional.  (dynamips will default to 9600, 8, N, 1, no hardware flow control)
-                     Note that access to the escape commands (described below) through a serial port are deliberately prevented, as the  escape  commands  interfere
-                     with serial encapsulation protocols.
+                     Note that access to the escape commands (described below) through a serial port are deliberately prevented, as the escape commands  interfere  with  serial  encapsulation
+                     protocols.
 
 Escape commands
        You can press ^] (Ctrl + ]) at any time, followed by one of these characters:
@@ -296,11 +290,11 @@ Virtual Bridge
        dynamips ios.bin -p 1:PA-FE-TX -s 1:0:udp:10001:127.0.0.1:10000
 
 Virtual Ethernet switch
-       The  virtual  ethernet  switch  is used to emulate an Ethernet network between emulator instances. This switch supports access and trunk ports (802.1Q).  ISL
-       will be available in a future release.
+       The  virtual ethernet switch is used to emulate an Ethernet network between emulator instances. This switch supports access and trunk ports (802.1Q).  ISL will be available in a future
+       release.
        Any emulator instance can act as a virtual ethernet switch.
-       The configuration file (specified by the "-E" option) contains a list of NetIO descriptors (representing interfaces) and a list of interface properties  (ac‐
-       cess/trunk port, VLAN info...)
+       The configuration file (specified by the "-E" option) contains a list of NetIO descriptors (representing interfaces) and  a  list  of  interface  properties  (access/trunk  port,  VLAN
+       info...)
        The interface definition is similar to Port Adapters:
 
        IF:interface_name:netio_type[:netio_parameters]
@@ -322,9 +316,8 @@ Virtual Ethernet switch
               DOT1Q:E2:1
 
 Virtual ATM switch
-       The  virtual  ATM  switch  fabric is used to emulate an ATM backbone between emulator instances. The use of this virtual switch is not mandatory, you can di‐
-       rectly connect emulator instances for point‐to‐point ATM connections.  Please note that only basic VP/VC switching is supported,  there  is  no  support  for
-       ILMI/QSAAL/... or other specific ATM protocols.
+       The  virtual  ATM  switch  fabric  is used to emulate an ATM backbone between emulator instances. The use of this virtual switch is not mandatory, you can directly connect emulator in‐
+       stances for point‐to‐point ATM connections.  Please note that only basic VP/VC switching is supported, there is no support for ILMI/QSAAL/... or other specific ATM protocols.
        Any emulator instance can act as a virtual ATM switch.
 
        Example of configuration file (specified by the "-a" option):
@@ -384,10 +377,10 @@ Testing the Virtual ATM switch with one dynamips instance
               !
 
 Virtual Frame‐Relay switch
-       The  virtual Frame‐Relay switch fabric is used to emulate a Frame‐Relay backbone between emulator instances. The use of this virtual switch is not mandatory,
-       you can directly connect emulator instances with appropriate IOS configuration.
-       Any emulator instance can act as a virtual Frame‐Relay switch.  There is only a basic implementation of the LMI protocol (ANSI Annex D),  which  is  probably
-       not conforming but works with Cisco IOS. Fortunately, Cisco IOS is able to detect automatically the LMI protocol.
+       The virtual Frame‐Relay switch fabric is used to emulate a Frame‐Relay backbone between emulator instances. The use of this virtual switch is not mandatory, you  can  directly  connect
+       emulator instances with appropriate IOS configuration.
+       Any emulator instance can act as a virtual Frame‐Relay switch.  There is only a basic implementation of the LMI protocol (ANSI Annex D), which is probably not conforming but works with
+       Cisco IOS. Fortunately, Cisco IOS is able to detect automatically the LMI protocol.
 
        Example of configuration file (specified by the "-f" option):
               # Virtual Interface List
@@ -424,7 +417,6 @@ OLD WEBSITES
        ⟨http://hacki.at/7200emu/index.php⟩
 
 AUTHOR
-       dynamips  is  being maintained by Flávio J. Saraiva <flaviojs2005@gmail.com>. This manual page was initially written by Erik Wenzel <erik@debian.org> for the
-       Debian GNU/Linux system.
+       dynamips is being maintained by Flávio J. Saraiva <flaviojs2005@gmail.com>. This manual page was initially written by Erik Wenzel <erik@debian.org> for the Debian GNU/Linux system.
 
-                                                                            Sep 28, 2013                                                                 DYNAMIPS(1)
+                                                                                          Sep 28, 2013                                                                              DYNAMIPS(1)

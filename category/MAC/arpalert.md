@@ -1,11 +1,11 @@
-ARPALERT(8)                                                            arp traffic monitoring                                                            ARPALERT(8)
+ARPALERT(8)                                                                          arp traffic monitoring                                                                         ARPALERT(8)
 
 NAME
        arpalert - ARP traffic monitoring
 
 DESCRIPTION
-       Arpalert  uses  ARP  protocol monitoring to prevent unauthorized connections on the local network.  If an illegal connection is detected, a program or script
-       could be launched, which could be used to send an alert message, for example.
+       Arpalert  uses  ARP  protocol  monitoring  to prevent unauthorized connections on the local network.  If an illegal connection is detected, a program or script could be launched, which
+       could be used to send an alert message, for example.
 
 COMMAND LINE
        -f config_file
@@ -44,8 +44,8 @@ COMMAND LINE
        -V     Print version and quit.
 
 CONFIGURATION FILE
-       The config file contains 3 types of data: integer, string and boolean. The boolean type can take values 'oui', 'true', 'yes', '1'  for  the  true  values  or
-       'non', 'no', 'false', '0' for the falses values.
+       The config file contains 3 types of data: integer, string and boolean. The boolean type can take values 'oui', 'true', 'yes', '1' for the true values or 'non', 'no', 'false',  '0'  for
+       the falses values.
 
        user = arpalert
               Use privileges separation with this user
@@ -58,8 +58,8 @@ CONFIGURATION FILE
               If this option is commented out, the program does not use chroot.
               The program read the config file and open the syslog socket before the chroot:
               The kill -HUP does not work with chroot.
-              If the syslog program is restarted, the socket change and the arpalert syslog system can't be connect to the new socket: the logs with syslog are dis‐
-              abled. Prefere to use the log file.
+              If  the  syslog  program is restarted, the socket change and the arpalert syslog system can't be connect to the new socket: the logs with syslog are disabled. Prefere to use the
+              log file.
               The file paths are relative to the chroot dir (except the config file)
 
        log file = /var/log/arpalert.log
@@ -101,8 +101,7 @@ CONFIGURATION FILE
               Comma separated network interfaces leisten to. If this value is not specified, the soft select the first interface.
 
        catch only arp = TRUE
-              Configure the network for catch only arp request.  The detection type "new_mac" is deactived.  This mode is used for CPU saving if Arpalert is running
-              on a router
+              Configure the network for catch only arp request.  The detection type "new_mac" is deactived.  This mode is used for CPU saving if Arpalert is running on a router
 
        mod on detect = ""
               Module file loaded by arpalert. This module is launched on each valid alert.  This system avoids a costly fork/exec
@@ -247,4 +246,4 @@ FILES
        var/run/arpalert.pid: pid file
        var/state/arpalert.leases: leases file
 
-                                                                             2006-05-09                                                                  ARPALERT(8)
+                                                                                           2006-05-09                                                                               ARPALERT(8)

@@ -1,4 +1,4 @@
-ARPING(8)                                                                      iputils                                                                     ARPING(8)
+ARPING(8)                                                                                   iputils                                                                                   ARPING(8)
 
 NAME
        arping - send ARP REQUEST to a neighbour host
@@ -50,8 +50,8 @@ OPTIONS
            Print version of the program and exit.
 
        -w deadline
-           Specify a timeout, in seconds, before arping exits regardless of how many packets have been sent or received. In this case arping does not stop after
-           count packet are sent, it waits either for deadline expire or until count probes are answered.
+           Specify a timeout, in seconds, before arping exits regardless of how many packets have been sent or received. In this case arping does not stop after count packet are sent, it
+           waits either for deadline expire or until count probes are answered.
 
        -i interval
            Specify an interval, in seconds, between packets.
@@ -63,10 +63,9 @@ AUTHOR
        arping was written by Alexey Kuznetsov <kuznet@ms2.inr.ac.ru>.
 
 SECURITY
-       arping requires CAP_NET_RAW capability to be executed. It is not recommended to be used as set-uid root, because it allows user to modify ARP caches of
-       neighbour hosts.
+       arping requires CAP_NET_RAW capability to be executed. It is not recommended to be used as set-uid root, because it allows user to modify ARP caches of neighbour hosts.
 
 AVAILABILITY
        arping is part of iputils package.
 
-iputils s20200821                                                                                                                                          ARPING(8)
+iputils 20210202                                                                                                                                                                      ARPING(8)

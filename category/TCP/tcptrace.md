@@ -1,4 +1,4 @@
-tcptrace(1)                                                            General Commands Manual                                                           tcptrace(1)
+tcptrace(1)                                                                         General Commands Manual                                                                         tcptrace(1)
 
 NAME
        tcptrace - a TCP connection analysis tool
@@ -338,8 +338,7 @@ OPTIONS
        Please use 'tcptrace -hfilter' for filter syntax.
 
 ENVIRONMENT
-       Options  are  first read from the file $HOME/.tcptracerc (if it exists), and then from the environment variable TCPTRACEOPTS (if it exists), and finally from
-       the command line.
+       Options are first read from the file $HOME/.tcptracerc (if it exists), and then from the environment variable TCPTRACEOPTS (if it exists), and finally from the command line.
 
 AUTHOR
        Shawn Ostermann (ostermann@cs.ohiou.edu)
@@ -349,12 +348,12 @@ CREDITS
 
 FILES
        Dump File Names
-       Trailing (unrecognized) arguments are taken to be one or more filenames.  The files can be compressed, see compress.h for configuration.  If  the  dump  file
-       name is 'stdin', then we read from standard input rather than from a file.
+       Trailing (unrecognized) arguments are taken to be one or more filenames.  The files can be compressed, see compress.h for configuration.  If the dump file name is 'stdin', then we read
+       from standard input rather than from a file.
 
 SEE ALSO
        xplot   an interactive tool for examining .xpl files output by tcptrace.
 
        jPlot   a Java version of xplot.
 
-                                                                             14 Oct 2002                                                                 tcptrace(1)
+                                                                                          14 Oct 2002                                                                               tcptrace(1)

@@ -1,4 +1,4 @@
-IPERF(1)                                                                    User Manuals                                                                    IPERF(1)
+IPERF(1)                                                                                  User Manuals                                                                                 IPERF(1)
 
 NAME
        iperf - perform network throughput tests
@@ -13,12 +13,12 @@ SYNOPSIS
        iperf -u -c server [options]
 
 DESCRIPTION
-       iperf  2 is a tool for performing network throughput and latency measurements. It can test using either TCP or UDP protocols. It supports both unidirectional
-       and bidirectional traffic. Multiple simultaneous traffic streams are also supported. Metrics are displayed to help isolate the causes  which  impact  perfor‐
-       mance. Setting the enhanced (-e) option provides all available metrics.
+       iperf  2 is a tool for performing network throughput and latency measurements. It can test using either TCP or UDP protocols. It supports both unidirectional and bidirectional traffic.
+       Multiple simultaneous traffic streams are also supported. Metrics are displayed to help isolate the causes which impact performance. Setting  the  enhanced  (-e)  option  provides  all
+       available metrics.
 
-       The user must establish both a both a server (to discard traffic) and a client (to generate traffic) for a test to occur. The client and server typically are
-       on different hosts or computers but need not be.
+       The user must establish both a both a server (to discard traffic) and a client (to generate traffic) for a test to occur. The client and server typically are on different hosts or com‐
+       puters but need not be.
 
 GENERAL OPTIONS
        -b, --bandwidth
@@ -34,8 +34,8 @@ GENERAL OPTIONS
               print a help synopsis
 
        -i, --interval < n[p] | f >
-              sample or display interval reports every n seconds (default) or n packets (per optional p suffix.) If f is used then the interval will be  each  frame
-              or burst. The frame interval reporting is experimental.  Also suggest a compile with fast-sampling, i.e. ./configure --enable-fastsampling
+              sample or display interval reports every n seconds (default) or n packets (per optional p suffix.) If f is used then the interval will be each frame or burst. The frame interval
+              reporting is experimental.  Also suggest a compile with fast-sampling, i.e. ./configure --enable-fastsampling
 
        -l, --len n[kmKM]
               set read/write buffer size (TCP) or length (UDP) to n (TCP default 128K, UDP default 1470)
@@ -47,9 +47,9 @@ GENERAL OPTIONS
               print TCP maximum segment size (MTU - TCP/IP header)
 
            --NUM_REPORT_STRUCTS <count>
-              Override  the  default  shared  memory size between the traffic thread(s) and reporter thread in order to mitigate mutex lock contentions. The default
-              value of 5000 should be sufficient for 1Gb/s networks. Increase this upon seeing the Warning message of reporter thread too slow. If the Warning  mes‐
-              sage isn't seen, then increasing this won't have any significant effect (other than to use some additional memory.)
+              Override the default shared memory size between the traffic thread(s) and reporter thread in order to mitigate mutex lock contentions. The default value of 5000 should be suffi‐
+              cient for 1Gb/s networks. Increase this upon seeing the Warning message of reporter thread too slow. If the Warning message isn't seen, then increasing this won't have any  sig‐
+              nificant effect (other than to use some additional memory.)
 
        -o, --output filename
               output the report or error message to this specified file
@@ -91,8 +91,8 @@ GENERAL OPTIONS
               if set to C or c report results as CSV (comma separated values)
 
        -Z, --tcp-congestion
-              Set  the  default  congestion-control algorithm to be used for new connections. Platforms must support setsockopt's TCP_CONGESTION. (Notes: See sysctl
-              and tcp_allowed_congestion_control for available options. May require root privileges.)
+              Set  the  default  congestion-control  algorithm  to  be used for new connections. Platforms must support setsockopt's TCP_CONGESTION. (Notes: See sysctl and tcp_allowed_conges‐
+              tion_control for available options. May require root privileges.)
 
 SERVER SPECIFIC OPTIONS
        -1, --singleclient
@@ -105,17 +105,15 @@ SERVER SPECIFIC OPTIONS
               run in server mode
 
            --histograms[=binwidth[u],bincount,[lowerci],[upperci]]
-              enable latency histograms for udp packets (-u), for tcp writes (with --trip-times), or for either udp or tcp with --isochronous clients.  The  binning
-              can  be  modified. Bin widths (default 1 millisecond, append u for microseconds,) bincount is total bins (default 1000), ci is confidence interval be‐
-              tween 0-100% (default lower 5%, upper 95%, 3 stdev 99.7%)
+              enable latency histograms for udp packets (-u), for tcp writes (with --trip-times), or for either udp or tcp with --isochronous clients. The binning can be modified. Bin  widths
+              (default 1 millisecond, append u for microseconds,) bincount is total bins (default 1000), ci is confidence interval between 0-100% (default lower 5%, upper 95%, 3 stdev 99.7%)
 
        -B, --bind ip | ip%device
               bind src ip addr and optional src device for receiving
 
        -D, --daemon
-              run the server as a daemon. On Windows this will run the specified command-line under the IPerfService, installing the service if necessary. Note  the
-              service  is  not  configured to auto-start or restart - if you need a self-starting service you will need to create an init script or use Windows "sc"
-              commands.
+              run  the  server as a daemon. On Windows this will run the specified command-line under the IPerfService, installing the service if necessary. Note the service is not configured
+              to auto-start or restart - if you need a self-starting service you will need to create an init script or use Windows "sc" commands.
 
        -H, --ssm-host host
               Set the source host (ip addr) per SSM multicast, i.e. the S of the S,G
@@ -131,8 +129,7 @@ SERVER SPECIFIC OPTIONS
 
 CLIENT SPECIFIC OPTIONS
        -b, --bandwidth n[kmgKMG] | npps
-              set target bandwidth to n bits/sec (default 1 Mbit/sec) or n packets per sec. This may be used  with  TCP  or  UDP.  For  variable  loads  use  format
-              mean,standard deviation
+              set target bandwidth to n bits/sec (default 1 Mbit/sec) or n packets per sec. This may be used with TCP or UDP. For variable loads use format mean,standard deviation
 
        -c, --client host | host%device
               run in client mode, connecting to host  where the optional %dev will SO_BINDTODEVICE that output interface (requires root and see NOTES)
@@ -144,8 +141,8 @@ CLIENT SPECIFIC OPTIONS
               Do a bidirectional test simultaneous test using two unidirectional sockets
 
            --fq-rate n[kmgKMG]
-              Set  a  rate  to  be  used  with  fair-queueing  based  socket-level  pacing,  in bytes or bits per second. Only available on platforms supporting the
-              SO_MAX_PACING_RATE socket option. (Note: Here the suffixes indicate bytes/sec or bits/sec per use of uppercase or lowercase, respectively)
+              Set a rate to be used with fair-queueing based socket-level pacing, in bytes or bits per second. Only available on platforms supporting  the  SO_MAX_PACING_RATE  socket  option.
+              (Note: Here the suffixes indicate bytes/sec or bits/sec per use of uppercase or lowercase, respectively)
 
            --full-duplex
               run a full duplex test, i.e. traffic in both transmit and receive directions using the same socket
@@ -157,20 +154,19 @@ CLIENT SPECIFIC OPTIONS
               set the interpacket gap to n (units of seconds) for packets or within a frame/burst when --isochronous is set
 
            --isochronous[=fps:mean,stdev]
-              send isochronous traffic with frequency frames per second and load defined by mean and standard deviation using a log normal distribution, defaults to
-              60:20m,0.  (Note:  Here the suffixes indicate bytes/sec or bits/sec per use of uppercase or lowercase, respectively. Also the p suffix is supported to
-              set the burst size in packets, e.g. isochronous=2:25p will send two 25 packet bursts every second, or one 25 packet burst every 0.5 seconds.)
+              send  isochronous traffic with frequency frames per second and load defined by mean and standard deviation using a log normal distribution, defaults to 60:20m,0. (Note: Here the
+              suffixes indicate bytes/sec or bits/sec per use of uppercase or lowercase, respectively. Also the p suffix is supported to set the burst size in packets, e.g.  isochronous=2:25p
+              will send two 25 packet bursts every second, or one 25 packet burst every 0.5 seconds.)
 
            --no-connect-sync
-              By default, parallel traffic threads (per -P greater than 1) will synchronize after their TCP connects and prior to each sending traffic, i.e. all the
-              threads  first complete (or error) the TCP 3WHS before any traffic thread will start sending. This option disables that synchronization such that each
-              traffic thread will start sending immediately after completing its successful connect.
+              By default, parallel traffic threads (per -P greater than 1) will synchronize after their TCP connects and prior to each sending traffic, i.e. all the threads first complete (or
+              error) the TCP 3WHS before any traffic thread will start sending. This option disables that synchronization such that each traffic thread will start  sending  immediately  after
+              completing its successful connect.
 
            --no-udp-fin
-              Don't perform the UDP final server to client exchange which means there won't be a final server report displayed on the client. All  packets  per  the
-              test  will  be from the client to the server and no packets should be sent in the other direction.  It's highly suggested that -t be set on the server
-              if this option is being used.  This is because there will be only one trigger ending packet sent from client to server  and  if  it's  lost  then  the
-              server will continue to run. (Requires ver 2.0.14 or better)
+              Don't  perform the UDP final server to client exchange which means there won't be a final server report displayed on the client. All packets per the test will be from the client
+              to the server and no packets should be sent in the other direction.  It's highly suggested that -t be set on the server if this option is being used.  This is because there will
+              be only one trigger ending packet sent from client to server and if it's lost then the server will continue to run. (Requires ver 2.0.14 or better)
 
        -n, --num n[kmKM]
               number of bytes to transmit (instead of -t)
@@ -179,19 +175,17 @@ CLIENT SPECIFIC OPTIONS
               Do a bidirectional test individually - client-to-server, followed by a reversed test, server-to-client
 
        -t, --time n
-              time in seconds to listen for new traffic connections, receive traffic or transmit traffic (Defaults: transmit is 10 secs while listen and receive are
-              indefinite)
+              time in seconds to listen for new traffic connections, receive traffic or transmit traffic (Defaults: transmit is 10 secs while listen and receive are indefinite)
 
            --trip-times
               enable the measurement of end to end write to read latencies (client and server clocks must be synchronized)
 
            --txdelay-time
-              time in seconds to hold back or delay after the TCP connect and prior to the socket writes. For UDP it's the delay between the traffic thread starting
-              and the first write.
+              time in seconds to hold back or delay after the TCP connect and prior to the socket writes. For UDP it's the delay between the traffic thread starting and the first write.
 
            --txstart-time n.n
-              set  the  txstart-time  to n.n using unix or epoch time format (supports microsecond resolution, e.g 1536014418.123456) An example to delay one second
-              using command subsitution is iperf -c 192.168.1.10 --txstart-time $(expr $(date +%s) + 1).$(date +%N)
+              set  the txstart-time to n.n using unix or epoch time format (supports microsecond resolution, e.g 1536014418.123456) An example to delay one second using command subsitution is
+              iperf -c 192.168.1.10 --txstart-time $(expr $(date +%s) + 1).$(date +%N)
 
        -B, --bind ip | ip:port | ipv6 -V | [ipv6]:port -V
               bind src ip addr and optional port as the source of traffic (see notes)
@@ -277,8 +271,8 @@ EXAMPLES
 
        where (per -e,)
               Reads Total number of socket reads
-              Dist(bin=size) Eight bin histogram of the socket reads returned byte count. Bin width is set per size. Bins are separated by a colon. In the  example,
-              the bins are 0-1K, 1K-2K, .., 7K-8K.
+              Dist(bin=size) Eight bin histogram of the socket reads returned byte count. Bin width is set per size. Bins are separated by a colon. In the example, the bins are  0-1K,  1K-2K,
+              .., 7K-8K.
 
        TCP tests (server with --trip-times on client) iperf -s -i 1 -w 4M
        ------------------------------------------------------------
@@ -301,12 +295,12 @@ EXAMPLES
        [  4] 0.00-10.06 sec   191 MBytes   159 Mbits/sec  54.183/ 8.026/150.243/16.781 ms (1526/131072) 1.03 MByte 366.98  7636=2948:2449:1258:498:175:185:75:48
 
        where (per -e,)
-              Burst Latency One way TCP write() to read() latency in mean/minimum/maximum/standard deviation format (Note: requires the client's and server's system
-              clocks to be synchronized to a common reference, e.g. using precision time protocol PTP. A GPS disciplined OCXO is a recommended reference.)
+              Burst  Latency One way TCP write() to read() latency in mean/minimum/maximum/standard deviation format (Note: requires the client's and server's system clocks to be synchronized
+              to a common reference, e.g. using precision time protocol PTP. A GPS disciplined OCXO is a recommended reference.)
               cnt Number of completed bursts received and used for the burst latency calculations
               size Average burst size in bytes (computed average and estimate only)
-              inP inP, short for in progress, is the average number of bytes in progress or in flight. This is taken from an application write to read  perspective.
-              (Requires --trip-times on client. See Little's law in NOTES.)
+              inP inP, short for in progress, is the average number of bytes in progress or in flight. This is taken from an application write to read perspective. (Requires  --trip-times  on
+              client. See Little's law in NOTES.)
               NetPwr Network power defined as (throughput / one way latency)
 
        UDP tests (client)
@@ -359,11 +353,11 @@ EXAMPLES
        [  3] 0.00-10.08 sec   449 MBytes   374 Mbits/sec   0.129 ms 592717/913046 (65%) 79.453/ 2.367/99.685/ 5.200 ms 31776 pps (null) 587.91
 
        where (per -e,)
-              Latency  End  to  end latency in mean/minimum/maximum/standard deviation format (Note: requires the client's and server's system clocks to be synchro‐
-              nized to a common reference, e.g. using precision time protocol PTP. A GPS disciplined OCXO is a recommended reference.)
+              Latency  End  to  end latency in mean/minimum/maximum/standard deviation format (Note: requires the client's and server's system clocks to be synchronized to a common reference,
+              e.g. using precision time protocol PTP. A GPS disciplined OCXO is a recommended reference.)
               PPS Received packet rate in packets per second
-              inP inP, short for in progress, is the average number of bytes in progress or in flight. This is taken from an application write to read  perspective.
-              (Requires --trip-times on client. See Little's law in NOTES.)
+              inP inP, short for in progress, is the average number of bytes in progress or in flight. This is taken from an application write to read perspective. (Requires  --trip-times  on
+              client. See Little's law in NOTES.)
               NetPwr Network power defined as (throughput / latency)
 
        Isochronous UDP tests (client)
@@ -405,10 +399,9 @@ EXAMPLES
        [  3] local 192.168.100.33 port 5001 connected with 192.168.100.76 port 42928 isoch (peer 2.0.13-alpha)
        [ ID] Interval        Transfer     Bandwidth        Jitter   Lost/Total  Latency avg/min/max/stdev PPS  NetPwr  Frames/Lost
        [  3] 0.00-9.98 sec   120 MBytes   101 Mbits/sec   0.010 ms  196/85867 (0.23%)  0.665/ 0.083/ 1.318/ 0.284 ms 8585 pps  18903.85  601/1
-       [    3]   0.00-9.98  sec  T8(f)-PDF:  bin(w=100us):cnt(85671)=1:2,2:844,3:10034,4:8493,5:8967,6:8733,7:8823,8:9023,9:8901,10:8816,11:7730,12:4563,13:741,14:1
-       (5.00/95.00%=3/12,Outliers=0,obl/obu=0/0)
-       [   3]  0.00-9.98  sec  F8(f)-PDF:  bin(w=100us):cnt(598)=   15:2,16:1,17:27,18:68,19:125,20:136,21:103,22:83,23:22,24:23,25:5,26:3   (5.00/95.00%=17/24,Out‐
+       [    3]   0.00-9.98   sec   T8(f)-PDF:   bin(w=100us):cnt(85671)=1:2,2:844,3:10034,4:8493,5:8967,6:8733,7:8823,8:9023,9:8901,10:8816,11:7730,12:4563,13:741,14:1  (5.00/95.00%=3/12,Out‐
        liers=0,obl/obu=0/0)
+       [  3] 0.00-9.98 sec F8(f)-PDF: bin(w=100us):cnt(598)= 15:2,16:1,17:27,18:68,19:125,20:136,21:103,22:83,23:22,24:23,25:5,26:3 (5.00/95.00%=17/24,Outliers=0,obl/obu=0/0)
 
        where, Frames/lost Total number of frames (or bursts) received. Total number of bursts lost or error-ed
               T8-PDF(f) Latency histogram for packets
@@ -418,62 +411,55 @@ ENVIRONMENT
        Note:  The environment variable option settings haven't been maintained well.  See the source code if these are of interest.
 
 NOTES
-       Numeric  options:  Some  numeric options support format characters per '<value>c' (e.g. 10M) where the c format characters are k,m,g,K,M,G.  Lowercase format
-       characters are 10^3 based and uppercase are 2^n based, e.g. 1k = 1000, 1K = 1024, 1m = 1,000,000 and 1M = 1,048,576
+       Numeric options: Some numeric options support format characters per '<value>c' (e.g. 10M) where the c format characters are k,m,g,K,M,G.  Lowercase format characters are 10^3 based and
+       uppercase are 2^n based, e.g. 1k = 1000, 1K = 1024, 1m = 1,000,000 and 1M = 1,048,576
 
-       Rate limiting: The -b option supports read and write rate limiting at the application level.  The -b option on the  client  also  supports  variable  offered
-       loads  through  the <mean>,<standard deviation> format, e.g.  -b 100m,10m. The distribution used is log normal. Similar for the isochronous option. The -b on
-       the server rate limits the reads. Socket based pacing is also supported using the --fq-rate long option. This will work with the --reverse and  --full-duplex
-       options as well.
+       Rate limiting: The -b option supports read and write rate limiting at the application level.  The -b option on the client also supports variable offered loads through the <mean>,<stan‐
+       dard deviation> format, e.g.  -b 100m,10m. The distribution used is log normal. Similar for the isochronous option. The -b on the server rate limits the reads. Socket based  pacing  is
+       also supported using the --fq-rate long option. This will work with the --reverse and --full-duplex options as well.
 
-       Synchronized  clocks:  The --trip-times option indicates that the client's and server's clocks are synchronized to a common reference.  Network Time Protocol
-       (NTP) or Precision Time Protocol (PTP) are commonly used for this. The reference clock(s) error and the synchronization protocols will affect the accuracy of
-       any end to end latency measurements.
+       Synchronized clocks: The --trip-times option indicates that the client's and server's clocks are synchronized to a common reference.  Network Time Protocol (NTP) or Precision Time Pro‐
+       tocol (PTP) are commonly used for this. The reference clock(s) error and the synchronization protocols will affect the accuracy of any end to end latency measurements.
 
-       Binding  is  done  at  the logical level (ip address or layer 3) using the -B option and at the device (or layer 2) level using the percent (%) separator for
-       both the client and the server. On the client, the -B option affects the bind(2) system call, and will set the source ip address and the  source  port,  e.g.
-       iperf -c <host> -B 192.168.100.2:6002. This controls the packet's source values but not routing.  These can be confusing in that a route or device lookup may
-       not be that of the device with the configured source IP.  So, for example, if the IP address of eth0 is used for -B and the routing table for the destination
-       IP  address  resolves  the  output  interface to be eth1, then the host will send the packet out device eth1 while using the source IP address of eth0 in the
-       packet.  To affect the physical output interface (e.g. dual homed systems) either use -c <host>%<dev> (requires root) which bypasses this  host  route  table
-       lookup,  or  configure  policy  routing per each -B source address and set the output interface appropriately in the policy routes. On the server or receive,
-       only packets destined to -B IP address will be received. It's also useful for multicast. For example, iperf -s -B 224.0.0.1%eth0 will only accept  ip  multi‐
-       cast  packets  with  dest  ip 224.0.0.1 that are received on the eth0 interface, while iperf -s -B 224.0.0.1 will receive those packets on any interface, Fi‐
-       nally, the device specifier is required for v6 link-local, e.g. -c [v6addr]%<dev> -V, to select the output interface.
+       Binding is done at the logical level (ip address or layer 3) using the -B option and at the device (or layer 2) level using the percent (%)  separator  for  both  the  client  and  the
+       server.  On the client, the -B option affects the bind(2) system call, and will set the source ip address and the source port, e.g. iperf -c <host> -B 192.168.100.2:6002. This controls
+       the packet's source values but not routing.  These can be confusing in that a route or device lookup may not be that of the device with the configured source IP.  So, for  example,  if
+       the  IP address of eth0 is used for -B and the routing table for the destination IP address resolves the output interface to be eth1, then the host will send the packet out device eth1
+       while using the source IP address of eth0 in the packet.  To affect the physical output interface (e.g. dual homed systems) either use -c <host>%<dev> (requires  root)  which  bypasses
+       this  host  route  table  lookup, or configure policy routing per each -B source address and set the output interface appropriately in the policy routes. On the server or receive, only
+       packets destined to -B IP address will be received. It's also useful for multicast. For example, iperf -s -B 224.0.0.1%eth0 will only accept ip multicast packets with dest ip 224.0.0.1
+       that  are  received on the eth0 interface, while iperf -s -B 224.0.0.1 will receive those packets on any interface, Finally, the device specifier is required for v6 link-local, e.g. -c
+       [v6addr]%<dev> -V, to select the output interface.
 
-       Reverse, full-duplex, dualtest (-d) and tradeoff (-r): The --reverse (-R) and --full-duplex options can be confusing when compared to the  older  options  of
-       --dualtest  (-d) and --tradeoff (-r). The newer options of --reverse and --full-duplex only open one socket and read and write to the same socket descriptor,
-       i.e. use the socket in full duplex mode.  The older -d and -r open second sockets in the opposite direction and do not use a socket in full duplex mode. Note
-       that  full  duplex  applies to the socket and not to the network devices and that full duplex sockets are supported by the operating systems regardless if an
-       underlying network supports full duplex transmission and reception.  It's suggested to use --reverse if you want to test through a NAT  firewall  (or  -R  on
-       non-windows systems). This applies role reversal of the test after opening the full duplex socket.  (Note: Firewall piercing may be required to use -d and -r
-       if a NAT gateway is in the path.)
+       Reverse, full-duplex, dualtest (-d) and tradeoff (-r): The --reverse (-R) and --full-duplex options can be confusing when compared to the older options of --dualtest (-d) and  --trade‐
+       off (-r). The newer options of --reverse and --full-duplex only open one socket and read and write to the same socket descriptor, i.e. use the socket in full duplex mode.  The older -d
+       and -r open second sockets in the opposite direction and do not use a socket in full duplex mode. Note that full duplex applies to the socket and not to the network  devices  and  that
+       full  duplex sockets are supported by the operating systems regardless if an underlying network supports full duplex transmission and reception.  It's suggested to use --reverse if you
+       want to test through a NAT firewall (or -R on non-windows systems). This applies role reversal of the test after opening the full duplex socket.  (Note: Firewall piercing  may  be  re‐
+       quired to use -d and -r if a NAT gateway is in the path.)
 
-       Also, the --reverse -b <rate> setting behaves differently for TCP and UDP. For TCP it will rate limit the read side, i.e. the iperf client (role reversed  to
-       act  as a server) reading from the full duplex socket.  This will in turn flow control the reverse traffic per standard TCP congestion control. The --reverse
-       -b <rate> will be applied on transmit (i.e. the server role reversed to act as a client) for UDP since there is no flow control with UDP. There is no  option
-       to directly rate limit the writes with TCP testing when using --reverse.
+       Also,  the  --reverse  -b <rate> setting behaves differently for TCP and UDP. For TCP it will rate limit the read side, i.e. the iperf client (role reversed to act as a server) reading
+       from the full duplex socket.  This will in turn flow control the reverse traffic per standard TCP congestion control. The --reverse -b <rate> will be  applied  on  transmit  (i.e.  the
+       server role reversed to act as a client) for UDP since there is no flow control with UDP. There is no option to directly rate limit the writes with TCP testing when using --reverse.
 
-       TCP  Connect  times:  The  TCP  connect  time  (or  three way handshake) can be seen on the iperf client when the -e (--enhanced) option is set. Look for the
-       ct=<value> in the connected message, e.g.in '[ 3] local 192.168.1.4 port 48736 connected with 192.168.1.1 port 5001 (ct=1.84 ms)' shows the  3WHS  took  1.84
-       milliseconds.
+       TCP  Connect  times: The TCP connect time (or three way handshake) can be seen on the iperf client when the -e (--enhanced) option is set. Look for the ct=<value> in the connected mes‐
+       sage, e.g.in '[ 3] local 192.168.1.4 port 48736 connected with 192.168.1.1 port 5001 (ct=1.84 ms)' shows the 3WHS took 1.84 milliseconds.
 
-       Little's Law in queueing theory is a theorem that determines the average number of items (L) in a stationary queuing system based on the average waiting time
-       (W) of an item within a system and the average number of items arriving at the system per unit of time (lambda). Mathematically, it's L = lambda * W. As used
-       here, the units are bytes. The arrival rate is taken from the writes.
+       Little's Law in queueing theory is a theorem that determines the average number of items (L) in a stationary queuing system based on the average waiting time (W) of an  item  within  a
+       system  and  the  average  number of items arriving at the system per unit of time (lambda). Mathematically, it's L = lambda * W. As used here, the units are bytes. The arrival rate is
+       taken from the writes.
 
-       Network  power:  The network power (NetPwr) metric is experimental. It's a convenience function defined as throughput/delay.  For TCP transmits, the delay is
-       the sampled RTT times.  For TCP receives, the delay is the write to read latency.  For UDP the delay is the end/end latency.  Don't  confuse  this  with  the
-       physics  definition  of power (delta energy/delta time) but more of a measure of a desirable property divided by an undesirable property. Also note, one must
-       use -i interval with TCP to get this as that's what sets the RTT sampling rate. The metric is scaled to assist with human readability.
+       Network power: The network power (NetPwr) metric is experimental. It's a convenience function defined as throughput/delay.  For TCP transmits, the delay is the sampled RTT times.   For
+       TCP  receives, the delay is the write to read latency.  For UDP the delay is the end/end latency.  Don't confuse this with the physics definition of power (delta energy/delta time) but
+       more of a measure of a desirable property divided by an undesirable property. Also note, one must use -i interval with TCP to get this as that's what sets the RTT  sampling  rate.  The
+       metric is scaled to assist with human readability.
 
-       Multicast: Iperf 2 supports multicast with a couple of caveats. First, multicast streams cannot take advantage of the -P option. The  server  will  serialize
-       multicast  streams.  Also,  it's highly encouraged to use a -t on a server that will be used for multicast clients. That is because the single end of traffic
-       packet sent from client to server may get lost and there are no redundant end of traffic packets.  Setting -t on the server will kill the  server  thread  in
-       the event this packet is indeed lost.
+       Multicast: Iperf 2 supports multicast with a couple of caveats. First, multicast streams cannot take advantage of the -P option. The server will serialize multicast streams. Also, it's
+       highly encouraged to use a -t on a server that will be used for multicast clients. That is because the single end of traffic packet sent from client to server may get  lost  and  there
+       are no redundant end of traffic packets.  Setting -t on the server will kill the server thread in the event this packet is indeed lost.
 
-       Fast Sampling: Use ./configure --enable-fastsampling and then compile from source to enable four digit (e.g. 1.0000) precision in reports' timestamps. Useful
-       for sub-millisecond sampling.
+       Fast  Sampling:  Use ./configure --enable-fastsampling and then compile from source to enable four digit (e.g. 1.0000) precision in reports' timestamps. Useful for sub-millisecond sam‐
+       pling.
 
 DIAGNOSTICS
        Use ./configure --enable-thread-debug and then compile from source to enable both asserts and advanced debugging of the tool itself.
@@ -482,10 +468,9 @@ BUGS
        See https://sourceforge.net/p/iperf2/tickets/
 
 AUTHORS
-       Iperf2, based from iperf (originally written by Mark Gates and Alex Warshavsky), has a goal of maintenance with some feature  enhancement.   Other  contribu‐
-       tions  from  Ajay Tirumala, Jim Ferguson, Jon Dugan <jdugan at x1024 dot net>, Feng Qin, Kevin Gibbs, John Estabrook <jestabro at ncsa.uiuc.edu>, Andrew Gal‐
-       latin <gallatin at gmail.com>, Stephen Hemminger <shemminger at linux-foundation.org>, Tim Auckland <tim.auckland at gmail.com>, Robert J. McMahon <rjmcmahon
-       at rjmcmahon.com>
+       Iperf2, based from iperf (originally written by Mark Gates and Alex Warshavsky), has a goal of maintenance with some feature enhancement.  Other contributions from Ajay  Tirumala,  Jim
+       Ferguson, Jon Dugan <jdugan at x1024 dot net>, Feng Qin, Kevin Gibbs, John Estabrook <jestabro at ncsa.uiuc.edu>, Andrew Gallatin <gallatin at gmail.com>, Stephen Hemminger <shemminger
+       at linux-foundation.org>, Tim Auckland <tim.auckland at gmail.com>, Robert J. McMahon <rjmcmahon at rjmcmahon.com>
 
 SEE ALSO
        accept(2),bind(2),close(2),connect(2),fcntl(2),getpeername(2),getsockname(2),getsockopt(2),listen(2),read(2),recv(2),select(2),send(2),setsockopt(2),shut‐
@@ -493,7 +478,6 @@ SEE ALSO
 
        Source code at http://sourceforge.net/projects/iperf2/
 
-       "Unix Network Programming, Volume 1: The Sockets Networking API (3rd Edition) 3rd Edition" by W. Richard Stevens (Author), Bill Fenner  (Author),  Andrew  M.
-       Rudoff (Author)
+       "Unix Network Programming, Volume 1: The Sockets Networking API (3rd Edition) 3rd Edition" by W. Richard Stevens (Author), Bill Fenner (Author), Andrew M. Rudoff (Author)
 
-NLANR/DAST                                                                   APRIL 2008                                                                     IPERF(1)
+NLANR/DAST                                                                                 APRIL 2008                                                                                  IPERF(1)

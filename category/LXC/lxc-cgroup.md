@@ -1,4 +1,4 @@
-lxc-cgroup(1)                                                                                                                                          lxc-cgroup(1)
+lxc-cgroup(1)                                                                                                                                                                     lxc-cgroup(1)
 
 NAME
        lxc-cgroup - manage the control group associated with a container
@@ -7,11 +7,10 @@ SYNOPSIS
        lxc-cgroup {-n name} {state-object} [value]
 
 DESCRIPTION
-       lxc-cgroup  gets  or sets the value of a state-object (e.g., 'cpuset.cpus') in the container's cgroup for the corresponding subsystem (e.g., 'cpuset'). If no
-       [value] is specified, the current value of the state-object is displayed; otherwise it is set.
+       lxc-cgroup  gets  or  sets the value of a state-object (e.g., 'cpuset.cpus') in the container's cgroup for the corresponding subsystem (e.g., 'cpuset'). If no [value] is specified, the
+       current value of the state-object is displayed; otherwise it is set.
 
-       Note that lxc-cgroup does not check that the state-object is valid for the running kernel, or that the corresponding subsystem is contained  in  any  mounted
-       cgroup hierarchy.
+       Note that lxc-cgroup does not check that the state-object is valid for the running kernel, or that the corresponding subsystem is contained in any mounted cgroup hierarchy.
 
 OPTIONS
        state-object
@@ -49,8 +48,7 @@ COMMON OPTIONS
        --rcfile=FILE
               Specify the configuration file to configure the virtualization and isolation functionalities for the container.
 
-              This  configuration  file  if present will be used even if there is already a configuration file present in the previously created container (via lxc-
-              create).
+              This configuration file if present will be used even if there is already a configuration file present in the previously created container (via lxc-create).
 
        --version
               Show the version number.
@@ -67,10 +65,10 @@ DIAGNOSTIC
               The container is not running.
 
 SEE ALSO
-       lxc(7), lxc-create(1), lxc-copy(1), lxc-destroy(1), lxc-start(1), lxc-stop(1), lxc-execute(1), lxc-console(1),  lxc-monitor(1),  lxc-wait(1),  lxc-cgroup(1),
-       lxc-ls(1), lxc-info(1), lxc-freeze(1), lxc-unfreeze(1), lxc-attach(1), lxc.conf(5)
+       lxc(7), lxc-create(1), lxc-copy(1), lxc-destroy(1), lxc-start(1), lxc-stop(1), lxc-execute(1), lxc-console(1), lxc-monitor(1), lxc-wait(1), lxc-cgroup(1), lxc-ls(1), lxc-info(1),  lxc-
+       freeze(1), lxc-unfreeze(1), lxc-attach(1), lxc.conf(5)
 
 AUTHOR
        Daniel Lezcano <daniel.lezcano@free.fr>
 
-                                                                             2020-12-30                                                                lxc-cgroup(1)
+                                                                                           2021-01-31                                                                             lxc-cgroup(1)

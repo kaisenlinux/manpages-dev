@@ -1,4 +1,4 @@
-VAGRANT(1)                                                                  User Commands                                                                 VAGRANT(1)
+VAGRANT(1)                                                                               User Commands                                                                               VAGRANT(1)
 
 NAME
        Vagrant - Tool for building and distributing virtualized development environments.
@@ -9,8 +9,8 @@ SYNOPSIS
 DESCRIPTION
        Vagrant is a tool for building and distributing virtualized development environments.
 
-       Vagrant  provides  the framework and configuration format to create and manage complete portable development environments. These development environments can
-       live on your computer or in the cloud, and are portable between Windows, Mac OS X, and Linux.
+       Vagrant  provides the framework and configuration format to create and manage complete portable development environments. These development environments can live on your computer or in
+       the cloud, and are portable between Windows, Mac OS X, and Linux.
 
 OPTIONS
        -v, --version
@@ -61,4 +61,4 @@ AUTHOR
 SEE ALSO
        For help on any individual command run vagrant COMMAND -h
 
-Vagrant 1.4.3                                                               January 2014                                                                  VAGRANT(1)
+Vagrant 1.4.3                                                                             January 2014                                                                               VAGRANT(1)

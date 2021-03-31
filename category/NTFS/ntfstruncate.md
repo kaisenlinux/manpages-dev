@@ -1,4 +1,4 @@
-NTFSTRUNCATE(8)                                                        System Manager's Manual                                                       NTFSTRUNCATE(8)
+NTFSTRUNCATE(8)                                                                     System Manager's Manual                                                                     NTFSTRUNCATE(8)
 
 NAME
        ntfstruncate - truncate a file on an NTFS volume
@@ -10,9 +10,9 @@ DESCRIPTION
        ntfstruncate truncates (or extends) a specified attribute belonging to a file or directory, to a specified length.
 
 OPTIONS
-       Below is a summary of all the options that ntfstruncate accepts.  Nearly all options have two equivalent names.  The short name is preceded by - and the long
-       name is preceded by --.  Any single letter options, that don't take an argument, can be combined into a single command, e.g.  -fv is  equivalent  to  -f  -v.
-       Long named options can be abbreviated to any unique prefix of their name.
+       Below  is  a  summary of all the options that ntfstruncate accepts.  Nearly all options have two equivalent names.  The short name is preceded by - and the long name is preceded by --.
+       Any single letter options, that don't take an argument, can be combined into a single command, e.g.  -fv is equivalent to -f -v.  Long named options can be abbreviated  to  any  unique
+       prefix of their name.
 
        -f, --force
               This will override some sensible defaults, such as not using a mounted volume.  Use this option with caution.
@@ -35,8 +35,8 @@ OPTIONS
               Show the version number, copyright and license of ntfstruncate.
 
        attr-type
-              Define  a  particular attribute type to be truncated (advanced use only).  By default, the unnamed $DATA attribute (the contents of a plain file) will
-              be truncated. The attribute has to be specified by a number in decimal or hexadecimal :
+              Define  a particular attribute type to be truncated (advanced use only).  By default, the unnamed $DATA attribute (the contents of a plain file) will be truncated. The attribute
+              has to be specified by a number in decimal or hexadecimal :
 
               ┌───────────────────────────────────────────┐
               │Hex     Decimal   Name                     │
@@ -62,9 +62,8 @@ OPTIONS
               Define the name of the particular attribute type to be truncated (advanced use only).
 
        new-length
-              Specify the target size of the file.  It will be rounded up to a multiple of the cluster size.  A suffix of K, M, G, T, P or E may be appended to mean
-              a  multiplicative factor of a power of 1000. Similarly a suffix of Ki, Mi, Gi, Ti, Pi or Ei may be appended to mean a multiplicative factor of a power
-              of 1024.
+              Specify the target size of the file.  It will be rounded up to a multiple of the cluster size.  A suffix of K, M, G, T, P or E may be appended to mean a multiplicative factor of
+              a power of 1000. Similarly a suffix of Ki, Mi, Gi, Ti, Pi or Ei may be appended to mean a multiplicative factor of a power of 1024.
 
 EXAMPLES
        Resize to 100MB the file database.db located in the Data directory which is at the root of an NTFS file system.
@@ -85,4 +84,4 @@ AVAILABILITY
 SEE ALSO
        ntfs-3g(8), ntfsfallocate(8), ntfsprogs(8).
 
-ntfs-3g 2017.3.23AR.3                                                         June 2014                                                              NTFSTRUNCATE(8)
+ntfs-3g 2017.3.23AR.3                                                                      June 2014                                                                            NTFSTRUNCATE(8)

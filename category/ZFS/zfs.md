@@ -1,4 +1,4 @@
-zfs(8)                                                             System Administration Commands                                                             zfs(8)
+zfs(8)                                                                           System Administration Commands                                                                          zfs(8)
 
 NAME
        zfs - configures ZFS file systems
@@ -93,8 +93,7 @@ SYNOPSIS
        zfs release [-r] tag snapshot...
 
 DESCRIPTION
-       The  zfs  command configures ZFS datasets within a ZFS storage pool, as described in zpool(1M). A dataset is identified by a unique path within the ZFS name‐
-       space. For example:
+       The zfs command configures ZFS datasets within a ZFS storage pool, as described in zpool(1M). A dataset is identified by a unique path within the ZFS namespace. For example:
 
          pool/{filesystem,volume,snapshot}
 
@@ -104,14 +103,13 @@ DESCRIPTION
 
        file system
 
-           A ZFS dataset of type filesystem can be mounted within the standard system namespace and behaves like other file systems. While ZFS file systems are  de‐
-           signed  to be POSIX compliant, known issues exist that prevent compliance in some cases. Applications that depend on standards conformance might fail due
-           to nonstandard behavior when checking file system free space.
+           A ZFS dataset of type filesystem can be mounted within the standard system namespace and behaves like other file systems. While ZFS file systems are designed to be POSIX compliant,
+           known issues exist that prevent compliance in some cases. Applications that depend on standards conformance might fail due to nonstandard behavior when checking  file  system  free
+           space.
 
        volume
 
-           A logical volume exported as a raw or block device. This type of dataset should only be used under special circumstances. File systems are typically used
-           in most environments.
+           A logical volume exported as a raw or block device. This type of dataset should only be used under special circumstances. File systems are typically used in most environments.
 
        snapshot
 
@@ -120,103 +118,99 @@ DESCRIPTION
    ZFS File System Hierarchy
        A ZFS storage pool is a logical collection of devices that provide space for datasets. A storage pool is also the root of the ZFS file system hierarchy.
 
-       The  root of the pool can be accessed as a file system, such as mounting and unmounting, taking snapshots, and setting properties. The physical storage char‐
-       acteristics, however, are managed by the zpool(1M) command.
+       The  root  of  the  pool can be accessed as a file system, such as mounting and unmounting, taking snapshots, and setting properties. The physical storage characteristics, however, are
+       managed by the zpool(1M) command.
 
        See zpool(1M) for more information on creating and administering pools.
 
    Snapshots
-       A snapshot is a read-only copy of a file system or volume. Snapshots can be created extremely quickly, and initially consume no additional space  within  the
-       pool. As data within the active dataset changes, the snapshot consumes more data than would otherwise be shared with the active dataset.
+       A snapshot is a read-only copy of a file system or volume. Snapshots can be created extremely quickly, and initially consume no additional space within the pool. As data within the ac‐
+       tive dataset changes, the snapshot consumes more data than would otherwise be shared with the active dataset.
 
        Snapshots can have arbitrary names. Snapshots of volumes can be cloned or rolled back, but cannot be accessed independently.
 
-       File system snapshots can be accessed under the .zfs/snapshot directory in the root of the file system. Snapshots are automatically mounted on demand and may
-       be unmounted at regular intervals. The visibility of the .zfs directory can be controlled by the snapdir property.
+       File  system  snapshots  can be accessed under the .zfs/snapshot directory in the root of the file system. Snapshots are automatically mounted on demand and may be unmounted at regular
+       intervals. The visibility of the .zfs directory can be controlled by the snapdir property.
 
    Clones
-       A clone is a writable volume or file system whose initial contents are the same as another dataset. As with snapshots, creating a clone is  nearly  instanta‐
-       neous, and initially consumes no additional space.
+       A clone is a writable volume or file system whose initial contents are the same as another dataset. As with snapshots, creating a clone is nearly instantaneous, and initially  consumes
+       no additional space.
 
-       Clones  can only be created from a snapshot. When a snapshot is cloned, it creates an implicit dependency between the parent and child. Even though the clone
-       is created somewhere else in the dataset hierarchy, the original snapshot cannot be destroyed as long as a clone exists. The origin property exposes this de‐
-       pendency, and the destroy command lists any such dependencies, if they exist.
+       Clones  can  only be created from a snapshot. When a snapshot is cloned, it creates an implicit dependency between the parent and child. Even though the clone is created somewhere else
+       in the dataset hierarchy, the original snapshot cannot be destroyed as long as a clone exists. The origin property exposes this dependency, and the destroy command lists any  such  de‐
+       pendencies, if they exist.
 
-       The clone parent-child dependency relationship can be reversed by using the promote subcommand. This causes the "origin" file system to become a clone of the
-       specified file system, which makes it possible to destroy the file system that the clone was created from.
+       The  clone  parent-child  dependency  relationship can be reversed by using the promote subcommand. This causes the "origin" file system to become a clone of the specified file system,
+       which makes it possible to destroy the file system that the clone was created from.
 
    Mount Points
-       Creating a ZFS file system is a simple operation, so the number of file systems per system is likely to be numerous. To cope  with  this,  ZFS  automatically
-       manages mounting and unmounting file systems without the need to edit the /etc/vfstab file. All automatically managed file systems are mounted by ZFS at boot
-       time.
+       Creating a ZFS file system is a simple operation, so the number of file systems per system is likely to be numerous. To cope with this, ZFS automatically manages mounting and  unmount‐
+       ing file systems without the need to edit the /etc/vfstab file. All automatically managed file systems are mounted by ZFS at boot time.
 
-       By default, file systems are mounted under /path, where path is the name of the file system in the ZFS namespace. Directories are created  and  destroyed  as
-       needed.
+       By default, file systems are mounted under /path, where path is the name of the file system in the ZFS namespace. Directories are created and destroyed as needed.
 
-       A  file  system can also have a mount point set in the mountpoint property. This directory is created as needed, and ZFS automatically mounts the file system
-       when the zfs mount -a command is invoked (without editing /etc/vfstab). The mountpoint property can be inherited, so if pool/home has a mount point  of  /ex‐
-       port/stuff, then pool/home/user automatically inherits a mount point of /export/stuff/user.
+       A  file  system can also have a mount point set in the mountpoint property. This directory is created as needed, and ZFS automatically mounts the file system when the zfs mount -a com‐
+       mand is invoked (without editing /etc/vfstab). The mountpoint property can be inherited, so if pool/home has a mount point of /export/stuff, then pool/home/user automatically  inherits
+       a mount point of /export/stuff/user.
 
        A file system mountpoint property of none prevents the file system from being mounted.
 
-       If  needed,  ZFS  file  systems can also be managed with traditional tools (mount, umount, /etc/vfstab). If a file system's mount point is set to legacy, ZFS
-       makes no attempt to manage the file system, and the administrator is responsible for mounting and unmounting the file system.
+       If needed, ZFS file systems can also be managed with traditional tools (mount, umount, /etc/vfstab). If a file system's mount point is set to legacy, ZFS makes no attempt to manage the
+       file system, and the administrator is responsible for mounting and unmounting the file system.
 
    Zones
-       A ZFS file system can be added to a non-global zone by using the zonecfg add fs subcommand. A ZFS file system that is added to a non-global  zone  must  have
-       its mountpoint property set to legacy.
+       A ZFS file system can be added to a non-global zone by using the zonecfg add fs subcommand. A ZFS file system that is added to a non-global zone must have its mountpoint  property  set
+       to legacy.
 
-       The  physical  properties  of an added file system are controlled by the global administrator. However, the zone administrator can create, modify, or destroy
-       files within the added file system, depending on how the file system is mounted.
+       The  physical  properties of an added file system are controlled by the global administrator. However, the zone administrator can create, modify, or destroy files within the added file
+       system, depending on how the file system is mounted.
 
-       A dataset can also be delegated to a non-global zone by using the zonecfg add dataset subcommand. You cannot delegate a dataset to one zone and the  children
-       of  the same dataset to another zone. The zone administrator can change properties of the dataset or any of its children. However, the quota property is con‐
-       trolled by the global administrator.
+       A dataset can also be delegated to a non-global zone by using the zonecfg add dataset subcommand. You cannot delegate a dataset to one zone and the children of the same dataset to  an‐
+       other zone. The zone administrator can change properties of the dataset or any of its children. However, the quota property is controlled by the global administrator.
 
-       A ZFS volume can be added as a device to a non-global zone by using the zonecfg add device subcommand. However, its physical properties can be modified  only
-       by the global administrator.
+       A  ZFS  volume can be added as a device to a non-global zone by using the zonecfg add device subcommand. However, its physical properties can be modified only by the global administra‐
+       tor.
 
        For more information about zonecfg syntax, see zonecfg(1M).
 
-       After  a  dataset is delegated to a non-global zone, the zoned property is automatically set. A zoned file system cannot be mounted in the global zone, since
-       the zone administrator might have to set the mount point to an unacceptable value.
+       After a dataset is delegated to a non-global zone, the zoned property is automatically set. A zoned file system cannot be mounted in the global zone, since the zone administrator might
+       have to set the mount point to an unacceptable value.
 
-       The global administrator can forcibly clear the zoned property, though this should be done with extreme care. The global administrator should verify that all
-       the mount points are acceptable before clearing the property.
+       The  global  administrator can forcibly clear the zoned property, though this should be done with extreme care. The global administrator should verify that all the mount points are ac‐
+       ceptable before clearing the property.
 
    Deduplication
-       Deduplication is the process for removing redundant data at  the block-level, reducing the total amount of data stored. If a file system has the dedup  prop‐
-       erty enabled, duplicate data blocks are removed synchronously.  The result is that only unique data is stored and common components are shared among files.
+       Deduplication is the process for removing redundant data at  the block-level, reducing the total amount of data stored. If a file system has the dedup  property enabled, duplicate data
+       blocks are removed synchronously.  The result is that only unique data is stored and common components are shared among files.
 
    Native Properties
-       Properties are divided into two types, native properties and user-defined (or "user") properties. Native properties either export internal statistics or con‐
-       trol  ZFS  behavior. In addition, native properties are either editable or read-only. User properties have no effect on ZFS behavior, but you can use them to
-       annotate datasets in a way that is meaningful in your environment. For more information about user properties, see the "User Properties" section, below.
+       Properties  are divided into two types, native properties and user-defined (or "user") properties. Native properties either export internal statistics or control ZFS behavior. In addi‐
+       tion, native properties are either editable or read-only. User properties have no effect on ZFS behavior, but you can use them to annotate datasets in a way that is meaningful in  your
+       environment. For more information about user properties, see the "User Properties" section, below.
 
-       Every dataset has a set of properties that export statistics about the dataset as well as control various behaviors. Properties are inherited from the parent
-       unless overridden by the child. Some properties apply only to certain types of datasets (file systems, volumes, or snapshots).
+       Every  dataset  has a set of properties that export statistics about the dataset as well as control various behaviors. Properties are inherited from the parent unless overridden by the
+       child. Some properties apply only to certain types of datasets (file systems, volumes, or snapshots).
 
-       The values of numeric properties can be specified using human-readable suffixes (for example, k, KB, M, Gb, and so forth, up to Z for zettabyte). The follow‐
-       ing are all valid (and equal) specifications:
+       The values of numeric properties can be specified using human-readable suffixes (for example, k, KB, M, Gb, and so forth, up to Z for zettabyte).  The  following  are  all  valid  (and
+       equal) specifications:
 
          1536M, 1.5g, 1.50GB
 
        The values of non-numeric properties are case sensitive and must be lowercase, except for mountpoint, sharenfs, and sharesmb.
 
-       The following native properties consist of read-only statistics about the dataset. These properties can be neither set, nor inherited. Native properties  ap‐
-       ply to all dataset types unless otherwise noted.
+       The  following native properties consist of read-only statistics about the dataset. These properties can be neither set, nor inherited. Native properties apply to all dataset types un‐
+       less otherwise noted.
 
        available
 
-           The amount of space available to the dataset and all its children, assuming that there is no other activity in the pool. Because space is shared within a
-           pool, availability can be limited by any number of factors, including physical pool size, quotas, reservations, or other datasets within the pool.
+           The amount of space available to the dataset and all its children, assuming that there is no other activity in the pool. Because space is shared within a pool, availability can  be
+           limited by any number of factors, including physical pool size, quotas, reservations, or other datasets within the pool.
 
            This property can also be referred to by its shortened column name, avail.
 
        compressratio
 
-           The compression ratio achieved for this dataset, expressed as a multiplier. Compression can be turned on by running: zfs set compression=on dataset.  The
-           default value is off.
+           The compression ratio achieved for this dataset, expressed as a multiplier. Compression can be turned on by running: zfs set compression=on dataset. The default value is off.
 
        creation
 
@@ -232,13 +226,12 @@ DESCRIPTION
 
        origin
 
-           For  cloned  file  systems  or volumes, the snapshot from which the clone was created. The origin cannot be destroyed (even with the -r or -f options) so
-           long as a clone exists.
+           For cloned file systems or volumes, the snapshot from which the clone was created. The origin cannot be destroyed (even with the -r or -f options) so long as a clone exists.
 
        referenced
 
-           The amount of data that is accessible by this dataset, which may or may not be shared with other datasets in the pool. When a snapshot or clone  is  cre‐
-           ated, it initially references the same amount of space as the file system or snapshot it was created from, since its contents are identical.
+           The  amount of data that is accessible by this dataset, which may or may not be shared with other datasets in the pool. When a snapshot or clone is created, it initially references
+           the same amount of space as the file system or snapshot it was created from, since its contents are identical.
 
            This property can also be referred to by its shortened column name, refer.
 
@@ -248,22 +241,21 @@ DESCRIPTION
 
        used
 
-           The amount of space consumed by this dataset and all its descendents. This is the value that is checked against this dataset's quota and reservation. The
-           space used does not include this dataset's reservation, but does take into account the reservations of any descendent datasets. The amount of space  that
-           a  dataset  consumes from its parent, as well as the amount of space that are freed if this dataset is recursively destroyed, is the greater of its space
-           used and its reservation.
+           The amount of space consumed by this dataset and all its descendents. This is the value that is checked against this dataset's quota and reservation. The space used  does  not  in‐
+           clude  this  dataset's  reservation, but does take into account the reservations of any descendent datasets. The amount of space that a dataset consumes from its parent, as well as
+           the amount of space that are freed if this dataset is recursively destroyed, is the greater of its space used and its reservation.
 
-           When snapshots (see the "Snapshots" section) are created, their space is initially shared between the snapshot and the file  system,  and  possibly  with
-           previous  snapshots.  As  the  file  system changes, space that was previously shared becomes unique to the snapshot, and counted in the snapshot's space
-           used. Additionally, deleting snapshots can increase the amount of space unique to (and used by) other snapshots.
+           When snapshots (see the "Snapshots" section) are created, their space is initially shared between the snapshot and the file system, and possibly with  previous  snapshots.  As  the
+           file  system  changes,  space that was previously shared becomes unique to the snapshot, and counted in the snapshot's space used. Additionally, deleting snapshots can increase the
+           amount of space unique to (and used by) other snapshots.
 
-           The amount of space used, available, or referenced does not take into account pending changes. Pending changes are generally accounted for within  a  few
-           seconds. Committing a change to a disk using fsync(3c) or O_SYNC does not necessarily guarantee that the space usage information is updated immediately.
+           The amount of space used, available, or referenced does not take into account pending changes. Pending changes are generally accounted for within a few seconds. Committing a change
+           to a disk using fsync(3c) or O_SYNC does not necessarily guarantee that the space usage information is updated immediately.
 
        usedby*
 
-           The  usedby*  properties decompose the used properties into the various reasons that space is used. Specifically, used = usedbychildren + usedbydataset +
-           usedbyrefreservation +, usedbysnapshots. These properties are only available for datasets created on zpool "version 13" pools.
+           The  usedby*  properties  decompose  the  used properties into the various reasons that space is used. Specifically, used = usedbychildren + usedbydataset + usedbyrefreservation +,
+           usedbysnapshots. These properties are only available for datasets created on zpool "version 13" pools.
 
        usedbychildren
 
@@ -271,8 +263,8 @@ DESCRIPTION
 
        usedbydataset
 
-           The amount of space used by this dataset itself, which would be freed if the dataset were destroyed (after first removing any refreservation and destroy‐
-           ing any necessary snapshots or descendents).
+           The amount of space used by this dataset itself, which would be freed if the dataset were destroyed (after first removing any refreservation and destroying any necessary  snapshots
+           or descendents).
 
        usedbyrefreservation
 
@@ -280,16 +272,15 @@ DESCRIPTION
 
        usedbysnapshots
 
-           The  amount  of  space consumed by snapshots of this dataset. In particular, it is the amount of space that would be freed if all of this dataset's snap‐
-           shots were destroyed. Note that this is not simply the sum of the snapshots' used properties because space can be shared by multiple snapshots.
+           The amount of space consumed by snapshots of this dataset. In particular, it is the amount of space that would be freed if all of this dataset's snapshots were destroyed. Note that
+           this is not simply the sum of the snapshots' used properties because space can be shared by multiple snapshots.
 
        userused@user
 
-           The amount of space consumed by the specified user in this dataset. Space is charged to the owner of each file, as displayed by  ls  -l.  The  amount  of
-           space charged is displayed by du and ls -s. See the zfs userspace subcommand for more information.
+           The amount of space consumed by the specified user in this dataset. Space is charged to the owner of each file, as displayed by ls -l. The amount of space charged is  displayed  by
+           du and ls -s. See the zfs userspace subcommand for more information.
 
-           Unprivileged users can access only their own space usage. The root user, or a user who has been granted the userused privilege with zfs allow, can access
-           everyone's usage.
+           Unprivileged users can access only their own space usage. The root user, or a user who has been granted the userused privilege with zfs allow, can access everyone's usage.
 
            The userused@... properties are not displayed by zfs get all. The user's name must be appended after the @ symbol, using one of the following forms:
 
@@ -307,16 +298,16 @@ DESCRIPTION
 
        groupused@group
 
-           The amount of space consumed by the specified group in this dataset. Space is charged to the group  of  each  file,  as  displayed  by  ls  -l.  See  the
-           userused@user property for more information.
+           The  amount of space consumed by the specified group in this dataset. Space is charged to the group of each file, as displayed by ls -l. See the userused@user property for more in‐
+           formation.
 
-           Unprivileged  users  can only access their own groups' space usage. The root user, or a user who has been granted the groupused privilege with zfs allow,
-           can access all groups' usage.
+           Unprivileged users can only access their own groups' space usage. The root user, or a user who has been granted the groupused privilege with zfs allow, can access all  groups'  us‐
+           age.
 
        volblocksize=blocksize
 
-           For volumes, specifies the block size of the volume. The blocksize cannot be changed once the volume has been written, so it should be set at volume cre‐
-           ation time. The default blocksize for volumes is 8 Kbytes. Any power of 2 from 512 bytes to 128 Kbytes is valid.
+           For  volumes,  specifies  the  block  size of the volume. The blocksize cannot be changed once the volume has been written, so it should be set at volume creation time. The default
+           blocksize for volumes is 8 Kbytes. Any power of 2 from 512 bytes to 128 Kbytes is valid.
 
            This property can also be referred to by its shortened column name, volblock.
 
@@ -324,73 +315,70 @@ DESCRIPTION
 
        aclinherit=discard | noallow | restricted | passthrough | passthrough-x
 
-           Controls  how ACL entries are inherited when files and directories are created. A file system with an aclinherit property of discard does not inherit any
-           ACL entries. A file system with an aclinherit property value of noallow only inherits inheritable ACL entries that specify "deny" permissions. The  prop‐
-           erty  value  restricted (the default) removes the write_acl and write_owner permissions when the ACL entry is inherited. A file system with an aclinherit
-           property value of passthrough inherits all inheritable ACL entries without any modifications made to the ACL entries when they are inherited. A file sys‐
-           tem  with  an  aclinherit property value of passthrough-x has the same meaning as passthrough, except that the owner@, group@, and everyone@ ACEs inherit
-           the execute permission only if the file creation mode also requests the execute bit.
+           Controls how ACL entries are inherited when files and directories are created. A file system with an aclinherit property of discard does not inherit any ACL entries. A file  system
+           with  an  aclinherit  property  value  of  noallow  only  inherits  inheritable ACL entries that specify "deny" permissions. The property value restricted (the default) removes the
+           write_acl and write_owner permissions when the ACL entry is inherited. A file system with an aclinherit property value of passthrough inherits all inheritable ACL  entries  without
+           any modifications made to the ACL entries when they are inherited. A file system with an aclinherit property value of passthrough-x has the same meaning as passthrough, except that
+           the owner@, group@, and everyone@ ACEs inherit the execute permission only if the file creation mode also requests the execute bit.
 
-           When the property value is set to passthrough, files are created with a mode determined by the inheritable ACEs. If no inheritable ACEs exist that affect
-           the mode, then the mode is set in accordance to the requested mode from the application.
+           When the property value is set to passthrough, files are created with a mode determined by the inheritable ACEs. If no inheritable ACEs exist that affect the mode, then the mode is
+           set in accordance to the requested mode from the application.
 
        aclmode=discard | groupmask | passthrough
 
-           Controls how an ACL is modified during chmod(2). A file system with an aclmode property of discard deletes all ACL entries that do not represent the mode
-           of the file. An aclmode property of groupmask (the default) reduces user or group permissions. The permissions are reduced, such that they are no greater
-           than  the group permission bits, unless it is a user entry that has the same UID as the owner of the file or directory. In this case, the ACL permissions
-           are reduced so that they are no greater than owner permission bits. A file system with an aclmode property of passthrough indicates that no  changes  are
-           made to the ACL other than generating the necessary ACL entries to represent the new mode of the file or directory.
+           Controls  how  an  ACL is modified during chmod(2). A file system with an aclmode property of discard deletes all ACL entries that do not represent the mode of the file. An aclmode
+           property of groupmask (the default) reduces user or group permissions. The permissions are reduced, such that they are no greater than the group permission bits,  unless  it  is  a
+           user entry that has the same UID as the owner of the file or directory. In this case, the ACL permissions are reduced so that they are no greater than owner permission bits. A file
+           system with an aclmode property of passthrough indicates that no changes are made to the ACL other than generating the necessary ACL entries to represent the new mode of  the  file
+           or directory.
 
        atime=on | off
 
-           Controls whether the access time for files is updated when they are read. Turning this property off avoids producing write traffic when reading files and
-           can result in significant performance gains, though it might confuse mailers and other similar utilities. The default value is on.
+           Controls  whether the access time for files is updated when they are read. Turning this property off avoids producing write traffic when reading files and can result in significant
+           performance gains, though it might confuse mailers and other similar utilities. The default value is on.
 
        canmount=on | off | noauto
 
-           If this property is set to off, the file system cannot be mounted, and is ignored by zfs mount -a. Setting this property to off is similar to setting the
-           mountpoint  property to none, except that the dataset still has a normal mountpoint property, which can be inherited. Setting this property to off allows
-           datasets to be used solely as a mechanism to inherit properties. One example of setting canmount=off is to have two datasets with the same mountpoint, so
-           that the children of both datasets appear in the same directory, but might have different inherited characteristics.
+           If this property is set to off, the file system cannot be mounted, and is ignored by zfs mount -a. Setting this property to off is similar to setting  the  mountpoint  property  to
+           none,  except  that the dataset still has a normal mountpoint property, which can be inherited. Setting this property to off allows datasets to be used solely as a mechanism to in‐
+           herit properties. One example of setting canmount=off is to have two datasets with the same mountpoint, so that the children of both datasets appear  in  the  same  directory,  but
+           might have different inherited characteristics.
 
-           When  the noauto option is set, a dataset can only be mounted and unmounted explicitly. The dataset is not mounted automatically when the dataset is cre‐
-           ated or imported, nor is it mounted by the zfs mount -a command or unmounted by the zfs unmount -a command.
+           When  the  noauto option is set, a dataset can only be mounted and unmounted explicitly. The dataset is not mounted automatically when the dataset is created or imported, nor is it
+           mounted by the zfs mount -a command or unmounted by the zfs unmount -a command.
 
            This property is not inherited.
 
        checksum=on | off | fletcher2,| fletcher4 | sha256
 
-           Controls the checksum used to verify data integrity. The default value is on, which automatically selects an appropriate algorithm (currently, fletcher4,
-           but this may change in future releases). The value off disables integrity checking on user data. Disabling checksums is NOT a recommended practice.
+           Controls the checksum used to verify data integrity. The default value is on, which automatically selects an appropriate algorithm (currently, fletcher4, but this may change in fu‐
+           ture releases). The value off disables integrity checking on user data. Disabling checksums is NOT a recommended practice.
 
            Changing this property affects only newly-written data.
 
        compression=on | off | lzjb | gzip | gzip-N | zle
 
-           Controls  the  compression  algorithm used for this dataset. The lzjb compression algorithm is optimized for performance while providing decent data com‐
-           pression. Setting compression to on uses the lzjb compression algorithm. The gzip compression algorithm uses the same compression as the gzip(1) command.
-           You can specify the gzip level by using the value gzip-N where N is an integer from 1 (fastest) to 9 (best compression ratio). Currently, gzip is equiva‐
-           lent to gzip-6 (which is also the default for gzip(1)).
+           Controls  the  compression algorithm used for this dataset. The lzjb compression algorithm is optimized for performance while providing decent data compression. Setting compression
+           to on uses the lzjb compression algorithm. The gzip compression algorithm uses the same compression as the gzip(1) command. You can specify the gzip level by using the value gzip-N
+           where N is an integer from 1 (fastest) to 9 (best compression ratio). Currently, gzip is equivalent to gzip-6 (which is also the default for gzip(1)).
 
            This property can also be referred to by its shortened column name compress. Changing this property affects only newly-written data.
 
        copies=1 | 2 | 3
 
-           Controls the number of copies of data stored for this dataset. These copies are in addition to any redundancy provided by the pool, for example,  mirror‐
-           ing  or  RAID-Z.  The copies are stored on different disks, if possible. The space used by multiple copies is charged to the associated file and dataset,
-           changing the used property and counting against quotas and reservations.
+           Controls the number of copies of data stored for this dataset. These copies are in addition to any redundancy provided by the pool, for example, mirroring or RAID-Z. The copies are
+           stored on different disks, if possible. The space used by multiple copies is charged to the associated file and dataset, changing the used property and counting against quotas  and
+           reservations.
 
            Changing this property only affects newly-written data. Therefore, set this property at file system creation time by using the -o copies=N option.
 
        dedup=on | off | verify | sha256[,verify]
 
-           Controls whether deduplication is in effect for a dataset. The default value is off. The default checksum used for deduplication is  sha256  (subject  to
-           change).  When  dedup  is  enabled, the dedup checksum algorithm overrides the checksum property. Setting the value to verify is equivalent to specifying
-           sha256,verify.
+           Controls  whether  deduplication  is in effect for a dataset. The default value is off. The default checksum used for deduplication is sha256 (subject to change). When dedup is en‐
+           abled, the dedup checksum algorithm overrides the checksum property. Setting the value to verify is equivalent to specifying sha256,verify.
 
-           If the property is set to verify, then, whenever two blocks have the same signature, ZFS will do a byte-for-byte comparison with the  existing  block  to
-           ensure that the contents are identical.
+           If the property is set to verify, then, whenever two blocks have the same signature, ZFS will do a byte-for-byte comparison with the existing block to ensure that the contents  are
+           identical.
 
        devices=on | off
 
@@ -402,16 +390,15 @@ DESCRIPTION
 
        mlslabel=label | none
 
-           The  mlslabel  property is a sensitivity label that determines if a dataset  can be mounted in a zone on a system with Trusted Extensions enabled. If the
-           labeled dataset matches the labeled zone, the dataset can be mounted  and accessed from the labeled zone.
+           The  mlslabel property is a sensitivity label that determines if a dataset  can be mounted in a zone on a system with Trusted Extensions enabled. If the labeled dataset matches the
+           labeled zone, the dataset can be mounted  and accessed from the labeled zone.
 
            When the mlslabel property is not set, the default value is none. Setting the  mlslabel property to none is equivalent to removing the property.
 
-           The mlslabel property can be modified only when Trusted Extensions is enabled and only with appropriate privilege. Rights to modify it  cannot  be  dele‐
-           gated.  When  changing  a label to a higher label or setting the initial dataset label, the {PRIV_FILE_UPGRADE_SL} privilege is required. When changing a
-           label to a lower label or the default (none), the {PRIV_FILE_DOWNGRADE_SL} privilege is required. Changing the dataset to labels other than  the  default
-           can be done only when the dataset is not mounted. When a dataset with the default label is mounted into a labeled-zone, the mount operation automatically
-           sets the mlslabel property to the label of that zone.
+           The mlslabel property can be modified only when Trusted Extensions is enabled and only with appropriate privilege. Rights to modify it cannot be delegated. When changing a label to
+           a  higher  label  or  setting  the  initial  dataset  label,  the  {PRIV_FILE_UPGRADE_SL}  privilege  is required. When changing a label to a lower label or the default (none), the
+           {PRIV_FILE_DOWNGRADE_SL} privilege is required. Changing the dataset to labels other than the default can be done only when the dataset is not mounted. When a dataset with the  de‐
+           fault label is mounted into a labeled-zone, the mount operation automatically sets the mlslabel property to the label of that zone.
 
            When Trusted Extensions is not enabled, only datasets with the default label (none) can be mounted.
 
@@ -419,42 +406,41 @@ DESCRIPTION
 
            Controls the mount point used for this file system. See the "Mount Points" section for more information on how this property is used.
 
-           When the mountpoint property is changed for a file system, the file system and any children that inherit the mount point are unmounted. If the new  value
-           is  legacy, then they remain unmounted. Otherwise, they are automatically remounted in the new location if the property was previously legacy or none, or
-           if they were mounted before the property was changed. In addition, any shared file systems are unshared and shared in the new location.
+           When the mountpoint property is changed for a file system, the file system and any children that inherit the mount point are unmounted. If the new value is legacy, then they remain
+           unmounted. Otherwise, they are automatically remounted in the new location if the property was previously legacy or none, or if they were mounted before the property  was  changed.
+           In addition, any shared file systems are unshared and shared in the new location.
 
        nbmand=on | off
 
-           Controls whether the file system should be mounted with nbmand (Non Blocking mandatory locks). This is used for CIFS clients. Changes  to  this  property
-           only take effect when the file system is umounted and remounted. See mount(1M) for more information on nbmand mounts.
+           Controls  whether  the  file  system should be mounted with nbmand (Non Blocking mandatory locks). This is used for CIFS clients. Changes to this property only take effect when the
+           file system is umounted and remounted. See mount(1M) for more information on nbmand mounts.
 
        primarycache=all | none | metadata
 
-           Controls  what  is cached in the primary cache (ARC). If this property is set to all, then both user data and metadata is cached. If this property is set
-           to none, then neither user data nor metadata is cached. If this property is set to metadata, then only metadata is cached. The default value is all.
+           Controls what is cached in the primary cache (ARC). If this property is set to all, then both user data and metadata is cached. If this property is set to none, then  neither  user
+           data nor metadata is cached. If this property is set to metadata, then only metadata is cached. The default value is all.
 
        quota=size | none
 
-           Limits the amount of space a dataset and its descendents can consume. This property enforces a hard limit on the amount of space used. This includes  all
-           space consumed by descendents, including file systems and snapshots. Setting a quota on a descendent of a dataset that already has a quota does not over‐
-           ride the ancestor's quota, but rather imposes an additional limit.
+           Limits  the  amount of space a dataset and its descendents can consume. This property enforces a hard limit on the amount of space used. This includes all space consumed by descen‐
+           dents, including file systems and snapshots. Setting a quota on a descendent of a dataset that already has a quota does not override the ancestor's quota, but rather imposes an ad‐
+           ditional limit.
 
            Quotas cannot be set on volumes, as the volsize property acts as an implicit quota.
 
        userquota@user=size | none
 
-           Limits the amount of space consumed by the specified user. Similar to the refquota property, the userquota space calculation does not include space  that
-           is used by descendent datasets, such as snapshots and clones. User space consumption is identified by the userspace@user property.
+           Limits  the  amount  of  space  consumed  by the specified user. Similar to the refquota property, the userquota space calculation does not include space that is used by descendent
+           datasets, such as snapshots and clones. User space consumption is identified by the userspace@user property.
 
-           Enforcement  of  user quotas may be delayed by several seconds. This delay means that a user might exceed her quota before the system notices that she is
-           over quota. The system would then begin to refuse additional writes with the EDQUOT error message . See the zfs userspace subcommand  for  more  informa‐
-           tion.
+           Enforcement of user quotas may be delayed by several seconds. This delay means that a user might exceed her quota before the system notices that she is over quota. The system would
+           then begin to refuse additional writes with the EDQUOT error message . See the zfs userspace subcommand for more information.
 
-           Unprivileged  users  can only access their own groups' space usage. The root user, or a user who has been granted the userquota privilege with zfs allow,
-           can get and set everyone's quota.
+           Unprivileged  users  can only access their own groups' space usage. The root user, or a user who has been granted the userquota privilege with zfs allow, can get and set everyone's
+           quota.
 
-           This property is not available on volumes, on file systems before version 4, or on pools before version 15. The userquota@...  properties  are  not  dis‐
-           played by zfs get all. The user's name must be appended after the @ symbol, using one of the following forms:
+           This property is not available on volumes, on file systems before version 4, or on pools before version 15. The userquota@... properties are not  displayed  by  zfs  get  all.  The
+           user's name must be appended after the @ symbol, using one of the following forms:
 
                o      POSIX name (for example, joe)
 
@@ -468,8 +454,8 @@ DESCRIPTION
 
            Limits the amount of space consumed by the specified group. Group space consumption is identified by the userquota@user property.
 
-           Unprivileged  users can access only their own groups' space usage. The root user, or a user who has been granted the groupquota privilege with zfs allow,
-           can get and set all groups' quotas.
+           Unprivileged users can access only their own groups' space usage. The root user, or a user who has been granted the groupquota privilege with zfs allow, can get and set all groups'
+           quotas.
 
        readonly=on | off
 
@@ -479,12 +465,12 @@ DESCRIPTION
 
        recordsize=size
 
-           Specifies a suggested block size for files in the file system. This property is designed solely for use with database  workloads  that  access  files  in
-           fixed-size records. ZFS automatically tunes block sizes according to internal algorithms optimized for typical access patterns.
+           Specifies a suggested block size for files in the file system. This property is designed solely for use with database workloads that access files in fixed-size records.  ZFS  auto‐
+           matically tunes block sizes according to internal algorithms optimized for typical access patterns.
 
-           For  databases  that  create very large files but access them in small random chunks, these algorithms may be suboptimal. Specifying a recordsize greater
-           than or equal to the record size of the database can result in significant performance gains. Use of this property for general purpose  file  systems  is
-           strongly discouraged, and may adversely affect performance.
+           For  databases  that create very large files but access them in small random chunks, these algorithms may be suboptimal. Specifying a recordsize greater than or equal to the record
+           size of the database can result in significant performance gains. Use of this property for general purpose file systems is strongly discouraged, and may  adversely  affect  perfor‐
+           mance.
 
            The size specified must be a power of two greater than or equal to 512 and less than or equal to 128 Kbytes.
 
@@ -494,32 +480,31 @@ DESCRIPTION
 
        refquota=size | none
 
-           Limits the amount of space a dataset can consume. This property enforces a hard limit on the amount of space used. This hard limit does not include space
-           used by descendents, including file systems and snapshots.
+           Limits  the  amount of space a dataset can consume. This property enforces a hard limit on the amount of space used. This hard limit does not include space used by descendents, in‐
+           cluding file systems and snapshots.
 
        refreservation=size | none
 
-           The minimum amount of space guaranteed to a dataset, not including its descendents. When the amount of space used is below this  value,  the  dataset  is
-           treated  as if it were taking up the amount of space specified by refreservation. The refreservation reservation is accounted for in the parent datasets'
-           space used, and counts against the parent datasets' quotas and reservations.
+           The minimum amount of space guaranteed to a dataset, not including its descendents. When the amount of space used is below this value, the dataset is treated as if it  were  taking
+           up the amount of space specified by refreservation. The refreservation reservation is accounted for in the parent datasets' space used, and counts against the parent datasets' quo‐
+           tas and reservations.
 
-           If refreservation is set, a snapshot is only allowed if there is enough free pool space outside of this reservation to accommodate the current number  of
-           "referenced" bytes in the dataset.
+           If refreservation is set, a snapshot is only allowed if there is enough free pool space outside of this reservation to accommodate the current number of "referenced" bytes  in  the
+           dataset.
 
            This property can also be referred to by its shortened column name, refreserv.
 
        reservation=size | none
 
-           The  minimum amount of space guaranteed to a dataset and its descendents. When the amount of space used is below this value, the dataset is treated as if
-           it were taking up the amount of space specified by its reservation. Reservations are accounted for in the parent datasets' space used, and count  against
-           the parent datasets' quotas and reservations.
+           The  minimum  amount  of  space  guaranteed  to a dataset and its descendents. When the amount of space used is below this value, the dataset is treated as if it were taking up the
+           amount of space specified by its reservation. Reservations are accounted for in the parent datasets' space used, and count against the parent datasets' quotas and reservations.
 
            This property can also be referred to by its shortened column name, reserv.
 
        secondarycache=all | none | metadata
 
-           Controls  what  is cached in the secondary cache (L2ARC). If this property is set to all, then both user data and metadata is cached. If this property is
-           set to none, then neither user data nor metadata is cached. If this property is set to metadata, then only metadata is cached. The default value is all.
+           Controls what is cached in the secondary cache (L2ARC). If this property is set to all, then both user data and metadata is cached. If this property is set to  none,  then  neither
+           user data nor metadata is cached. If this property is set to metadata, then only metadata is cached. The default value is all.
 
        setuid=on | off
 
@@ -527,77 +512,70 @@ DESCRIPTION
 
        shareiscsi=on | off
 
-           Like the sharenfs property, shareiscsi indicates whether a ZFS volume is exported as an iSCSI target. The acceptable values for  this  property  are  on,
-           off, and type=disk. The default value is off. In the future, other target types might be supported. For example, tape.
+           Like  the  sharenfs  property, shareiscsi indicates whether a ZFS volume is exported as an iSCSI target. The acceptable values for this property are on, off, and type=disk. The de‐
+           fault value is off. In the future, other target types might be supported. For example, tape.
 
-           You  might  want to set shareiscsi=on for a file system so that all ZFS volumes within the file system are shared by default. However, setting this prop‐
-           erty on a file system has no direct effect.
+           You might want to set shareiscsi=on for a file system so that all ZFS volumes within the file system are shared by default. However, setting this property on a file system  has  no
+           direct effect.
 
        sharesmb=on | off | opts
 
-           Controls whether the file system is shared by using the Solaris CIFS service, and what options are to be used. A file system with the  sharesmb  property
-           set  to off is managed through traditional tools such as sharemgr(1M). Otherwise, the file system is automatically shared and unshared with the zfs share
-           and zfs unshare commands. If the property is set to on, the sharemgr(1M) command is invoked with no options. Otherwise, the sharemgr(1M) command  is  in‐
-           voked with options equivalent to the contents of this property.
+           Controls  whether  the  file  system  is  shared  by using the Solaris CIFS service, and what options are to be used. A file system with the sharesmb property set to off is managed
+           through traditional tools such as sharemgr(1M). Otherwise, the file system is automatically shared and unshared with the zfs share and zfs unshare commands. If the property is  set
+           to on, the sharemgr(1M) command is invoked with no options. Otherwise, the sharemgr(1M) command is invoked with options equivalent to the contents of this property.
 
-           Because  SMB  shares requires a resource name, a unique resource name is constructed from the dataset name. The constructed name is a copy of the dataset
-           name except that the characters in the dataset name, which would be illegal in the resource name, are replaced with underscore (_) characters.  A  pseudo
-           property "name" is also supported that allows you to replace the data set name with a specified name. The specified name is then used to replace the pre‐
-           fix dataset in the case of inheritance. For example, if the dataset data/home/john is set to name=john, then data/home/john has a resource name of  john.
-           If a child dataset of data/home/john/backups, it has a resource name of john_backups.
+           Because SMB shares requires a resource name, a unique resource name is constructed from the dataset name. The constructed name is a copy of the dataset name except that the charac‐
+           ters in the dataset name, which would be illegal in the resource name, are replaced with underscore (_) characters. A pseudo property "name" is also supported that  allows  you  to
+           replace  the  data  set  name  with  a  specified  name.  The  specified  name  is  then  used to replace the prefix dataset in the case of inheritance. For example, if the dataset
+           data/home/john is set to name=john, then data/home/john has a resource name of john. If a child dataset of data/home/john/backups, it has a resource name of john_backups.
 
-           When  SMB  shares  are  created,  the SMB share name appears as an entry in the .zfs/shares directory. You can use the ls or chmod command to display the
-           share-level ACLs on the entries in this directory.
+           When SMB shares are created, the SMB share name appears as an entry in the .zfs/shares directory. You can use the ls or chmod command to display the share-level ACLs on the entries
+           in this directory.
 
-           When the sharesmb property is changed for a dataset, the dataset and any children inheriting the property are re-shared with the new options, only if the
-           property  was  previously set to off, or if they were shared before the property was changed. If the new property is set to off, the file systems are un‐
-           shared.
+           When  the  sharesmb  property is changed for a dataset, the dataset and any children inheriting the property are re-shared with the new options, only if the property was previously
+           set to off, or if they were shared before the property was changed. If the new property is set to off, the file systems are unshared.
 
        sharenfs=on | off | opts
 
-           Controls whether the file system is shared via NFS, and what options are used. A file system with a sharenfs property of off is  managed  through  tradi‐
-           tional  tools  such  as share(1M), unshare(1M), and dfstab(4). Otherwise, the file system is automatically shared and unshared with the zfs share and zfs
-           unshare commands. If the property is set to on, the share(1M) command is invoked with no options. Otherwise, the share(1M) command is  invoked  with  op‐
-           tions equivalent to the contents of this property.
+           Controls whether the file system is shared via NFS, and what options are used. A file system with a sharenfs property of off is managed through traditional tools such as share(1M),
+           unshare(1M), and dfstab(4). Otherwise, the file system is automatically shared and unshared with the zfs share and zfs unshare commands. If the property is set to on, the share(1M)
+           command is invoked with no options. Otherwise, the share(1M) command is invoked with options equivalent to the contents of this property.
 
-           When the sharenfs property is changed for a dataset, the dataset and any children inheriting the property are re-shared with the new options, only if the
-           property was previously off, or if they were shared before the property was changed. If the new property is off, the file systems are unshared.
+           When the sharenfs property is changed for a dataset, the dataset and any children inheriting the property are re-shared with the new options, only if the  property  was  previously
+           off, or if they were shared before the property was changed. If the new property is off, the file systems are unshared.
 
        logbias = latency | throughput
 
-           Provides a hint to ZFS about handling of synchronous requests in this dataset. If logbias is set to latency (the default), ZFS uses the  pool's  log  de‐
-           vices  (if configured) to handle the requests at low latency. If logbias is set to throughput, ZFS does not use the configured pool log devices. Instead,
-           ZFS optimizes synchronous operations for global pool throughput and efficient use of resources.
+           Provides a hint to ZFS about handling of synchronous requests in this dataset. If logbias is set to latency (the default), ZFS uses the pool's log devices (if configured) to handle
+           the requests at low latency. If logbias is set to throughput, ZFS does not use the configured pool log devices. Instead,  ZFS  optimizes  synchronous  operations  for  global  pool
+           throughput and efficient use of resources.
 
        snapdir=hidden | visible
 
-           Controls whether the .zfs directory is hidden or visible in the root of the file system as discussed in the "Snapshots" section.  The  default  value  is
-           hidden.
+           Controls whether the .zfs directory is hidden or visible in the root of the file system as discussed in the "Snapshots" section. The default value is hidden.
 
        version=1 | 2 | current
 
-           The on-disk version of this file system, which is independent of the pool version. This property can only be set to later supported versions. See the zfs
-           upgrade command.
+           The on-disk version of this file system, which is independent of the pool version. This property can only be set to later supported versions. See the zfs upgrade command.
 
        volsize=size
 
-           For volumes, specifies the logical size of the volume. By default, creating a volume establishes a reservation of equal size. For storage  pools  with  a
-           version  number  of 9 or higher, a refreservation is set instead. Any changes to volsize are reflected in an equivalent change to the reservation (or re‐
-           freservation). The volsize can only be set to a multiple of volblocksize, and cannot be zero.
+           For  volumes,  specifies  the  logical  size  of  the volume. By default, creating a volume establishes a reservation of equal size. For storage pools with a version number of 9 or
+           higher, a refreservation is set instead. Any changes to volsize are reflected in an equivalent change to the reservation (or refreservation). The volsize can only be set to a  mul‐
+           tiple of volblocksize, and cannot be zero.
 
-           The reservation is kept equal to the volume's logical size to prevent unexpected behavior for consumers. Without the reservation, the  volume  could  run
-           out  of space, resulting in undefined behavior or data corruption, depending on how the volume is used. These effects can also occur when the volume size
-           is changed while it is in use (particularly when shrinking the size). Extreme care should be used when adjusting the volume size.
+           The  reservation  is  kept equal to the volume's logical size to prevent unexpected behavior for consumers. Without the reservation, the volume could run out of space, resulting in
+           undefined behavior or data corruption, depending on how the volume is used. These effects can also occur when the volume size is changed while  it  is  in  use  (particularly  when
+           shrinking the size). Extreme care should be used when adjusting the volume size.
 
-           Though not recommended, a "sparse volume" (also known as "thin provisioning") can be created by specifying the -s option to the zfs create -V command, or
-           by  changing  the reservation after the volume has been created. A "sparse volume" is a volume where the reservation is less then the volume size. Conse‐
-           quently, writes to a sparse volume can fail with ENOSPC when the pool is low on space. For a sparse volume, changes to volsize are not reflected  in  the
-           reservation.
+           Though  not  recommended, a "sparse volume" (also known as "thin provisioning") can be created by specifying the -s option to the zfs create -V command, or by changing the reserva‐
+           tion after the volume has been created. A "sparse volume" is a volume where the reservation is less then the volume size. Consequently, writes to a  sparse  volume  can  fail  with
+           ENOSPC when the pool is low on space. For a sparse volume, changes to volsize are not reflected in the reservation.
 
        vscan=on | off
 
-           Controls whether regular files should be scanned for viruses when a file is opened and closed. In addition to enabling this property, the virus scan ser‐
-           vice must also be enabled for virus scanning to occur. The default value is off.
+           Controls  whether  regular  files should be scanned for viruses when a file is opened and closed. In addition to enabling this property, the virus scan service must also be enabled
+           for virus scanning to occur. The default value is off.
 
        xattr=on | off
 
@@ -607,39 +585,37 @@ DESCRIPTION
 
            Controls whether the dataset is managed from a non-global zone. See the "Zones" section for more information. The default value is off.
 
-       The following three properties cannot be changed after the file system is created, and therefore, should be set when the file system is created. If the prop‐
-       erties  are  not  set with the zfs create or zpool create commands, these properties are inherited from the parent dataset. If the parent dataset lacks these
-       properties due to having been created prior to these features being supported, the new file system will have the default values for these properties.
+       The following three properties cannot be changed after the file system is created, and therefore, should be set when the file system is created. If the properties are not set with  the
+       zfs create or zpool create commands, these properties are inherited from the parent dataset. If the parent dataset lacks these properties due to having been created prior to these fea‐
+       tures being supported, the new file system will have the default values for these properties.
 
        casesensitivity=sensitive | insensitive | mixed
 
-           Indicates whether the file name matching algorithm used by the file system should be case-sensitive, case-insensitive, or allow  a  combination  of  both
-           styles  of matching. The default value for the casesensitivity property is sensitive. Traditionally, UNIX and POSIX file systems have case-sensitive file
-           names.
+           Indicates whether the file name matching algorithm used by the file system should be case-sensitive, case-insensitive, or allow a combination of both styles of  matching.  The  de‐
+           fault value for the casesensitivity property is sensitive. Traditionally, UNIX and POSIX file systems have case-sensitive file names.
 
-           The mixed value for the casesensitivity property indicates that the file system can support requests for both case-sensitive and case-insensitive  match‐
-           ing  behavior. Currently, case-insensitive matching behavior on a file system that supports mixed behavior is limited to the Solaris CIFS server product.
-           For more information about the mixed value behavior, see the Solaris ZFS Administration Guide.
+           The  mixed  value  for  the  casesensitivity property indicates that the file system can support requests for both case-sensitive and case-insensitive matching behavior. Currently,
+           case-insensitive matching behavior on a file system that supports mixed behavior is limited to the Solaris CIFS server product. For more information about the mixed value behavior,
+           see the Solaris ZFS Administration Guide.
 
        normalization = none | formC | formD | formKC | formKD
 
-           Indicates whether the file system should perform a unicode normalization of file names whenever two file names are compared, and which normalization  al‐
-           gorithm should be used. File names are always stored unmodified, names are normalized as part of any comparison process. If this property is set to a le‐
-           gal value other than none, and the utf8only property was left unspecified, the utf8only property is automatically set to on. The  default  value  of  the
-           normalization property is none. This property cannot be changed after the file system is created.
+           Indicates  whether the file system should perform a unicode normalization of file names whenever two file names are compared, and which normalization algorithm should be used. File
+           names are always stored unmodified, names are normalized as part of any comparison process. If this property is set to a legal value other than none, and the utf8only property  was
+           left  unspecified,  the utf8only property is automatically set to on. The default value of the normalization property is none. This property cannot be changed after the file system
+           is created.
 
        utf8only=on | off
 
-           Indicates whether the file system should reject file names that include characters that are not present in the UTF-8 character code set. If this property
-           is explicitly set to off, the normalization property must either not be explicitly set or be set to none. The default value for the utf8only property  is
-           off. This property cannot be changed after the file system is created.
+           Indicates whether the file system should reject file names that include characters that are not present in the UTF-8 character code set. If this property is explicitly set to  off,
+           the  normalization  property must either not be explicitly set or be set to none. The default value for the utf8only property is off. This property cannot be changed after the file
+           system is created.
 
-       The  casesensitivity, normalization, and utf8only properties are also new permissions that can be assigned to non-privileged users by using the ZFS delegated
-       administration feature.
+       The casesensitivity, normalization, and utf8only properties are also new permissions that can be assigned to non-privileged users by using the ZFS delegated administration feature.
 
    Temporary Mount Point Properties
-       When a file system is mounted, either through mount(1M) for legacy mounts or the zfs mount command for normal file systems, its mount options are set accord‐
-       ing to its properties. The correlation between properties and mount options is as follows:
+       When a file system is mounted, either through mount(1M) for legacy mounts or the zfs mount command for normal file systems, its mount options are set according to its  properties.  The
+       correlation between properties and mount options is as follows:
 
              PROPERTY                MOUNT OPTION
               devices                 devices/nodevices
@@ -648,35 +624,32 @@ DESCRIPTION
               setuid                  setuid/nosetuid
               xattr                   xattr/noxattr
 
-       In  addition,  these options can be set on a per-mount basis using the -o option, without affecting the property that is stored on disk. The values specified
-       on the command line override the values stored in the dataset. The -nosuid option is an alias for nodevices,nosetuid. These properties are reported as  "tem‐
-       porary" by the zfs get command. If the properties are changed while the dataset is mounted, the new setting overrides any temporary settings.
+       In addition, these options can be set on a per-mount basis using the -o option, without affecting the property that is stored on disk. The values specified on the command line override
+       the values stored in the dataset. The -nosuid option is an alias for nodevices,nosetuid. These properties are reported as "temporary" by the zfs get  command.  If  the  properties  are
+       changed while the dataset is mounted, the new setting overrides any temporary settings.
 
    User Properties
-       In  addition  to  the standard native properties, ZFS supports arbitrary user properties. User properties have no effect on ZFS behavior, but applications or
-       administrators can use them to annotate datasets (file systems, volumes, and snapshots).
+       In  addition  to the standard native properties, ZFS supports arbitrary user properties. User properties have no effect on ZFS behavior, but applications or administrators can use them
+       to annotate datasets (file systems, volumes, and snapshots).
 
-       User property names must contain a colon (:) character to distinguish them from native properties. They may contain lowercase letters, numbers, and the  fol‐
-       lowing  punctuation  characters:  colon  (:), dash (-), period (.), and underscore (_). The expected convention is that the property name is divided into two
-       portions such as module:property, but this namespace is not enforced by ZFS. User property names can be at most 256 characters, and cannot begin with a  dash
-       (-).
+       User property names must contain a colon (:) character to distinguish them from native properties. They may contain lowercase letters, numbers, and the  following  punctuation  charac‐
+       ters: colon (:), dash (-), period (.), and underscore (_). The expected convention is that the property name is divided into two portions such as module:property, but this namespace is
+       not enforced by ZFS. User property names can be at most 256 characters, and cannot begin with a dash (-).
 
-       When making programmatic use of user properties, it is strongly suggested to use a reversed DNS domain name for the module component of property names to re‐
-       duce the chance that two independently-developed packages use the same property name for different purposes. Property names beginning with com.sun.  are  re‐
-       served for use by Sun Microsystems.
+       When making programmatic use of user properties, it is strongly suggested to use a reversed DNS domain name for the module component of property names to reduce the chance that two in‐
+       dependently-developed packages use the same property name for different purposes. Property names beginning with com.sun. are reserved for use by Sun Microsystems.
 
-       The values of user properties are arbitrary strings, are always inherited, and are never validated. All of the commands that operate on properties (zfs list,
-       zfs get, zfs set, and so forth) can be used to manipulate both native properties and user properties. Use the zfs inherit command to clear a user property  .
-       If the property is not defined in any parent dataset, it is removed entirely. Property values are limited to 1024 characters.
+       The  values  of user properties are arbitrary strings, are always inherited, and are never validated. All of the commands that operate on properties (zfs list, zfs get, zfs set, and so
+       forth) can be used to manipulate both native properties and user properties. Use the zfs inherit command to clear a user property . If  the  property  is  not  defined  in  any  parent
+       dataset, it is removed entirely. Property values are limited to 1024 characters.
 
    ZFS Volumes as Swap or Dump Devices
-       During  an  initial  installation or a live upgrade from a UFS file system, a swap device and dump device are created on ZFS volumes in the ZFS root pool. By
-       default, the swap area size is based on 1/2 the size of physical memory up to 2 Gbytes. The size of the dump device depends on the kernel's  requirements  at
-       installation time. Separate ZFS volumes must be used for the swap area and dump devices. Do not swap to a file on a ZFS file system. A ZFS swap file configu‐
-       ration is not supported.
+       During  an  initial installation or a live upgrade from a UFS file system, a swap device and dump device are created on ZFS volumes in the ZFS root pool. By default, the swap area size
+       is based on 1/2 the size of physical memory up to 2 Gbytes. The size of the dump device depends on the kernel's requirements at installation time. Separate ZFS volumes must be used for
+       the swap area and dump devices. Do not swap to a file on a ZFS file system. A ZFS swap file configuration is not supported.
 
-       If you need to change your swap area or dump device after the system is installed or upgraded, use the swap(1M) and dumpadm(1M)  commands.  If  you  need  to
-       change the size of your swap area or dump device, see the Solaris ZFS Administration Guide.
+       If  you  need  to change your swap area or dump device after the system is installed or upgraded, use the swap(1M) and dumpadm(1M) commands. If you need to change the size of your swap
+       area or dump device, see the Solaris ZFS Administration Guide.
 
 SUBCOMMANDS
        All subcommands that modify state are logged persistently to the pool in their original form.
@@ -691,27 +664,25 @@ SUBCOMMANDS
 
            -p
 
-               Creates  all  the non-existing parent datasets. Datasets created in this manner are automatically mounted according to the mountpoint property inher‐
-               ited from their parent. Any property specified on the command line using the -o option is ignored. If the target filesystem already exists, the oper‐
-               ation completes successfully.
+               Creates all the non-existing parent datasets. Datasets created in this manner are automatically mounted according to the mountpoint property inherited from  their  parent.  Any
+               property specified on the command line using the -o option is ignored. If the target filesystem already exists, the operation completes successfully.
 
            -o property=value
 
-               Sets  the specified property as if the command zfs set property=value was invoked at the same time the dataset was created. Any editable ZFS property
-               can also be set at creation time. Multiple -o options can be specified. An error results if the same property is specified in multiple -o options.
+               Sets the specified property as if the command zfs set property=value was invoked at the same time the dataset was created. Any editable ZFS property can also be set at creation
+               time. Multiple -o options can be specified. An error results if the same property is specified in multiple -o options.
 
        zfs create [-ps] [-b blocksize] [-o property=value] ... -V size volume
 
-           Creates a volume of the given size. The volume is exported as a block device in /dev/zvol/{dsk,rdsk}/path, where path is the name of the  volume  in  the
-           ZFS namespace. The size represents the logical size as exported by the device. By default, a reservation of equal size is created.
+           Creates a volume of the given size. The volume is exported as a block device in /dev/zvol/{dsk,rdsk}/path, where path is the name of the volume in the ZFS namespace. The size  rep‐
+           resents the logical size as exported by the device. By default, a reservation of equal size is created.
 
            size is automatically rounded up to the nearest 128 Kbytes to ensure that the volume has an integral number of blocks regardless of blocksize.
 
            -p
 
-               Creates  all  the non-existing parent datasets. Datasets created in this manner are automatically mounted according to the mountpoint property inher‐
-               ited from their parent. Any property specified on the command line using the -o option is ignored. If the target filesystem already exists, the oper‐
-               ation completes successfully.
+               Creates  all  the  non-existing parent datasets. Datasets created in this manner are automatically mounted according to the mountpoint property inherited from their parent. Any
+               property specified on the command line using the -o option is ignored. If the target filesystem already exists, the operation completes successfully.
 
            -s
 
@@ -719,8 +690,8 @@ SUBCOMMANDS
 
            -o property=value
 
-               Sets  the specified property as if the zfs set property=value command was invoked at the same time the dataset was created. Any editable ZFS property
-               can also be set at creation time. Multiple -o options can be specified. An error results if the same property is specified in multiple -o options.
+               Sets the specified property as if the zfs set property=value command was invoked at the same time the dataset was created. Any editable ZFS property can also be set at creation
+               time. Multiple -o options can be specified. An error results if the same property is specified in multiple -o options.
 
            -b blocksize
 
@@ -728,8 +699,8 @@ SUBCOMMANDS
 
        zfs destroy [-rRf] filesystem|volume
 
-           Destroys the given dataset. By default, the command unshares any file systems that are currently shared, unmounts any file  systems  that  are  currently
-           mounted, and refuses to destroy a dataset that has active dependents (children or clones).
+           Destroys  the  given  dataset. By default, the command unshares any file systems that are currently shared, unmounts any file systems that are currently mounted, and refuses to de‐
+           stroy a dataset that has active dependents (children or clones).
 
            -r
 
@@ -743,16 +714,16 @@ SUBCOMMANDS
 
                Force an unmount of any file systems using the unmount -f command. This option has no effect on non-file systems or unmounted file systems.
 
-           Extreme  care  should  be taken when applying either the -r or the -f options, as they can destroy large portions of a pool and cause unexpected behavior
-           for mounted file systems in use.
+           Extreme care should be taken when applying either the -r or the -f options, as they can destroy large portions of a pool and cause unexpected behavior for mounted file  systems  in
+           use.
 
        zfs destroy [-rRd] snapshot
 
-           The given snapshot is destroyed immediately if and only if the zfs destroy command without the -d option would have destroyed it. Such immediate destruc‐
-           tion would occur, for example, if the snapshot had no clones and the user-initiated reference count were zero.
+           The  given snapshot is destroyed immediately if and only if the zfs destroy command without the -d option would have destroyed it. Such immediate destruction would occur, for exam‐
+           ple, if the snapshot had no clones and the user-initiated reference count were zero.
 
-           If  the  snapshot  does not qualify for immediate destruction, it is marked for deferred deletion. In this state, it exists as a usable, visible snapshot
-           until both of the preconditions listed above are met, at which point it is destroyed.
+           If the snapshot does not qualify for immediate destruction, it is marked for deferred deletion. In this state, it exists as a usable, visible snapshot until both of  the  precondi‐
+           tions listed above are met, at which point it is destroyed.
 
            -d
 
@@ -768,13 +739,11 @@ SUBCOMMANDS
 
        zfs snapshot [-r] [-o property=value] ... filesystem@snapname|volume@snapname
 
-           Creates a snapshot with the given name. All previous modifications by successful system calls to the file system are part of the snapshot. See the "Snap‐
-           shots" section for details.
+           Creates a snapshot with the given name. All previous modifications by successful system calls to the file system are part of the snapshot. See the "Snapshots" section for details.
 
            -r
 
-               Recursively  create  snapshots of all descendent datasets. Snapshots are taken atomically, so that all recursive snapshots correspond to the same mo‐
-               ment in time.
+               Recursively create snapshots of all descendent datasets. Snapshots are taken atomically, so that all recursive snapshots correspond to the same moment in time.
 
            -o property=value
 
@@ -782,12 +751,12 @@ SUBCOMMANDS
 
        zfs rollback [-rRf] snapshot
 
-           Roll back the given dataset to a previous snapshot. When a dataset is rolled back, all data that has changed since the snapshot  is  discarded,  and  the
-           dataset  reverts  to the state at the time of the snapshot. By default, the command refuses to roll back to a snapshot other than the most recent one. In
-           order to do so, all intermediate snapshots must be destroyed by specifying the -r option.
+           Roll  back  the given dataset to a previous snapshot. When a dataset is rolled back, all data that has changed since the snapshot is discarded, and the dataset reverts to the state
+           at the time of the snapshot. By default, the command refuses to roll back to a snapshot other than the most recent one. In order to do so, all intermediate snapshots  must  be  de‐
+           stroyed by specifying the -r option.
 
-           The -rR options do not recursively destroy the child snapshots of a recursive snapshot. Only the top-level recursive snapshot is destroyed by  either  of
-           these options. To completely roll back a recursive snapshot, you must rollback the individual child snapshots.
+           The -rR options do not recursively destroy the child snapshots of a recursive snapshot. Only the top-level recursive snapshot is destroyed by either of these options. To completely
+           roll back a recursive snapshot, you must rollback the individual child snapshots.
 
            -r
 
@@ -803,13 +772,13 @@ SUBCOMMANDS
 
        zfs clone [-p] [-o property=value] ... snapshot filesystem|volume
 
-           Creates a clone of the given snapshot. See the "Clones" section for details. The target dataset can be located anywhere in the ZFS hierarchy, and is cre‐
-           ated as the same type as the original.
+           Creates a clone of the given snapshot. See the "Clones" section for details. The target dataset can be located anywhere in the ZFS hierarchy, and is created as the same type as the
+           original.
 
            -p
 
-               Creates all the non-existing parent datasets. Datasets created in this manner are automatically mounted according to the mountpoint  property  inher‐
-               ited from their parent. If the target filesystem or volume already exists, the operation completes successfully.
+               Creates all the non-existing parent datasets. Datasets created in this manner are automatically mounted according to the mountpoint property inherited from their parent. If the
+               target filesystem or volume already exists, the operation completes successfully.
 
            -o property=value
 
@@ -817,26 +786,24 @@ SUBCOMMANDS
 
        zfs promote clone-filesystem
 
-           Promotes  a  clone  file  system to no longer be dependent on its "origin" snapshot. This makes it possible to destroy the file system that the clone was
-           created from. The clone parent-child dependency relationship is reversed, so that the origin file system becomes a clone of the specified file system.
+           Promotes a clone file system to no longer be dependent on its "origin" snapshot. This makes it possible to destroy the file system that the clone was created from. The  clone  par‐
+           ent-child dependency relationship is reversed, so that the origin file system becomes a clone of the specified file system.
 
-           The snapshot that was cloned, and any snapshots previous to this snapshot, are now owned by the promoted clone. The space they use moves from the  origin
-           file  system to the promoted clone, so enough space must be available to accommodate these snapshots. No new space is consumed by this operation, but the
-           space accounting is adjusted. The promoted clone must not have any conflicting snapshot names of its own. The rename subcommand can be used to rename any
-           conflicting snapshots.
+           The snapshot that was cloned, and any snapshots previous to this snapshot, are now owned by the promoted clone. The space they use moves from the origin file system to the promoted
+           clone, so enough space must be available to accommodate these snapshots. No new space is consumed by this operation, but the space accounting is adjusted. The promoted  clone  must
+           not have any conflicting snapshot names of its own. The rename subcommand can be used to rename any conflicting snapshots.
 
        zfs rename filesystem|volume|snapshot
        filesystem|volume|snapshot
        zfs rename [-p] filesystem|volume filesystem|volume
 
-           Renames  the  given  dataset. The new target can be located anywhere in the ZFS hierarchy, with the exception of snapshots. Snapshots can only be renamed
-           within the parent file system or volume. When renaming a snapshot, the parent file system of the snapshot does not need to be specified as  part  of  the
-           second argument. Renamed file systems can inherit new mount points, in which case they are unmounted and remounted at the new mount point.
+           Renames the given dataset. The new target can be located anywhere in the ZFS hierarchy, with the exception of snapshots. Snapshots can only be renamed within the parent file system
+           or volume. When renaming a snapshot, the parent file system of the snapshot does not need to be specified as part of the second argument. Renamed file systems can inherit new mount
+           points, in which case they are unmounted and remounted at the new mount point.
 
            -p
 
-               Creates all the nonexistent parent datasets. Datasets created in this manner are automatically mounted according to the mountpoint property inherited
-               from their parent.
+               Creates all the nonexistent parent datasets. Datasets created in this manner are automatically mounted according to the mountpoint property inherited from their parent.
 
        zfs rename -r snapshot snapshot
 
@@ -844,9 +811,9 @@ SUBCOMMANDS
 
        zfs list [-r|-d depth] [-H] [-o property[,...]] [ -t type[,...]] [ -s property ] ... [ -S property ] ... [filesystem|volume|snapshot] ...
 
-           Lists the property information for the given datasets in tabular form. If specified, you can list property information by the absolute  pathname  or  the
-           relative pathname. By default, all file systems and volumes are displayed. Snapshots are displayed if the listsnaps property is on (the default is off) .
-           The following fields are displayed, name,used,available,referenced,mountpoint.
+           Lists  the  property  information  for the given datasets in tabular form. If specified, you can list property information by the absolute pathname or the relative pathname. By de‐
+           fault, all file systems and volumes are displayed. Snapshots are displayed if  the  listsnaps  property  is  on  (the  default  is  off)  .  The  following  fields  are  displayed,
+           name,used,available,referenced,mountpoint.
 
            -H
 
@@ -870,14 +837,14 @@ SUBCOMMANDS
 
                    o      The value name to display the dataset name
 
-                   o      The value space to display space usage properties on file systems and volumes. This is a shortcut for specifying -o  name,avail,used,used‐
-                          snap,usedds,usedrefreserv,usedchild -t filesystem,volume syntax.
+                   o      The  value  space  to  display  space  usage  properties on file systems and volumes. This is a shortcut for specifying -o name,avail,used,usedsnap,usedds,usedrefre‐
+                          serv,usedchild -t filesystem,volume syntax.
 
            -s property
 
-               A  property  for  sorting  the output by column in ascending order based on the value of the property. The property must be one of the properties de‐
-               scribed in the "Properties" section, or the special value name to sort by the dataset name. Multiple properties can be specified at  one  time  using
-               multiple -s property options. Multiple -s options are evaluated from left to right in decreasing order of importance.
+               A property for sorting the output by column in ascending order based on the value of the property. The property must be one of the properties described in the "Properties" sec‐
+               tion, or the special value name to sort by the dataset name. Multiple properties can be specified at one time using multiple -s property options. Multiple -s options are evalu‐
+               ated from left to right in decreasing order of importance.
 
                The following is a list of sorting criteria:
 
@@ -895,20 +862,18 @@ SUBCOMMANDS
 
            -t type
 
-               A  comma-separated list of types to display, where type is one of filesystem, snapshot , volume, or all. For example, specifying -t snapshot displays
-               only snapshots.
+               A comma-separated list of types to display, where type is one of filesystem, snapshot , volume, or all. For example, specifying -t snapshot displays only snapshots.
 
        zfs set property=value filesystem|volume|snapshot ...
 
-           Sets the property to the given value for each dataset. Only some properties can be edited. See the "Properties" section  for  more  information  on  what
-           properties can be set and acceptable values. Numeric values can be specified as exact values, or in a human-readable form with a suffix of B, K, M, G, T,
-           P, E, Z (for bytes, kilobytes, megabytes, gigabytes, terabytes, petabytes, exabytes, or zettabytes, respectively). User properties can be  set  on  snap‐
-           shots. For more information, see the "User Properties" section.
+           Sets the property to the given value for each dataset. Only some properties can be edited. See the "Properties" section for more information on what properties can be set  and  ac‐
+           ceptable  values.  Numeric values can be specified as exact values, or in a human-readable form with a suffix of B, K, M, G, T, P, E, Z (for bytes, kilobytes, megabytes, gigabytes,
+           terabytes, petabytes, exabytes, or zettabytes, respectively). User properties can be set on snapshots. For more information, see the "User Properties" section.
 
        zfs get [-r|-d depth] [-Hp] [-o all | field[,...] [-s source[,...]] all | property[,...] filesystem|volume|snapshot ...
 
-           Displays  properties  for the given datasets. If no datasets are specified, then the command displays properties for all datasets on the system. For each
-           property, the following columns are displayed:
+           Displays properties for the given datasets. If no datasets are specified, then the command displays properties for all datasets on the system. For each property, the following col‐
+           umns are displayed:
 
                  name      Dataset name
                   property  Property name
@@ -916,8 +881,8 @@ SUBCOMMANDS
                   source    Property source. Can either be local, default,
                             temporary, inherited, or none (-).
 
-           All columns except the RECEIVED column are displayed by default; specify particular or all columns, using the -o option. This command takes a comma-sepa‐
-           rated list of properties as described in the "Native Properties" and "User Properties" sections.
+           All  columns except the RECEIVED column are displayed by default; specify particular or all columns, using the -o option. This command takes a comma-separated list of properties as
+           described in the "Native Properties" and "User Properties" sections.
 
            The special value all can be used to display all properties that apply to the given dataset's type (filesystem, volume, or snapshot).
 
@@ -931,8 +896,7 @@ SUBCOMMANDS
 
            -H
 
-               Display  output  in  a form more easily parsed by scripts. Any headers are omitted, and fields are explicitly separated by a single tab instead of an
-               arbitrary amount of space.
+               Display output in a form more easily parsed by scripts. Any headers are omitted, and fields are explicitly separated by a single tab instead of an arbitrary amount of space.
 
            -o field
 
@@ -948,8 +912,7 @@ SUBCOMMANDS
 
            -s source
 
-               A comma-separated list of sources to display. Those properties coming from a source other than those in this list are ignored. Each  source  must  be
-               one of the following:
+               A comma-separated list of sources to display. Those properties coming from a source other than those in this list are ignored. Each source must be one of the following:
 
                  local,default,inherited,temporary,received,none
 
@@ -961,8 +924,8 @@ SUBCOMMANDS
 
        zfs inherit [-rS] property filesystem|volume|snapshot ...
 
-           Clears  the specified property, causing it to be inherited from an ancestor. If no ancestor has the property set, then the default value is used. See the
-           "Properties" section for a listing of default values, and details on which properties can be inherited.
+           Clears the specified property, causing it to be inherited from an ancestor. If no ancestor has the property set, then the default value is used. See the "Properties" section for  a
+           listing of default values, and details on which properties can be inherited.
 
            -r
 
@@ -970,9 +933,8 @@ SUBCOMMANDS
 
            -S
 
-               Revert to the received property value, if any. If the property does not have a received value, the behavior of zfs inherit -S is the same as zfs  in‐
-               herit  without -S. If the property does have a received value, zfs inherit masks the received value with the inherited value until zfs inherit -S re‐
-               verts to the received value.
+               Revert  to  the  received  property  value, if any. If the property does not have a received value, the behavior of zfs inherit -S is the same as zfs inherit without -S. If the
+               property does have a received value, zfs inherit masks the received value with the inherited value until zfs inherit -S reverts to the received value.
 
        zfs upgrade [-v]
 
@@ -980,13 +942,12 @@ SUBCOMMANDS
 
        zfs upgrade [-r] [-V version] [-a | filesystem]
 
-           Upgrades file systems to a new on-disk version. Once this is done, the file systems will no longer be accessible on systems running older versions of the
-           software. zfs send streams generated from new snapshots of these file systems cannot be accessed on systems running older versions of the software.
+           Upgrades file systems to a new on-disk version. Once this is done, the file systems will no longer be accessible on systems running older versions of the software. zfs send streams
+           generated from new snapshots of these file systems cannot be accessed on systems running older versions of the software.
 
            In general, the file system version is independent of the pool version. See zpool(1M) for information on the zpool upgrade command.
 
-           In  some cases, the file system version and the pool version are interrelated and the pool version must be upgraded before the file system version can be
-           upgraded.
+           In some cases, the file system version and the pool version are interrelated and the pool version must be upgraded before the file system version can be upgraded.
 
            -a
 
@@ -1002,13 +963,12 @@ SUBCOMMANDS
 
            -V version
 
-               Upgrade to the specified version. If the -V flag is not specified, this command upgrades to the most recent version. This option can only be used  to
-               increase the version number, and only up to the most recent version supported by this software.
+               Upgrade  to  the specified version. If the -V flag is not specified, this command upgrades to the most recent version. This option can only be used to increase the version num‐
+               ber, and only up to the most recent version supported by this software.
 
        zfs userspace [-niHp] [-o field[,...]] [-sS field]... [-t type [,...]] filesystem | snapshot
 
-           Displays  space  consumed  by, and quotas on, each user in the specified filesystem or snapshot. This corresponds to the userused@user and userquota@user
-           properties.
+           Displays space consumed by, and quotas on, each user in the specified filesystem or snapshot. This corresponds to the userused@user and userquota@user properties.
 
            -n
 
@@ -1028,8 +988,7 @@ SUBCOMMANDS
 
            -s field
 
-               Sort output by this field. The s and S flags may be specified multiple times to sort first by one field, then by another. The default is -s  type  -s
-               name.
+               Sort output by this field. The s and S flags may be specified multiple times to sort first by one field, then by another. The default is -s type -s name.
 
            -S field
 
@@ -1045,15 +1004,15 @@ SUBCOMMANDS
 
            -i
 
-               Translate  SID  to  POSIX  ID. The POSIX ID may be ephemeral if no mapping exists. Normal POSIX interfaces (for example, stat(2), ls -l) perform this
-               translation, so the -i option allows the output from zfs userspace to be compared directly with those utilities. However, -i may lead to confusion if
-               some files were created by an SMB user before a SMB-to-POSIX name mapping was established. In such a case, some files are owned by the SMB entity and
-               some by the POSIX entity. However, the -i option will report that the POSIX entity has the total usage and quota for both.
+               Translate SID to POSIX ID. The POSIX ID may be ephemeral if no mapping exists. Normal POSIX interfaces (for example, stat(2), ls -l) perform this translation, so the -i  option
+               allows  the output from zfs userspace to be compared directly with those utilities. However, -i may lead to confusion if some files were created by an SMB user before a SMB-to-
+               POSIX name mapping was established. In such a case, some files are owned by the SMB entity and some by the POSIX entity. However, the -i option will report that the  POSIX  en‐
+               tity has the total usage and quota for both.
 
        zfs groupspace [-niHp] [-o field[,...]] [-sS field]... [-t type [,...]] filesystem | snapshot
 
-           Displays space consumed by, and quotas on, each group in the specified filesystem or snapshot. This subcommand is identical to zfs userspace, except that
-           the default types to display are -t posixgroup,smbgroup.
+           Displays  space consumed by, and quotas on, each group in the specified filesystem or snapshot. This subcommand is identical to zfs userspace, except that the default types to dis‐
+           play are -t posixgroup,smbgroup.
 
              -
 
@@ -1067,8 +1026,7 @@ SUBCOMMANDS
 
            -o options
 
-               An  optional, comma-separated list of mount options to use temporarily for the duration of the mount. See the "Temporary Mount Point Properties" sec‐
-               tion for details.
+               An optional, comma-separated list of mount options to use temporarily for the duration of the mount. See the "Temporary Mount Point Properties" section for details.
 
            -O
 
@@ -1112,8 +1070,7 @@ SUBCOMMANDS
 
            filesystem
 
-               Share the specified filesystem according to the sharenfs and sharesmb properties. File systems are shared when the sharenfs or sharesmb  property  is
-               set.
+               Share the specified filesystem according to the sharenfs and sharesmb properties. File systems are shared when the sharenfs or sharesmb property is set.
 
        zfs unshare -a | filesystem|mountpoint
 
@@ -1129,8 +1086,8 @@ SUBCOMMANDS
 
        zfs send [-DvRp] [-[iI] snapshot] snapshot
 
-           Creates  a  stream  representation  of the second snapshot, which is written to standard output. The output can be redirected to a file or to a different
-           system (for example, using ssh(1). By default, a full stream is generated.
+           Creates a stream representation of the second snapshot, which is written to standard output. The output can be redirected to a file or to a different  system  (for  example,  using
+           ssh(1). By default, a full stream is generated.
 
            -D
 
@@ -1138,24 +1095,24 @@ SUBCOMMANDS
 
            -i snapshot
 
-               Generate an incremental stream from the first snapshot to the second snapshot. The incremental source (the first snapshot) can be  specified  as  the
-               last component of the snapshot name (for example, the part after the @), and it is assumed to be from the same file system as the second snapshot.
+               Generate  an  incremental stream from the first snapshot to the second snapshot. The incremental source (the first snapshot) can be specified as the last component of the snap‐
+               shot name (for example, the part after the @), and it is assumed to be from the same file system as the second snapshot.
 
                If the destination is a clone, the source may be the origin snapshot, which must be fully specified (for example, pool/fs@origin, not just @origin).
 
            -I snapshot
 
-               Generate a stream package that sends all intermediary snapshots from the first snapshot to the second snapshot. For example, -I @a fs@d is similar to
-               -i @a fs@b; -i @b fs@c; -i @c fs@d. The incremental source snapshot may be specified as with the -i option.
+               Generate a stream package that sends all intermediary snapshots from the first snapshot to the second snapshot. For example, -I @a fs@d is similar to -i @a fs@b; -i @b fs@c; -i
+               @c fs@d. The incremental source snapshot may be specified as with the -i option.
 
            -R
 
-               Generate a replication stream package, which will replicate the specified filesystem, and all descendent file systems, up to the named snapshot. When
-               received, all properties, snapshots, descendent file systems, and clones are preserved.
+               Generate  a replication stream package, which will replicate the specified filesystem, and all descendent file systems, up to the named snapshot. When received, all properties,
+               snapshots, descendent file systems, and clones are preserved.
 
-               If the -i or -I flags are used in conjunction with the -R flag, an incremental replication stream is generated. The current values of properties, and
-               current snapshot and file system names are set when the stream is received. If the -F flag is specified when this stream is received,  snapshots  and
-               file systems that do not exist on the sending side are destroyed.
+               If the -i or -I flags are used in conjunction with the -R flag, an incremental replication stream is generated. The current values of properties, and current snapshot and  file
+               system names are set when the stream is received. If the -F flag is specified when this stream is received, snapshots and file systems that do not exist on the sending side are
+               destroyed.
 
            -p
 
@@ -1170,30 +1127,26 @@ SUBCOMMANDS
        zfs receive [-vnFu] filesystem|volume|snapshot
        zfs receive [-vnFu] [-d | -e] filesystem
 
-           Creates a snapshot whose contents are as specified in the stream provided on standard input. If a full stream is received, then a new file system is cre‐
-           ated as well. Streams are created using the zfs send subcommand, which by default creates a full stream. zfs recv can be used as an  alias  for  zfs  re‐
-           ceive.
+           Creates a snapshot whose contents are as specified in the stream provided on standard input. If a full stream is received, then a new file system is created as  well.  Streams  are
+           created using the zfs send subcommand, which by default creates a full stream. zfs recv can be used as an alias for zfs receive.
 
-           If  an  incremental  stream  is  received,  then  the destination file system must already exist, and its most recent snapshot must match the incremental
-           stream's source. For zvols, the destination device link is destroyed and recreated, which means the zvol cannot be accessed during the receive operation.
+           If  an  incremental stream is received, then the destination file system must already exist, and its most recent snapshot must match the incremental stream's source. For zvols, the
+           destination device link is destroyed and recreated, which means the zvol cannot be accessed during the receive operation.
 
-           When a snapshot replication package stream that is generated by using the zfs send -R command is  received, any snapshots that do not exist on the  send‐
-           ing location are destroyed by using the zfs destroy -d command.
+           When a snapshot replication package stream that is generated by using the zfs send -R command is  received, any snapshots that do not exist on the sending location are destroyed by
+           using the zfs destroy -d command.
 
-           The  name  of the snapshot (and file system, if a full stream is received) that this subcommand creates depends on the argument type and the -d or -e op‐
-           tion.
+           The name of the snapshot (and file system, if a full stream is received) that this subcommand creates depends on the argument type and the -d or -e option.
 
-           If the argument is a snapshot name, the specified snapshot is created. If the argument is a file system or volume name, a snapshot with the same name  as
-           the sent snapshot is created within the specified filesystem or volume. If the -d or -e option is specified, the snapshot name is determined by appending
-           the sent snapshot's name to the specified filesystem. If the -d option is specified, all but the pool name of the sent snapshot path is appended (for ex‐
-           ample,  b/c@1  appended from sent snapshot a/b/c@1), and if the -e option is specified, only the tail of the sent snapshot path is appended (for example,
-           c@1 appended from sent snapshot a/b/c@1). In the case of -d, any file systems needed to replicate the path of the sent snapshot are  created  within  the
-           specified file system.
+           If  the  argument is a snapshot name, the specified snapshot is created. If the argument is a file system or volume name, a snapshot with the same name as the sent snapshot is cre‐
+           ated within the specified filesystem or volume. If the -d or -e option is specified, the snapshot name is determined by appending the sent snapshot's name to the specified filesys‐
+           tem.  If  the  -d option is specified, all but the pool name of the sent snapshot path is appended (for example, b/c@1 appended from sent snapshot a/b/c@1), and if the -e option is
+           specified, only the tail of the sent snapshot path is appended (for example, c@1 appended from sent snapshot a/b/c@1). In the case of -d, any file systems needed to  replicate  the
+           path of the sent snapshot are created within the specified file system.
 
            -d
 
-               Use  all  but the first element of the sent snapshot path (all but the pool name) to determine the name of the new snapshot as described in the para‐
-               graph above.
+               Use all but the first element of the sent snapshot path (all but the pool name) to determine the name of the new snapshot as described in the paragraph above.
 
            -e
 
@@ -1213,8 +1166,8 @@ SUBCOMMANDS
 
            -F
 
-               Force a rollback of the file system to the most recent snapshot before performing the receive operation.  If  receiving  an  incremental  replication
-               stream (for example, one generated by zfs send -R -[iI]), destroy snapshots and file systems that do not exist on the sending side.
+               Force a rollback of the file system to the most recent snapshot before performing the receive operation. If receiving an incremental replication stream (for example, one gener‐
+               ated by zfs send -R -[iI]), destroy snapshots and file systems that do not exist on the sending side.
 
        zfs allow filesystem | volume
 
@@ -1227,21 +1180,20 @@ SUBCOMMANDS
 
            [-ug] "everyone"|user|group[,...]
 
-               Specifies  to  whom  the  permissions  are delegated. Multiple entities can be specified as a comma-separated list. If neither of the -ug options are
-               specified, then the argument is interpreted preferentially as the keyword "everyone", then as a user name, and lastly as a group name. To  specify  a
-               user or group named "everyone", use the -u or -g options. To specify a group with the same name as a user, use the -g options.
+               Specifies to whom the permissions are delegated. Multiple entities can be specified as a comma-separated list. If neither of the -ug options are specified, then the argument is
+               interpreted preferentially as the keyword "everyone", then as a user name, and lastly as a group name. To specify a user or group named "everyone", use the -u or -g options. To
+               specify a group with the same name as a user, use the -g options.
 
            [-e] perm|@setname[,...]
 
-               Specifies  that the permissions be delegated to "everyone." Multiple permissions may be specified as a comma-separated list. Permission names are the
-               same as ZFS subcommand and property names. See the property list below. Property set names, which begin with an at sign (@) , may be  specified.  See
-               the -s form below for details.
+               Specifies that the permissions be delegated to "everyone." Multiple permissions may be specified as a comma-separated list. Permission names are the same as ZFS subcommand  and
+               property names. See the property list below. Property set names, which begin with an at sign (@) , may be specified. See the -s form below for details.
 
            [-ld] filesystem|volume
 
-               Specifies  where  the  permissions  are delegated. If neither of the -ld options are specified, or both are, then the permissions are allowed for the
-               file system or volume, and all of its descendents. If only the -l option is used, then is allowed "locally" only for the specified  file  system.  If
-               only the -d option is used, then is allowed only for the descendent file systems.
+               Specifies where the permissions are delegated. If neither of the -ld options are specified, or both are, then the permissions are allowed for the file system or volume, and all
+               of its descendents. If only the -l option is used, then is allowed "locally" only for the specified file system. If only the -d option is used, then is allowed only for the de‐
+               scendent file systems.
 
        Permissions are generally the ability to use a ZFS subcommand or change a ZFS property. The following permissions are available:
 
@@ -1318,19 +1270,19 @@ SUBCOMMANDS
 
        zfs allow -s @setname perm|@setname[,...] filesystem|volume
 
-           Defines  or adds permissions to a permission set. The set can be used by other zfs allow commands for the specified file system and its descendents. Sets
-           are evaluated dynamically, so changes to a set are immediately reflected. Permission sets follow the same naming restrictions as ZFS  file  systems,  but
-           the name must begin with an "at sign" (@), and can be no more than 64 characters long.
+           Defines  or adds permissions to a permission set. The set can be used by other zfs allow commands for the specified file system and its descendents. Sets are evaluated dynamically,
+           so changes to a set are immediately reflected. Permission sets follow the same naming restrictions as ZFS file systems, but the name must begin with an "at sign" (@), and can be no
+           more than 64 characters long.
 
        zfs unallow [-rldug] "everyone"|user|group[,...] [perm|@setname[, ...]] filesystem|volume
        zfs unallow [-rld] -e [perm|@setname [,...]] filesystem|volume
        zfs unallow [-r] -c [perm|@setname[,...]]
        filesystem|volume
 
-           Removes permissions that were granted with the zfs allow command. No permissions are explicitly denied, so other permissions granted are still in effect.
-           For example, if the permission is granted by an ancestor. If no permissions are specified, then all permissions for the specified user, group, or  every‐
-           one are removed. Specifying "everyone" (or using the -e option) only removes the permissions that were granted to "everyone", not all permissions for ev‐
-           ery user and group. See the zfs allow command for a description of the -ldugec options.
+           Removes  permissions  that were granted with the zfs allow command. No permissions are explicitly denied, so other permissions granted are still in effect. For example, if the per‐
+           mission is granted by an ancestor. If no permissions are specified, then all permissions for the specified user, group, or everyone are removed. Specifying "everyone" (or using the
+           -e  option)  only  removes the permissions that were granted to "everyone", not all permissions for every user and group. See the zfs allow command for a description of the -ldugec
+           options.
 
            -r
 
@@ -1343,8 +1295,7 @@ SUBCOMMANDS
 
        zfs hold [-r] tag snapshot...
 
-           Adds a single reference, named with the tag argument, to the specified snapshot or snapshots. Each snapshot has its own tag namespace, and tags  must  be
-           unique within that space.
+           Adds a single reference, named with the tag argument, to the specified snapshot or snapshots. Each snapshot has its own tag namespace, and tags must be unique within that space.
 
            If a hold exists on a snapshot, attempts to destroy that snapshot by using the zfs destroy command return EBUSY.
 
@@ -1373,8 +1324,8 @@ SUBCOMMANDS
 EXAMPLES
        Example 1 Creating a ZFS File System Hierarchy
 
-       The  following  commands  create a file system named pool/home and a file system named pool/home/bob. The mount point /export/home is set for the parent file
-       system, and is automatically inherited by the child file system.
+       The following commands create a file system named pool/home and a file system named pool/home/bob. The mount point /export/home is set for the parent file system, and is  automatically
+       inherited by the child file system.
 
          # zfs create pool/home
          # zfs set mountpoint=/export/home pool/home
@@ -1382,31 +1333,29 @@ EXAMPLES
 
        Example 2 Creating a ZFS Snapshot
 
-       The following command creates a snapshot named yesterday. This snapshot is mounted on demand in the .zfs/snapshot directory at the root of the  pool/home/bob
-       file system.
+       The following command creates a snapshot named yesterday. This snapshot is mounted on demand in the .zfs/snapshot directory at the root of the pool/home/bob file system.
 
          # zfs snapshot pool/home/bob@yesterday
 
        Example 3 Creating and Destroying Multiple Snapshots
 
-       The  following  command  creates  snapshots  named  yesterday  of pool/home and all of its descendent file systems. Each snapshot is mounted on demand in the
-       .zfs/snapshot directory at the root of its file system. The second command destroys the newly created snapshots.
+       The  following  command  creates snapshots named yesterday of pool/home and all of its descendent file systems. Each snapshot is mounted on demand in the .zfs/snapshot directory at the
+       root of its file system. The second command destroys the newly created snapshots.
 
          # zfs snapshot -r pool/home@yesterday
          # zfs destroy -r pool/home@yesterday
 
        Example 4 Disabling and Enabling File System Compression
 
-       The following command disables the compression property for  all  file  systems  under  pool/home.  The  next  command  explicitly  enables  compression  for
-       pool/home/anne.
+       The following command disables the compression property for all file systems under pool/home. The next command explicitly enables compression for pool/home/anne.
 
          # zfs set compression=off pool/home
          # zfs set compression=on pool/home/anne
 
        Example 5 Listing ZFS Datasets
 
-       The  following  command lists all active file systems and volumes in the system. Snapshots are displayed if the listsnaps property is on. The default is off.
-       See zpool(1M) for more information on pool properties.
+       The following command lists all active file systems and volumes in the system. Snapshots are displayed if the listsnaps property is on. The default is off. See zpool(1M) for  more  in‐
+       formation on pool properties.
 
          # zfs list
             NAME                      USED  AVAIL  REFER  MOUNTPOINT
@@ -1499,8 +1448,7 @@ EXAMPLES
 
        Example 10 Promoting a ZFS Clone
 
-       The following commands illustrate how to test out changes to a file system, and then replace the original file system with the  changed  one,  using  clones,
-       clone promotion, and renaming:
+       The following commands illustrate how to test out changes to a file system, and then replace the original file system with the changed one, using clones, clone promotion, and renaming:
 
          # zfs create pool/project/production
            populate /pool/project/production with data
@@ -1521,8 +1469,8 @@ EXAMPLES
 
        Example 12 Remotely Replicating ZFS Data
 
-       The following commands send a full stream and then an incremental stream to a remote machine, restoring them into poolB/received/fs@aand poolB/received/fs@b,
-       respectively. poolB must contain the file system poolB/received, and must not initially contain poolB/received/fs.
+       The  following  commands send a full stream and then an incremental stream to a remote machine, restoring them into poolB/received/fs@aand poolB/received/fs@b, respectively. poolB must
+       contain the file system poolB/received, and must not initially contain poolB/received/fs.
 
          # zfs send pool/fs@a | \
             ssh host zfs receive poolB/received/fs@a
@@ -1531,9 +1479,8 @@ EXAMPLES
 
        Example 13 Using the zfs receive -d Option
 
-       The following command sends a full stream of poolA/fsA/fsB@snap to a remote machine, receiving it into poolB/received/fsA/fsB@snap. The fsA/fsB@snap  portion
-       of  the  received  snapshot's name is determined from the name of the sent snapshot. poolB must contain the file system poolB/received. If poolB/received/fsA
-       does not exist, it is created as an empty file system.
+       The following command sends a full stream of poolA/fsA/fsB@snap to a remote machine, receiving it into poolB/received/fsA/fsB@snap. The fsA/fsB@snap portion of the received  snapshot's
+       name is determined from the name of the sent snapshot. poolB must contain the file system poolB/received. If poolB/received/fsA does not exist, it is created as an empty file system.
 
          # zfs send poolA/fsA/fsB@snap | \
             ssh host zfs receive -d poolB/received
@@ -1560,8 +1507,8 @@ EXAMPLES
 
        Example 16 Performing a Rolling Snapshot
 
-       The following example shows how to maintain a history of snapshots with a consistent naming scheme. To keep a week's worth of snapshots,  the  user  destroys
-       the oldest snapshot, renames the remaining snapshots, and then creates a new snapshot, as follows:
+       The  following example shows how to maintain a history of snapshots with a consistent naming scheme. To keep a week's worth of snapshots, the user destroys the oldest snapshot, renames
+       the remaining snapshots, and then creates a new snapshot, as follows:
 
          # zfs destroy -r pool/users@7daysago
          # zfs rename -r pool/users@6daysago @7daysago
@@ -1575,8 +1522,7 @@ EXAMPLES
 
        Example 17 Setting sharenfs Property Options on a ZFS File System
 
-       The  following  commands  show how to set sharenfs property options to enable rw access for a set of IP addresses and to enable root access for system neo on
-       the tank/home file system.
+       The following commands show how to set sharenfs property options to enable rw access for a set of IP addresses and to enable root access for system neo on the tank/home file system.
 
          # # zfs set sharenfs='rw=@123.123.0.0/16,root=neo' tank/home
 
@@ -1584,8 +1530,7 @@ EXAMPLES
 
        Example 18 Delegating ZFS Administration Permissions on a ZFS Dataset
 
-       The following example shows how to set permissions so that user cindys can create, destroy, mount, and take snapshots  on  tank/cindys.  The  permissions  on
-       tank/cindys are also displayed.
+       The following example shows how to set permissions so that user cindys can create, destroy, mount, and take snapshots on tank/cindys. The permissions on tank/cindys are also displayed.
 
          # zfs allow cindys create,destroy,mount,snapshot tank/cindys
          # zfs allow tank/cindys
@@ -1594,15 +1539,15 @@ EXAMPLES
                    user cindys create,destroy,mount,snapshot
          -------------------------------------------------------------
 
-       Because the tank/cindys mount point permission is set to 755 by default, user cindys will be unable to mount file systems under tank/cindys. Set an ACL simi‐
-       lar to the following syntax to provide mount point access:
+       Because the tank/cindys mount point permission is set to 755 by default, user cindys will be unable to mount file systems under tank/cindys. Set an ACL similar to the following  syntax
+       to provide mount point access:
 
          # chmod A+user:cindys:add_subdirectory:allow /tank/cindys
 
        Example 19 Delegating Create Time Permissions on a ZFS Dataset
 
-       The following example shows how to grant anyone in the group staff to create file systems in tank/users. This syntax also allows  staff  members  to  destroy
-       their own file systems, but not destroy anyone else's file system. The permissions on tank/users are also displayed.
+       The  following  example  shows how to grant anyone in the group staff to create file systems in tank/users. This syntax also allows staff members to destroy their own file systems, but
+       not destroy anyone else's file system. The permissions on tank/users are also displayed.
 
          # # zfs allow staff create,mount tank/users
          # zfs allow -c destroy tank/users
@@ -1632,8 +1577,7 @@ EXAMPLES
 
        Example 21 Delegating Property Permissions on a ZFS Dataset
 
-       The  following  example  shows to grant the ability to set quotas and reservations on the users/home file system. The permissions on users/home are also dis‐
-       played.
+       The following example shows to grant the ability to set quotas and reservations on the users/home file system. The permissions on users/home are also displayed.
 
          # zfs allow cindys quota,reservation users/home
          # zfs allow users/home
@@ -1648,8 +1592,7 @@ EXAMPLES
 
        Example 22 Removing ZFS Delegated Permissions on a ZFS Dataset
 
-       The following example shows how to remove the snapshot permission from the staff group on the tank/users file system. The permissions on tank/users are  also
-       displayed.
+       The following example shows how to remove the snapshot permission from the staff group on the tank/users file system. The permissions on tank/users are also displayed.
 
          # zfs unallow staff snapshot tank/users
          # zfs allow tank/users
@@ -1689,11 +1632,10 @@ ATTRIBUTES
        └─────────────────────────────┴─────────────────────────────┘
 
 SEE ALSO
-       ssh(1),  iscsitadm(1M),  mount(1M),  share(1M),  sharemgr(1M),  unshare(1M),  zonecfg(1M),  zpool(1M), chmod(2), stat(2), write(2), fsync(3C), dfstab(4), at‐
-       tributes(5)
+       ssh(1), iscsitadm(1M), mount(1M), share(1M), sharemgr(1M), unshare(1M), zonecfg(1M), zpool(1M), chmod(2), stat(2), write(2), fsync(3C), dfstab(4), attributes(5)
 
        See the gzip(1) man page, which is not part of the SunOS man page collection.
 
        For information about using the ZFS web-based management tool and other ZFS features, see the Solaris ZFS Administration Guide.
 
-SunOS 5.11                                                                   21 Dec 2009                                                                      zfs(8)
+SunOS 5.11                                                                                21 Dec 2009                                                                                    zfs(8)

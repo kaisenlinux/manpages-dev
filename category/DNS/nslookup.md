@@ -1,4 +1,4 @@
-NSLOOKUP(1)                                                                    BIND 9                                                                    NSLOOKUP(1)
+NSLOOKUP(1)                                                                                  BIND 9                                                                                 NSLOOKUP(1)
 
 NAME
        nslookup - query Internet name servers interactively
@@ -7,59 +7,58 @@ SYNOPSIS
        nslookup [-option] [name | -] [server]
 
 DESCRIPTION
-       Nslookup  is  a  program to query Internet domain name servers.  Nslookup has two modes: interactive and non-interactive. Interactive mode allows the user to
-       query name servers for information about various hosts and domains or to print a list of hosts in a domain.  Non-interactive mode is used to print  just  the
-       name and requested information for a host or domain.
+       nslookup is a program to query Internet domain name servers.  nslookup has two modes: interactive and non-interactive. Interactive mode allows the user to query name servers for infor‐
+       mation about various hosts and domains or to print a list of hosts in a domain.  Non-interactive mode prints just the name and requested information for a host or domain.
 
 ARGUMENTS
        Interactive mode is entered in the following cases:
 
-       a. when no arguments are given (the default name server will be used)
+       a. when no arguments are given (the default name server is used);
 
        b. when the first argument is a hyphen (-) and the second argument is the host name or Internet address of a name server.
 
-       Non-interactive mode is used when the name or Internet address of the host to be looked up is given as the first argument. The optional second argument spec‐
-       ifies the host name or address of a name server.
+       Non-interactive mode is used when the name or Internet address of the host to be looked up is given as the first argument. The optional second argument specifies the host name  or  ad‐
+       dress of a name server.
 
-       Options can also be specified on the command line if they precede the arguments and are prefixed with a hyphen. For example, to change the default query type
-       to host information, and the initial timeout to 10 seconds, type:
+       Options  can also be specified on the command line if they precede the arguments and are prefixed with a hyphen. For example, to change the default query type to host information, with
+       an initial timeout of 10 seconds, type:
 
           nslookup -query=hinfo  -timeout=10
 
-       The -version option causes nslookup to print the version number and immediately exits.
+       The -version option causes nslookup to print the version number and immediately exit.
 
 INTERACTIVE COMMANDS
        host [server]
-              Look up information for host using the current default server or using server, if specified. If host is an Internet address and the query type is A or
-              PTR, the name of the host is returned. If host is a name and does not have a trailing period, the search list is used to qualify the name.
+              This command looks up information for host using the current default server or using server, if specified. If host is an Internet address and the query type is  A  or  PTR,  the
+              name of the host is returned. If host is a name and does not have a trailing period (.), the search list is used to qualify the name.
 
               To look up a host not in the current domain, append a period to the name.
 
        server domain | lserver domain
-              Change the default server to domain; lserver uses the initial server to look up information about  domain,  while  server  uses  the  current  default
-              server. If an authoritative answer can't be found, the names of servers that might have the answer are returned.
+              These  commands change the default server to domain; lserver uses the initial server to look up information about domain, while server uses the current default server. If an au‐
+              thoritative answer cannot be found, the names of servers that might have the answer are returned.
 
-       root   not implemented
+       root   This command is not implemented.
 
-       finger not implemented
+       finger This command is not implemented.
 
-       ls     not implemented
+       ls     This command is not implemented.
 
-       view   not implemented
+       view   This command is not implemented.
 
-       help   not implemented
+       help   This command is not implemented.
 
-       ?      not implemented
+       ?      This command is not implemented.
 
-       exit   Exits the program.
+       exit   This command exits the program.
 
        set keyword[=value]
               This command is used to change state information that affects the lookups. Valid keywords are:
 
-              all    Prints the current values of the frequently used options to set. Information about the current default server and host is also printed.
+              all    This keyword prints the current values of the frequently used options to set. Information about the current default server and host is also printed.
 
               class=value
-                     Change the query class to one of:
+                     This keyword changes the query class to one of:
 
                      IN     the Internet class
 
@@ -69,71 +68,53 @@ INTERACTIVE COMMANDS
 
                      ANY    wildcard
 
-                     The class specifies the protocol group of the information.
-
-                     (Default = IN; abbreviation = cl)
+                     The class specifies the protocol group of the information. The default is IN; the abbreviation for this keyword is cl.
 
               nodebug
-                     Turn on or off the display of the full response packet and any intermediate response packets when searching.
+                     This keyword turns on or off the display of the full response packet, and any intermediate response packets, when searching. The default for this keyword is nodebug;  the
+                     abbreviation for this keyword is [no]deb.
 
-                     (Default = nodebug; abbreviation = [no]deb)
-
-              nod2   Turn debugging mode on or off. This displays more about what nslookup is doing.
-
-                     (Default = nod2)
+              nod2   This keyword turns debugging mode on or off. This displays more about what nslookup is doing. The default is nod2.
 
               domain=name
-                     Sets the search list to name.
+                     This keyword sets the search list to name.
 
               nosearch
-                     If the lookup request contains at least one period but doesn't end with a trailing period, append the domain names in the domain search list to
-                     the request until an answer is received.
-
-                     (Default = search)
+                     If  the  lookup  request contains at least one period, but does not end with a trailing period, this keyword appends the domain names in the domain search list to the re‐
+                     quest until an answer is received. The default is search.
 
               port=value
-                     Change the default TCP/UDP name server port to value.
-
-                     (Default = 53; abbreviation = po)
+                     This keyword changes the default TCP/UDP name server port to value from its default, port 53. The abbreviation for this keyword is po.
 
               querytype=value | type=value
-                     Change the type of the information query.
+                     This keyword changes the type of the information query to value. The defaults are A and then AAAA; the abbreviations for these keywords are q and ty.
 
-                     (Default = A and then AAAA; abbreviations = q, ty)
-
-                     Note: It is only possible to specify one query type, only the default
-                            behavior looks up both when an alternative is not specified.
+                     Please note that it is only possible to specify one query type. Only the default behavior looks up both when an alternative is not specified.
 
               norecurse
-                     Tell the name server to query other servers if it does not have the information.
-
-                     (Default = recurse; abbreviation = [no]rec)
+                     This keyword tells the name server to query other servers if it does not have the information. The default is recurse; the abbreviation for this keyword is [no]rec.
 
               ndots=number
-                     Set the number of dots (label separators) in a domain that will disable searching. Absolute names always stop searching.
+                     This keyword sets the number of dots (label separators) in a domain that disables searching. Absolute names always stop searching.
 
               retry=number
-                     Set the number of retries to number.
+                     This keyword sets the number of retries to number.
 
               timeout=number
-                     Change the initial timeout interval for waiting for a reply to number seconds.
+                     This keyword changes the initial timeout interval to wait for a reply to number, in seconds.
 
-              novc   Always use a virtual circuit when sending requests to the server.
+              novc   This keyword indicates that a virtual circuit should always be used when sending requests to the server.  novc is the default.
 
-                     (Default = novc)
-
-              nofail Try the next nameserver if a nameserver responds with SERVFAIL or a referral (nofail) or terminate query (fail) on such a response.
-
-                     (Default = nofail)
+              nofail This keyword tries the next nameserver if a nameserver responds with SERVFAIL or a referral (nofail), or terminates the query (fail) on such a response.  The  default  is
+                     nofail.
 
 RETURN VALUES
        nslookup returns with an exit status of 1 if any query failed, and 0 otherwise.
 
 IDN SUPPORT
-       If nslookup has been built with IDN (internationalized domain name) support, it can accept and display non-ASCII domain names.  nslookup  appropriately  con‐
-       verts  character encoding of domain name before sending a request to DNS server or displaying a reply from the server. If you'd like to turn off the IDN sup‐
-       port for some reason, define the IDN_DISABLE environment variable. The IDN support is disabled if the variable is set when nslookup runs or when the standard
-       output is not a tty.
+       If  nslookup  has been built with IDN (internationalized domain name) support, it can accept and display non-ASCII domain names. nslookup appropriately converts character encoding of a
+       domain name before sending a request to a DNS server or displaying a reply from the server.  To turn off IDN support, define the IDN_DISABLE environment variable. IDN support  is  dis‐
+       abled if the variable is set when nslookup runs, or when the standard output is not a tty.
 
 FILES
        /etc/resolv.conf
@@ -147,4 +128,4 @@ AUTHOR
 COPYRIGHT
        2021, Internet Systems Consortium
 
-9.16.11-Debian                                                               2021-01-11                                                                  NSLOOKUP(1)
+9.16.13-Debian                                                                             2021-03-11                                                                               NSLOOKUP(1)

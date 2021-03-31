@@ -1,4 +1,4 @@
-TCPXTRACT(1)                                                                User Commands                                                               TCPXTRACT(1)
+TCPXTRACT(1)                                                                             User Commands                                                                             TCPXTRACT(1)
 
 NAME
        tcpxtract - extract files from captured network packets
@@ -26,4 +26,4 @@ DESCRIPTION
        --help, -h
               display this lovely screen
 
-tcpxtract v1.0.1                                                            October 2005                                                                TCPXTRACT(1)
+tcpxtract v1.0.1                                                                          October 2005                                                                             TCPXTRACT(1)

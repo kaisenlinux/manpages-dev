@@ -1,4 +1,4 @@
-CPULIMIT(1)                                                                 User commands                                                                CPULIMIT(1)
+CPULIMIT(1)                                                                              User commands                                                                              CPULIMIT(1)
 
 NAME
        cpulimit -- limits the CPU usage of a process
@@ -39,8 +39,8 @@ DESCRIPTION
               kill target process instead of throttling its CPU usage
 
        -m, --monitor-forks
-              watch  and  throttle  child  processes of the target process Warning: It is usually a bad idea to use this flag on a shell script. The commands in the
-              script will each spawn a process which will, in turn, spawn more copies of this program to throttle them, bogging down the system.
+              watch  and  throttle  child  processes  of  the target process Warning: It is usually a bad idea to use this flag on a shell script. The commands in the script will each spawn a
+              process which will, in turn, spawn more copies of this program to throttle them, bogging down the system.
 
        -r, --restore
               restore a process killed using the -k flag.
@@ -92,17 +92,17 @@ EXAMPLES
               Throttle process 1234 at 20% CPU usage. If cpulimit is forced to exit, it sends the watched process the SIGTERM signal.
 
 NOTES
-       •   cpulimit always sends the SIGSTOP and SIGCONT signals to a process, both to verify that it can control it and to limit the average amount of CPU it  con‐
-           sumes.   This can result in misleading (annoying) job control messages that indicate that the job has been stopped (when actually it was, but immediately
-           restarted).  This can also cause issues with interactive shells that detect or otherwise depend on SIGSTOP/SIGCONT.   For example, you may place a job in
-           the foreground, only to see it immediately stopped and restarted in the background.  (See also <http://bugs.debian.org/558763>.)
+       •   cpulimit always sends the SIGSTOP and SIGCONT signals to a process, both to verify that it can control it and to limit the average amount of CPU it consumes.  This  can  result  in
+           misleading  (annoying) job control messages that indicate that the job has been stopped (when actually it was, but immediately restarted).  This can also cause issues with interac‐
+           tive shells that detect or otherwise depend on SIGSTOP/SIGCONT.   For example, you may place a job in the foreground, only to see it immediately stopped and restarted in the  back‐
+           ground.  (See also <http://bugs.debian.org/558763>.)
 
-       •   When  invoked  with  the -e or -P options, cpulimit looks for any process under /proc with a name that matches the process name argument given.  Further‐
-           more, it uses the first instance of the process found.  To control a specific instance of a process, use the -p option and provide a PID.
+       •   When  invoked  with  the  -e or -P options, cpulimit looks for any process under /proc with a name that matches the process name argument given.  Furthermore, it uses the first in‐
+           stance of the process found.  To control a specific instance of a process, use the -p option and provide a PID.
 
        •   The current version of cpulimit assumes the kernel HZ value 100.
 
 AUTHOR
        This manpage was written for the Debian project by gregor herrmann <gregoa@debian.org> but may be used by others.
 
-cpulimit                                                                      June 2012                                                                  CPULIMIT(1)
+cpulimit                                                                                   June 2012                                                                                CPULIMIT(1)

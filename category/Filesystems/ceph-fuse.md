@@ -1,4 +1,4 @@
-CEPH-FUSE(8)                                                                    Ceph                                                                    CEPH-FUSE(8)
+CEPH-FUSE(8)                                                                                  Ceph                                                                                 CEPH-FUSE(8)
 
 NAME
        ceph-fuse - FUSE-based client for ceph
@@ -7,8 +7,8 @@ SYNOPSIS
        ceph-fuse [-n client.username] [ -m monaddr:port ] mountpoint [ fuse options ]
 
 DESCRIPTION
-       ceph-fuse  is  a FUSE (File system in USErspace) client for Ceph distributed file system. It will mount a ceph file system specified via the -m option or de‐
-       scribed by ceph.conf (see below) at the specific mount point. See Mount CephFS using FUSE for detailed information.
+       ceph-fuse  is a FUSE (File system in USErspace) client for Ceph distributed file system. It will mount a ceph file system specified via the -m option or described by ceph.conf (see be‐
+       low) at the specific mount point. See Mount CephFS using FUSE for detailed information.
 
        The file system can be unmounted with:
 
@@ -41,8 +41,7 @@ OPTIONS
        -s     Disable multi-threaded operation.
 
 AVAILABILITY
-       ceph-fuse is part of Ceph, a massively scalable, open-source, distributed storage system. Please refer to the Ceph documentation at http://ceph.com/docs  for
-       more information.
+       ceph-fuse is part of Ceph, a massively scalable, open-source, distributed storage system. Please refer to the Ceph documentation at http://ceph.com/docs for more information.
 
 SEE ALSO
        fusermount(8), ceph(8)
@@ -50,4 +49,4 @@ SEE ALSO
 COPYRIGHT
        2010-2021, Inktank Storage, Inc. and contributors. Licensed under Creative Commons Attribution Share Alike 3.0 (CC-BY-SA-3.0)
 
-dev                                                                         Jan 15, 2021                                                                CEPH-FUSE(8)
+dev                                                                                       Jan 28, 2021                                                                             CEPH-FUSE(8)

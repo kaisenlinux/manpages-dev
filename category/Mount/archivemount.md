@@ -1,5 +1,5 @@
 
-ARCHIVEMOUNT(1)                                                             User Commands                                                            ARCHIVEMOUNT(1)
+ARCHIVEMOUNT(1)                                                                          User Commands                                                                          ARCHIVEMOUNT(1)
 
 NAME
        archivemount - mounts an archive for access as a file system
@@ -8,8 +8,8 @@ SYNOPSIS
        archivemount [-hVdfs] [-o options] archivepath mountpoint
 
 DESCRIPTION
-       The  archivemount  command mounts the file tree contained in the archive archivepath on the directory mountpoint.  The archive's contents can subsequently be
-       accessed inside mountpoint as a file system.  The umount(8) command performs the corresponding unmount operation.
+       The  archivemount  command mounts the file tree contained in the archive archivepath on the directory mountpoint.  The archive's contents can subsequently be accessed inside mountpoint
+       as a file system.  The umount(8) command performs the corresponding unmount operation.
 
        archivemount is known to work under both linux and Mac OS X (via MacFUSE).
 
@@ -59,12 +59,11 @@ ARCHIVE FORMATS
 
               •      two different variants of shar archives.
 
-       Before writing, the original archive is renamed with a ``.orig'' extension appended to it.  More detail about the read/write support  can  be  found  in  the
-       libarchive(3) documentation.
+       Before writing, the original archive is renamed with a ``.orig'' extension appended to it.  More detail about the read/write support can be found in the libarchive(3) documentation.
 
 OPTIONS
-       archivemount  is  built upon the FUSE (Filesystem in Userspace) library, and the complete set of available options depends upon the specific FUSE implementa‐
-       tion.  Execute archivemount -h to retrieve a definitive list.
+       archivemount is built upon the FUSE (Filesystem in Userspace) library, and the complete set of available options depends upon the specific FUSE implementation.  Execute archivemount -h
+       to retrieve a definitive list.
 
    general options
        -o opt,[opt...]
@@ -362,14 +361,14 @@ OPTIONS
               new encoding of the file names (default: ISO-8859-2)
 
 LICENSE
-       This sofware is free software; you can redistribute it and/or modify it under the terms of the GNU Library General Public License as published  by  the  Free
-       Software Foundation; either version 2 of the License, or (at your option) any later version.
+       This  sofware  is free software; you can redistribute it and/or modify it under the terms of the GNU Library General Public License as published by the Free Software Foundation; either
+       version 2 of the License, or (at your option) any later version.
 
-       This  software  is  distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-       FOR A PARTICULAR PURPOSE.  See the GNU Library General Public License for more details.
+       This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS  FOR  A  PARTICULAR  PURPOSE.
+       See the GNU Library General Public License for more details.
 
-       You should have received a copy of the GNU Library General Public License along with this software; if not, write to the Free Software Foundation,  Inc.,  59
-       Temple Place, Suite 330, Boston, MA  02111-1307  USA
+       You  should  have  received  a copy of the GNU Library General Public License along with this software; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330,
+       Boston, MA  02111-1307  USA
 
 KNOWN BUGS
        This is beta software and should be treated as such.  Bug reports to the AUTHORS listed below would be appreciated.
@@ -388,4 +387,4 @@ AUTHORS
 
        This man page was written by Tom Duck <tom.duck@dal.ca> with material drawn from the page for libarchive(3).
 
-ARCHIVEMOUNT version 0.8.7                                                 15 August 2013                                                            ARCHIVEMOUNT(1)
+ARCHIVEMOUNT version 0.8.7                                                               15 August 2013                                                                         ARCHIVEMOUNT(1)

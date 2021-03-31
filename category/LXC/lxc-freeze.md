@@ -1,4 +1,4 @@
-lxc-freeze(1)                                                                                                                                          lxc-freeze(1)
+lxc-freeze(1)                                                                                                                                                                     lxc-freeze(1)
 
 NAME
        lxc-freeze - freeze all the container's processes
@@ -7,8 +7,8 @@ SYNOPSIS
        lxc-freeze {-n name}
 
 DESCRIPTION
-       lxc-freeze  freezes  all  the processes running inside the container. The processes will be blocked until they are explicitly thawed by the lxc-unfreeze com‐
-       mand. This command is useful for batch managers to schedule a group of processes.
+       lxc-freeze  freezes  all  the processes running inside the container. The processes will be blocked until they are explicitly thawed by the lxc-unfreeze command. This command is useful
+       for batch managers to schedule a group of processes.
 
 COMMON OPTIONS
        These options are common to most of lxc commands.
@@ -39,8 +39,7 @@ COMMON OPTIONS
        --rcfile=FILE
               Specify the configuration file to configure the virtualization and isolation functionalities for the container.
 
-              This configuration file if present will be used even if there is already a configuration file present in the previously created  container  (via  lxc-
-              create).
+              This configuration file if present will be used even if there is already a configuration file present in the previously created container (via lxc-create).
 
        --version
               Show the version number.
@@ -50,10 +49,10 @@ DIAGNOSTIC
               The specified container was not created before with the lxc-create command.
 
 SEE ALSO
-       lxc(7),  lxc-create(1),  lxc-copy(1),  lxc-destroy(1), lxc-start(1), lxc-stop(1), lxc-execute(1), lxc-console(1), lxc-monitor(1), lxc-wait(1), lxc-cgroup(1),
-       lxc-ls(1), lxc-info(1), lxc-freeze(1), lxc-unfreeze(1), lxc-attach(1), lxc.conf(5)
+       lxc(7), lxc-create(1), lxc-copy(1), lxc-destroy(1), lxc-start(1), lxc-stop(1), lxc-execute(1), lxc-console(1), lxc-monitor(1), lxc-wait(1), lxc-cgroup(1), lxc-ls(1), lxc-info(1),  lxc-
+       freeze(1), lxc-unfreeze(1), lxc-attach(1), lxc.conf(5)
 
 AUTHOR
        Daniel Lezcano <daniel.lezcano@free.fr>
 
-                                                                             2020-12-30                                                                lxc-freeze(1)
+                                                                                           2021-01-31                                                                             lxc-freeze(1)

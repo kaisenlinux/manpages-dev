@@ -1,4 +1,4 @@
-MACCHANGER(1)                                                          General Commands Manual                                                         MACCHANGER(1)
+MACCHANGER(1)                                                                       General Commands Manual                                                                       MACCHANGER(1)
 
 NAME
        macchanger - MAC Changer
@@ -53,4 +53,4 @@ SEE ALSO
 AUTHOR
        Alvaro Lopez Ortega <alvaro@alobbs.com>.
 
-                                                                           April 10, 2013                                                              MACCHANGER(1)
+                                                                                         April 10, 2013                                                                           MACCHANGER(1)

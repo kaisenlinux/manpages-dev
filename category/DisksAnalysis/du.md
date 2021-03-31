@@ -1,4 +1,4 @@
-DU(1)                                                                       User Commands                                                                      DU(1)
+DU(1)                                                                                    User Commands                                                                                    DU(1)
 
 NAME
        du - estimate file space usage
@@ -19,8 +19,8 @@ DESCRIPTION
               write counts for all files, not just directories
 
        --apparent-size
-              print apparent sizes, rather than disk usage; although the apparent size is usually smaller, it may be larger due to holes in ('sparse') files, inter‐
-              nal fragmentation, indirect blocks, and the like
+              print  apparent sizes, rather than disk usage; although the apparent size is usually smaller, it may be larger due to holes in ('sparse') files, internal fragmentation, indirect
+              blocks, and the like
 
        -B, --block-size=SIZE
               scale sizes by SIZE before printing them; e.g., '-BM' prints sizes in units of 1,048,576 bytes; see SIZE format below
@@ -35,8 +35,7 @@ DESCRIPTION
               dereference only symlinks that are listed on the command line
 
        -d, --max-depth=N
-              print the total for a directory (or file, with --all) only if it is N or fewer levels below the command line argument;  --max-depth=0 is the  same  as
-              --summarize
+              print the total for a directory (or file, with --all) only if it is N or fewer levels below the command line argument;  --max-depth=0 is the same as --summarize
 
        --files0-from=F
               summarize disk usage of the NUL-terminated file names specified in file F; if F is -, then read names from standard input
@@ -95,15 +94,15 @@ DESCRIPTION
        --version
               output version information and exit
 
-       Display values are in units of the first available SIZE from --block-size, and the DU_BLOCK_SIZE, BLOCK_SIZE and BLOCKSIZE environment variables.  Otherwise,
-       units default to 1024 bytes (or 512 if POSIXLY_CORRECT is set).
+       Display values are in units of the first available SIZE from --block-size, and the DU_BLOCK_SIZE, BLOCK_SIZE and BLOCKSIZE environment variables.   Otherwise,  units  default  to  1024
+       bytes (or 512 if POSIXLY_CORRECT is set).
 
-       The SIZE argument is an integer and optional unit (example: 10K is 10*1024).  Units are K,M,G,T,P,E,Z,Y (powers of 1024) or KB,MB,... (powers of 1000).   Bi‐
-       nary prefixes can be used, too: KiB=K, MiB=M, and so on.
+       The  SIZE  argument  is an integer and optional unit (example: 10K is 10*1024).  Units are K,M,G,T,P,E,Z,Y (powers of 1024) or KB,MB,... (powers of 1000).  Binary prefixes can be used,
+       too: KiB=K, MiB=M, and so on.
 
 PATTERNS
-       PATTERN  is a shell pattern (not a regular expression).  The pattern ? matches any one character, whereas * matches any string (composed of zero, one or mul‐
-       tiple characters).  For example, *.o will match any files whose names end in .o.  Therefore, the command
+       PATTERN is a shell pattern (not a regular expression).  The pattern ? matches any one character, whereas * matches any string (composed of zero, one or multiple characters).  For exam‐
+       ple, *.o will match any files whose names end in .o.  Therefore, the command
 
               du --exclude='*.o'
 
@@ -124,4 +123,4 @@ SEE ALSO
        Full documentation <https://www.gnu.org/software/coreutils/du>
        or available locally via: info '(coreutils) du invocation'
 
-GNU coreutils 8.32                                                         September 2020                                                                      DU(1)
+GNU coreutils 8.32                                                                       September 2020                                                                                   DU(1)

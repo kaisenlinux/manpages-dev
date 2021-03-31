@@ -1,4 +1,4 @@
-dhcping(8)                                                             General Commands Manual                                                            dhcping(8)
+dhcping(8)                                                                          General Commands Manual                                                                          dhcping(8)
 
 NAME
        dhcping - send a DHCP request to DHCP server to see if it's up and running
@@ -64,28 +64,26 @@ SETUP
 
        Running in DHCPINFORM mode with -i:
 
-       If you see "DHCPINFORM from 192.168.1.1 via xl0: not authoritative for subnet 192.168.1.0", you should add the authoritative statement to the subnet, See
-       dhcpd.conf(5) for details.
+       If you see "DHCPINFORM from 192.168.1.1 via xl0: not authoritative for subnet 192.168.1.0", you should add the authoritative statement to the subnet, See dhcpd.conf(5) for details.
 
-       When running in very verbose mode, dhcping tries to dump all data of the send and received DHCP packets. It will first dump the packet in hex-format, then
-       decodes the header and finally the options.
+       When running in very verbose mode, dhcping tries to dump all data of the send and received DHCP packets. It will first dump the packet in hex-format, then decodes the header and
+       finally the options.
 
 HOW IT WORKS
-       The client either sends a DHCPREQUEST or DHCPINFORM packet to the server and waits for an answer. Then, if a DHCPREQUEST was send, it will send a DHCPRELEASE
-       back to the server.
+       The client either sends a DHCPREQUEST or DHCPINFORM packet to the server and waits for an answer. Then, if a DHCPREQUEST was send, it will send a DHCPRELEASE back to the server.
 
 SECURITY
-       This program is installed setuid root as it requires the privileges to bind itself to port 68 (bootpc). Root privileges are dropped as soon as the program
-       has bound itself to that port.
+       This program is installed setuid root as it requires the privileges to bind itself to port 68 (bootpc). Root privileges are dropped as soon as the program has bound itself to that
+       port.
 
 BUGS
        Currently (this may, or may not, change in the future) the ISC DHCP daemon does not write leases with a fixed IP address in the dhcpd.leases file.
 
-       DHCPINFORM packets can only be used on subnets the server is authoritative for.  If the monitoring script runs on a subnet the server isn't authoritative
-       for, it should use the DHCPREQUEST packets. I also experienced some problems with ISC DHCPD v2 servers, but that is also in the README of it.
+       DHCPINFORM packets can only be used on subnets the server is authoritative for.  If the monitoring script runs on a subnet the server isn't authoritative for, it should use the
+       DHCPREQUEST packets. I also experienced some problems with ISC DHCPD v2 servers, but that is also in the README of it.
 
-       The -V option is still working, but shouldn't be used for debugging of the packets. Better use dhcpdump(8) for that, which is available on my website. I
-       wanted to remove it, but decided only to do it from the documentation, not from the code. Maybe I'll need it one day for debugging.
+       The -V option is still working, but shouldn't be used for debugging of the packets. Better use dhcpdump(8) for that, which is available on my website. I wanted to remove it, but
+       decided only to do it from the documentation, not from the code. Maybe I'll need it one day for debugging.
 
 AUTHOR
        Edwin Groothuis, edwin@mavetju.org (http://www.mavetju.org)
@@ -93,4 +91,4 @@ AUTHOR
 SEE ALSO
        dhcpd(8), dhclient(8), dhcpd.conf(5), dhcpdump(8)
 
-3rd Berkeley Distribution                                                 January 27, 2002                                                                dhcping(8)
+3rd Berkeley Distribution                                                               January 27, 2002                                                                             dhcping(8)

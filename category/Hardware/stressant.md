@@ -1,16 +1,15 @@
-STRESSANT(1)                                                                  Stressant                                                                 STRESSANT(1)
+STRESSANT(1)                                                                               Stressant                                                                               STRESSANT(1)
 
 NAME
        stressant - Stressant Documentation
 
 SYNOPSIS
-       stressant  [-h]  [–version]  [–logfile  PATH]  [–email EMAIL] [–smtpserver HOST] [–smtpuser USERNAME] [–smtppass PASSWORD] [–information] [–disk] [–no-smart]
-       [–diskDevice PATH] [–jobFile PATH] [–overwrite] [–writeSize SIZE] [–directory PATH] [–diskRuntime DISKRUNTIME] [–cpu] [–cpuBurnTime TIME] [–network] [–iperf‐
-       Server HOST] [–iperfTime TIME]
+       stressant  [-h]  [–version]  [–logfile PATH] [–email EMAIL] [–smtpserver HOST] [–smtpuser USERNAME] [–smtppass PASSWORD] [–information] [–disk] [–no-smart] [–diskDevice PATH] [–jobFile
+       PATH] [–overwrite] [–writeSize SIZE] [–directory PATH] [–diskRuntime DISKRUNTIME] [–cpu] [–cpuBurnTime TIME] [–network] [–iperfServer HOST] [–iperfTime TIME]
 
 DESCRIPTION
-       Stressant  is a simple yet complete stress-testing tool that forces a computer to perform a series of test using well-known Linux software in order to detect
-       possible design or construction failures.
+       Stressant is a simple yet complete stress-testing tool that forces a computer to perform a series of test using well-known Linux software in order to detect  possible  design  or  con‐
+       struction failures.
 
 OPTIONS
           -h, --help
@@ -26,8 +25,8 @@ OPTIONS
                  send report by email to given address
 
           --smtpserver HOST
-                 SMTP server to use, use a colon to specify the port number if non-default (25). willl attempt to use STARTTLS to secure the connexion and  fail  if
-                 unsupported (default: deliver using the –mta command)
+                 SMTP  server  to  use, use a colon to specify the port number if non-default (25). willl attempt to use STARTTLS to secure the connexion and fail if unsupported (default: de‐
+                 liver using the –mta command)
 
           --smtpuser USERNAME
                  username for the SMTP server (default: no user)
@@ -104,17 +103,16 @@ EXAMPLES
 
           stressant --email person@example.com --smtpserver submission.example.net --smtpuser person --smtppassword
 
-       The stressant-meta package also depends on other tools that are not directly called by the automated script above, but are documented below. The meta-package
-       also suggests many more useful tools.
+       The stressant-meta package also depends on other tools that are not directly called by the automated script above, but are documented below. The meta-package also  suggests  many  more
+       useful tools.
 
    Wiping disks
        DANGER:
-          Wiping disks, just in case it’s not totally obvious, will DELETE DATA on the given file or device. DO NOT run ANY command in this section unless  you  are
-          sure you are writing to the CORRECT DEVICE and that you REALLY want to DESTROY DATA.
+          Wiping  disks, just in case it’s not totally obvious, will DELETE DATA on the given file or device. DO NOT run ANY command in this section unless you are sure you are writing to the
+          CORRECT DEVICE and that you REALLY want to DESTROY DATA.
 
-       As  mentioned above, the stressant commandline tool can be used to directly wipe a disk with the fio(1) command which is actually a disk-testing command that
-       is abused for that purpose. You may not have fio(1) installed on your machine, however, so you may also use the venerable badblocks(8) command to test disks,
-       without wiping them:
+       As mentioned above, the stressant commandline tool can be used to directly wipe a disk with the fio(1) command which is actually a disk-testing command that is abused for that purpose.
+       You may not have fio(1) installed on your machine, however, so you may also use the venerable badblocks(8) command to test disks, without wiping them:
 
           badblocks -nsv /dev/sdc
 
@@ -122,13 +120,13 @@ EXAMPLES
 
           badblocks -wsv /dev/sdc
 
-       Be  aware,  however, that the effect of this will vary according to the physical medium. For example, data may be recovered old spinning hard drives (HDD) if
-       only the above technique is used. For that purpose, you should use a tool like nwipe(1) that erases disks using multiple passes and patterns:
+       Be  aware, however, that the effect of this will vary according to the physical medium. For example, data may be recovered old spinning hard drives (HDD) if only the above technique is
+       used. For that purpose, you should use a tool like nwipe(1) that erases disks using multiple passes and patterns:
 
           nwipe --autonuke --nogui --method=random --verify=off --logfile=nwipe.log /dev/sdc
 
-       Those tools are also ineffective on solid state drives (SSD) as they have a more complex logic layer and different layout semantics. For this,  you  need  to
-       use a “ATA secure erase” procedure using the hdparm(8) command:
+       Those tools are also ineffective on solid state drives (SSD) as they have a more complex logic layer and different layout semantics. For this, you need to use a “ATA secure erase” pro‐
+       cedure using the hdparm(8) command:
 
           hdparm --user-master u --security-set-pass Eins /dev/sdc
           time hdparm --user-master u --security-erase Eins /dev/sdc
@@ -136,12 +134,12 @@ EXAMPLES
        More information about this procedure is available in the ATA wiki.
 
        NOTE:
-          The “secure erase” procedure basically delegates the task of erasing the data to the disk controler. Nothing garantees the destruction of that data, short
-          of physical destruction of the drive. See this discussion for more information.
+          The “secure erase” procedure basically delegates the task of erasing the data to the disk controler. Nothing garantees the destruction of that data, short of physical destruction of
+          the drive. See this discussion for more information.
 
    Testing disks
-       A good way to test disks is to wipe them, as above, but that’s obviously destructive. Sometimes you might want to just test the disk’s performance  by  hand,
-       without wiping anything. Stressant ships with fio(1) and bonnie++(1) for that purpose. The latter is probably the simplest to use:
+       A good way to test disks is to wipe them, as above, but that’s obviously destructive. Sometimes you might want to just test the disk’s performance by  hand,  without  wiping  anything.
+       Stressant ships with fio(1) and bonnie++(1) for that purpose. The latter is probably the simplest to use:
 
           bonnie++ -s 4G -d /mnt/disk/ -n 1024
 
@@ -170,8 +168,8 @@ EXAMPLES
               dm-0: ios=511/0, merge=0/0, ticks=764/0, in_queue=764, util=76.86%, aggrios=511/0, aggrmerge=0/0, aggrticks=547/0, aggrin_queue=576, aggrutil=73.55%
             sdb: ios=511/0, merge=0/0, ticks=547/0, in_queue=576, util=73.55%
 
-       A  more  realistic  workload will ignore the cache (--direct=1), include random (--readwrite=randrw) or sequential writes (--readwrite=readwrite), and paral‐
-       lelize the test to put more pressure on the disk (--numjobs=4):
+       A  more  realistic  workload  will ignore the cache (--direct=1), include random (--readwrite=randrw) or sequential writes (--readwrite=readwrite), and parallelize the test to put more
+       pressure on the disk (--numjobs=4):
 
           $ fio --name=stressant --group_reporting --directory=test --size=100M --readwrite=randrw --direct=1 --numjobs=4
           Run status group 0 (all jobs):
@@ -188,12 +186,11 @@ EXAMPLES
        Parameters can be stored in a job file, passed as an argument to fio. Examples are available in /usr/share/doc/fio/examples.
 
        NOTE:
-          There are many other ways to test disks, obviously. In particular, simple tools like disk-filltest might be considered for inclusion in the  future,  pro‐
-          vided they enter Debian.
+          There are many other ways to test disks, obviously. In particular, simple tools like disk-filltest might be considered for inclusion in the future, provided they enter Debian.
 
    Testing flash memory
-       Flash memory cards are known to sometimes be “fake”, that is, they misreport the actual capacity of the card or the bandwith available. The stressant distri‐
-       bution therefore recommends a tool called f3 which allows you to perform tests on the memory card. For example, this is a probe on a honest memory card:
+       Flash memory cards are known to sometimes be “fake”, that is, they misreport the actual capacity of the card or the bandwith available. The stressant distribution therefore  recommends
+       a tool called f3 which allows you to perform tests on the memory card. For example, this is a probe on a honest memory card:
 
           $ sudo f3probe --destructive --time-ops /dev/sdb
           F3 probe 6.0
@@ -221,9 +218,8 @@ EXAMPLES
        WARNING:
           As the --destructive flag hints, this will destroy the data on the card, so backup the data elsewhere before doing those tests.
 
-       Note that older versions of f3probe(1) (6.0 or earlier) will have trouble doing its job unless the card is connected through a USB reader. Newer versions can
-       deal  with normal block devices, provided that you pass the magic --reset-type=2 argument. Here’s such an example, on a fake MicroSD card that is labeled and
-       announced as 32GB but is actually closer to 16GB:
+       Note that older versions of f3probe(1) (6.0 or earlier) will have trouble doing its job unless the card is connected through a USB reader. Newer versions can deal with normal block de‐
+       vices, provided that you pass the magic --reset-type=2 argument. Here’s such an example, on a fake MicroSD card that is labeled and announced as 32GB but is actually closer to 16GB:
 
           root@curie:/home/anarcat/backup# ~anarcat/dist/f3/f3probe --destructive --time-ops --reset-type=2  /dev/mmcblk0
           F3 probe 6.0
@@ -268,9 +264,9 @@ EXAMPLES
        This allows you to detect hidden caches and fake sizes directly as well.
 
    Network performance testing
-       The --iperfServer option of stressant runs a bandwidth test against a predefined (or specified) server. You can, of course, call iPerf directly to  run  your
-       own  client/server  tests  to  find  issues  in specific routes on the network. The iperf3 package was chosen over the older iperf because public servers are
-       available for the test to work automatically. iperf3 also has interesting performance features like --zerocopy and --file, see iperf3(1) for details.
+       The --iperfServer option of stressant runs a bandwidth test against a predefined (or specified) server. You can, of course, call iPerf directly to run your own client/server  tests  to
+       find  issues  in specific routes on the network. The iperf3 package was chosen over the older iperf because public servers are available for the test to work automatically. iperf3 also
+       has interesting performance features like --zerocopy and --file, see iperf3(1) for details.
 
        To run a test, start a server:
 
@@ -297,4 +293,4 @@ AUTHOR
 COPYRIGHT
        2020, Antoine Beaupre
 
-???                                                                         Feb 20, 2020                                                                STRESSANT(1)
+???                                                                                       Feb 20, 2020                                                                             STRESSANT(1)

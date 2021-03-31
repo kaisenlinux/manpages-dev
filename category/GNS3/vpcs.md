@@ -1,5 +1,5 @@
 
-VPCS(1)                                                                 Virtual PC Simulator                                                                 VPCS(1)
+VPCS(1)                                                                               Virtual PC Simulator                                                                              VPCS(1)
 
 NAME
        vpcs - Virtual PC Simulator
@@ -8,15 +8,14 @@ SYNOPSIS
        vpcs [OPTIONS] [FILENAME]
 
 DESCRIPTION
-       VPCS provides a command line interface to nine simulated virtual PCs.  You can ping/trace route from/to them, or ping/trace route other hosts/routers from
-       the virtual PCs, making it an ideal study tool when you simulate Cisco or Juniper routers in a Dynamips or GNS3 environment.
+       VPCS provides a command line interface to nine simulated virtual PCs.  You can ping/trace route from/to them, or ping/trace route other hosts/routers from the virtual PCs, making it an
+       ideal study tool when you simulate Cisco or Juniper routers in a Dynamips or GNS3 environment.
 
-       Virtual PCs are able to generate and respond to ICMP (ping), TCP and UDP packets delivered to the application via a UDP pipe or Unix tap interface.  If
-       scriptfile is specified, then vpcs reads the file on start-up and executes the commands in the scriptfile.  scriptfile must be in vpcs script file format.
+       Virtual PCs are able to generate and respond to ICMP (ping), TCP and UDP packets delivered to the application via a UDP pipe or Unix tap interface.  If scriptfile is specified, then
+       vpcs reads the file on start-up and executes the commands in the scriptfile.  scriptfile must be in vpcs script file format.
 
-       vpcs listens for messages on nine consecutive UDP ports and sends messages on nine consecutive UDP ports.  By the default, vpcs listens on UDP ports 20000 to
-       20008 and sends messages on UDP ports 30000 to 30008.  Each UDP port pair (20000/30000, 20001/30001...20008/30008) represents a virtual PC.  Virtual PCs are
-       numbered 1 to 9.
+       vpcs listens for messages on nine consecutive UDP ports and sends messages on nine consecutive UDP ports.  By the default, vpcs listens on UDP ports 20000 to 20008 and sends messages
+       on UDP ports 30000 to 30008.  Each UDP port pair (20000/30000, 20001/30001...20008/30008) represents a virtual PC.  Virtual PCs are numbered 1 to 9.
 
 OPTIONS
        -h, --help
@@ -27,42 +26,41 @@ OPTIONS
        -R     Disable the relay function
 
        [-i] num
-              Start vpcs with num vitrual PCs, maximum 9.  If omitted vpcs will start with 9 virtual PCs. If num is 1, such as when GNS3 v1.x spawns PCs, commands
-              that reference other PCs will have restricted options and the prompt will not display the PC number.
+              Start vpcs with num vitrual PCs, maximum 9.  If omitted vpcs will start with 9 virtual PCs. If num is 1, such as when GNS3 v1.x spawns PCs, commands that reference other PCs
+              will have restricted options and the prompt will not display the PC number.
 
        -p port
-              Run vpcs as a daemon process listening on TCP port specified by port.  As a daemon process, vpcs does not present a command line interface to the
-              user, but the command line interface can be accessed remotely using a TCP stream application such as telnet or netcat (nc).  Once the daemon has been
-              started, there is no internal mechanism for terminating the program, and the program must be terminated by sending a system signal 9, typically by
-              using the command kill -9 PID (where PID is the process id of the vpcs instance)
+              Run vpcs as a daemon process listening on TCP port specified by port.  As a daemon process, vpcs does not present a command line interface to the user, but the command line
+              interface can be accessed remotely using a TCP stream application such as telnet or netcat (nc).  Once the daemon has been started, there is no internal mechanism for
+              terminating the program, and the program must be terminated by sending a system signal 9, typically by using the command kill -9 PID (where PID is the process id of the vpcs
+              instance)
 
-       -m num vpcs uses 9 consecutive MAC addresses for the 9 vpcs stating at 00:50:79:66:68:00 by default. The -m option adds num to the last byte of the base MAC
-              address.  Should any increment cause the last byte exceed 0xFF during this process, it will increment to 0x00.
+       -m num vpcs uses 9 consecutive MAC addresses for the 9 vpcs stating at 00:50:79:66:68:00 by default. The -m option adds num to the last byte of the base MAC address.  Should any
+              increment cause the last byte exceed 0xFF during this process, it will increment to 0x00.
 
        [-r] FILENAME
-              If FILENAME is specified, then vpcs reads the file on start-up and executes the commands in the FILENAME.  FILENAME  must be in vpcs script file
-              format.  By default, if a file named startup.vpc exists in the directory where the vpcs program was started, it will be read and executed when vpcs
-              starts.  The -r option is optional if FILENAME is the last parameter.
+              If FILENAME is specified, then vpcs reads the file on start-up and executes the commands in the FILENAME.  FILENAME  must be in vpcs script file format.  By default, if a file
+              named startup.vpc exists in the directory where the vpcs program was started, it will be read and executed when vpcs starts.  The -r option is optional if FILENAME is the last
+              parameter.
 
-       -e     On systems that support the /dev/tapx interface (Unix/Linux), run vpcs in tap mode rather than UDP mode.  In tap mode, IP packets are sent and
-              received via /dev/tapx interfaces rather than via UDP streams.  Typically /dev/tapx interfaces are only available to the root user, meaning vpcs would
-              also be required to be run by the root user (sudo vpcs -e) to use tap mode.
+       -e     On systems that support the /dev/tapx interface (Unix/Linux), run vpcs in tap mode rather than UDP mode.  In tap mode, IP packets are sent and received via /dev/tapx interfaces
+              rather than via UDP streams.  Typically /dev/tapx interfaces are only available to the root user, meaning vpcs would also be required to be run by the root user (sudo vpcs -e)
+              to use tap mode.
 
-       [-u]   This option is the default and not necessary, but included to contrast with the -e option.  By default, vpcs sends and receives IP packets to and from
-              specified UDP ports. vpcs listens on UDP port 20000 and sends to port 127.0.0.1:30000 by default.  The listening and sending ports can be manipulated
-              using the -s, -c and -t options.
+       [-u]   This option is the default and not necessary, but included to contrast with the -e option.  By default, vpcs sends and receives IP packets to and from specified UDP ports. vpcs
+              listens on UDP port 20000 and sends to port 127.0.0.1:30000 by default.  The listening and sending ports can be manipulated using the -s, -c and -t options.
 
    UDP Mode Options
        -s port
-              port specifies the base port number that vpcs uses to listen for messages. By default vpcs listens for messages on UDP ports 20000 to 20008.  By
-              changing the base port that vpcs listens to using the -s option causes nine consecutive UDP ports to be used starting at the port specified by port.
+              port specifies the base port number that vpcs uses to listen for messages. By default vpcs listens for messages on UDP ports 20000 to 20008.  By changing the base port that vpcs
+              listens to using the -s option causes nine consecutive UDP ports to be used starting at the port specified by port.
 
-       -t ip  vpcs streams packets to nine UDP ports commencing at 127.0.0.1:30000 by default.  The -t option allows you to stream packets to a remote host as
-              specified by IPv4 address ip. Typically the remote host will be running dynamips with a cloud connection configured to link to this host’s IP address.
+       -t ip  vpcs streams packets to nine UDP ports commencing at 127.0.0.1:30000 by default.  The -t option allows you to stream packets to a remote host as specified by IPv4 address ip.
+              Typically the remote host will be running dynamips with a cloud connection configured to link to this host’s IP address.
 
        -c port
-              vpcs streams packets to nine UDP ports commencing at 127.0.0.1:30000.  The -c option allows you to stream packets to a different set of nine ports
-              commencing at the base port number specified by port.
+              vpcs streams packets to nine UDP ports commencing at 127.0.0.1:30000.  The -c option allows you to stream packets to a different set of nine ports commencing at the base port
+              number specified by port.
 
    TAP Mode Options
        -d device
@@ -70,13 +68,12 @@ OPTIONS
 
    Hypervisor Mode Option
        -H port
-              Run as a hypervisor, listening on TCP port specified by port.  In the hypervisor mode, you can connect this control port with telnet, start or stop an
-              instance of vpcs.
+              Run as a hypervisor, listening on TCP port specified by port.  In the hypervisor mode, you can connect this control port with telnet, start or stop an instance of vpcs.
 
 EXAMPLES
    No command line options
-       If you start the vpcs with no arguments, vpcs will start and look for the script startup.vpc in the current directory.  If it exists, it will run the script.
-       This is the normal way of running the vpcs.  It is simply evoked from the command line like this:
+       If you start the vpcs with no arguments, vpcs will start and look for the script startup.vpc in the current directory.  If it exists, it will run the script.  This is the normal way of
+       running the vpcs.  It is simply evoked from the command line like this:
 
        vpcs
 
@@ -94,21 +91,19 @@ EXAMPLES
 
        3. The remote UDP port numbers for the second instance would have to differ from the first instance.
 
-       Since the default local listening port is 20000, and the default remote port is 30000, you would want to start vpcs with a local listening port of 20009 (or
-       greater) and remote port of 30009 (or greater) .  You would also want the base MAC address to be offset by at least nine to avoid any clashes.  In this case
-       you would use the command:
+       Since the default local listening port is 20000, and the default remote port is 30000, you would want to start vpcs with a local listening port of 20009 (or greater) and remote port of
+       30009 (or greater) .  You would also want the base MAC address to be offset by at least nine to avoid any clashes.  In this case you would use the command:
 
        vpcs -s 20009 -c 30009 -m 9
 
-       A far better way to run more than nine Virtual PCs is to use the Hypervisor mode.  In Hypervisor mode, vpcs will automatically take care of incrementing MAC
-       addresses and UDP port numbers so here is no clash.
+       A far better way to run more than nine Virtual PCs is to use the Hypervisor mode.  In Hypervisor mode, vpcs will automatically take care of incrementing MAC addresses and UDP port
+       numbers so here is no clash.
 
 BASE INTERFACE
-       vpcs presents the user with a command line interface (unless daemon mode has been invoked by the -p option). The interface prompt indicates which of the 9
-       virtual PCs currently has focus by indicating the VPC number in brackets.  Eg.:
+       vpcs presents the user with a command line interface (unless daemon mode has been invoked by the -p option). The interface prompt indicates which of the 9 virtual PCs currently has
+       focus by indicating the VPC number in brackets.  Eg.:
        VPCS[1]>
-       Here the digit 1 inside the brackets indicates that VPC 1 has focus, and any traffic generated will be sent from VPC 1, and basic show commands will relate
-       to VPC 1.
+       Here the digit 1 inside the brackets indicates that VPC 1 has focus, and any traffic generated will be sent from VPC 1, and basic show commands will relate to VPC 1.
 
        Note: When started with the -i 1 option, VPC 1 always has focus, and the prompt does NOT display the VPC number in brackets. Eg.:
        VPCS>
@@ -168,13 +163,13 @@ BASE INTERFACE
                  Set DNS server ip, delete if ip is '0'
 
               domain NAME
-                 Set local domain name to NAME.  The domain name will be added to host names when using commands that support names. Example: If the domain name was
-                 set to example.com, then a command of ping abcd would cause the VPCS to attempt to resolve the name abcd.example.com.
+                 Set local domain name to NAME.  The domain name will be added to host names when using commands that support names. Example: If the domain name was set to example.com, then a
+                 command of ping abcd would cause the VPCS to attempt to resolve the name abcd.example.com.
 
        load [FILENAME[.vpc]]
-              Load the configuration/scriptfile from the file FILENAME. If FILENAME ends with '.vpc', then the '.vpc' can be omitted. If FILENAME is omitted then
-              startup.vpc will be loaded if it exists. When the file is loaded, each line of the file is executed as a VPCS command. If the state of the echo flag
-              is on, the command will be echoed to the console before execution, except:
+              Load the configuration/scriptfile from the file FILENAME. If FILENAME ends with '.vpc', then the '.vpc' can be omitted. If FILENAME is omitted then startup.vpc will be loaded if
+              it exists. When the file is loaded, each line of the file is executed as a VPCS command. If the state of the echo flag is on, the command will be echoed to the console before
+              execution, except:
 
               * If the command is prefixed with a '@' symbol (eg @set echo color red);
 
@@ -213,14 +208,13 @@ BASE INTERFACE
        relay ARG ...
               Configure packet relay between UDP ports.
 
-              The relay command allows the VPCS to become a virtual patch panel where connections can be dynamically changed using the relay command.  There are
-              three steps required to use VPCS as a virtual patch panel.
+              The relay command allows the VPCS to become a virtual patch panel where connections can be dynamically changed using the relay command.  There are three steps required to use
+              VPCS as a virtual patch panel.
 
               1. A relay hub port must be defined using the relay port port command.
 
-              2. Remote NIO_UDP connections (cloud connections in GNS3) use this hub port as the remote port, ensuring each NIO_UDP connection has a unique local
-                 port. (The local port numbers will be used to 'patch' the connection). VPC instances can be directed to use this hub port as their remote port
-                 using the command set rport port.
+              2. Remote NIO_UDP connections (cloud connections in GNS3) use this hub port as the remote port, ensuring each NIO_UDP connection has a unique local port. (The local port numbers
+                 will be used to 'patch' the connection). VPC instances can be directed to use this hub port as their remote port using the command set rport port.
 
               3. The 'patching' is completed using the command:
                  relay add [ip1:]port1 [ip2:]port2, where port1 and port2 are the local port numbers used in step 2.
@@ -246,8 +240,8 @@ BASE INTERFACE
               To telnet to the port 2004 of a remote host 10.1.1.1, use rlogin 10.1.1.1 2004
 
        save [FILENAME[.vpc]]
-              Save the configuration to the scriptfile FILENAME.vpc. If there is no '.' in FILENAME then a '.vpc' extension is added. If FILENAME is omitted then
-              the configuration will be saved to startup.vpc
+              Save the configuration to the scriptfile FILENAME.vpc. If there is no '.' in FILENAME then a '.vpc' extension is added. If FILENAME is omitted then the configuration will be
+              saved to startup.vpc
 
        set ARG ...
               Set hostname, connection port, ipfrag state, dump options and echo options
@@ -273,8 +267,8 @@ BASE INTERFACE
                  raw     Print the first 40 bytes
 
            echo on|off|[color clear|FGCOLOR [BGCOLOR]]
-                         Sets the state of the echo flag used when executing script files, or sets the color of text to FGCOLOR with optional BGCOLOR.  set echo
-                         color clear resets colors to their defaults.
+                         Sets the state of the echo flag used when executing script files, or sets the color of text to FGCOLOR with optional BGCOLOR.  set echo color clear resets colors to
+                         their defaults.
                          Color list: black, red, green, yellow, blue, magenta, cyan, white
 
            lport port    Local port
@@ -315,8 +309,8 @@ BASE INTERFACE
                          2. If no parameter is given for arp/dump/ip/ipv6 information for the current VPC will be displayed.
 
        sleep [seconds] [text]
-              Print text and pause execution of script for time seconds.  If seconds is zero or missing, pause until a key is pressed.  Default text when no
-              parameters given: 'Press any key to continue'
+              Print text and pause execution of script for time seconds.  If seconds is zero or missing, pause until a key is pressed.  Default text when no parameters given: 'Press any key
+              to continue'
 
        trace HOST [OPTION ...]
               Print the path packets take to the network  HOST.  HOST can be an ip address or name.
@@ -338,24 +332,22 @@ BASE INTERFACE
               Do the same as save
 
    VPCS script file format
-       Any text file consisting of valid vpcs commands can be used as a vpcs script file.  Lines in the file beginning with the # character will be treated as
-       comments and ignored.  As the script is being executed, the VPCS will either display each command immediately before it is executed or not depending on the
-       state of the echo flag.  The @ character can also be used to supress command echoing.  Commands pre-pended by the @ character are not echoed.  The echo and
-       sleep commands are never echoed except the sleep 0 command which is always echoed.
+       Any text file consisting of valid vpcs commands can be used as a vpcs script file.  Lines in the file beginning with the # character will be treated as comments and ignored.  As the
+       script is being executed, the VPCS will either display each command immediately before it is executed or not depending on the state of the echo flag.  The @ character can also be used
+       to supress command echoing.  Commands pre-pended by the @ character are not echoed.  The echo and sleep commands are never echoed except the sleep 0 command which is always echoed.
 
        Command files can make use of the echo and sleep commands to create some form of interactive script.
 
-       Script file exececution can be aborted at any time by pressing Ctrl+c.  This means that the ping HOST -t command (which must be terimated by Ctrl+c) is not
-       useful in vpcs script files.
+       Script file exececution can be aborted at any time by pressing Ctrl+c.  This means that the ping HOST -t command (which must be terimated by Ctrl+c) is not useful in vpcs script files.
 
 HYPERVISOR INTERFACE
        When vpcs is started with the -H port option, vpcs starts in hypervisor mode as a daemon process.
 
-       To access the vpcs hypervisor interface, you need to start a telnet session to the port number you specified with the -H option.  If for example you started
-       vpcs with a command of vpcs -H 20000, then you would typically open a telnet session to port 20000  on your localhost  IP address (127.0.0.1).
+       To access the vpcs hypervisor interface, you need to start a telnet session to the port number you specified with the -H option.  If for example you started vpcs with a command of vpcs
+       -H 20000, then you would typically open a telnet session to port 20000  on your localhost  IP address (127.0.0.1).
 
-       In this mode, an alternative interface is presented to allow the user to create and kill multiple vpcs sessions.  These sessions are always run as a daemon
-       process and must be accessed via either an external telnet application, or by using the telnet or rlogin  command within the vpcs hypervisor session.
+       In this mode, an alternative interface is presented to allow the user to create and kill multiple vpcs sessions.  These sessions are always run as a daemon process and must be accessed
+       via either an external telnet application, or by using the telnet or rlogin  command within the vpcs hypervisor session.
 
        In hypervisor  mode, the commands supported are:
 
@@ -397,18 +389,18 @@ HYPERVISOR INTERFACE
        HV >
        -------------------------------------------------------
 
-       Note that when the vpcs instance was initiated from within the hypervisor interface, it spawned a vpcs daemon process listening on TCP port 20001.  To access
-       that process, the rlogin command was used to port 20001 initiating a session with that instance.  However, you could have just as easily started another
-       independent telnet session in another shell instance to 127.0.0.1 20001.
+       Note that when the vpcs instance was initiated from within the hypervisor interface, it spawned a vpcs daemon process listening on TCP port 20001.  To access that process, the rlogin
+       command was used to port 20001 initiating a session with that instance.  However, you could have just as easily started another independent telnet session in another shell instance to
+       127.0.0.1 20001.
 
-       Also note that once you have finished with the vpcs session, you can exit either using the disconnect command, or use the key combination of Ctrl+X.  If you
-       have nested rlogin sessions, Ctrl+X will return you to the hypervisor, disconnect will take you back one level in the nesting.
+       Also note that once you have finished with the vpcs session, you can exit either using the disconnect command, or use the key combination of Ctrl+X.  If you have nested rlogin
+       sessions, Ctrl+X will return you to the hypervisor, disconnect will take you back one level in the nesting.
 
 BUGS
        IPv6 implementation is a basic implementation that is not fully implemented.
 
-       The ping HOST -t command (which must be terminated by Ctrl+c) can not be used in vpcs script files because when Ctrl+c is pressed to stop the ping, it also
-       aborts the script file execution.
+       The ping HOST -t command (which must be terminated by Ctrl+c) can not be used in vpcs script files because when Ctrl+c is pressed to stop the ping, it also aborts the script file
+       execution.
 
        Please send problems, bugs, questions, desirable enhancements, patches etc to the author.
 
@@ -421,4 +413,4 @@ COPYRIGHT
        Source code and license can be found at vpcs.sf.net.
        For more information, please visit wiki.freecode.com.cn.
 
-0.8                                                                          2013-12-16                                                                      VPCS(1)
+0.8                                                                                        2013-12-16                                                                                   VPCS(1)

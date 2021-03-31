@@ -1,4 +1,4 @@
-SHRED(1)                                                                    User Commands                                                                   SHRED(1)
+SHRED(1)                                                                                 User Commands                                                                                 SHRED(1)
 
 NAME
        shred - overwrite a file to hide its contents, and optionally delete it
@@ -46,13 +46,12 @@ DESCRIPTION
        --version
               output version information and exit
 
-       Delete  FILE(s)  if  --remove  (-u)  is specified.  The default is not to remove the files because it is common to operate on device files like /dev/hda, and
-       those files usually should not be removed.  The optional HOW parameter indicates how to remove a directory entry: 'unlink' => use  a  standard  unlink  call.
-       'wipe'  => also first obfuscate bytes in the name.  'wipesync' => also sync each obfuscated byte to disk.  The default mode is 'wipesync', but note it can be
-       expensive.
+       Delete  FILE(s) if --remove (-u) is specified.  The default is not to remove the files because it is common to operate on device files like /dev/hda, and those files usually should not
+       be removed.  The optional HOW parameter indicates how to remove a directory entry: 'unlink' => use a standard  unlink  call.   'wipe'  =>  also  first  obfuscate  bytes  in  the  name.
+       'wipesync' => also sync each obfuscated byte to disk.  The default mode is 'wipesync', but note it can be expensive.
 
-       CAUTION: shred assumes the file system and hardware overwrite data in place.  Although this is common, many platforms operate otherwise.  Also,  backups  and
-       mirrors may contain unremovable copies that will let a shredded file be recovered later.  See the GNU coreutils manual for details.
+       CAUTION: shred assumes the file system and hardware overwrite data in place.  Although this is common, many platforms operate otherwise.  Also, backups and mirrors may contain unremov‐
+       able copies that will let a shredded file be recovered later.  See the GNU coreutils manual for details.
 
 AUTHOR
        Written by Colin Plumb.
@@ -69,4 +68,4 @@ SEE ALSO
        Full documentation <https://www.gnu.org/software/coreutils/shred>
        or available locally via: info '(coreutils) shred invocation'
 
-GNU coreutils 8.32                                                         September 2020                                                                   SHRED(1)
+GNU coreutils 8.32                                                                       September 2020                                                                                SHRED(1)

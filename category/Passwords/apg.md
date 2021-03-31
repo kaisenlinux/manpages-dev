@@ -1,32 +1,29 @@
-APG(1)                                                                       User Manual                                                                      APG(1)
+APG(1)                                                                                    User Manual                                                                                    APG(1)
 
 NAME
        apg - generates several random passwords
 
 SYNOPSIS
-       apg  [-a  algorithm]  [-M mode] [-E char_string] [-n num_of_pass] [-m min_pass_len] [-x max_pass_len] [-r dictfile] [-b filter_file] [-p min_substr_len] [-s]
-       [-c cl_seed] [-d] [-y] [-l] [-t] [-q] [-h] [-v]
+       apg  [-a  algorithm] [-M mode] [-E char_string] [-n num_of_pass] [-m min_pass_len] [-x max_pass_len] [-r dictfile] [-b filter_file] [-p min_substr_len] [-s] [-c cl_seed] [-d] [-y] [-l]
+       [-t] [-q] [-h] [-v]
 
 DESCRIPTION
        apg generates several random passwords. It uses several password generation algorithms (currently two) and a built-in pseudo random number generator.
 
-       Default algorithm is pronounceable password generation algorithm designed by Morrie Gasser and described in A Random Word Generator For  Pronounceable  Pass‐
-       words  National Technical Information Service (NTIS) AD-A-017676.  The original paper is very old and had never been put online, so I have to use NIST imple‐
-       mentation described in FIPS-181.
+       Default algorithm is pronounceable password generation algorithm designed by Morrie Gasser and described in A Random Word Generator For Pronounceable Passwords National  Technical  In‐
+       formation Service (NTIS) AD-A-017676.  The original paper is very old and had never been put online, so I have to use NIST implementation described in FIPS-181.
 
-       Another algorithm is simple random character generation algorithm, but it uses four user-defined symbol sets to produce random password. It means  that  user
-       can choose type of symbols that should appear in password. Symbol sets are: numeric symbol set (0,...,9), capital letters symbol set (A,...,Z), small letters
-       symbol set (a,...,z) and special symbols symbol set (#,@,!,...).
+       Another  algorithm  is simple random character generation algorithm, but it uses four user-defined symbol sets to produce random password. It means that user can choose type of symbols
+       that should appear in password. Symbol sets are: numeric symbol set (0,...,9), capital letters symbol set (A,...,Z), small letters symbol set (a,...,z) and special symbols  symbol  set
+       (#,@,!,...).
 
-       Built-in pseudo random number generator is an implementation of algorithm described in Appendix C of ANSI X9.17 or RFC 1750 with exception that it uses  CAST
-       or  SHA-1  instead  of Triple DES.  It uses local time with precision of microseconds (see gettimeofday(2)) and /dev/random (if available) to produce initial
-       random seed.
+       Built-in  pseudo random number generator is an implementation of algorithm described in Appendix C of ANSI X9.17 or RFC 1750 with exception that it uses CAST or SHA-1 instead of Triple
+       DES.  It uses local time with precision of microseconds (see gettimeofday(2)) and /dev/random (if available) to produce initial random seed.
 
-       apg also have the ability to check generated password quality using dictionary. You can use this ability if you specify command-line options -r  dictfile  or
-       -b  filtername  where  dictfile  is the dictionary file name and filtername is the name of Bloom filter file. In that dictionary you may place words (one per
-       line) that should not appear as generated passwords. For example: user names, common words, etc. You even can use one of the dictionaries that come with dic‐
-       tionary  password  crackers.  Bloom filter file should be created with apgbfm(1) utility included in apg distribution. In future releases I plan to implement
-       some other techniques to check passwords (like pattern check) just to make life easier.
+       apg also have the ability to check generated password quality using dictionary. You can use this ability if you specify command-line options -r dictfile or -b filtername where dictfile
+       is  the  dictionary  file name and filtername is the name of Bloom filter file. In that dictionary you may place words (one per line) that should not appear as generated passwords. For
+       example: user names, common words, etc. You even can use one of the dictionaries that come with dictionary password crackers.  Bloom filter file should be created with apgbfm(1)  util‐
+       ity included in apg distribution. In future releases I plan to implement some other techniques to check passwords (like pattern check) just to make life easier.
 
 OPTIONS
    Password generation modes options
@@ -39,12 +36,10 @@ OPTIONS
               Generate num_of_pass number of passwords. Default is 6.
 
        -m min_pass_len
-              Generate password with minimum length min_pass_len.  If min_pass_len > max_pass_len then max_pass_len = min_pass_len.  Default minimum password length
-              is 8.
+              Generate password with minimum length min_pass_len.  If min_pass_len > max_pass_len then max_pass_len = min_pass_len.  Default minimum password length is 8.
 
        -x max_pass_len
-              Generate password with maximum length max_pass_len.  If min_pass_len > max_pass_len then max_pass_len = min_pass_len.  Default maximum password length
-              is 10.
+              Generate password with maximum length max_pass_len.  If min_pass_len > max_pass_len then max_pass_len = min_pass_len.  Default maximum password length is 10.
 
        -M mode
               Use symbolsets specified with mode for password generation.  mode is a text string consisting of characters S, s, N, n, C, c, L, l. Where:
@@ -61,8 +56,7 @@ OPTIONS
 
               c      Generator should use capital symbol set for password generation.
 
-              L      Generator must use small letters symbol set for every generated password (always present if  pronounceable  password  generation  algorithm  is
-                     used).
+              L      Generator must use small letters symbol set for every generated password (always present if pronounceable password generation algorithm is used).
 
               l      Generator should use small letters symbol set for password generation.
 
@@ -78,8 +72,8 @@ OPTIONS
               -M Cn
 
        -E char_string
-              Exclude  characters  in char_string from password generation process (in pronounceable password generation mode you can not exclude small letters). To
-              include special symbols that can be recognized by shell (apostrophe, quotes, dollar sign, etc.) in char_string use the backslashed versions.
+              Exclude characters in char_string from password generation process (in pronounceable password generation mode you can not exclude small letters). To include special symbols that
+              can be recognized by shell (apostrophe, quotes, dollar sign, etc.) in char_string use the backslashed versions.
 
               Examples:
 
@@ -101,9 +95,9 @@ OPTIONS
               Check generated passwords for their appearance in filter_file. filter_file should be created with the apgbfm(1) utility.
 
        -p min_substr_len
-              This option tells apg(1) to check every substring of the generated password for appearance in filter_file. If any of such substrings would be found in
-              the  filter_file then generated password would be rejected and apg(1) will generate another one.  min_substr_len specifies minimum substring length to
-              check.  This option is active only if -b option is defined.
+              This option tells apg(1) to check every substring of the generated password for appearance in filter_file. If any of such substrings would be found in the filter_file then  gen‐
+              erated  password would be rejected and apg(1) will generate another one.  min_substr_len specifies minimum substring length to check.  This option is active only if -b option is
+              defined.
 
    Pseudo random number generator options
        -s     Ask user for random sequence for password generation
@@ -140,8 +134,7 @@ DEFAULT OPTIONS
        [ end ]----> pwgen.sh
 
 EXIT CODE
-       On successful completion of its task, apg will complete with exit code 0.  An exit code of -1 indicates an error occurred.  Textual errors are written to the
-       standard error stream.
+       On successful completion of its task, apg will complete with exit code 0.  An exit code of -1 indicates an error occurred.  Textual errors are written to the standard error stream.
 
 DIAGNOSTICS
        If /dev/random is not available, apg will display a message about it.
@@ -159,4 +152,4 @@ AUTHOR
        Adel I. Mirzazhanov, <a-del@iname.com>
        Project home page: http://www.adel.nursat.kz/apg/
 
-Automated Password Generator                                                 2003 Aug 04                                                                      APG(1)
+Automated Password Generator                                                              2003 Aug 04                                                                                    APG(1)

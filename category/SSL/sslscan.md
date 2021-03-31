@@ -1,4 +1,4 @@
-SSLSCAN(1)                                                             General Commands Manual                                                            SSLSCAN(1)
+SSLSCAN(1)                                                                          General Commands Manual                                                                          SSLSCAN(1)
 
 NAME
        sslscan - Fast SSL/TLS scanner
@@ -7,8 +7,8 @@ SYNOPSIS
        sslscan [options] [host:port | host]
 
 DESCRIPTION
-       sslscan  queries  SSL/TLS services (such as HTTPS) and reports the protocol versions, cipher suites, key exchanges, signature algorithms, and certificates in
-       use.  This helps the user understand which parameters are weak from a security standpoint.
+       sslscan  queries  SSL/TLS  services (such as HTTPS) and reports the protocol versions, cipher suites, key exchanges, signature algorithms, and certificates in use.  This helps the user
+       understand which parameters are weak from a security standpoint.
 
        Terminal output is thus colour-coded as follows:
 
@@ -51,8 +51,8 @@ OPTIONS
               Print the hexadecimal cipher IDs
 
        --show-times
-              Show the time taken for each handshake in milliseconds. Note that only a single request is made with each cipher, and that the size of the ClientHello
-              is not constant, so this should not be used for proper benchmarking or performance testing.
+              Show the time taken for each handshake in milliseconds. Note that only a single request is made with each cipher, and that the size of the ClientHello is not constant,  so  this
+              should not be used for proper benchmarking or performance testing.
 
               You might want to also use --no-cipher-details to make the output a bit clearer.
 
@@ -107,8 +107,8 @@ OPTIONS
        --no-groups
               Do not enumerate key exchange groups
 
-       --no-sigs
-              Do not enumerate signature algorithms
+       --show-sigs
+              Enumerate signature algorithms
 
        --starttls-ftp
               STARTTLS setup for FTP
@@ -139,9 +139,6 @@ OPTIONS
 
        --xmpp-server
               Perform a server-to-server XMPP connection. Try this if --starttls-xmpp is failing.
-
-       --http
-              Makes a HTTP request after a successful connection and returns the server response code
 
        --rdp
               Send RDP preamble before starting scan.
@@ -184,4 +181,4 @@ AUTHOR
        sslscan was extended by rbsec <robin@rbsec.net>.
        This manual page was originally written by Marvin Stark <marv@der-marv.de>.
 
-                                                                           March 19, 2020                                                                 SSLSCAN(1)
+                                                                                         March 19, 2020                                                                              SSLSCAN(1)

@@ -1,4 +1,4 @@
-xmount(1)                                                                      xmount                                                                      xmount(1)
+xmount(1)                                                                                    xmount                                                                                   xmount(1)
 
 NAME
        xmount - Tool to crossmount between multiple input and output harddisk image files
@@ -7,16 +7,16 @@ SYNOPSIS
        xmount [fopts] <xopts> <mntp>
 
 DESCRIPTION
-       xmount allows you to convert on-the-fly between multiple input and output harddisk image formats. xmount creates a virtual file system using FUSE (Filesystem
-       in Userspace) that contains a virtual representation of the input image.
+       xmount  allows  you  to convert on-the-fly between multiple input and output harddisk image formats. xmount creates a virtual file system using FUSE (Filesystem in Userspace) that con‐
+       tains a virtual representation of the input image.
 
-       The virtual representation can be in raw DD, Apple's Disk Image format (DMG), VirtualBox's virtual disk file format (VDI), Microsoft's Virtual Hard Disk  Im‐
-       age format (VHD) or in VmWare's VMDK file format.
+       The virtual representation can be in raw DD, Apple's Disk Image format (DMG), VirtualBox's virtual disk file format (VDI), Microsoft's Virtual  Hard  Disk  Image  format  (VHD)  or  in
+       VmWare's VMDK file format.
 
        Input images can be raw DD, EWF (Expert Witness Compression Format) or AFF (Advanced Forensic Format) files.
 
-       In  addition, xmount also supports virtual write access to the output files that is redirected to a cache file. This makes it possible to boot acquired hard‐
-       disk images using QEMU, KVM, VirtualBox, VmWare or alike.
+       In  addition, xmount also supports virtual write access to the output files that is redirected to a cache file. This makes it possible to boot acquired harddisk images using QEMU, KVM,
+       VirtualBox, VmWare or alike.
 
 OPTIONS
        fopts: (Options specific to FUSE)
@@ -67,4 +67,4 @@ EXAMPLE
 
          xmount --in raw ./acquired_disk.dd --out vdi --cache ./disk.cache /mnt
 
-Daniel Gillen                                                               Nov 05, 2016                                                                   xmount(1)
+Daniel Gillen                                                                             Nov 05, 2016                                                                                xmount(1)

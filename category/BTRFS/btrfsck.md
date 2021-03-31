@@ -1,4 +1,4 @@
-BTRFS-CHECK(8)                                                              Btrfs Manual                                                              BTRFS-CHECK(8)
+BTRFS-CHECK(8)                                                                            Btrfs Manual                                                                           BTRFS-CHECK(8)
 
 NAME
        btrfs-check - check or repair a btrfs filesystem
@@ -7,22 +7,20 @@ SYNOPSIS
        btrfs check [options] <device>
 
 DESCRIPTION
-       The filesystem checker is used to verify structural integrity of a filesystem and attempt to repair it if requested. It is recommended to unmount the
-       filesystem prior to running the check, but it is possible to start checking a mounted filesystem (see --force).
+       The filesystem checker is used to verify structural integrity of a filesystem and attempt to repair it if requested. It is recommended to unmount the filesystem prior to running the
+       check, but it is possible to start checking a mounted filesystem (see --force).
 
        By default, btrfs check will not modify the device but you can reaffirm that by the option --readonly.
 
        btrfsck is an alias of btrfs check command and is now deprecated.
 
            Warning
-           Do not use --repair unless you are advised to do so by a developer or an experienced user, and then only after having accepted that no fsck successfully
-           repair all types of filesystem corruption. Eg. some other software or hardware bugs can fatally damage a volume.
+           Do not use --repair unless you are advised to do so by a developer or an experienced user, and then only after having accepted that no fsck successfully repair all types of
+           filesystem corruption. Eg. some other software or hardware bugs can fatally damage a volume.
 
-       The structural integrity check verifies if internal filesystem objects or data structures satisfy the constraints, point to the right objects or are
-       correctly connected together.
+       The structural integrity check verifies if internal filesystem objects or data structures satisfy the constraints, point to the right objects or are correctly connected together.
 
-       There are several cross checks that can detect wrong reference counts of shared extents, backreferences, missing extents of inodes, directory and inode
-       connectivity etc.
+       There are several cross checks that can detect wrong reference counts of shared extents, backreferences, missing extents of inodes, directory and inode connectivity etc.
 
        The amount of memory required can be high, depending on the size of the filesystem, similarly the run time. Check the modes that can also affect that.
 
@@ -63,11 +61,11 @@ SAFE OR ADVISORY OPTIONS
        --clear-space-cache v1|v2
            completely wipe all free space cache of given type
 
-           For free space cache v1, the clear_cache kernel mount option only rebuilds the free space cache for block groups that are modified while the filesystem
-           is mounted with that option. Thus, using this option with v1 makes it possible to actually clear the entire free space cache.
+           For free space cache v1, the clear_cache kernel mount option only rebuilds the free space cache for block groups that are modified while the filesystem is mounted with that option.
+           Thus, using this option with v1 makes it possible to actually clear the entire free space cache.
 
-           For free space cache v2, the clear_cache kernel mount option destroys the entire free space cache. This option, with v2 provides an alternative method of
-           clearing the free space cache that doesn’t require mounting the filesystem.
+           For free space cache v2, the clear_cache kernel mount option destroys the entire free space cache. This option, with v2 provides an alternative method of clearing the free space
+           cache that doesn’t require mounting the filesystem.
 
        --clear-ino-cache
            remove leftover items pertaining to the deprecated inode map feature
@@ -77,8 +75,8 @@ DANGEROUS OPTIONS
            enable the repair mode and attempt to fix problems where possible
 
                Note
-               there’s a warning and 10 second delay when this option is run without --force to give users a chance to think twice before running repair, the
-               warnings in documentation have shown to be insufficient
+               there’s a warning and 10 second delay when this option is run without --force to give users a chance to think twice before running repair, the warnings in documentation have
+               shown to be insufficient
 
        --init-csum-tree
            create a new checksum tree and recalculate checksums in all files
@@ -98,8 +96,8 @@ DANGEROUS OPTIONS
            The MODE can be one of:
 
            original
-               The metadata are read into memory and verified, thus the requirements are high on large filesystems and can even lead to out-of-memory conditions.
-               The possible workaround is to export the block device over network to a machine with enough memory.
+               The metadata are read into memory and verified, thus the requirements are high on large filesystems and can even lead to out-of-memory conditions. The possible workaround is to
+               export the block device over network to a machine with enough memory.
 
            lowmem
                This mode is supposed to address the high memory consumption at the cost of increased IO when it needs to re-read blocks. This may increase run time.
@@ -108,8 +106,8 @@ DANGEROUS OPTIONS
                    lowmem mode does not work with --repair yet, and is still considered experimental.
 
        --force
-           allow work on a mounted filesystem. Note that this should work fine on a quiescent or read-only mounted filesystem but may crash if the device is changed
-           externally, eg. by the kernel module. Repair without mount checks is not supported right now.
+           allow work on a mounted filesystem. Note that this should work fine on a quiescent or read-only mounted filesystem but may crash if the device is changed externally, eg. by the
+           kernel module. Repair without mount checks is not supported right now.
 
            This option also skips the delay and warning in the repair mode (see --repair).
 
@@ -122,4 +120,4 @@ AVAILABILITY
 SEE ALSO
        mkfs.btrfs(8), btrfs-scrub(8), btrfs-rescue(8)
 
-Btrfs v5.10                                                                  01/18/2021                                                               BTRFS-CHECK(8)
+Btrfs v5.10.1                                                                              02/05/2021                                                                            BTRFS-CHECK(8)

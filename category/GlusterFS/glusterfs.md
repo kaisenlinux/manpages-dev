@@ -1,4 +1,4 @@
-GlusterFS(8)                                                                Gluster Inc.                                                                GlusterFS(8)
+GlusterFS(8)                                                                              Gluster Inc.                                                                             GlusterFS(8)
 
 NAME
        GlusterFS - clustered file system
@@ -7,12 +7,11 @@ SYNOPSIS
        glusterfs [options] [mountpoint]
 
 DESCRIPTION
-       GlusterFS  is a clustered file system, capable of scaling to several peta-bytes.  It aggregates various storage bricks over Infiniband RDMA or TCP/IP and in‐
-       terconnect into one large parallel network file system. Storage bricks can be made of any commodity hardware, such as x86-64 server with SATA-II RAID and In‐
-       finiband HBA.
+       GlusterFS  is  a  clustered  file system, capable of scaling to several peta-bytes.  It aggregates various storage bricks over Infiniband RDMA or TCP/IP and interconnect into one large
+       parallel network file system. Storage bricks can be made of any commodity hardware, such as x86-64 server with SATA-II RAID and Infiniband HBA.
 
-       GlusterFS is fully POSIX compliant file system. On client side, it has dependency on FUSE package, on server side, it works seemlessly on different operating
-       systems.  Currently supported on GNU/Linux and Solaris.
+       GlusterFS is fully POSIX compliant file system. On client side, it has dependency on FUSE package, on server side, it works seemlessly on different operating systems.   Currently  sup‐
+       ported on GNU/Linux and Solaris.
 
 OPTIONS
    Basic options
@@ -86,8 +85,7 @@ OPTIONS
 
    Fuse options
        --attr-times-granularity=NANOSECONDS
-              Declare supported granularity of file attribute times (default is 0 which kernel  handles  as  unspecified;  valid  real  values  are  between  1  and
-              1000000000).
+              Declare supported granularity of file attribute times (default is 0 which kernel handles as unspecified; valid real values are between 1 and 1000000000).
 
        --attribute-timeout=SECONDS
               Set attribute timeout to SECONDS for inodes in fuse kernel module (the default is 1).
@@ -117,8 +115,8 @@ OPTIONS
               Set negative timeout to SECONDS in fuse kernel module (the default is 0).
 
        --auto-invalidation=BOOL
-              controls whether fuse-kernel can auto-invalidate attribute, dentry and page-cache. Disable this only if same files/directories are not accessed across
-              two different mounts concurrently [default: on].
+              controls  whether fuse-kernel can auto-invalidate attribute, dentry and page-cache. Disable this only if same files/directories are not accessed across two different mounts con‐
+              currently [default: on].
 
        --volfile-check
               Enable strict volume file checking.
@@ -147,4 +145,4 @@ SEE ALSO
 COPYRIGHT
        Copyright(c) 2006-2011  Red Hat, Inc.  <http://www.redhat.com>
 
-07 March 2011                                                           Clustered File System                                                           GlusterFS(8)
+07 March 2011                                                                        Clustered File System                                                                         GlusterFS(8)

@@ -1,4 +1,4 @@
-jfs_tune(8)                                                        Set JFS file system parameters.                                                       jfs_tune(8)
+jfs_tune(8)                                                                     Set JFS file system parameters.                                                                     jfs_tune(8)
 
 NAME
        jfs_tune - adjust tunable file system parameters on JFS
@@ -23,19 +23,19 @@ OPTIONS
 
               jfs_tune -J device=external-journal device
 
-              Instead  of  specifying  a  device name directly, external-journal can also be specified by either LABEL=label or UUID=UUID (Use jfs_tune -l device to
-              display a journal device's volume label and UUID.)
+              Instead  of  specifying  a  device name directly, external-journal can also be specified by either LABEL=label or UUID=UUID (Use jfs_tune -l device to display a journal device's
+              volume label and UUID.)
 
        -l     List the contents of the JFS file system or external journal superblock that resides on device.
 
        -L volume-label
-              Set the volume label of the JFS file system or external journal.  JFS labels can be at most 16 characters long; if  volume-label  is  longer  than  16
-              characters, jfs_tune will truncate it and print a warning.  The volume label can be used by mount(8), fsck(8), and /etc/fstab(5) (and possibly others)
-              by specifying LABEL=volume_label instead of a block special device name like /dev/hda5.
+              Set the volume label of the JFS file system or external journal.  JFS labels can be at most 16 characters long; if volume-label is longer than 16 characters, jfs_tune will trun‐
+              cate it and print a warning.  The volume label can be used by mount(8), fsck(8), and /etc/fstab(5) (and possibly others) by specifying LABEL=volume_label instead of a block spe‐
+              cial device name like /dev/hda5.
 
        -U UUID
-              Set the universally unique identifier (UUID) of the file system or external journal device to UUID.  The format of the UUID is a series of hex  digits
-              separated by hyphens, like this: "c1b9d5a2-f162-11cf-9ece-0020afc76f16".  The UUID parameter may also be one of the following:
+              Set the universally unique identifier (UUID) of the file system or external journal device to UUID.  The format of the UUID is a series of hex digits separated by hyphens,  like
+              this: "c1b9d5a2-f162-11cf-9ece-0020afc76f16".  The UUID parameter may also be one of the following:
 
                    clear  clear the file system UUID
 
@@ -43,8 +43,7 @@ OPTIONS
 
                    time   generate a new time-based UUID
 
-              The UUID may be used by mount(8), fsck(8), and /etc/fstab(5) (and possibly others) by specifying UUID=uuid instead of a block special device name like
-              /dev/hda1.
+              The UUID may be used by mount(8), fsck(8), and /etc/fstab(5) (and possibly others) by specifying UUID=uuid instead of a block special device name like /dev/hda1.
 
               See uuidgen(8) for more information.
 
@@ -75,4 +74,4 @@ AUTHOR
        See the JFS project web site for more details:
        http://jfs.sourceforge.net/
 
-                                                                          October 28, 2002                                                               jfs_tune(8)
+                                                                                        October 28, 2002                                                                            jfs_tune(8)

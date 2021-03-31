@@ -1,4 +1,4 @@
-locate(1)                                                              General Commands Manual                                                             locate(1)
+locate(1)                                                                           General Commands Manual                                                                           locate(1)
 
 NAME
        locate - find files by name
@@ -9,15 +9,14 @@ SYNOPSIS
 DESCRIPTION
        locate reads one or more databases prepared by updatedb(8) and writes file names matching at least one of the PATTERNs to standard output, one per line.
 
-       If --regex is not specified, PATTERNs can contain globbing characters.  If any PATTERN contains no globbing characters, locate behaves as if the pattern were
-       *PATTERN*.
+       If --regex is not specified, PATTERNs can contain globbing characters.  If any PATTERN contains no globbing characters, locate behaves as if the pattern were *PATTERN*.
 
-       By default, locate does not check whether files found in database still exist (but it does require all parent directories to exist if the database was  built
-       with --require-visibility no).  locate can never report files created after the most recent update of the relevant database.
+       By  default,  locate does not check whether files found in database still exist (but it does require all parent directories to exist if the database was built with --require-visibility
+       no).  locate can never report files created after the most recent update of the relevant database.
 
 EXIT STATUS
-       locate exits with status 0 if any match was found or if locate was invoked with one of the --limit 0, --help, --statistics or --version options.  If no match
-       was found or a fatal error was encountered, locate exits with status 1.
+       locate exits with status 0 if any match was found or if locate was invoked with one of the --limit 0, --help, --statistics or --version options.  If no match was found or a fatal error
+       was encountered, locate exits with status 1.
 
        Errors encountered while reading a database are not fatal, search continues in other specified databases, if any.
 
@@ -32,18 +31,17 @@ OPTIONS
               Instead of writing file names on standard output, write the number of matching entries only.
 
        -d, --database DBPATH
-              Replace the default database with DBPATH.  DBPATH is a :-separated list of database file names.  If more than one --database option is specified,  the
-              resulting path is a concatenation of the separate paths.
+              Replace  the  default  database with DBPATH.  DBPATH is a :-separated list of database file names.  If more than one --database option is specified, the resulting path is a con‐
+              catenation of the separate paths.
 
-              An  empty  database  file name is replaced by the default database.  A database file name - refers to the standard input.  Note that a database can be
-              read from the standard input only once.
+              An empty database file name is replaced by the default database.  A database file name - refers to the standard input.  Note that a database can be read from the standard  input
+              only once.
 
        -e, --existing
               Print only entries that refer to files existing at the time locate is run.
 
        -L, --follow
-              When checking whether files exist (if the --existing option is specified), follow trailing symbolic links.  This causes broken symbolic  links  to  be
-              omitted from the output.
+              When checking whether files exist (if the --existing option is specified), follow trailing symbolic links.  This causes broken symbolic links to be omitted from the output.
 
               This is the default behavior.  The opposite can be specified using --nofollow.
 
@@ -60,14 +58,14 @@ OPTIONS
               Ignored, for compatibility with BSD and GNU locate.
 
        -P, --nofollow, -H
-              When  checking  whether files exist (if the --existing option is specified), do not follow trailing symbolic links.  This causes broken symbolic links
-              to be reported like other files.
+              When  checking  whether  files exist (if the --existing option is specified), do not follow trailing symbolic links.  This causes broken symbolic links to be reported like other
+              files.
 
               This is the opposite of --follow.
 
        -0, --null
-              Separate the entries on output using the ASCII NUL character instead of writing each entry on a separate line.  This option is designed for interoper‐
-              ability with the --null option of GNU xargs(1).
+              Separate the entries on output using the ASCII NUL character instead of writing each entry on a separate line.  This option is designed for interoperability with the --null  op‐
+              tion of GNU xargs(1).
 
        -S, --statistics
               Write statistics about each read database to standard output instead of searching for files and exit successfully.
@@ -108,13 +106,12 @@ ENVIRONMENT
 NOTES
        The order in which the requested databases are processed is unspecified, which allows locate to reorder the database path for security reasons.
 
-       locate  attempts to be compatible to slocate (without the options used for creating databases) and GNU locate, in that order.  This is the reason for the im‐
-       practical default --follow option and for the confusing set of --regex and --regexp options.
+       locate  attempts  to  be compatible to slocate (without the options used for creating databases) and GNU locate, in that order.  This is the reason for the impractical default --follow
+       option and for the confusing set of --regex and --regexp options.
 
        The short spelling of the -r option is incompatible to GNU locate, where it corresponds to the --regex option.  Use the long option names to avoid confusion.
 
-       The LOCATE_PATH environment variable replaces the default database in BSD and GNU locate, but it is added to other databases in this implementation and  slo‐
-       cate.
+       The LOCATE_PATH environment variable replaces the default database in BSD and GNU locate, but it is added to other databases in this implementation and slocate.
 
 AUTHOR
        Miloslav Trmac <mitr@redhat.com>
@@ -122,4 +119,4 @@ AUTHOR
 SEE ALSO
        updatedb(8)
 
-mlocate                                                                       Sep 2012                                                                     locate(1)
+mlocate                                                                                     Sep 2012                                                                                  locate(1)

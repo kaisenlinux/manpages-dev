@@ -1,12 +1,11 @@
-ZFS-FUSE(8)                                                                [FIXME: manual]                                                               ZFS-FUSE(8)
+ZFS-FUSE(8)                                                                             [FIXME: manual]                                                                             ZFS-FUSE(8)
 
 NAME
        zfs-fuse - ZFS filesystem daemon
 
 SYNOPSIS
-       zfs-fuse [--pidfile filename] [--no-daemon] [--no-kstat-mount] [--disable-block-cache] [--disable-page-cache] [--fuse-attr-timeout SECONDS]
-                [--fuse-entry-timeout SECONDS] [--log-uberblocks] [--max-arc-size MB] [--fuse-mount-options OPT,OPT,OPT...] [--min-uberblock-txg MIN]
-                [--stack-size=size] [--enable-xattr] [--help]
+       zfs-fuse [--pidfile filename] [--no-daemon] [--no-kstat-mount] [--disable-block-cache] [--disable-page-cache] [--fuse-attr-timeout SECONDS] [--fuse-entry-timeout SECONDS]
+                [--log-uberblocks] [--max-arc-size MB] [--fuse-mount-options OPT,OPT,OPT...] [--min-uberblock-txg MIN] [--stack-size=size] [--enable-xattr] [--help]
 
 DESCRIPTION
        This manual page documents briefly the zfs-fuse command.
@@ -14,8 +13,8 @@ DESCRIPTION
        zfs-fuse is a daemon which provides support for the ZFS filesystem, via fuse. Ordinarily this daemon will be invoked from system boot scripts.
 
 OPTIONS
-       This program follows the usual GNU command line syntax, with long options starting with two dashes (`-'). A summary of options is included below. For a
-       complete description, see the Info files.
+       This program follows the usual GNU command line syntax, with long options starting with two dashes (`-'). A summary of options is included below. For a complete description, see the
+       Info files.
 
        -h --help
            Show summary of options.
@@ -39,8 +38,7 @@ OPTIONS
            Sets timeout for caching FUSE attributes in kernel. Defaults to 0.0. Higher values give a 40% performance boost.
 
        -e SECONDS --fuse-entry-timeout SECONDS
-           Sets timeout for caching FUSE entries in kernel. Defaults to 0.0. Higher values give a 10000% performance boost but cause file permission checking
-           security issues.
+           Sets timeout for caching FUSE entries in kernel. Defaults to 0.0. Higher values give a 10000% performance boost but cause file permission checking security issues.
 
        --log-uberblocks
            Logs uberblocks of any mounted filesystem to syslog
@@ -75,26 +73,25 @@ REMARKS ON PRECEDENCE
 BUGS/CAVEATS
        The path to the configuration file (/etc/zfs/zfsrc) cannot at this time be configured.
 
-       Most existing packages suggest settings can be set at the top of their init script. These get frequently overridden by a (distribution specific)
-       /etc/default/zfs-fuse file, if it exists. Be sure to look at these places if you want your changes to options to take effect.
+       Most existing packages suggest settings can be set at the top of their init script. These get frequently overridden by a (distribution specific) /etc/default/zfs-fuse file, if it
+       exists. Be sure to look at these places if you want your changes to options to take effect.
 
-       The /etc/zfs/zfsrc is going to be the recommended approach in the future. So, packagers, please refrain from passing commandline parameters within the
-       initscript (except for --pid-file).
+       The /etc/zfs/zfsrc is going to be the recommended approach in the future. So, packagers, please refrain from passing commandline parameters within the initscript (except for
+       --pid-file).
 
 SEE ALSO
        zfs (8), zpool (8), zdb(8), zstreamdump(8), /etc/zfs/zfsrc
 
 AUTHOR
-       This manual page was written by Bryan Donlan bdonlan@gmail.com for the Debian(TM) system (but may be used by others). Permission is granted to copy,
-       distribute and/or modify this document under the terms of the GNU General Public License, Version 2 any later version published by the Free Software
-       Foundation, or the Common Development and Distribution License.
+       This manual page was written by Bryan Donlan bdonlan@gmail.com for the Debian(TM) system (but may be used by others). Permission is granted to copy, distribute and/or modify this
+       document under the terms of the GNU General Public License, Version 2 any later version published by the Free Software Foundation, or the Common Development and Distribution License.
 
        Revised by Seth Heeren zfs-fuse@sehe.nl
 
-       On Debian systems, the complete text of the GNU General Public License can be found in /usr/share/common-licenses/GPL. The text of the Common Development and
-       Distribution Licence may be found at /usr/share/doc/zfs-fuse/copyright
+       On Debian systems, the complete text of the GNU General Public License can be found in /usr/share/common-licenses/GPL. The text of the Common Development and Distribution Licence may
+       be found at /usr/share/doc/zfs-fuse/copyright
 
 COPYRIGHT
        Copyright © 2010 Bryan Donlan
 
-[FIXME: source]                                                              2010-06-09                                                                  ZFS-FUSE(8)
+[FIXME: source]                                                                            2010-06-09                                                                               ZFS-FUSE(8)

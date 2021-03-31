@@ -1,4 +1,4 @@
-DISLOCKER-FUSE(1)                                                          DISLOCKER-FUSE                                                          DISLOCKER-FUSE(1)
+DISLOCKER-FUSE(1)                                                                        DISLOCKER-FUSE                                                                       DISLOCKER-FUSE(1)
 
 NAME
        Dislocker-fuse - Read/write BitLocker encrypted volumes under Linux, OSX and FreeBSD.
@@ -6,14 +6,14 @@ NAME
 SYNOPSIS
        dislocker-fuse [-hqrsv] [-l LOG_FILE] [-O OFFSET] [-V VOLUME DECRYPTMETHOD -F[N]] [-- ARGS...]
 
-       Where DECRYPTMETHOD = {-p[RECOVERY_PASSWORD] | -f BEK_FILE | -u[USER_PASSWORD] | -k FVEK_FILE | -c}
+       Where DECRYPTMETHOD = {-p[RECOVERY_PASSWORD] | -f BEK_FILE | -u[USER_PASSWORD] | -k FVEK_FILE | -K VMK_FILE | -c}
 
 DESCRIPTION
-       Given a decryption mean, the program is used to read or write BitLocker encrypted volumes. Technically, the program will create a virtual NTFS partition that
-       you can mount as any other NTFS partition.
+       Given a decryption mean, the program is used to read or write BitLocker encrypted volumes. Technically, the program will create a virtual NTFS partition that you can mount as any other
+       NTFS partition.
 
-       The virtual partition is linked to the underlying BitLocker volume, so any write to this volume is put on the BitLocker volume as well. However, you can  use
-       dd(1) to get rid of this limitation -- if it's a limitation for you. An example is provided in the EXAMPLES section of this man page.
+       The virtual partition is linked to the underlying BitLocker volume, so any write to this volume is put on the BitLocker volume as well. However, you can use dd(1) to get  rid  of  this
+       limitation -- if it's a limitation for you. An example is provided in the EXAMPLES section of this man page.
 
 OPTIONS
        Program's options are described below:
@@ -25,28 +25,29 @@ OPTIONS
               decrypt volume using the bek file (present on a USB key)
 
        -F, --force-block=[N]
-              force use of metadata block number N (1, 2 or 3).  Without N, the first block is forced.  Without this option, the program will try each block until a
-              valid one is found
+              force use of metadata block number N (1, 2 or 3).  Without N, the first block is forced.  Without this option, the program will try each block until a valid one is found
 
        -h     print the help and exit
 
        -k, --fvek FVEK_FILE
               decrypt volume using the FVEK directly.  See the FVEK FILE section below to understand what is to be put into this FVEK_FILE
 
+       -K, --vmk VMK_FILE
+              decrypt volume using the VMK directly.  See the VMK FILE section below to understand what is to be put into this VMK_FILE
+
        -l, --logfile LOG_FILE
               put messages into this file (stdout by default)
 
        -O, --offset OFFSET
-              BitLocker partition offset, in bytes, in base 10 (default is 0).  Protip: in your shell, you probably can  pass  -O  $((0xdeadbeef))  if  you  have  a
-              16-based number and are too lazy to convert it in another way.
+              BitLocker  partition offset, in bytes, in base 10 (default is 0).  Protip: in your shell, you probably can pass -O $((0xdeadbeef)) if you have a 16-based number and are too lazy
+              to convert it in another way.
 
        -p, --recovery-password=[RECOVERY_PASSWORD]
-              decrypt  volume  using the recovery password method.  If no recovery-password is provided, it will be asked afterward; this has the advantage that the
-              program will validate each block one by one, on the fly, as you type it and not to leak the password on the commandline
+              decrypt volume using the recovery password method.  If no recovery-password is provided, it will be asked afterward; this has the advantage that the program will  validate  each
+              block one by one, on the fly, as you type it and not to leak the password on the commandline
 
        -q, --quiet
-              do NOT display any information.  This option has priority on any previous `-v'. One probably wants to check the return value of the program when using
-              this option
+              do NOT display any information.  This option has priority on any previous `-v'. One probably wants to check the return value of the program when using this option
 
        -r, --readonly
               do not allow one to write on the BitLocker volume (read only mode)
@@ -55,8 +56,8 @@ OPTIONS
               do not check the volume's state, assume it's ok to mount it.  Do not use this if you don't know what you're doing
 
        -u, --user-password=[USER_PASSWORD]
-              decrypt  the  volume  using the user password method.  If no user-password is provided, it will be asked afterward; this has the advantage not to leak
-              the password on the commandline
+              decrypt  the volume using the user password method.  If no user-password is provided, it will be asked afterward; this has the advantage not to leak the password on the command‐
+              line
 
        -v, --verbosity
               increase verbosity (CRITICAL level by default), see also `-q'
@@ -81,8 +82,8 @@ EXAMPLES
 
               % dd if=/dev/sda2 of=encrypted.bitlocker
 
-              This will copy the entire volume located into /dev/sda2 to encrypted.bitlocker.  You're not forced to do this step, but  this  will  ensure  no  write
-              whatsoever is performed on the BitLocker volume.
+              This will copy the entire volume located into /dev/sda2 to encrypted.bitlocker.  You're not forced to do this step, but this will ensure no write whatsoever is performed on  the
+              BitLocker volume.
 
        Then dislock it:
 
@@ -95,8 +96,8 @@ EXAMPLES
 
        --
 
-       It  seems that you have to unmount the NTFS partition and the dislocker one before halting the system, or you will run into unexpected behaviour. In order to
-       do so, you may run these commands (replacing your mount points):
+       It  seems  that  you have to unmount the NTFS partition and the dislocker one before halting the system, or you will run into unexpected behaviour. In order to do so, you may run these
+       commands (replacing your mount points):
               % umount /mnt/clear && umount /mnt/ntfs/dislocker-file
 
        --
@@ -108,4 +109,4 @@ AUTHOR
 
        Feel free to send bugs report to <dislocker __AT__ hsc __DOT__ fr>
 
-Linux                                                                        2011-09-07                                                            DISLOCKER-FUSE(1)
+Linux                                                                                      2011-09-07                                                                         DISLOCKER-FUSE(1)

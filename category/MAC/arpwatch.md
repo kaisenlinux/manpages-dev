@@ -1,4 +1,4 @@
-ARPWATCH(8)                                                            System Manager's Manual                                                           ARPWATCH(8)
+ARPWATCH(8)                                                                         System Manager's Manual                                                                         ARPWATCH(8)
 
 NAME
        arpwatch - keep track of ethernet/ip address pairings
@@ -19,8 +19,8 @@ SYNOPSIS
                [ -z ignorenet/ignoremask ]
 
 DESCRIPTION
-       Arpwatch  keeps  track  for ethernet/ip address pairings. It syslogs activity and reports certain changes via email.  Arpwatch uses pcap(3) to listen for arp
-       packets on a local ethernet interface.
+       Arpwatch  keeps  track for ethernet/ip address pairings. It syslogs activity and reports certain changes via email.  Arpwatch uses pcap(3) to listen for arp packets on a local ethernet
+       interface.
 
        The -d flag is used enable debugging. This also inhibits forking into the background and emailing the reports. Instead, they are sent to stderr.
 
@@ -28,38 +28,35 @@ DESCRIPTION
 
        The -i flag is used to override the default interface.
 
-       The -n flag specifies additional local networks. This can be useful to avoid "bogon" warnings when there is more than one network running on the  same  wire.
-       If the optional width is not specified, the default netmask for the network's class is used.
+       The -n flag specifies additional local networks. This can be useful to avoid "bogon" warnings when there is more than one network running on the same wire. If the optional width is not
+       specified, the default netmask for the network's class is used.
 
        The -N flag disables reporting any bogons.
 
-       The -r flag is used to specify a savefile (perhaps created by tcpdump(1) or pcapture(1)) to read from instead of reading from the network. In this case, arp‐
-       watch does not fork.
+       The -r flag is used to specify a savefile (perhaps created by tcpdump(1) or pcapture(1)) to read from instead of reading from the network. In this case, arpwatch does not fork.
 
-       (Debian) The -F option is used to specify a pcap filter, which provides a generic way of ignoring specific packets.  The applied pcap filter will be "(arp or
-       rarp) and not vlan and (filter)".  See pcap-filter(7) for the syntax of that string.
+       (Debian)  The  -F  option  is used to specify a pcap filter, which provides a generic way of ignoring specific packets.  The applied pcap filter will be "(arp or rarp) and not vlan and
+       (filter)".  See pcap-filter(7) for the syntax of that string.
 
-       (Debian)  The  -s  flag  is used to specify the path to the sendmail program.  Any program that takes the option -odi and then text from stdin can be substi‐
-       tuted. This is useful for redirecting reports to log files instead of mail.
+       (Debian) The -s flag is used to specify the path to the sendmail program.  Any program that takes the option -odi and then text from stdin can be substituted. This is useful for  redi‐
+       recting reports to log files instead of mail.
 
-       (Debian) The -p flag disables promiscuous operation.  ARP broadcasts get through hubs without having the interface in promiscuous mode, while saving  consid‐
-       erable  resources  that  would be wasted on processing gigabytes of non-broadcast traffic.  OTOH, setting promiscuous mode does not mean getting 100% traffic
-       that would concern arpwatch .  YMMV.
+       (Debian)  The  -p flag disables promiscuous operation.  ARP broadcasts get through hubs without having the interface in promiscuous mode, while saving considerable resources that would
+       be wasted on processing gigabytes of non-broadcast traffic.  OTOH, setting promiscuous mode does not mean getting 100% traffic that would concern arpwatch .  YMMV.
 
-       (Debian) -a By default, arpwatch only logs bogons but otherwise ignores them. If this option is specified, arpwatch will perform normal processing with bogon
-       packets  and send reports about detected events. This option can be combined with -N to disable the report of the packet being a bogon (processing will still
-       be done).
+       (Debian) -a By default, arpwatch only logs bogons but otherwise ignores them. If this option is specified, arpwatch will perform normal processing with bogon packets and  send  reports
+       about detected events. This option can be combined with -N to disable the report of the packet being a bogon (processing will still be done).
 
        (Debian) The -m option is used to specify the e-mail address to which reports will be sent.  By default, reports are sent to root on the local machine.
 
-       (Debian) The -u flag instructs arpwatch to drop root privileges and change the UID to username and GID to the primary group of username  .   This  is  recom‐
-       mended for security reasons, but username has to have write access to the default directory.
+       (Debian) The -u flag instructs arpwatch to drop root privileges and change the UID to username and GID to the primary group of username .  This is recommended for security reasons, but
+       username has to have write access to the default directory.
 
        (Debian) The -Q flags prevents arpwatch from sending reports by mail.
 
-       (Debian)  The -z option is used to set a range of ip addresses to ignore (such as a DHCP range).  Both the ignorenet and the ignoremask are specified in num‐
-       bers-and-dots notation and separated from each other by a slash (/).  Specifying the ignoremask by subnet length is not  supported.   If  the  ignoremask  is
-       omitted, 255.255.255.255 is assumed.  Example: -z 192.168.10.0/255.255.255.0
+       (Debian) The -z option is used to set a range of ip addresses to ignore (such as a DHCP range).  Both the ignorenet and the ignoremask are specified in  numbers-and-dots  notation  and
+       separated  from  each  other  by  a  slash  (/).   Specifying  the ignoremask by subnet length is not supported.  If the ignoremask is omitted, 255.255.255.255 is assumed.  Example: -z
+       192.168.10.0/255.255.255.0
 
        Note that an empty arp.dat file must be created before the first time you run arpwatch.
 
@@ -73,8 +70,8 @@ REPORT MESSAGES
               The ethernet address has not been seen before.
 
        flip flop
-              The ethernet address has changed from the most recently seen address to the second most recently seen address.  (If either the old or new ethernet ad‐
-              dress is a DECnet address and it is less than 24 hours, the email version of the report is suppressed.)
+              The ethernet address has changed from the most recently seen address to the second most recently seen address.  (If either the old or new ethernet address is  a  DECnet  address
+              and it is less than 24 hours, the email version of the report is suppressed.)
 
        changed ethernet address
               The host switched to a new ethernet address.
@@ -97,8 +94,7 @@ SYSLOG MESSAGES
               The source mac ethernet address didn't match the address inside the arp packet.
 
        reused old ethernet address
-              The ethernet address has changed from the most recently seen address to the third (or greater) least recently seen address.  (This  is  similar  to  a
-              flip flop.)
+              The ethernet address has changed from the most recently seen address to the third (or greater) least recently seen address.  (This is similar to a flip flop.)
 
        suppressed DECnet flip flop
               A "flip flop" report was suppressed because one of the two addresses was a DECnet address.
@@ -125,4 +121,4 @@ BUGS
 
        Most error messages are posted using syslog.
 
-4th Berkeley Distribution                                                  8 October 2000                                                                ARPWATCH(8)
+4th Berkeley Distribution                                                                8 October 2000                                                                             ARPWATCH(8)

@@ -1,4 +1,4 @@
-LZOP(1)                                                                                                                                                      LZOP(1)
+LZOP(1)                                                                                                                                                                                 LZOP(1)
 
 NAME
        lzop - compress or expand files
@@ -12,28 +12,27 @@ SYNOPSIS
        lzop [-dxlthIVL19] [-qvcfFnNPkU] [-o file] [-p[path]] [-S suffix] [filename ...]
 
 DESCRIPTION
-       lzop reduces the size of the named files. Whenever possible, each file is compressed into one with the extension .lzo, while keeping the same ownership
-       modes, access and modification times. If no files are specified, or if a file name is "-", lzop tries to compress the standard input to the standard output.
-       lzop will only attempt to compress regular files or symbolic links to regular files.  In particular, it will ignore directories.
+       lzop reduces the size of the named files. Whenever possible, each file is compressed into one with the extension .lzo, while keeping the same ownership modes, access and modification
+       times. If no files are specified, or if a file name is "-", lzop tries to compress the standard input to the standard output. lzop will only attempt to compress regular files or
+       symbolic links to regular files.  In particular, it will ignore directories.
 
        If the compressed file name is too long for its file system, lzop truncates it.
 
-       Compressed files can be restored to their original form using lzop -d.  lzop -d takes a list of files on its command line and decompresses each file whose
-       name ends with .lzo and which begins with the correct magic number to an uncompressed file without the original extension. lzop -d also recognizes the
-       special extension .tzo as shorthand for .tar.lzo.  When compressing, lzop uses the .tzo extension if necessary instead of truncating a file with a .tar
-       extension.
+       Compressed files can be restored to their original form using lzop -d.  lzop -d takes a list of files on its command line and decompresses each file whose name ends with .lzo and which
+       begins with the correct magic number to an uncompressed file without the original extension. lzop -d also recognizes the special extension .tzo as shorthand for .tar.lzo.  When
+       compressing, lzop uses the .tzo extension if necessary instead of truncating a file with a .tar extension.
 
-       lzop stores the original file name, mode and time stamp in the compressed file. These can be used when decompressing the file with the -d option. This is
-       useful when the compressed file name was truncated or when the time stamp was not preserved after a file transfer.
+       lzop stores the original file name, mode and time stamp in the compressed file. These can be used when decompressing the file with the -d option. This is useful when the compressed
+       file name was truncated or when the time stamp was not preserved after a file transfer.
 
-       lzop preserves the ownership, mode and time stamp of files when compressing. When decompressing lzop restores the mode and time stamp if present in the
-       compressed files.  See the options -n, -N, --no-mode and --no-time for more information.
+       lzop preserves the ownership, mode and time stamp of files when compressing. When decompressing lzop restores the mode and time stamp if present in the compressed files.  See the
+       options -n, -N, --no-mode and --no-time for more information.
 
        lzop always keeps original files unchanged unless you use the option -U.
 
-       lzop uses the LZO data compression library for compression services. The amount of compression obtained depends on the size of the input and the distribution
-       of common substrings.  Typically, text such as source code or English is compressed into 40-50% of the original size, and large files usually compress much
-       better than small ones. Compression and decompression speed is generally much faster than that achieved by gzip, but compression ratio is worse.
+       lzop uses the LZO data compression library for compression services. The amount of compression obtained depends on the size of the input and the distribution of common substrings.
+       Typically, text such as source code or English is compressed into 40-50% of the original size, and large files usually compress much better than small ones. Compression and
+       decompression speed is generally much faster than that achieved by gzip, but compression ratio is worse.
 
    COMPRESSION LEVELS
        lzop offers the following compression levels of the LZO1X algorithm:
@@ -52,8 +51,8 @@ MAIN COMMAND
        If no other command is given then lzop defaults to compression (using compression level -3).
 
        -#, --fast, --best
-           Regulate the speed of compression using the specified digit #, where -1 or --fast indicates the fastest compression method (less compression) and -9 or
-           --best indicates the slowest compression method (best compression). The default compression level is -3.
+           Regulate the speed of compression using the specified digit #, where -1 or --fast indicates the fastest compression method (less compression) and -9 or --best indicates the slowest
+           compression method (best compression). The default compression level is -3.
 
        -d, --decompress, --uncompress
            Decompress. Each file will be placed into same the directory as the compressed file.
@@ -110,15 +109,14 @@ MAIN COMMAND
 
 OPTIONS
        -c, --stdout, --to-stdout
-           Write output on standard output. If there are several input files, the output consists of a sequence of independently (de)compressed members. To obtain
-           better compression, concatenate all input files before compressing them.
+           Write output on standard output. If there are several input files, the output consists of a sequence of independently (de)compressed members. To obtain better compression,
+           concatenate all input files before compressing them.
 
        -o FILE, --output=FILE
            Write output to the file FILE. If there are several input files, the output consists of a sequence of independently (de)compressed members.
 
        -p, -pDIR, --path=DIR
-           Write output files into the directory DIR instead of the directory determined by the input file. If DIR is omitted, then write to the current working
-           directory.
+           Write output files into the directory DIR instead of the directory determined by the input file. If DIR is omitted, then write to the current working directory.
 
        -f, --force
            Force lzop to
@@ -137,22 +135,19 @@ OPTIONS
            Use with care.
 
        -F, --no-checksum
-           Do not store or verify a checksum of the uncompressed file when compressing or decompressing.  This speeds up the operation of lzop a little bit
-           (especially when decompressing), but as unnoticed data corruption can happen in case of damaged compressed files the usage of this option is not
-           generally recommended.  Also, a checksum is always stored when compressing with one of the slow compression levels (-7, -8 or -9), regardless of this
-           option.
+           Do not store or verify a checksum of the uncompressed file when compressing or decompressing.  This speeds up the operation of lzop a little bit (especially when decompressing),
+           but as unnoticed data corruption can happen in case of damaged compressed files the usage of this option is not generally recommended.  Also, a checksum is always stored when
+           compressing with one of the slow compression levels (-7, -8 or -9), regardless of this option.
 
        -n, --no-name
-           When decompressing, do not restore the original file name if present (remove only the lzop suffix from the compressed file name). This option is the
-           default under UNIX.
+           When decompressing, do not restore the original file name if present (remove only the lzop suffix from the compressed file name). This option is the default under UNIX.
 
        -N, --name
-           When decompressing, restore the original file name if present. This option is useful on systems which have a limit on file name length. If the original
-           name saved in the compressed file is not suitable for its file system, a new name is constructed from the original one to make it legal.  This option is
-           the default under DOS, Windows and OS/2.
+           When decompressing, restore the original file name if present. This option is useful on systems which have a limit on file name length. If the original name saved in the compressed
+           file is not suitable for its file system, a new name is constructed from the original one to make it legal.  This option is the default under DOS, Windows and OS/2.
 
-       -P  When decompressing, restore the original path and file name if present.  When compressing, store the relative (and cleaned) path name.  This option is
-           mainly useful when using archive mode - see usage examples below.
+       -P  When decompressing, restore the original path and file name if present.  When compressing, store the relative (and cleaned) path name.  This option is mainly useful when using
+           archive mode - see usage examples below.
 
        --no-mode
            When decompressing, do not restore the original mode (permissions) saved in the compressed file.
@@ -161,15 +156,14 @@ OPTIONS
            When decompressing, do not restore the original time stamp saved in the compressed file.
 
        -S .suf, --suffix=.suf
-           Use suffix .suf instead of .lzo. The suffix must not contain multiple dots and special characters like '+' or '*', and suffixes other than .lzo should be
-           avoided to avoid confusion when files are transferred to other systems.
+           Use suffix .suf instead of .lzo. The suffix must not contain multiple dots and special characters like '+' or '*', and suffixes other than .lzo should be avoided to avoid confusion
+           when files are transferred to other systems.
 
        -k, --keep
            Do not delete input files. This is the default.
 
        -U, --unlink, --delete
-           Delete input files after successful compression or decompression. Use this option to make lzop behave like gzip and bzip2.  Note that explicitly giving
-           -k overrides -U.
+           Delete input files after successful compression or decompression. Use this option to make lzop behave like gzip and bzip2.  Note that explicitly giving -k overrides -U.
 
        --crc32
            Use a crc32 checksum instead of an adler32 checksum.
@@ -184,20 +178,19 @@ OPTIONS
            Suppress all warnings and decrease the verbosity of some commands like --list or --test.
 
        -v, --verbose
-           Verbose. Display the name for each file compressed or decompressed. Multiple -v can be used to increase the verbosity of some commands like --list or
-           --test.
+           Verbose. Display the name for each file compressed or decompressed. Multiple -v can be used to increase the verbosity of some commands like --list or --test.
 
        --  Specifies that this is the end of the options. Any file name after -- will not be interpreted as an option even if it starts with a hyphen.
 
 OTHER OPTIONS
        --no-stdin
-           Do not try to read standard input (but a file name "-" will still override this option).  In old versions of lzop, this option was necessary when used in
-           cron jobs (which do not have a controlling terminal).
+           Do not try to read standard input (but a file name "-" will still override this option).  In old versions of lzop, this option was necessary when used in cron jobs (which do not
+           have a controlling terminal).
 
        --filter=NUMBER
-           Rarely useful.  Preprocess data with a special "multimedia" filter before compressing in order to improve compression ratio.  NUMBER must be a decimal
-           number from 1 to 16, inclusive.  Using a filter slows down both compression and decompression quite a bit, and the compression ratio usually doesn't
-           improve much either...  More effective filters may be added in the future, though.
+           Rarely useful.  Preprocess data with a special "multimedia" filter before compressing in order to improve compression ratio.  NUMBER must be a decimal number from 1 to 16,
+           inclusive.  Using a filter slows down both compression and decompression quite a bit, and the compression ratio usually doesn't improve much either...  More effective filters may
+           be added in the future, though.
 
            You can try --filter=1 with data like 8-bit sound samples, --filter=2 with 16-bit samples or depth-16 images, etc.
 
@@ -295,13 +288,11 @@ ADVANCED USAGE
            lzop -t sources.lzo
            lzop -tvv sources.lzo                -> be very verbose
 
-       If you wish to create a single archive file with multiple members so that members can later be extracted independently, you should prefer a full-featured
-       archiver such as tar. The latest version of GNU tar supports the --use-compress-program=lzop option to invoke lzop transparently.  lzop is designed as a
-       complement to tar, not as a replacement.
+       If you wish to create a single archive file with multiple members so that members can later be extracted independently, you should prefer a full-featured archiver such as tar. The
+       latest version of GNU tar supports the --use-compress-program=lzop option to invoke lzop transparently.  lzop is designed as a complement to tar, not as a replacement.
 
 ENVIRONMENT
-       The environment variable LZOP can hold a set of default options for lzop. These options are interpreted first and can be overwritten by explicit command line
-       parameters.  For example:
+       The environment variable LZOP can hold a set of default options for lzop. These options are interpreted first and can be overwritten by explicit command line parameters.  For example:
 
            for sh/ksh/zsh:    LZOP="-1v --name"; export LZOP
            for csh/tcsh:      setenv LZOP "-1v --name"
@@ -338,7 +329,7 @@ COPYRIGHT
 
        lzop and the LZO library are distributed under the terms of the GNU General Public License (GPL).
 
-       Legal info: If want to integrate lzop into your commercial (backup-)system please carefully read the GNU GPL FAQ at http://www.gnu.org/licenses/gpl-faq.html
-       about possible implications.
+       Legal info: If want to integrate lzop into your commercial (backup-)system please carefully read the GNU GPL FAQ at http://www.gnu.org/licenses/gpl-faq.html about possible
+       implications.
 
-lzop 1.04                                                                    2017-08-10                                                                      LZOP(1)
+lzop 1.04                                                                                  2017-08-10                                                                                   LZOP(1)

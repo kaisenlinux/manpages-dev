@@ -1,4 +1,4 @@
-LSHW(1)                                                                                                                                                      LSHW(1)
+LSHW(1)                                                                                                                                                                                 LSHW(1)
 
 NAME
        lshw - list hardware
@@ -10,16 +10,14 @@ SYNOPSIS
 
        lshw [ -X ]
 
-       lshw  [   [  -html ]  [ -short ]  [ -xml ]  [ -json ]  [ -businfo ]  ]  [ -dump filename ]  [ -class class... ]  [ -disable test... ]  [ -enable test... ]  [
-       -sanitize ]  [ -numeric ]  [ -quiet ]
+       lshw  [  [ -html ]  [ -short ]  [ -xml ]  [ -json ]  [ -businfo ]  ]  [ -dump filename ]  [ -class class... ]  [ -disable test... ]  [ -enable test... ]  [ -sanitize ]  [ -numeric ]  [
+       -quiet ]
 
 DESCRIPTION
-       lshw is a small tool to extract detailed information on the hardware configuration of the machine. It can report exact memory  configuration,  firmware  ver‐
-       sion,  mainboard  configuration, CPU version and speed, cache configuration, bus speed, etc. on DMI-capable x86 or IA-64 systems and on some PowerPC machines
-       (PowerMac G4 is known to work).
+       lshw is a small tool to extract detailed information on the hardware configuration of the machine. It can report exact memory configuration, firmware version, mainboard  configuration,
+       CPU version and speed, cache configuration, bus speed, etc. on DMI-capable x86 or IA-64 systems and on some PowerPC machines (PowerMac G4 is known to work).
 
-       It currently supports DMI (x86 and IA-64 only), OpenFirmware device tree (PowerPC only), PCI/AGP, CPUID (x86), IDE/ATA/ATAPI, PCMCIA (only  tested  on  x86),
-       SCSI and USB.
+       It currently supports DMI (x86 and IA-64 only), OpenFirmware device tree (PowerPC only), PCI/AGP, CPUID (x86), IDE/ATA/ATAPI, PCMCIA (only tested on x86), SCSI and USB.
 
        -version
               Displays the version of lshw and exits.
@@ -51,10 +49,9 @@ DESCRIPTION
        -enable test
 
        -disable test
-              Enables  or  disables a test. test can be dmi (for DMI/SMBIOS extensions), device-tree (for OpenFirmware device tree), spd (for memory Serial Presence
-              Detect), memory (for memory-size guessing heuristics), cpuinfo (for kernel-reported CPU detection), cpuid (for CPU detection), pci  (for  PCI/AGP  ac‐
-              cess), isapnp (for ISA PnP extensions), pcmcia (for PCMCIA/PCCARD), ide (for IDE/ATAPI), usb (for USB devices),scsi (for SCSI) or network (for network
-              interfaces detection).
+              Enables or disables a test. test can be dmi (for DMI/SMBIOS extensions), device-tree (for OpenFirmware device tree), spd (for memory Serial Presence Detect), memory (for memory-
+              size guessing heuristics), cpuinfo (for kernel-reported CPU detection), cpuid (for CPU detection), pci (for PCI/AGP access), isapnp (for ISA PnP extensions),  pcmcia  (for  PCM‐
+              CIA/PCCARD), ide (for IDE/ATAPI), usb (for USB devices),scsi (for SCSI) or network (for network interfaces detection).
 
        -quiet Don't display status.
 
@@ -82,8 +79,7 @@ FILES
        /etc/pci.ids
 
        /usr/share/hwdata/pci.ids
-              A list of all known PCI ID's (vendors, devices, classes and subclasses).  If compiled with zlib support, lshw will look for pci.ids.gz first, then for
-              pci.ids.
+              A list of all known PCI ID's (vendors, devices, classes and subclasses).  If compiled with zlib support, lshw will look for pci.ids.gz first, then for pci.ids.
 
        /proc/bus/pci/*
               Used to access the configuration of installed PCI busses and devices.
@@ -131,4 +127,4 @@ OTHER INFO
        The webpage for lshw is at
         <URL:http://lshw.ezix.org/>
 
-$Rev$                                                                      28 January 2018                                                                   LSHW(1)
+$Rev$                                                                                   28 January 2018                                                                                 LSHW(1)

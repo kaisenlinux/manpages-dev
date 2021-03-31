@@ -1,4 +1,4 @@
-lxc-wait(1)                                                                                                                                              lxc-wait(1)
+lxc-wait(1)                                                                                                                                                                         lxc-wait(1)
 
 NAME
        lxc-wait - wait for a specific container state
@@ -45,8 +45,7 @@ COMMON OPTIONS
        --rcfile=FILE
               Specify the configuration file to configure the virtualization and isolation functionalities for the container.
 
-              This  configuration  file  if present will be used even if there is already a configuration file present in the previously created container (via lxc-
-              create).
+              This configuration file if present will be used even if there is already a configuration file present in the previously created container (via lxc-create).
 
        --version
               Show the version number.
@@ -63,10 +62,10 @@ DIAGNOSTIC
               The specified container was not created before with the lxc-create command.
 
 SEE ALSO
-       lxc(7), lxc-create(1), lxc-copy(1), lxc-destroy(1), lxc-start(1), lxc-stop(1), lxc-execute(1), lxc-console(1),  lxc-monitor(1),  lxc-wait(1),  lxc-cgroup(1),
-       lxc-ls(1), lxc-info(1), lxc-freeze(1), lxc-unfreeze(1), lxc-attach(1), lxc.conf(5)
+       lxc(7),  lxc-create(1), lxc-copy(1), lxc-destroy(1), lxc-start(1), lxc-stop(1), lxc-execute(1), lxc-console(1), lxc-monitor(1), lxc-wait(1), lxc-cgroup(1), lxc-ls(1), lxc-info(1), lxc-
+       freeze(1), lxc-unfreeze(1), lxc-attach(1), lxc.conf(5)
 
 AUTHOR
        Daniel Lezcano <daniel.lezcano@free.fr>
 
-                                                                             2020-12-30                                                                  lxc-wait(1)
+                                                                                           2021-01-31                                                                               lxc-wait(1)
