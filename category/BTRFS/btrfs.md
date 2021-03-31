@@ -1,4 +1,4 @@
-BTRFS(8)                                                                    Btrfs Manual                                                                    BTRFS(8)
+BTRFS(8)                                                                                  Btrfs Manual                                                                                 BTRFS(8)
 
 NAME
        btrfs - a toolbox to manage btrfs filesystems
@@ -7,20 +7,20 @@ SYNOPSIS
        btrfs <command> [<args>]
 
 DESCRIPTION
-       The btrfs utility is a toolbox for managing btrfs filesystems. There are command groups to work with subvolumes, devices, for whole filesystem or other
-       specific actions. See section COMMANDS.
+       The btrfs utility is a toolbox for managing btrfs filesystems. There are command groups to work with subvolumes, devices, for whole filesystem or other specific actions. See section
+       COMMANDS.
 
-       There are also standalone tools for some tasks like btrfs-convert or btrfstune that were separate historically and/or haven’t been merged to the main
-       utility. See section STANDALONE TOOLS for more details.
+       There are also standalone tools for some tasks like btrfs-convert or btrfstune that were separate historically and/or haven’t been merged to the main utility. See section STANDALONE
+       TOOLS for more details.
 
        For other topics (mount options, etc) please refer to the separate manual page btrfs(5).
 
 COMMAND SYNTAX
-       Any command name can be shortened so long as the shortened form is unambiguous, however, it is recommended to use full command names in scripts. All command
-       groups have their manual page named btrfs-<group>.
+       Any command name can be shortened so long as the shortened form is unambiguous, however, it is recommended to use full command names in scripts. All command groups have their manual
+       page named btrfs-<group>.
 
-       For example: it is possible to run btrfs sub snaps instead of btrfs subvolume snapshot. But btrfs file s is not allowed, because file s may be interpreted
-       both as filesystem show and as filesystem sync.
+       For example: it is possible to run btrfs sub snaps instead of btrfs subvolume snapshot. But btrfs file s is not allowed, because file s may be interpreted both as filesystem show and
+       as filesystem sync.
 
        If the command name is ambiguous, the list of conflicting options is printed.
 
@@ -103,8 +103,8 @@ COMMANDS
            See btrfs-subvolume(8) for details.
 
 STANDALONE TOOLS
-       New functionality could be provided using a standalone tool. If the functionality proves to be useful, then the standalone tool is declared obsolete and its
-       functionality is copied to the main tool. Obsolete tools are removed after a long (years) depreciation period.
+       New functionality could be provided using a standalone tool. If the functionality proves to be useful, then the standalone tool is declared obsolete and its functionality is copied to
+       the main tool. Obsolete tools are removed after a long (years) depreciation period.
 
        Tools that are still in active use without an equivalent in btrfs:
 
@@ -131,8 +131,8 @@ STANDALONE TOOLS
        btrfs-zero-log
            moved to btrfs rescue zero-log, standalone removed.
 
-       For space-constrained environments, it’s possible to build a single binary with functionality of several standalone tools. This is following the concept of
-       busybox where the file name selects the functionality. This works for symlinks or hardlinks. The full list can be obtained by btrfs help --box.
+       For space-constrained environments, it’s possible to build a single binary with functionality of several standalone tools. This is following the concept of busybox where the file name
+       selects the functionality. This works for symlinks or hardlinks. The full list can be obtained by btrfs help --box.
 
 EXIT STATUS
        btrfs returns a zero exit status if it succeeds. Non zero is returned in case of failure.
@@ -141,8 +141,7 @@ AVAILABILITY
        btrfs is part of btrfs-progs. Please refer to the btrfs wiki http://btrfs.wiki.kernel.org for further details.
 
 SEE ALSO
-       btrfs(5), btrfs-balance(8), btrfs-check(8), btrfs-convert(8), btrfs-device(8), btrfs-filesystem(8), btrfs-inspect-internal(8), btrfs-property(8),
-       btrfs-qgroup(8), btrfs-quota(8), btrfs-receive(8), btrfs-replace(8), btrfs-rescue(8), btrfs-restore(8), btrfs-scrub(8), btrfs-send(8), btrfs-subvolume(8),
-       btrfstune(8), mkfs.btrfs(8)
+       btrfs(5), btrfs-balance(8), btrfs-check(8), btrfs-convert(8), btrfs-device(8), btrfs-filesystem(8), btrfs-inspect-internal(8), btrfs-property(8), btrfs-qgroup(8), btrfs-quota(8),
+       btrfs-receive(8), btrfs-replace(8), btrfs-rescue(8), btrfs-restore(8), btrfs-scrub(8), btrfs-send(8), btrfs-subvolume(8), btrfstune(8), mkfs.btrfs(8)
 
-Btrfs v5.10                                                                  01/18/2021                                                                     BTRFS(8)
+Btrfs v5.10.1                                                                              02/05/2021                                                                                  BTRFS(8)

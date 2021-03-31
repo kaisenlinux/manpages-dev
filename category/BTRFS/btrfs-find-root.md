@@ -1,4 +1,4 @@
-BTRFS-FIND-ROOT(8)                                                          Btrfs Manual                                                          BTRFS-FIND-ROOT(8)
+BTRFS-FIND-ROOT(8)                                                                        Btrfs Manual                                                                       BTRFS-FIND-ROOT(8)
 
 NAME
        btrfs-find-root - filter to find btrfs root
@@ -28,4 +28,4 @@ EXIT STATUS
 SEE ALSO
        mkfs.btrfs(8)
 
-Btrfs v5.10                                                                  01/18/2021                                                           BTRFS-FIND-ROOT(8)
+Btrfs v5.10.1                                                                              02/05/2021                                                                        BTRFS-FIND-ROOT(8)

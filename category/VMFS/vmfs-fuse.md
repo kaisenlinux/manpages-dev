@@ -1,4 +1,4 @@
-VMFS-FUSE(8)                                                                 vmfs-tools                                                                 VMFS-FUSE(8)
+VMFS-FUSE(8)                                                                               vmfs-tools                                                                              VMFS-FUSE(8)
 
 NAME
        vmfs-fuse - mount VMFS file system
@@ -26,4 +26,4 @@ NOTES
         2. mh@glandium.org
            mailto:mh@glandium.org
 
-  0.0.0.0.                                                                   03/25/2012                                                                 VMFS-FUSE(8)
+  0.0.0.0.                                                                                 03/25/2012                                                                              VMFS-FUSE(8)

@@ -1,4 +1,4 @@
-FULL(4)                                                               Linux Programmer's Manual                                                              FULL(4)
+FULL(4)                                                                            Linux Programmer's Manual                                                                            FULL(4)
 
 NAME
        full - always full device
@@ -25,7 +25,7 @@ SEE ALSO
        mknod(1), null(4), zero(4)
 
 COLOPHON
-       This  page is part of release 5.10 of the Linux man-pages project.  A description of the project, information about reporting bugs, and the latest version of
-       this page, can be found at https://www.kernel.org/doc/man-pages/.
+       This  page is part of release 5.10 of the Linux man-pages project.  A description of the project, information about reporting bugs, and the latest version of this page, can be found at
+       https://www.kernel.org/doc/man-pages/.
 
-Linux                                                                        2019-03-06                                                                      FULL(4)
+Linux                                                                                      2019-03-06                                                                                   FULL(4)

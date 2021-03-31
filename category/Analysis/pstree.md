@@ -1,94 +1,94 @@
-PSTREE(1)                                                                   User Commands                                                                  PSTREE(1)
+PSTREE(1)                                                                          Commandes de l'utilisateur                                                                         PSTREE(1)
 
-NAME
-       pstree - display a tree of processes
+NOM
+       pstree - afficher un arbre des processus
 
 SYNOPSIS
-       pstree [-a, --arguments] [-c, --compact-not] [-C, --color attr] [-g, --show-pgids] [-h, --highlight-all, -Hpid, --highlight-pid pid] [-l, --long] [-n, --nu‐
-       meric-sort] [-N, --ns-sort ns] [-p, --show-pids] [-s, --show-parents] [-S, --ns-changes] [-t, --thread-names] [-T, --hide-threads] [-u, --uid-changes]
-       [-Z, --security-context] [-A, --ascii, -G, --vt100, -U, --unicode] [pid, user]
+       pstree [-a, --arguments] [-c, --compact-not] [-C, --color attr] [-g, --show-pgids] [-h, --highlight-all, -H pid, --highlight-pid pid] [-l, --long] [-n, --numeric-sort]
+       [-N, --ns-sort ns] [-p, --show-pids] [-s, --show-parents] [-S, --ns-changes] [-t, --thread-names] [-T, --hide-threads] [-u, --uid-changes] [-Z, --security-context] [-A, --as‐
+       cii, -G, --vt100, -U, --unicode] [pid, user]
        pstree -V, --version
 
 DESCRIPTION
-       pstree shows running processes as a tree.  The tree is rooted at either pid or init if pid is omitted.  If a user name is specified, all process trees rooted
-       at processes owned by that user are shown.
+       pstree montre les processus en cours d'exécution sous forme d'arbre. L'arbre est ancré soit au pid ou soit à init si pid est omis. Si un nom d'utilisateur est spécifié, tous les arbres
+       de processus partant d'un processus de cet utilisateur sont montrés.
 
-       pstree visually merges identical branches by putting them in square brackets and prefixing them with the repetition count, e.g.
+       pstree fusionne visuellement les branches identiques en les mettant entre crochets et en les préfixant avec le compteur de répétitions, par exemple,
 
            init-+-getty
                 |-getty
                 |-getty
                 `-getty
 
-       becomes
+       devient
 
            init---4*[getty]
 
-       Child threads of a process are found under the parent process and are shown with the process name in curly braces, e.g.
+       Les threads enfants d'un processus sont trouvés sous le processus parent et sont montrés avec le nom du processus entre accolades, par exemple,
 
            icecast2---13*[{icecast2}]
 
-       If pstree is called as pstree.x11 then it will prompt the user at the end of the line to press return and will not return until that has happened.   This  is
-       useful for when pstree is run in a xterminal.
+       Si pstree est appelé en tant que pstree.x11, alors, il demande à l'utilisateur d'appuyer sur « retour » à la fin de la ligne et ne retournera pas tant que  cela  n'aura  pas  eu  lieu.
+       C'est utile quand pstree est exécuté dans un xterminal.
 
-       Certain  kernel or mount parameters, such as the hidepid option for procfs, will hide information for some processes. In these situations pstree will attempt
-       to build the tree without this information, showing process names as question marks.
+       Certains  noyaux ou paramètres de montage tels que l'option hidepid de procfs cacheront les informations de certains processus. Dans ces cas, pstree essayera de construire l'arbre sans
+       ces informations. Les noms de processus seront remplacés par des points d'interrogation.
 
 OPTIONS
-       -a     Show command line arguments.  If the command line of a process is swapped out, that process is shown in  parentheses.   -a  implicitly  disables  com‐
-              paction for processes but not threads.
+       -a     Montrer les arguments de la ligne de commande. Si la ligne de commande du processus est placée dans le fichier d'échange, ce processus est affiché entre parenthèses.  -a  désac‐
+              tive implicitement le compactage pour les processus mais pas pour les threads.
 
-       -A     Use ASCII characters to draw the tree.
+       -A     Utiliser des caractères ASCII pour dessiner l'arbre.
 
-       -c     Disable compaction of identical subtrees.  By default, subtrees are compacted whenever possible.
+       -c     Désactiver le compactage de sous-arbres identiques. Par défaut, les sous-arbres sont compactés dès que possible.
 
-       -C     Color  the process name by given attribute. Currently pstree only accepts age which colors by process age.  Processes newer than 60 seconds are green,
-              newer than an hour yellow and the remaining red.
+       -C     Color the process name by given attribute. Currently pstree only accepts the value age which colors by process age. Processes newer than 60 seconds are green, newer than an hour
+              yellow and the remaining red.
 
-       -g     Show PGIDs.  Process Group IDs are shown as decimal numbers in parentheses after each process name.  -g implicitly disables compaction.  If both  PIDs
-              and PGIDs are displayed then PIDs are shown first.
+       -g     Montrer les PGID. Les ID de groupes de processus sont montrés sous forme de nombres décimaux entre parenthèses après le nom du processus. -g désactive implicitement  le  compac‐
+              tage. Si les PID et les PGID sont affichés, alors, les PID sont affichés en premier.
 
-       -G     Use VT100 line drawing characters.
+       -G     Utiliser les caractères de dessin de lignes du VT100.
 
-       -h     Highlight  the  current process and its ancestors.  This is a no-op if the terminal doesn't support highlighting or if neither the current process nor
-              any of its ancestors are in the subtree being shown.
+       -h     Mettre  en  évidence le processus courant et ses ancêtres. Cette option ne fait rien si le terminal ne supporte pas la mise en évidence ou si ni le processus courant ni aucun de
+              ses ancêtres est affiché.
 
-       -H     Like -h, but highlight the specified process instead.  Unlike with -h, pstree fails when using -H if highlighting is not available.
+       -H     Comme -h mais met en évidence le processus spécifié. Contrairement à -h, pstree échoue si la mise en évidence n'est pas disponible quand -H est utilisé.
 
-       -l     Display long lines.  By default, lines are truncated to either the COLUMNS environment variable or the display width.  If  neither  of  these  methods
-              work, the default of 132 columns is used.
+       -l     Afficher les lignes longues. Par défaut, les lignes sont tronquées à la largeur définie par la variable d'environnement COLUMNS ou la largeur de l'affichage. Si  aucune  de  ces
+              méthodes fonctionne, 132 colonnes sont utilisées par défaut.
 
-       -n     Sort processes with the same ancestor by PID instead of by name.  (Numeric sort.)
+       -n     Trier les processus avec le même parent par PID au lieu du nom. (Tri numérique.)
 
-       -N     Show individual trees for each namespace of the type specified.  The available types are: ipc, mnt, net, pid, user, uts.  Regular users don't have ac‐
-              cess to other users' processes information, so the output will be limited.
+       -N     Montrer les arbres individuels pour chaque espace de noms du type spécifié. Les types disponibles sont: ipc, mnt, net, pid, time, user, uts. Les utilisateurs réguliers n'ont pas
+              accès aux informations des processus des autres utilisateurs, donc, la sortie sera limitée.
 
-       -p     Show PIDs.  PIDs are shown as decimal numbers in parentheses after each process name.  -p implicitly disables compaction.
+       -p     Montrer les PID. Les PID sont montrés sous forme de nombre décimaux entre parenthèses après le nom du processus. -p désactive implicitement le compactage.
 
-       -s     Show parent processes of the specified process.
+       -s     Montrer les processus parents du processus spécifié.
 
-       -S     Show namespaces transitions.  Like -N, the output is limited when running as a regular user.
+       -S     Montrer les transitions d'espaces de noms. Comme -N, la sortie est limitée quand la commande est exécutée par un utilisateur régulier.
 
-       -t     Show full names for threads when available.
+       -t     Montrer les noms complets des threads si disponibles.
 
-       -T     Hide threads and only show processes.
+       -T     Cacher les threads et montrer uniquement les processus.
 
-       -u     Show uid transitions.  Whenever the uid of a process differs from the uid of its parent, the new uid is shown in parentheses after the process name.
+       -u     Montrer les transitions de uid. Quand le uid d'un processus diffère du uid de son parent, le nouvel uid est montré entre parenthèses après le nom du processus.
 
-       -U     Use UTF-8 (Unicode) line drawing characters.  Under Linux 1.1-54 and above, UTF-8 mode is entered on the console with echo -e ' 33%8'  and  left  with
-              echo -e ' 33%@'
+       -U     Utiliser les caractères de dessin de lignes de UTF-8 (Unicode). Sous Linux 1.1-54 et suivants, la console entre en mode UTF-8 avec echo -e  ' 33%8'  et  en  sort  avec  echo  -e
+              ' 33%@'.
 
-       -V     Display version information.
+       -V     Afficher les informations de version.
 
-       -Z     (SELinux) Show security context for each process.  This flag will only work if pstree is compiled with SELinux support.
+       -Z     Show the current security attributes of the process. For SELinux systems this will be the security context.
 
-FILES
-       /proc  location of the proc file system
+FICHIERS
+       /proc  emplacement du système de fichiers proc
 
-BUGS
-       Some character sets may be incompatible with the VT100 characters.
+BOGUES
+       Certains jeux de caractères peuvent être incompatibles avec les caractères VT100.
 
-SEE ALSO
-       ps(1), top(1).
+VOIR AUSSI
+       ps(1), top(1), proc(5).
 
-psmisc                                                                       2019-10-23                                                                    PSTREE(1)
+psmisc                                                                                     2021-01-05                                                                                 PSTREE(1)

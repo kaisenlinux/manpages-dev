@@ -1,4 +1,4 @@
-VIRTUALBOX(1)                                                               User Commands                                                              VIRTUALBOX(1)
+VIRTUALBOX(1)                                                                            User Commands                                                                            VIRTUALBOX(1)
 
 NAME
        VirtualBox - x86 virtualization solution
@@ -10,4 +10,4 @@ DESCRIPTION
 
        If you are looking for --startvm and related options, you need to use VirtualBoxVM.
 
-VirtualBox                                                                  January 2019                                                               VIRTUALBOX(1)
+VirtualBox                                                                                January 2019                                                                            VIRTUALBOX(1)

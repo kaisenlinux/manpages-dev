@@ -1,4 +1,4 @@
-DSTAT(1)                                                                                                                                                    DSTAT(1)
+DSTAT(1)                                                                                                                                                                               DSTAT(1)
 
 NAME
        dstat - versatile tool for generating system resource statistics
@@ -9,14 +9,14 @@ SYNOPSIS
 DESCRIPTION
        Dstat is a versatile replacement for vmstat, iostat and ifstat. Dstat overcomes some of the limitations and adds some extra features.
 
-       Dstat allows you to view all of your system resources instantly, you can eg. compare disk usage in combination with interrupts from your IDE controller, or
-       compare the network bandwidth numbers directly with the disk throughput (in the same interval).
+       Dstat allows you to view all of your system resources instantly, you can eg. compare disk usage in combination with interrupts from your IDE controller, or compare the network
+       bandwidth numbers directly with the disk throughput (in the same interval).
 
-       Dstat also cleverly gives you the most detailed information in columns and clearly indicates in what magnitude and unit the output is displayed. Less
-       confusion, less mistakes, more efficient.
+       Dstat also cleverly gives you the most detailed information in columns and clearly indicates in what magnitude and unit the output is displayed. Less confusion, less mistakes, more
+       efficient.
 
-       Dstat is unique in letting you aggregate block device throughput for a certain diskset or network bandwidth for a group of interfaces, ie. you can see the
-       throughput for all the block devices that make up a single filesystem or storage system.
+       Dstat is unique in letting you aggregate block device throughput for a certain diskset or network bandwidth for a group of interfaces, ie. you can see the throughput for all the block
+       devices that make up a single filesystem or storage system.
 
        Dstat allows its data to be directly written to a CSV file to be imported and used by OpenOffice, Gnumeric or Excel to create graphs.
 
@@ -127,8 +127,8 @@ OPTIONS
            enable (external) plugins by plugin name, see PLUGINS for options
 
        Possible internal stats are
-           aio, cpu, cpu24, cpu-adv, cpu-use, disk, disk24, disk24-old, epoch, fs, int, int24, io, ipc, load, lock, mem, mem-adv, net, page, page24, proc, raw,
-           socket, swap, swap-old, sys, tcp, time, udp, unix, vm, vm-adv, zones
+           aio, cpu, cpu24, cpu-adv, cpu-use, disk, disk24, disk24-old, epoch, fs, int, int24, io, ipc, load, lock, mem, mem-adv, net, page, page24, proc, raw, socket, swap, swap-old, sys,
+           tcp, time, udp, unix, vm, vm-adv, zones
 
        --list
            list the internal and external plugin names
@@ -170,8 +170,8 @@ OPTIONS
            show profiling statistics when exiting dstat
 
 PLUGINS
-       While anyone can create their own dstat plugins (and contribute them) dstat ships with a number of plugins already that extend its capabilities greatly. Here
-       is an overview of the plugins dstat ships with:
+       While anyone can create their own dstat plugins (and contribute them) dstat ships with a number of plugins already that extend its capabilities greatly. Here is an overview of the
+       plugins dstat ships with:
 
        --battery
            battery in percentage (needs ACPI)
@@ -437,11 +437,11 @@ ARGUMENTS
        The default delay is 1 and count is unspecified (unlimited)
 
 INTERMEDIATE UPDATES
-       When invoking dstat with a delay greater than 1 and without the --noupdate option, it will show intermediate updates, ie. the first time a 1 sec average, the
-       second update a 2 second average, etc. until the delay has been reached.
+       When invoking dstat with a delay greater than 1 and without the --noupdate option, it will show intermediate updates, ie. the first time a 1 sec average, the second update a 2 second
+       average, etc. until the delay has been reached.
 
-       So in case you specified a delay of 10, the 9 intermediate updates are NOT snapshots, they are averages over the time that passed since the last final
-       update. The end result is that you get a 10 second average on a new line, just like with vmstat.
+       So in case you specified a delay of 10, the 9 intermediate updates are NOT snapshots, they are averages over the time that passed since the last final update. The end result is that
+       you get a 10 second average on a new line, just like with vmstat.
 
 EXAMPLES
        Using dstat to relate disk-throughput with network-usage (eth0), total CPU-usage and system counters:
@@ -465,8 +465,8 @@ EXAMPLES
            dstat -t --cpu-adv -yif
 
 BUGS
-       Since it is practically impossible to test dstat on every possible permutation of kernel, python or distribution version, I need your help and your feedback
-       to fix the remaining problems. If you have improvements or bugreports, please send them to: dag@wieers.com[1]
+       Since it is practically impossible to test dstat on every possible permutation of kernel, python or distribution version, I need your help and your feedback to fix the remaining
+       problems. If you have improvements or bugreports, please send them to: dag@wieers.com[1]
 
            Note
            Please see the TODO file for known bugs and future plans.
@@ -480,8 +480,8 @@ FILES
            /usr/local/share/dstat/
 
 ENVIRONMENT VARIABLES
-       Dstat will read additional command line arguments from the environment variable DSTAT_OPTS. You can use this to configure Dstat’s default behavior, e.g. if
-       you have a black-on-white terminal:
+       Dstat will read additional command line arguments from the environment variable DSTAT_OPTS. You can use this to configure Dstat’s default behavior, e.g. if you have a black-on-white
+       terminal:
 
            export DSTAT_OPTS="--bw --noupdate"
 
@@ -549,4 +549,4 @@ NOTES
         2. apollock@debian.org
            mailto:apollock@debian.org
 
-  0.7.3                                                                      August 2014                                                                    DSTAT(1)
+  0.7.3                                                                                   August 2014                                                                                  DSTAT(1)

@@ -1,4 +1,4 @@
-KEEPASSXC(1)                                                           General Commands Manual                                                          KEEPASSXC(1)
+KEEPASSXC(1)                                                                        General Commands Manual                                                                        KEEPASSXC(1)
 
 NAME
        keepassxc - a modern open-source password manager
@@ -7,9 +7,9 @@ SYNOPSIS
        keepassxc [options] [filename(s)]
 
 DESCRIPTION
-       KeePassXC is a free/open-source password manager or safe which helps you to manage your passwords in a secure way. The complete database is always encrypted
-       with the industry-standard AES (alias Rijndael) encryption algorithm using a 256 bit key. KeePassXC uses a database format that is compatible with KeePass
-       Password Safe. Your wallet works offline and requires no Internet connection.
+       KeePassXC is a free/open-source password manager or safe which helps you to manage your passwords in a secure way. The complete database is always encrypted with the industry-standard
+       AES (alias Rijndael) encryption algorithm using a 256 bit key. KeePassXC uses a database format that is compatible with KeePass Password Safe. Your wallet works offline and requires no
+       Internet connection.
 
 OPTIONS
        -h, --help
@@ -57,4 +57,4 @@ COPYRIGHT
 
        KeePassXC code is licensed under GPL-2 or GPL-3.
 
-KeePassXC 2.6.0                                                              2020-07-10                                                                 KEEPASSXC(1)
+KeePassXC 2.6.0                                                                            2020-07-10                                                                              KEEPASSXC(1)

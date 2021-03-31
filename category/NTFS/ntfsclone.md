@@ -1,4 +1,4 @@
-NTFSCLONE(8)                                                           System Manager's Manual                                                          NTFSCLONE(8)
+NTFSCLONE(8)                                                                        System Manager's Manual                                                                        NTFSCLONE(8)
 
 NAME
        ntfsclone - Efficiently clone, image, restore or rescue an NTFS
@@ -10,117 +10,113 @@ SYNOPSIS
        ntfsclone --metadata [OPTIONS] SOURCE
 
 DESCRIPTION
-       ntfsclone  will  efficiently clone (copy, save, backup, restore) or rescue an NTFS filesystem to a sparse file, image, device (partition) or standard output.
-       It works at disk sector level and copies only the used data. Unused disk space becomes zero (cloning to sparse file), encoded with control codes  (saving  in
-       special image format), left unchanged (cloning to a disk/partition) or filled with zeros (cloning to standard output).
+       ntfsclone  will  efficiently  clone  (copy, save, backup, restore) or rescue an NTFS filesystem to a sparse file, image, device (partition) or standard output.  It works at disk sector
+       level and copies only the used data. Unused disk space becomes zero (cloning to sparse file), encoded with control codes (saving in special image format), left unchanged (cloning to  a
+       disk/partition) or filled with zeros (cloning to standard output).
 
-       ntfsclone can be useful to make backups, an exact snapshot of an NTFS filesystem and restore it later on, or for developers to test NTFS read/write function‐
-       ality, troubleshoot/investigate users' issues using the clone without the risk of destroying the original filesystem.
+       ntfsclone can be useful to make backups, an exact snapshot of an NTFS filesystem and restore it later on, or for developers to test NTFS read/write functionality, troubleshoot/investi‐
+       gate users' issues using the clone without the risk of destroying the original filesystem.
 
-       The clone, if not using the special image format, is an exact copy of the original NTFS filesystem from sector to sector thus it can  be  also  mounted  just
-       like the original NTFS filesystem.  For example if you clone to a file and the kernel has loopback device and NTFS support then the file can be mounted as
+       The clone, if not using the special image format, is an exact copy of the original NTFS filesystem from sector to sector thus it can  be  also  mounted  just  like  the  original  NTFS
+       filesystem.  For example if you clone to a file and the kernel has loopback device and NTFS support then the file can be mounted as
 
               mount -t ntfs -o loop ntfsclone.img /mnt/ntfsclone
 
    Windows Cloning
-       If you want to copy, move or restore a system or boot partition to another computer, or to a different disk or partition (e.g. hda1->hda2, hda1->hdb1 or to a
-       different disk sector offset) then you will need to take extra care.
+       If you want to copy, move or restore a system or boot partition to another computer, or to a different disk or partition (e.g. hda1->hda2, hda1->hdb1 or to a different disk sector off‐
+       set) then you will need to take extra care.
 
-       Usually, Windows will not be able to boot, unless you copy, move or restore NTFS to the same partition which starts at the same sector on the  same  type  of
-       disk having the same BIOS legacy cylinder setting as the original partition and disk had.
+       Usually, Windows will not be able to boot, unless you copy, move or restore NTFS to the same partition which starts at the same sector on the same type of disk  having  the  same  BIOS
+       legacy cylinder setting as the original partition and disk had.
 
-       The  ntfsclone utility guarantees to make an exact copy of NTFS but it won't deal with booting issues. This is by design: ntfsclone is a filesystem, not sys‐
-       tem utility. Its aim is only NTFS cloning, not Windows cloning. Hereby ntfsclone can be used as a very fast and reliable build block for Windows cloning  but
-       itself it's not enough.
+       The  ntfsclone utility guarantees to make an exact copy of NTFS but it won't deal with booting issues. This is by design: ntfsclone is a filesystem, not system utility. Its aim is only
+       NTFS cloning, not Windows cloning. Hereby ntfsclone can be used as a very fast and reliable build block for Windows cloning but itself it's not enough.
 
    Sparse Files
-       A  file  is sparse if it has unallocated blocks (holes). The reported size of such files are always higher than the disk space consumed by them.  The du com‐
-       mand can tell the real disk space used by a sparse file.  The holes are always read as zeros. All major Linux filesystem like, ext2, ext3, reiserfs, Reiser4,
-       JFS and XFS, supports sparse files but for example the ISO 9600 CD-ROM filesystem doesn't.
+       A file is sparse if it has unallocated blocks (holes). The reported size of such files are always higher than the disk space consumed by them.  The du command can tell  the  real  disk
+       space used by a sparse file.  The holes are always read as zeros. All major Linux filesystem like, ext2, ext3, reiserfs, Reiser4, JFS and XFS, supports sparse files but for example the
+       ISO 9600 CD-ROM filesystem doesn't.
 
    Handling Large Sparse Files
-       As  of  today  Linux  provides  inadequate  support  for  managing (tar, cp, gzip, gunzip, bzip2, bunzip2, cat, etc) large sparse files.  The only main Linux
-       filesystem having support for efficient sparse file handling is XFS by the XFS_IOC_GETBMAPX ioctl(2).  However none of  the  common  utilities  supports  it.
-       This means when you tar, cp, gzip, bzip2, etc a large sparse file they will always read the entire file, even if you use the "sparse support" options.
+       As of today Linux provides inadequate support for managing (tar, cp, gzip, gunzip, bzip2, bunzip2, cat, etc) large sparse files.  The only main Linux filesystem having support for  ef‐
+       ficient  sparse  file handling is XFS by the XFS_IOC_GETBMAPX ioctl(2).  However none of the common utilities supports it.  This means when you tar, cp, gzip, bzip2, etc a large sparse
+       file they will always read the entire file, even if you use the "sparse support" options.
 
-       bzip2(1)  compresses  large  sparse files much better than gzip(1) but it does so also much slower. Moreover neither of them handles large sparse files effi‐
-       ciently during uncompression from disk space usage point of view.
+       bzip2(1) compresses large sparse files much better than gzip(1) but it does so also much slower. Moreover neither of them handles large sparse files  efficiently  during  uncompression
+       from disk space usage point of view.
 
-       At present the most efficient way, both speed and space-wise, to compress and uncompress large sparse files by common tools would be using  tar(1)  with  the
-       options  -S  (handle sparse files "efficiently") and -j (filter the archive through bzip2). Although tar still reads and analyses the entire file, it doesn't
-       pass on the large data blocks having only zeros to filters and it also avoids writing large amount of zeros to the disk needlessly. But since tar can't  cre‐
-       ate  an  archive  from the standard input, you can't do this in-place by just reading ntfsclone standard output. Even more sadly, using the -S option results
-       serious data loss since the end of 2004 and the GNU tar maintainers didn't release fixed versions until the present day.
+       At  present  the  most  efficient way, both speed and space-wise, to compress and uncompress large sparse files by common tools would be using tar(1) with the options -S (handle sparse
+       files "efficiently") and -j (filter the archive through bzip2). Although tar still reads and analyses the entire file, it doesn't pass on the large data blocks  having  only  zeros  to
+       filters and it also avoids writing large amount of zeros to the disk needlessly. But since tar can't create an archive from the standard input, you can't do this in-place by just read‐
+       ing ntfsclone standard output. Even more sadly, using the -S option results serious data loss since the end of 2004 and the GNU tar maintainers didn't release fixed versions until  the
+       present day.
 
    The Special Image Format
-       It's also possible, actually it's recommended, to save an NTFS filesystem to a special image format.  Instead of representing unallocated  blocks  as  holes,
-       they  are  encoded using control codes. Thus, the image saves space without requiring sparse file support. The image format is ideal for streaming filesystem
-       images over the network and similar, and can be used as a replacement for Ghost or Partition Image if it is combined with other tools. The downside  is  that
-       you can't mount the image directly, you need to restore it first.
+       It's  also  possible, actually it's recommended, to save an NTFS filesystem to a special image format.  Instead of representing unallocated blocks as holes, they are encoded using con‐
+       trol codes. Thus, the image saves space without requiring sparse file support. The image format is ideal for streaming filesystem images over the network and similar, and can  be  used
+       as a replacement for Ghost or Partition Image if it is combined with other tools. The downside is that you can't mount the image directly, you need to restore it first.
 
-       To  save  an image using the special image format, use the -s or the --save-image option. To restore an image, use the -r or the --restore-image option. Note
-       that you can restore images from standard input by using '-' as the SOURCE file.
+       To  save an image using the special image format, use the -s or the --save-image option. To restore an image, use the -r or the --restore-image option. Note that you can restore images
+       from standard input by using '-' as the SOURCE file.
 
    Metadata-only Cloning
-       One of the features of ntfsclone is that, it can also save only the NTFS metadata using the option -m or --metadata and the clone still will be mountable. In
-       this case all non-metadata file content will be lost and reading them back will result always zeros.
+       One of the features of ntfsclone is that, it can also save only the NTFS metadata using the option -m or --metadata and the clone still will be mountable. In this case all non-metadata
+       file content will be lost and reading them back will result always zeros.
 
        The metadata-only image can be compressed very well, usually to not more than 1-8 MB thus it's easy to transfer for investigation, troubleshooting.
 
-       In  this  mode of ntfsclone, NONE of the user's data is saved, including the resident user's data embedded into metadata. All is filled with zeros.  Moreover
-       all the file timestamps, deleted and unused spaces inside the metadata are filled with zeros. Thus this mode is inappropriate for example for forensic analy‐
-       ses.  This mode may be combined with --save-image to create a special image format file instead of a sparse file.
+       In  this  mode  of  ntfsclone, NONE of the user's data is saved, including the resident user's data embedded into metadata. All is filled with zeros.  Moreover all the file timestamps,
+       deleted and unused spaces inside the metadata are filled with zeros. Thus this mode is inappropriate for example for forensic analyses.  This mode may be combined with --save-image  to
+       create a special image format file instead of a sparse file.
 
        Please note, filenames are not wiped out. They might contain sensitive information, so think twice before sending such an image to anybody.
 
 OPTIONS
-       Below  is  a  summary of all the options that ntfsclone accepts.  Nearly all options have two equivalent names.  The short name is preceded by - and the long
-       name is preceded by -- .  Any single letter options, that don't take an argument, can be combined into a single command, e.g.  -fv is equivalent to -f  -v  .
-       Long named options can be abbreviated to any unique prefix of their name.
+       Below is a summary of all the options that ntfsclone accepts.  Nearly all options have two equivalent names.  The short name is preceded by - and the long name is preceded by -- .  Any
+       single letter options, that don't take an argument, can be combined into a single command, e.g.  -fv is equivalent to -f -v .  Long named options can be abbreviated to any unique  pre‐
+       fix of their name.
 
        -o, --output FILE
-              Clone  NTFS  to  the  non-existent  FILE.   If FILE is '-' then clone to the standard output. This option cannot be used for creating a partition, use
-              --overwrite for an existing partition.
+              Clone NTFS to the non-existent FILE.  If FILE is '-' then clone to the standard output. This option cannot be used for creating a partition, use --overwrite for an existing par‐
+              tition.
 
        -O, --overwrite FILE
               Clone NTFS to FILE, which can be an existing partition or a regular file which will be overwritten if it exists.
 
        -s, --save-image
-              Save to the special image format. This is the most efficient way space and speed-wise if imaging is done to the standard output, e.g. for  image  com‐
-              pression, encryption or streaming through a network.
+              Save to the special image format. This is the most efficient way space and speed-wise if imaging is done to the standard  output,  e.g.  for  image  compression,  encryption  or
+              streaming through a network.
 
        -r, --restore-image
               Restore from the special image format specified by SOURCE argument. If the SOURCE is '-' then the image is read from the standard input.
 
        -n, --no-action
-              Test  the  consistency of a saved image by simulating its restoring without writing anything. The NTFS data contained in the image is not tested.  The
-              option --restore-image must also be present, and the options --output and --overwrite must be omitted.
+              Test  the consistency of a saved image by simulating its restoring without writing anything. The NTFS data contained in the image is not tested.  The option --restore-image must
+              also be present, and the options --output and --overwrite must be omitted.
 
        --rescue
-              Ignore disk read errors so disks having bad sectors, e.g. dying disks, can be rescued the most efficiently way, with minimal stress on them. Ntfsclone
-              works  at the lowest, sector level in this mode too thus more data can be rescued.  The contents of the unreadable sectors are filled by character '?'
-              and the beginning of such sectors are marked by "BadSectoR\0".
+              Ignore disk read errors so disks having bad sectors, e.g. dying disks, can be rescued the most efficiently way, with minimal stress on them. Ntfsclone works at the lowest,  sec‐
+              tor  level  in  this  mode too thus more data can be rescued.  The contents of the unreadable sectors are filled by character '?' and the beginning of such sectors are marked by
+              "BadSectoR\0".
 
        -m, --metadata
-              Clone ONLY METADATA (for NTFS experts). Only cloning to a (sparse) file is allowed, unless used the option --save-image is also used.  You can't meta‐
-              data-only clone to a device.
+              Clone ONLY METADATA (for NTFS experts). Only cloning to a (sparse) file is allowed, unless used the option --save-image is also used.  You can't metadata-only clone to a device.
 
        --ignore-fs-check
-              Ignore  the  result  of  the filesystem consistency check. This option is allowed to be used only with the --metadata option, for the safety of user's
-              data. The clusters which cause the inconsistency are saved too.
+              Ignore the result of the filesystem consistency check. This option is allowed to be used only with the --metadata option, for the safety of user's data. The clusters which cause
+              the inconsistency are saved too.
 
        -t, --preserve-timestamps
               Do not wipe the timestamps, to be used only with the --metadata option.
 
        --full-logfile
-              Include the Windows log file in the copy. This is only useful for extracting metadata, saving or cloning a file system  which  was  not  properly  un‐
-              mounted from Windows.
+              Include the Windows log file in the copy. This is only useful for extracting metadata, saving or cloning a file system which was not properly unmounted from Windows.
 
        --new-serial, or
 
        --new-half-serial
-              Set  a  new random serial number to the clone. The serial number is a 64 bit number used to identify the device during the mounting process, so it has
-              to be changed to enable the original file system and the clone to be mounted at the same time on the same computer.
+              Set  a new random serial number to the clone. The serial number is a 64 bit number used to identify the device during the mounting process, so it has to be changed to enable the
+              original file system and the clone to be mounted at the same time on the same computer.
 
               The option --new-half-serial only changes the upper part of the serial number, keeping the lower part which is used by Windows unchanged.
 
@@ -195,16 +191,14 @@ EXAMPLES
               cp --sparse=always /proc/self/fd/0 ntfsmeta.img
 
 KNOWN ISSUES
-       There are no known problems with ntfsclone.  If you think you have found a problem then  please  send  an  email  describing  it  to  the  development  team:
-       ntfs-3g-devel@lists.sf.net
+       There are no known problems with ntfsclone.  If you think you have found a problem then please send an email describing it to the development team: ntfs-3g-devel@lists.sf.net
 
-       Sometimes  it  might  appear  ntfsclone  froze if the clone is on ReiserFS and even CTRL-C won't stop it. This is not a bug in ntfsclone, however it's due to
-       ReiserFS being extremely inefficient creating large sparse files and not handling signals during this operation. This ReiserFS problem was improved in kernel
-       2.4.22.  XFS, JFS and ext3 don't have this problem.
+       Sometimes it might appear ntfsclone froze if the clone is on ReiserFS and even CTRL-C won't stop it. This is not a bug in ntfsclone, however it's due to ReiserFS being extremely  inef‐
+       ficient creating large sparse files and not handling signals during this operation. This ReiserFS problem was improved in kernel 2.4.22.  XFS, JFS and ext3 don't have this problem.
 
 AUTHORS
-       ntfsclone  was  written  by Szabolcs Szakacsits with contributions from Per Olofsson (special image format support) and Anton Altaparmakov.  It was ported to
-       ntfs-3g by Erik Larsson and Jean-Pierre Andre.
+       ntfsclone  was  written by Szabolcs Szakacsits with contributions from Per Olofsson (special image format support) and Anton Altaparmakov.  It was ported to ntfs-3g by Erik Larsson and
+       Jean-Pierre Andre.
 
 AVAILABILITY
        ntfsclone is part of the ntfs-3g package and is available at:
@@ -213,4 +207,4 @@ AVAILABILITY
 SEE ALSO
        ntfsresize(8) ntfsprogs(8) xfs_copy(8) debugreiserfs(8) e2image(8)
 
-ntfs-3g 2017.3.23AR.3                                                       February 2013                                                               NTFSCLONE(8)
+ntfs-3g 2017.3.23AR.3                                                                    February 2013                                                                             NTFSCLONE(8)

@@ -1,4 +1,4 @@
-IOTOP(8)                                                               System Manager's Manual                                                              IOTOP(8)
+IOTOP(8)                                                                            System Manager's Manual                                                                            IOTOP(8)
 
 NAME
        iotop - simple top-like I/O monitor
@@ -7,21 +7,19 @@ SYNOPSIS
        iotop [OPTIONS]
 
 DESCRIPTION
-       iotop  watches  I/O usage information output by the Linux kernel (requires 2.6.20 or later) and displays a table of current I/O usage by processes or threads
-       on the system. At least the CONFIG_TASK_DELAY_ACCT, CONFIG_TASK_IO_ACCOUNTING, CONFIG_TASKSTATS and CONFIG_VM_EVENT_COUNTERS options need to  be  enabled  in
-       your Linux kernel build configuration.
+       iotop  watches I/O usage information output by the Linux kernel (requires 2.6.20 or later) and displays a table of current I/O usage by processes or threads on the system. At least the
+       CONFIG_TASK_DELAY_ACCT, CONFIG_TASK_IO_ACCOUNTING, CONFIG_TASKSTATS and CONFIG_VM_EVENT_COUNTERS options need to be enabled in your Linux kernel build configuration.
 
-       iotop  displays columns for the I/O bandwidth read and written by each process/thread during the sampling period. It also displays the percentage of time the
-       thread/process spent while swapping in and while waiting on I/O. For each process, its I/O priority (class/level) is shown.
+       iotop displays columns for the I/O bandwidth read and written by each process/thread during the sampling period. It also displays the percentage of time the thread/process spent  while
+       swapping in and while waiting on I/O. For each process, its I/O priority (class/level) is shown.
 
-       In addition, the total I/O bandwidth read and written during the sampling period is displayed at the top of the interface.  Total DISK READ  and  Total  DISK
-       WRITE  values  represent  total read and write bandwidth between processes and kernel threads on the one side and kernel block device subsystem on the other.
-       While Current DISK READ and Current DISK WRITE values represent corresponding bandwidths for current disk I/O between kernel block device subsystem  and  un‐
-       derlying  hardware  (HDD,  SSD, etc.).  Thus Total and Current values may not be equal at any given moment of time due to data caching and I/O operations re‐
-       ordering that take place inside Linux kernel.
+       In  addition, the total I/O bandwidth read and written during the sampling period is displayed at the top of the interface.  Total DISK READ and Total DISK WRITE values represent total
+       read and write bandwidth between processes and kernel threads on the one side and kernel block device subsystem on the other. While Current DISK READ and Current DISK WRITE values rep‐
+       resent  corresponding bandwidths for current disk I/O between kernel block device subsystem and underlying hardware (HDD, SSD, etc.).  Thus Total and Current values may not be equal at
+       any given moment of time due to data caching and I/O operations reordering that take place inside Linux kernel.
 
-       Use the left and right arrows to change the sorting, r to reverse the sorting order, o to toggle the --only option, p to toggle the --processes option, a  to
-       toggle the --accumulated option, q to quit or i to change the priority of a thread or a process' thread(s). Any other key will force a refresh.
+       Use the left and right arrows to change the sorting, r to reverse the sorting order, o to toggle the --only option, p to toggle the --processes option, a to  toggle  the  --accumulated
+       option, q to quit or i to change the priority of a thread or a process' thread(s). Any other key will force a refresh.
 
 OPTIONS
        --version
@@ -55,8 +53,8 @@ OPTIONS
               Show accumulated I/O instead of bandwidth. In this mode, iotop shows the amount of I/O processes have done since iotop started.
 
        -k, --kilobytes
-              Use  kilobytes  instead of a human friendly unit. This mode is useful when scripting the batch mode of iotop. Instead of choosing the most appropriate
-              unit iotop will display all sizes in kilobytes.
+              Use  kilobytes instead of a human friendly unit. This mode is useful when scripting the batch mode of iotop. Instead of choosing the most appropriate unit iotop will display all
+              sizes in kilobytes.
 
        -t, --time
               Add a timestamp on each line (implies --batch). Each line will be prefixed by the current time.
@@ -78,4 +76,4 @@ AUTHOR
 
        This manual page was started by Paul Wise for the Debian project and is placed in the public domain.
 
-                                                                             April 2009                                                                     IOTOP(8)
+                                                                                           April 2009                                                                                  IOTOP(8)

@@ -1,4 +1,4 @@
-PCAPFIX(1)                                                             General Commands Manual                                                            PCAPFIX(1)
+PCAPFIX(1)                                                                          General Commands Manual                                                                          PCAPFIX(1)
 
 NAME
        pcapfix - repair pcap and pcapng files
@@ -9,13 +9,13 @@ SYNOPSIS
 DESCRIPTION
        Pcapfix is a tool to repair your damaged or corrupted pcap and pcapng files. It is written in C and released under the GNU General Public License.
 
-       To  fix  your  pcap  files  the  tool first checks for an intact pcap global header and repairs it if there are some corrupted bytes. It there seems to be no
-       global header at all, pcapfix adds a self-created one at the beginning of the file. In a second step the tool tries to find pcap packet  headers  inside  the
-       file, below the global header. It checks if the values are correct (or seem to be correct) and tries to repair a packet if there is something wrong.
+       To  fix  your  pcap files the tool first checks for an intact pcap global header and repairs it if there are some corrupted bytes. It there seems to be no global header at all, pcapfix
+       adds a self-created one at the beginning of the file. In a second step the tool tries to find pcap packet headers inside the file, below the global header. It checks if the values  are
+       correct (or seem to be correct) and tries to repair a packet if there is something wrong.
 
-       To  fix  your  pcapng files the tool loops through all packet headers that can be found in the file. It checks for mandatory Section Header and Interface De‐
-       scription Block and creates them if missing. Pcapfix checks for correct block sizes and valid option fields. If something is wrong, invalid  fields  are  re‐
-       paired (if possible) or skipped and adjusted to finally get a proper pcapng file.
+       To  fix  your  pcapng  files the tool loops through all packet headers that can be found in the file. It checks for mandatory Section Header and Interface Description Block and creates
+       them if missing. Pcapfix checks for correct block sizes and valid option fields. If something is wrong, invalid fields are repaired (if possible) or skipped and adjusted to finally get
+       a proper pcapng file.
 
 OPTIONS
        -d, --deep-scan
@@ -55,32 +55,31 @@ EXAMPLES
 NOTES
        Output file name
 
-            If you want to perform the reparation process on the input file without creating a separate output file - e.g. in case you are out of space, you can use
-            the -o option and give the same name as the input file.
+            If you want to perform the reparation process on the input file without creating a separate output file - e.g. in case you are out of space, you can use the -o option and give the
+            same name as the input file.
 
-            WARNING: This process is DANGEROUS and may destroy your data. You should only use this option if you know what you are doing and accept the risk of los‐
-            ing the input file.
+            WARNING: This process is DANGEROUS and may destroy your data. You should only use this option if you know what you are doing and accept the risk of losing the input file.
 
        Deep scan
 
-            In  classic  pcap files, pcapfix will only scan the first 65536 bytes (maximum packet length) for a proper first packet. If you want to force packet de‐
-            tection even above this limit (e.g. because your file has been heavily destroyed) you can use the deep scan option (-d).
+            In classic pcap files, pcapfix will only scan the first 65536 bytes (maximum packet length) for a proper first packet. If you want to force packet detection even above this  limit
+            (e.g. because your file has been heavily destroyed) you can use the deep scan option (-d).
 
-            This option is not necessary for pcapng files because the whole file is arranged in blocks that are 'unlimited' by default. In result pcapfix  will  al‐
-            ways scan the whole pcapng file for further blocks.
+            This  option  is  not  necessary for pcapng files because the whole file is arranged in blocks that are 'unlimited' by default. In result pcapfix will always scan the whole pcapng
+            file for further blocks.
 
        Soft mode
 
-            There  are programs that breach some pcap conventions when writing files. Ignoring those rules do not break the pcap file but they make it difficult for
-            pcapfix to identify the packets in case of broken files.
+            There are programs that breach some pcap conventions when writing files. Ignoring those rules do not break the pcap file but they make it difficult for  pcapfix  to  identify  the
+            packets in case of broken files.
 
-            By default pcapfix uses hard mode. If you encounter problems when repairing files, try to switch to soft mode (-s). Pcapfix will then try  to  find  the
-            packets in a more tolerant way.
+            By  default  pcapfix  uses hard mode. If you encounter problems when repairing files, try to switch to soft mode (-s). Pcapfix will then try to find the packets in a more tolerant
+            way.
 
        PCAPNG Format
 
-            Pcapfix  will  try to identify the file format to repair (pcap / pcapng) before doing any further checks. If the header itself is corrupted, it will as‐
-            sume the format to be classic pcap. To change this behaviour you can force the tool to do a pcapng-repair by supplying -n (--pcapng) option.
+            Pcapfix will try to identify the file format to repair (pcap / pcapng) before doing any further checks. If the header itself is corrupted, it will assume the format to be  classic
+            pcap. To change this behaviour you can force the tool to do a pcapng-repair by supplying -n (--pcapng) option.
 
        Verbosity
 
@@ -88,14 +87,14 @@ NOTES
 
        ASCII-mode transferred Files (FTP)
 
-            Pcapfix is able to repair pcap files that have been transferred in ascii-mode via FTP. In those files a proper pcap structure will be  created  only  to
-            make them readable by wireshark etc. The data inside the packets (and some pcap headers) might still be corrupted. To repair those packets a deeper look
-            inside the packet structure (e.g. checksum) will be necessary.
+            Pcapfix  is  able to repair pcap files that have been transferred in ascii-mode via FTP. In those files a proper pcap structure will be created only to make them readable by wire‐
+            shark etc. The data inside the packets (and some pcap headers) might still be corrupted. To repair those packets a deeper look inside the packet structure (e.g. checksum) will  be
+            necessary.
 
        Data Link Types
 
-            You can make pcapfix change / select your data link type by supplying -t option. Although you may select a data link type number between 0 and 255, only
-            the following types are assigned: If the data link type field is corrupt, pcapfix will select LINKTYPE_ETHERNET by default.
+            You  can  make  pcapfix change / select your data link type by supplying -t option. Although you may select a data link type number between 0 and 255, only the following types are
+            assigned: If the data link type field is corrupt, pcapfix will select LINKTYPE_ETHERNET by default.
 
             See http://www.tcpdump.org/linktypes.html for further information.
 
@@ -171,8 +170,8 @@ NOTES
             245  LINKTYPE_NFC_LLCP
 
 DEVELOPMENT
-       This tool is still under development! Please send any further wishes, feature requests or problems in compiling and execution to ruport@f00l.de. Additionally
-       You may send me pcap/pcapng files that could not be repaired too in order to improve pcapfix and get your file repaired.
+       This tool is still under development! Please send any further wishes, feature requests or problems  in  compiling  and  execution  to  ruport@f00l.de.  Additionally  You  may  send  me
+       pcap/pcapng files that could not be repaired too in order to improve pcapfix and get your file repaired.
 
        For further information visit the pcapfix homepage at http://f00l.de/pcapfix/.
 
@@ -299,13 +298,13 @@ HISTORY
 COPYRIGHT
        Copyright (c) 2012-2018 Robert Krause
 
-       Pcapfix is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software  Foun‐
-       dation, either version 3 of the License, or any later version.
+       Pcapfix  is  free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of
+       the License, or any later version.
 
-       Pcapfix  is  distributed  in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
-       PARTICULAR PURPOSE. See the GNU General Public License for more details.
+       Pcapfix is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See  the
+       GNU General Public License for more details.
 
 AUTHOR
        Written by Robert Krause <ruport@f00l.de>.
 
-                                                                             22 JAN 2019                                                                  PCAPFIX(1)
+                                                                                          22 JAN 2019                                                                                PCAPFIX(1)

@@ -1,4 +1,4 @@
-EXTUNDELETE(1)                                                         General Commands Manual                                                        EXTUNDELETE(1)
+EXTUNDELETE(1)                                                                      General Commands Manual                                                                      EXTUNDELETE(1)
 
 NAME
        extundelete - utility to undelete files from an ext3 or ext4 partition.
@@ -9,8 +9,8 @@ SYNOPSIS
 DESCRIPTION
        extundelete is a utility that can recover deleted files from an ext3 or ext4 partition
        extundelete uses the information stored in the partition's journal to attempt to recover a file that has been deleted from the partition.
-       There  is  no  guarantee  that  any particular file will be able to be undeleted, so always try to have a good backup system in place, or at least put one in
-       place after recovering your files!
+       There  is  no  guarantee  that any particular file will be able to be undeleted, so always try to have a good backup system in place, or at least put one in place after recovering your
+       files!
 
 OPTIONS
        --version
@@ -63,11 +63,9 @@ OPTIONS
               Specifies the block size of the partition to be used when opening the file system.
 
        --before date
-              Only restore files deleted before the date specified, which should be in the form of the number of seconds since the UNIX epoch.  Use a shell  command
-              like
+              Only restore files deleted before the date specified, which should be in the form of the number of seconds since the UNIX epoch.  Use a shell command like
               $ date -d "Aug 1 9:02" +%s
-              to  convert a human-readable date to the proper format. The conversion from the number of seconds to a readable format may be found by using either of
-              the following:
+              to convert a human-readable date to the proper format. The conversion from the number of seconds to a readable format may be found by using either of the following:
               $ date -d@1234567890
               $ perl -le "print scalar localtime 1234567890"
 
@@ -80,4 +78,4 @@ AUTHOR
 
        This manual page was written by Elías Alejandro Año Mendoza <ealmdz@gmail.com>, for the Debian project (and may be used by others).
 
-                                                                         September 29, 2010                                                           EXTUNDELETE(1)
+                                                                                       September 29, 2010                                                                        EXTUNDELETE(1)

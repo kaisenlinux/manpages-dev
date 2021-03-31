@@ -1,4 +1,4 @@
-filezilla(1)                                                              FileZilla Manual                                                              filezilla(1)
+filezilla(1)                                                                            FileZilla Manual                                                                           filezilla(1)
 
 NAME
        FileZilla - FTP client
@@ -15,9 +15,8 @@ DESCRIPTION
 
 OPTIONS
        -c <site>, --site <site>
-              Connect  to the given site from the Site Manager.  Site has to be given as complete path, with a slash as separation character. Any slash or backslash
-              that is part of a segment has to be escaped with a backslash. Path has to be prefixed with 0 for user defined entries or 1 for default  entries.  Site
-              path may not contain double quotation marks.
+              Connect  to  the given site from the Site Manager.  Site has to be given as complete path, with a slash as separation character. Any slash or backslash that is part of a segment
+              has to be escaped with a backslash. Path has to be prefixed with 0 for user defined entries or 1 for default entries. Site path may not contain double quotation marks.
 
               Example: filezilla -c 0/foo/bar/sl\/ash connects to the user site sl/ash in the site directory foo/bar
 
@@ -46,8 +45,7 @@ ENVIRONMENT
        The FZ_DATADIR environment variable can be used to specify the directory containing FileZilla's data files.
 
 SUPPORT
-       Please  visit  https://filezilla-project.org/ for further information. Report bugs only if you are using the latest version available from the FileZilla web‐
-       site.
+       Please visit https://filezilla-project.org/ for further information. Report bugs only if you are using the latest version available from the FileZilla website.
 
 COPYRIGHT
        Copyright (C) 2004-2019  Tim Kosse
@@ -57,4 +55,4 @@ COPYRIGHT
 SEE ALSO
        fzdefaults.xml(5)
 
-                                                                            January 2018                                                                filezilla(1)
+                                                                                          January 2018                                                                             filezilla(1)

@@ -1,4 +1,4 @@
-DIRVISH-RUNALL(8)                                                      System Manager's Manual                                                     DIRVISH-RUNALL(8)
+DIRVISH-RUNALL(8)                                                                   System Manager's Manual                                                                   DIRVISH-RUNALL(8)
 
 NAME
        dirvish-runall - run a set of dirvish backup jobs.
@@ -33,9 +33,9 @@ OPTIONS
               Print the version information and exit.
 
 EXIT CODES
-       To  facilitate  further  automation  and  integration of dirvish-runall with other tools dirvish-runall provides rationalised exit codes.  The exit codes are
-       range based.  While the code for a specific error may change from one version to another it will remain within the specified range.  So don't test  for  spe‐
-       cific exit codes but instead test for a range of values.  To the degree possible higher value ranges indicate more severe errors.
+       To  facilitate  further  automation and integration of dirvish-runall with other tools dirvish-runall provides rationalised exit codes.  The exit codes are range based.  While the code
+       for a specific error may change from one version to another it will remain within the specified range.  So don't test for specific exit codes but instead test for a  range  of  values.
+       To the degree possible higher value ranges indicate more severe errors.
 
        0      success
 
@@ -60,4 +60,4 @@ SEE ALSO
        dirvish.conf(5)
 
 BUGS
-                                                                                                                                                   DIRVISH-RUNALL(8)
+                                                                                                                                                                              DIRVISH-RUNALL(8)

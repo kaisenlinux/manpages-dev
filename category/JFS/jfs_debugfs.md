@@ -1,4 +1,4 @@
-jfs_debugfs(8)                                                         JFS file system editor                                                         jfs_debugfs(8)
+jfs_debugfs(8)                                                                       JFS file system editor                                                                      jfs_debugfs(8)
 
 NAME
        jfs_debugfs - shell-type JFS file system editor
@@ -216,4 +216,4 @@ AUTHORS
        See the JFS project web site for more details:
        http://jfs.sourceforge.net/
 
-                                                                          October 29, 2002                                                            jfs_debugfs(8)
+                                                                                        October 29, 2002                                                                         jfs_debugfs(8)

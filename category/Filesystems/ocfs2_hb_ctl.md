@@ -1,4 +1,4 @@
-ocfs2_hb_ctl(8)                                                          OCFS2 Manual Pages                                                          ocfs2_hb_ctl(8)
+ocfs2_hb_ctl(8)                                                                        OCFS2 Manual Pages                                                                       ocfs2_hb_ctl(8)
 
 NAME
        ocfs2_hb_ctl - Starts and stops the O2CB local heartbeat on a given device.
@@ -15,11 +15,10 @@ SYNOPSIS
        ocfs2_hb_ctl -h
 
 DESCRIPTION
-       ocfs2_hb_ctl  starts  and  stops  local  heartbeat on a OCFS2 device.  Users are strongly urged not to use this tool directly. It is automatically invoked by
-       mount.ocfs2(8) and other tools that require heartbeat notifications.
+       ocfs2_hb_ctl  starts and stops local heartbeat on a OCFS2 device.  Users are strongly urged not to use this tool directly. It is automatically invoked by mount.ocfs2(8) and other tools
+       that require heartbeat notifications.
 
-       This utility only operates in the local heartbeat mode. It fails silently when run in global heartbeat mode. More information on the heartbeat modes  can  be
-       found in o2cb(7).
+       This utility only operates in the local heartbeat mode. It fails silently when run in global heartbeat mode. More information on the heartbeat modes can be found in o2cb(7).
 
        The tools accepts devices to be specified by its name or its uuid. Service denotes the application that is requesting the heartbeat notification.
 
@@ -34,8 +33,8 @@ OPTIONS
 
        -u     Specify region by device uuid.
 
-       -n     Adjust  IO  priority for the heartbeat thread. This option calls the ionice tool to set its IO scheduling class to realtime with scheduling class data
-              as provided.  This option is usable only with the O2CB cluster stack.
+       -n     Adjust IO priority for the heartbeat thread. This option calls the ionice tool to set its IO scheduling class to realtime with scheduling class data as provided.  This option is
+              usable only with the O2CB cluster stack.
 
        -h     Displays help and exit.
 
@@ -48,4 +47,4 @@ AUTHORS
 COPYRIGHT
        Copyright © 2004, 2012 Oracle. All rights reserved.
 
-Version 1.8.6                                                               January 2012                                                             ocfs2_hb_ctl(8)
+Version 1.8.6                                                                             January 2012                                                                          ocfs2_hb_ctl(8)

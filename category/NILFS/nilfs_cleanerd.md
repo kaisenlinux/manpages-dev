@@ -1,4 +1,4 @@
-NILFS_CLEANERD(8)                                                      System Manager's Manual                                                     NILFS_CLEANERD(8)
+NILFS_CLEANERD(8)                                                                   System Manager's Manual                                                                   NILFS_CLEANERD(8)
 
 NAME
        nilfs_cleanerd - NILFS2 garbage collector
@@ -13,8 +13,8 @@ DESCRIPTION
 
        The optional directory argument specifies the mount point where the daemon operates.  It must be an r/w-mount.
 
-       This program can be invoked either automatically by mount.nilfs2(8) or manually by an administrator.  However, users are recommended to invoke nilfs_cleanerd
-       through mount.nilfs2(8) or mount(8) and shutdown it through umount.nilfs2(8) or umount(8) in order to avoid state inconsistencies among administration tools.
+       This program can be invoked either automatically by mount.nilfs2(8) or manually by an administrator.  However, users are recommended to invoke nilfs_cleanerd through mount.nilfs2(8) or
+       mount(8) and shutdown it through umount.nilfs2(8) or umount(8) in order to avoid state inconsistencies among administration tools.
 
        nilfs_cleanerd displays its process ID (pid) to standard output when it started.
 
@@ -59,4 +59,4 @@ AVAILABILITY
 SEE ALSO
        nilfs(8), mount.nilfs2(8), umount.nilfs2(8), nilfs_cleanerd.conf(5).
 
-nilfs-utils version 2.2                                                       Apr 2014                                                             NILFS_CLEANERD(8)
+nilfs-utils version 2.2                                                                     Apr 2014                                                                          NILFS_CLEANERD(8)

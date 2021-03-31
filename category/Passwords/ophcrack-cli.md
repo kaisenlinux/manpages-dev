@@ -1,4 +1,4 @@
-OPHCRACK(1)                                                                 User Commands                                                                OPHCRACK(1)
+OPHCRACK(1)                                                                              User Commands                                                                              OPHCRACK(1)
 
 NAME
        Ophcrack - a Microsoft Windows password cracker using rainbow tables.
@@ -80,8 +80,7 @@ OPTIONS
 EXAMPLES
        ophcrack -g -d /path/to/tables -t xp_free_fast,0,3:vista_free -f in.txt
 
-       Launch  ophcrack in command line using tables 0 and 3 in /path/to/tables/xp_free_fast and all tables in /path/to/tables/vista_free and cracks hashes from pw‐
-       dump file in.txt
+       Launch ophcrack in command line using tables 0 and 3 in /path/to/tables/xp_free_fast and all tables in /path/to/tables/vista_free and cracks hashes from pwdump file in.txt
 
 SEE ALSO
        Homepage: http://ophcrack.sourceforge.net/
@@ -89,8 +88,8 @@ SEE ALSO
 
 AUTHOR
        This manual page was written by Adam Cecile <gandalf@le-vert.net> for the Debian system (but may be used by others).
-       Permission is granted to copy, distribute and/or modify this document under the terms of the GNU General Public License, Version 2 or any later version  pub‐
-       lished by the Free Software Foundation
+       Permission  is  granted to copy, distribute and/or modify this document under the terms of the GNU General Public License, Version 2 or any later version published by the Free Software
+       Foundation
        On Debian systems, the complete text of the GNU General Public License can be found in /usr/share/common-licenses/GPL.
 
-3.2.0                                                                        March 2009                                                                  OPHCRACK(1)
+3.2.0                                                                                      March 2009                                                                               OPHCRACK(1)

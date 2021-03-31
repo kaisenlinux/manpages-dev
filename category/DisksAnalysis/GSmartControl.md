@@ -1,4 +1,4 @@
-GSmartControl(1)                                                            User Commands                                                           GSmartControl(1)
+GSmartControl(1)                                                                         User Commands                                                                         GSmartControl(1)
 
 NAME
        GSmartControl - Hard disk drive and SSD health inspection tool
@@ -9,14 +9,13 @@ SYNOPSIS
        gsmartcontrol-root [--desktop=<desktop>] [OPTIONS]
 
 DESCRIPTION
-       GSmartControl is a graphical user interface for smartctl (from smartmontools), which is a tool for querying and controlling SMART (Self-Monitoring, Analysis,
-       and Reporting Technology) data on modern hard disk and solid-state drives. It allows you to inspect the drive's SMART data to determine its health,  as  well
-       as run various tests on it.
+       GSmartControl  is a graphical user interface for smartctl (from smartmontools), which is a tool for querying and controlling SMART (Self-Monitoring, Analysis, and Reporting Technology)
+       data on modern hard disk and solid-state drives. It allows you to inspect the drive's SMART data to determine its health, as well as run various tests on it.
 
        This manual page documents briefly the gsmartcontrol and gsmartcontrol-root commands.
 
-       gsmartcontrol-root  command launches gsmartcontrol with administrative privileges. The desktop argument specifies which desktop is currently running, for au‐
-       tomatic selection of native su mechanism. Valid values for desktop are auto, kde, gnome, other.
+       gsmartcontrol-root command launches gsmartcontrol with administrative privileges. The desktop argument specifies which desktop is currently running, for automatic selection  of  native
+       su mechanism. Valid values for desktop are auto, kde, gnome, other.
 
 OPTIONS
    Help Options:
@@ -49,8 +48,8 @@ OPTIONS
               Load smartctl data from file, creating a virtual drive. You can specify this option multiple times.
 
        --add-device
-              Add this device to device list. The format of the device is <device>::<type>::<extra_args>, where type and extra_args are optional.   This  option  is
-              useful with --no-scan to list certain drives only. You can specify this option multiple times. Example:
+              Add this device to device list. The format of the device is <device>::<type>::<extra_args>, where type and extra_args are optional.  This option is useful with --no-scan to list
+              certain drives only. You can specify this option multiple times. Example:
               --add-device /dev/sda --add-device /dev/twa0::3ware,2 --add-device '/dev/sdb::::-T permissive'
 
        --display=DISPLAY
@@ -71,4 +70,4 @@ COPYRIGHT
 AUTHOR
        This manual page was originally written by Giuseppe Iuculano <giuseppe@iuculano.it> for the Debian project.
 
-gsmartcontrol                                                                                                                                       GSmartControl(1)
+gsmartcontrol                                                                                                                                                                  GSmartControl(1)

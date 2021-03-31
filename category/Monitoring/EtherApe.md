@@ -1,15 +1,14 @@
-etherape(1)                                                            General Commands Manual                                                           etherape(1)
+etherape(1)                                                                         General Commands Manual                                                                         etherape(1)
 
 NAME
        etherape - graphical network traffic browser
 
 SYNOPSIS
-       etherape  [ -d ] [ -f filter ] [ --final-export outfile ] [ --glade-file interfacefile ] [ -i interface ] [ -l maxnodes ] [ -m operating mode ] [ --max-delay
-       delay ] [ --min-delay delay ] [ -n ] [ -P column file ] [ -q ] [ -r inputfile ] [ -s ] [ --signal-export outfile ] [ -Z user ]
+       etherape [ -d ] [ -f filter ] [ --final-export outfile ] [ --glade-file interfacefile ] [ -i interface ] [ -l maxnodes ] [ -m operating mode ] [ --max-delay delay ] [ --min-delay delay
+       ] [ -n ] [ -P column file ] [ -q ] [ -r inputfile ] [ -s ] [ --signal-export outfile ] [ -Z user ]
 
 DESCRIPTION
-       EtherApe is a network traffic browser. It displays network activity graphically. It uses GNOME libraries as its user interface, and libpcap, a packet capture
-       and filtering library.
+       EtherApe is a network traffic browser. It displays network activity graphically. It uses GNOME libraries as its user interface, and libpcap, a packet capture and filtering library.
 
 OPTIONS
        These options can be supplied to the command:
@@ -77,17 +76,16 @@ COLUMN POSITIONING
 
        The first column is a regex of either the FQDN or the IP address.
 
-       The second column is a number indicating the "column" that the node will be positioned in the display with column 1 being on the far left. Up to 1000 columns
-       are permitted.
+       The second column is a number indicating the "column" that the node will be positioned in the display with column 1 being on the far left. Up to 1000 columns are permitted.
 
-       Instead of being arranged in a circle the nodes are displayed in columns.  This is quite useful for arranging nodes so that you can see nodes on the "inside"
-       of your network on the left and the public internet nodes (anything not specified in the config file) on the right.
+       Instead of being arranged in a circle the nodes are displayed in columns.  This is quite useful for arranging nodes so that you can see nodes on the "inside" of  your  network  on  the
+       left and the public internet nodes (anything not specified in the config file) on the right.
 
-       The  input  file  above will cause 3 columns to display.  Nodes with FQDN containing mydomain.com, those in the 172.16.2.0/24 subnet, and link local IPv6 ad‐
-       dresses will be in the left column.  2 "routers", and IPv6 multicast will be in the center column and everything else will be in the right column.
+       The  input  file  above  will cause 3 columns to display.  Nodes with FQDN containing mydomain.com, those in the 172.16.2.0/24 subnet, and link local IPv6 addresses will be in the left
+       column.  2 "routers", and IPv6 multicast will be in the center column and everything else will be in the right column.
 
-       Column locations are determined by the first match while searching from the top of the input.  Overlapping regex's can be used with  the  understanding  that
-       the first match will determine the location.  The broadest regex's should be near the bottom of the position specification.
+       Column locations are determined by the first match while searching from the top of the input.  Overlapping regex's can be used with the understanding that the first match  will  deter‐
+       mine the location.  The broadest regex's should be near the bottom of the position specification.
 
 SIGNALS
        USR1   on receipt of signal USR1, and if enabled with --signal-export, EtherApe will dump its state to the chosen xml file.
@@ -109,4 +107,4 @@ AUTHORS
 
        Riccardo Ghetta <bchiara@users.sourceforge.net>
 
-                                                                        EtherApe Manual Page                                                             etherape(1)
+                                                                                      EtherApe Manual Page                                                                          etherape(1)

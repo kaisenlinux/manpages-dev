@@ -1,4 +1,4 @@
-VERSION:(8)                                                        System Administration Utilities                                                       VERSION:(8)
+VERSION:(8)                                                                     System Administration Utilities                                                                     VERSION:(8)
 
 NAME
        lxctl - utility to manage Linux Containers (LXC)
@@ -221,4 +221,4 @@ SEE ALSO
 
        should give you access to the complete manual.
 
-Version: 0.3.0                                                                June 2012                                                                  VERSION:(8)
+Version: 0.3.0                                                                             June 2012                                                                                VERSION:(8)

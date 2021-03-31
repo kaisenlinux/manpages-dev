@@ -1,4 +1,4 @@
-rsbackup(1)                                                            General Commands Manual                                                           rsbackup(1)
+rsbackup(1)                                                                         General Commands Manual                                                                         rsbackup(1)
 
 NAME
        rsbackup - rsync-based backup utility
@@ -9,8 +9,8 @@ SYNOPSIS
        rsbackup --retire-device [OPTIONS] [--] DEVICE...
 
 DESCRIPTION
-       rsbackup  backs  up  files from one or more (remote) destinations to a single backup storage directory, preserving their contents, layout, ownership, permis‐
-       sions, timestamps and hardlink structure.
+       rsbackup  backs up files from one or more (remote) destinations to a single backup storage directory, preserving their contents, layout, ownership, permissions, timestamps and hardlink
+       structure.
 
        Incremental backups are achieved by hard-linking identical files within successive backups of the same files.
 
@@ -26,15 +26,14 @@ OPTIONS
        --retire-device
               Retire the named devices.  Retiring a device only means deleting the records of it.  Files on the device itself are not touched.
 
-              If the device is still listed in the configuration file then you will be asked whether you really want to retire it; you can suppress this check  with
-              the --force option.
+              If the device is still listed in the configuration file then you will be asked whether you really want to retire it; you can suppress this check with the --force option.
 
        --retire
-              Retire  the  named  hosts and volumes.  Retiring a volume means deleting any available backups for the volume and the records of them.  Records corre‐
-              sponding to backups on unavailable devices are not removed.
+              Retire the named hosts and volumes.  Retiring a volume means deleting any available backups for the volume and the records of them.  Records corresponding to backups on unavail‐
+              able devices are not removed.
 
-              If you just want to remove backup records for retired volumes but want to keep the backups, you should either manually remove the records (see  SCHEMA
-              below), or rename it within the volume.
+              If you just want to remove backup records for retired volumes but want to keep the backups, you should either manually remove the records (see SCHEMA below), or rename it within
+              the volume.
 
               Since this command deletes backups, you will be prompted to confirm it.  You can suppress this check with the --force option.
 
@@ -66,8 +65,8 @@ OPTIONS
               The path to the configuration file.  The default is /etc/rsbackup/config.
 
        --store PATH, -s PATH
-              Specify  the destination directory to back up to.  Using this option (possibly more than once) is equivalent to removing the store directives from the
-              configuration file and replacing them with the paths give in --store options.
+              Specify the destination directory to back up to.  Using this option (possibly more than once) is equivalent to removing the store directives from the configuration file and  re‐
+              placing them with the paths give in --store options.
 
               This option implicitly enables the --warn-store option.
 
@@ -129,8 +128,7 @@ OPTIONS
               Suppress display of errors from rsync.
 
    Volume Selection
-       The list of selectors on the command line determines what subset of the known volumes are backed up, pruned or retired.  The following selectors  are  possi‐
-       ble:
+       The list of selectors on the command line determines what subset of the known volumes are backed up, pruned or retired.  The following selectors are possible:
 
        HOST            Select all volumes for the host.
 
@@ -142,8 +140,8 @@ OPTIONS
 
        *               Select all volumes.
 
-       If  no  hosts or volumes are specified on the command line then all volumes are selected for backing up or pruning.  For retiring, you must explicitly select
-       hosts or volumes to retire and only positive selections are possible.
+       If  no  hosts or volumes are specified on the command line then all volumes are selected for backing up or pruning.  For retiring, you must explicitly select hosts or volumes to retire
+       and only positive selections are possible.
 
 BACKUP LIFECYCLE
    Adding A New Host
@@ -165,8 +163,8 @@ BACKUP LIFECYCLE
        You may want to set per-volume values for prune-parameter prune-age, max-age and prune-parameter min-backups.
 
    Adding A New Device
-       To add a new device, format and mount it and create a device-id file in its top-level directory.  Add a device entry for it in the configuration file  and  a
-       store entry mentioning its usual mount point.
+       To add a new device, format and mount it and create a device-id file in its top-level directory.  Add a device entry for it in the configuration file and a store entry  mentioning  its
+       usual mount point.
 
        Under normal circumstances you should make sure that the backup filesystem is owned by root and mode 0700.
 
@@ -184,14 +182,12 @@ BACKUP LIFECYCLE
 
        You will probably want to automate this.
 
-       An  "incomplete  backup"  occurs  when a backup of a volume fails or is interrupted before completion.  They are not immediately deleted because rsync may be
-       able to use the files already transferred to save effort on subsequent backups on the same day, or (if there are no complete backups to use for this purpose)
-       later days.
+       An  "incomplete backup" occurs when a backup of a volume fails or is interrupted before completion.  They are not immediately deleted because rsync may be able to use the files already
+       transferred to save effort on subsequent backups on the same day, or (if there are no complete backups to use for this purpose) later days.
 
    Retiring A Host
-       Retiring  a  host  means removing all backups for it.  The suggested approach is to remove configuration for it and then use rsbackup --retire HOST to remove
-       its backups too.  You can do this the other way around but you will be prompted to check you really meant to remove backups for a host still  listed  in  the
-       configuration file.
+       Retiring a host means removing all backups for it.  The suggested approach is to remove configuration for it and then use rsbackup --retire HOST to remove its backups too.  You can  do
+       this the other way around but you will be prompted to check you really meant to remove backups for a host still listed in the configuration file.
 
        If any of the backups for the host are on a retired device you should retire that device first.
 
@@ -201,8 +197,8 @@ BACKUP LIFECYCLE
        You can retire multiple hosts and volumes in a single command.
 
    Retiring A Device
-       Retiring  a  device just means removing the records for it.  Use rsbackup --retire-device DEVICE to do this.  The contents of the device are not modified; if
-       you want that you must do it manually.
+       Retiring a device just means removing the records for it.  Use rsbackup --retire-device DEVICE to do this.  The contents of the device are not modified; if you want that you must do it
+       manually.
 
        You can retire multiple devices in a single command.
 
@@ -210,22 +206,20 @@ RESTORING
        Restore costs extra l-)
 
    Manual Restore
-       The backup has the same layout, permissions etc as the original system, so it's perfectly possible to simply copy files from  a  backup  directory  to  their
-       proper location.
+       The backup has the same layout, permissions etc as the original system, so it's perfectly possible to simply copy files from a backup directory to their proper location.
 
        Be careful to get file ownership right.  The backup is stored with the same numeric user and group ID as the original system used.
 
-       Until  a  backup  is  completed, or while one is being pruned, a corresponding .incomplete file will exist.  Check for such a file before restoring any given
-       backup.
+       Until a backup is completed, or while one is being pruned, a corresponding .incomplete file will exist.  Check for such a file before restoring any given backup.
 
    Restoring With rsync
-       Supposing that host chymax has a volume called users in which user home directories are backed up, and user rjk wants their entire home directory to  be  re‐
-       stored, an example restore command might be:
+       Supposing that host chymax has a volume called users in which user home directories are backed up, and user rjk wants their entire home directory to be  restored,  an  example  restore
+       command might be:
 
            rsync -aSHAXz --numeric-ids /store/chymax/users/2010-04-01/rjk/. chymax:~rjk/.
 
-       You  could  add  the --delete option if you wanted to restore to exactly the status quo ante, or at the opposite extreme --existing if you only wanted to re‐
-       store files that had been deleted.
+       You  could  add  the  --delete  option  if you wanted to restore to exactly the status quo ante, or at the opposite extreme --existing if you only wanted to restore files that had been
+       deleted.
 
        You might prefer to rsync back into a staging area and then pick files out manually.
 
@@ -239,8 +233,8 @@ STORE VALIDITY
               The store can be used for a backup.
 
        unavailable
-              The store cannot be used for a backup.  Normally this does not generate an error but --warn-store can be used to report warnings for  all  unavailable
-              stores, and if no store is available then the problems with the unavailable stores are described.
+              The store cannot be used for a backup.  Normally this does not generate an error but --warn-store can be used to report warnings for all unavailable stores, and if no  store  is
+              available then the problems with the unavailable stores are described.
 
        bad    The store cannot be used for a backup.  This always generates an error message, but does not prevent backups to other stores taking place.
 
@@ -298,8 +292,7 @@ SCHEMA
 
        device    The name of the device the backup was written to.
 
-       id        The  unique identifier for the backup.  Currently this is the date the backup was made, in the format YYYY-MM-DD but this may be changed in the fu‐
-                 ture.
+       id        The unique identifier for the backup.  Currently this is the date the backup was made, in the format YYYY-MM-DD but this may be changed in the future.
 
        time      The time that the backup was started, as a time_t.
 
@@ -325,15 +318,14 @@ SCHEMA
 
        5      Pruning has completed.
 
-       rsbackup is not designed with concurrent access to this table in mind.  Therefore it is recommended that you only modify its contents when the program is not
-       running.
+       rsbackup is not designed with concurrent access to this table in mind.  Therefore it is recommended that you only modify its contents when the program is not running.
 
 HISTORICAL BEHAVIOR
-       Older versions of rsbackup stored the logs for each backup in a separate file.  If such files are encountered then rsbackup will automatically populate back‐
-       ups.db from them and then delete them.
+       Older  versions  of  rsbackup stored the logs for each backup in a separate file.  If such files are encountered then rsbackup will automatically populate backups.db from them and then
+       delete them.
 
-       Older versions of rsbackup logged pruning information to a pruning logfile.  These files will be deleted at the same rate as records of pruned backups in the
-       database.  They are not included in the report.
+       Older versions of rsbackup logged pruning information to a pruning logfile.  These files will be deleted at the same rate as records of pruned backups in the database.   They  are  not
+       included in the report.
 
 SEE ALSO
        rsbackup-graph(1), rsbackup.cron(1), rsbackup-mount(1), rsbackup-snapshot-hook(1), rsync(1), rsbackup(5)
@@ -341,4 +333,4 @@ SEE ALSO
 AUTHOR
        Richard Kettlewell <rjk@greenend.org.uk>
 
-                                                                                                                                                         rsbackup(1)
+                                                                                                                                                                                    rsbackup(1)

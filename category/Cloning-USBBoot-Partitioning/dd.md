@@ -1,4 +1,4 @@
-DD(1)                                                                       User Commands                                                                      DD(1)
+DD(1)                                                                                    User Commands                                                                                    DD(1)
 
 NAME
        dd - convert and copy a file
@@ -45,11 +45,11 @@ DESCRIPTION
        skip=N skip N ibs-sized blocks at start of input
 
        status=LEVEL
-              The  LEVEL  of  information  to  print  to stderr; 'none' suppresses everything but error messages, 'noxfer' suppresses the final transfer statistics,
-              'progress' shows periodic transfer statistics
+              The LEVEL of information to print to stderr; 'none' suppresses everything but error messages, 'noxfer' suppresses the final transfer statistics, 'progress' shows periodic trans‐
+              fer statistics
 
-       N and BYTES may be followed by the following multiplicative suffixes: c=1, w=2, b=512, kB=1000, K=1024, MB=1000*1000, M=1024*1024,  xM=M,  GB=1000*1000*1000,
-       G=1024*1024*1024, and so on for T, P, E, Z, Y.  Binary prefixes can be used, too: KiB=K, MiB=M, and so on.
+       N and BYTES may be followed by the following multiplicative suffixes: c=1, w=2, b=512, kB=1000, K=1024, MB=1000*1000, M=1024*1024, xM=M, GB=1000*1000*1000, G=1024*1024*1024, and so  on
+       for T, P, E, Z, Y.  Binary prefixes can be used, too: KiB=K, MiB=M, and so on.
 
        Each CONV symbol may be:
 
@@ -153,4 +153,4 @@ SEE ALSO
        Full documentation <https://www.gnu.org/software/coreutils/dd>
        or available locally via: info '(coreutils) dd invocation'
 
-GNU coreutils 8.32                                                         September 2020                                                                      DD(1)
+GNU coreutils 8.32                                                                       September 2020                                                                                   DD(1)

@@ -1,4 +1,4 @@
-ipv6calc(8)                                                             system administration                                                            ipv6calc(8)
+ipv6calc(8)                                                                          system administration                                                                          ipv6calc(8)
 
 NAME
        ipv6calc - format and calculate IPv6/IPv4/MAC
@@ -157,4 +157,4 @@ COPYRIGHT
 AUTHORS
        Peter Bieringer <pb@bieringer.de>
 
-Peter Bieringer <pb@bieringer.de>                                              0.99.0                                                                    ipv6calc(8)
+Peter Bieringer <pb@bieringer.de>                                                            0.99.0                                                                                 ipv6calc(8)

@@ -1,4 +1,4 @@
-BTRFS-MAP-LOGICAL(8)                                                        Btrfs Manual                                                        BTRFS-MAP-LOGICAL(8)
+BTRFS-MAP-LOGICAL(8)                                                                      Btrfs Manual                                                                     BTRFS-MAP-LOGICAL(8)
 
 NAME
        btrfs-map-logical - map btrfs logical extent to physical extent
@@ -30,4 +30,4 @@ EXIT STATUS
 SEE ALSO
        mkfs.btrfs(8)
 
-Btrfs v5.10                                                                  01/18/2021                                                         BTRFS-MAP-LOGICAL(8)
+Btrfs v5.10.1                                                                              02/05/2021                                                                      BTRFS-MAP-LOGICAL(8)

@@ -1,4 +1,4 @@
-XFREERDP(1)                                                                   xfreerdp                                                                   XFREERDP(1)
+XFREERDP(1)                                                                                 xfreerdp                                                                                XFREERDP(1)
 
 NAME
        xfreerdp - FreeRDP X11 client
@@ -7,8 +7,8 @@ SYNOPSIS
        xfreerdp [file] [options] [/v:server[:port]]
 
 DESCRIPTION
-       xfreerdp is an X11 Remote Desktop Protocol (RDP) client which is part of the FreeRDP project. An RDP server is built-in to many editions of Windows.
-       Alternative servers included xrdp and VRDP (VirtualBox).
+       xfreerdp is an X11 Remote Desktop Protocol (RDP) client which is part of the FreeRDP project. An RDP server is built-in to many editions of Windows. Alternative servers included xrdp
+       and VRDP (VirtualBox).
 
 OPTIONS
        /a:addin[,options], /addin:addin[,options]
@@ -84,10 +84,10 @@ OPTIONS
            Print the build configuration
 
        /cert:[deny,ignore,name:name,tofu,fingerprint:hash:hash as hex[,fingerprint:hash:another hash]]
-           Certificate accept options. Use with care! * deny ... Automatically abort connection if the certificate does not match, no user interaction. * ignore ...
-           Ignore the certificate checks altogether (overrules all other options) * name ... Use the alternate <name> instead of the certificate subject to match
-           locally stored certificates * tofu ... Accept certificate unconditionally on first connect and deny on subsequent connections if the certificate does not
-           match * fingerprints ... A list of certificate hashes that are accepted unconditionally for a connection
+           Certificate accept options. Use with care! * deny ... Automatically abort connection if the certificate does not match, no user interaction. * ignore ... Ignore the certificate
+           checks altogether (overrules all other options) * name ... Use the alternate <name> instead of the certificate subject to match locally stored certificates * tofu ... Accept
+           certificate unconditionally on first connect and deny on subsequent connections if the certificate does not match * fingerprints ... A list of certificate hashes that are accepted
+           unconditionally for a connection
 
        /cert-deny
            [deprecated, use /cert:deny] Automatically abort connection for any certificate that can not be validated.
@@ -107,8 +107,8 @@ OPTIONS
        /client-hostname:name
            Client Hostname to send to server
 
-       -clipboard
-           Redirect clipboard (default:on)
+       /clipboard:[use-selection:atom]
+           Redirect clipboard. * use-selection:<atom> ... (X11) Specify which X selection to access. Default is CLIPBOARD. PRIMARY is the X-style middle-click selection. (default:on)
 
        /codec-cache:[rfx|nsc|jpeg]
            Bitmap codec cache
@@ -132,8 +132,8 @@ OPTIONS
            Display control
 
        /drive:name,path
-           Redirect directory <path> as named share <name>. Hotplug support is enabled with /drive:hotplug,*. This argument provides the same function as "Drives
-           that I plug in later" option in MSTSC.
+           Redirect directory <path> as named share <name>. Hotplug support is enabled with /drive:hotplug,*. This argument provides the same function as "Drives that I plug in later" option
+           in MSTSC.
 
        +drives
            Redirect all mount points as shares (default:off)
@@ -251,6 +251,9 @@ OPTIONS
 
        /kbd-lang-list
            List keyboard languages
+
+       /kbd-remap:List of key=value,... pairs to remap scancodes
+           Keyboard scancode remapping
 
        /kbd-subtype:id
            Keyboard subtype
@@ -504,16 +507,15 @@ OPTIONS
 
 ENVIRONMENT VARIABLES
        wlog environment variable
-           xfreerdp uses wLog as its log facility, you can refer to the corresponding man page (wlog(7)) for more informations. Arguments passed via the /log-level
-           or /log-filters have precedence over the environment variables.
+           xfreerdp uses wLog as its log facility, you can refer to the corresponding man page (wlog(7)) for more informations. Arguments passed via the /log-level or /log-filters have
+           precedence over the environment variables.
 
 EXAMPLES
        xfreerdp connection.rdp /p:Pwd123! /f
            Connect in fullscreen mode using a stored configuration connection.rdp and the password Pwd123!
 
        xfreerdp /u:USER /size:50%h /v:rdp.contoso.com
-           Connect to host rdp.contoso.com with user USER and a size of 50 percent of the height. If width (w) is set instead of height (h) like /size:50%w. 50
-           percent of the width is used.
+           Connect to host rdp.contoso.com with user USER and a size of 50 percent of the height. If width (w) is set instead of height (h) like /size:50%w. 50 percent of the width is used.
 
        xfreerdp /u:CONTOSO\\JohnDoe /p:Pwd123! /v:rdp.contoso.com
            Connect to host rdp.contoso.com with user CONTOSO\\JohnDoe and password Pwd123!
@@ -522,8 +524,8 @@ EXAMPLES
            Connect to host 192.168.1.100 on port 4489 with user JohnDoe, password Pwd123!. The screen width is set to 1366 and the height to 768
 
        xfreerdp /u:JohnDoe /p:Pwd123! /vmconnect:C824F53E-95D2-46C6-9A18-23A5BB403532 /v:192.168.1.100
-           Establish a connection to host 192.168.1.100 with user JohnDoe, password Pwd123!  and connect to Hyper-V console (use port 2179, disable negotiation)
-           with VMID C824F53E-95D2-46C6-9A18-23A5BB403532
+           Establish a connection to host 192.168.1.100 with user JohnDoe, password Pwd123!  and connect to Hyper-V console (use port 2179, disable negotiation) with VMID
+           C824F53E-95D2-46C6-9A18-23A5BB403532
 
        +clipboard
            Activate clipboard redirection
@@ -561,4 +563,4 @@ LINKS
 AUTHOR
        The FreeRDP Team
 
-freerdp                                                                      2020-08-25                                                                  XFREERDP(1)
+freerdp                                                                                    2021-02-25                                                                               XFREERDP(1)

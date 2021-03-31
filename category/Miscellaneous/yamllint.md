@@ -1,12 +1,11 @@
-YAMLLINT(1)                                                                   yamllint                                                                   YAMLLINT(1)
+YAMLLINT(1)                                                                                 yamllint                                                                                YAMLLINT(1)
 
 NAME
        yamllint -
 
        A linter for YAML files.
 
-       yamllint does not only check for syntax validity, but for weirdnesses like key repetition and cosmetic problems such as lines length, trailing spaces, inden‐
-       tation, etc.
+       yamllint does not only check for syntax validity, but for weirdnesses like key repetition and cosmetic problems such as lines length, trailing spaces, indentation, etc.
 
 SCREENSHOT
        [image: yamllint screenshot] [image]
@@ -45,11 +44,10 @@ TABLE OF CONTENTS
             10:1      error    too many blank lines (4 > 2)  (empty-lines)
             11:4      error    too many spaces inside braces  (braces)
 
-       By default, the output of yamllint is colored when run from a terminal, and pure text in other cases. Add the -f standard arguments to force non-colored out‐
-       put. Use the -f colored arguments to force colored output.
+       By  default, the output of yamllint is colored when run from a terminal, and pure text in other cases. Add the -f standard arguments to force non-colored output. Use the -f colored ar‐
+       guments to force colored output.
 
-       Add the -f parsable arguments if you need an output format parsable by a machine (for instance for syntax highlighting in text editors). The output will then
-       look like:
+       Add the -f parsable arguments if you need an output format parsable by a machine (for instance for syntax highlighting in text editors). The output will then look like:
 
           file.yml:6:2: [warning] missing starting space in comment (comments)
           file.yml:57:1: [error] trailing spaces (trailing-spaces)
@@ -63,8 +61,8 @@ TABLE OF CONTENTS
           If you have a .yamllint file in your working directory, it will be automatically loaded as configuration by yamllint.
 
    Configuration
-       yamllint uses a set of rules to check source files for problems.  Each rule is independent from the others, and can be  enabled,  disabled  or  tweaked.  All
-       these settings can be gathered in a configuration file.
+       yamllint uses a set of rules to check source files for problems.  Each rule is independent from the others, and can be enabled, disabled or tweaked. All these settings can be  gathered
+       in a configuration file.
 
        To use a custom configuration file, use the -c option:
 
@@ -158,8 +156,7 @@ TABLE OF CONTENTS
           yamllint -d relaxed file.yml
 
    Extending the default configuration
-       When writing a custom configuration file, you don't need to redefine every rule. Just extend the default configuration (or any already-existing configuration
-       file).
+       When writing a custom configuration file, you don't need to redefine every rule. Just extend the default configuration (or any already-existing configuration file).
 
        For instance, if you just want to disable the comments-indentation rule, your file could look like this:
 
@@ -199,8 +196,8 @@ TABLE OF CONTENTS
           yamllint -d "{extends: relaxed, rules: {line-length: {max: 120}}}" file.yaml
 
    Errors and warnings
-       Problems detected by yamllint can be raised either as errors or as warnings.  The CLI will output them (with different colors when using the  colored  output
-       format, or auto when run from a terminal).
+       Problems  detected  by  yamllint  can be raised either as errors or as warnings.  The CLI will output them (with different colors when using the colored output format, or auto when run
+       from a terminal).
 
        By default the script will exit with a return code 1 only when there is one or more error(s).
 
@@ -246,8 +243,7 @@ TABLE OF CONTENTS
                 /this-file-has-trailing-spaces-but-it-is-OK.yaml
                 /generated/*.yaml
 
-       Note  that this .gitignore-style path pattern allows complex path exclusion/inclusion, see the pathspec README file for more details.  Here is a more complex
-       example:
+       Note that this .gitignore-style path pattern allows complex path exclusion/inclusion, see the pathspec README file for more details.  Here is a more complex example:
 
           # For all rules
           ignore: |
@@ -268,11 +264,10 @@ TABLE OF CONTENTS
                 ascii-art/*
 
    Setting the locale
-       It is possible to set the locale option globally. This is passed to Python's locale.setlocale, so an empty string "" will  use  the  system  default  locale,
-       while e.g.  "en_US.UTF-8" will use that.
+       It is possible to set the locale option globally. This is passed to Python's locale.setlocale, so an empty string "" will use the system default locale, while e.g.  "en_US.UTF-8"  will
+       use that.
 
-       Currently  this only affects the key-ordering rule. The default will order by Unicode code point number, while locales will sort case and accents properly as
-       well.
+       Currently this only affects the key-ordering rule. The default will order by Unicode code point number, while locales will sort case and accents properly as well.
 
           extends: default
 
@@ -333,8 +328,8 @@ TABLE OF CONTENTS
 
        Options
 
-       • forbid is used to forbid the use of flow mappings which are denoted by surrounding braces ({ and }). Use true to forbid  the  use  of  flow  mappings  com‐
-         pletely.
+       • forbid  is  used to forbid the use of flow mappings which are denoted by surrounding braces ({ and }). Use true to forbid the use of flow mappings completely. Use non-empty to forbid
+         the use of all flow mappings except for empty ones.
 
        • min-spaces-inside defines the minimal number of spaces required inside braces.
 
@@ -368,7 +363,17 @@ TABLE OF CONTENTS
 
              object: { key1: 4, key2: 8 }
 
-       2. With braces: {min-spaces-inside: 0, max-spaces-inside: 0}
+       2. With braces: {forbid: non-empty}
+
+          the following code snippet would PASS:
+
+             object: {}
+
+          the following code snippet would FAIL:
+
+             object: { key1: 4, key2: 8 }
+
+       3. With braces: {min-spaces-inside: 0, max-spaces-inside: 0}
 
           the following code snippet would PASS:
 
@@ -378,7 +383,7 @@ TABLE OF CONTENTS
 
              object: { key1: 4, key2: 8 }
 
-       3. With braces: {min-spaces-inside: 1, max-spaces-inside: 3}
+       4. With braces: {min-spaces-inside: 1, max-spaces-inside: 3}
 
           the following code snippet would PASS:
 
@@ -396,7 +401,7 @@ TABLE OF CONTENTS
 
              object: {key1: 4, key2: 8 }
 
-       4. With braces: {min-spaces-inside-empty: 0, max-spaces-inside-empty: 0}
+       5. With braces: {min-spaces-inside-empty: 0, max-spaces-inside-empty: 0}
 
           the following code snippet would PASS:
 
@@ -406,7 +411,7 @@ TABLE OF CONTENTS
 
              object: { }
 
-       5. With braces: {min-spaces-inside-empty: 1, max-spaces-inside-empty: -1}
+       6. With braces: {min-spaces-inside-empty: 1, max-spaces-inside-empty: -1}
 
           the following code snippet would PASS:
 
@@ -421,8 +426,8 @@ TABLE OF CONTENTS
 
        Options
 
-       • forbid  is  used to forbid the use of flow sequences which are denoted by surrounding brackets ([ and ]). Use true to forbid the use of flow sequences com‐
-         pletely.
+       • forbid is used to forbid the use of flow sequences which are denoted by surrounding brackets ([ and ]). Use true to forbid the use of flow sequences completely. Use non-empty to for‐
+         bid the use of all flow sequences except for empty ones.
 
        • min-spaces-inside defines the minimal number of spaces required inside brackets.
 
@@ -457,7 +462,17 @@ TABLE OF CONTENTS
 
              object: [ 1, 2, abc ]
 
-       2. With brackets: {min-spaces-inside: 0, max-spaces-inside: 0}
+       2. With brackets: {forbid: non-empty}
+
+          the following code snippet would PASS:
+
+             object: []
+
+          the following code snippet would FAIL:
+
+             object: [ 1, 2, abc ]
+
+       3. With brackets: {min-spaces-inside: 0, max-spaces-inside: 0}
 
           the following code snippet would PASS:
 
@@ -467,7 +482,7 @@ TABLE OF CONTENTS
 
              object: [ 1, 2, abc ]
 
-       3. With brackets: {min-spaces-inside: 1, max-spaces-inside: 3}
+       4. With brackets: {min-spaces-inside: 1, max-spaces-inside: 3}
 
           the following code snippet would PASS:
 
@@ -485,7 +500,7 @@ TABLE OF CONTENTS
 
              object: [1, 2, abc ]
 
-       4. With brackets: {min-spaces-inside-empty: 0, max-spaces-inside-empty: 0}
+       5. With brackets: {min-spaces-inside-empty: 0, max-spaces-inside-empty: 0}
 
           the following code snippet would PASS:
 
@@ -495,7 +510,7 @@ TABLE OF CONTENTS
 
              object: [ ]
 
-       5. With brackets: {min-spaces-inside-empty: 1, max-spaces-inside-empty: -1}
+       6. With brackets: {min-spaces-inside-empty: 1, max-spaces-inside-empty: -1}
 
           the following code snippet would PASS:
 
@@ -644,8 +659,7 @@ TABLE OF CONTENTS
 
        • Use ignore-shebangs to ignore a shebang at the beginning of the file when require-starting-space is set.
 
-       • min-spaces-from-content is used to visually separate inline comments from content. It defines the minimal required number of spaces between a  comment  and
-         its preceding content.
+       • min-spaces-from-content is used to visually separate inline comments from content. It defines the minimal required number of spaces between a comment and its preceding content.
 
        Default values (when enabled)
 
@@ -987,12 +1001,12 @@ TABLE OF CONTENTS
 
        Options
 
-       • spaces  defines  the  indentation width, in spaces. Set either to an integer (e.g. 2 or 4, representing the number of spaces in an indentation level) or to
-         consistent to allow any number, as long as it remains the same within the file.
+       • spaces  defines the indentation width, in spaces. Set either to an integer (e.g. 2 or 4, representing the number of spaces in an indentation level) or to consistent to allow any num‐
+         ber, as long as it remains the same within the file.
 
-       • indent-sequences defines whether block sequences should be indented or not (when in a mapping, this indentation is not mandatory --  some  people  perceive
-         the - as part of the indentation). Possible values: true, false, whatever and consistent. consistent requires either all block sequences to be indented, or
-         none to be. whatever means either indenting or not indenting individual block sequences is OK.
+       • indent-sequences defines whether block sequences should be indented or not (when in a mapping, this indentation is not mandatory -- some people perceive the - as part of the indenta‐
+         tion). Possible values: true, false, whatever and consistent. consistent requires either all block sequences to be indented, or none to be. whatever means either indenting or not in‐
+         denting individual block sequences is OK.
 
        • check-multi-line-strings defines whether to lint indentation in multi-line strings. Set to true to enable, false to disable.
 
@@ -1182,9 +1196,8 @@ TABLE OF CONTENTS
              : 2
 
    key-ordering
-       Use this rule to enforce alphabetical ordering of keys in mappings. The sorting order uses the Unicode code point number as a default. As a result,  the  or‐
-       dering  is  case-sensitive  and not accent-friendly (see examples below).  This can be changed by setting the global locale option.  This allows to sort case
-       and accents properly.
+       Use this rule to enforce alphabetical ordering of keys in mappings. The sorting order uses the Unicode code point number as a default. As a result, the ordering is  case-sensitive  and
+       not accent-friendly (see examples below).  This can be changed by setting the global locale option.  This allows to sort case and accents properly.
 
        Examples
 
@@ -1242,15 +1255,12 @@ TABLE OF CONTENTS
    line-length
        Use this rule to set a limit to lines length.
 
-       Note: with Python 2, the line-length rule may not work properly with unicode characters because of the way strings are represented  in  bytes.  We  recommend
-       running yamllint with Python 3.
-
        Options
 
        • max defines the maximal (inclusive) length of lines.
 
-       • allow-non-breakable-words  is  used to allow non breakable words (without spaces inside) to overflow the limit. This is useful for long URLs, for instance.
-         Use true to allow, false to forbid.
+       • allow-non-breakable-words  is used to allow non breakable words (without spaces inside) to overflow the limit. This is useful for long URLs, for instance. Use true to allow, false to
+         forbid.
 
        • allow-non-breakable-inline-mappings implies allow-non-breakable-words and extends it to also allow non-breakable words in inline mappings.
 
@@ -1317,8 +1327,7 @@ TABLE OF CONTENTS
    new-line-at-end-of-file
        Use this rule to require a new line character (\n) at the end of files.
 
-       The POSIX standard requires the last line to end with a new line character.  All UNIX tools expect a new line at the end of files. Most text editors use this
-       convention too.
+       The POSIX standard requires the last line to end with a new line character.  All UNIX tools expect a new line at the end of files. Most text editors use this convention too.
 
    new-lines
        Use this rule to force the type of new line characters.
@@ -1334,8 +1343,8 @@ TABLE OF CONTENTS
               type: unix
 
    octal-values
-       Use this rule to prevent values with octal numbers. In YAML, numbers that start with 0 are interpreted as octal, but this is not always wanted.  For instance
-       010 is the city code of Beijing, and should not be converted to 8.
+       Use this rule to prevent values with octal numbers. In YAML, numbers that start with 0 are interpreted as octal, but this is not always wanted.  For instance 010 is the  city  code  of
+       Beijing, and should not be converted to 8.
 
        Options
 
@@ -1382,8 +1391,7 @@ TABLE OF CONTENTS
                city-code: 0o10
 
    quoted-strings
-       Use this rule to forbid any string values that are not quoted, or to prevent quoted strings without needing it. You can also enforce the type  of  the  quote
-       used.
+       Use this rule to forbid any string values that are not quoted, or to prevent quoted strings without needing it. You can also enforce the type of the quote used.
 
        Options
 
@@ -1391,8 +1399,8 @@ TABLE OF CONTENTS
 
        • required defines whether using quotes in string values is required (true, default) or not (false), or only allowed when really needed (only-when-needed).
 
-       • extra-required  is  a  list of PCRE regexes to force string values to be quoted, if they match any regex. This option can only be used with required: false
-         and  required: only-when-needed.
+       • extra-required  is  a  list  of  PCRE  regexes  to  force  string  values  to  be  quoted,  if  they match any regex. This option can only be used with required: false and  required:
+         only-when-needed.
 
        • extra-allowed is a list of PCRE regexes to allow quoted string values, even if required: only-when-needed is set.
 
@@ -1488,13 +1496,12 @@ TABLE OF CONTENTS
    truthy
        Use this rule to forbid non-explictly typed truthy values other than allowed ones (by default: true and false), for example YES or off.
 
-       This can be useful to prevent surprises from YAML parsers transforming [yes, FALSE, Off] into [true, false, false] or {y: 1, yes: 2, on: 3, true: 4, True: 5}
-       into {y: 1, true: 5}.
+       This can be useful to prevent surprises from YAML parsers transforming [yes, FALSE, Off] into [true, false, false] or {y: 1, yes: 2, on: 3, true: 4, True: 5} into {y: 1, true: 5}.
 
        Options
 
-       • allowed-values  defines  the  list  of truthy values which will be ignored during linting. The default is ['true', 'false'], but can be changed to any list
-         containing: 'TRUE', 'True',  'true', 'FALSE', 'False', 'false', 'YES', 'Yes', 'yes', 'NO', 'No', 'no', 'ON', 'On', 'on', 'OFF', 'Off', 'off'.
+       • allowed-values defines the list of truthy values which will be ignored during linting. The default is ['true', 'false'], but can be changed to any list  containing:  'TRUE',  'True',
+         'true', 'FALSE', 'False', 'false', 'YES', 'Yes', 'yes', 'NO', 'No', 'no', 'ON', 'On', 'on', 'OFF', 'Off', 'off'.
 
        • check-keys disables verification for keys in mappings. By default, truthy rule applies to both keys and values. Set this option to false to prevent this.
 
@@ -1578,8 +1585,7 @@ TABLE OF CONTENTS
 
    Disable with comments
    Disabling checks for a specific line
-       To prevent yamllint from reporting problems for a specific line, add a directive comment (# yamllint disable-line ...) on that line, or on  the  line  above.
-       For instance:
+       To prevent yamllint from reporting problems for a specific line, add a directive comment (# yamllint disable-line ...) on that line, or on the line above. For instance:
 
           # The following mapping contains the same key twice,
           # but I know what I'm doing:
@@ -1609,8 +1615,8 @@ TABLE OF CONTENTS
        If you need to disable multiple rules, it is allowed to chain rules like this: # yamllint disable-line rule:hyphens rule:commas rule:indentation.
 
    Disabling checks for all (or part of) the file
-       To prevent yamllint from reporting problems for the whole file, or for a block of lines within the file, use # yamllint disable ... and # yamllint enable ...
-       directive comments. For instance:
+       To  prevent  yamllint  from reporting problems for the whole file, or for a block of lines within the file, use # yamllint disable ... and # yamllint enable ... directive comments. For
+       instance:
 
           # yamllint disable rule:colons
           - Lorem       : ipsum
@@ -1632,8 +1638,7 @@ TABLE OF CONTENTS
        If you need to disable multiple rules, it is allowed to chain rules like this: # yamllint disable rule:hyphens rule:commas rule:indentation.
 
    Disabling all checks for a file
-       To prevent yamllint from reporting problems for a specific file, add the directive comment # yamllint disable-file as the first line of the  file.   For  in‐
-       stance:
+       To prevent yamllint from reporting problems for a specific file, add the directive comment # yamllint disable-file as the first line of the file.  For instance:
 
           # yamllint disable-file
           # The following mapping contains the same key twice, but I know what I'm doing:
@@ -1686,8 +1691,8 @@ TABLE OF CONTENTS
                      • conf -- yamllint configuration object
 
    Integration with text editors
-       Most  text  editors support syntax checking and highlighting, to visually report syntax errors and warnings to the user. yamllint can be used to syntax-check
-       YAML source, but a bit of configuration is required depending on your favorite text editor.
+       Most text editors support syntax checking and highlighting, to visually report syntax errors and warnings to the user. yamllint can be used to syntax-check YAML source, but  a  bit  of
+       configuration is required depending on your favorite text editor.
 
    Vim
        Assuming that the ALE plugin is installed, yamllint is supported by default. It is automatically enabled when editing YAML files.
@@ -1721,8 +1726,8 @@ TABLE OF CONTENTS
                 args: [-c=/path/to/.yamllint]
 
    Integration with GitHub Actions
-       yamllint auto-detects when it's running inside of GitHub Actions<https://github.com/features/actions> and automatically uses the suited output format to dec‐
-       orate code with linting errors automatically. You can also force the GitHub Actions output with yamllint --format github.
+       yamllint  auto-detects when it's running inside of GitHub Actions<https://github.com/features/actions> and automatically uses the suited output format to decorate code with linting er‐
+       rors automatically. You can also force the GitHub Actions output with yamllint --format github.
 
        An example workflow using GitHub Actions:
 
@@ -1748,10 +1753,24 @@ TABLE OF CONTENTS
                 - name: Lint YAML files
                   run: yamllint .
 
+   Integration with Arcanist
+       You can configure yamllint to run on arc lint. Here is an example .arclint file that makes use of this configuration.
+
+          {
+            "linters": {
+              "yamllint": {
+                "type": "script-and-regex",
+                "script-and-regex.script": "yamllint",
+                "script-and-regex.regex": "/^(?P<line>\\d+):(?P<offset>\\d+) +(?P<severity>warning|error) +(?P<message>.*) +\\((?P<name>.*)\\)$/m",
+                "include": "(\\.(yml|yaml)$)"
+              }
+            }
+          }
+
 AUTHOR
        Adrien Vergé
 
 COPYRIGHT
        Copyright 2016, Adrien Vergé
 
-1.25.0                                                                      Dec 25, 2020                                                                 YAMLLINT(1)
+1.26.0                                                                                    Feb 06, 2021                                                                              YAMLLINT(1)

@@ -1,4 +1,4 @@
-CMOSPWD(8)                                                             System Manager's Manual                                                            CMOSPWD(8)
+CMOSPWD(8)                                                                          System Manager's Manual                                                                          CMOSPWD(8)
 
 NAME
        cmospwd - a cmos/bios password recovery tool
@@ -47,4 +47,4 @@ AUTHOR
 
        This manual page was written by Michael Prokop <mika@grml.org>, for the Debian project (but may be used by others).
 
-                                                                            July 6, 2006                                                                  CMOSPWD(8)
+                                                                                          July 6, 2006                                                                               CMOSPWD(8)

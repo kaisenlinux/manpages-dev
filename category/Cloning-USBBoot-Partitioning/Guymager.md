@@ -1,4 +1,4 @@
-guymager(1)                                                            General Commands Manual                                                           guymager(1)
+guymager(1)                                                                         General Commands Manual                                                                         guymager(1)
 
 0.8.12-1" "guymager manual pages"
 
@@ -9,11 +9,11 @@ SYNOPSIS
        guymager [log=log_file] [cfg=configuration_file] [options]
 
 DESCRIPTION
-       Guymager  is a Qt-based forensic imager. It is capable of producing image files in EWF, AFF and dd format. Its main strenghs are the easy user interface, the
-       high imaging speed and the extended acquisition info file.
+       Guymager  is a Qt-based forensic imager. It is capable of producing image files in EWF, AFF and dd format. Its main strenghs are the easy user interface, the high imaging speed and the
+       extended acquisition info file.
 
-       The internal structure is based on separate threads for reading, hash calculation (MD5 and SHA256), writing and includes a parallelised  compression  engine,
-       thus making full usage of multi-processor and hyper-threading machines.
+       The internal structure is based on separate threads for reading, hash calculation (MD5 and SHA256), writing and includes a parallelised compression engine, thus making  full  usage  of
+       multi-processor and hyper-threading machines.
 
        Guymager should be run with root privileges, as other users do not have access to physical devices normally.
 
@@ -22,15 +22,15 @@ OPTIONS
               By default, guymager uses /var/log/guymager.log as its log file. This option allows for specifying a different file.
 
        cfg=configuration_file
-              The default configuration file is /etc/guymager/guymager.cfg. This option allows for specifying a different file. Guymager creates a template configu‐
-              ration file when the option -cfg=template.cfg is given.
+              The  default configuration file is /etc/guymager/guymager.cfg. This option allows for specifying a different file. Guymager creates a template configuration file when the option
+              -cfg=template.cfg is given.
 
-       All other configuration options may be specified on the command line and/or in the configuration file. See /etc/guymager/guymager.cfg for  a  description  of
-       all possible options. In case an option is specified in the configuration file and on the command line, the command line dominates.
+       All other configuration options may be specified on the command line and/or in the configuration file. See /etc/guymager/guymager.cfg for a description of all possible options. In case
+       an option is specified in the configuration file and on the command line, the command line dominates.
 
 EXIT CODES
-       Guymager normally returns an exit code of 0. Exit code 1 means that Guymager terminated because the AutoExit function became active. All other exit codes are
-       related to internal Guymager or Qt errors.
+       Guymager  normally  returns an exit code of 0. Exit code 1 means that Guymager terminated because the AutoExit function became active. All other exit codes are related to internal Guy‐
+       mager or Qt errors.
 
 EXAMPLES
        Write all log entries to ./my.log:
@@ -47,4 +47,4 @@ EXAMPLES
 AUTHOR
        Guy Voncken (develop (at) faert.net)
 
-version 0.8.12-1                                                             2020-05-08                                                                  guymager(1)
+version 0.8.12-1                                                                           2020-05-08                                                                               guymager(1)

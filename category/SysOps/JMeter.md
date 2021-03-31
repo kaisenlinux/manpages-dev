@@ -1,4 +1,4 @@
-JMETER(1)                                                                   User Commands                                                                  JMETER(1)
+JMETER(1)                                                                                User Commands                                                                                JMETER(1)
 
 NAME
        jmeter - Apache JMeter - Load testing tool
@@ -7,12 +7,12 @@ SYNOPSIS
        jmeter [options]
 
 DESCRIPTION
-       Apache  JMeter  is  a Java application designed to load test functional behavior and measure performance. It was originally designed for testing Web Applica‐
-       tions but has since expanded to other test functions.
+       Apache JMeter is a Java application designed to load test functional behavior and measure performance. It was originally designed for testing Web Applications but has since expanded to
+       other test functions.
 
-       Apache JMeter may be used to test performance both on static and dynamic resources (files, Servlets, Perl scripts, Java Objects, Data Bases and Queries,  FTP
-       Servers  and  more). It can be used to simulate a heavy load on a server, network or object to test its strength or to analyze overall performance under dif‐
-       ferent load types. You can use it to make a graphical analysis of performance or to test your server/script/object behavior under heavy concurrent load.
+       Apache JMeter may be used to test performance both on static and dynamic resources (files, Servlets, Perl scripts, Java Objects, Data Bases and Queries, FTP Servers and more).  It  can
+       be  used  to  simulate a heavy load on a server, network or object to test its strength or to analyze overall performance under different load types. You can use it to make a graphical
+       analysis of performance or to test your server/script/object behavior under heavy concurrent load.
 
 OPTIONS
        -h, --help
@@ -131,4 +131,4 @@ EXAMPLES
 HOMEPAGE
        http://jmeter.apache.org
 
-                                                                              July 2013                                                                    JMETER(1)
+                                                                                           July 2013                                                                                  JMETER(1)

@@ -1,4 +1,4 @@
-CSSH(1p)                                                         User Contributed Perl Documentation                                                        CSSH(1p)
+CSSH(1p)                                                                      User Contributed Perl Documentation                                                                      CSSH(1p)
 
 NAME
        cssh - Cluster administration tool
@@ -7,9 +7,8 @@ VERSION
        This documentation is for version: 4.16
 
 SYNOPSIS
-       cssh [-a '<command>'] [-K <seconds>] [-q] [-c '<filename>'] [-x <cols>] [-C '<filename>'] [--debug [[...] || <INTEGER>]] [-d] [-e '<[user@]<host>[:port]>']
-       [--fillscreen] [-f '<font>'] [-h] [-L '[tag]'] [-H] [-o '<STRING>'] [-p <port>] [-Q] [-y <rows>] [-s] [-r '<filename>'] [-t '<STRING>'] [-g] [-T '<title>']
-       [-u] [-?] [-A] [-l '<username>'] [-v]
+       cssh [-a '<command>'] [-K <seconds>] [-q] [-c '<filename>'] [-x <cols>] [-C '<filename>'] [--debug [[...] || <INTEGER>]] [-d] [-e '<[user@]<host>[:port]>'] [--fillscreen] [-f '<font>']
+       [-h] [-L '[tag]'] [-H] [-o '<STRING>'] [-p <port>] [-Q] [-y <rows>] [-s] [-r '<filename>'] [-t '<STRING>'] [-g] [-T '<title>'] [-u] [-?] [-A] [-l '<username>'] [-v]
 
 RELATED
        Also see the individual man pages for each of these utilities
@@ -20,44 +19,41 @@ RELATED
        ctel - Use 'telnet' as the communication method
 
 DESCRIPTION
-       The command opens an administration console and an xterm to all specified hosts.  Any text typed into the administration console is replicated to all
-       windows.  All windows may also be typed into directly.
+       The command opens an administration console and an xterm to all specified hosts.  Any text typed into the administration console is replicated to all windows.  All windows may also be
+       typed into directly.
 
-       This tool is intended for (but not limited to) cluster administration where the same configuration or commands must be run on each node within the cluster.
-       Performing these commands all at once via this tool ensures all nodes are kept in sync.
+       This tool is intended for (but not limited to) cluster administration where the same configuration or commands must be run on each node within the cluster.  Performing these commands
+       all at once via this tool ensures all nodes are kept in sync.
 
        Connections are opened using ssh which must be correctly installed and configured.
 
-       Extra caution should be taken when editing files as lines may not necessarily be in the same order;  assuming line 5 is the same across all servers and
-       modifying that is dangerous.  It's better to search for the specific line to be changed and double-check all terminals are as expected before changes are
-       committed.
+       Extra caution should be taken when editing files as lines may not necessarily be in the same order;  assuming line 5 is the same across all servers and modifying that is dangerous.
+       It's better to search for the specific line to be changed and double-check all terminals are as expected before changes are committed.
 
    Further Notes
        Please also see "KNOWN BUGS".
 
        •   The dotted line on any sub-menu is a tear-off, i.e. click on it and the sub-menu is turned into its own window.
 
-       •   Unchecking a hostname on the Hosts sub-menu will unplug the host from the cluster control window, so any text typed into the console is not sent to that
-           host.  Re-selecting it will plug it back in.
+       •   Unchecking a hostname on the Hosts sub-menu will unplug the host from the cluster control window, so any text typed into the console is not sent to that host.  Re-selecting it will
+           plug it back in.
 
-       •   If your window manager menu bars are obscured by terminal windows see the "screen_reserve_XXXXX" options in the $HOME/.clusterssh/config file (see
-           "FILES").
+       •   If your window manager menu bars are obscured by terminal windows see the "screen_reserve_XXXXX" options in the $HOME/.clusterssh/config file (see "FILES").
 
        •   If the terminals overlap too much see the "terminal_reserve_XXXXX" options in the $HOME/.clusterssh/config file (see "FILES").
 
-       •   When using ClusterSSH on a large number of systems to connect to a single system using an SSH utility (e.g. you issue a command to to copy a file using
-           scp from the remote computers to a single host) and when these connections require authentication (i.e. you are going to authenticate with a password),
-           the sshd daemon at that location may refuse connections after the number "MaxStartups" limit in sshd_config is exceeded.  (If this value is not set, it
-           defaults to 10).  This is expected behavior; sshd uses this mechanism to prevent DoS attacks from unauthenticated sources.  Please tune sshd_config and
-           reload the SSH daemon, or consider using the ~/.ssh/authorized_keys mechanism for authentication if you encounter this problem.
+       •   When using ClusterSSH on a large number of systems to connect to a single system using an SSH utility (e.g. you issue a command to to copy a file using scp from the remote
+           computers to a single host) and when these connections require authentication (i.e. you are going to authenticate with a password), the sshd daemon at that location may refuse
+           connections after the number "MaxStartups" limit in sshd_config is exceeded.  (If this value is not set, it defaults to 10).  This is expected behavior; sshd uses this mechanism to
+           prevent DoS attacks from unauthenticated sources.  Please tune sshd_config and reload the SSH daemon, or consider using the ~/.ssh/authorized_keys mechanism for authentication if
+           you encounter this problem.
 
        •   If client windows fail to open, try running:
 
            "cssh -e {single host name}"
 
-           This will test the mechanisms used to open windows to hosts.  This could be due to either the "-xrm" terminal option which enables "AllowSendEvents"
-           (some terminals do not require this option, other terminals have another method for enabling it - see your terminal documentation) or the configuration
-           of "ssh".
+           This will test the mechanisms used to open windows to hosts.  This could be due to either the "-xrm" terminal option which enables "AllowSendEvents" (some terminals do not require
+           this option, other terminals have another method for enabling it - see your terminal documentation) or the configuration of "ssh".
 
 OPTIONS
        Some of these options may also be defined within the configuration file.  Default options are shown as appropriate.
@@ -99,15 +95,14 @@ OPTIONS
            Show basic help text and exit
 
        --list '[tag]', -L '[tag]'
-           List available cluster tags. Tag is optional.  If a tag is provided then hosts for that tag are listed.  NOTE: format of output changes when using
-           "--quiet" or "-Q" option.
+           List available cluster tags. Tag is optional.  If a tag is provided then hosts for that tag are listed.  NOTE: format of output changes when using "--quiet" or "-Q" option.
 
        --man, -H
            Show full help text (the man page) and exit
 
        --options '<STRING>', -o '<STRING>'
-           Specify arguments to be passed to ssh when making the connection.  NOTE: options for ssh should normally be put into the ssh configuration file; see
-           "ssh_config" and $HOME/.ssh/config for more details.
+           Specify arguments to be passed to ssh when making the connection.  NOTE: options for ssh should normally be put into the ssh configuration file; see "ssh_config" and
+           $HOME/.ssh/config for more details.
 
            Default: -x -o ConnectTimeout=10
 
@@ -154,8 +149,7 @@ ARGUMENTS
        The following arguments are supported:
 
        [user@]<hostname>[:port] ...
-           Open an xterm to the given hostname and connect to the administration console.  The optional port number can be used if the server is not listening on
-           the standard port.
+           Open an xterm to the given hostname and connect to the administration console.  The optional port number can be used if the server is not listening on the standard port.
 
        <tag> ...
            Open a series of xterms defined by <tag> in one of the supplementary configuration files (see "FILES").
@@ -197,12 +191,12 @@ EXAMPLES
        Open up a session to 3 servers
            $ cssh server1 server2 server3
 
-       Open up a session to a cluster of servers identified by the tag 'farm1' and give the controlling window a specific title, where the tag is defined in one of
-       the default configuration files
+       Open up a session to a cluster of servers identified by the tag 'farm1' and give the controlling window a specific title, where the tag is defined in one of the default configuration
+       files
            $ cssh -T 'Web Farm Cluster 1' farm1
 
-       Connect to different servers using different login names.  NOTE: this can also be achieved by setting up appropriate options in the configuration files.  Do
-       not close the console when the last terminal exits.
+       Connect to different servers using different login names.  NOTE: this can also be achieved by setting up appropriate options in the configuration files.  Do not close the console when
+       the last terminal exits.
            $ cssh user1@server1 admin@server2
 
        Open up a cluster defined in a non-default configuration file
@@ -213,8 +207,8 @@ EXAMPLES
 
 FILES
        /etc/clusters, $HOME/.clusterssh/clusters
-           These files contain a list of tags to server names mappings.  When any name is used on the command line it is checked to see if it is a tag.  If it is a
-           tag, then the tag is replaced with the list of servers.  The format is as follows:
+           These files contain a list of tags to server names mappings.  When any name is used on the command line it is checked to see if it is a tag.  If it is a tag, then the tag is
+           replaced with the list of servers.  The format is as follows:
 
            <tag> [user@]<server>[:port] [user@]<server>[:port] [...]
 
@@ -241,13 +235,12 @@ FILES
 
            "webservers websvr6 websvr7 websvr8 websvr9"
 
-           Extra cluster files may also be specified either as an option on the command line (see "cluster-file") or in the user's $HOME/.clusterssh/config file
-           (see "extra_cluster_file" configuration option).
+           Extra cluster files may also be specified either as an option on the command line (see "cluster-file") or in the user's $HOME/.clusterssh/config file (see "extra_cluster_file"
+           configuration option).
 
            NOTE: the last tag read overwrites any pre-existing tag of that name.
 
-           NOTE: there is a special cluster tag called "default" - any tags or hosts included within this tag will be automatically opened if nothing is specified
-           on the command line.
+           NOTE: there is a special cluster tag called "default" - any tags or hosts included within this tag will be automatically opened if nothing is specified on the command line.
 
        /etc/tags, $HOME/.clusterssh/tags
            Very similar to clusters files but the definition is reversed.  The format is:
@@ -256,14 +249,12 @@ FILES
 
            This allows one host to be specified as a member of a number of tags.  This format can be clearer than using clusters files.
 
-           Extra tag files may be specified either as an option (see "tag-file") or within the user's $HOME/.clusterssh/config file (see "extra_tag_file"
-           configuration option).
+           Extra tag files may be specified either as an option (see "tag-file") or within the user's $HOME/.clusterssh/config file (see "extra_tag_file" configuration option).
 
            NOTE: All tags are added together
 
        /etc/csshrc & $HOME/.clusterssh/config
-           This file contains configuration overrides - the defaults are as marked.  Default options are overwritten first by the global file, and then by the user
-           file.
+           This file contains configuration overrides - the defaults are as marked.  Default options are overwritten first by the global file, and then by the user file.
 
            NOTE: values for entries do not need to be quoted unless it is required for passing arguments, e.g.
 
@@ -274,8 +265,7 @@ FILES
            "terminal_allow_send_events=-xrm '*.VT100.allowSendEvents:true'"
 
            auto_close = 5
-               Close terminal window after this many seconds.  If set to 0 will instead wait on input from the user in each window before closing. See also
-               --autoclose and --no-autoclose
+               Close terminal window after this many seconds.  If set to 0 will instead wait on input from the user in each window before closing. See also --autoclose and --no-autoclose
 
            auto_quit = 1
                Automatically quit after the last client window closes.  Set to 0 to disable.  See also --autoquit
@@ -289,8 +279,8 @@ FILES
 
                command_pre= . $HOME/virtualenvs/default/bin/active ; command_post= | ct
 
-               would allow for using Python virtual envronments and then piping all shell output through "chromaterm" for syntax highlighting.  Note: you must use
-               appropriate command separators/terminators to keep the meaning of the command pipline (such as ";" and "|" between commands).
+               would allow for using Python virtual envronments and then piping all shell output through "chromaterm" for syntax highlighting.  Note: you must use appropriate command
+               separators/terminators to keep the meaning of the command pipline (such as ";" and "|" between commands).
 
                These are not put through macro parsing.
 
@@ -298,15 +288,14 @@ FILES
                Sets the default communication method (initially taken from the name of the program, but can be overridden here).
 
            console_position = <null>
-               Set the initial position of the console - if empty then let the window manager decide.  Format is '+<x>+<y>', i.e. '+0+0' is top left hand corner of
-               the screen, '+0-70' is bottom left hand side of screen (more or less).
+               Set the initial position of the console - if empty then let the window manager decide.  Format is '+<x>+<y>', i.e. '+0+0' is top left hand corner of the screen, '+0-70' is
+               bottom left hand side of screen (more or less).
 
            external_command_mode = 0600
                File mode bits for the external_command_pipe.
 
            external_command_pipe = <null>
-               Define the full path to an external command pipe that can be written to for controlling some aspects of ClusterSSH, such as opening sessions to more
-               clusters.
+               Define the full path to an external command pipe that can be written to for controlling some aspects of ClusterSSH, such as opening sessions to more clusters.
 
                Commands:
 
@@ -317,23 +306,22 @@ FILES
                e.g.: "echo 'open localhost'" /path/to/external_command_pipe >>
 
            external_cluster_command = <null>
-               Define the full path to an external command that can be used to resolve tags to host names.  This command can be written in any language.  The script
-               must accept a list of tags to resolve and output a list of hosts (space separated on a single line).  Any tags that cannot be resolved should be
-               returned unchanged.
+               Define the full path to an external command that can be used to resolve tags to host names.  This command can be written in any language.  The script must accept a list of tags
+               to resolve and output a list of hosts (space separated on a single line).  Any tags that cannot be resolved should be returned unchanged.
 
                A non-0 exit code will be counted as an error, a warning will be printed and output ignored.
 
                If the external command is given a "-L" option it should output a list of tags (space separated on a single line) it can resolve
 
            extra_cluster_file = <null>
-               Define an extra cluster file in the format of /etc/clusters.  Multiple files can be specified, separated by commas.  Both ~ and $HOME are acceptable
-               as a reference to the user's home directory, e.g.
+               Define an extra cluster file in the format of /etc/clusters.  Multiple files can be specified, separated by commas.  Both ~ and $HOME are acceptable as a reference to the
+               user's home directory, e.g.
 
                "extra_cluster_file = ~/clusters, $HOME/clus"
 
            extra_tag_file = <null>
-               Define an extra tag file in the format of /etc/tags.  Multiple files can be specified, separated by commas.  Both ~ and $HOME are acceptable as a
-               reference to the user's home directory, e.g.
+               Define an extra tag file in the format of /etc/tags.  Multiple files can be specified, separated by commas.  Both ~ and $HOME are acceptable as a reference to the user's home
+               directory, e.g.
 
                "extra_tag_file = ~/tags, $HOME/tags"
 
@@ -365,8 +353,8 @@ FILES
            key_user_2 = Alt-2
            key_user_3 = Alt-3
            key_user_4 = Alt-4
-               Default key sequence to send user defined macros to client.  If the matching macro_user_1 macro is undefined, the sequence is passed straight to the
-               terminal.  See "KEY SHORTCUTS" for more information.
+               Default key sequence to send user defined macros to client.  If the matching macro_user_1 macro is undefined, the sequence is passed straight to the terminal.  See "KEY
+               SHORTCUTS" for more information.
 
            macro_servername = %s
            macro_hostname = %h
@@ -429,15 +417,14 @@ FILES
 
                NOTE: The given defaults are based on OpenSSH, not commercial ssh software.
 
-               NOTE: Any "generic" change to the method (e.g., specifying the ssh port to use) should be done in the medium's own config file (see "ssh_config" and
-               $HOME/.ssh/config).
+               NOTE: Any "generic" change to the method (e.g., specifying the ssh port to use) should be done in the medium's own config file (see "ssh_config" and $HOME/.ssh/config).
 
            screen_reserve_top = 0
            screen_reserve_bottom = 60
            screen_reserve_left = 0
            screen_reserve_right = 0
-               Number of pixels from the screen's side to reserve when calculating screen geometry for tiling.  Setting this to something like 50 will help keep
-               cssh from positioning windows over your window manager's menu bar if it draws one at that side of the screen.
+               Number of pixels from the screen's side to reserve when calculating screen geometry for tiling.  Setting this to something like 50 will help keep cssh from positioning windows
+               over your window manager's menu bar if it draws one at that side of the screen.
 
            terminal = /path/to/xterm
                Path to the X-Windows terminal used for the client.
@@ -449,8 +436,8 @@ FILES
                When non-0, set the working directory for each terminal as per 'terminal_chdir_path'
 
            terminal_chdir_path = $HOME/.clusterssh/work/%s
-               Path to use as working directory for each terminal when 'terminal_chdir' is enabled.  The path provided is passed through the macro parser (see the
-               section above on 'macros_enabled'.
+               Path to use as working directory for each terminal when 'terminal_chdir' is enabled.  The path provided is passed through the macro parser (see the section above on
+               'macros_enabled'.
 
            terminal_font = 6x13
                Font to use in the terminal windows.  Use standard X font notation.
@@ -459,21 +446,20 @@ FILES
            terminal_reserve_bottom = 0
            terminal_reserve_left = 5
            terminal_reserve_right = 0
-               Number of pixels from the terminal's side to reserve when calculating screen geometry for tiling.  Setting these will help keep cssh from positioning
-               windows over your scroll and title bars or otherwise overlapping the windows too much.
+               Number of pixels from the terminal's side to reserve when calculating screen geometry for tiling.  Setting these will help keep cssh from positioning windows over your scroll
+               and title bars or otherwise overlapping the windows too much.
 
            terminal_colorize = 1
-               If set to 1 (the default), then "-bg" and "-fg" arguments will be added to the terminal invocation command-line.  The terminal will be colored in a
-               pseudo-random way based on the host name; while the color of a terminal is not easily predicted, it will always be the same color for a given host
-               name.  After a while, you will recognize hosts by their characteristic terminal color.
+               If set to 1 (the default), then "-bg" and "-fg" arguments will be added to the terminal invocation command-line.  The terminal will be colored in a pseudo-random way based on
+               the host name; while the color of a terminal is not easily predicted, it will always be the same color for a given host name.  After a while, you will recognize hosts by their
+               characteristic terminal color.
 
            terminal_bg_style = dark
-               If set to "dark", the terminal background will be set to black and the foreground to the pseudo-random color.  If set to "light", then the foreground
-               will be black and the background the pseudo-random color.  If terminal_colorize is "zero", then this option has no effect.
+               If set to "dark", the terminal background will be set to black and the foreground to the pseudo-random color.  If set to "light", then the foreground will be black and the
+               background the pseudo-random color.  If terminal_colorize is "zero", then this option has no effect.
 
            terminal_size = 80x24
-               Initial size of terminals to use. NOTE: the number of lines (24) will be decreased when resizing terminals for tiling, not the number of characters
-               (80).
+               Initial size of terminals to use. NOTE: the number of lines (24) will be decreased when resizing terminals for tiling, not the number of characters (80).
 
            terminal_title_opt = -T
                Option used with "terminal" to set the title of the window
@@ -485,8 +471,8 @@ FILES
                Title of windows to use for both the console and terminals.
 
            unmap_on_redraw = no
-               Tell Tk to use the UnmapWindow request before redrawing terminal windows.  This defaults to "no" as it causes some problems with the FVWM window
-               manager.  If you are experiencing problems with redraws, you can set it to "yes" to allow the window to be unmapped before it is repositioned.
+               Tell Tk to use the UnmapWindow request before redrawing terminal windows.  This defaults to "no" as it causes some problems with the FVWM window manager.  If you are
+               experiencing problems with redraws, you can set it to "yes" to allow the window to be unmapped before it is repositioned.
 
            use_all_a_records = 0
                If a hostname resolves to multiple IP addresses, set to 1 to connect to all of them, not just the first one found.  See also "--use-all-a-records"}
@@ -495,8 +481,8 @@ FILES
                Setting to 0 will disable all hotkeys.
 
            use_natural_sort = 0
-               Windows will normally sort in alphabetical order, i.e.: host1, host11, host2.  Setting to this 1 will change the sort order, i.e.: host1, host2,
-               host11. NOTE: You must have the perl module Sort::Naturally installed.
+               Windows will normally sort in alphabetical order, i.e.: host1, host11, host2.  Setting to this 1 will change the sort order, i.e.: host1, host2, host11. NOTE: You must have the
+               perl module Sort::Naturally installed.
 
            user = $LOGNAME
                Sets the default user for running commands on clients.
@@ -505,11 +491,10 @@ FILES
                Perform window tiling (set to 0 to disable)
 
            window_tiling_direction = right
-               Direction to tile windows, where "right" means starting top left and moving right and then down, and anything else means starting bottom right and
-               moving left and then up
+               Direction to tile windows, where "right" means starting top left and moving right and then down, and anything else means starting bottom right and moving left and then up
 
-           NOTE: The key shortcut modifiers must be in the form "Control", "Alt" or "Shift", e.g. with the first letter capitalised and the rest lower case.  Keys
-           may also be disabled individually by setting to the word "null".
+           NOTE: The key shortcut modifiers must be in the form "Control", "Alt" or "Shift", e.g. with the first letter capitalised and the rest lower case.  Keys may also be disabled
+           individually by setting to the word "null".
 
        $HOME/.clusterssh/send_menu
            This (optional) file contains items to populate the send menu.  The default entry could be written as:
@@ -569,8 +554,8 @@ FILES
 KNOWN BUGS
        If you have any ideas about how to fix the below bugs, please get in touch and/or provide a patch.
 
-       •   Swapping virtual desktops can cause a redraw of all the terminal windows.  This is due to a lack of distinction within Tk between switching desktops and
-           minimising/maximising windows.  Until Tk can tell the difference between the two events, there is no fix (apart from rewriting everything directly in X).
+       •   Swapping virtual desktops can cause a redraw of all the terminal windows.  This is due to a lack of distinction within Tk between switching desktops and minimising/maximising
+           windows.  Until Tk can tell the difference between the two events, there is no fix (apart from rewriting everything directly in X).
 
 TROUBLESHOOTING
        If you have issues running cssh, first try:
@@ -587,8 +572,7 @@ TROUBLESHOOTING
 
        •   SSH doesn't understand "-o ConnectTimeout=10" - remove the option from the $HOME/.clusterssh/config file
 
-       •   OpenSSH-3.8 using untrusted ssh tunnels - use "-Y" instead of "-X" or use "ForwardX11Trusted yes" in $HOME/.ssh/ssh_config (if you change the default ssh
-           options from "-x" to "-X")
+       •   OpenSSH-3.8 using untrusted ssh tunnels - use "-Y" instead of "-X" or use "ForwardX11Trusted yes" in $HOME/.ssh/ssh_config (if you change the default ssh options from "-x" to "-X")
 
 SUPPORT AND REPORTING BUGS
        A web site for comments, requests, bug reports and bug fixes/patches is available at: <https://github.com/duncs/clusterssh>
@@ -603,8 +587,8 @@ SUPPORT AND REPORTING BUGS
 
        "cat /etc/csshrc $HOME/.clusterssh/config"
 
-       Using the debug option (--debug) will turn on debugging output.  Repeat the option to increase the amount of debug.  However, if possible please only use
-       this option with one host at a time, e.g. "cssh --debug <host>" due to the amount of output produced (in both main and child windows).
+       Using the debug option (--debug) will turn on debugging output.  Repeat the option to increase the amount of debug.  However, if possible please only use this option with one host at a
+       time, e.g. "cssh --debug <host>" due to the amount of output produced (in both main and child windows).
 
 SEE ALSO
        <https://github.com/duncs/clusterssh/wiki/>, "ssh", Tk::overview, X11::Protocol, "perl"
@@ -615,9 +599,9 @@ AUTHOR
 LICENSE AND COPYRIGHT
        Copyright 1999-2018 Duncan Ferguson.
 
-       This program is free software; you can redistribute it and/or modify it under the terms of either: the GNU General Public License as published by the Free
-       Software Foundation; or the Artistic License.
+       This program is free software; you can redistribute it and/or modify it under the terms of either: the GNU General Public License as published by the Free Software Foundation; or the
+       Artistic License.
 
        See http://dev.perl.org/licenses/ for more information.
 
-perl v5.30.3                                                                 2020-06-23                                                                     CSSH(1p)
+perl v5.32.0                                                                               2021-02-02                                                                                  CSSH(1p)

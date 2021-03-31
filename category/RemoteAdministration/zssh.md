@@ -1,4 +1,4 @@
-ZSSH(1)                                                                         ZSSH                                                                         ZSSH(1)
+ZSSH(1)                                                                                       ZSSH                                                                                      ZSSH(1)
 
 NAME
        zssh - interactive file transfer wrapper for ssh
@@ -8,20 +8,19 @@ SYNOPSIS
        ztelnet [zssh options] [--] [telnet options]
 
 DESCRIPTION
-       zssh  (Zmodem  SSH) is a program for interactively transferring files to a remote machine while using the secure shell ( ssh ). It is intended to be a conve‐
-       nient alternative to scp , allowing to transfer files without having to open another session and re-authenticate oneself.
+       zssh (Zmodem SSH) is a program for interactively transferring files to a remote machine while using the secure shell ( ssh ). It is intended to be a convenient alternative to scp , al‐
+       lowing to transfer files without having to open another session and re-authenticate oneself.
 
-       zssh is an interactive wrapper for ssh used to switch the ssh connection between the remote shell and file transfers.  This  is  achieved  by  using  another
-       tty/pty  pair between the user and the local ssh process to plug either the user's tty (remote shell mode) or another process (file transfer mode) on the ssh
-       connection.
+       zssh is an interactive wrapper for ssh used to switch the ssh connection between the remote shell and file transfers. This is achieved by using another tty/pty pair  between  the  user
+       and the local ssh process to plug either the user's tty (remote shell mode) or another process (file transfer mode) on the ssh connection.
 
        ztelnet behaves similarly to zssh, except telnet is used instead of ssh.  It is equivalent to 'zssh -s "telnet -8 -E"'
 
        Files are transferred through the zmodem protocol, using the rz and sz commands.
 
-       zssh behaves as an usual ssh session until the escape sequence is depressed ( default is ^@ which can be produced by pressing C-space,  or  C-2,  or  C-`  ),
-       which  enables  file  transfer mode. A new prompt is then displayed, and commands can be executed locally to initiate file transfers (among other things). It
-       roughly behaves as a local shell featuring line edition, history and completion (thanks to libreadline), globbing, and escape characters ( " ' and \ ).
+       zssh  behaves  as  an  usual ssh session until the escape sequence is depressed ( default is ^@ which can be produced by pressing C-space, or C-2, or C-` ), which enables file transfer
+       mode. A new prompt is then displayed, and commands can be executed locally to initiate file transfers (among other things). It roughly behaves as a local shell featuring line  edition,
+       history and completion (thanks to libreadline), globbing, and escape characters ( " ' and \ ).
 
        The following builtins are handled by zssh itself: ?  , cd , disconnect , escape , exit , help , hook , quit , repeat , rz , suspend , sz , version
 
@@ -42,20 +41,17 @@ DESCRIPTION
 
        quit                same as exit.
 
-       repeat              repeats cmd forever (^C to interrupt). Useful for example if you use a remote script invoking "sz" and you don't want to be  typing  "rz"
-                           each  time...   Remember however that several files can be transferred by a single sz/rz pair so this is not usually necessary to use re‐
-                           peat.
+       repeat              repeats  cmd forever (^C to interrupt). Useful for example if you use a remote script invoking "sz" and you don't want to be typing "rz" each time...  Remember how‐
+                           ever that several files can be transferred by a single sz/rz pair so this is not usually necessary to use repeat.
 
-       rz                  Receive files from the remote machine. runs rz and plugs the process on the ssh connection.  running sz on the REMOTE machine is required
-                           :
+       rz                  Receive files from the remote machine. runs rz and plugs the process on the ssh connection.  running sz on the REMOTE machine is required :
                            1)   run `sz <remote_file> ...' from the remote machine shell
                            2)   press the escape sequence (C-space) to enter file transfer mode
                            3)   run the `rz' builtin
 
        suspend             suspend zssh (back to the local machine shell)
 
-       sz <file> ...       Send files to the remote machine. runs sz and plugs the process on the ssh connection.  There is no need to manually run rz on the remote
-                           side.
+       sz <file> ...       Send files to the remote machine. runs sz and plugs the process on the ssh connection.  There is no need to manually run rz on the remote side.
 
        version             print version information
 
@@ -83,8 +79,8 @@ OPTIONS
 
 ENVIRONMENT
        ZSSHESCAPE
-                 Setting the ZSSHESCAPE environment variable allows one to override the default escape sequence. ZSSHESCAPE should contain only  two  characters  of
-                 the form `^X', meaning that ^X is to be the new escape sequence.
+                 Setting the ZSSHESCAPE environment variable allows one to override the default escape sequence. ZSSHESCAPE should contain only two characters of the form `^X',  meaning  that
+                 ^X is to be the new escape sequence.
 
 REQUIREMENTS
        the following binaries need to be properly installed for zssh to work :
@@ -107,14 +103,13 @@ TIPS
 
        Transfers can be interrupted with ^C (somewhat experimental =)
 
-       If  you  get stuck in rz/sz (for example you've just ran rz, but you then decided not to transmit anything), hit a dozen ^X (Ctrl-X, not the zssh escape!) to
-       stop it
+       If you get stuck in rz/sz (for example you've just ran rz, but you then decided not to transmit anything), hit a dozen ^X (Ctrl-X, not the zssh escape!) to stop it
 
        Use `sz -y <files>' to overwrite files on the other side
 
 BUGS / LIMITATIONS
-       You may sometimes have to hit return 2 or 3 times after file transfer completion in order get back to the shell. Some digits  are  usually  displayed;  don't
-       worry it won't harm (you or your term) ...
+       You  may  sometimes  have to hit return 2 or 3 times after file transfer completion in order get back to the shell. Some digits are usually displayed; don't worry it won't harm (you or
+       your term) ...
 
        the tty may (sometimes) be somewhat upset after an interrupted transfer ( using ^C ). typing `reset' in this case should help.
 
@@ -133,4 +128,4 @@ AUTHOR
 SEE ALSO
        ssh(1), telnet(1), scp(1), sz(1), rz(1), readline(3),
 
-ZSSH                                                                        June 26, 2000                                                                    ZSSH(1)
+ZSSH                                                                                     June 26, 2000                                                                                  ZSSH(1)

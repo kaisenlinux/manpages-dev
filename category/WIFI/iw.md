@@ -1,4 +1,4 @@
-IW(8)                                                                           Linux                                                                          IW(8)
+IW(8)                                                                                        Linux                                                                                        IW(8)
 
 NAME
        iw - show / manipulate wireless devices and their configuration
@@ -31,12 +31,12 @@ IW - COMMAND SYNTAX
        reg    - regulatory agent.
 
    COMMAND
-       Specifies the action to perform on the object.  The set of possible actions depends on the object type.  iw help will print all supported commands, while iw
-       help command will print the help for all matching commands.
+       Specifies the action to perform on the object.  The set of possible actions depends on the object type.  iw help will print all supported commands, while iw help command will print the
+       help for all matching commands.
 
 SEE ALSO
        ip(8), crda(8), regdbdump(8), regulatory.bin(5)
 
        http://wireless.kernel.org/en/users/Documentation/iw
 
-iw                                                                           7 June 2012                                                                       IW(8)
+iw                                                                                        7 June 2012                                                                                     IW(8)

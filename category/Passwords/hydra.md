@@ -1,4 +1,4 @@
-HYDRA(1)                                                               General Commands Manual                                                              HYDRA(1)
+HYDRA(1)                                                                            General Commands Manual                                                                            HYDRA(1)
 
 NAME
        hydra - a very fast network logon cracker which supports many different services
@@ -17,12 +17,12 @@ DESCRIPTION
        This tool gives researchers and security consultants the possibility to show how easy it would be to gain unauthorized access from remote to a system.
 
        Currently this tool supports:
-              adam6500  afp  asterisk  cisco  cisco-enable  cvs  firebird ftp ftps http[s]-{head|get|post} http[s]-{get|post}-form http-proxy http-proxy-urlenum icq
-              imap[s] irc ldap2[s] ldap3[-{cram|digest}md5][s] mssql mysql(v4) mysql5 ncp nntp oracle oracle-listener oracle-sid pcanywhere pcnfs  pop3[s]  postgres
-              rdp radmin2 redis rexec rlogin rpcap rsh rtsp s7-300 sapr3 sip smb smtp[s] smtp-enum snmp socks5 ssh sshkey svn teamspeak telnet[s] vmauthd vnc xmpp
+              adam6500  afp  asterisk  cisco  cisco-enable  cvs  firebird  ftp  ftps  http[s]-{head|get|post}  http[s]-{get|post}-form  http-proxy  http-proxy-urlenum icq imap[s] irc ldap2[s]
+              ldap3[-{cram|digest}md5][s] mssql mysql(v4) mysql5 ncp nntp oracle oracle-listener oracle-sid pcanywhere pcnfs pop3[s] postgres rdp radmin2 redis rexec  rlogin  rpcap  rsh  rtsp
+              s7-300 sapr3 sip smb smtp[s] smtp-enum snmp socks5 ssh sshkey svn teamspeak telnet[s] vmauthd vnc xmpp
 
-       For  most  protocols SSL is supported (e.g. https-get, ftp-ssl, etc.).  If not all necessary libraries are found during compile time, your available services
-       will be less.  Type "hydra" to see what is available.
+       For  most protocols SSL is supported (e.g. https-get, ftp-ssl, etc.).  If not all necessary libraries are found during compile time, your available services will be less.  Type "hydra"
+       to see what is available.
 
 Options
        target a target to attack, can be an IPv4 address, IPv6 address or DNS name.
@@ -34,8 +34,7 @@ Options
               Some modules have optional or mandatory options. type "hydra -U <servicename>"
                to get help on on the options of a service.
 
-       -R     restore a previously aborted session. Requires a hydra.restore file was written. Options are restored, but can be changed by setting them after -R  on
-              the command line
+       -R     restore a previously aborted session. Requires a hydra.restore file was written. Options are restored, but can be changed by setting them after -R on the command line
 
        -S     connect via SSL
 
@@ -65,8 +64,8 @@ Options
        -C FILE
               colon separated "login:pass" format, instead of -L/-P options
 
-       -u     by  default  Hydra  checks all passwords for one login and then tries the next login. This option loops around the passwords, so the first password is
-              tried on all logins, then the next password.
+       -u     by default Hydra checks all passwords for one login and then tries the next login. This option loops around the passwords, so the first password is tried on all logins, then the
+              next password.
 
        -f     exit after the first found login/password pair (per host if -M)
 
@@ -94,8 +93,7 @@ Options
               defines a wait time between each connection a task performs. This usually only makes sense if a low task number is used, .e.g -t 1
 
        -c TIME
-              the wait time in seconds per login attempt over all threads (-t 1 is recommended) This usually only makes sense if a low task number is used, .e.g  -t
-              1
+              the wait time in seconds per login attempt over all threads (-t 1 is recommended) This usually only makes sense if a low task number is used, .e.g -t 1
 
        -4 / -6
               prefer IPv4 (default) or IPv6 addresses
@@ -119,4 +117,4 @@ AUTHOR
 
        This manual page was written by Daniel Echeverry <epsilon77@gmail.com>, for the Debian project (and may be used by others).
 
-                                                                             01/01/2020                                                                     HYDRA(1)
+                                                                                           01/01/2020                                                                                  HYDRA(1)

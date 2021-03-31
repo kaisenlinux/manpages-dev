@@ -1,4 +1,4 @@
-jfs_logdump(8)                                                     JFS utility - journal log dump                                                     jfs_logdump(8)
+jfs_logdump(8)                                                                   JFS utility - journal log dump                                                                  jfs_logdump(8)
 
 NAME
        jfs_logdump - dump a JFS formatted device's journal log
@@ -25,8 +25,7 @@ REPORTING BUGS
        If you find a bug in JFS or jfs_logdump, please report it via the bug tracking system ("Report Bugs" section) of the JFS project web site:
        http://jfs.sourceforge.net/
 
-       Please  send  as much pertinent information as possible, including any jfs_logdump error messages and the complete output of running jfs_fsck with the -v op‐
-       tion on the JFS device.
+       Please send as much pertinent information as possible, including any jfs_logdump error messages and the complete output of running jfs_fsck with the -v option on the JFS device.
 
 SEE ALSO
        jfs_fsck(8), jfs_mkfs(8), jfs_fscklog(8), jfs_tune(8), jfs_debugfs(8)
@@ -39,4 +38,4 @@ AUTHORS
        See the JFS project web site for more details:
        http://jfs.sourceforge.net/
 
-                                                                          October 29, 2002                                                            jfs_logdump(8)
+                                                                                        October 29, 2002                                                                         jfs_logdump(8)

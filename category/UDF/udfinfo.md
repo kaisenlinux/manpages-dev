@@ -1,4 +1,4 @@
-UDFINFO(1)                                                             General Commands Manual                                                            UDFINFO(1)
+UDFINFO(1)                                                                          General Commands Manual                                                                          UDFINFO(1)
 
 NAME
        udfinfo — show information about UDF filesystem
@@ -7,33 +7,61 @@ SYNOPSIS
        udfinfo [ options ] device
 
 DESCRIPTION
-       udfinfo shows various information about a UDF filesystem stored either on the block device or in the disk file image. The output from the udfinfo is suitable
-       for parsing by external applications or scripts.
+       udfinfo  shows  various  information about a UDF filesystem stored either on the block device or in the disk file image. The output from the udfinfo is suitable for parsing by external
+       applications or scripts.
 
 OPTIONS
        -h,--help
               Display the usage and the list of options.
 
        -b,--blocksize= block-size
-              Specify the size of blocks in bytes. Valid block size for a UDF filesystem is a power of two in the range from 512 to 32768 and must  match  a  device
-              logical (sector) size. If omitted, udfinfo tries to autodetect block size. First it tries logical (sector) size and then all valid block sizes.
+              Specify the size of blocks in bytes. Valid block size for a UDF filesystem is a power of two in the range from 512 to 32768 and must match a device  logical  (sector)  size.  If
+              omitted, udfinfo tries to autodetect block size. First it tries logical (sector) size and then all valid block sizes.
+
+       --startblock= start-block
+              Specify  the  block  location where the UDF filesystem starts. It is used for calculating the block location of the Volume Recognition Sequence (32 kB after the start block) and
+              the first Anchor Volume Descriptor Pointer (256 blocks after the start block).
+
+              Normally start block is 0, but for Multisession UDF optical discs it is the block location where the last session of Multisession UDF disc starts.
+
+              If omitted, udfinfo for optical disc tries to detect start block of the last session from disc Table Of Contents. Otherwise value 0 is used.
+
+              For accessing some previous session of Multisession UDF optical disc, it is required to specify correct block where that previous session starts. And also to specify where  that
+              session ends via --lastblock option.
+
+              For Multisession UDF disc images stored in file there is no way to detect where the last session starts and therefore it is necessary to specify the correct start block location
+              manually from the original optical disc Table Of Contents.
+
+              (Option available since udfinfo 2.3)
+
+       --lastblock= last-block
+              Specify the block location where the UDF filesystem ends. It is used for calculating the block location of second and third Anchor Volume Descriptor Pointer  (256  blocks  prior
+              the last block and the last block itself).
+
+              Normally last block is number of disk blocks minus one, but for Multisession UDF optical discs when reading different session than the last one (specified by --startblock) it is
+              the block location where the specified session ends.
+
+              If omitted, udfinfo for optical disc tried to detect the last recorded block with fallback to the last block of device or disk file image.
+
+              For accessing some previous session of Multisession UDF optical disc, it is required to specify correct value for both --startblock and --lastblock options.
+
+              (Option available since udfinfo 2.3)
 
        --vatblock= vat-block
-              Specify  the block location of the Virtual Allocation Table. Virtual Allocation Table is present only on UDF disks with Virtual Partition Map and must
-              be at the last written/recorded disk block.
+              Specify the block location of the Virtual Allocation Table. Virtual Allocation Table is present only on UDF disks with Virtual Partition Map  and  must  be  at  the  last  writ‐
+              ten/recorded disk block.
 
-              If omitted, udfinfo for optical disc tries to detect the last recorded block with fallback to the last block of block device or disk  file  image.  In
-              most cases, this fallback does not have to work and for disk file images with Virtual Allocation Table is necessary to specify the correct location.
+              If  omitted,  udfinfo  for  optical disc tries to detect the last recorded block with fallback to the last block of block device or disk file image or block specified by --last‐
+              block. In most cases, this fallback does not have to work and for disk file images with Virtual Allocation Table it is necessary to specify the correct location.
 
-              Virtual  Allocation  Table  contains  locations  of UDF disk blocks needed to read data storage, determinate used and free space blocks, read File Set
-              Identifier and calculate Windows-specific Volume Serial Number. Also, it contains Logical Volume Identifier and overwrite previously stored in Logical
-              Volume Descriptor.
+              Virtual Allocation Table contains locations of UDF disk blocks needed to read data storage, determinate used and free space blocks, read File Set Identifier and  calculate  Win‐
+              dows-specific Volume Serial Number. Also, it contains Logical Volume Identifier and overwrite previously stored in Logical Volume Descriptor.
 
        --locale
               Encode UDF string identifiers on output according to current locale settings (default).
 
-       --u8   Encode  UDF  string  identifiers  on output to 8-bit OSTA Compressed Unicode format without leading Compression ID byte, which is equivalent to Latin1
-              (ISO-8859-1).  This will work only for strings which Unicode code points are below U+100.
+       --u8   Encode  UDF  string  identifiers on output to 8-bit OSTA Compressed Unicode format without leading Compression ID byte, which is equivalent to Latin1 (ISO-8859-1) encoding. This
+              will work only for strings which all Unicode code points are below U+100.
 
        --u16  Encode UDF string identifiers on output to 16-bit OSTA Compressed Unicode format without leading Compression ID byte, which is equivalent to UTF-16BE.
 
@@ -61,6 +89,20 @@ OUTPUT FORMAT
 
               fullvsid         UDF Volume Set Identifier stored in UDF Primary Volume Descriptor
 
+              owner            UDF Logical Volume Info1 stored in UDF Implementation Use Volume Descriptor, represents Owner name, person creating the medium or  filesystem  (available  since
+                               udfinfo 2.3)
+
+              organization     UDF  Logical  Volume  Info2  stored  in UDF Implementation Use Volume Descriptor, represents Organization name responsible for creating the medium or filesystem
+                               (available since udfinfo 2.3)
+
+              contact          UDF Logical Volume Info3 stored in UDF Implementation Use Volume Descriptor, represents Contact information  for  the  medium  or  filesystem  (available  since
+                               udfinfo 2.3)
+
+              appid            UDF Application Identifier stored in UDF Primary Volume Descriptor, identifies application that created medium or filesystem (available since udfinfo 2.3)
+
+              impid            UDF  Developer  Identifier stored in UDF Implementation Identifier of UDF Primary Volume Descriptor, uniquely identifies the implementation which created medium
+                               or filesystem (available since udfinfo 2.3)
+
               winserialnum     Windows-specific Volume Serial Number
 
               blocksize        UDF block size
@@ -81,7 +123,11 @@ OUTPUT FORMAT
 
               udfwriterev      UDF revision needed for writing or modifying UDF disk
 
-              vatblock         UDF block location of the Virtual Allocation Table (visible only when available)
+              startblock       Block location where the UDF filesystem starts (visible only when non-zero, available since udfinfo 2.3)
+
+              lastblock        Block location where the UDF filesystem ends (visible only when it is not same as the last block on disk, available since udfinfo 2.3)
+
+              vatblock         Block location of the UDF Virtual Allocation Table (visible only when available)
 
               integrity        UDF integrity of Logical Volume, one of: opened, closed, unknown
 
@@ -95,8 +141,8 @@ OUTPUT FORMAT
 
        When either softwriteprotect or hardwriteprotect flag is set then UDF disk should be treated as read-only.
 
-       All UDF string identifiers are stored on UDF disk in Unicode, therefore they are locale or code page agnostic. Options --locale, --u8, --u16 and --utf8  con‐
-       trols how are identifiers encoded on output.
+       All UDF string identifiers are stored on UDF disk in Unicode, therefore they are locale or code page agnostic. Options --locale, --u8, --u16 and --utf8 controls how are identifiers en‐
+       coded on output.
 
        All newline characters from the UDF string identifiers are removed, so it is guaranteed that the newline character is present only as a separator.
 
@@ -106,19 +152,20 @@ OUTPUT FORMAT
 
        With meaning that block-type starts at UDF block block-num and span block-count blocks on device.
 
-       Windows-specific  Volume  Serial Number is a non-standard 32-bit checksum, calculated as four separate 8-bit XOR checksums of 512 bytes long UDF File Set De‐
-       scriptor. Therefore, it cannot be set or changed as opposed to UUID which is 64-bit long. This non-standard checksum is used only by Windows  systems  (since
-       Windows 98 era when it was introduced) and can be displayed on Windows systems by applications like vol, dir or fsutil.exe.
+       Windows-specific Volume Serial Number is a non-standard 32-bit checksum, calculated as four separate 8-bit XOR checksums of 512 bytes long UDF File Set Descriptor. Therefore, it cannot
+       be set or changed as opposed to UUID which is 64-bit long. This non-standard checksum is used only by Windows systems (since Windows 98 era when it was introduced) and can be displayed
+       on Windows systems by applications like vol, dir or fsutil.exe.
 
 LIMITATIONS
+       udfinfo  prior  to version 2.3 was unable to handle Multisession UDF discs correctly. It always printed only information about the first session (the oldest one) and not about the last
+       session (the most recent).
+
        udfinfo prior to version 2.2 was unable to print Unicode strings with code points above U+FFFF correctly.
 
-       udfinfo  prior to version 2.2 was unable to read Metadata Partition.  Therefore, determining used and free space blocks, reading File Set Identifier and cal‐
-       culating Windows-specific Volume Serial Number did not have to be available or correctly calculated for disks with UDF revisions higher than 2.01  which  had
-       Metadata Partition.
+       udfinfo prior to version 2.2 was unable to read Metadata Partition. Therefore, determining used and free space blocks, reading File Set Identifier and calculating Windows-specific Vol‐
+       ume Serial Number did not have to be available or correctly calculated for disks with UDF revisions higher than 2.01 which had Metadata Partition.
 
-       udfinfo prior to version 2.1 was unable to read Virtual Allocation Table stored outside of Information Control Block. Therefore above limitation applied also
-       for some Write Once media.
+       udfinfo prior to version 2.1 was unable to read Virtual Allocation Table stored outside of Information Control Block. Therefore above limitation applied also for some Write Once media.
 
 AUTHOR
        Pali Rohár <pali.rohar@gmail.com>
@@ -129,4 +176,4 @@ AVAILABILITY
 SEE ALSO
        mkudffs(8), pktsetup(8), udflabel(8), cdrwtool(1), wrudf(1)
 
-Commands                                                                      udftools                                                                    UDFINFO(1)
+Commands                                                                                    udftools                                                                                 UDFINFO(1)

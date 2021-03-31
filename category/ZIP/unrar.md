@@ -1,4 +1,4 @@
-UNRAR(1)                                                                    RAR archiver                                                                    UNRAR(1)
+UNRAR(1)                                                                                  RAR archiver                                                                                 UNRAR(1)
 
 NAME
        unrar - extract files from rar archives
@@ -12,8 +12,8 @@ DESCRIPTION
        Commands and options described here are as of unrar 2.02.
 
 COMMANDS
-       After the program name comes a command and then optional switches with dashes before them.  A summary of commands is included below.  For a complete descrip‐
-       tion, run unrar without options.
+       After  the program name comes a command and then optional switches with dashes before them.  A summary of commands is included below.  For a complete description, run unrar without op‐
+       tions.
 
        e      Extract files to current directory.
 
@@ -69,4 +69,4 @@ SWITCHES
 AUTHOR
        This manual page was written by Petr Cech <cech@debian.org> according to "unrar -h" for the Debian GNU/Linux system (but may be used by others).
 
-                                                                             02.11.1999                                                                     UNRAR(1)
+                                                                                           02.11.1999                                                                                  UNRAR(1)

@@ -1,4 +1,4 @@
-xfs_mkfile(8)                                                          System Manager's Manual                                                         xfs_mkfile(8)
+xfs_mkfile(8)                                                                       System Manager's Manual                                                                       xfs_mkfile(8)
 
 NAME
        xfs_mkfile - create an XFS file
@@ -8,8 +8,8 @@ SYNOPSIS
        xfs_mkfile -V
 
 DESCRIPTION
-       xfs_mkfile  creates  one or more files. The file is padded with zeroes by default.  The default size is in bytes, but it can be flagged as kilobytes, blocks,
-       megabytes, or gigabytes with the k, b, m, or g suffixes, respectively.
+       xfs_mkfile creates one or more files. The file is padded with zeroes by default.  The default size is in bytes, but it can be flagged as kilobytes, blocks, megabytes, or gigabytes with
+       the k, b, m, or g suffixes, respectively.
 
 OPTIONS
        -v     Verbose. Report the names and sizes of created files.
@@ -20,4 +20,4 @@ OPTIONS
 
        -V     Prints the version number and exits.
 
-                                                                                                                                                       xfs_mkfile(8)
+                                                                                                                                                                                  xfs_mkfile(8)

@@ -1,4 +1,4 @@
-lxc-ls(1)                                                                                                                                                  lxc-ls(1)
+lxc-ls(1)                                                                                                                                                                             lxc-ls(1)
 
 NAME
        lxc-ls - list the containers existing on the system
@@ -40,8 +40,8 @@ OPTIONS
               Show nested containers. The number of nesting levels to be shown can be specified by passing a number as argument.
 
        --filter=regex
-              The regular expression passed to lxc-ls will be applied to the container name. The format is a POSIX extended regular expression. It can also be given
-              as additional argument without explicitly using --filter.
+              The  regular  expression  passed  to lxc-ls will be applied to the container name. The format is a POSIX extended regular expression. It can also be given as additional argument
+              without explicitly using --filter.
 
 EXAMPLES
        lxc-ls --fancy
@@ -79,21 +79,20 @@ COMMON OPTIONS
        --rcfile=FILE
               Specify the configuration file to configure the virtualization and isolation functionalities for the container.
 
-              This configuration file if present will be used even if there is already a configuration file present in the previously created  container  (via  lxc-
-              create).
+              This configuration file if present will be used even if there is already a configuration file present in the previously created container (via lxc-create).
 
        --version
               Show the version number.
 
 SEE ALSO
-       lxc(7),  lxc-create(1),  lxc-copy(1),  lxc-destroy(1), lxc-start(1), lxc-stop(1), lxc-execute(1), lxc-console(1), lxc-monitor(1), lxc-wait(1), lxc-cgroup(1),
-       lxc-ls(1), lxc-info(1), lxc-freeze(1), lxc-unfreeze(1), lxc-attach(1), lxc.conf(5)
+       lxc(7), lxc-create(1), lxc-copy(1), lxc-destroy(1), lxc-start(1), lxc-stop(1), lxc-execute(1), lxc-console(1), lxc-monitor(1), lxc-wait(1), lxc-cgroup(1), lxc-ls(1), lxc-info(1),  lxc-
+       freeze(1), lxc-unfreeze(1), lxc-attach(1), lxc.conf(5)
 
 HISTORY
-       Written originally as a shell script by Daniel Lezcano and Serge Hallyn.  Later reimplemented and extended in Python by Stéphane  Graber  and  then  reimple‐
-       mented and extended in C by Christian Brauner.
+       Written  originally  as  a  shell  script by Daniel Lezcano and Serge Hallyn.  Later reimplemented and extended in Python by Stéphane Graber and then reimplemented and extended in C by
+       Christian Brauner.
 
 AUTHOR
        Christian Brauner <christian.brauner@mailbox.org>, Stéphane Graber <stgraber@ubuntu.com>
 
-                                                                             2020-12-30                                                                    lxc-ls(1)
+                                                                                           2021-01-31                                                                                 lxc-ls(1)

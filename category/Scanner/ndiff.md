@@ -1,4 +1,4 @@
-NDIFF(1)                                                                    User Commands                                                                   NDIFF(1)
+NDIFF(1)                                                                                 User Commands                                                                                 NDIFF(1)
 
 NAME
        ndiff - Utility to compare the results of Nmap scans
@@ -7,8 +7,7 @@ SYNOPSIS
        ndiff [options] {a.xml} {b.xml}
 
 DESCRIPTION
-       Ndiff is a tool to aid in the comparison of Nmap scans. It takes two Nmap XML output files and prints the differences between them. The differences observed
-       are:
+       Ndiff is a tool to aid in the comparison of Nmap scans. It takes two Nmap XML output files and prints the differences between them. The differences observed are:
 
        •   Host states (e.g. up to down)
 
@@ -38,8 +37,8 @@ OPTIONS SUMMARY
        Any other arguments are taken to be the names of Nmap XML output files. There must be exactly two.
 
 EXAMPLE
-       Let's use Ndiff to compare the output of two Nmap scans that use different options. In the first, we'll do a fast scan (-F), which scans fewer ports for
-       speed. In the second, we'll scan the larger default set of ports, and run an NSE script.
+       Let's use Ndiff to compare the output of two Nmap scans that use different options. In the first, we'll do a fast scan (-F), which scans fewer ports for speed. In the second, we'll
+       scan the larger default set of ports, and run an NSE script.
 
            # nmap -F scanme.nmap.org -oX scanme-1.xml
            # nmap --script=html-title scanme.nmap.org -oX scanme-2.xml
@@ -61,20 +60,19 @@ EXAMPLE
             113/tcp   closed auth
            +31337/tcp closed Elite
 
-       Changes are marked by a - or + at the beginning of a line. We can see from the output that the scan without the -F fast scan option found two additional
-       ports: 70 and 31337. The html-title script produced some additional output for port 80. From the port counts, we may infer that the fast scan scanned 100
-       ports (95 filtered, 3 open, and 2 closed), while the normal scan scanned 1000 (993 filtered, 3 open, and 4 closed).
+       Changes are marked by a - or + at the beginning of a line. We can see from the output that the scan without the -F fast scan option found two additional ports: 70 and 31337. The
+       html-title script produced some additional output for port 80. From the port counts, we may infer that the fast scan scanned 100 ports (95 filtered, 3 open, and 2 closed), while the
+       normal scan scanned 1000 (993 filtered, 3 open, and 4 closed).
 
        The -v (or --verbose) option to Ndiff made it show even the ports that didn't change, like 22 and 25. Without -v, they would not have been shown.
 
 OUTPUT
-       There are two output modes: text and XML. Text output is the default, and can also be selected with the --text option. Text output resembles a unified diff
-       of Nmap's normal terminal output. Each line is preceded by a character indicating whether and how it changed.  - means that the line was in the first scan
-       but not in the second; + means it was in the second but not the first. A line that changed is represented by a - line followed by a + line. Lines that did
-       not change are preceded by a blank space.
+       There are two output modes: text and XML. Text output is the default, and can also be selected with the --text option. Text output resembles a unified diff of Nmap's normal terminal
+       output. Each line is preceded by a character indicating whether and how it changed.  - means that the line was in the first scan but not in the second; + means it was in the second but
+       not the first. A line that changed is represented by a - line followed by a + line. Lines that did not change are preceded by a blank space.
 
-       Example 1 is an example of text output. Here, port 80 on the host photos-cache-snc1.facebook.com gained a service version (lighttpd 1.5.0). The host at
-       69.63.179.25 changed its reverse DNS name. The host at 69.63.184.145 was completely absent in the first scan but came up in the second.
+       Example 1 is an example of text output. Here, port 80 on the host photos-cache-snc1.facebook.com gained a service version (lighttpd 1.5.0). The host at 69.63.179.25 changed its reverse
+       DNS name. The host at 69.63.184.145 was completely absent in the first scan but came up in the second.
 
        Example 1. Ndiff text output
 
@@ -100,13 +98,13 @@ OUTPUT
            +80/tcp  open  http     Apache httpd 1.3.41.fb1
            +443/tcp open  ssl/http Apache httpd 1.3.41.fb1
 
-       XML output, intended to be processed by other programs, is selected with the --xml option. It is based on Nmap's XML output, with a few additional elements
-       to indicate differences. The XML document is enclosed in nmapdiff and scandiff elements. Host differences are enclosed in hostdiff tags and port differences
-       are enclosed in portdiff tags. Inside a hostdiff or portdiff, a and b tags show the state of the host or port in the first scan (a) or the second scan (b).
+       XML output, intended to be processed by other programs, is selected with the --xml option. It is based on Nmap's XML output, with a few additional elements to indicate differences. The
+       XML document is enclosed in nmapdiff and scandiff elements. Host differences are enclosed in hostdiff tags and port differences are enclosed in portdiff tags. Inside a hostdiff or
+       portdiff, a and b tags show the state of the host or port in the first scan (a) or the second scan (b).
 
-       Example 2 shows the XML diff of the same scans shown above in Example 1. Notice how port 80 of photos-cache-snc1.facebook.com is enclosed in portdiff tags.
-       For 69.63.179.25, the old hostname is in a tags and the new is in b. For the new host 69.63.184.145, there is a b in the hostdiff without a corresponding a,
-       indicating that there was no information for the host in the first scan.
+       Example 2 shows the XML diff of the same scans shown above in Example 1. Notice how port 80 of photos-cache-snc1.facebook.com is enclosed in portdiff tags. For 69.63.179.25, the old
+       hostname is in a tags and the new is in b. For the new host 69.63.184.145, there is a b in the hostdiff without a corresponding a, indicating that there was no information for the host
+       in the first scan.
 
        Example 2. Ndiff XML output
 
@@ -178,8 +176,8 @@ OUTPUT
            </nmapdiff>
 
 PERIODIC DIFFS
-       Using Nmap, Ndiff, cron, and a shell script, it's possible to scan a network daily and get email reports of the state of the network and changes since the
-       previous scan.  Example 3 shows the script that ties it together.
+       Using Nmap, Ndiff, cron, and a shell script, it's possible to scan a network daily and get email reports of the state of the network and changes since the previous scan.  Example 3
+       shows the script that ties it together.
 
        Example 3. Scanning a network periodically with Ndiff and cron
 
@@ -216,10 +214,9 @@ BUGS
        Report bugs to the nmap-dev mailing list at <dev@nmap.org>.
 
 HISTORY
-       Ndiff started as a project by Michael Pattrick during the 2008 Google Summer of Code. Michael designed the program and led the discussion of its output
-       formats. He wrote versions of the program in Perl and C++, but the summer ended shortly after it was decided to rewrite the program in Python for the sake of
-       Windows (and Zenmap) compatibility. This Python version was written by David Fifield. James Levine released[1] a Perl script named Ndiff with similar
-       functionality in 2000.
+       Ndiff started as a project by Michael Pattrick during the 2008 Google Summer of Code. Michael designed the program and led the discussion of its output formats. He wrote versions of
+       the program in Perl and C++, but the summer ended shortly after it was decided to rewrite the program in Python for the sake of Windows (and Zenmap) compatibility. This Python version
+       was written by David Fifield. James Levine released[1] a Perl script named Ndiff with similar functionality in 2000.
 
 AUTHORS
        David Fifield <david@bamsoftware.com>
@@ -233,4 +230,4 @@ NOTES
         1. released
            http://seclists.org/nmap-hackers/2000/315
 
-Ndiff                                                                        08/12/2019                                                                     NDIFF(1)
+Ndiff                                                                                      03/15/2018                                                                                  NDIFF(1)

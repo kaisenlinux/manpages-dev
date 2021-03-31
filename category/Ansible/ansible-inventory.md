@@ -1,12 +1,12 @@
-ANSIBLE-INVENTORY(1)                                               System administration commands                                               ANSIBLE-INVENTORY(1)
+ANSIBLE-INVENTORY(1)                                                             System administration commands                                                            ANSIBLE-INVENTORY(1)
 
 NAME
        ansible-inventory - None
 
 SYNOPSIS
        usage: ansible-inventory [-h] [--version] [-v] [-i INVENTORY]
-              [--vault-id  VAULT_IDS] [--ask-vault-pass | --vault-password-file VAULT_PASSWORD_FILES] [--playbook-dir BASEDIR] [--list] [--host HOST] [--graph] [-y]
-              [--toml] [--vars] [--export] [--output OUTPUT_FILE] [host|group]
+              [--vault-id  VAULT_IDS]  [--ask-vault-pass  | --vault-password-file VAULT_PASSWORD_FILES] [--playbook-dir BASEDIR] [--list] [--host HOST] [--graph] [-y] [--toml] [--vars] [--ex‐
+              port] [--output OUTPUT_FILE] [host|group]
 
 DESCRIPTION
        used to display or dump the configured inventory as Ansible sees it
@@ -36,8 +36,7 @@ COMMON OPTIONS
           When doing --list, send the inventory to a file instead of to the screen
 
        --playbook-dir 'BASEDIR'
-          Since this tool does not use playbooks, use this as a substitute playbook directory.This sets  the  relative  path  for  many  features  including  roles/
-          group_vars/ etc.
+          Since this tool does not use playbooks, use this as a substitute playbook directory.This sets the relative path for many features including roles/ group_vars/ etc.
 
        --toml
           Use TOML format instead of default JSON, ignored for --graph
@@ -96,7 +95,7 @@ COPYRIGHT
 SEE ALSO
        ansible (1), ansible-config (1), ansible-console (1), ansible-doc (1), ansible-galaxy (1), ansible-playbook (1), ansible-pull (1), ansible-vault (1)
 
-       Extensive  documentation is available in the documentation site: <https://docs.ansible.com>.  IRC and mailing list info can be found in file CONTRIBUTING.md,
-       available in: <https://github.com/ansible/ansible>
+       Extensive documentation is available in the documentation site: <https://docs.ansible.com>.  IRC and mailing  list  info  can  be  found  in  file  CONTRIBUTING.md,  available  in:  <‐
+       https://github.com/ansible/ansible>
 
-Ansible 2.9.16                                                                                                                                  ANSIBLE-INVENTORY(1)
+Ansible 2.9.16                                                                                                                                                             ANSIBLE-INVENTORY(1)

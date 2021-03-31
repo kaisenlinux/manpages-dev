@@ -1,5 +1,5 @@
 
-BAOBAB(1)                                                              General Commands Manual                                                             BAOBAB(1)
+BAOBAB(1)                                                                           General Commands Manual                                                                           BAOBAB(1)
 
 NAME
        baobab - A graphical disk usage analyzer for the GNOME desktop
@@ -8,9 +8,8 @@ SYNOPSIS
        baobab  [OPTIONS…] [DIRECTORY]
 
 DESCRIPTION
-       baobab  (a.k.a.  Disk  Usage Analyzer) is able to scan either specific folders (local and remote) or devices, in order to give the user a tree representation
-       including each directory size or percentage in the branch. It also auto-detects any mounted/unmounted device. A graphical representation is also provided for
-       any selected folder.
+       baobab (a.k.a. Disk Usage Analyzer) is able to scan either specific folders (local and remote) or devices, in order to give the user a tree representation including each directory size
+       or percentage in the branch. It also auto-detects any mounted/unmounted device. A graphical representation is also provided for any selected folder.
 
 OPTIONS
        -a, --all-file-systems
@@ -27,4 +26,4 @@ BUGS
 ADDITIONAL INFORMATION
        For further information visit https://wiki.gnome.org/Apps/DiskUsageAnalyzer.
 
-                                                                              June 2020                                                                    BAOBAB(1)
+                                                                                           June 2020                                                                                  BAOBAB(1)

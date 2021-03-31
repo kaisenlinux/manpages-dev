@@ -1,4 +1,4 @@
-lftp(1)                                                                General Commands Manual                                                               lftp(1)
+lftp(1)                                                                             General Commands Manual                                                                             lftp(1)
 
 NAME
        lftp - Sophisticated file transfer program
@@ -14,43 +14,38 @@ VERSION
        This man page documents lftp version 4.8.1.
 
 DESCRIPTION
-       lftp is a file transfer program that allows sophisticated FTP, HTTP and other connections to other hosts. If site is specified then lftp will connect to that
-       site otherwise a connection has to be established with the open command.
+       lftp  is  a file transfer program that allows sophisticated FTP, HTTP and other connections to other hosts. If site is specified then lftp will connect to that site otherwise a connec‐
+       tion has to be established with the open command.
 
-       lftp can handle several file access methods - FTP, FTPS, HTTP, HTTPS, HFTP, FISH, SFTP and file (HTTPS and FTPS are only available when lftp is compiled with
-       GNU  TLS or OpenSSL library). You can specify the method to use in `open URL' command, e.g. `open http://www.us.kernel.org/pub/linux'. HFTP is ftp-over-http-
-       proxy protocol. It can be used automatically instead of FTP if ftp:proxy is set to `http://proxy[:port]'. Fish is a protocol working over an  ssh  connection
-       to a unix account. SFtp is a protocol implemented in SSH2 as SFTP subsystem.
+       lftp can handle several file access methods - FTP, FTPS, HTTP, HTTPS, HFTP, FISH, SFTP and file (HTTPS and FTPS are only available when lftp is compiled with GNU  TLS  or  OpenSSL  li‐
+       brary).  You can specify the method to use in `open URL' command, e.g. `open http://www.us.kernel.org/pub/linux'. HFTP is ftp-over-http-proxy protocol. It can be used automatically in‐
+       stead of FTP if ftp:proxy is set to `http://proxy[:port]'. Fish is a protocol working over an ssh connection to a unix account. SFtp is a protocol implemented in SSH2 as  SFTP  subsys‐
+       tem.
 
        Besides FTP-like protocols, lftp has support for BitTorrent protocol as `torrent' command. Seeding is also supported.
 
-       Every  operation  in  lftp  is  reliable, that is any non-fatal error is handled properly and the operation is repeated. So if downloading breaks, it will be
-       restarted from the point automatically. Even if FTP server does not support the REST command, lftp will try to retrieve the file from the very beginning  un‐
-       til the file is transferred completely.
+       Every  operation in lftp is reliable, that is any non-fatal error is handled properly and the operation is repeated. So if downloading breaks, it will be restarted from the point auto‐
+       matically. Even if FTP server does not support the REST command, lftp will try to retrieve the file from the very beginning until the file is transferred completely.
 
-       lftp has shell-like command syntax allowing you to launch several commands in parallel in background (&). It is also possible to group commands within () and
-       execute them in background. All background jobs are executed in the same single process. You can bring a foreground job to background with ^Z (c-z) and  back
-       with command `wait' (or `fg' which is alias to `wait'). To list running jobs, use command `jobs'. Some commands allow redirecting their output (cat, ls, ...)
-       to file or via pipe to external command. Commands can be executed conditionally based on termination status of previous command (&&, ||).
+       lftp has shell-like command syntax allowing you to launch several commands in parallel in background (&). It is also possible to group commands within ()  and  execute  them  in  back‐
+       ground.  All background jobs are executed in the same single process. You can bring a foreground job to background with ^Z (c-z) and back with command `wait' (or `fg' which is alias to
+       `wait'). To list running jobs, use command `jobs'. Some commands allow redirecting their output (cat, ls, ...) to file or via pipe to external command. Commands can be executed  condi‐
+       tionally based on termination status of previous command (&&, ||).
 
-       If you exit lftp before all jobs are not finished yet, lftp will move itself to nohup mode in background. The same thing happens with a real modem hangup  or
-       when you close an xterm.
+       If you exit lftp before all jobs are not finished yet, lftp will move itself to nohup mode in background. The same thing happens with a real modem hangup or when you close an xterm.
 
-       lftp  has  built-in mirror which can download or update a whole directory tree. There is also reverse mirror (mirror -R) which uploads or updates a directory
-       tree on server. Mirror can also synchronize directories between two remote servers, using FXP if available.
+       lftp  has  built-in mirror which can download or update a whole directory tree. There is also reverse mirror (mirror -R) which uploads or updates a directory tree on server. Mirror can
+       also synchronize directories between two remote servers, using FXP if available.
 
-       There is command `at' to launch a job at specified time in current context, command `queue' to queue commands for sequential execution  for  current  server,
-       and much more.
+       There is command `at' to launch a job at specified time in current context, command `queue' to queue commands for sequential execution for current server, and much more.
 
-       On startup, lftp executes /etc/lftp.conf and then ~/.lftprc and ~/.lftp/rc (or ~/.config/lftp/rc if ~/.lftp does not exist).  You can place aliases and `set'
-       commands there. Some people prefer to see full protocol debug, use `debug' to turn the debug on. Use `debug 3' to see only greeting messages and  error  mes‐
-       sages.
+       On startup, lftp executes /etc/lftp.conf and then ~/.lftprc and ~/.lftp/rc (or ~/.config/lftp/rc if ~/.lftp does not exist).  You can place aliases and `set' commands there. Some  peo‐
+       ple prefer to see full protocol debug, use `debug' to turn the debug on. Use `debug 3' to see only greeting messages and error messages.
 
-       lftp  has a number of settable variables. You can use `set -a' to see all variables and their values or `set -d' to see list of defaults.  Variable names can
-       be abbreviated and prefix can be omitted unless the rest becomes ambiguous.
+       lftp  has  a number of settable variables. You can use `set -a' to see all variables and their values or `set -d' to see list of defaults.  Variable names can be abbreviated and prefix
+       can be omitted unless the rest becomes ambiguous.
 
-       If lftp was compiled with OpenSSL (configure --with-openssl) it includes software  developed  by  the  OpenSSL  Project  for  use  in  the  OpenSSL  Toolkit.
-       (http://www.openssl.org/)
+       If lftp was compiled with OpenSSL (configure --with-openssl) it includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit. (http://www.openssl.org/)
 
    Commands
        ! shell command
@@ -63,8 +58,7 @@ DESCRIPTION
 
        alias  [name [value]]
 
-       Define  or  undefine  alias name. If value is omitted, the alias is undefined, else it takes the value value. If no argument is given the current aliases are
-       listed.
+       Define or undefine alias name. If value is omitted, the alias is undefined, else it takes the value value. If no argument is given the current aliases are listed.
 
             alias dir ls -lF
             alias less zmore
@@ -105,8 +99,8 @@ DESCRIPTION
 
        cd rdir
 
-       Change current remote directory.  The previous remote directory is stored as `-'. You can do `cd -' to change the directory back.  The previous directory for
-       each site is also stored on disk, so you can do `open site; cd -' even after lftp restart.
+       Change current remote directory.  The previous remote directory is stored as `-'. You can do `cd -' to change the directory back.  The previous directory for each site is  also  stored
+       on disk, so you can do `open site; cd -' even after lftp restart.
 
        chmod [OPTS] mode files...
 
@@ -123,12 +117,13 @@ DESCRIPTION
 
        cls [OPTS] files...
 
-       `cls' tries to retrieve information about specified files or directories and outputs the information according to format options. The difference between `ls'
-       and `cls' is that `ls' requests the server to format file listing, and `cls' formats it itself, after retrieving all the needed information.
+       `cls' tries to retrieve information about specified files or directories and outputs the information according to format options. The difference between `ls' and `cls' is that `ls' re‐
+       quests the server to format file listing, and `cls' formats it itself, after retrieving all the needed information.
 
             -1                         single-column output
             -a, --all                  show dot files
             -B, --basename             show basename of files only
+
                 --block-size=SIZ       use SIZ-byte blocks
             -d, --directory            list directory entries instead of contents
             -F, --classify             append indicator (one of /@) to entries
@@ -176,17 +171,17 @@ DESCRIPTION
 
        eval [-f format ] args...
 
-       without -f it executes given arguments as a command. With -f, arguments are transformed into a new command. The format can contain plain text and  placehold‐
-       ers $0...$9 and $@, corresponding to the arguments.
+       without -f it executes given arguments as a command. With -f, arguments are transformed into a new command. The format can contain plain text and placeholders $0...$9  and  $@,  corre‐
+       sponding to the arguments.
 
        exit [bg] [top] [parent] [kill] [code]
 
-       exit  will  exit from lftp or move to background if there are active jobs. If no job is active, code is passed to operating system as lftp's termination sta‐
-       tus. If code is omitted, the exit code of last command is used.
+       exit  will  exit from lftp or move to background if there are active jobs. If no job is active, code is passed to operating system as lftp's termination status. If code is omitted, the
+       exit code of last command is used.
 
-       `exit bg' forces moving to background when cmd:move-background is false.  `exit top' makes top level `shell'  (internal  lftp  command  executor)  terminate.
-       `exit  parent'  terminates  the  parent shell when running a nested script.  `exit kill' kills all numbered jobs before exiting. The options can be combined,
-       e.g.  `at 08:00 -- exit top kill &' kills all jobs and makes lftp exit at specified time.
+       `exit bg' forces moving to background when cmd:move-background is false.  `exit top' makes top level `shell' (internal lftp command executor) terminate.  `exit parent'  terminates  the
+       parent  shell  when  running  a  nested script.  `exit kill' kills all numbered jobs before exiting. The options can be combined, e.g.  `at 08:00 -- exit top kill &' kills all jobs and
+       makes lftp exit at specified time.
 
        fg
 
@@ -194,8 +189,7 @@ DESCRIPTION
 
        find [OPTS] directory...
 
-       List files in the directory (current directory by default) recursively.  This can help with servers lacking ls -R support. You can redirect  output  of  this
-       command. Options:
+       List files in the directory (current directory by default) recursively.  This can help with servers lacking ls -R support. You can redirect output of this command. Options:
 
             -d MD, --max-depth=MD   specify maximum scan depth
             -l,    --ls             use long listing format
@@ -208,13 +202,13 @@ DESCRIPTION
             put ftp://...
             mput ftp://.../*
             mget -O ftp://... ftp://.../*
-       or  other combinations to get FXP transfer (directly between two FTP servers).  lftp would fallback to plain copy (via client) if FXP transfer cannot be ini‐
-       tiated or ftp:use-fxp is false.
+       or other combinations to get FXP transfer (directly between two FTP servers).  lftp would fallback to plain copy (via client) if FXP transfer cannot  be  initiated  or  ftp:use-fxp  is
+       false.
 
        get [-E] [-a] [-c] [-e] [-P N] [-O base] rfile [-o lfile] ...
 
-       Retrieve the remote file rfile and store it as the local file lfile.  If -o is omitted, the file is stored to local file named as base name of rfile. You can
-       get multiple files by specifying multiple instances of rfile (and -o lfile). Does not expand wildcards, use mget for that.
+       Retrieve  the  remote  file  rfile  and store it as the local file lfile.  If -o is omitted, the file is stored to local file named as base name of rfile. You can get multiple files by
+       specifying multiple instances of rfile (and -o lfile). Does not expand wildcards, use mget for that.
 
             -c          continue, reget
             -E          delete source files after successful transfer
@@ -293,8 +287,7 @@ DESCRIPTION
 
        ls params
 
-       List  remote files. You can redirect output of this command to file or via pipe to external command.  By default, ls output is cached, to see new listing use
-       rels or cache flush.
+       List remote files. You can redirect output of this command to file or via pipe to external command.  By default, ls output is cached, to see new listing use rels or cache flush.
 
        mget [-c] [-d] [-a] [-E] [-e] [-P N] [-O base] files
 
@@ -312,8 +305,8 @@ DESCRIPTION
 
        Mirror specified source directory to the target directory.
 
-       By default the source is remote and the target is a local directory.  When using -R, the source directory is local and the target is remote.  If  the  target
-       directory is omitted, base name of the source directory is used.  If both directories are omitted, current local and remote directories are used.
+       By default the source is remote and the target is a local directory.  When using -R, the source directory is local and the target is remote.  If the target directory is  omitted,  base
+       name of the source directory is used.  If both directories are omitted, current local and remote directories are used.
 
        The source and/or the target may be URLs pointing to directories.
 
@@ -321,7 +314,6 @@ DESCRIPTION
 
             -c,      --continue                 continue a mirror job if possible
             -e,      --delete                   delete files not present at the source
-
                      --delete-excluded          delete files excluded at the target
                      --delete-first             delete old files before transferring new ones
                      --depth-first              descend into subdirectories before transferring files
@@ -329,6 +321,7 @@ DESCRIPTION
             -s,      --allow-suid               set suid/sgid bits according to the source
                      --allow-chown              try to set owner and group on files
                      --ascii                    use ascii mode transfers (implies --ignore-size)
+
                      --ignore-time              ignore time when deciding whether to download
                      --ignore-size              ignore size when deciding whether to download
                      --only-missing             download only missing files
@@ -372,22 +365,21 @@ DESCRIPTION
                      --skip-noaccess            don't try to transfer files with no read access.
                      --use-cache                use cached directory listings
                      --Remove-source-files      remove source files after transfer (use with caution)
-                     --Remove-source-dirs       remove  source  files and directories after transfer (use with caution).  Top level directory is not removed if it's
-                                                name ends with a slash.
+                     --Remove-source-dirs       remove source files and directories after transfer (use with caution).  Top level directory is not removed if it's name ends with a slash.
                      --Move                     same as --Remove-source-dirs
             -a                                  same as --allow-chown --allow-suid --no-umask
             RX is an extended regular expression, just like in egrep(1).
 
        GP is a glob pattern, e.g. `*.zip'.
 
-       Include and exclude options can be specified multiple times. It means that a file or directory would be mirrored if it matches an include and does not  match
-       to excludes after the include, or does not match anything and the first check is exclude. Directories are matched with a slash appended.
+       Include  and  exclude options can be specified multiple times. It means that a file or directory would be mirrored if it matches an include and does not match to excludes after the in‐
+       clude, or does not match anything and the first check is exclude. Directories are matched with a slash appended.
 
-       Note  that symbolic links are not created when uploading to remote server, because FTP protocol cannot do it. To upload files the links refer to, use `mirror
-       -RL' command (treat symbolic links as files).
+       Note that symbolic links are not created when uploading to remote server, because FTP protocol cannot do it. To upload files the links refer to, use `mirror -RL'  command  (treat  sym‐
+       bolic links as files).
 
-       For options --newer-than and --older-than you can either specify a file or time specification like that used by at(1) command,  e.g.   `now-7days'  or  `week
-       ago'. If you specify a file, then modification time of that file will be used.
+       For  options  --newer-than and --older-than you can either specify a file or time specification like that used by at(1) command, e.g.  `now-7days' or `week ago'. If you specify a file,
+       then modification time of that file will be used.
 
        Verbosity level can be selected using --verbose=level option or by several -v options, e.g. -vvv. Levels are:
             0 - no output (default)
@@ -395,22 +387,19 @@ DESCRIPTION
             2 - +print not deleted file names (when -e is not specified)
             3 - +print directory names which are mirrored
 
-       --only-newer  turns off file size comparison and uploads/downloads only newer files even if size is different. By default older files are transferred and re‐
-       place newer ones.
+       --only-newer turns off file size comparison and uploads/downloads only newer files even if size is different. By default older files are transferred and replace newer ones.
 
-       --upload-older allows replacing newer remote files with older ones (when the target side is remote). Some remote back-ends cannot preserve timestamps so  the
-       default is to keep newer files.
+       --upload-older allows replacing newer remote files with older ones (when the target side is remote). Some remote back-ends cannot preserve timestamps so the default is  to  keep  newer
+       files.
 
-       Recursion  mode can be one of `always', `never', `missing', `newer'. With the option `newer' mirror compares timestamps of directories and enters a directory
-       only if it is older or missing on the target side. Be aware that when a file changes the directory timestamp may stay the same, so mirror won't process  that
-       directory.
+       Recursion  mode  can  be  one  of `always', `never', `missing', `newer'. With the option `newer' mirror compares timestamps of directories and enters a directory only if it is older or
+       missing on the target side. Be aware that when a file changes the directory timestamp may stay the same, so mirror won't process that directory.
 
        The options --file and --directory may be used multiple times and even mixed provided that base directories of the paths are the same.
 
        You can mirror between two servers if you specify URLs instead of directories.  FXP is automatically used for transfers between FTP servers, if possible.
 
-       Some  FTP  servers  hide  dot-files  by  default  (e.g. .htaccess), and show them only when LIST command is used with -a option. In such case try to use `set
-       ftp:list-options -a'.
+       Some FTP servers hide dot-files by default (e.g. .htaccess), and show them only when LIST command is used with -a option. In such case try to use `set ftp:list-options -a'.
 
        --depth-first, --no-empty-dirs and setting mirror:no-empty-dirs=true.
 
@@ -420,8 +409,8 @@ DESCRIPTION
 
        module module [ args ]
 
-       Load given module using dlopen(3) function. If module name does not contain a slash, it is searched in directories specified by module:path variable.   Argu‐
-       ments are passed to module_init function. See README.modules for technical details.
+       Load given module using dlopen(3) function. If module name does not contain a slash, it is searched in directories specified by module:path variable.   Arguments  are  passed  to  mod‐
+       ule_init function. See README.modules for technical details.
 
        more files
 
@@ -451,8 +440,7 @@ DESCRIPTION
 
        mv file1 file2
 
-       Rename  file1 to file2. No wildcard exmapsion is performed.  If you give more than two arguments, or the last argument ends with a slash, then mmv command is
-       executed instead.
+       Rename file1 to file2. No wildcard exmapsion is performed.  If you give more than two arguments, or the last argument ends with a slash, then mmv command is executed instead.
 
        nlist [args]
 
@@ -460,12 +448,12 @@ DESCRIPTION
 
        open [OPTS] site
 
-       Select a server by host name, URL or bookmark. When an URL or bookmark is given, automatically change the current working directory to the directory  of  the
-       URL.  Options:
+       Select a server by host name, URL or bookmark. When an URL or bookmark is given, automatically change the current working directory to the directory of the URL.  Options:
 
             -e cmd            execute the command just after selecting the server
             -u user[,pass]    use the user/password for authentication
             -p port           use the port for connection
+
             -s slot           assign the connection to this slot
             -d                enable debug
             -B                don't look up bookmarks
@@ -476,8 +464,8 @@ DESCRIPTION
 
        pget [OPTS] rfile [-o lfile]
 
-       Gets  the  specified  file using several connections. This can speed up transfer, but loads the net and server heavily impacting other users. Use only if you
-       really have to transfer the file ASAP.  Options:
+       Gets  the  specified file using several connections. This can speed up transfer, but loads the net and server heavily impacting other users. Use only if you really have to transfer the
+       file ASAP.  Options:
 
             -c           continue transfer. Requires lfile.lftp-pget-status file.
             -n maxconn   set maximum number of connections (default is taken from pget:default-n setting)
@@ -500,12 +488,12 @@ DESCRIPTION
 
        queue [-n num ] cmd
 
-       Add the given command to queue for sequential execution. Each site has its own queue. `-n' adds the command before the given item in the queue. Don't try  to
-       queue `cd' or `lcd' commands, it may confuse lftp. Instead do the cd/lcd before `queue' command, and it will remember the place in which the command is to be
-       done. It is possible to queue up an already running job by `queue wait <jobno>', but the job will continue execution even if it is not the first in queue.
+       Add the given command to queue for sequential execution. Each site has its own queue. `-n' adds the command before the given item in the queue. Don't try to queue `cd'  or  `lcd'  com‐
+       mands,  it may confuse lftp. Instead do the cd/lcd before `queue' command, and it will remember the place in which the command is to be done. It is possible to queue up an already run‐
+       ning job by `queue wait <jobno>', but the job will continue execution even if it is not the first in queue.
 
-       `queue stop' will stop the queue, it will not execute any new commands, but already running jobs will continue to run. You can use `queue stop' to create  an
-       empty stopped queue. `queue start' will resume queue execution.  When you exit lftp, it will start all stopped queues automatically.
+       `queue stop' will stop the queue, it will not execute any new commands, but already running jobs will continue to run. You can use `queue stop' to create an empty stopped queue. `queue
+       start' will resume queue execution.  When you exit lftp, it will start all stopped queues automatically.
 
        `queue' with no arguments will either create a stopped queue or print queue status.
 
@@ -519,7 +507,6 @@ DESCRIPTION
 
             -q   Be quiet.
             -v   Be verbose.
-
             -Q   Output in a format that can be used to re-queue. Useful with --delete.
 
        Examples:
@@ -532,13 +519,14 @@ DESCRIPTION
 
             queue -d 3             Delete the third item in the queue.
             queue -m 6 4           Move the sixth item in the queue before the fourth.
+
             queue -m "get*zip" 1   Move all commands matching "get*zip" to the beginning of the queue.  (The order of the items is preserved.)
             queue -d "get*zip"     Delete all commands matching "get*zip".
 
        quote cmd
 
-       For  FTP  - send the command uninterpreted. Use with caution - it can lead to unknown remote state and thus will cause reconnect. You cannot be sure that any
-       change of remote state because of quoted command is solid - it can be reset by reconnect at any time.
+       For  FTP  - send the command uninterpreted. Use with caution - it can lead to unknown remote state and thus will cause reconnect. You cannot be sure that any change of remote state be‐
+       cause of quoted command is solid - it can be reset by reconnect at any time.
 
        For HTTP - specific to HTTP action. Syntax: ``quote <command> [<args>]''.  Command may be ``set-cookie'' or ``post''.
             open http://www.site.net
@@ -546,8 +534,8 @@ DESCRIPTION
             set http:post-content-type application/x-www-form-urlencoded
             quote post /cgi-bin/script.cgi "var=value&othervar=othervalue" > local_file
 
-       For FISH - send the command uninterpreted. This can be used to execute arbitrary commands on server. The command must not take input or print ### at new line
-       beginning. If it does, the protocol will become out of sync.
+       For FISH - send the command uninterpreted. This can be used to execute arbitrary commands on server. The command must not take input or print ### at new line beginning. If it does, the
+       protocol will become out of sync.
             open fish://server
             quote find -name \*.zip
 
@@ -583,8 +571,8 @@ DESCRIPTION
 
        rm [-r] [-f] files
 
-       Remove  remote  files.   Does  not expand wildcards, use mrm for that. -r is for recursive directory remove. Be careful, if something goes wrong you can lose
-       files. -f suppress error messages.
+       Remove  remote files.  Does not expand wildcards, use mrm for that. -r is for recursive directory remove. Be careful, if something goes wrong you can lose files. -f suppress error mes‐
+       sages.
 
        rmdir dir(s)
 
@@ -596,8 +584,8 @@ DESCRIPTION
 
        set [var [val]]
 
-       Set variable to given value. If the value is omitted, unset the variable.  Variable name has format ``name/closure'', where closure can specify exact  appli‐
-       cation of the setting. See below for details.  If set is called with no variable then only altered settings are listed.  It can be changed by options:
+       Set variable to given value. If the value is omitted, unset the variable.  Variable name has format ``name/closure'', where closure can specify exact application of  the  setting.  See
+       below for details.  If set is called with no variable then only altered settings are listed.  It can be changed by options:
 
             -a   list all settings, including default values
             -d   list only default values, not necessary current ones
@@ -608,13 +596,12 @@ DESCRIPTION
 
        sleep interval
 
-       Sleep  given time interval and exit. Interval is in seconds by default, but can be suffixed with 'm', 'h', 'd' for minutes, hours and days respectively.  See
-       also at.
+       Sleep given time interval and exit. Interval is in seconds by default, but can be suffixed with 'm', 'h', 'd' for minutes, hours and days respectively.  See also at.
 
        slot [name]
 
-       Select specified slot or list all slots allocated. A slot is a connection to a server, somewhat like a virtual console. You can create  multiple  slots  con‐
-       nected to different servers and switch between them. You can also use slot:name as a pseudo-URL evaluating to that slot location.
+       Select specified slot or list all slots allocated. A slot is a connection to a server, somewhat like a virtual console. You can create multiple slots connected to different servers and
+       switch between them. You can also use slot:name as a pseudo-URL evaluating to that slot location.
 
        Default readline binding allows quick switching between slots named 0-9 using Meta-0 - Meta-9 keys (often you can use Alt instead of Meta).
 
@@ -631,10 +618,9 @@ DESCRIPTION
 
        torrent [OPTS] torrent-files...
 
-       Start  BitTorrent  process for the given torrent-files, which can be a local file, URL, magnet link or plain info_hash written in hex or base32.  Local wild‐
-       cards are expanded. Existing files are first validated unless --force-valid option is given. Missing pieces are downloaded. Files are stored in specified di‐
-       rectory  or  current  working directory by default. Seeding continues until ratio reaches torrent:stop-on-ratio setting or time of torrent:seed-max-time runs
-       out.
+       Start BitTorrent process for the given torrent-files, which can be a local file, URL, magnet link or plain info_hash written in hex or base32.  Local wildcards are  expanded.  Existing
+       files  are first validated unless --force-valid option is given. Missing pieces are downloaded. Files are stored in specified directory or current working directory by default. Seeding
+       continues until ratio reaches torrent:stop-on-ratio setting or time of torrent:seed-max-time runs out.
 
        Options:
 
@@ -642,9 +628,8 @@ DESCRIPTION
             --force-valid            skip file validation (if you are sure they are ok).
             --only-new               stop if the metadata is known already or the torrent is complete.
             --only-incomplete        stop if the torrent is already complete.
-            --dht-bootstrap=<node>   bootstrap DHT by sending a query to specified node.  This option should be used just once to fill the local node  cache.   Port
-                                     number  may be given after colon, default is 6881.  Here are some nodes for bootstrapping: dht.transmissionbt.com, router.utor‐
-                                     rent.com, router.bittorrent.com.
+            --dht-bootstrap=<node>   bootstrap DHT by sending a query to specified node.  This option should be used just once to fill the local node cache.  Port number may  be  given  after
+                                     colon, default is 6881.  Here are some nodes for bootstrapping: dht.transmissionbt.com, router.utorrent.com, router.bittorrent.com.
             --share                  share specified file or directory using BitTorrent protocol. Magnet link is printed when it's ready.
 
        user user [pass]
@@ -672,8 +657,8 @@ DESCRIPTION
        Same as more, but filter each file through zcat. (See also cat, zcat and more)
 
    Settings
-       On startup, lftp executes ~/.lftprc and ~/.lftp/rc (or ~/.config/lftp/rc if ~/.lftp does not exist).  You can place aliases and `set'  commands  there.  Some
-       people prefer to see full protocol debug, use `debug' to turn the debug on.
+       On  startup,  lftp  executes  ~/.lftprc and ~/.lftp/rc (or ~/.config/lftp/rc if ~/.lftp does not exist).  You can place aliases and `set' commands there. Some people prefer to see full
+       protocol debug, use `debug' to turn the debug on.
 
        There is also a system-wide startup file in /etc/lftp.conf.  It can be in different directory, see FILES section.
 
@@ -719,8 +704,7 @@ DESCRIPTION
               the commands in string are executed once when all jobs in a queue are done.
 
        cmd:cls-completion-default (string)
-              default  cls  options  for  displaying completion choices. For example, to make completion listings show file sizes, set cmd:cls-completion-default to
-              `-s'.
+              default cls options for displaying completion choices. For example, to make completion listings show file sizes, set cmd:cls-completion-default to `-s'.
 
        cmd:cls-default (string)
               default cls command options. They can be overridden by explicitly given options.
@@ -735,8 +719,8 @@ DESCRIPTION
               The value is used when `open' is used with just host name without protocol. Default is `ftp'.
 
        cmd:fail-exit (boolean)
-              if true, exit when a command fails and the following command is unconditional (i.e. does not begin with || or &&). lftp exits after the  unconditional
-              command is issued without executing it.
+              if true, exit when a command fails and the following command is unconditional (i.e. does not begin with || or &&). lftp exits after the unconditional command is  issued  without
+              executing it.
 
        cmd:interactive (tri-boolean)
               when true, lftp acts interactively, handles terminal signals and outputs some extra messages. Default is auto and depends on stdin being a terminal.
@@ -751,9 +735,8 @@ DESCRIPTION
               when false, lftp refuses to go to background when exiting. To force it, use `exit bg'.
 
        cmd:move-background-detach (boolean)
-              when  true  (default), lftp detaches itself from the control terminal when moving to background, it is possible to attach back using `attach' command;
-              when false, lftp tricks the shell to move lftp to background process group and continues to run, then fg shell command brings lftp back to  foreground
-              unless it has done all jobs and terminated.
+              when  true (default), lftp detaches itself from the control terminal when moving to background, it is possible to attach back using `attach' command; when false, lftp tricks the
+              shell to move lftp to background process group and continues to run, then fg shell command brings lftp back to foreground unless it has done all jobs and terminated.
 
        cmd:prompt (string)
               The prompt. lftp recognizes the following backslash-escaped special characters that are decoded as follows:
@@ -778,20 +761,18 @@ DESCRIPTION
               \]     end a sequence of non-printing characters
 
        cmd:parallel (number)
-              Number  of  jobs  run in parallel in non-interactive mode. For example, this may be useful for scripts with multiple `get' commands. Note that setting
-              this to a value greater than 1 changes conditional execution behaviour, basically makes it inconsistent.
+              Number of jobs run in parallel in non-interactive mode. For example, this may be useful for scripts with multiple `get' commands. Note that setting this to a value greater  than
+              1 changes conditional execution behaviour, basically makes it inconsistent.
 
        cmd:queue-parallel (number)
               Number of jobs run in parallel in a queue.
 
        cmd:remote-completion (boolean)
-              a boolean to control whether or not lftp uses remote completion. When true, Tab key guesses if the word being completed should be a remote file  name.
-              Meta-Tab  does  remote  completion  always.  So you can force remote completion with Meta-Tab when cmd:remote-completion is false or when the guess is
-              wrong.
+              a  boolean  to control whether or not lftp uses remote completion. When true, Tab key guesses if the word being completed should be a remote file name. Meta-Tab does remote com‐
+              pletion always. So you can force remote completion with Meta-Tab when cmd:remote-completion is false or when the guess is wrong.
 
        cmd:save-cwd-history (boolean)
-              when true, lftp saves last CWD of each site to ~/.local/share/lftp/cwd_history or ~/.lftp/cwd_history, allowing to do ``cd -'' after lftp restart. De‐
-              fault is true.
+              when true, lftp saves last CWD of each site to ~/.local/share/lftp/cwd_history or ~/.lftp/cwd_history, allowing to do ``cd -'' after lftp restart. Default is true.
 
        cmd:save-rl-history (boolean)
               when true, lftp saves readline history to ~/.local/share/lftp/rl_history or ~/.lftp/rl_history on exit.  Default is true.
@@ -809,8 +790,8 @@ DESCRIPTION
               the number of lines to keep in readline history.
 
        cmd:term-status (string)
-              the  format  string  to use to display terminal status. The closure for this setting is the terminal type from TERM environment variable. Default uses
-              ``tsl'' and ``fsl'' termcap values.
+              the format string to use to display terminal status. The closure for this setting is the terminal type from TERM environment variable. Default uses ``tsl'' and  ``fsl''  termcap
+              values.
 
               The following escapes are supported:
 
@@ -828,22 +809,20 @@ DESCRIPTION
               when true, lftp prints the commands it executes (like sh -x).
 
        cmd:verify-host (boolean)
-              if true, lftp resolves host name immediately in `open' command.  It is also possible to skip the check for a single `open' command if `&' is given, or
-              if ^Z is pressed during the check.
+              if  true,  lftp  resolves host name immediately in `open' command.  It is also possible to skip the check for a single `open' command if `&' is given, or if ^Z is pressed during
+              the check.
 
        cmd:verify-path (boolean)
-              if  true,  lftp  checks  the path given in `cd' command.  It is also possible to skip the check for a single `cd' command if `&' is given, or if ^Z is
-              pressed during the check.  Examples:
+              if true, lftp checks the path given in `cd' command.  It is also possible to skip the check for a single `cd' command if `&' is given, or if ^Z is pressed during the check.  Ex‐
+              amples:
                    set cmd:verify-path/hftp://* false
                    cd directory &
 
        cmd:verify-path-cached (boolean)
-              When false, `cd' to a directory known from cache as existent will succeed immediately.  Otherwise the verification will depend on cmd:verify-path set‐
-              ting.
+              When false, `cd' to a directory known from cache as existent will succeed immediately.  Otherwise the verification will depend on cmd:verify-path setting.
 
        color:use-color (tri-boolean)
-              when true, cls command and completion output colored file listings according to color:dir-colors setting.  When set to auto, colors are used when out‐
-              put is a terminal.
+              when true, cls command and completion output colored file listings according to color:dir-colors setting.  When set to auto, colors are used when output is a terminal.
 
        color:dir-colors (string)
               file listing color description. By default the value of LS_COLORS environment variable is used. See dircolors(1).
@@ -864,19 +843,19 @@ DESCRIPTION
               limit the time for DNS queries. If DNS server is unavailable too long, lftp will fail to resolve a given host name. Set to `never' to disable.
 
        dns:order (list of protocol names)
-              sets the order of DNS queries. Default is ``inet6 inet'' which means first look up address in inet6 family, then inet and use them in that order.   To
-              disable inet6 (AAAA) lookup, set this variable to ``inet''.
+              sets  the  order  of  DNS  queries.  Default  is ``inet6 inet'' which means first look up address in inet6 family, then inet and use them in that order.  To disable inet6 (AAAA)
+              lookup, set this variable to ``inet''.
 
        dns:use-fork (boolean)
               if true, lftp will fork before resolving host address. Default is true.
 
        dns:max-retries (number)
-              If  zero,  there is no limit on the number of times lftp will try to lookup an address.  If > 0, lftp will try only this number of times to look up an
-              address of each address family in dns:order.
+              If zero, there is no limit on the number of times lftp will try to lookup an address.  If > 0, lftp will try only this number of times to look up an address of each address fam‐
+              ily in dns:order.
 
        dns:name (string)
-              This setting can be used to substitute a host name alias with another name or IP address. The host name alias is used as the setting closure, the sub‐
-              stituted name or IP address is in the value. Multiple names or IP addresses can be separated by comma.
+              This  setting can be used to substitute a host name alias with another name or IP address. The host name alias is used as the setting closure, the substituted name or IP address
+              is in the value. Multiple names or IP addresses can be separated by comma.
 
        file:charset (string)
               local character set. It is set from current locale initially.
@@ -894,12 +873,12 @@ DESCRIPTION
               the character set used by fish server in requests, replies and file listings.  Default is empty which means the same as local.
 
        fish:connect-program (string)
-              the program to use for connecting to remote server. It should support `-l' option for user name, `-p' for port number. Default is `ssh -a -x'. You can
-              set it to `rsh', for example. For private key authentication add `-i' option with the key file.
+              the program to use for connecting to remote server. It should support `-l' option for user name, `-p' for port number. Default is `ssh -a -x'. You can set it to `rsh', for exam‐
+              ple. For private key authentication add `-i' option with the key file.
 
        fish:shell (string)
-              use specified shell on server side. Default is /bin/sh. On some systems, /bin/sh exits when doing cd to a non-existent directory. lftp can handle that
-              but it has to reconnect. Set it to /bin/bash for such systems if bash is installed.
+              use  specified  shell on server side. Default is /bin/sh. On some systems, /bin/sh exits when doing cd to a non-existent directory. lftp can handle that but it has to reconnect.
+              Set it to /bin/bash for such systems if bash is installed.
 
        ftp:acct (string)
               Send this string in ACCT command after login. The result is ignored.  The closure for this setting has format user@host.
@@ -917,8 +896,8 @@ DESCRIPTION
               when there is no support for SIZE command, try to catch file size from the "150 Opening data connection" reply.
 
        ftp:charset (string)
-              the  character  set  used  by FTP server in requests, replies and file listings.  Default is empty which means the same as local. This setting is only
-              used when the server does not support UTF8.
+              the character set used by FTP server in requests, replies and file listings.  Default is empty which means the same as local. This setting is only used when the server does  not
+              support UTF8.
 
        ftp:client (string)
               the name of FTP client to send with CLNT command, if supported by server.  If it is empty, then no CLNT command will be sent.
@@ -930,40 +909,35 @@ DESCRIPTION
               bind data socket to the interface of control connection (in passive mode).  Default is true, exception is the loopback interface.
 
        ftp:fix-pasv-address (boolean)
-              if true, lftp will try to correct address returned by server for PASV command in case when server address is in public network and PASV returns an ad‐
-              dress  from a private network. In this case lftp would substitute server address instead of the one returned by PASV command, port number would not be
-              changed.  Default is true.
+              if  true,  lftp  will try to correct address returned by server for PASV command in case when server address is in public network and PASV returns an address from a private net‐
+              work. In this case lftp would substitute server address instead of the one returned by PASV command, port number would not be changed.  Default is true.
 
        ftp:fxp-passive-source (boolean)
-              if true, lftp will try to set up source FTP server in passive mode first, otherwise destination one. If first attempt fails, lftp tries to set them up
-              the other way. If the other disposition fails too, lftp falls back to plain copy. See also ftp:use-fxp.
+              if true, lftp will try to set up source FTP server in passive mode first, otherwise destination one. If first attempt fails, lftp tries to set them up  the  other  way.  If  the
+              other disposition fails too, lftp falls back to plain copy. See also ftp:use-fxp.
 
        ftp:home (string)
-              Initial  directory. Default is empty string which means auto. Set this to `/' if you don't like the look of %2F in FTP URLs. The closure for this set‐
-              ting has format user@host.
+              Initial directory. Default is empty string which means auto. Set this to `/' if you don't like the look of %2F in FTP URLs. The closure for this setting has format user@host.
 
        ftp:ignore-pasv-address (boolean)
-              If true, lftp uses control connection address instead of the one returned in PASV reply for data connection. This can be useful for broken NATs.   De‐
-              fault is false.
+              If true, lftp uses control connection address instead of the one returned in PASV reply for data connection. This can be useful for broken NATs.  Default is false.
 
        ftp:list-empty-ok (boolean)
               if set to false, empty lists from LIST command will be treated as incorrect, and another method (NLST) will be used.
 
        ftp:list-options (string)
-              sets  options  which  are always appended to LIST command. It can be useful to set this to `-a' if server does not show dot (hidden) files by default.
-              Default is empty.
+              sets options which are always appended to LIST command. It can be useful to set this to `-a' if server does not show dot (hidden) files by default.  Default is empty.
 
        ftp:mode-z-level (number)
               compression level (0-9) for uploading with MODE Z.
 
        ftp:nop-interval (seconds)
-              delay between NOOP commands when downloading tail of a file. This is useful for FTP servers which send "Transfer  complete"  message  before  flushing
-              data transfer. In such cases NOOP commands can prevent connection timeout.
+              delay  between  NOOP commands when downloading tail of a file. This is useful for FTP servers which send "Transfer complete" message before flushing data transfer. In such cases
+              NOOP commands can prevent connection timeout.
 
        ftp:passive-mode (boolean)
-              sets  passive FTP mode. This can be useful if you are behind a firewall or a dumb masquerading router. In passive mode lftp uses PASV command, not the
-              PORT command which is used in active mode. In passive mode lftp itself makes the data connection to the server; in active mode the server connects  to
-              lftp for data transfer. Passive mode is the default.
+              sets passive FTP mode. This can be useful if you are behind a firewall or a dumb masquerading router. In passive mode lftp uses PASV command, not the PORT command which is  used
+              in active mode. In passive mode lftp itself makes the data connection to the server; in active mode the server connects to lftp for data transfer. Passive mode is the default.
 
        ftp:port-ipv4 (ipv4 address)
               specifies an IPv4 address to send with PORT command. Default is empty which means to send the address of local end of control connection.
@@ -975,35 +949,31 @@ DESCRIPTION
               use EPSV as preferred passive mode. Default is `false'.
 
        ftp:proxy (URL)
-              specifies  FTP  proxy  to use.  To disable proxy set this to empty string. Note that it is a FTP proxy which uses FTP protocol, not FTP over HTTP. De‐
-              fault value is taken from environment variable ftp_proxy if it starts with ``ftp://''. If your FTP proxy requires authentication,  specify  user  name
-              and password in the URL.  If ftp:proxy starts with http:// then hftp protocol (FTP over HTTP proxy) is used instead of FTP automatically.
+              specifies FTP proxy to use.  To disable proxy set this to empty string. Note that it is a FTP proxy which uses FTP protocol, not FTP over HTTP. Default value is taken from envi‐
+              ronment variable ftp_proxy if it starts with ``ftp://''. If your FTP proxy requires authentication, specify user name and password in the URL.  If ftp:proxy starts with  http://
+              then hftp protocol (FTP over HTTP proxy) is used instead of FTP automatically.
 
        ftp:proxy-auth-type (string)
               When set to ``joined'', lftp sends ``user@proxy_user@ftp.example.org'' as user name to proxy, and ``password@proxy_password'' as password.
 
-              When set to ``joined-acct'', lftp sends ``user@ftp.example.org proxy_user'' (with space) as user name to proxy. The site password is sent as usual and
-              the proxy password is expected in the following ACCT command.
+              When  set to ``joined-acct'', lftp sends ``user@ftp.example.org proxy_user'' (with space) as user name to proxy. The site password is sent as usual and the proxy password is ex‐
+              pected in the following ACCT command.
 
-              When set to ``open'', lftp first sends proxy user and proxy password and then ``OPEN ftp.example.org'' followed by ``USER user''.  The  site  password
-              is then sent as usual.
+              When set to ``open'', lftp first sends proxy user and proxy password and then ``OPEN ftp.example.org'' followed by ``USER user''.  The site password is then sent as usual.
 
-              When  set  to ``user'' (default), lftp first sends proxy user and proxy password and then ``user@ftp.example.org'' as user name.  The site password is
-              then sent as usual.
+              When set to ``user'' (default), lftp first sends proxy user and proxy password and then ``user@ftp.example.org'' as user name.  The site password is then sent as usual.
 
-              When set to ``proxy-user@host'', lftp first sends ``USER proxy_user@ftp.example.org'', then proxy password. The site user and password are  then  sent
-              as usual.
+              When set to ``proxy-user@host'', lftp first sends ``USER proxy_user@ftp.example.org'', then proxy password. The site user and password are then sent as usual.
 
        ftp:rest-list (boolean)
               allow usage of REST command before LIST command. This might be useful for large directories, but some FTP servers silently ignore REST before LIST.
 
        ftp:rest-stor (boolean)
-              if  false,  lftp will not try to use REST before STOR. This can be useful for some buggy servers which corrupt (fill with zeros) the file if REST fol‐
-              lowed by STOR is used.
+              if false, lftp will not try to use REST before STOR. This can be useful for some buggy servers which corrupt (fill with zeros) the file if REST followed by STOR is used.
 
        ftp:retry-530 (regex)
-              Retry on server reply 530 for PASS command if text matches this regular expression.  This setting should be useful to distinguish  between  overloaded
-              server (temporary condition) and incorrect password (permanent condition).
+              Retry on server reply 530 for PASS command if text matches this regular expression.  This setting should be useful to distinguish between overloaded server (temporary condition)
+              and incorrect password (permanent condition).
 
        ftp:retry-530-anonymous (regex)
               Additional regular expression for anonymous login, like ftp:retry-530.
@@ -1018,16 +988,15 @@ DESCRIPTION
               do not send plain text password over the network, use skey/opie instead. If skey/opie is not available, assume failed login. Off by default.
 
        ftp:ssl-allow (boolean)
-              if  true, try to negotiate SSL connection with FTP server for non-anonymous access. Default is true. This and other SSL settings are only available if
-              lftp was compiled with an ssl/tls library.
+              if  true,  try to negotiate SSL connection with FTP server for non-anonymous access. Default is true. This and other SSL settings are only available if lftp was compiled with an
+              ssl/tls library.
 
        ftp:ssl-auth (string)
-              the argument for AUTH command, can be one of SSL, TLS, TLS-P, TLS-C.  See RFC4217 for explanations. By default TLS or SSL will be used,  depending  on
-              FEAT reply.
+              the argument for AUTH command, can be one of SSL, TLS, TLS-P, TLS-C.  See RFC4217 for explanations. By default TLS or SSL will be used, depending on FEAT reply.
 
        ftp:ssl-data-use-keys (boolean)
-              if  true, lftp loads ssl:key-file for protected data connection too. When false, it does not, and the server can match data and control connections by
-              session ID.  Default is true.
+              if true, lftp loads ssl:key-file for protected data connection too. When false, it does not, and the server can match data and control connections by  session  ID.   Default  is
+              true.
 
        ftp:ssl-force (boolean)
               if true, refuse to send password in clear when server does not support SSL.  Default is false.
@@ -1036,8 +1005,8 @@ DESCRIPTION
               if true, request SSL connection for data transfers. This is cpu-intensive but provides privacy. Default is false.
 
        ftp:ssl-protect-fxp (boolean)
-              if true, request SSL connection for data transfer between two FTP servers in FXP mode. CPSV or SSCN command will be used in that case. If SSL  connec‐
-              tion fails for some reason, lftp would try unprotected FXP transfer unless ftp:ssl-force is set for any of the two servers. Default is false.
+              if  true,  request SSL connection for data transfer between two FTP servers in FXP mode. CPSV or SSCN command will be used in that case. If SSL connection fails for some reason,
+              lftp would try unprotected FXP transfer unless ftp:ssl-force is set for any of the two servers. Default is false.
 
        ftp:ssl-protect-list (boolean)
               if true, request SSL connection for file list transfers. Default is true.
@@ -1049,25 +1018,22 @@ DESCRIPTION
               interval between STAT commands. Default is 1 second.
 
        ftp:strict-multiline (boolean)
-              when  true,  lftp  strictly checks for multiline reply format (expects it to end with the same code as it started with). When false, this check is re‐
-              laxed.
+              when true, lftp strictly checks for multiline reply format (expects it to end with the same code as it started with). When false, this check is relaxed.
 
        ftp:sync-mode (boolean)
-              if true, lftp will send one command at a time and wait for response. This might be useful if you are using a buggy FTP server or router.  When  it  is
-              off,  lftp  sends  a pack of commands and waits for responses - it speeds up operation when round trip time is significant.  Unfortunately it does not
-              work with all FTP servers and some routers have troubles with it, so it is on by default.
+              if true, lftp will send one command at a time and wait for response. This might be useful if you are using a buggy FTP server or router. When it is off, lftp  sends  a  pack  of
+              commands  and  waits for responses - it speeds up operation when round trip time is significant.  Unfortunately it does not work with all FTP servers and some routers have trou‐
+              bles with it, so it is on by default.
 
        ftp:timezone (string)
-              Assume this timezone for time in listings returned by LIST command.  This setting can be GMT offset [+|-]HH[:MM[:SS]] or any valid TZ value (e.g.  Eu‐
-              rope/Moscow  or  MSK-3MSD,M3.5.0,M10.5.0/3).  The default is GMT.  Set it to an empty value to assume local timezone specified by environment variable
-              TZ.
+              Assume this timezone for time in listings returned by LIST command.   This  setting  can  be  GMT  offset  [+|-]HH[:MM[:SS]]  or  any  valid  TZ  value  (e.g.  Europe/Moscow  or
+              MSK-3MSD,M3.5.0,M10.5.0/3). The default is GMT.  Set it to an empty value to assume local timezone specified by environment variable TZ.
 
        ftp:too-many-re (regexp)
               Decrease the dynamic connection limit when 421 reply line matches this regular expression.
 
        ftp:trust-feat (string)
-              When true, assume that FEAT returned data are correct and don't use common protocol extensions like SIZE, MDTM, REST if they are not listed.   Default
-              is false.
+              When true, assume that FEAT returned data are correct and don't use common protocol extensions like SIZE, MDTM, REST if they are not listed.  Default is false.
 
        ftp:use-abor (boolean)
               if false, lftp does not send ABOR command but closes data connection immediately.
@@ -1109,8 +1075,8 @@ DESCRIPTION
               when true, lftp sends 5-argument `SITE UTIME' command to set file modification time on uploaded files. Default is true.
 
        ftp:use-site-utime2 (boolean)
-              when true, lftp sends 2-argument `SITE UTIME' command to set file modification time on uploaded files. Default is true.  If 5-argument `SITE UTIME' is
-              also enabled, 2-argument command is tried first.
+              when  true,  lftp sends 2-argument `SITE UTIME' command to set file modification time on uploaded files. Default is true.  If 5-argument `SITE UTIME' is also enabled, 2-argument
+              command is tried first.
 
        ftp:use-size (boolean)
               when true (default), lftp uses SIZE command to determine file size.
@@ -1119,39 +1085,38 @@ DESCRIPTION
               if true, lftp sends STAT command in FXP mode transfer to know how much data has been transferred. See also ftp:stat-interval. Default is true.
 
        ftp:use-stat-for-list (boolean)
-              when true, lftp uses STAT instead of LIST command. By default `.' is used as STAT argument. Using STAT, lftp avoids creating data connection  for  di‐
-              rectory listing. Some servers require special options for STAT, use ftp:list-options to specify them (e.g. -la).
+              when true, lftp uses STAT instead of LIST command. By default `.' is used as STAT argument. Using STAT, lftp avoids creating data connection for directory listing. Some  servers
+              require special options for STAT, use ftp:list-options to specify them (e.g. -la).
 
        ftp:use-telnet-iac (boolean)
-              when  true  (default), lftp uses TELNET IAC command and follows TELNET protocol as specified in RFC959. When false, it does not follow TELNET protocol
-              and thus does not double 255 (0xFF, 0377) character and does not prefix ABOR and STAT commands with TELNET IP+SYNCH signal.
+              when true (default), lftp uses TELNET IAC command and follows TELNET protocol as specified in RFC959. When false, it does not follow TELNET protocol and thus does not double 255
+              (0xFF, 0377) character and does not prefix ABOR and STAT commands with TELNET IP+SYNCH signal.
 
        ftp:use-tvfs (tri-boolean)
-              When set to auto, usage of TVFS feature depends on FEAT server reply. Otherwise this setting tells whether use it or not. In short, if a  server  sup‐
-              ports TVFS feature then it uses unix-like paths.
+              When set to auto, usage of TVFS feature depends on FEAT server reply. Otherwise this setting tells whether use it or not. In short, if a server supports  TVFS  feature  then  it
+              uses unix-like paths.
 
        ftp:use-utf8 (boolean)
-              if true, lftp sends `OPTS UTF8 ON' to the server to activate UTF-8 encoding (if supported). Disable it if the file names have a different encoding and
-              the server has a trouble with it.
+              if  true,  lftp sends `OPTS UTF8 ON' to the server to activate UTF-8 encoding (if supported). Disable it if the file names have a different encoding and the server has a trouble
+              with it.
 
        ftp:use-quit (boolean)
               if true, lftp sends QUIT before disconnecting from ftp server. Default is true.
 
        ftp:verify-address (boolean)
-              verify that data connection comes from the network address of control connection peer. This can possibly prevent data connection  spoofing  which  can
-              lead  to  data corruption. Unfortunately, this can fail for certain ftp servers with several network interfaces, when they do not set outgoing address
-              on data socket, so it is disabled by default.
+              verify that data connection comes from the network address of control connection peer. This can possibly prevent data connection spoofing which can lead to data corruption.  Un‐
+              fortunately, this can fail for certain ftp servers with several network interfaces, when they do not set outgoing address on data socket, so it is disabled by default.
 
        ftp:verify-port (boolean)
-              verify that data connection has port 20 (ftp-data) on its remote end.  This can possibly prevent data connection spoofing by users of remote host. Un‐
-              fortunately, too many windows and even unix ftp servers forget to set proper port on data connection, thus this check is off by default.
+              verify  that  data connection has port 20 (ftp-data) on its remote end.  This can possibly prevent data connection spoofing by users of remote host. Unfortunately, too many win‐
+              dows and even unix ftp servers forget to set proper port on data connection, thus this check is off by default.
 
        ftp:web-mode (boolean)
               disconnect after closing data connection. This can be useful for totally broken ftp servers. Default is false.
 
        ftps:initial-prot (string)
-              specifies  initial  PROT setting for FTPS connections. Should be one of: C, S, E, P, or empty. Default is empty which means unknown, so that lftp will
-              use PROT command unconditionally. If PROT command turns out to be unsupported, then Clear mode would be assumed.
+              specifies initial PROT setting for FTPS connections. Should be one of: C, S, E, P, or empty. Default is empty which means unknown, so that lftp will use  PROT  command  uncondi‐
+              tionally. If PROT command turns out to be unsupported, then Clear mode would be assumed.
 
        hftp:cache (boolean)
               allow server/proxy side caching for ftp-over-http protocol.
@@ -1160,31 +1125,29 @@ DESCRIPTION
               specify corresponding HTTP request header.
 
        hftp:decode (boolean)
-              when true, lftp automatically decodes the entity in hftp protocol when Content-Encoding header value matches deflate, gzip, compress, x-gzip or x-com‐
-              press.
+              when true, lftp automatically decodes the entity in hftp protocol when Content-Encoding header value matches deflate, gzip, compress, x-gzip or x-compress.
 
        hftp:proxy (URL)
-              specifies  HTTP  proxy  for FTP-over-HTTP protocol (hftp). The protocol hftp cannot work without a HTTP proxy, obviously.  Default value is taken from
-              environment variable ftp_proxy if it starts with ``http://'', otherwise from environment variable http_proxy.  If your FTP proxy requires  authentica‐
-              tion, specify user name and password in the URL.
+              specifies  HTTP  proxy  for  FTP-over-HTTP  protocol  (hftp).  The  protocol  hftp cannot work without a HTTP proxy, obviously.  Default value is taken from environment variable
+              ftp_proxy if it starts with ``http://'', otherwise from environment variable http_proxy.  If your FTP proxy requires authentication, specify user name and password in the URL.
 
        hftp:use-allprop (boolean)
               if true, lftp will send `<allprop/>' request body in `PROPFIND' requests, otherwise it will send an empty request body.
 
        hftp:use-authorization (boolean)
-              if  set to off, lftp will send password as part of URL to the proxy. This may be required for some proxies (e.g. M-soft). Default is on, and lftp will
-              send password as part of Authorization header.
+              if set to off, lftp will send password as part of URL to the proxy. This may be required for some proxies (e.g. M-soft). Default is on, and lftp will send password  as  part  of
+              Authorization header.
 
        hftp:use-head (boolean)
-              if set to off, lftp will try to use `GET' instead of `HEAD' for hftp protocol.  While this is slower, it may allow lftp  to  work  with  some  proxies
-              which don't understand or mishandle ``HEAD ftp://'' requests.
+              if  set to off, lftp will try to use `GET' instead of `HEAD' for hftp protocol.  While this is slower, it may allow lftp to work with some proxies which don't understand or mis‐
+              handle ``HEAD ftp://'' requests.
 
        hftp:use-mkcol (boolean)
               if set to off, lftp will try to use `PUT' instead of `MKCOL' to create directories with hftp protocol. Default is off.
 
        hftp:use-propfind (boolean)
-              if  set  to off, lftp will not try to use `PROPFIND' to get directory contents with hftp protocol and use `GET' instead. Default is off. When enabled,
-              lftp will also use PROPPATCH to set file modification time after uploading.
+              if set to off, lftp will not try to use `PROPFIND' to get directory contents with hftp protocol and use `GET' instead. Default is off. When enabled, lftp will also use PROPPATCH
+              to set file modification time after uploading.
 
        hftp:use-range (boolean)
               when true, lftp will use Range header for transfer restart.
@@ -1215,8 +1178,8 @@ DESCRIPTION
               specifies value of Content-Type HTTP request header for POST method.  Default is ``application/x-www-form-urlencoded''.
 
        http:proxy (URL)
-              specifies HTTP proxy. It is used when lftp works over HTTP protocol.  Default value is taken from environment variable http_proxy.  If your proxy  re‐
-              quires authentication, specify user name and password in the URL.
+              specifies  HTTP proxy. It is used when lftp works over HTTP protocol.  Default value is taken from environment variable http_proxy.  If your proxy requires authentication, spec‐
+              ify user name and password in the URL.
 
        http:put-method (PUT or POST)
               specifies which HTTP method to use on put.
@@ -1225,8 +1188,7 @@ DESCRIPTION
               specifies value of Content-Type HTTP request header for PUT method.
 
        http:referer (string)
-              specifies  value for Referer HTTP request header. Single dot `.' expands to current directory URL. Default is `.'. Set to empty string to disable Ref‐
-              erer header.
+              specifies value for Referer HTTP request header. Single dot `.' expands to current directory URL. Default is `.'. Set to empty string to disable Referer header.
 
        http:set-cookies (boolean)
               if true, lftp modifies http:cookie variables when Set-Cookie header is received.
@@ -1238,8 +1200,8 @@ DESCRIPTION
               if set to off, lftp will try to use `PUT' instead of `MKCOL' to create directories with HTTP protocol. Default is on.
 
        http:use-propfind (boolean)
-              if set to off, lftp will not try to use `PROPFIND' to get directory contents with HTTP protocol and use `GET' instead. Default is off.  When  enabled,
-              lftp will also use PROPPATCH to set `Last-Modified' property after a file upload.
+              if set to off, lftp will not try to use `PROPFIND' to get directory contents with HTTP protocol and use `GET' instead. Default is off. When enabled, lftp will also use PROPPATCH
+              to set `Last-Modified' property after a file upload.
 
        http:use-range (boolean)
               when true, lftp will use Range header for transfer restart.
@@ -1251,8 +1213,7 @@ DESCRIPTION
               specifies https proxy. Default value is taken from environment variable https_proxy.
 
        log:enabled (boolean)
-              when  true,  the  log messages are output. The closure for this and other `log:' variables is either `debug' for debug messages or `xfer' for transfer
-              logging.
+              when true, the log messages are output. The closure for this and other `log:' variables is either `debug' for debug messages or `xfer' for transfer logging.
 
        log:file (string)
               the target output file for logging. When empty, stderr is used.
@@ -1292,23 +1253,23 @@ DESCRIPTION
               when true, mirror doesn't create empty directories (like --no-empty-dirs option).
 
        mirror:sort-by (string)
-              specifies order of file transfers. Valid values are: name, name-desc, size, size-desc, date, date-desc. When the value is name or name-desc, then mir‐
-              ror:order setting also affects the order or transfers.
+              specifies  order  of file transfers. Valid values are: name, name-desc, size, size-desc, date, date-desc. When the value is name or name-desc, then mirror:order setting also af‐
+              fects the order or transfers.
 
        mirror:order (list of patterns)
-              specifies  order  of file transfers when sorting by name. E.g. setting this to "*.sfv *.sum" makes mirror to transfer files matching *.sfv first, then
-              ones matching *.sum and then all other files. To process directories after other files, add "*/" to the end of pattern list.
+              specifies order of file transfers when sorting by name. E.g. setting this to "*.sfv *.sum" makes mirror to transfer files matching *.sfv first, then ones matching *.sum and then
+              all other files. To process directories after other files, add "*/" to the end of pattern list.
 
        mirror:overwrite (boolean)
               when true, mirror will overwrite plain files instead of removing and re-creating them.
 
        mirror:parallel-directories (boolean)
-              if true, mirror will start processing of several directories in parallel when it is in parallel mode. Otherwise, it will transfer files from a  single
-              directory before moving to other directories.
+              if  true, mirror will start processing of several directories in parallel when it is in parallel mode. Otherwise, it will transfer files from a single directory before moving to
+              other directories.
 
        mirror:parallel-transfer-count (number)
-              specifies  number  of  parallel  transfers  mirror is allowed to start.  You can override it with --parallel option.  A closure can be matched against
-              source or target host names, the minimum number greater than 0 is used.
+              specifies number of parallel transfers mirror is allowed to start.  You can override it with --parallel option.  A closure can be matched against source or  target  host  names,
+              the minimum number greater than 0 is used.
 
        mirror:require-source (boolean)
               When true, mirror requires a source directory to be specified explicitly, otherwise it is supposed to be the current directory.
@@ -1320,12 +1281,11 @@ DESCRIPTION
               when true, mirror does not try to download files which are obviously inaccessible by the permission mask. Default is false.
 
        mirror:use-pget-n (number)
-              specifies -n option for pget command used to transfer every single file under mirror.  A closure can be matched against source or target  host  names,
-              the minimum number greater than 0 is used.  When the value is less than 2, pget is not used.
+              specifies  -n  option for pget command used to transfer every single file under mirror.  A closure can be matched against source or target host names, the minimum number greater
+              than 0 is used.  When the value is less than 2, pget is not used.
 
        module:path (string)
-              colon  separated  list  of  directories  to  look for modules. Can be initialized by environment variable LFTP_MODULE_PATH. Default is `PKGLIBDIR/VER‐
-              SION:PKGLIBDIR'.
+              colon separated list of directories to look for modules. Can be initialized by environment variable LFTP_MODULE_PATH. Default is `PKGLIBDIR/VERSION:PKGLIBDIR'.
 
        net:connection-limit (number)
               maximum number of concurrent connections to the same site. 0 means unlimited.
@@ -1340,16 +1300,16 @@ DESCRIPTION
               disconnect from server after this idle time. Default is 3 minutes.
 
        net:limit-rate (bytes per second)
-              limit transfer rate on data connection. 0 means unlimited. You can specify two numbers separated by colon to limit  download  and  upload  rate  sepa‐
-              rately.  Suffixes are supported, e.g. 100K means 102400.
+              limit transfer rate on data connection. 0 means unlimited. You can specify two numbers separated by colon to limit download and upload rate separately.  Suffixes are  supported,
+              e.g. 100K means 102400.
 
        net:limit-max (bytes)
               limit accumulating of unused limit-rate. 0 means twice of limit-rate.
 
        net:limit-total-rate (bytes per second)
-              limit  transfer  rate  of  all connections in sum. 0 means unlimited. You can specify two numbers separated by colon to limit download and upload rate
-              separately.  Note that sockets have receive buffers on them, this can lead to network link load higher than this rate limit just after transfer begin‐
-              ning. You can try to set net:socket-buffer to relatively small value to avoid this.
+              limit transfer rate of all connections in sum. 0 means unlimited. You can specify two numbers separated by colon to limit download and upload rate separately.  Note that sockets
+              have receive buffers on them, this can lead to network link load higher than this rate limit just after transfer beginning. You can try to set  net:socket-buffer  to  relatively
+              small value to avoid this.
 
        If you specify a closure, then rate limitation will be applied to sum of connections to a single matching host.
 
@@ -1366,20 +1326,19 @@ DESCRIPTION
               ignore this number of hard errors. Useful to login to buggy FTP servers which reply 5xx when there is too many users.
 
        net:reconnect-interval-base (seconds)
-              sets the base minimal time between reconnects. Actual interval depends on net:reconnect-interval-multiplier and number of attempts to perform an oper‐
-              ation.
+              sets the base minimal time between reconnects. Actual interval depends on net:reconnect-interval-multiplier and number of attempts to perform an operation.
 
        net:reconnect-interval-max (seconds)
-              sets maximum reconnect interval. When current interval after multiplication by net:reconnect-interval-multiplier reaches this value (or  exceeds  it),
-              it is reset back to net:reconnect-interval-base.
+              sets  maximum reconnect interval. When current interval after multiplication by net:reconnect-interval-multiplier reaches this value (or exceeds it), it is reset back to net:re‐
+              connect-interval-base.
 
        net:reconnect-interval-multiplier (real number)
-              sets multiplier by which base interval is multiplied each time new attempt to perform an operation fails. When the interval reaches maximum, it is re‐
-              set to base value. See net:reconnect-interval-base and net:reconnect-interval-max.
+              sets multiplier by which base interval is multiplied each time new attempt to perform an operation fails. When the interval reaches maximum, it  is  reset  to  base  value.  See
+              net:reconnect-interval-base and net:reconnect-interval-max.
 
        net:socket-bind-ipv4 (ipv4 address)
-              bind all IPv4 sockets to specified address. This can be useful to select a specific network interface to use. Default is empty which means not to bind
-              IPv4 sockets, operating system will choose an address automatically using routing table.
+              bind  all  IPv4  sockets to specified address. This can be useful to select a specific network interface to use. Default is empty which means not to bind IPv4 sockets, operating
+              system will choose an address automatically using routing table.
 
        net:socket-bind-ipv6 (ipv6 address)
               the same for IPv6 sockets.
@@ -1400,30 +1359,28 @@ DESCRIPTION
               minimal chunk size to split the file to.
 
        pget:save-status (time interval)
-              save  pget transfer status this often. Set to `never' to disable saving of the status file.  The status is saved to a file with suffix .lftp-pget-sta‐
-              tus.
+              save pget transfer status this often. Set to `never' to disable saving of the status file.  The status is saved to a file with suffix .lftp-pget-status.
 
        sftp:auto-confirm (boolean)
               when true, lftp answers ``yes'' to all ssh questions, in particular to the question about a new host key. Otherwise it answers ``no''.
 
        sftp:charset (string)
-              the character set used by SFTP server in file names and file listings.  Default is empty which means the same as local. This setting is only used  for
-              SFTP protocol version prior to 4. Version 4 and later always use UTF-8.
+              the character set used by SFTP server in file names and file listings.  Default is empty which means the same as local. This setting is only used for SFTP protocol version prior
+              to 4. Version 4 and later always use UTF-8.
 
        sftp:connect-program (string)
-              the  program  to  use for connecting to remote server. It should support `-l' option for user name, `-p' for port number. Default is `ssh -a -x'.  For
-              private key authentication add `-i' option with the key file.
+              the  program  to  use for connecting to remote server. It should support `-l' option for user name, `-p' for port number. Default is `ssh -a -x'.  For private key authentication
+              add `-i' option with the key file.
 
        sftp:max-packets-in-flight (number)
-              The maximum number of unreplied packets in flight. If round trip time is significant, you should increase this and  size-read/size-write.  Default  is
-              16.
+              The maximum number of unreplied packets in flight. If round trip time is significant, you should increase this and size-read/size-write. Default is 16.
 
        sftp:protocol-version (number)
               The protocol number to negotiate. Default is 6. The actual protocol version used depends on the server.
 
        sftp:server-program (string)
-              The server program implementing SFTP protocol. If it does not contain a slash `/', it is considered a ssh2 subsystem and -s option is used when start‐
-              ing connect-program.  Default is `sftp'. You can use rsh as transport level protocol like this:
+              The server program implementing SFTP protocol. If it does not contain a slash `/', it is considered a ssh2 subsystem and -s option is used when  starting  connect-program.   De‐
+              fault is `sftp'. You can use rsh as transport level protocol like this:
                    set sftp:connect-program rsh
                    set sftp:server-program /usr/libexec/openssh/sftp-server
               Similarly you can run SFTP over SSH1.
@@ -1450,8 +1407,8 @@ DESCRIPTION
               use specified directory as Certificate Revocation List certificate repository (OpenSSL only).
 
        ssl:key-file (path to file)
-              use specified file as your private key. This setting is only used for ftps and https protocols. For sftp and fish protocols  use  sftp:connect-program
-              and fish:connect-program respectively (add `-i' option to ssh).
+              use specified file as your private key. This setting is only used for ftps and https protocols. For sftp and fish protocols use sftp:connect-program and fish:connect-program re‐
+              spectively (add `-i' option to ssh).
 
        ssl:cert-file (path to file)
               use specified file as your certificate.
@@ -1460,12 +1417,11 @@ DESCRIPTION
               when true, use Server Name Indication (SNI) TLS extension.
 
        ssl:verify-certificate (boolean)
-              if set to yes, then verify server's certificate to be signed by a known Certificate Authority and not be on Certificate Revocation List. You can spec‐
-              ify either host name or certificate fingerprint in the closure.
+              if set to yes, then verify server's certificate to be signed by a known Certificate Authority and not be on Certificate Revocation List. You can specify either host name or cer‐
+              tificate fingerprint in the closure.
 
        ssl:priority (string)
-              free form priority string for GnuTLS. If built with OpenSSL the understood values are + or - followed by SSL3.0, TLS1.0, TLS1.1 or  TLS1.2,  separated
-              by :. Example:
+              free form priority string for GnuTLS. If built with OpenSSL the understood values are + or - followed by SSL3.0, TLS1.0, TLS1.1 or TLS1.2, separated by :. Example:
                    set ssl:priority "NORMAL:-SSL3.0:-TLS1.0:-TLS1.1:+TLS1.2"
 
        torrent:ip (ipv4 address)
@@ -1484,8 +1440,7 @@ DESCRIPTION
               explicit retracker URL, e.g. `http://retracker.local/announce'.
 
        torrent:save-metadata (boolean)
-              when true, lftp saves metadata of each torrent it works with to ~/.local/share/lftp/torrent/md or ~/.lftp/torrent/md directory and loads it from there
-              if necessary.
+              when true, lftp saves metadata of each torrent it works with to ~/.local/share/lftp/torrent/md or ~/.lftp/torrent/md directory and loads it from there if necessary.
 
        torrent:seed-max-time (time interval)
               maximum seed time. After this period of time a complete torrent shuts down independently of ratio. It can be set to infinity if needed.
@@ -1551,23 +1506,21 @@ DESCRIPTION
               when true, a file will be transferred to a temporary file in the same directory and then renamed.
 
        xfer:verify (boolean)
-              when true, verify-command is launched after successful transfer to validate file integrity. Zero exit code of that command should indicate correctness
-              of the file.
+              when true, verify-command is launched after successful transfer to validate file integrity. Zero exit code of that command should indicate correctness of the file.
 
        xfer:verify-command (string)
               the command to validate file integrity. The only argument is the path to the file.
 
-       The  name  of a variable can be abbreviated unless it becomes ambiguous. The prefix before `:' can be omitted too. You can set one variable several times for
-       different closures, and thus you can get a particular settings for particular state. The closure is to be specified after variable name separated with  slash
-       `/'.
+       The name of a variable can be abbreviated unless it becomes ambiguous. The prefix before `:' can be omitted too. You can set one variable several times for different closures, and thus
+       you can get a particular settings for particular state. The closure is to be specified after variable name separated with slash `/'.
 
-       The  closure for `dns:', `net:', `ftp:', `http:', `hftp:' domain variables is currently just the host name as you specify it in the `open' command (with some
-       exceptions where closure is meaningless, e.g. dns:cache-size).  For some `cmd:' domain variables the closure is current URL without path.  For `log:'  domain
-       variables the closure is either `debug' or `xfer'.  For other variables it is not currently used. See examples in the sample lftp.conf.
+       The closure for `dns:', `net:', `ftp:', `http:', `hftp:' domain variables is currently just the host name as you specify it in the `open' command (with some exceptions where closure is
+       meaningless, e.g. dns:cache-size).  For some `cmd:' domain variables the closure is current URL without path.  For `log:' domain variables the closure is either `debug' or `xfer'.  For
+       other variables it is not currently used. See examples in the sample lftp.conf.
 
-       Certain  commands  and  settings take a time interval parameter. It has the format Nx[Nx...], where N is time amount (floating point) and x is time unit: d -
-       days, h - hours, m - minutes, s - seconds. Default unit is second. E.g. 5h30m or 5.5h.  Also the interval can be `infinity', `inf', `never', `forever'  -  it
-       means infinite interval. E.g. `sleep forever' or `set dns:cache-expire never'.
+       Certain commands and settings take a time interval parameter. It has the format Nx[Nx...], where N is time amount (floating point) and x is time unit: d - days, h - hours, m - minutes,
+       s  -  seconds.  Default  unit  is second. E.g. 5h30m or 5.5h.  Also the interval can be `infinity', `inf', `never', `forever' - it means infinite interval. E.g. `sleep forever' or `set
+       dns:cache-expire never'.
 
        Boolean settings can be one of (true, on, yes, 1, +) for a True value or one of (false, off, no, 0, -) for a False value.
 
@@ -1576,17 +1529,16 @@ DESCRIPTION
        Integer settings can have a suffix: k - kibi, m - mebi, g - gigi, etc.  They can also have a prefix: 0 - octal, 0x - hexadecimal.
 
    FTP asynchronous mode (pipelining)
-       Lftp can speed up FTP operations by sending several commands at once and then checking all the responses. See ftp:sync-mode variable. Sometimes this does not
-       work, thus synchronous mode is the default. You can try to turn synchronous mode off and see if it works for you. It is  known  that  some  network  software
-       dealing with address translation works incorrectly in the case of several FTP commands in one network packet.
+       Lftp can speed up FTP operations by sending several commands at once and then checking all the responses. See ftp:sync-mode variable. Sometimes this does  not  work,  thus  synchronous
+       mode  is the default. You can try to turn synchronous mode off and see if it works for you. It is known that some network software dealing with address translation works incorrectly in
+       the case of several FTP commands in one network packet.
 
-       RFC959  says: ``The user-process sending another command before the completion reply would be in violation of protocol; but server-FTP processes should queue
-       any commands that arrive while a preceding command is in progress''. Also, RFC1123 says: ``Implementors MUST  NOT  assume  any  correspondence  between  READ
-       boundaries  on  the  control connection and the Telnet EOL sequences (CR LF).'' and ``a single READ from the control connection may include more than one FTP
-       command''.
+       RFC959 says: ``The user-process sending another command before the completion reply would be in violation of protocol; but server-FTP processes should queue any  commands  that  arrive
+       while  a  preceding command is in progress''. Also, RFC1123 says: ``Implementors MUST NOT assume any correspondence between READ boundaries on the control connection and the Telnet EOL
+       sequences (CR LF).'' and ``a single READ from the control connection may include more than one FTP command''.
 
-       So it must be safe to send several commands at once, which speeds up operation a lot and seems to work with all Unix and  VMS  based  ftp  servers.  Unfortu‐
-       nately, windows based servers often cannot handle several commands in one packet, and so cannot some broken routers.
+       So it must be safe to send several commands at once, which speeds up operation a lot and seems to work with all Unix and VMS based ftp servers. Unfortunately, windows based servers of‐
+       ten cannot handle several commands in one packet, and so cannot some broken routers.
 
 OPTIONS
        -d     Switch on debugging mode.
@@ -1598,9 +1550,9 @@ OPTIONS
               Use the given port to connect.
 
        -u user[,pass]
-              Use  the  given username and password to connect. Remember to quote the password properly in the shell. Also note that it is not secure to specify the
-              password on command line, use ~/.netrc file or LFTP_PASSWORD environment variable together with --env-password option. Alternatively you can use  ssh-
-              based protocols with authorized keys, so you don't have to enter a password.
+              Use  the  given  username and password to connect. Remember to quote the password properly in the shell. Also note that it is not secure to specify the password on command line,
+              use ~/.netrc file or LFTP_PASSWORD environment variable together with --env-password option. Alternatively you can use ssh-based protocols with authorized  keys,  so  you  don't
+              have to enter a password.
 
        --norc Don't execute rc files from the home directory.
 
@@ -1611,8 +1563,8 @@ OPTIONS
               Execute commands in the file and exit.  This option must be used alone without other arguments (except --norc).
 
        -c commands
-              Execute the given commands and exit. Commands can be separated with a semicolon, `&&' or `||'. Remember to quote the commands argument properly in the
-              shell.  This option must be used alone without other arguments (except --norc).
+              Execute  the  given commands and exit. Commands can be separated with a semicolon, `&&' or `||'. Remember to quote the commands argument properly in the shell.  This option must
+              be used alone without other arguments (except --norc).
 
        Other open options may also be given on the lftp command line.
 
@@ -1640,8 +1592,8 @@ ENVIRONMENT VARIABLES
               Used to set initial module:path variable.
 
        LFTP_HOME
-              Used to locate the directory that stores user-specific configuration files. If unset, ~/.lftp will be used. Please note that if  this  directory  does
-              not exist, then XDG directories will be used.
+              Used to locate the directory that stores user-specific configuration files. If unset, ~/.lftp will be used. Please note that if this directory does not exist, then XDG  directo‐
+              ries will be used.
 
        LFTP_PASSWORD
               Used for --env-password open option.
@@ -1650,8 +1602,8 @@ ENVIRONMENT VARIABLES
               used to set initial color:dir-colors variable.
 
        XDG_CONFIG_HOME, XDG_DATA_HOME, XDG_CACHE_HOME
-              Used  to  locate the directories for user-specific files when ~/.lftp (or $LFTP_HOME directory) does not exist. Defaults are ~/.config, ~/.local/share
-              and ~/.cache respectively. The suffix /lftp is appended to make the full path to the directories.
+              Used  to  locate the directories for user-specific files when ~/.lftp (or $LFTP_HOME directory) does not exist. Defaults are ~/.config, ~/.local/share and ~/.cache respectively.
+              The suffix /lftp is appended to make the full path to the directories.
 
 FILES
        /etc/lftp.conf
@@ -1682,19 +1634,19 @@ FILES
               The directory is used to store temporary files for edit command.
 
        ~/.local/share/lftp/torrent/md/ or ~/.lftp/torrent/md/"
-              The directory is used to store torrent metadata. It is especially useful for magnet links, cached metadata can be loaded from the directory.   It  can
-              also serve as torrent history, file names are the info_hash of torrents.
+              The directory is used to store torrent metadata. It is especially useful for magnet links, cached metadata can be loaded from the directory.  It can also serve as  torrent  his‐
+              tory, file names are the info_hash of torrents.
 
        ~/.netrc
-              The file is consulted to get default login and password to a server when it is specified without a protocol to the `open' command.  Passwords are also
-              searched here if an URL with user name but with no password is used.
+              The  file  is  consulted to get default login and password to a server when it is specified without a protocol to the `open' command.  Passwords are also searched here if an URL
+              with user name but with no password is used.
 
 SEE ALSO
        ftpd(8), ftp(1)
-       RFC854 (telnet), RFC959 (ftp), RFC1123, RFC1945 (http/1.0), RFC2052 (SRV RR), RFC2228 (ftp security extensions),  RFC2389  (ftp  FEAT),  RFC2428  (ftp/ipv6),
-       RFC2518  (WebDAV), RFC2616 (http/1.1), RFC2617 (http/1.1 authentication), RFC2640 (ftp i18n), RFC3659 (ftp extensions), RFC4217 (ftp over ssl), BEP0003 (Bit‐
-       Torrent Protocol), BEP0005 (DHT Protocol), BEP0006 (Fast Extension), BEP0007 (IPv6 Tracker Extension), BEP0009 (Extension for Peers to Send Metadata  Files),
-       BEP0010 (Extension Protocol), BEP0012 (Multitracker Metadata Extension), BEP0023 (Tracker Returns Compact Peer Lists), BEP0032 (DHT Extensions for IPv6).
+       RFC854 (telnet), RFC959 (ftp), RFC1123, RFC1945 (http/1.0), RFC2052 (SRV RR), RFC2228 (ftp security extensions), RFC2389 (ftp  FEAT),  RFC2428  (ftp/ipv6),  RFC2518  (WebDAV),  RFC2616
+       (http/1.1),  RFC2617  (http/1.1  authentication),  RFC2640  (ftp i18n), RFC3659 (ftp extensions), RFC4217 (ftp over ssl), BEP0003 (BitTorrent Protocol), BEP0005 (DHT Protocol), BEP0006
+       (Fast Extension), BEP0007 (IPv6 Tracker Extension), BEP0009 (Extension for Peers to Send Metadata Files), BEP0010  (Extension  Protocol),  BEP0012  (Multitracker  Metadata  Extension),
+       BEP0023 (Tracker Returns Compact Peer Lists), BEP0032 (DHT Extensions for IPv6).
        https://tools.ietf.org/html/draft-preston-ftpext-deflate-04 (ftp deflate transmission mode),
        https://tools.ietf.org/html/draft-ietf-secsh-filexfer-13 (sftp).
        http://wiki.theory.org/BitTorrentSpecification
@@ -1707,7 +1659,7 @@ AUTHOR
        lav@yars.free.net
 
 ACKNOWLEDGMENTS
-       This  manual page was originally written by Christoph Lameter <clameter@debian.org>, for the Debian GNU/Linux system. The page was improved and updated later
-       by Nicolas Lichtmaier <nick@Feedback.com.ar>, James Troup <J.J.Troup@comp.brad.ac.uk> and Alexander V. Lukyanov <lav@yars.free.net>.
+       This  manual  page  was  originally  written  by Christoph Lameter <clameter@debian.org>, for the Debian GNU/Linux system. The page was improved and updated later by Nicolas Lichtmaier
+       <nick@Feedback.com.ar>, James Troup <J.J.Troup@comp.brad.ac.uk> and Alexander V. Lukyanov <lav@yars.free.net>.
 
-                                                                             10 Aug 2017                                                                     lftp(1)
+                                                                                          10 Aug 2017                                                                                   lftp(1)

@@ -1,4 +1,4 @@
-NTFSCLUSTER(8)                                                         System Manager's Manual                                                        NTFSCLUSTER(8)
+NTFSCLUSTER(8)                                                                      System Manager's Manual                                                                      NTFSCLUSTER(8)
 
 NAME
        ntfscluster - identify files in a specified region of an NTFS volume.
@@ -16,13 +16,13 @@ DESCRIPTION
        The sector mode will display a list of files that have data in the specified range of sectors.
 
    Cluster
-       The  cluster  mode will display a list of files that have data in the specified range of clusters.  When the cluster size is one sector, this will be equiva‐
-       lent to the sector mode of operation.
+       The cluster mode will display a list of files that have data in the specified range of clusters.  When the cluster size is one sector, this will be equivalent to the sector mode of op‐
+       eration.
 
 OPTIONS
-       Below is a summary of all the options that ntfscluster accepts.  Nearly all options have two equivalent names.  The short name is preceded by - and the  long
-       name  is  preceded  by  --.  Any single letter options, that don't take an argument, can be combined into a single command, e.g.  -fv is equivalent to -f -v.
-       Long named options can be abbreviated to any unique prefix of their name.
+       Below is a summary of all the options that ntfscluster accepts.  Nearly all options have two equivalent names.  The short name is preceded by - and the long name  is  preceded  by  --.
+       Any  single  letter  options, that don't take an argument, can be combined into a single command, e.g.  -fv is equivalent to -f -v.  Long named options can be abbreviated to any unique
+       prefix of their name.
 
        -c, --cluster RANGE
               Any files whose data is in this range of clusters will be displayed.
@@ -64,8 +64,7 @@ EXAMPLES
               ntfscluster -c 0-500 /dev/hda1
 
 BUGS
-       The info mode isn't implemented yet.  ntfscluster is quite limited, but it has no known bugs.  If you find a bug please send an email describing the  problem
-       to the development team:
+       The info mode isn't implemented yet.  ntfscluster is quite limited, but it has no known bugs.  If you find a bug please send an email describing the problem to the development team:
        ntfs-3g-devel@lists.sf.net
 
 AUTHORS
@@ -78,4 +77,4 @@ AVAILABILITY
 SEE ALSO
        ntfsinfo(8), ntfsprogs(8)
 
-ntfs-3g 2017.3.23AR.3                                                       November 2005                                                             NTFSCLUSTER(8)
+ntfs-3g 2017.3.23AR.3                                                                    November 2005                                                                           NTFSCLUSTER(8)

@@ -1,4 +1,4 @@
-FSCK.VMFS(8)                                                                 vmfs-tools                                                                 FSCK.VMFS(8)
+FSCK.VMFS(8)                                                                               vmfs-tools                                                                              FSCK.VMFS(8)
 
 NAME
        fsck.vmfs - VMFS file system check utility
@@ -24,4 +24,4 @@ NOTES
         2. mh@glandium.org
            mailto:mh@glandium.org
 
-  0.0.0.0.                                                                   03/25/2012                                                                 FSCK.VMFS(8)
+  0.0.0.0.                                                                                 03/25/2012                                                                              FSCK.VMFS(8)

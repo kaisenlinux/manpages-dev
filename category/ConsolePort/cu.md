@@ -1,4 +1,4 @@
-cu(1)                                                                  General Commands Manual                                                                 cu(1)
+cu(1)                                                                               General Commands Manual                                                                               cu(1)
 
 NAME
        cu - Call up another system
@@ -9,22 +9,21 @@ SYNOPSIS
 DESCRIPTION
        The cu command is used to call up another system and act as a dial in terminal.  It can also do simple file transfers with no error checking.
 
-       cu takes a single argument, besides the options.  If the argument is the string "dir" cu will make a direct connection to the port.  This may only be used by
-       users with write access to the port, as it permits reprogramming the modem.
+       cu takes a single argument, besides the options.  If the argument is the string "dir" cu will make a direct connection to the port.  This may only be used by users with write access to
+       the port, as it permits reprogramming the modem.
 
-       Otherwise, if the argument begins with a digit, it is taken to be a phone number to call.  Otherwise, it is taken to be the name of a system to call.  The -z
-       or  --system  option may be used to name a system beginning with a digit, and the -c or --phone option may be used to name a phone number that does not begin
-       with a digit.
+       Otherwise, if the argument begins with a digit, it is taken to be a phone number to call.  Otherwise, it is taken to be the name of a system to call.  The -z or --system option may  be
+       used to name a system beginning with a digit, and the -c or --phone option may be used to name a phone number that does not begin with a digit.
 
-       cu locates a port to use in the UUCP configuration files.  If a simple system name is given, it will select a port appropriate  for  that  system.   The  -p,
-       --port, -l, --line, -s and --speed options may be used to control the port selection.
+       cu  locates  a  port  to  use in the UUCP configuration files.  If a simple system name is given, it will select a port appropriate for that system.  The -p, --port, -l, --line, -s and
+       --speed options may be used to control the port selection.
 
-       When  a connection is made to the remote system, cu forks into two processes.  One reads from the port and writes to the terminal, while the other reads from
-       the terminal and writes to the port.
+       When a connection is made to the remote system, cu forks into two processes.  One reads from the port and writes to the terminal, while the other reads from the terminal and writes  to
+       the port.
 
-       cu provides several commands that may be used during the conversation.  The commands all begin with an escape character, initially  ~  (tilde).   The  escape
-       character  is only recognized at the beginning of a line.  To send an escape character to the remote system at the start of a line, it must be entered twice.
-       All commands are either a single character or a word beginning with % (percent sign).
+       cu  provides  several commands that may be used during the conversation.  The commands all begin with an escape character, initially ~ (tilde).  The escape character is only recognized
+       at the beginning of a line.  To send an escape character to the remote system at the start of a line, it must be entered twice.  All commands are either a single character  or  a  word
+       beginning with % (percent sign).
 
        cu recognizes the following commands:
 
@@ -51,8 +50,8 @@ DESCRIPTION
        ~> file
             Send a file to the remote system.  This just dumps the file over the communication line.  It is assumed that the remote system is expecting it.
 
-       ~<   Receive a file from the remote system.  This prompts for the local file name and for the remote command to execute to begin the file transfer.  It  con‐
-            tinues accepting data until the contents of the eofread variable are seen.
+       ~<   Receive  a  file from the remote system.  This prompts for the local file name and for the remote command to execute to begin the file transfer.  It continues accepting data until
+            the contents of the eofread variable are seen.
 
        ~p from to, ~%put from to
             Send a file to a remote Unix system.  This runs the appropriate commands on the remote system.
@@ -66,8 +65,7 @@ DESCRIPTION
        ~! variable
             Set a cu variable to false.
 
-       ~z   Suspend  the  cu session.  This is only supported on some systems.  On systems for which ^Z may be used to suspend a job, ~^Z will also suspend the ses‐
-            sion.
+       ~z   Suspend the cu session.  This is only supported on some systems.  On systems for which ^Z may be used to suspend a job, ~^Z will also suspend the session.
 
        ~%nostop
             Turn off XON/XOFF handling.
@@ -85,15 +83,13 @@ DESCRIPTION
             The escape character.  Initially ~ (tilde).
 
        delay
-            If this variable is true, cu will delay for a second after recognizing the escape character before printing the name of the local system.   The  default
-            is true.
+            If this variable is true, cu will delay for a second after recognizing the escape character before printing the name of the local system.  The default is true.
 
-       eol  The  list of characters which are considered to finish a line.  The escape character is only recognized after one of these is seen.  The default is car‐
-            riage return, ^U, ^C, ^O, ^D, ^S, ^Q, ^R.
+       eol  The list of characters which are considered to finish a line.  The escape character is only recognized after one of these is seen.  The default is carriage return, ^U, ^C, ^O, ^D,
+            ^S, ^Q, ^R.
 
        binary
-            Whether to transfer binary data when sending a file.  If this is false, then newlines in the file being sent are converted to carriage returns.  The de‐
-            fault is false.
+            Whether to transfer binary data when sending a file.  If this is false, then newlines in the file being sent are converted to carriage returns.  The default is false.
 
        binary-prefix
             A string used before sending a binary character in a file transfer, if the binary variable is true.  The default is ^V.
@@ -105,8 +101,7 @@ DESCRIPTION
             The character to look for after sending each line in a file.  The default is carriage return.
 
        timeout
-            The  timeout to use, in seconds, when looking for a character, either when doing echo checking or when looking for the echonl character.  The default is
-            30.
+            The timeout to use, in seconds, when looking for a character, either when doing echo checking or when looking for the echonl character.  The default is 30.
 
        kill The character to use delete a line if the echo check fails.  The default is ^U.
 
@@ -159,8 +154,7 @@ OPTIONS
             Equivalent to --port port.
 
        -l line, --line line
-            Name the line to use by giving a device name.  This may be used to dial out on ports that are not listed in the UUCP configuration files.  Write  access
-            to the device is required.
+            Name the line to use by giving a device name.  This may be used to dial out on ports that are not listed in the UUCP configuration files.  Write access to the device is required.
 
        -s speed, --speed speed
             The speed (baud rate) to use.
@@ -173,12 +167,11 @@ OPTIONS
        -d   Enter debugging mode.  Equivalent to --debug all.
 
        -x type, --debug type
-            Turn  on particular debugging types.  The following types are recognized: abnormal, chat, handshake, uucp-proto, proto, port, config, spooldir, execute,
-            incoming, outgoing.  Only abnormal, chat, handshake, port, config, incoming and outgoing are meaningful for cu.
+            Turn  on  particular debugging types.  The following types are recognized: abnormal, chat, handshake, uucp-proto, proto, port, config, spooldir, execute, incoming, outgoing.  Only
+            abnormal, chat, handshake, port, config, incoming and outgoing are meaningful for cu.
 
-            Multiple types may be given, separated by commas, and the --debug option may appear multiple times.  A number may also be given, which will turn on that
-            many types from the foregoing list; for example, --debug 2 is equivalent to --debug abnormal,chat.  --debug all may be used to turn on all debugging op‐
-            tions.
+            Multiple types may be given, separated by commas, and the --debug option may appear multiple times.  A number may also be given, which will turn on that many types from the  fore‐
+            going list; for example, --debug 2 is equivalent to --debug abnormal,chat.  --debug all may be used to turn on all debugging options.
 
        -I file, --config file
             Set configuration file to use.  This option may not be available, depending upon how cu was compiled.
@@ -195,4 +188,4 @@ BUGS
 AUTHOR
        Ian Lance Taylor <ian@airs.com>
 
-                                                                          Taylor UUCP 1.07                                                                     cu(1)
+                                                                                        Taylor UUCP 1.07                                                                                  cu(1)

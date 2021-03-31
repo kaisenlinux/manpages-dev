@@ -1,4 +1,4 @@
-NVRAM_EXPORT(1)                                                        General Commands Manual                                                       NVRAM_EXPORT(1)
+NVRAM_EXPORT(1)                                                                     General Commands Manual                                                                     NVRAM_EXPORT(1)
 
 NAME
        nvram_export - Cisco NVRAM configuration export
@@ -34,7 +34,6 @@ OLD WEBSITES
        ⟨http://hacki.at/7200emu/index.php⟩
 
 AUTHOR
-       dynamips  is  being maintained by Flávio J. Saraiva <flaviojs2005@gmail.com>. This manual page was initially written by Erik Wenzel <erik@debian.org> for the
-       Debian GNU/Linux system.
+       dynamips is being maintained by Flávio J. Saraiva <flaviojs2005@gmail.com>. This manual page was initially written by Erik Wenzel <erik@debian.org> for the Debian GNU/Linux system.
 
-                                                                            Sep 28, 2013                                                             NVRAM_EXPORT(1)
+                                                                                          Sep 28, 2013                                                                          NVRAM_EXPORT(1)

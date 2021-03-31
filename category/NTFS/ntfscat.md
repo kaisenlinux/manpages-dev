@@ -1,4 +1,4 @@
-NTFSCAT(8)                                                             System Manager's Manual                                                            NTFSCAT(8)
+NTFSCAT(8)                                                                          System Manager's Manual                                                                          NTFSCAT(8)
 
 NAME
        ntfscat - print NTFS files and streams on the standard output
@@ -12,13 +12,13 @@ DESCRIPTION
        The case of the filename passed to ntfscat is ignored.
 
 OPTIONS
-       Below is a summary of all the options that ntfscat accepts.  Nearly all options have two equivalent names.  The short name is preceded by - and the long name
-       is preceded by --.  Any single letter options, that don't take an argument, can be combined into a single command, e.g.  -fv is equivalent to  -f  -v.   Long
-       named options can be abbreviated to any unique prefix of their name.
+       Below  is  a  summary of all the options that ntfscat accepts.  Nearly all options have two equivalent names.  The short name is preceded by - and the long name is preceded by --.  Any
+       single letter options, that don't take an argument, can be combined into a single command, e.g.  -fv is equivalent to -f -v.  Long named options can be abbreviated to any unique prefix
+       of their name.
 
        -a, --attribute TYPE
-              Display the contents of a particular attribute type.  By default, the unnamed $DATA attribute will be shown.  The attribute can be specified by a num‐
-              ber in decimal or hexadecimal, or by name.
+              Display  the contents of a particular attribute type.  By default, the unnamed $DATA attribute will be shown.  The attribute can be specified by a number in decimal or hexadeci‐
+              mal, or by name.
 
               ┌───────────────────────────────────────────┐
               │Hex     Decimal   Name                     │
@@ -93,4 +93,4 @@ SEE ALSO
 
        libntfs(8), ntfsls(8), ntfsprogs(8)
 
-ntfs-3g 2017.3.23AR.3                                                      September 2007                                                                 NTFSCAT(8)
+ntfs-3g 2017.3.23AR.3                                                                    September 2007                                                                              NTFSCAT(8)

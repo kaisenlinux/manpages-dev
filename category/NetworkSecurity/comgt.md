@@ -1,4 +1,4 @@
-comgt(1)                                                               General Commands Manual                                                              comgt(1)
+comgt(1)                                                                            General Commands Manual                                                                            comgt(1)
 
 NAME
        comgt  - Option GlobeTrotter GPRS/EDGE/3G/HSDPA  and Vodafone 3G/GPRS datacard control tool
@@ -29,8 +29,8 @@ OPTIONS
                       Print Version information.
 
             -x
-                      for  internal  and external scripts, any reference to 115200 baud is converted to 57600.  This is useful for data cards that don't like 115200
-                      baud such as the GlobeTrotter EDGE.
+                      for  internal and external scripts, any reference to 115200 baud is converted to 57600.  This is useful for data cards that don't like 115200 baud such as the GlobeTrot‐
+                      ter EDGE.
 
 DESCRIPTION
        comgt is a scripting language interpreter useful for establishing communications on serial lines and through PCMCIA modems as well as GPRS and 3G datacards.
@@ -55,24 +55,23 @@ DESCRIPTION
        - External utilities system calls: system, exec.
 
    Supported GPRS and 3G datacards
-       comgt has been tested against GlobeTrotter GPRS,EDGE, Combo EDGE, 3G, 3G EDGE, HSDPA and GlobeTrotter Fusion as well as Vodafone 3G.  It can set the PIN  and
-       display  information  about  datacards  before a PPP connection is started.  Additionally, because the GlobeTrotter and Vodafone 3G/GPRS datacard have a sec‐
-       ondary serial interface, these datacards can be monitored while a PPP connection is in existence and transferring data.
+       comgt has been tested against GlobeTrotter GPRS,EDGE, Combo EDGE, 3G, 3G EDGE, HSDPA and GlobeTrotter Fusion as well as Vodafone 3G.  It can set the PIN and display  information  about
+       datacards  before a PPP connection is started.  Additionally, because the GlobeTrotter and Vodafone 3G/GPRS datacard have a secondary serial interface, these datacards can be monitored
+       while a PPP connection is in existence and transferring data.
 
-       comgt is primarily designed to work with the GlobeTrotter range of datacards but should be compatible with any other GPRS or 3G datacard provided its  inter‐
-       face is implemented as one or more serial or USB serial devices and it is controlled and queried by an implementation of the Hayes command interface with the
-       same AT command extensions used by the listed datacards.
+       comgt is primarily designed to work with the GlobeTrotter range of datacards but should be compatible with any other GPRS or 3G datacard provided its interface is implemented as one or
+       more serial or USB serial devices and it is controlled and queried by an implementation of the Hayes command interface with the same AT command extensions used by the listed datacards.
 
    Using comgt
-       comgt has only one function: to run a script. This may be one of a number of "standard" internal scripts or an external script. Both types of script are  in‐
-       voked in the same way. The "standard" scripts are built into comgt and will work for serially connected modems, built-in modems, PCMCIA modems as well as the
-       GlobeTrotter GPRS and the Vodafone 3G/GPRS datacards.  There is a search priority order for scripts - 1)internal, 2)working directory, 3)/etc/comgt
+       comgt  has  only  one function: to run a script. This may be one of a number of "standard" internal scripts or an external script. Both types of script are invoked in the same way. The
+       "standard" scripts are built into comgt and will work for serially connected modems, built-in modems, PCMCIA modems as well as the GlobeTrotter GPRS and the Vodafone 3G/GPRS datacards.
+       There is a search priority order for scripts - 1)internal, 2)working directory, 3)/etc/comgt
 
    Built-in scripts
   comgt
-       This runs the default internal script. Running comgt without any script specified, e.g., comgt -d /dev/ttyS1 it will check for a PIN and prompt you if it  is
-       required.  The  next  thing  it does is wait for the device to register, it then reports the signal strength.  If you don´t specify a port with the -d option
-       then /dev/modem is assumed.  If the -s switch is not used then this default script is run before any external script.
+       This runs the default internal script. Running comgt without any script specified, e.g., comgt -d /dev/ttyS1 it will check for a PIN and prompt you if it is required. The next thing it
+       does is wait for the device to register, it then reports the signal strength.  If you don´t specify a port with the -d option then /dev/modem is assumed.  If the -s switch is not  used
+       then this default script is run before any external script.
 
   comgt help
        Lists these and the other options available.
@@ -131,8 +130,8 @@ DESCRIPTION
        You can also pass environment parameters to a comgt script via $env().
 
    Replacing chat
-       chat is a utility that comes with the ppp package (for Linux, anyway) that, with a set of expect-send string couples, does enough to connect most  people  to
-       ISPs and such.  While chat´s use is very simple, it isn´t very flexible.  That´s where comgt takes over.
+       chat is a utility that comes with the ppp package (for Linux, anyway) that, with a set of expect-send string couples, does enough to connect most people to ISPs and such.  While chat´s
+       use is very simple, it isn´t very flexible.  That´s where comgt takes over.
 
        comgt can be used in place of chat using the same strategy.  For example, a pppd line reading:
 
@@ -157,24 +156,23 @@ DESCRIPTION
        Of course it then becomes trivial to make this script a whole lot more functional by adding code for busy detect, re-dialing, etc...
 
    Verbose output
-       When  the verbose option is turned on, comgt reports everthing on the standard error channel.  If turned on from the command line (-v), the output contains 4
-       sections.
+       When the verbose option is turned on, comgt reports everthing on the standard error channel.  If turned on from the command line (-v), the output contains 4 sections.
 
        - Command line argument actions
-         These are actions taken because they were specified from the command line, such as opening a communication device (-d), etc...  For these to be output, you
-         must specify -v as the first argument.
+         These are actions taken because they were specified from the command line, such as opening a communication device (-d), etc...  For these to be output, you must  specify  -v  as  the
+         first argument.
 
        - List of arguments
-         The  number  and list of arguments passed. This is useful in case you have a bunch of environment variables or quotes, back-quotes, backslashes on the com‐
-         mand line and you´re not sure what the script really sees.
+         The  number and list of arguments passed. This is useful in case you have a bunch of environment variables or quotes, back-quotes, backslashes on the command line and you´re not sure
+         what the script really sees.
 
        - Script list
-         A list of the script to execute.  This may be a concatenation of the default internal script, unless this is suppressed by the  -s  option,  and  a  script
-         file.  Every line is listed with its line number and character position.
+         A list of the script to execute.  This may be a concatenation of the default internal script, unless this is suppressed by the -s option, and a script file.   Every  line  is  listed
+         with its line number and character position.
 
        - Execution output
-         List of commands as they are executed. The parser prints the line its currently on, starting from the exact point where its at to the end of the line. Mul‐
-         tiple command groups on a single line produce multiple output lines. Verbose output may be mixed with script output (print, eprint or lprint.)
+         List  of  commands  as they are executed. The parser prints the line its currently on, starting from the exact point where its at to the end of the line. Multiple command groups on a
+         single line produce multiple output lines. Verbose output may be mixed with script output (print, eprint or lprint.)
 
        Here´s an example:
 
@@ -202,9 +200,8 @@ DESCRIPTION
 
 Programming manual
    Syntax
-       The syntax used for comgt scripts is rather simple, somewhat BASIC-like.  A script is a non-tokenized, pure ASCII text file containing  lines  terminated  by
-       newline  characters (Unix standard.)  Scripts can be created and/or modified using any standard text editor (vi, vim, joe, pico, emacs, ed, microEmacs) Lines
-       in a comgt script read like so:
+       The syntax used for comgt scripts is rather simple, somewhat BASIC-like.  A script is a non-tokenized, pure ASCII text file containing lines  terminated  by  newline  characters  (Unix
+       standard.)  Scripts can be created and/or modified using any standard text editor (vi, vim, joe, pico, emacs, ed, microEmacs) Lines in a comgt script read like so:
 
         - Empty line
         - [indent]rem remark
@@ -227,9 +224,9 @@ Programming manual
          Because this space ^ would terminate the let command group.
 
    Error reporting
-       When comgt detects a script error, it immediately turns on verbose mode, generates a dump (see the dump command), reports the error in three lines and  stops
-       the execution.  The first line reported is the command group being executed, the second one shows where the parser got and the third line reports the charac‐
-       ter position of the program counter, the error and the exit code.
+       When  comgt  detects a script error, it immediately turns on verbose mode, generates a dump (see the dump command), reports the error in three lines and stops the execution.  The first
+       line reported is the command group being executed, the second one shows where the parser got and the third line reports the character position of the program counter, the error and the
+       exit code.
 
        Here´s an example:
 
@@ -270,9 +267,9 @@ Programming manual
             comgt 11:20:15 -> Error @49, line 5, Division by zero. (6)
 
    Exit codes
-       When comgt terminates, it does so with an "exit code".  That is a number passed back to the calling process to signify success  or  failures.   In  every-day
-       Unix,  0  (zero)  means success and everything else means whatever the author of the program wants it to mean.  In a shell script, or directly on the command
-       line, you may look at the content of $?  after having called comgt to examine its exit code.
+       When  comgt  terminates, it does so with an "exit code".  That is a number passed back to the calling process to signify success or failures.  In every-day Unix, 0 (zero) means success
+       and everything else means whatever the author of the program wants it to mean.  In a shell script, or directly on the command line, you may look at the  content  of  $?   after  having
+       called comgt to examine its exit code.
 
        Example:
 
@@ -969,16 +966,15 @@ AUTHORS
        Martin Gregorie <martin@gregorie.org> wrote the original manpage for comgt from the dcon documentation and packaged comgt for distribution.
 
    History
-       Daniel Chouinard wrote most (90%) of dcon back in 1989 when he started doing Unix Apps tech support mostly by modem to customer systems.   He  was  tired  of
-       typing all those passwords and funny call-charging codes everytime he used cu.  Also, the company he worked for needed a system that would log call times and
-       estimated costs.  Thus dcon was born.  Six or seven years later (1996) and he was using pppd to connect to his ISP site.  He was more or less happy with chat
-       but  found  it  lacked  flow  control and multiple response checks from "atdt...".  He wanted it to do different things for "no carrier", "no dial tone", and
-       "busy".  Although he thought that chat would probably be enhanced someday, when he found dcon.c on one of his old 45M tapes he  tried  compiling  it  on  his
-       Linux box and, lo and behold, it did.  In the end, he added a few things to it (kill, fork, wait, 1/100 sec. times) and left it at that.
+       Daniel Chouinard wrote most (90%) of dcon back in 1989 when he started doing Unix Apps tech support mostly by modem to customer systems.  He was tired of typing all those passwords and
+       funny call-charging codes everytime he used cu.  Also, the company he worked for needed a system that would log call times and estimated costs.  Thus dcon was born.  Six or seven years
+       later  (1996)  and  he was using pppd to connect to his ISP site.  He was more or less happy with chat but found it lacked flow control and multiple response checks from "atdt...".  He
+       wanted it to do different things for "no carrier", "no dial tone", and "busy".  Although he thought that chat would probably be enhanced someday, when he found dcon.c on one of his old
+       45M tapes he tried compiling it on his Linux box and, lo and behold, it did.  In the end, he added a few things to it (kill, fork, wait, 1/100 sec. times) and left it at that.
 
-       A  couple  of  years ago Paul Hardwick found the program, dcon 0.97, last modified in 1996. The purpose of this program was to run scripts that would control
-       Linux serial ports. The implementation was very similar to something he had written for Windows. Anyway, rather than reinvent he contacted the author, Daniel
-       Chouinard,  and  asked  his  permission to reuse the code.  Happily he gave permission and a basic but useful utility called comgt was created. Paul takes no
-       credit for the engine, apart from making it compatible with todays compilers.  It is basically dcon repackaged.
+       A  couple  of years ago Paul Hardwick found the program, dcon 0.97, last modified in 1996. The purpose of this program was to run scripts that would control Linux serial ports. The im‐
+       plementation was very similar to something he had written for Windows. Anyway, rather than reinvent he contacted the author, Daniel Chouinard, and asked his  permission  to  reuse  the
+       code.   Happily  he gave permission and a basic but useful utility called comgt was created. Paul takes no credit for the engine, apart from making it compatible with todays compilers.
+       It is basically dcon repackaged.
 
-                                                                          20 October, 2006                                                                  comgt(1)
+                                                                                        20 October, 2006                                                                               comgt(1)

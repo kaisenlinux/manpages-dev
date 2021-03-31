@@ -1,4 +1,4 @@
-TMFS(1)                                                                General Commands Manual                                                               TMFS(1)
+TMFS(1)                                                                             General Commands Manual                                                                             TMFS(1)
 
 NAME
        tmfs - Time Machine File System
@@ -7,8 +7,7 @@ SYNOPSIS
        tmfs hfs-root-mount time-machine-mount [fuse options...]
 
 DESCRIPTION
-       tmfs  creates  a  read-only  virtual filesystem which helps you to read your Apple Time Machine backup by reconstructing the hard-linked directories from the
-       HFS+ metadata directory.
+       tmfs creates a read-only virtual filesystem which helps you to read your Apple Time Machine backup by reconstructing the hard-linked directories from the HFS+ metadata directory.
 
        You can browse the mounted time-machine-mount normally and recover data from any backup point.
 
@@ -23,8 +22,8 @@ OPTIONS
               The path where the Time Machine will be mounted.  This should be an empty directory.
 
        fuse options
-              A comma separated list of options that will be passed to fuse(8).  See fuse(8) for available options. To be able to access the volume under  a  normal
-              user account you should set the uid, gid and allow_other options.
+              A  comma separated list of options that will be passed to fuse(8).  See fuse(8) for available options. To be able to access the volume under a normal user account you should set
+              the uid, gid and allow_other options.
 
 EXAMPLES
        mkdir /mnt/hfs /mnt/tm
@@ -40,4 +39,4 @@ AUTHORS
 SEE ALSO
        fuse(8)
 
-                                                                          October 31, 2012                                                                   TMFS(1)
+                                                                                        October 31, 2012                                                                                TMFS(1)

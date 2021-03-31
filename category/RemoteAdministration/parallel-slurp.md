@@ -1,22 +1,21 @@
-parallel-slurp(1)                                                      General Commands Manual                                                     parallel-slurp(1)
+parallel-slurp(1)                                                                   General Commands Manual                                                                   parallel-slurp(1)
 
 NAME
-       parallel-slurp — parallel process kill program
+       parallel-slurp — parallel file download program
 
 SYNOPSIS
-       parallel-slurp [-vAr] [-h hosts_file] [-H [user@]host[:port]] [-l user] [-p par] [-o outdir] [-e errdir] [-t timeout] [-O options] [-x args] [-X arg] [-L lo‐
-       caldir] remote local
+       parallel-slurp [-vAr] [-h hosts_file] [-H [user@]host[:port]] [-l user] [-p par] [-o outdir] [-e errdir] [-t timeout] [-O options] [-x args] [-X arg] [-L localdir] remote local
 
 DESCRIPTION
-       parallel-slurp is a program for copying files in parallel from a number of hosts.  It provides features such as passing a password to scp, saving  output  to
-       files, and timing out.
+       parallel-slurp is a program for copying files in parallel from a number of hosts using the scp program.  It provides features such as passing a password to scp, saving output to files,
+       and timing out.
 
 OPTIONS
        -h host_file
        --hosts host_file
-              Read hosts from the given host_file.  Lines in the host file are of the form [user@]host[:port] and can include blank lines and comments (lines begin‐
-              ning with "#").  If multiple host files are given (the -h option is used more than once), then parallel-slurp behaves as though these files were  con‐
-              catenated together.  If a host is specified multiple times, then parallel-slurp will connect the given number of times.
+              Read hosts from the given host_file.  Lines in the host file are of the form [user@]host[:port] and can include blank lines and comments (lines beginning with "#").  If multiple
+              host  files  are  given  (the  -h  option is used more than once), then parallel-slurp behaves as though these files were concatenated together.  If a host is specified multiple
+              times, then parallel-slurp will connect the given number of times.
 
        -H     [user@]host[:port]
        --host [user@]host[:port]
@@ -38,8 +37,8 @@ OPTIONS
 
        -o outdir
        --outdir outdir
-              Save  standard  output  to files in the given directory.  Filenames are of the form [user@]host[:port][.num] where the user and port are only included
-              for hosts that explicitly specify them.  The number is a counter that is incremented each time for hosts that are specified more than once.
+              Save standard output to files in the given directory.  Filenames are of the form [user@]host[:port][.num] where the user and port are only included  for  hosts  that  explicitly
+              specify them.  The number is a counter that is incremented each time for hosts that are specified more than once.
 
        -e errdir
        --errdir errdir
@@ -47,29 +46,26 @@ OPTIONS
 
        -x args
        --extra-args args
-              Passes extra SSH command-line arguments (see the ssh(1) man page for more information about SSH arguments).  This option  may  be  specified  multiple
-              times.   The  arguments are processed to split on whitespace, protect text within quotes, and escape with backslashes.  To pass arguments without such
-              processing, use the -X option instead.
+              Passes extra SSH command-line arguments (see the ssh(1) man page for more information about SSH arguments).  This option may be specified multiple times.  The arguments are pro‐
+              cessed to split on whitespace, protect text within quotes, and escape with backslashes.  To pass arguments without such processing, use the -X option instead.
 
        -X arg
        --extra-arg arg
-              Passes a single SSH command-line argument (see the ssh(1) man page for more information about SSH arguments).  Unlike the -x option, no processing  is
-              performed on the argument, including word splitting.  To pass multiple command-line arguments, use the option once for each argument.
+              Passes a single SSH command-line argument (see the ssh(1) man page for more information about SSH arguments).  Unlike the -x option, no processing is performed on the  argument,
+              including word splitting.  To pass multiple command-line arguments, use the option once for each argument.
 
        -O options
        --options options
-              SSH options in the format used in the SSH configuration file (see the ssh_config(5) man page for more information).  This option may be specified mul‐
-              tiple times.
+              SSH options in the format used in the SSH configuration file (see the ssh_config(5) man page for more information).  This option may be specified multiple times.
 
        -A
        --askpass
-              Prompt for a password and pass it to ssh.  The password may be used for either to unlock a key or for password authentication.  The password is trans‐
-              ferred  in  a fairly secure manner (e.g., it will not show up in argument lists).  However, be aware that a root user on your system could potentially
-              intercept the password.
+              Prompt  for  a  password and pass it to ssh.  The password may be used for either to unlock a key or for password authentication.  The password is transferred in a fairly secure
+              manner (e.g., it will not show up in argument lists).  However, be aware that a root user on your system could potentially intercept the password.
 
        -v
        --verbose
-              Include error messages from ssh with the -i and \ options.
+              Include error messages from ssh with the -i and -e options.
 
        -r
        --recursive
@@ -80,9 +76,8 @@ OPTIONS
               Copy files from the remote host to the given local directory.
 
 TIPS
-       The ssh_config file can include an arbitrary number of Host sections.  Each host entry specifies ssh options which apply only to the given host.  Host  defi‐
-       nitions can even behave like aliases if the HostName option is included.  This ssh feature, in combination with pssh host files, provides a tremendous amount
-       of flexibility.
+       The ssh_config file can include an arbitrary number of Host sections.  Each host entry specifies ssh options which apply only to the given host.  Host definitions can even behave  like
+       aliases if the HostName option is included.  This ssh feature, in combination with pssh host files, provides a tremendous amount of flexibility.
 
 EXIT STATUS
        The exit status codes from parallel-slurp are as follows:
@@ -105,4 +100,4 @@ AUTHORS
 SEE ALSO
        ssh(1), ssh_config(5), parallel-ssh(1), parallel-scp(1), parallel-rsync(1), parallel-nuke(1),
 
-                                                                          January 24, 2012                                                         parallel-slurp(1)
+                                                                                        January 24, 2012                                                                      parallel-slurp(1)

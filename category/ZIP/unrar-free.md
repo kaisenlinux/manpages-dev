@@ -1,11 +1,11 @@
-UNRAR-FREE(1)                                                          General Commands Manual                                                         UNRAR-FREE(1)
+UNRAR-FREE(1)                                                                       General Commands Manual                                                                       UNRAR-FREE(1)
 
 NAME
        unrar-free — extract files from rar archives
 
 SYNOPSIS
-       unrar-free  [-xtfp?V]   [--extract]   [--list]   [--force]   [--extract-newer]   [--extract-no-paths]  [--password]  [--help]  [--usage]  [--version] ARCHIVE
-       [FILE ...]       [DESTINATION]
+       unrar-free  [-xtfp?V]  [--extract]  [--list]  [--force]  [--extract-newer]  [--extract-no-paths]  [--password]  [--help]  [--usage]  [--version] ARCHIVE  [FILE ...]           [DESTINA‐
+       TION]
 
 DESCRIPTION
        unrar-free is a program for extracting files from rar archives.
@@ -42,8 +42,7 @@ OPTIONS
 NON-FREE UNRAR COMPATIBLE SYNOPSIS
        unrar-free [elvx]  [-ep]  [-o+]  [-o-]  [-ppassword]  [-u]  [--] ARCHIVE  [FILE ...]          [DESTINATION]
 
-       This syntax should only be used in front-end programs which are using non-free unrar as a back-end. It is recommended to use this program by GNU command line
-       syntax.
+       This syntax should only be used in front-end programs which are using non-free unrar as a back-end. It is recommended to use this program by GNU command line syntax.
 
        e         Extract files from archive without full path.
 
@@ -71,9 +70,9 @@ BUGS
 AUTHORS
        unrar-free was written by Ben Asselstine based on UniquE RAR File Library by Christian Scheurer and Johannes Winkelmann.
 
-       This  manual page was written by Niklas Vainio <niklas.vainio@iki.fi> for the Debian system (but may be used by others).  Permission is granted to copy, dis‐
-       tribute and/or modify this document under the terms of the GNU General Public License, Version 2 any later version published by the Free Software Foundation.
+       This manual page was written by Niklas Vainio <niklas.vainio@iki.fi> for the Debian system (but may be used by others).  Permission is granted to copy, distribute  and/or  modify  this
+       document under the terms of the GNU General Public License, Version 2 any later version published by the Free Software Foundation.
 
        On Debian systems, the complete text of the GNU General Public License can be found in /usr/share/common-licenses/GPL.
 
-                                                                                                                                                       UNRAR-FREE(1)
+                                                                                                                                                                                  UNRAR-FREE(1)

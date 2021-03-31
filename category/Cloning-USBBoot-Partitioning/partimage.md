@@ -1,13 +1,13 @@
-partimage(1)                                                           Partition Image Manual                                                           partimage(1)
+partimage(1)                                                                         Partition Image Manual                                                                        partimage(1)
 
 NAME
        partimage - back up and restore disk partitions
 
 SYNOPSIS
-       partimage  [  -bcdehimMnoSvwy  ]  [-B 'pattern response string']  [-z compresslevel] [-V volumesize] [-f actionatend] [-s server] [-p port] [-a mountoptions]
-       [-U username] [-P password] [-g loglevel] [ save device image_file ]
-       partimage [ -bcdehimMnoSvwy ] [-B 'pattern response string'] [-z compresslevel]  [-V volumesize]  [-f actionatend]  [-s server]  [-p port]  [-a mountoptions]
-       [-U username] [-P password] [-g loglevel] [ restore device image_file/'stdin' ]
+       partimage  [  -bcdehimMnoSvwy  ]  [-B 'pattern response string'] [-z compresslevel] [-V volumesize] [-f actionatend] [-s server] [-p port] [-a mountoptions] [-U username] [-P password]
+       [-g loglevel] [ save device image_file ]
+       partimage [ -bcdehimMnoSvwy ] [-B 'pattern response string'] [-z compresslevel] [-V volumesize] [-f actionatend] [-s server]  [-p port]  [-a mountoptions]  [-U username]  [-P password]
+       [-g loglevel] [ restore device image_file/'stdin' ]
        partimage [ restmbr image_file ]
        partimage [ imginfo image_file ]
 
@@ -62,11 +62,10 @@ OPTIONS
               batch mode: the GUI won't wait for an user action.
 
        -B 'pattern response string', --fully-batch 'pattern response string'
-              full  batch  mode: the GUI is not being displayed. Rather status messages are displayed as normal text.  The pattern response string has the following
-              format:
+              full batch mode: the GUI is not being displayed. Rather status messages are displayed as normal text.  The pattern response string has the following format:
               ´<glob-pattern>=<response-value>;...´
-              where the glob pattern is matched against the string <window-title>/<message-text> of the message dialogue box to be displayed. For dialog boxes  with
-              buttons in the window, the <response> must be the exact button text.  The pattern response string usually needs to be quoted as above.
+              where  the glob pattern is matched against the string <window-title>/<message-text> of the message dialogue box to be displayed. For dialog boxes with buttons in the window, the
+              <response> must be the exact button text.  The pattern response string usually needs to be quoted as above.
 
        -y, --nosync
               Don't synchronize the disks at the end of the operation. Dangerous!
@@ -123,4 +122,4 @@ AUTHOR
        Franck Ladurelle <ladurelf@partimage.org>
        Francois Dupoux  <fdupoux@partimage.org>
 
-3rd Berkeley Distribution                                                   30 May, 2002                                                                partimage(1)
+3rd Berkeley Distribution                                                                 30 May, 2002                                                                             partimage(1)

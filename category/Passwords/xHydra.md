@@ -1,4 +1,4 @@
-XHYDRA(1)                                                              General Commands Manual                                                             XHYDRA(1)
+XHYDRA(1)                                                                           General Commands Manual                                                                           XHYDRA(1)
 
 NAME
        xhydra - Gtk+2 frontend for thc-hydra
@@ -19,4 +19,4 @@ AUTHOR
 
        This manual page was written by Daniel Echeverry <epsilon77@gmail.com>, for the Debian project (and may be used by others).
 
-                                                                             02/02/2012                                                                    XHYDRA(1)
+                                                                                           02/02/2012                                                                                 XHYDRA(1)

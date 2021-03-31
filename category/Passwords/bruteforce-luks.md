@@ -1,4 +1,4 @@
-BRUTEFORCE-LUKS(1)                                                Bruteforce LUKS encrypted volume                                                BRUTEFORCE-LUKS(1)
+BRUTEFORCE-LUKS(1)                                                              Bruteforce LUKS encrypted volume                                                             BRUTEFORCE-LUKS(1)
 
 NAME
        bruteforce-luks - try to find the password of a LUKS volume
@@ -11,9 +11,9 @@ DESCRIPTION
 
        It can be used in two ways:
 
-              •  brute  force  attack: try all the possible passwords given a character set.  It is especially useful if you know something about the password (i.e.
-              you forgot a part of your password but still remember most of it). Finding the password of a volume without knowing anything about it would  take  way
-              too much time (unless the password is really short and/or weak).
+              •  brute  force  attack:  try all the possible passwords given a character set.  It is especially useful if you know something about the password (i.e. you forgot a part of your
+              password but still remember most of it). Finding the password of a volume without knowing anything about it would take way too much time (unless the  password  is  really  short
+              and/or weak).
 
               • dictionary attack: try all the passwords in a file.
 
@@ -93,4 +93,4 @@ EXAMPLES
              (Let the program run for a few minutes and stop it)
            bruteforce-luks -t 6 -w state.txt /dev/sdd1
 
-BRUTEFORCE-LUKS 1.3.1                                                         July 2017                                                           BRUTEFORCE-LUKS(1)
+BRUTEFORCE-LUKS 1.3.1                                                                      July 2017                                                                         BRUTEFORCE-LUKS(1)

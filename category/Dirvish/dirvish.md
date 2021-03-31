@@ -1,4 +1,4 @@
-DIRVISH(8)                                                             System Manager's Manual                                                            DIRVISH(8)
+DIRVISH(8)                                                                          System Manager's Manual                                                                          DIRVISH(8)
 
 NAME
        dirvish - Disk based virtual image network backup system
@@ -9,22 +9,21 @@ SYNOPSIS
 DESCRIPTION
        Create a backup image of a client directory tree.
 
-       Each  image is a directory containing transfer log, summary, tree and if transfer errors were detected an rsync_error file.  The transfer log retains the the
-       output of any pre and post processing commands and the rsync log listing all files that were changed or added with some statistical information.  The summary
-       file contains all the information about how the image was created and meta-data for managing the image in config file format.  Tree is the copy of the client
-       tree.
+       Each  image is a directory containing transfer log, summary, tree and if transfer errors were detected an rsync_error file.  The transfer log retains the the output of any pre and post
+       processing commands and the rsync log listing all files that were changed or added with some statistical information.  The summary file contains all the information about how the image
+       was created and meta-data for managing the image in config file format.  Tree is the copy of the client tree.
 
-       The client directory tree is compared with an existing image to create a new image.  Unchanged files are shared between images.  For changed files only those
-       parts that actually change are transfered over the network.  Unchanged portions of files are copied from the reference image.
+       The client directory tree is compared with an existing image to create a new image.  Unchanged files are shared between images.  For changed files only those parts that actually change
+       are transfered over the network.  Unchanged portions of files are copied from the reference image.
 
-       The  resulting  images contain complete copies of the original trees preserving ownership and file permissions.  In this way even though the backups are made
-       incrementally, each image can be used independently for restores or to make removable-media off-site copies or archives.
+       The resulting images contain complete copies of the original trees preserving ownership and file permissions.  In this way even though the backups are made  incrementally,  each  image
+       can be used independently for restores or to make removable-media off-site copies or archives.
 
        The removal of an image will have no effect on other images.
 
 OPTIONS
-       Each option on the command line may be specified any number of times.  Those options that support lists in the config files will accumulate all of their  ar‐
-       guments otherwise each specification will override the ones before.
+       Each option on the command line may be specified any number of times.  Those options that support lists in the config files will accumulate all of their arguments otherwise each speci‐
+       fication will override the ones before.
 
        As configuration files are loaded they may override options on the command line.
 
@@ -35,16 +34,16 @@ OPTIONS
 
               A branch is a sequence of images.
 
-              If  a  vault  has been specified either here or with --vault the first time this option is used it will attempt to load the config file branch_name or
-              branch_name.conf from the vault.
+              If a vault has been specified either here or with --vault the first time this option is used it will attempt to load the config file branch_name  or  branch_name.conf  from  the
+              vault.
 
        --config config-file
               Load options from the specified file.
 
               If this precedes --vault the --vault option will not load it's own config file.
 
-              If vault has been set and config-file is a bare filename the presence of one in the vault will take precedence over one in the current directory.   To
-              specify one in the current directory after --vault use ./ to precede the name.
+              If  vault has been set and config-file is a bare filename the presence of one in the vault will take precedence over one in the current directory.  To specify one in the current
+              directory after --vault use ./ to precede the name.
 
               The master configuration file will be read prior to processing options.
 
@@ -53,8 +52,8 @@ OPTIONS
 
               See Time::ParseDate(3pm) for details.
 
-              This  does  not  actually  expire  anything.   What it does do is add an Expire: field to the image summary file containing an absolute time so that a
-              dirvish-expire or another tool outside of dirvish can decide when to remove old images.
+              This does not actually expire anything.  What it does do is add an Expire: field to the image summary file containing an absolute time so that a dirvish-expire or  another  tool
+              outside of dirvish can decide when to remove old images.
 
        --image image_name
               Specify a name for the image.
@@ -84,8 +83,7 @@ OPTIONS
        --reference branch_name|image_name
               Specify an existing image or a branch from which to create the new image.
 
-              If a branch_name is specified, the last existing image from its history file will be used.  A branch will take precedence over an image  of  the  same
-              name.
+              If a branch_name is specified, the last existing image from its history file will be used.  A branch will take precedence over an image of the same name.
 
        --reset option
               Reset the values in an accumulating option.
@@ -102,16 +100,15 @@ OPTIONS
 
               If not preceeded by --config this will attempt to load the config file default or default.conf within the vault.
 
-              If  branch_name  is  specified here this will behave exactly like the --branch option and branch_name or branch_name.conf will be attempted instead of
-              default.conf.
+              If branch_name is specified here this will behave exactly like the --branch option and branch_name or branch_name.conf will be attempted instead of default.conf.
 
        --version
               Print version string and exit.
 
 EXIT CODES
-       To facilitate further automation and integration of dirvish with other tools dirvish provides rationalised exit codes.   The  exit  codes  are  range  based.
-       While  the code for a specific error may change from one version to another it will remain within the specified range.  So don't test for specific exit codes
-       but instead test for a range of values.  To the degree possible higher value ranges indicate more severe errors.
+       To  facilitate  further automation and integration of dirvish with other tools dirvish provides rationalised exit codes.  The exit codes are range based.  While the code for a specific
+       error may change from one version to another it will remain within the specified range.  So don't test for specific exit codes but instead test for a range of values.   To  the  degree
+       possible higher value ranges indicate more severe errors.
 
        0      success
 
@@ -190,17 +187,16 @@ AUTHOR
        Dirvish was created by J.W. Schultz of Pegasystems Technologies.
 
 BUGS AND ISSUES
-       Fields set in configuration files will override command line options that have been set before the file is read.  This behaviour while consistent  may  occa‐
-       sionally confuse.  For this reason most command line options should be specified after any options that may cause a configuration file to be loaded.
+       Fields  set  in  configuration files will override command line options that have been set before the file is read.  This behaviour while consistent may occasionally confuse.  For this
+       reason most command line options should be specified after any options that may cause a configuration file to be loaded.
 
        In order to preserve permissions it is necessary for dirvish to run as root on the backup server.
 
        The root user must have non-interactive ssh access to the client systems.  It is not necessary that this access be as the root user on the client.
 
-       File ownership is preserved using numeric values so it is not necessary to have user accounts on the backup server.  Making the vaults network accessible us‐
-       ing protocols that map UIDs based on names instead of number could allow access controls on files to be violated.
+       File ownership is preserved using numeric values so it is not necessary to have user accounts on the backup server.  Making the vaults network accessible using protocols that map  UIDs
+       based on names instead of number could allow access controls on files to be violated.
 
-       Making the vaults writable by users will compromise the integrity of the backups.  Therefore any access to the vaults by users should be done through a read-
-       only mount.
+       Making the vaults writable by users will compromise the integrity of the backups.  Therefore any access to the vaults by users should be done through a read-only mount.
 
-                                                                                                                                                          DIRVISH(8)
+                                                                                                                                                                                     DIRVISH(8)
