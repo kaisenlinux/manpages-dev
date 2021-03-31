@@ -1,6 +1,6 @@
 # Kaisen Linux | Manpages
 
-This documentation contains 460 manual pages for applications from **kaisen-menu**.
+This documentation contains 459 manual pages for applications from **kaisen-menu**.
 
 ![kaisen-menu](assets/kaisen_menu.png)
 
