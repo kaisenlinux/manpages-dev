@@ -3,7 +3,7 @@
 This project is for:
 > Kaisen Linux | Manpages
 
-# How to generate the manpages-documentaion
+## How to generate the manpages-documentaion
 
 - You can modify a md file in category\ or packages\ then,
 
@@ -11,18 +11,22 @@ run the script :
 
 ```bash
 ./mix_build.sh # build for website production
-./mix_build.sh --package # build for kaisen-webdocs package
+./mix_build.sh --package # build for kaisen-webdocs debian package
 # if the command is successful, you can view the doc with your browser
 # firefox doc/index.html (manpages sorted by category)
 # firefox doc/packages/readme.html (manpages sorted by packages A-Z)
 ```
 
+## How to add a page to the documentation
+
 - If you want to add a md file, you have to create a md in category\ or packages\ folder, then add a line in mix_category.exs or mix_packages.exs, then
 
-run the script :
+  example: README.md was added to category\ and packages\ and a line in mix_category.exs and mix_packages.exs were added.
+
+then run the script :
 
 ```bash
-./mix_build.sh
+./mix_build.sh (or mix_build.sh --package if you build for debian package)
 # if the command is successful, you can view the doc with your browser
 # firefox doc/index.html (manpages sorted by category)
 # firefox doc/packages/readme.html (manpages sorted by packages A-Z)
@@ -40,14 +44,13 @@ chmod +x install-requirements.sh && ./install-requirements.sh
 ```
 
 ```bash
-# then restart your shell and enter the following command to install erlang and elixir via asdf
-asdf plugin add erlang
-asdf plugin add elixir
-asdf install erlang latest
-asdf install elixir latest
+# then enter the following command to install erlang and elixir via asdf
+asdf plugin add erlang && asdf plugin add elixir
+asdf install erlang 23.3.1
+asdf install elixir 1.11.4-otp-23
 # you have to define a global version for erlang and elixir
-# asdf global elixir 1.11.3-otp-23
-# asdg global erlang 23.2.5 
+asdf global elixir 1.11.4-otp-23
+asdf global erlang 23.3.1 
 ```
 
 # Directory definition
@@ -66,11 +69,9 @@ asdf install elixir latest
 - `mix_category.exs` : configuration for manpages sorted by category with linked md files to build in doc folder
 - `mix_packages.exs` : configuration for manpages sorted by packages from A-Z with linked md files to build in doc folder
 
-# Note
-
-no optimisation post-scripts like sed or other to update manpage desc without horizontal scrollbar and anchors title in h1, h2. 
-no source of how md files are generated.
-
 # version
 
 28/03/2021 - upgrade to v1.6 in mix*.exs
+06/04/2021 - fix install_requirements.sh for adding asdf to zsh and bash.
+	   - Adding commands to run after launching this script.
+	   - Adding .tool-versions for only using elixir 1.11

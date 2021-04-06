@@ -19,6 +19,14 @@ if [[ "$my_shell" = "B"||"b" ]]; then
 # asdf bash
 echo ". $HOME/.asdf/asdf.sh" >> ~/.bashrc
 echo ". $HOME/.asdf/completions/asdf.bash" >> ~/.bashrc
+# ending
+echo "Installation done"
+echo "Enter in your terminal :
+asdf plugin add erlang && asdf plugin add elixir
+asdf install erlang 23.3.1
+asdf install elixir 1.11.4-otp-23
+asdf global erlang 23.3.1 && asdf local elixir 1.11.4-otp-23"
+exec bash
 else
 # asdf zsh
 echo ". $HOME/.asdf/asdf.sh" >> ~/.zshrc
@@ -27,7 +35,15 @@ echo ". $HOME/.asdf/asdf.sh" >> ~/.zshrc
 #autoload -Uz compinit
 #compinit
 source ~/.zshrc
-fi
 # ending
-echo "Installation done : Restart your shell by opening a new terminal"
+echo "Installation done"
+echo "Enter in your terminal :
+asdf plugin add erlang && asdf plugin add elixir
+asdf install erlang 23.3.1
+asdf install elixir 1.11.4-otp-23
+asdf global erlang 23.3.1
+asdf local elixir 1.11.4-otp-23"
+exec zsh
+fi
+
 # enter in terminal: asdf

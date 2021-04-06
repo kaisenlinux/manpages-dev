@@ -34,3 +34,6 @@ kaisen_manpages-*.tar
 
 # ignore mix.log for deps check
 mix.log
+
+# ignore .tool-versions
+.tool-versions
