@@ -45,7 +45,7 @@ chmod +x install-requirements.sh && ./install-requirements.sh
 
 ```bash
 # then enter the following command to install erlang and elixir via asdf
-asdf plugin add erlang && asdf plugin add elixir
+asdf plugin-add erlang && asdf plugin-add elixir
 asdf install erlang 23.3.1
 asdf install elixir 1.11.4-otp-23
 # you have to define a global version for erlang and elixir
@@ -75,3 +75,4 @@ asdf global erlang 23.3.1
 06/04/2021 - fix install_requirements.sh for adding asdf to zsh and bash.
 	   - Adding commands to run after launching this script.
 	   - Adding .tool-versions for only using elixir 1.11
+	   - Updating asdf command in script	
