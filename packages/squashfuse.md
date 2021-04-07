@@ -1,4 +1,4 @@
-squashfuse(1)                                                                     BSD General Commands Manual                                                                     squashfuse(1)
+squashfuse(1)                                                                   BSD General Commands Manual                                                                  squashfuse(1)
 
 NAME
      squashfuse — mount a SquashFS archive with FUSE
@@ -35,4 +35,4 @@ SEE ALSO
 
      FUSE ⟨http://fuse.sourceforge.net/⟩
 
-BSD                                                                                      March 19, 2012                                                                                     BSD
+BSD                                                                                   March 19, 2012                                                                                   BSD

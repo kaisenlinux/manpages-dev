@@ -1,45 +1,27 @@
 # README
 
-This project is for:
-> Kaisen Linux | Manpages
+This project is to generate manpages website for https://kaisenlinux.org/manpages and kaisen-webdocs deb package.
 
-## How to generate the manpages-documentaion
+You must run those script on a **fresh installation** of kaisen linux each time a new rolling is distributed.
 
-- You can modify a md file in category\ or packages\ then,
+The only requirement is git-core and kaisen linux MATE.
 
-run the script :
+## Sequential steps to build manpages
 
-```bash
-./mix_build.sh # build for website production
-./mix_build.sh --package # build for kaisen-webdocs debian package
-# if the command is successful, you can view the doc with your browser
-# firefox doc/index.html (manpages sorted by category)
-# firefox doc/packages/readme.html (manpages sorted by packages A-Z)
-```
-
-## How to add a page to the documentation
-
-- If you want to add a md file, you have to create a md in category\ or packages\ folder, then add a line in mix_category.exs or mix_packages.exs, then
-
-  example: README.md was added to category\ and packages\ and a line in mix_category.exs and mix_packages.exs were added.
-
-then run the script :
+### Step 1
 
 ```bash
-./mix_build.sh (or mix_build.sh --package if you build for debian package)
-# if the command is successful, you can view the doc with your browser
-# firefox doc/index.html (manpages sorted by category)
-# firefox doc/packages/readme.html (manpages sorted by packages A-Z)
+./manpages-build.sh --fullbuild
 ```
+This script parse the kaisen linux system and the kaisen linux menu to generate an **output_fullbuild_DDMMYYYY** directory.
 
-# Install the requirements if necessary
+Then it update the current repository.
 
-After git cloning this directory:  
+### Step 2
 
 You can use the following script to install **git, erlang and elixir** via **asdf manager** :
 
 ```bash
-# you must have a sudo user
 chmod +x install-requirements.sh && ./install-requirements.sh
 ```
 
@@ -52,6 +34,25 @@ asdf install elixir 1.11.4-otp-23
 asdf global elixir 1.11.4-otp-23
 asdf global erlang 23.3.1 
 ```
+
+## Step 3
+
+You can run the build of the kaisen linnux manpages website for the official kaisen linux website or for the deb package.
+
+```bash
+./mix_build.sh # build for website production
+./mix_build.sh --package # build for kaisen-webdocs debian package
+# if the command is successful, you can view the doc with your browser
+# firefox doc/index.html (manpages sorted by category)
+# firefox doc/packages/readme.html (manpages sorted by packages A-Z)
+```
+
+- For official kaisen linux website :
+You can now copy doc/* in the kaisen prod website/manpages/ folder.
+
+- For official kaisen linux kaisen-webdocs package
+You can now copy doc/* in kaisen-manpages/ folder.
+
 
 # Directory definition
 
@@ -76,3 +77,4 @@ asdf global erlang 23.3.1
 	   - Adding commands to run after launching this script.
 	   - Adding .tool-versions for only using elixir 1.11
 	   - Updating asdf command in script	
+07/04/2021 - Integrating build script of manpages in the manpages-dev repository

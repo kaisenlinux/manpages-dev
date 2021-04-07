@@ -1,4 +1,4 @@
-PZSTD(1)                                                                                 User Commands                                                                                 PZSTD(1)
+PZSTD(1)                                                                               User Commands                                                                              PZSTD(1)
 
 NAME
        PZSTD - parallelised Zstandard compression, al la pigz
@@ -58,4 +58,4 @@ DESCRIPTION
 
        --     : all arguments after "--" are treated as files
 
-PZSTD version: 1.4.8.                                                                      March 2021                                                                                  PZSTD(1)
+PZSTD version: 1.4.8.                                                                   March 2021                                                                                PZSTD(1)

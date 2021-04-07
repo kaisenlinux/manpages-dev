@@ -1,4 +1,4 @@
-SNAPPER(8)                                                                       Filesystem Snapshot Management                                                                      SNAPPER(8)
+SNAPPER(8)                                                                    Filesystem Snapshot Management                                                                    SNAPPER(8)
 
 NAME
        snapper - Command-line program for filesystem snapshot management
@@ -11,12 +11,13 @@ SYNOPSIS
 DESCRIPTION
        Snapper is a command-line program for filesystem snapshot management. It can create, delete and compare snapshots and undo changes done between snapshots.
 
-       Snapper never modifies the content of snapshots. Thus snapper creates read-only snapshots if supported by the kernel. Supported filesystems are btrfs and ext4 (discontinued) as well as
-       snapshots of LVM logical volumes with thin-provisioning. Some filesystems might not be supported depending on your installation.
+       Snapper never modifies the content of snapshots. Thus snapper creates read-only snapshots if supported by the kernel. Supported filesystems are btrfs and ext4 (discontinued) as
+       well as snapshots of LVM logical volumes with thin-provisioning. Some filesystems might not be supported depending on your installation.
 
 CONCEPTS
    Configurations
-       For each filesystem or subvolume that should be snapshotted by snapper, a configuration file is required, see snapper-configs(5). The setup can be done with the create-config command.
+       For each filesystem or subvolume that should be snapshotted by snapper, a configuration file is required, see snapper-configs(5). The setup can be done with the create-config
+       command.
 
    Snapshots
        Snapper distinguishes three types of snapshots.
@@ -45,8 +46,8 @@ CONCEPTS
        •   Certain programs like YaST and zypper create pre/post snapshot pairs when modifying the system.
 
    Cleanup Algorithms
-       Snapper provides several algorithms to clean up old snapshots. The algorithms are executed in a daily cron-job. This can be configured in the corresponding configurations files along
-       with parameters for every algorithm.
+       Snapper provides several algorithms to clean up old snapshots. The algorithms are executed in a daily cron-job. This can be configured in the corresponding configurations files
+       along with parameters for every algorithm.
 
        number
            Deletes old snapshots when a certain number of snapshots is reached.
@@ -57,22 +58,22 @@ CONCEPTS
        empty-pre-post
            Deletes pre/post snapshot pairs with empty diffs.
 
-       The number and timeline cleanup algorithms can also try to keep the space used by snapshots below a limit and the free space of the filesystem above a limit. For the first condition
-       quota must be setup, see command setup-quota. Additional the NUMBER_LIMIT and TIMELINE_LIMIT variables in the config file must have ranges (min- and max-value). The algorithms will
-       then make two passes:
+       The number and timeline cleanup algorithms can also try to keep the space used by snapshots below a limit and the free space of the filesystem above a limit. For the first
+       condition quota must be setup, see command setup-quota. Additional the NUMBER_LIMIT and TIMELINE_LIMIT variables in the config file must have ranges (min- and max-value). The
+       algorithms will then make two passes:
 
         1. Delete snapshots above the max-value independent of the snapshot and filesystem space.
 
         2. Delete snapshots above the min-value until the limits for the snapshot and filesystem are reached.
 
-       The limit for the used space can be configured via the SPACE_LIMIT variable. Note: Only snapshots that have a cleanup algorithm set are taken into account when calculating the space
-       used by snapshots. The limit for the free space can be configured via the FREE_LIMIT variable.
+       The limit for the used space can be configured via the SPACE_LIMIT variable. Note: Only snapshots that have a cleanup algorithm set are taken into account when calculating the
+       space used by snapshots. The limit for the free space can be configured via the FREE_LIMIT variable.
 
    Filters
        Some files keep state information of the system, e.g.  /etc/mtab. Such files should never be reverted. To help users, snapper allows one to ignore these files.
 
-       Each line in all files /etc/snapper/filters/*.txt specifies a pattern. When snapper computes the difference between two snapshots it ignores all files and directories matching any of
-       those patterns by using fnmatch(3) with the flag FNM_LEADING_DIR.
+       Each line in all files /etc/snapper/filters/*.txt specifies a pattern. When snapper computes the difference between two snapshots it ignores all files and directories matching any
+       of those patterns by using fnmatch(3) with the flag FNM_LEADING_DIR.
 
        Note that filters do not exclude files or directories from being snapshotted. For that, use subvolumes or mount points.
 
@@ -125,8 +126,8 @@ GLOBAL OPTIONS
            Print version and exit.
 
 COMMANDS
-       Snapper provides a number of commands. Each command accepts the options listed in the GLOBAL OPTIONS section. These options must be specified before the command name. In addition, many
-       commands have specific options, which are listed in this section. These command-specific options must be specified after the name of the command and before any of the command
+       Snapper provides a number of commands. Each command accepts the options listed in the GLOBAL OPTIONS section. These options must be specified before the command name. In addition,
+       many commands have specific options, which are listed in this section. These command-specific options must be specified after the name of the command and before any of the command
        arguments.
 
        help
@@ -144,8 +145,8 @@ COMMANDS
            Create a new configuration for a filesystem or subvolume. For this command you will likely need the global option --config, see GLOBAL OPTIONS and CONCEPTS.
 
            -f, --fstype fstype
-               Manually set filesystem type. Supported values are btrfs, ext4 (discontinued) and lvm. For lvm, snapper uses LVM thin-provisioned snapshots. The filesystem type on top of LVM
-               must be provided in parentheses, e.g. lvm(xfs).
+               Manually set filesystem type. Supported values are btrfs, ext4 (discontinued) and lvm. For lvm, snapper uses LVM thin-provisioned snapshots. The filesystem type on top of
+               LVM must be provided in parentheses, e.g. lvm(xfs).
 
                Without this option snapper tries to detect the filesystem.
 
@@ -166,8 +167,8 @@ COMMANDS
                Columns are not selected when JSON format is used.
 
        set-config configdata
-           Changes the settings of the configuration. The settings configdata are a list of key-value-pairs separated by spaces and the key and value must be separated by an equal sign, e.g.
-           "NUMBER_CLEANUP=yes NUMBER_LIMIT=10". The value of SUBVOLUME and FSTYPE cannot be changed.
+           Changes the settings of the configuration. The settings configdata are a list of key-value-pairs separated by spaces and the key and value must be separated by an equal sign,
+           e.g. "NUMBER_CLEANUP=yes NUMBER_LIMIT=10". The value of SUBVOLUME and FSTYPE cannot be changed.
 
        list (ls) [options]
            List snapshots.
@@ -193,8 +194,8 @@ COMMANDS
            #, Pre # and Post #
                The number of the snapshot.
 
-               For btrfs the number can be followed by a sign. A "-" indicates that the snapshot is the currently mounted snapshot and a "+" indicates that the snapshot will be mounted next
-               time (It is the btrfs default subvolume). If both conditions apply a "*" is displayed.
+               For btrfs the number can be followed by a sign. A "-" indicates that the snapshot is the currently mounted snapshot and a "+" indicates that the snapshot will be mounted
+               next time (It is the btrfs default subvolume). If both conditions apply a "*" is displayed.
 
            Used Space
                For btrfs the exclusive space of the btrfs quota group corresponding to the snapshot.
@@ -252,8 +253,8 @@ COMMANDS
            -s, --sync
                Sync the filesystem after deleting the snapshots. The details depend on the filesystem type.
 
-               Btrfs normally asynchronously frees space after deleting snapshots. With this option snapper will wait until the space once used by the deleted snapshots is actually available
-               again.
+               Btrfs normally asynchronously frees space after deleting snapshots. With this option snapper will wait until the space once used by the deleted snapshots is actually
+               available again.
 
            Snapshot 0 cannot be deleted. For btrfs the currently mounted snapshot and the snapshot that will be mounted next time (the btrfs default subvolume) can also not be deleted.
 
@@ -264,16 +265,16 @@ COMMANDS
            Unmount a snapshot. Not required for all filesystem types.
 
        status [options] number1..number2
-           Compare the snapshots number1 and number2. This will show a list of files and directories that have been created, modified or deleted in the time between the two snapshots have
-           been made.
+           Compare the snapshots number1 and number2. This will show a list of files and directories that have been created, modified or deleted in the time between the two snapshots
+           have been made.
 
            -o, --output file
                Write output to file file.
 
            The output consists of a string encoding the status followed by the filename. The characters of the status string are:
 
-            1. A "+" means the file was created, a "-" means the file was deleted. A "c" means the content of the file has changed and a "t" means the type of the file has changed (e.g. from
-               regular file to directory).
+            1. A "+" means the file was created, a "-" means the file was deleted. A "c" means the content of the file has changed and a "t" means the type of the file has changed (e.g.
+               from regular file to directory).
 
             2. A "p" means the permissions are have changed.
 
@@ -288,8 +289,8 @@ COMMANDS
            If there is no change a "." is outputted.
 
        diff [options] number1..number2 [files]
-           Compare the snapshots number1 and number2. This will show a diff of the content of files and directories that have been created, modified or deleted in the time between the two
-           snapshots have been made.
+           Compare the snapshots number1 and number2. This will show a diff of the content of files and directories that have been created, modified or deleted in the time between the
+           two snapshots have been made.
 
            -i, --input file
                Read files to diff from file file.
@@ -310,8 +311,8 @@ COMMANDS
            Creates two new snapshots and sets the default subvolume. Per default the system boots from the default subvolume of the root filesystem. The exact actions depend on whether a
            number is provided or not:
 
-           •   Without a number, a first read-only snapshot of the default subvolume is created. A second read-write snapshot of the current system is created. The system is set to boot from
-               the second snapshot.
+           •   Without a number, a first read-only snapshot of the default subvolume is created. A second read-write snapshot of the current system is created. The system is set to boot
+               from the second snapshot.
 
            •   With a number, a first read-only snapshot of the current system is created. A second read-write snapshot is created of number. The system is set to boot from the second
                snapshot.
@@ -330,8 +331,8 @@ COMMANDS
            -u, --userdata userdata
                Set userdata for the snapshot. The key-value pairs must be separated by comma and the key and value must be separated by an equal sign, e.g. requestid=42,user=arthur.
 
-           The rollback command also sets the description, the cleanup algorithm and some userdata unless the values are specified on the command line. This will automate cleanup of snapshots
-           created by rollbacks.
+           The rollback command also sets the description, the cleanup algorithm and some userdata unless the values are specified on the command line. This will automate cleanup of
+           snapshots created by rollbacks.
 
            In other ambits than classic the rollback command does what is required to do a rollback. Anyway it is recommended to use specific programs in that case.
 
@@ -339,8 +340,8 @@ COMMANDS
            Sets up quota. Currently only supported with btrfs.
 
        cleanup [options] cleanup-algorithm
-           Run the cleanup algorithm cleanup-algorithm. Currently implemented cleanup algorithms are number, timeline and empty-pre-post. To run all cleanup algorithms, all can be provided as
-           cleanup-algorithm.
+           Run the cleanup algorithm cleanup-algorithm. Currently implemented cleanup algorithms are number, timeline and empty-pre-post. To run all cleanup algorithms, all can be
+           provided as cleanup-algorithm.
 
            --path path
                Cleanup all configs affecting path. Only useful for btrfs.
@@ -413,4 +414,4 @@ NOTES
         1. RFC 4180
            https://tools.ietf.org/html/rfc4180
 
-0.8.15                                                                                     2020-06-15                                                                                SNAPPER(8)
+0.8.15                                                                                  2020-06-15                                                                              SNAPPER(8)

@@ -1,4 +1,4 @@
-pffinfo                                                                                      LOCAL                                                                                      pffinfo
+pffinfo                                                                                    LOCAL                                                                                   pffinfo
 
 NAME
      pffinfo — determines information about a Personal Folder File (OST, PAB and PST)
@@ -18,8 +18,8 @@ DESCRIPTION
      -a      shows allocation information
 
      -c codepage
-             specify the codepage of ASCII strings, options: ascii, windows-874, windows-932, windows-936, windows-949, windows-950, windows-1250, windows-1251, windows-1252 (default), win‐
-             dows-1253, windows-1254, windows-1255, windows-1256, windows-1257 or windows-1258
+             specify the codepage of ASCII strings, options: ascii, windows-874, windows-932, windows-936, windows-949, windows-950, windows-1250, windows-1251, windows-1252 (default),
+             windows-1253, windows-1254, windows-1255, windows-1256, windows-1257 or windows-1258
 
      -h      shows this help
 
@@ -67,10 +67,10 @@ AUTHOR
      These man pages were written by Joachim Metz.
 
 COPYRIGHT
-     Copyright (C) 2008-2018, Joachim Metz <joachim.metz@gmail.com>.  This is free software; see the source for copying conditions. There is NO warranty; not even for MERCHANTABILITY or FIT‐
-     NESS FOR A PARTICULAR PURPOSE.
+     Copyright (C) 2008-2018, Joachim Metz <joachim.metz@gmail.com>.  This is free software; see the source for copying conditions. There is NO warranty; not even for MERCHANTABILITY or
+     FITNESS FOR A PARTICULAR PURPOSE.
 
 SEE ALSO
      pffexport(1)
 
-libpff                                                                                  January 1, 2017                                                                                  libpff
+libpff                                                                                January 1, 2017                                                                               libpff

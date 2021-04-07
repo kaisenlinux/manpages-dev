@@ -1,22 +1,22 @@
-di(1)                                                                               General Commands Manual                                                                               di(1)
+di(1)                                                                             General Commands Manual                                                                            di(1)
 
 Name
        di - disk information
 
 Synopsis
-       di  [-AacghHklLmnPqRtZ]  [-B block-size] [-d display-size] [-f format] [-I include-fstyp-list] [-s sort-type] [-w block-width] [-W inode-width] [-x exclude-fstyp-list] [-X debug-level]
-       [-z zone-name] [file [...]]
+       di  [-AacghHklLmnPqRtZ]  [-B  block-size] [-d display-size] [-f format] [-I include-fstyp-list] [-s sort-type] [-w block-width] [-W inode-width] [-x exclude-fstyp-list] [-X debug-
+       level] [-z zone-name] [file [...]]
 
        mi
 
 Description
-       di Displays usage information on mounted filesystems.  Block values are reported in a human readable format.  If the user or group has a disk quota, the values  reported  are  adjusted
-       according the quotas that apply to the user.
+       di Displays usage information on mounted filesystems.  Block values are reported in a human readable format.  If the user or group has a disk quota, the values  reported  are  ad‐
+       justed according the quotas that apply to the user.
 
        If file is specified, the usage information for the partition on which file is located is printed.
 
-       Unless  the -a flag is specified, the following mounted filesystems will not normally be displayed: filesystems with total space <= 0; loopback filesystems that are duplicates of other
-       normally mounted filesystems (filesystem type of 'lofs' , 'none', or 'nullfs'); loopback filesystems that are part of a zone (Solaris).
+       Unless  the  -a flag is specified, the following mounted filesystems will not normally be displayed: filesystems with total space <= 0; loopback filesystems that are duplicates of
+       other normally mounted filesystems (filesystem type of 'lofs' , 'none', or 'nullfs'); loopback filesystems that are part of a zone (Solaris).
 
        Filesystems that the user does not have permissions to access will not be displayed at all.
 
@@ -39,9 +39,9 @@ Description
               Values are output with tab separators.  See also the -c option.
 
        -d     display-size (alias: --display-size)
-              Display the usage in units specified by display-size.  Note that if the base block size is SI units of 1000 bytes, the display  size  is  calculated  using  those  units.   dis‐
-              play-size  may be one of: 512 - POSIX, k - kilobytes, m - megabytes, g - gigabytes, t - terabytes, p - petabytes, e - exabytes, z - zettabytes, y - yottabytes, h - Scaled alter‐
-              native 1, H - Scaled alternative 2, or a specific value to use as the block size.
+              Display the usage in units specified by display-size.  Note that if the base block size is SI units of 1000 bytes, the display size is calculated using those  units.   dis‐
+              play-size  may  be  one of: 512 - POSIX, k - kilobytes, m - megabytes, g - gigabytes, t - terabytes, p - petabytes, e - exabytes, z - zettabytes, y - yottabytes, h - Scaled
+              alternative 1, H - Scaled alternative 2, or a specific value to use as the block size.
 
               Block display sizes greater than 1024 bytes are displayed with a precision of one decimal place after the radix.
 
@@ -66,8 +66,8 @@ Description
               Display partition sizes in scaled alternative 2 format.
 
        -I     include-fstype-list (compatibility: -F, --type)
-              Include only the file system types listed in include-fstyp-list.  The list is a comma separated list of file system types.  Multiple -I options may be specified.  If the  'fuse'
-              filesystem type is specified, all fuse* filesystems will be included.
+              Include only the file system types listed in include-fstyp-list.  The list is a comma separated list of file system types.  Multiple -I options may be  specified.   If  the
+              'fuse' filesystem type is specified, all fuse* filesystems will be included.
               e.g. -I nfs,tmpfs or -I nfs -I tmpfs.
 
        --inodes
@@ -101,9 +101,9 @@ Description
               Do not resolve symlinks (for mount points that have a trailing UUID).
 
        -s     sort-type
-              Use  sort-type  to  sort the output.  The output of di is normally sorted by mount point.  The following sort flags may be used to change the sort order: m - by mount point (de‐
-              fault); n - leave unsorted (as it appears in the mount table); s - by special device name; T - by total space; f - by free space; a - by available space; t - by filesystem type;
-              r - reverse the sort order; This will apply to all sort flags following this sort flag.
+              Use  sort-type  to  sort the output.  The output of di is normally sorted by mount point.  The following sort flags may be used to change the sort order: m - by mount point
+              (default); n - leave unsorted (as it appears in the mount table); s - by special device name; T - by total space; f - by free space; a - by available space; t - by filesys‐
+              tem type; r - reverse the sort order; This will apply to all sort flags following this sort flag.
 
               These sort options may be combined in any order.  e.g.:
               di -stsrm # by type, special, reversed mount;
@@ -114,9 +114,9 @@ Description
        --sync Ignored.
 
        -t     (compatibility: --total)
-              Print  a  totals line below the list of file systems.  Pooled filesystems (zfs, advfs) have only the main pool added to the total.  It is up to the user to exclude (using the -x
-              option) read-only filesystems (cdfs, iso9660), swap-based (memfs, mfs, tmpfs) filesystems and user (fuse*) filesystems.  Excluding the 'fuse' filesystem will exclude  all  fuse*
-              filesystems.
+              Print a totals line below the list of file systems.  Pooled filesystems (zfs, advfs) have only the main pool added to the total.  It is up to the user to exclude (using the
+              -x option) read-only filesystems (cdfs, iso9660), swap-based (memfs, mfs, tmpfs) filesystems and user (fuse*) filesystems.  Excluding the 'fuse' filesystem will exclude all
+              fuse* filesystems.
 
        -w     block-width
               Set the print width for block values.  The default is eight.
@@ -130,7 +130,7 @@ Description
               Set the print width for inode values.  Default is seven.
 
        -x     exclude-fstype-list (compatibility: --exclude-type)
-              Exclude  the  file  system  types  listed  in exclude-fstyp-list.  The list is a comma separated list of file system types.  Multiple -x options may be specified.  If the 'fuse'
+              Exclude  the file system types listed in exclude-fstyp-list.  The list is a comma separated list of file system types.  Multiple -x options may be specified.  If the 'fuse'
               filesystem type is excluded, all fuse* filesystems will be excluded.  e.g. -x nfs,tmpfs or -x nfs -x tmpfs.
 
        -X     level
@@ -143,7 +143,7 @@ Description
               Display the filesystems for all visible zones.
 
 Format Strings
-       The output of di may be specified via a format string.  This string may be given either via the -f command line option or as part of  the  DI_ARGS  environment  variable.   The  format
+       The output of di may be specified via a format string.  This string may be given either via the -f command line option or as part of the DI_ARGS environment variable.  The  format
        string may specify the following columns:
 
        m      Print the name of the mount point.
@@ -152,8 +152,8 @@ Format Strings
 
        s      Print the file system name (special device or remote mount point).
 
-       S      Print  the file system name (special device or remote mount point), at full length.  The file system name is formatted to the maximum width necessary for the longest file system
-              name.
+       S      Print  the  file  system name (special device or remote mount point), at full length.  The file system name is formatted to the maximum width necessary for the longest file
+              system name.
 
        t      Print the file system type.
 
@@ -183,7 +183,7 @@ Format Strings
 
        1      Print the percentage of total megabytes in use (actual number of megabytes used / total disk space).
 
-       2      Print the percentage of megabytes in use, BSD-style.  Represents the percentage of user-available space in use.  Note that values  over  100%  are  possible  (actual  number  of
+       2      Print the percentage of megabytes in use, BSD-style.  Represents the percentage of user-available space in use.  Note that values over 100% are possible (actual  number  of
               megabytes used / disk space available to non-root users).
 
        Percentage Free
@@ -212,8 +212,8 @@ Format Strings
 
        The default format string for mi is MSTIO.
 
-       The  format  string  may also contain any other character not listed above.  The character will be printed as is.  e.g. di -f 'mbuvp|iUFP' will print the character '|' between the disk
-       usage and the file slot usage.  The command sequence:
+       The  format  string  may also contain any other character not listed above.  The character will be printed as is.  e.g. di -f 'mbuvp|iUFP' will print the character '|' between the
+       disk usage and the file slot usage.  The command sequence:
               di -f 'mbuvp
               miUFP'
        will print two lines of data for each filesystem.
@@ -241,8 +241,8 @@ Examples
               di -f SMBuv2T
 
 Environment Variables
-       The DI_ARGS environment variable may be used to specify command line arguments.  e.g. If you always want gigabytes displayed, set DI_ARGS equal to "-dg".  Any  command  line  arguments
-       specified will override the DI_ARGS environment variable.
+       The DI_ARGS environment variable may be used to specify command line arguments.  e.g. If you always want gigabytes displayed, set DI_ARGS equal to "-dg".  Any command  line  argu‐
+       ments specified will override the DI_ARGS environment variable.
 
        The DI_LOCALE_DIR environment variable may be used to specify the location of the di program's locale message files.
 
@@ -272,4 +272,4 @@ Author
 
        Brad Lanam, Walnut Creek, CA (brad.lanam.di_at_gmail.com)
 
-                                                                                          17 Jan 2013                                                                                     di(1)
+                                                                                        17 Jan 2013                                                                                  di(1)

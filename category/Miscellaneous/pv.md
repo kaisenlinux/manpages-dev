@@ -1,4 +1,4 @@
-PV(1)                                                                                     User Manuals                                                                                    PV(1)
+PV(1)                                                                                  User Manuals                                                                                  PV(1)
 
 NAME
        pv - monitor the progress of data through a pipe
@@ -8,13 +8,14 @@ SYNOPSIS
        pv [-h|-V]
 
 DESCRIPTION
-       pv  shows the progress of data through a pipeline by giving information such as time elapsed, percentage completed (with progress bar), current throughput rate, total data transferred,
-       and ETA.
+       pv  shows  the progress of data through a pipeline by giving information such as time elapsed, percentage completed (with progress bar), current throughput rate, total data trans‐
+       ferred, and ETA.
 
-       To use it, insert it in a pipeline between two processes, with the appropriate options.  Its standard input will be passed through to its standard output and progress will be shown  on
-       standard error.
+       To use it, insert it in a pipeline between two processes, with the appropriate options.  Its standard input will be passed through to its standard  output  and  progress  will  be
+       shown on standard error.
 
-       pv will copy each supplied FILE in turn to standard output (- means standard input), or if no FILEs are specified just standard input is copied. This is the same behaviour as cat(1).
+       pv  will  copy  each  supplied  FILE in turn to standard output (- means standard input), or if no FILEs are specified just standard input is copied. This is the same behaviour as
+       cat(1).
 
        A simple example to watch how quickly a file is transferred using nc(1):
 
@@ -43,8 +44,8 @@ DESCRIPTION
 
               pv < /dev/zero > /dev/sda
 
-       Note  that if the input size cannot be calculated, and the output is a block device, then the size of the block device will be used and pv will automatically stop at that size as if -S
-       had been given.
+       Note that if the input size cannot be calculated, and the output is a block device, then the size of the block device will be used and pv will automatically stop at that  size  as
+       if -S had been given.
 
        (Linux only): Watching file descriptor 3 opened by another process 1234:
 
@@ -58,23 +59,23 @@ OPTIONS
        pv takes many options, which are divided into display switches, output modifiers, and general options.
 
 DISPLAY SWITCHES
-       If no display switches are specified, pv behaves as if -p, -t, -e, -r, and -b had been given (i.e. everything except average rate is switched on).  Otherwise, only those display  types
-       that are explicitly switched on will be shown.
+       If  no  display switches are specified, pv behaves as if -p, -t, -e, -r, and -b had been given (i.e. everything except average rate is switched on).  Otherwise, only those display
+       types that are explicitly switched on will be shown.
 
        -p, --progress
-              Turn  the  progress  bar on.  If standard input is not a file and no size was given (with the -s modifier), the progress bar cannot indicate how close to completion the transfer
-              is, so it will just move left and right to indicate that data is moving.
+              Turn the progress bar on.  If standard input is not a file and no size was given (with the -s modifier), the progress bar cannot indicate how close to completion the trans‐
+              fer is, so it will just move left and right to indicate that data is moving.
 
        -t, --timer
               Turn the timer on.  This will display the total elapsed time that pv has been running for.
 
        -e, --eta
-              Turn the ETA timer on.  This will attempt to guess, based on previous transfer rates and the total data size, how long it will be before completion.  This option  will  have  no
-              effect if the total data size cannot be determined.
+              Turn  the ETA timer on.  This will attempt to guess, based on previous transfer rates and the total data size, how long it will be before completion.  This option will have
+              no effect if the total data size cannot be determined.
 
        -I, --fineta
-              Turn  the  ETA  timer on, but display the estimated local time of arrival instead of time left.  When the estimated time is more than 6 hours in the future, the date is shown as
-              well.
+              Turn the ETA timer on, but display the estimated local time of arrival instead of time left.  When the estimated time is more than 6 hours in the future, the date is  shown
+              as well.
 
        -r, --rate
               Turn the rate counter on.  This will display the current rate of data transfer.
@@ -95,24 +96,24 @@ DISPLAY SWITCHES
               Ignore the options -p, -t, -e, -r, -a, -b, -T, and -A, and instead use the format string FORMAT to determine the output format.  See the FORMATTING section below.
 
        -n, --numeric
-              Numeric output.  Instead of giving a visual indication of progress, pv will give an integer percentage, one per line, on standard error, suitable for piping (via convoluted  re‐
-              direction) into dialog(1).  Note that -f is not required if -n is being used.
+              Numeric output.  Instead of giving a visual indication of progress, pv will give an integer percentage, one per line, on standard error, suitable for piping (via convoluted
+              redirection) into dialog(1).  Note that -f is not required if -n is being used.
 
-              Note  that  if --numeric is in use, then adding --bytes will cause the number of bytes processed so far to be output instead of a percentage; if --line-mode is also in use, then
-              instead of bytes or a percentage, the number of lines so far is output.  And finally, if --timer is also in use, then each output line is prefixed with the elapsed time so  far,
-              as a decimal number of seconds.
+              Note that if --numeric is in use, then adding --bytes will cause the number of bytes processed so far to be output instead of a percentage; if --line-mode is also  in  use,
+              then  instead  of  bytes  or a percentage, the number of lines so far is output.  And finally, if --timer is also in use, then each output line is prefixed with the elapsed
+              time so far, as a decimal number of seconds.
 
        -q, --quiet
               No output.  Useful if the -L option is being used on its own to just limit the transfer rate of a pipe.
 
 OUTPUT MODIFIERS
        -W, --wait
-              Wait  until  the first byte has been transferred before showing any progress information or calculating any ETAs.  Useful if the program you are piping to or from requires extra
-              information before it starts, eg piping data into gpg(1) or mcrypt(1) which require a passphrase before data can be processed.
+              Wait until the first byte has been transferred before showing any progress information or calculating any ETAs.  Useful if the program you are piping to  or  from  requires
+              extra information before it starts, eg piping data into gpg(1) or mcrypt(1) which require a passphrase before data can be processed.
 
        -D, --delay-start SEC
-              Wait until SEC seconds have passed before showing any progress information, for example in a script where you only want to show a progress bar if it starts taking a  long  time.
-              Note that this can be a decimal such as 0.5.
+              Wait  until  SEC  seconds have passed before showing any progress information, for example in a script where you only want to show a progress bar if it starts taking a long
+              time.  Note that this can be a decimal such as 0.5.
 
        -s SIZE, --size SIZE
               Assume the total amount of data to be transferred is SIZE bytes when calculating percentages and ETAs.  The same suffixes of "k", "m" etc can be used as with -L.
@@ -120,8 +121,8 @@ OUTPUT MODIFIERS
               Has no effect if used with -d PID to watch all file descriptors of a process, but will work with -d PID:FD.
 
        -l, --line-mode
-              Instead  of counting bytes, count lines (newline characters). The progress bar will only move when a new line is found, and the value passed to the -s option will be interpreted
-              as a line count.  Note that file sizes are not automatically calculated when this option is used, to avoid having to read all files twice.
+              Instead of counting bytes, count lines (newline characters). The progress bar will only move when a new line is found, and the value passed to the -s option will be  inter‐
+              preted as a line count.  Note that file sizes are not automatically calculated when this option is used, to avoid having to read all files twice.
 
        -0, --null
               Count lines as null terminated.  This option implies --line-mode.
@@ -142,25 +143,26 @@ OUTPUT MODIFIERS
               Force output.  Normally, pv will not output any visual display if standard error is not a terminal.  This option forces it to do so.
 
        -c, --cursor
-              Use cursor positioning escape sequences instead of just using carriage returns.  This is useful in conjunction with -N (name) if you are using multiple pv invocations in a  sin‐
-              gle, long, pipeline.
+              Use  cursor positioning escape sequences instead of just using carriage returns.  This is useful in conjunction with -N (name) if you are using multiple pv invocations in a
+              single, long, pipeline.
 
 DATA TRANSFER MODIFIERS
        -L RATE, --rate-limit RATE
               Limit the transfer to a maximum of RATE bytes per second.  A suffix of "K", "M", "G", or "T" can be added to denote kibibytes (*1024), mebibytes, and so on.
 
        -B BYTES, --buffer-size BYTES
-              Use  a  transfer  buffer  size of BYTES bytes.  A suffix of "K", "M", "G", or "T" can be added to denote kibibytes (*1024), mebibytes, and so on.  The default buffer size is the
-              block size of the input file's filesystem multiplied by 32 (512KiB max), or 400KiB if the block size cannot be determined.
+              Use a transfer buffer size of BYTES bytes.  A suffix of "K", "M", "G", or "T" can be added to denote kibibytes (*1024), mebibytes, and so on.  The default  buffer  size  is
+              the block size of the input file's filesystem multiplied by 32 (512KiB max), or 400KiB if the block size cannot be determined.
 
        -C, --no-splice
-              Never use splice(2), even if it would normally be possible.  The splice(2) system call is a more efficient way of transferring data from or to a pipe than  regular  read(2)  and
-              write(2),  but means that the transfer buffer may not be used.  This prevents -A and -T from working, so if you want to use -A or -T then you will need to use -C, at the cost of
-              a small loss in transfer efficiency.  (This option has no effect on systems where splice(2) is unavailable).
+              Never  use  splice(2), even if it would normally be possible.  The splice(2) system call is a more efficient way of transferring data from or to a pipe than regular read(2)
+              and write(2), but means that the transfer buffer may not be used.  This prevents -A and -T from working, so if you want to use -A or -T then you will need to use -C, at the
+              cost of a small loss in transfer efficiency.  (This option has no effect on systems where splice(2) is unavailable).
 
        -E, --skip-errors
-              Ignore read errors by attempting to skip past the offending sections.  The corresponding parts of the output will be null bytes.  At first only a few bytes will be skipped,  but
-              if there are many errors in a row then the skips will move up to chunks of 512.  This is intended to be similar to dd conv=sync,noerror but has not been as thoroughly tested.
+              Ignore read errors by attempting to skip past the offending sections.  The corresponding parts of the output will be null bytes.  At first only a few bytes will be skipped,
+              but if there are many errors in a row then the skips will move up to chunks of 512.  This is intended to be similar to dd conv=sync,noerror but has not been  as  thoroughly
+              tested.
 
               Specify -E twice to only report a read error once per file, instead of reporting each byte range skipped.
 
@@ -168,21 +170,21 @@ DATA TRANSFER MODIFIERS
               If a size was specified with -s, stop transferring data once that many bytes have been written, instead of continuing to the end of input.
 
        -d PID[:FD], --watchfd PID[:FD]
-              Instead  of  transferring  data,  watch  file  descriptor FD of process PID, and show its progress.  The pv process will exit when FD either changes to a different file, changes
+              Instead  of transferring data, watch file descriptor FD of process PID, and show its progress.  The pv process will exit when FD either changes to a different file, changes
               read/write mode, or is closed; other data transfer modifiers - and remote control - may not be used with this option.
 
-              If only a PID is specified, then that process will be watched, and all regular files and block devices it opens will be shown with a progress bar.  The pv process will exit when
-              process PID exits.
+              If only a PID is specified, then that process will be watched, and all regular files and block devices it opens will be shown with a progress bar.  The pv process will exit
+              when process PID exits.
 
        -R PID, --remote PID
-              If PID is an instance of pv that is already running, -R PID will cause that instance to act as though it had been given this instance's command line instead.  For example, if pv
-              -L 123K is running with process ID 9876, then running pv -R 9876 -L 321K will cause it to start using a rate limit of 321KiB instead of 123KiB.  Note that some options cannot be
-              changed while running, such as -c, -l, -f, -D, -E, and -S.
+              If  PID is an instance of pv that is already running, -R PID will cause that instance to act as though it had been given this instance's command line instead.  For example,
+              if pv -L 123K is running with process ID 9876, then running pv -R 9876 -L 321K will cause it to start using a rate limit of 321KiB instead of 123KiB.  Note  that  some  op‐
+              tions cannot be changed while running, such as -c, -l, -f, -D, -E, and -S.
 
 GENERAL OPTIONS
        -P FILE, --pidfile FILE
-              Save  the  process ID of pv in FILE.  The file will be truncated if it already exists, and will be removed when pv exits.  While pv is running, it will contain a single number -
-              the process ID of pv - followed by a newline.
+              Save  the process ID of pv in FILE.  The file will be truncated if it already exists, and will be removed when pv exits.  While pv is running, it will contain a single num‐
+              ber - the process ID of pv - followed by a newline.
 
        -h, --help
               Print a usage message on standard output and exit successfully.
@@ -207,11 +209,11 @@ FORMATTING
 
        %b     Bytes transferred so far (or lines if -l was specified).  Equivalent to -b.
 
-       %T     Percentage of the transfer buffer in use.  Equivalent to -T.  Shows "{----}" if the transfer is being done with splice(2), since splicing to or from pipes does not use the  buf‐
-              fer.
-
-       %nA    Show the last n bytes written (e.g.  %16A for the last 16 bytes).  Shows only dots if the transfer is being done with splice(2), since splicing to or from pipes does not use the
+       %T     Percentage of the transfer buffer in use.  Equivalent to -T.  Shows "{----}" if the transfer is being done with splice(2), since splicing to or from pipes does not use  the
               buffer.
+
+       %nA    Show  the  last  n bytes written (e.g.  %16A for the last 16 bytes).  Shows only dots if the transfer is being done with splice(2), since splicing to or from pipes does not
+              use the buffer.
 
        %N     Name prefix given by -N.  Padded to 9 characters with spaces, and suffixed with :.
 
@@ -258,11 +260,11 @@ AUTHOR
 KNOWN PROBLEMS
        The following problems are known to exist in pv:
 
-       *      The -c option does not work properly on Cygwin without cygserver running, if started near the bottom of the screen (IPC is needed to handle  the  terminal  scrolling).   To  fix
+       *      The -c option does not work properly on Cygwin without cygserver running, if started near the bottom of the screen (IPC is needed to handle the terminal scrolling).  To fix
               this, start cygserver before using pv -c.
 
-       *      The  -R option is not available on Cygwin without cygserver running (SYSV IPC is needed). To fix this, start cygserver before running the instance of pv you want, at runtime, to
-              change the parameters of.
+       *      The  -R  option  is not available on Cygwin without cygserver running (SYSV IPC is needed). To fix this, start cygserver before running the instance of pv you want, at run‐
+              time, to change the parameters of.
 
        If you find any other problems, please report them.
 
@@ -275,4 +277,4 @@ SEE ALSO
 LICENSE
        This is free software, distributed under the ARTISTIC 2.0 license.
 
-Linux                                                                                      June 2017                                                                                      PV(1)
+Linux                                                                                    June 2017                                                                                   PV(1)

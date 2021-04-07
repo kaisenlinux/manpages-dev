@@ -1,4 +1,4 @@
-DISLOCKER(1)                                                                               DISLOCKER                                                                               DISLOCKER(1)
+DISLOCKER(1)                                                                             DISLOCKER                                                                            DISLOCKER(1)
 
 NAME
        Dislocker-file - Read BitLocker encrypted volumes under Linux, OSX and FreeBSD.
@@ -11,8 +11,8 @@ SYNOPSIS
 DESCRIPTION
        Given a decryption mean, the program is used to decrypt BitLocker encrypted volumes.
 
-       This  process may take a very long time, depending on the initial volume size, as the program will decrypt the encrypted partition linearly. About this size, note that the created NTFS
-       file will be of the same size as the BitLocker encrypted partition, so you may want to check that you have enough free space on the volume where you put the NTFS file.
+       This  process may take a very long time, depending on the initial volume size, as the program will decrypt the encrypted partition linearly. About this size, note that the created
+       NTFS file will be of the same size as the BitLocker encrypted partition, so you may want to check that you have enough free space on the volume where you put the NTFS file.
 
        This NTFS file won't have any link with the original BitLocker encrypted partition, so you may modify it to suit your needs.
 
@@ -48,4 +48,4 @@ AUTHOR
 
        Feel free to send bugs report to <dislocker __AT__ hsc __DOT__ fr>
 
-Linux                                                                                      2011-09-07                                                                              DISLOCKER(1)
+Linux                                                                                   2011-09-07                                                                            DISLOCKER(1)

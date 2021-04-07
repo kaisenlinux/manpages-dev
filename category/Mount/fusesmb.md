@@ -1,4 +1,4 @@
-FUSESMB(1)                                                                          General Commands Manual                                                                          FUSESMB(1)
+FUSESMB(1)                                                                        General Commands Manual                                                                       FUSESMB(1)
 
 NAME
        fusesmb - Mount network neighbourhood
@@ -7,8 +7,8 @@ SYNOPSIS
        fusesmb mountpoint [options]
 
 DESCRIPTION
-       fusesmb is a Network Neighborhood (Samba shares) filesystem. It works like smbfs, but instead of accessing one share at a time, all computers and workgroups are accessible at once from
-       a single filesystem mount.
+       fusesmb is a Network Neighborhood (Samba shares) filesystem. It works like smbfs, but instead of accessing one share at a time, all computers and workgroups are accessible at once
+       from a single filesystem mount.
 
 OPTIONS
        fusesmb accepts the following options:
@@ -28,4 +28,4 @@ SEE ALSO
 AUTHOR
        Vincent Wagelaar <vincent@ricardis.tudelft.nl>.
 
-                                                                                         August 5, 2005                                                                              FUSESMB(1)
+                                                                                      August 5, 2005                                                                            FUSESMB(1)

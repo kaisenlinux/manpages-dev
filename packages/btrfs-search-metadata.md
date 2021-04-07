@@ -1,4 +1,4 @@
-BTRFS-SEARCH-METADATA(1)                                                             Btrfs Search Metadata                                                             BTRFS-SEARCH-METADATA(1)
+BTRFS-SEARCH-METADATA(1)                                                           Btrfs Search Metadata                                                          BTRFS-SEARCH-METADATA(1)
 
 NAME
        btrfs-search-metadata - lookup btrfs metadata
@@ -7,8 +7,8 @@ SYNOPSIS
        btrfs-search-metadata <subcommand> <args>
 
 DESCRIPTION
-       The btrfs-search-metadata program can be used to execute search queries in order to look up metadata items of an online, mounted btrfs filesystem.  Unlike the btrfs inspect-internal
-       dump-tree command, which directly reads from disk, btrfs-search-metadata only uses the kernel SEARCH ioctl function.
+       The btrfs-search-metadata program can be used to execute search queries in order to look up metadata items of an online, mounted btrfs filesystem.  Unlike the btrfs inspect-
+       internal dump-tree command, which directly reads from disk, btrfs-search-metadata only uses the kernel SEARCH ioctl function.
 
        Besides being able to get any metadata slice from any tree, there are a number of convenience presets that execute predefined search queries.
 
@@ -47,16 +47,16 @@ SUBCOMMANDS
            subcommand does is searching with min-key '(<inum> 0 0)' and max-key '(<inum> -1 -1)'
 
        block_group_contents --vaddr <vaddr> <path>
-           Dump the contents of a block group (from the extent tree) from the specified virtual address of the start of the block group to its end. Use the block_groups subcommand to list
-           block group addresses.
+           Dump the contents of a block group (from the extent tree) from the specified virtual address of the start of the block group to its end. Use the block_groups subcommand to
+           list block group addresses.
 
        block_group_free_space --vaddr <vaddr> <path>
-           Dump the free space extents for a block group (from the free space tree) for the block group at the specified virtual address. Use the block_groups subcommand to list block group
-           addresses.
+           Dump the free space extents for a block group (from the free space tree) for the block group at the specified virtual address. Use the block_groups subcommand to list block
+           group addresses.
 
 SEE ALSO
        This program is an example of what can be done using the python-btrfs library.
 
        Source and documentation on github: https://github.com/knorrie/python-btrfs
 
-                                                                                              2020                                                                     BTRFS-SEARCH-METADATA(1)
+                                                                                           2020                                                                   BTRFS-SEARCH-METADATA(1)

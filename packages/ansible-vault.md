@@ -1,4 +1,4 @@
-ANSIBLE-VAULT(1)                                                                 System administration commands                                                                ANSIBLE-VAULT(1)
+ANSIBLE-VAULT(1)                                                              System administration commands                                                              ANSIBLE-VAULT(1)
 
 NAME
        ansible-vault - encryption/decryption utility for Ansible data files
@@ -8,11 +8,11 @@ SYNOPSIS
               {create,decrypt,edit,view,encrypt,encrypt_string,rekey} ...
 
 DESCRIPTION
-       can encrypt any structured data file used by Ansible.  This can include group_vars/ or host_vars/ inventory variables, variables loaded by include_vars or vars_files, or variable files
-       passed on the ansible-playbook command line with -e @file.yml or -e @file.json.  Role variables and defaults are also included!
+       can  encrypt any structured data file used by Ansible.  This can include group_vars/ or host_vars/ inventory variables, variables loaded by include_vars or vars_files, or variable
+       files passed on the ansible-playbook command line with -e @file.yml or -e @file.json.  Role variables and defaults are also included!
 
-       Because Ansible tasks, handlers, and other objects are data, these can also be encrypted with vault.  If you'd like to not expose what variables you are using, you can keep an individ‐
-       ual task file entirely encrypted.
+       Because Ansible tasks, handlers, and other objects are data, these can also be encrypted with vault.  If you'd like to not expose what variables you are using, you can keep an in‐
+       dividual task file entirely encrypted.
 
 COMMON OPTIONS
        --version
@@ -171,7 +171,7 @@ COPYRIGHT
 SEE ALSO
        ansible (1), ansible-config (1), ansible-console (1), ansible-doc (1), ansible-galaxy (1), ansible-inventory (1), ansible-playbook (1), ansible-pull (1),
 
-       Extensive  documentation  is  available  in  the  documentation  site:  <https://docs.ansible.com>.   IRC  and  mailing list info can be found in file CONTRIBUTING.md, available in: <‐
+       Extensive  documentation  is  available  in  the  documentation site: <https://docs.ansible.com>.  IRC and mailing list info can be found in file CONTRIBUTING.md, available in: <‐
        https://github.com/ansible/ansible>
 
-Ansible 2.9.16                                                                                                                                                                 ANSIBLE-VAULT(1)
+Ansible 2.9.16                                                                                                                                                            ANSIBLE-VAULT(1)

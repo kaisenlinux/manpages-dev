@@ -1,4 +1,4 @@
-IOPING(1)                                                                                User Commands                                                                                IOPING(1)
+IOPING(1)                                                                              User Commands                                                                             IOPING(1)
 
 NAME
        ioping - simple disk I/O latency monitoring tool
@@ -76,8 +76,8 @@ OPTIONS
               increases default working set size to 64m (-work-size 64m).  Working set (-work-size) should be increased accordingly if disk has huge hardware cache.
 
        -W, -write
-              Use writes rather than reads. Safe for temporary file in directory target.  Write I/O gives more reliable results for systems where non-cached reads are not supported or cached
-              at some level.
+              Use writes rather than reads. Safe for temporary file in directory target.  Write I/O gives more reliable results for systems where non-cached reads are not supported or
+              cached at some level.
 
               Might be *DANGEROUS* for file/device: it will shred your data.  In this case should be repeated three times (-WWW).
 
@@ -202,4 +202,4 @@ AUTHORS
        This program was written by Konstantin Khlebnikov ⟨koct9i@gmail.com⟩.
        Man-page was written by Kir Kolyshkin ⟨kir@openvz.org⟩.
 
-                                                                                            Oct 2014                                                                                  IOPING(1)
+                                                                                         Oct 2014                                                                                IOPING(1)

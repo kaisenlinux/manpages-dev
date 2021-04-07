@@ -1,4 +1,4 @@
-PROGRESS(1)                                                                         General Commands Manual                                                                         PROGRESS(1)
+PROGRESS(1)                                                                       General Commands Manual                                                                      PROGRESS(1)
 
 NAME
        progress - Coreutils Progress Viewer
@@ -11,8 +11,8 @@ SYNOPSIS
 DESCRIPTION
        This manual page briefly documents the progress command.
 
-       This tool can be described as a Tiny, Dirty, Linux-Only C command that looks for coreutils basic commands (cp, mv, dd, tar, gzip/gunzip, cat, etc.) currently running on your system and
-       displays the percentage of copied data.
+       This  tool can be described as a Tiny, Dirty, Linux-Only C command that looks for coreutils basic commands (cp, mv, dd, tar, gzip/gunzip, cat, etc.) currently running on your sys‐
+       tem and displays the percentage of copied data.
 
        It can now also estimate throughput (using flag -w).
 
@@ -45,7 +45,8 @@ OPTIONS
               monitor only this numeric process ID (ex: `pidof firefox`). This option can be used multiple times on the command line.
 
        -i (--ignore-file file)
-              do not report a process for 'file'. If the file does not exist yet, you must give a full and clean absolute path. This option can be used multiple times on the command line.
+              do not report a process for 'file'. If the file does not exist yet, you must give a full and clean absolute path. This option can be used  multiple  times  on  the  command
+              line.
 
        -o (--open-mode {r|w})
               report only files opened for read or write by the process. This option is useful when you want to monitor only output files (or input ones) of a process.
@@ -89,4 +90,4 @@ HOMEPAGE
 AUTHOR
        This manual page was written by Thomas Zimmermann <bugs@vdm-design.de>, for the openSUSE project (and may be used by others).
 
-progress                                                                                January 22, 2016                                                                            PROGRESS(1)
+progress                                                                             January 22, 2016                                                                          PROGRESS(1)

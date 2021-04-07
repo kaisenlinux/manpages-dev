@@ -1,4 +1,4 @@
-DISLOCKER-FUSE(1)                                                                        DISLOCKER-FUSE                                                                       DISLOCKER-FUSE(1)
+DISLOCKER-FUSE(1)                                                                     DISLOCKER-FUSE                                                                     DISLOCKER-FUSE(1)
 
 NAME
        Dislocker-fuse - Read/write BitLocker encrypted volumes under Linux, OSX and FreeBSD.
@@ -9,11 +9,11 @@ SYNOPSIS
        Where DECRYPTMETHOD = {-p[RECOVERY_PASSWORD] | -f BEK_FILE | -u[USER_PASSWORD] | -k FVEK_FILE | -K VMK_FILE | -c}
 
 DESCRIPTION
-       Given a decryption mean, the program is used to read or write BitLocker encrypted volumes. Technically, the program will create a virtual NTFS partition that you can mount as any other
-       NTFS partition.
+       Given  a decryption mean, the program is used to read or write BitLocker encrypted volumes. Technically, the program will create a virtual NTFS partition that you can mount as any
+       other NTFS partition.
 
-       The virtual partition is linked to the underlying BitLocker volume, so any write to this volume is put on the BitLocker volume as well. However, you can use dd(1) to get  rid  of  this
-       limitation -- if it's a limitation for you. An example is provided in the EXAMPLES section of this man page.
+       The virtual partition is linked to the underlying BitLocker volume, so any write to this volume is put on the BitLocker volume as well. However, you can use dd(1) to  get  rid  of
+       this limitation -- if it's a limitation for you. An example is provided in the EXAMPLES section of this man page.
 
 OPTIONS
        Program's options are described below:
@@ -39,12 +39,12 @@ OPTIONS
               put messages into this file (stdout by default)
 
        -O, --offset OFFSET
-              BitLocker  partition offset, in bytes, in base 10 (default is 0).  Protip: in your shell, you probably can pass -O $((0xdeadbeef)) if you have a 16-based number and are too lazy
-              to convert it in another way.
+              BitLocker  partition offset, in bytes, in base 10 (default is 0).  Protip: in your shell, you probably can pass -O $((0xdeadbeef)) if you have a 16-based number and are too
+              lazy to convert it in another way.
 
        -p, --recovery-password=[RECOVERY_PASSWORD]
-              decrypt volume using the recovery password method.  If no recovery-password is provided, it will be asked afterward; this has the advantage that the program will  validate  each
-              block one by one, on the fly, as you type it and not to leak the password on the commandline
+              decrypt volume using the recovery password method.  If no recovery-password is provided, it will be asked afterward; this has the advantage that the program  will  validate
+              each block one by one, on the fly, as you type it and not to leak the password on the commandline
 
        -q, --quiet
               do NOT display any information.  This option has priority on any previous `-v'. One probably wants to check the return value of the program when using this option
@@ -56,8 +56,8 @@ OPTIONS
               do not check the volume's state, assume it's ok to mount it.  Do not use this if you don't know what you're doing
 
        -u, --user-password=[USER_PASSWORD]
-              decrypt  the volume using the user password method.  If no user-password is provided, it will be asked afterward; this has the advantage not to leak the password on the command‐
-              line
+              decrypt the volume using the user password method.  If no user-password is provided, it will be asked afterward; this has the advantage not to leak the password on the com‐
+              mandline
 
        -v, --verbosity
               increase verbosity (CRITICAL level by default), see also `-q'
@@ -82,8 +82,8 @@ EXAMPLES
 
               % dd if=/dev/sda2 of=encrypted.bitlocker
 
-              This will copy the entire volume located into /dev/sda2 to encrypted.bitlocker.  You're not forced to do this step, but this will ensure no write whatsoever is performed on  the
-              BitLocker volume.
+              This will copy the entire volume located into /dev/sda2 to encrypted.bitlocker.  You're not forced to do this step, but this will ensure no write whatsoever is performed on
+              the BitLocker volume.
 
        Then dislock it:
 
@@ -96,8 +96,8 @@ EXAMPLES
 
        --
 
-       It  seems  that  you have to unmount the NTFS partition and the dislocker one before halting the system, or you will run into unexpected behaviour. In order to do so, you may run these
-       commands (replacing your mount points):
+       It  seems  that  you  have to unmount the NTFS partition and the dislocker one before halting the system, or you will run into unexpected behaviour. In order to do so, you may run
+       these commands (replacing your mount points):
               % umount /mnt/clear && umount /mnt/ntfs/dislocker-file
 
        --
@@ -109,4 +109,4 @@ AUTHOR
 
        Feel free to send bugs report to <dislocker __AT__ hsc __DOT__ fr>
 
-Linux                                                                                      2011-09-07                                                                         DISLOCKER-FUSE(1)
+Linux                                                                                   2011-09-07                                                                       DISLOCKER-FUSE(1)

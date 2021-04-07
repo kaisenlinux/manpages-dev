@@ -1,4 +1,4 @@
-DNSENUM(1)                                                                    User Contributed Perl Documentation                                                                    DNSENUM(1)
+DNSENUM(1)                                                                  User Contributed Perl Documentation                                                                 DNSENUM(1)
 
 NAME
        dnsenum -- multithread script to enumerate information on a domain and to discover non-contiguous IP blocks
@@ -91,8 +91,8 @@ OPTIONS
            -r,  --recursion              Recursion on subdomains, brute force all discovered subdomains
                                           that have an NS record.
 
-          NOTES: To perform recursion first we must check previous subdomains results (zonetransfer, google scraping and brute force) for NS records after that we perform brute force on valid
-          subdomains that have NS records and so on. NS, MX and reverse lookup results are not concerned.
+          NOTES: To perform recursion first we must check previous subdomains results (zonetransfer, google scraping and brute force) for NS records after that we perform brute force on
+          valid subdomains that have NS records and so on. NS, MX and reverse lookup results are not concerned.
 
    WHOIS IP OPTIONS:
        Perform whois ip queries on c class netanges discovered from previous operations.
@@ -106,8 +106,8 @@ OPTIONS
                                           Warning: this can generate very large netranges and it
                                           will take lot of time to perform reverse lookups.
 
-          NOTES: The whois query should recursively query the various whois providers until it gets the more detailed information including either TechPhone or OrgTechPhone by default. See:
-          perldoc Net::Whois::IP.  On errors the netrange will be a default c class /24.
+          NOTES: The whois query should recursively query the various whois providers until it gets the more detailed information including either TechPhone or OrgTechPhone by default.
+          See: perldoc Net::Whois::IP.  On errors the netrange will be a default c class /24.
 
    REVERSE LOOKUP OPTIONS:
            -e,  --exclude <regexp>       Exclude PTR records that match the regexp expression from reverse
@@ -147,10 +147,10 @@ MAINTAINER
        Network Silence
 
 COPYRIGHT
-       This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2
-       of the License, or (at your option) any later version.
+       This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either
+       version 2 of the License, or (at your option) any later version.
 
 SCRIPT CATEGORIES
        Networking DNS
 
-perl v5.30.3                                                                               2020-09-17                                                                                DNSENUM(1)
+perl v5.30.3                                                                            2020-09-17                                                                              DNSENUM(1)

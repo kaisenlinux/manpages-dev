@@ -1,4 +1,4 @@
-ATFTP(1)                                                                            General Commands Manual                                                                            ATFTP(1)
+ATFTP(1)                                                                          General Commands Manual                                                                         ATFTP(1)
 
 NAME
        atftp - TFTP client (RFC1350).
@@ -7,12 +7,12 @@ SYNOPSIS
        atftp [options] [host [port]]
 
 DESCRIPTION
-       atftp  can  be  used  interactively  or in batch mode to retrieve files from TFTP servers. When used interactively, a summary of the commands can be printed by typing 'help'. This TFTP
+       atftp can be used interactively or in batch mode to retrieve files from TFTP servers. When used interactively, a summary of the commands can be printed by typing 'help'. This TFTP
        client support all basic features from RFC1350, RFC2347, RFC2348 and RFC2349. It also support multicast implementation of RFC2090 and mtftp as defined in the PXE specification.
 
 OPTIONS
-       This program supports both the usual GNU command line syntax, with long options starting with two dashes ('--') as well as short options. Some options are usable in  batch  mode  only,
-       they have no meaning when atftp is use interactively. A description of the options is shown below.
+       This program supports both the usual GNU command line syntax, with long options starting with two dashes ('--') as well as short options. Some options are  usable  in  batch  mode
+       only, they have no meaning when atftp is use interactively. A description of the options is shown below.
 
        -g, --get
               Non interactive invocation only. Instruct atftp to fetch a file from a tftp server.
@@ -63,4 +63,4 @@ OPTIONS
 AUTHOR
        This manual page was written by Remi Lefebvre <remi@debian.org> and Jean-Pierre Lefebvre <helix@step.polymtl.ca>.
 
-                                                                                       December 27, 2000                                                                               ATFTP(1)
+                                                                                     December 27, 2000                                                                            ATFTP(1)

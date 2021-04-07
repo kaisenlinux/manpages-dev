@@ -1,19 +1,19 @@
-PARTCLONE(8)                                                                         Partclone User Manual                                                                         PARTCLONE(8)
+PARTCLONE(8)                                                                       Partclone User Manual                                                                      PARTCLONE(8)
 
 NAME
        partclone - The utility for clone and restore a partition.
 
 SYNOPSIS
-       partclone.[fstype] {[-c | --clone] [-r | --restore] [-b | --dev-to-dev]} {[-s | --source] source} {[[-o | --output] [-O | --overwrite]] target} [[-dX | --debug=X] [--restore_raw_file]]
-                          [[-z | --buffer_size] [-N | --ncurses]] [[-q | --quiet] [-f | --UI-fresh]] [[-F | --force] [-I | --ignore_fschk]] [[--ignore_crc] [-X | --dialog] [-C | --nocheck]]
-                          [[-R | --rescue] [-L | --logfile] logfile]
+       partclone.[fstype] {[-c | --clone] [-r | --restore] [-b | --dev-to-dev]} {[-s | --source] source} {[[-o | --output] [-O | --overwrite]] target}
+                          [[-dX | --debug=X] [--restore_raw_file]] [[-z | --buffer_size] [-N | --ncurses]] [[-q | --quiet] [-f | --UI-fresh]] [[-F | --force] [-I | --ignore_fschk]]
+                          [[--ignore_crc] [-X | --dialog] [-C | --nocheck]] [[-R | --rescue] [-L | --logfile] logfile]
 
 DESCRIPTION
-       partclone.[fstype] is a part of Partclone project. Partclone provide utilities to backup used blocks and design for higher compatibility of the file system by using existing library,
-       e.g. e2fslibs is used to read the used block of ext2 partition.
+       partclone.[fstype] is a part of Partclone project. Partclone provide utilities to backup used blocks and design for higher compatibility of the file system by using existing
+       library, e.g. e2fslibs is used to read the used block of ext2 partition.
 
-       Partclone supported file system include btrfs, ext2, ext3, ext4, reiserfs, reiser4, xfs and jfs for LINUX. Also support some non-linux operation system, ex: NTFS, FAT and EXFAT(for
-       Windows), HFS plus(APPLE MAC OS), UFS2(FreeBSD), VMFS(VMWare Vsphere) and MINIX(MINIX3).
+       Partclone supported file system include btrfs, ext2, ext3, ext4, reiserfs, reiser4, xfs and jfs for LINUX. Also support some non-linux operation system, ex: NTFS, FAT and
+       EXFAT(for Windows), HFS plus(APPLE MAC OS), UFS2(FreeBSD), VMFS(VMWare Vsphere) and MINIX(MINIX3).
 
        All partclone utils could be run like partclone.[fstype] is very smiliar fsck or mkfs. For example, for backup/restore hfsplus, just run partclone.hfsp
 
@@ -153,9 +153,9 @@ COPYRIGHT
 
        This manual page was written for the Debian system (and may be used by others).
 
-       Permission is granted to copy, distribute and/or modify this document under the terms of the GNU General Public License, Version 2 or (at your option) any later version published by
-       the Free Software Foundation.
+       Permission is granted to copy, distribute and/or modify this document under the terms of the GNU General Public License, Version 2 or (at your option) any later version published
+       by the Free Software Foundation.
 
        On Debian systems, the complete text of the GNU General Public License can be found in /usr/share/common-licenses/GPL.
 
-partclone                                                                                  12/24/2015                                                                              PARTCLONE(8)
+partclone                                                                               12/24/2015                                                                            PARTCLONE(8)

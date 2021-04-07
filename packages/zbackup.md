@@ -1,4 +1,4 @@
-zbackup(1)                                                                          General Commands Manual                                                                          zbackup(1)
+zbackup(1)                                                                        General Commands Manual                                                                       zbackup(1)
 
 NAME
        zbackup - versatile deduplicating backup tool
@@ -45,4 +45,4 @@ AUTHOR
 SEE ALSO
        tar(1) zbackup(5)
 
-                                                                                                                                                                                     zbackup(1)
+                                                                                                                                                                                zbackup(1)

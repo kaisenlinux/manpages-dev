@@ -1,5 +1,5 @@
 
-gluster-setgfid2path(8)                                                             System Manager's Manual                                                             gluster-setgfid2path(8)
+gluster-setgfid2path(8)                                                           System Manager's Manual                                                          gluster-setgfid2path(8)
 
 NAME
        gluster-setgfid2path - Gluster tool to set GFID to Path xattrs
@@ -8,11 +8,11 @@ SYNOPSIS
        gluster-setgfid2path file
 
 DESCRIPTION
-       New  feature  introduced with Gluster release 3.12, to find full path from GFID.  This feature can be enabled using Volume set command gluster volume set <VOLUME> storage.gfid2path en‐
-       able
+       New  feature introduced with Gluster release 3.12, to find full path from GFID.  This feature can be enabled using Volume set command gluster volume set <VOLUME> storage.gfid2path
+       enable
 
-       Once gfid2path feature is enabled, it starts recording the necessary xattrs required for the feature. But it will not add xattrs for the already existing files. This tool provides  fa‐
-       cility to update the gfid2path xattrs for the given file path.
+       Once gfid2path feature is enabled, it starts recording the necessary xattrs required for the feature. But it will not add xattrs for the already existing files. This tool provides
+       facility to update the gfid2path xattrs for the given file path.
 
 EXAMPLES
        To add xattrs of a single file,
@@ -32,4 +32,4 @@ SEE ALSO
 COPYRIGHT
        Copyright(c) 2017   Red Hat, Inc.   <http://www.redhat.com>
 
-                                                                        Command line utility to set GFID to Path Xattrs                                                 gluster-setgfid2path(8)
+                                                                      Command line utility to set GFID to Path Xattrs                                              gluster-setgfid2path(8)

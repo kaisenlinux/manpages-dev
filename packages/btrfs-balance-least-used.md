@@ -1,4 +1,4 @@
-BTRFS-BALANCE-LEAST-USED(1)                                                  Btrfs Balance Least Used Block Groups                                                  BTRFS-BALANCE-LEAST-USED(1)
+BTRFS-BALANCE-LEAST-USED(1)                                                Btrfs Balance Least Used Block Groups                                               BTRFS-BALANCE-LEAST-USED(1)
 
 NAME
        btrfs-balance-least-used - Feed least used data block groups to btrfs balance first.
@@ -7,15 +7,15 @@ SYNOPSIS
        btrfs-balance-least-used [args] mountpoint
 
 DESCRIPTION
-       The btrfs-balance-least-used program is an example of a user space defined way to implement btrfs balance filters. It looks at the data block groups present in the file system and asks
-       btrfs to empty them in order of actual usage, lowest usage first.
+       The btrfs-balance-least-used program is an example of a user space defined way to implement btrfs balance filters. It looks at the data block groups present in the file system and
+       asks btrfs to empty them in order of actual usage, lowest usage first.
 
-       In most cases (when not being in the process of conversion between block group profiles) this will result in the most optimal and quickest way to reclaim physical disk space because
-       data will be rewritten into empty space into already existing block groups.
+       In most cases (when not being in the process of conversion between block group profiles) this will result in the most optimal and quickest way to reclaim physical disk space
+       because data will be rewritten into empty space into already existing block groups.
 
-       What btrfs balance effectively does is just taking the data and feeding it back to the allocator of the filesystem as new writes, blacklisting their current location. Implementing user
-       space balance filters can result in a higly optimized workflow to reclaim physical space, or to minimize the amount of data that has to be rewritten to rebalance complex filesystems
-       with multiple devices.
+       What btrfs balance effectively does is just taking the data and feeding it back to the allocator of the filesystem as new writes, blacklisting their current location. Implementing
+       user space balance filters can result in a higly optimized workflow to reclaim physical space, or to minimize the amount of data that has to be rewritten to rebalance complex
+       filesystems with multiple devices.
 
        Usage of btrfs-balance-least-used can replace repeated invocations of btrfs balance with increased usage values. Additionally, the program will show live progress of the balance
        operation.
@@ -38,8 +38,8 @@ DESCRIPTION
 
        This clearly shows that balance packs data into existing other block groups, since the total amount of block groups is going down all the time.
 
-       Also, along the way we see that usage of block groups we found when starting has gone up, so if they're still in the usage range, we just postpone them again, throwing them back into
-       the work queue. If their usage has gone up above the usage limit, ignore them.
+       Also, along the way we see that usage of block groups we found when starting has gone up, so if they're still in the usage range, we just postpone them again, throwing them back
+       into the work queue. If their usage has gone up above the usage limit, ignore them.
 
        When there's nothing to do, the output reports the lowest used_pct found:
 
@@ -59,4 +59,4 @@ SEE ALSO
 
        Source and documentation on github: https://github.com/knorrie/python-btrfs
 
-                                                                                              2017                                                                  BTRFS-BALANCE-LEAST-USED(1)
+                                                                                           2017                                                                BTRFS-BALANCE-LEAST-USED(1)

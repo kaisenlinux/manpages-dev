@@ -1,4 +1,4 @@
-BTRFS-CONVERT(8)                                                                          Btrfs Manual                                                                         BTRFS-CONVERT(8)
+BTRFS-CONVERT(8)                                                                       Btrfs Manual                                                                       BTRFS-CONVERT(8)
 
 NAME
        btrfs-convert - convert from ext2/3/4 or reiserfs filesystem to btrfs in-place
@@ -7,8 +7,8 @@ SYNOPSIS
        btrfs-convert [options] <device>
 
 DESCRIPTION
-       btrfs-convert is used to convert existing source filesystem image to a btrfs filesystem in-place. The original filesystem image is accessible in subvolume named like ext2_saved as file
-       image.
+       btrfs-convert is used to convert existing source filesystem image to a btrfs filesystem in-place. The original filesystem image is accessible in subvolume named like ext2_saved as
+       file image.
 
        Supported filesystems:
 
@@ -19,17 +19,17 @@ DESCRIPTION
        The list of supported source filesystem by a given binary is listed at the end of help (option --help).
 
            Warning
-           If you are going to perform rollback to the original filesystem, you should not execute btrfs balance command on the converted filesystem. This will change the extent layout and
-           make btrfs-convert unable to rollback.
+           If you are going to perform rollback to the original filesystem, you should not execute btrfs balance command on the converted filesystem. This will change the extent layout
+           and make btrfs-convert unable to rollback.
 
-       The conversion utilizes free space of the original filesystem. The exact estimate of the required space cannot be foretold. The final btrfs metadata might occupy several gigabytes on a
-       hundreds-gigabyte filesystem.
+       The conversion utilizes free space of the original filesystem. The exact estimate of the required space cannot be foretold. The final btrfs metadata might occupy several gigabytes
+       on a hundreds-gigabyte filesystem.
 
-       If the ability to rollback is no longer important, the it is recommended to perform a few more steps to transition the btrfs filesystem to a more compact layout. This is because the
-       conversion inherits the original data blocks' fragmentation, and also because the metadata blocks are bound to the original free space layout.
+       If the ability to rollback is no longer important, the it is recommended to perform a few more steps to transition the btrfs filesystem to a more compact layout. This is because
+       the conversion inherits the original data blocks' fragmentation, and also because the metadata blocks are bound to the original free space layout.
 
-       Due to different constraints, it is only possible to convert filesystems that have a supported data block size (ie. the same that would be valid for mkfs.btrfs). This is typically the
-       system page size (4KiB on x86_64 machines).
+       Due to different constraints, it is only possible to convert filesystems that have a supported data block size (ie. the same that would be valid for mkfs.btrfs). This is typically
+       the system page size (4KiB on x86_64 machines).
 
            Note
            The source filesystem should be clean, you are encouraged to run the fsck tool if you’re not sure.
@@ -54,8 +54,9 @@ DESCRIPTION
 
        Optional but recommended step.
 
-       The metadata block groups after conversion may be smaller than the default size (256MiB or 1GiB). Running a balance will attempt to merge the block groups. This depends on the free
-       space layout (and fragmentation) and may fail due to lack of enough work space. This is a soft error leaving the filesystem usable but the block group layout may remain unchanged.
+       The metadata block groups after conversion may be smaller than the default size (256MiB or 1GiB). Running a balance will attempt to merge the block groups. This depends on the
+       free space layout (and fragmentation) and may fail due to lack of enough work space. This is a soft error leaving the filesystem usable but the block group layout may remain
+       unchanged.
 
        Note that balance operation takes a lot of time, please see also btrfs-balance(8).
 
@@ -75,8 +76,8 @@ OPTIONS
            disable inlining of small files to metadata blocks, this will decrease the metadata consumption and may help to convert a filesystem with low free space
 
        -N|--nodesize <SIZE>
-           set filesystem nodesize, the tree block size in which btrfs stores its metadata. The default value is 16KB (16384) or the page size, whichever is bigger. Must be a multiple of the
-           sectorsize, but not larger than 65536. See mkfs.btrfs(8) for more details.
+           set filesystem nodesize, the tree block size in which btrfs stores its metadata. The default value is 16KB (16384) or the page size, whichever is bigger. Must be a multiple of
+           the sectorsize, but not larger than 65536. See mkfs.btrfs(8) for more details.
 
        -r|--rollback
            rollback to the original ext2/3/4 filesystem if possible
@@ -88,8 +89,8 @@ OPTIONS
            use label from the converted filesystem
 
        -O|--features <feature1>[,<feature2>...]
-           A list of filesystem features enabled the at time of conversion. Not all features are supported by old kernels. To disable a feature, prefix it with ^. Description of the features
-           is in section FILESYSTEM FEATURES of mkfs.btrfs(8).
+           A list of filesystem features enabled the at time of conversion. Not all features are supported by old kernels. To disable a feature, prefix it with ^. Description of the
+           features is in section FILESYSTEM FEATURES of mkfs.btrfs(8).
 
            To see all available features that btrfs-convert supports run:
 
@@ -107,4 +108,4 @@ EXIT STATUS
 SEE ALSO
        mkfs.btrfs(8)
 
-Btrfs v5.10.1                                                                              02/05/2021                                                                          BTRFS-CONVERT(8)
+Btrfs v5.10.1                                                                           02/05/2021                                                                        BTRFS-CONVERT(8)

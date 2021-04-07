@@ -1,4 +1,4 @@
-ZFS-FUSE(8)                                                                             [FIXME: manual]                                                                             ZFS-FUSE(8)
+ZFS-FUSE(8)                                                                           [FIXME: manual]                                                                          ZFS-FUSE(8)
 
 NAME
        zfs-fuse - ZFS filesystem daemon
@@ -13,8 +13,8 @@ DESCRIPTION
        zfs-fuse is a daemon which provides support for the ZFS filesystem, via fuse. Ordinarily this daemon will be invoked from system boot scripts.
 
 OPTIONS
-       This program follows the usual GNU command line syntax, with long options starting with two dashes (`-'). A summary of options is included below. For a complete description, see the
-       Info files.
+       This program follows the usual GNU command line syntax, with long options starting with two dashes (`-'). A summary of options is included below. For a complete description, see
+       the Info files.
 
        -h --help
            Show summary of options.
@@ -84,14 +84,15 @@ SEE ALSO
 
 AUTHOR
        This manual page was written by Bryan Donlan bdonlan@gmail.com for the Debian(TM) system (but may be used by others). Permission is granted to copy, distribute and/or modify this
-       document under the terms of the GNU General Public License, Version 2 any later version published by the Free Software Foundation, or the Common Development and Distribution License.
+       document under the terms of the GNU General Public License, Version 2 any later version published by the Free Software Foundation, or the Common Development and Distribution
+       License.
 
        Revised by Seth Heeren zfs-fuse@sehe.nl
 
-       On Debian systems, the complete text of the GNU General Public License can be found in /usr/share/common-licenses/GPL. The text of the Common Development and Distribution Licence may
-       be found at /usr/share/doc/zfs-fuse/copyright
+       On Debian systems, the complete text of the GNU General Public License can be found in /usr/share/common-licenses/GPL. The text of the Common Development and Distribution Licence
+       may be found at /usr/share/doc/zfs-fuse/copyright
 
 COPYRIGHT
        Copyright © 2010 Bryan Donlan
 
-[FIXME: source]                                                                            2010-06-09                                                                               ZFS-FUSE(8)
+[FIXME: source]                                                                         2010-06-09                                                                             ZFS-FUSE(8)

@@ -1,4 +1,4 @@
-IFSTAT(1)                                                                               System Utilities                                                                              IFSTAT(1)
+IFSTAT(1)                                                                            System Utilities                                                                            IFSTAT(1)
 
 NAME
        ifstat - Report InterFace STATistics
@@ -18,8 +18,8 @@ OPTIONS
 
        -z  Hides interface which counters are null, eg interfaces that are up but not used.
 
-       -i  Specifies the list of interfaces to monitor, separated by commas (if an interface name has a comma, it can be escaped with '\'). Multiple instances of the options are added to‐
-           gether.
+       -i  Specifies the list of interfaces to monitor, separated by commas (if an interface name has a comma, it can be escaped with '\'). Multiple instances of the options are added
+           together.
 
        -s  Equivalent to -d snmp:[comm@][#]host[/nn]] to poll a remote host through SNMP. See below for details.
 
@@ -31,9 +31,9 @@ OPTIONS
 
        -T  Reports total bandwith for all monitored interfaces.
 
-       -A  Disables use of interface indexes: by default, when polling mechanism is index based (snmp, ifmib), ifstat remembers indexes of monitored interfaces to poll only them. However, if
-           interfaces indexes change often (new interfaces added, etc), you might loose some stats, hence this flag. Note that if you ask ifstat to monitor a non existent interface, it will
-           poll all interfaces until it finds the requested one (regardless of this flag) so you can poll for an interface that goes up and down.
+       -A  Disables use of interface indexes: by default, when polling mechanism is index based (snmp, ifmib), ifstat remembers indexes of monitored interfaces to poll only them. How‐
+           ever, if interfaces indexes change often (new interfaces added, etc), you might loose some stats, hence this flag. Note that if you ask ifstat to monitor a non existent inter‐
+           face, it will poll all interfaces until it finds the requested one (regardless of this flag) so you can poll for an interface that goes up and down.
 
        -w  Uses fixed width columns, instead of enlarging them if needed for interfaces names to fit.
 
@@ -47,8 +47,8 @@ OPTIONS
 
        -v  Displays version and the compiled-in drivers.
 
-       -d  Specifies a driver to use to gather stats and an eventual option for this driver separated of the driver name by a colon. If this is not specified, ifstat uses the first driver
-           compiled in, with no options.
+       -d  Specifies a driver to use to gather stats and an eventual option for this driver separated of the driver name by a colon. If this is not specified, ifstat uses the first
+           driver compiled in, with no options.
 
            The following drivers are available (depending on the operating system and compile-time options, not all of them might be present):
 
@@ -81,19 +81,19 @@ OPTIONS
                This driver gets statistics using the GetIfTable interface available on Win32 systems. It doesn't accept any options.
 
            snmp
-               This driver gets statistics through SNMP. The option, in the form [comm@][#]host[/nn]], specifies the host and eventual community to poll. Default community is public, but can
-               be changed by prepending "comm@" to the hostname. If host starts by a #, interface names are generated from their index as `ifNN' (this is a workaround for some equipments that
-               give all interfaces the same description). Default host is localhost, and this will be used by default if snmp is the only available driver.
+               This driver gets statistics through SNMP. The option, in the form [comm@][#]host[/nn]], specifies the host and eventual community to poll. Default community is public, but
+               can be changed by prepending "comm@" to the hostname. If host starts by a #, interface names are generated from their index as `ifNN' (this is a workaround for some equip‐
+               ments that give all interfaces the same description). Default host is localhost, and this will be used by default if snmp is the only available driver.
 
-               The driver will try to poll several interfaces at once by grouping requests in SNMP packets. By default interfaces will be polled by group of 8. If this doesn't work well with
-               your equipments, you can lower that number by suffixing the hostname with /nn, where nn is the number of interfaces to poll at once. You can also increase the number if you
-               want to poll a large number of interfaces efficiently and if your server supports it.
+               The driver will try to poll several interfaces at once by grouping requests in SNMP packets. By default interfaces will be polled by group of 8. If this doesn't work well
+               with your equipments, you can lower that number by suffixing the hostname with /nn, where nn is the number of interfaces to poll at once. You can also increase the number
+               if you want to poll a large number of interfaces efficiently and if your server supports it.
 
        delay
            delay is the delay between updates in seconds, which defaults to 1.  A decimal number can be specified for intervals shorter than a second. (minimum 0.1)
 
-           A second delay can also be specified (separated from the first one by a '/'). In that case the first delay will be used for the first poll after start and the second one will be
-           used for all following polls (This can be used to have a "fast" start when running for a long while with a big delay).
+           A second delay can also be specified (separated from the first one by a '/'). In that case the first delay will be used for the first poll after start and the second one will
+           be used for all following polls (This can be used to have a "fast" start when running for a long while with a big delay).
 
        count
            count is the number of updates before stopping. If not specified, it is unlimited.
@@ -104,4 +104,4 @@ SEE ALSO
 AUTHOR
        Gaël Roualland, <gael.roualland@dial.oleane.com>
 
-ifstat 1.1                                                                                 2003-11-22                                                                                 IFSTAT(1)
+ifstat 1.1                                                                              2003-11-22                                                                               IFSTAT(1)

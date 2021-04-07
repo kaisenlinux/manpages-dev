@@ -1,4 +1,4 @@
-LXCFS(1)                                                                                 User Commands                                                                                 LXCFS(1)
+LXCFS(1)                                                                               User Commands                                                                              LXCFS(1)
 
 NAME
        lxcfs - System virtualization filesystem for containers
@@ -43,4 +43,4 @@ DESCRIPTION
 SEE ALSO
        lxc(1), lxc.container.conf(5)
 
-lxcfs 4.0.7                                                                              February 2021                                                                                 LXCFS(1)
+lxcfs 4.0.7                                                                            February 2021                                                                              LXCFS(1)

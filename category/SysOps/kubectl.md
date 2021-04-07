@@ -1,4 +1,4 @@
-KUBERNETES(1)(kubernetes)                                                                                                                                             KUBERNETES(1)(kubernetes)
+KUBERNETES(1)(kubernetes)                                                                                                                                        KUBERNETES(1)(kubernetes)
 
 Eric Paris Jan 2015
 
@@ -50,11 +50,11 @@ OPTIONS
 
        --context=""      The name of the kubeconfig context to use
 
-       --default-not-ready-toleration-seconds=300       Indicates  the  tolerationSeconds  of the toleration for notReady:NoExecute that is added by default to every pod that does not already
-       have such a toleration.
-
-       --default-unreachable-toleration-seconds=300      Indicates the tolerationSeconds of the toleration for unreachable:NoExecute that is added by default to every pod that  does  not  al‐
+       --default-not-ready-toleration-seconds=300       Indicates  the  tolerationSeconds of the toleration for notReady:NoExecute that is added by default to every pod that does not al‐
        ready have such a toleration.
+
+       --default-unreachable-toleration-seconds=300      Indicates the tolerationSeconds of the toleration for unreachable:NoExecute that is added by default to every pod that  does  not
+       already have such a toleration.
 
        --disable-root-cgroup-stats=false      Disable collecting root Cgroup stats
 
@@ -76,11 +76,11 @@ OPTIONS
 
        --enable-load-reader=false      Whether to enable cpu load reader
 
-       --event-storage-age-limit="default=0"      Max length of time for which to store events (per type). Value is a comma separated list of key values, where the keys are event types (e.g.:
-       creation, oom) or "default" and the value is a duration. Default is applied to all non-specified event types
+       --event-storage-age-limit="default=0"       Max  length of time for which to store events (per type). Value is a comma separated list of key values, where the keys are event types
+       (e.g.: creation, oom) or "default" and the value is a duration. Default is applied to all non-specified event types
 
-       --event-storage-event-limit="default=0"      Max number of events to store (per type). Value is a comma separated list of key values, where the keys are event  types  (e.g.:  creation,
-       oom) or "default" and the value is an integer. Default is applied to all non-specified event types
+       --event-storage-event-limit="default=0"      Max number of events to store (per type). Value is a comma separated list of key values, where the keys are event  types  (e.g.:  cre‐
+       ation, oom) or "default" and the value is an integer. Default is applied to all non-specified event types
 
        --global-housekeeping-interval=1m0s      Interval between global housekeepings
 
@@ -118,11 +118,11 @@ OPTIONS
 
        --profile-output="profile.pprof"      Name of the file to write the profile to
 
-       --referenced-reset-interval=0       Reset  interval  for referenced bytes (container_referenced_bytes metric), number of measurement cycles after which referenced bytes are cleared, if
-       set to 0 referenced bytes are never cleared (default: 0)
+       --referenced-reset-interval=0       Reset interval for referenced bytes (container_referenced_bytes metric), number of measurement cycles after which referenced bytes are cleared,
+       if set to 0 referenced bytes are never cleared (default: 0)
 
-       --request-timeout="0"      The length of time to wait before giving up on a single server request. Non-zero values should contain a corresponding time unit (e.g. 1s, 2m, 3h).  A  value
-       of zero means don't timeout requests.
+       --request-timeout="0"      The length of time to wait before giving up on a single server request. Non-zero values should contain a corresponding time unit (e.g. 1s,  2m,  3h).  A
+       value of zero means don't timeout requests.
 
        -s, --server=""      The address and port of the Kubernetes API server
 
@@ -165,13 +165,13 @@ OPTIONS
        --warnings-as-errors=false      Treat warnings received from the server as errors and exit with a non-zero exit code
 
 SEE ALSO
-       kubectl-alpha(1),  kubectl-annotate(1),  kubectl-api-resources(1), kubectl-api-versions(1), kubectl-apply(1), kubectl-attach(1), kubectl-auth(1), kubectl-autoscale(1), kubectl-certifi‐
-       cate(1), kubectl-cluster-info(1), kubectl-completion(1),  kubectl-config(1),  kubectl-cordon(1),  kubectl-cp(1),  kubectl-create(1),  kubectl-debug(1),  kubectl-delete(1),  kubectl-de‐
-       scribe(1),   kubectl-diff(1),  kubectl-drain(1),  kubectl-edit(1),  kubectl-exec(1),  kubectl-explain(1),  kubectl-expose(1),  kubectl-get(1),  kubectl-kustomize(1),  kubectl-label(1),
-       kubectl-logs(1),  kubectl-options(1),  kubectl-patch(1),  kubectl-plugin(1),  kubectl-port-forward(1),   kubectl-proxy(1),   kubectl-replace(1),   kubectl-rollout(1),   kubectl-run(1),
-       kubectl-scale(1), kubectl-set(1), kubectl-taint(1), kubectl-top(1), kubectl-uncordon(1), kubectl-version(1), kubectl-wait(1),
+       kubectl-alpha(1),  kubectl-annotate(1), kubectl-api-resources(1), kubectl-api-versions(1), kubectl-apply(1), kubectl-attach(1), kubectl-auth(1), kubectl-autoscale(1), kubectl-cer‐
+       tificate(1),  kubectl-cluster-info(1),  kubectl-completion(1),  kubectl-config(1),  kubectl-cordon(1),  kubectl-cp(1),  kubectl-create(1),   kubectl-debug(1),   kubectl-delete(1),
+       kubectl-describe(1),  kubectl-diff(1), kubectl-drain(1), kubectl-edit(1), kubectl-exec(1), kubectl-explain(1), kubectl-expose(1), kubectl-get(1), kubectl-kustomize(1), kubectl-la‐
+       bel(1),  kubectl-logs(1),   kubectl-options(1),   kubectl-patch(1),   kubectl-plugin(1),   kubectl-port-forward(1),   kubectl-proxy(1),   kubectl-replace(1),   kubectl-rollout(1),
+       kubectl-run(1), kubectl-scale(1), kubectl-set(1), kubectl-taint(1), kubectl-top(1), kubectl-uncordon(1), kubectl-version(1), kubectl-wait(1),
 
 HISTORY
        January 2015, Originally compiled by Eric Paris (eparis at redhat dot com) based on the kubernetes source material, but hopefully they have been automatically generated since!
 
-Manuals                                                                                       User                                                                    KUBERNETES(1)(kubernetes)
+Manuals                                                                                    User                                                                  KUBERNETES(1)(kubernetes)

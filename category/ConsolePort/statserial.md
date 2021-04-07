@@ -1,4 +1,4 @@
-STATSERIAL(1)                                                                            User Commands                                                                            STATSERIAL(1)
+STATSERIAL(1)                                                                          User Commands                                                                         STATSERIAL(1)
 
 NAME
        statserial - display serial port modem status lines
@@ -7,11 +7,11 @@ SYNOPSIS
        statserial [-n |  -d | -x] <device-name>
 
 DESCRIPTION
-       Statserial  displays  a  table of the signals on a standard 9-pin or 25-pin serial port, and indicates the status of the handshaking lines. It can be useful for debugging problems with
-       serial ports or modems.
+       Statserial  displays  a  table of the signals on a standard 9-pin or 25-pin serial port, and indicates the status of the handshaking lines. It can be useful for debugging problems
+       with serial ports or modems.
 
-       The optional device-name parameter is the full name of the device file for the serial port in question. If not specified, the default is taken from the environment  variable  MODEM  if
-       set, otherwise /dev/ttyS0.
+       The optional device-name parameter is the full name of the device file for the serial port in question. If not specified, the default is taken from the environment variable  MODEM
+       if set, otherwise /dev/ttyS0.
 
 COMMAND-LINE OPTIONS
        Each of the command line options is mutually exclusive.
@@ -38,11 +38,11 @@ BUGS/LIMITATIONS
        The device file may be locked if other applications are using it.
 
 AUTHOR
-       Statserial was written by Jeff Tranter (Jeff_Tranter@Mitel.COM), later updated by Frank Baumgart (godot@uni-paderborn.de) and is released under the conditions of the GNU General Public
-       License.  See the file COPYING and notes in the source code for details.
+       Statserial  was  written by Jeff Tranter (Jeff_Tranter@Mitel.COM), later updated by Frank Baumgart (godot@uni-paderborn.de) and is released under the conditions of the GNU General
+       Public License.  See the file COPYING and notes in the source code for details.
 
 SEE ALSO
        setserial(8) stty(1)
        /usr/src/linux/drivers/char/serial.c /usr/include/linux/termios.h
 
-Linux                                                                                   17 December 1994                                                                          STATSERIAL(1)
+Linux                                                                                17 December 1994                                                                        STATSERIAL(1)

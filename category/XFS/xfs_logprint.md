@@ -1,4 +1,4 @@
-xfs_logprint(8)                                                                     System Manager's Manual                                                                     xfs_logprint(8)
+xfs_logprint(8)                                                                   System Manager's Manual                                                                  xfs_logprint(8)
 
 NAME
        xfs_logprint - print the log of an XFS filesystem
@@ -7,16 +7,16 @@ SYNOPSIS
        xfs_logprint [ options ] device
 
 DESCRIPTION
-       xfs_logprint  prints  the  log of an XFS filesystem (see xfs(5)).  The device argument is the pathname of the partition or logical volume containing the filesystem. The device can be a
-       regular file if the -f option is used. The contents of the filesystem remain undisturbed.  There are two major modes of operation in xfs_logprint.
+       xfs_logprint prints the log of an XFS filesystem (see xfs(5)).  The device argument is the pathname of the partition or logical volume containing the filesystem. The device can be
+       a regular file if the -f option is used. The contents of the filesystem remain undisturbed.  There are two major modes of operation in xfs_logprint.
 
-       One mode is better for filesystem operation debugging.  It is called the transactional view and is enabled through the -t option. The transactional view prints only the portion of  the
-       log that pertains to recovery. In other words, it prints out complete transactions between the tail and the head. This view tries to display each transaction without regard to how they
-       are split across log records.
+       One mode is better for filesystem operation debugging.  It is called the transactional view and is enabled through the -t option. The transactional view prints only the portion of
+       the log that pertains to recovery. In other words, it prints out complete transactions between the tail and the head. This view tries to display each transaction without regard to
+       how they are split across log records.
 
-       The second mode starts printing out information from the beginning of the log.  Some error blocks might print out in the beginning because the last log record usually overlaps the old‐
-       est  log  record.  A message is printed when the physical end of the log is reached and when the logical end of the log is reached. A log record view is displayed one record at a time.
-       Transactions that span log records may not be decoded fully.
+       The second mode starts printing out information from the beginning of the log.  Some error blocks might print out in the beginning because the last log record usually overlaps the
+       oldest  log record. A message is printed when the physical end of the log is reached and when the logical end of the log is reached. A log record view is displayed one record at a
+       time. Transactions that span log records may not be decoded fully.
 
 OPTIONS
        -b     Extract and print buffer information. Only used in transactional view.
@@ -30,11 +30,11 @@ OPTIONS
 
        -D     Do not decode anything; just print data.
 
-       -e     Exit when an error is found in the log. Normally, xfs_logprint tries to continue and unwind from bad logs.  However, sometimes it just dies in bad ways.  Using this option  pre‐
-              vents core dumps.
+       -e     Exit when an error is found in the log. Normally, xfs_logprint tries to continue and unwind from bad logs.  However, sometimes it just dies in bad ways.  Using this  option
+              prevents core dumps.
 
-       -f     Specifies that the filesystem image to be processed is stored in a regular file at device (see the mkfs.xfs(8) -d file option).  This might happen if an image copy of a filesys‐
-              tem has been made into an ordinary file with xfs_copy(8).
+       -f     Specifies  that  the  filesystem  image to be processed is stored in a regular file at device (see the mkfs.xfs(8) -d file option).  This might happen if an image copy of a
+              filesystem has been made into an ordinary file with xfs_copy(8).
 
        -l logdev
               External log device. Only for those filesystems which use an external log.
@@ -59,4 +59,4 @@ OPTIONS
 SEE ALSO
        mkfs.xfs(8), mount(8).
 
-                                                                                                                                                                                xfs_logprint(8)
+                                                                                                                                                                           xfs_logprint(8)

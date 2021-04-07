@@ -1,4 +1,4 @@
-SOCKSTAT(1)                                                                       BSD General Commands Manual                                                                       SOCKSTAT(1)
+SOCKSTAT(1)                                                                     BSD General Commands Manual                                                                    SOCKSTAT(1)
 
 NAME
      sockstat — list open sockets
@@ -23,8 +23,8 @@ DESCRIPTION
 
      -h          Show a usage summary.
 
-     -p ports    Only show Internet sockets if either the local or foreign port number is on the specified list.  The ports argument is a comma-separated list of port numbers and ranges spec‐
-                 ified as first and last port separated by a dash.
+     -p ports    Only show Internet sockets if either the local or foreign port number is on the specified list.  The ports argument is a comma-separated list of port numbers and ranges
+                 specified as first and last port separated by a dash.
 
      -P pid|process
                  Only show sockets of the specified pid|process.  The pid|process argument is a process name or pid.
@@ -52,8 +52,8 @@ DESCRIPTION
 
      PROTO            The transport protocol associated with the socket for Internet sockets, or the type of socket (stream or datagram) for UNIX sockets.
 
-     LOCAL ADDRESS    For Internet sockets, this is the address the local end of the socket is bound to (see getsockname(2)).  For bound UNIX sockets, it is the socket's filename.  For other
-                      UNIX sockets, it is a right arrow followed by the endpoint's filename, or “??” if the endpoint could not be determined.
+     LOCAL ADDRESS    For Internet sockets, this is the address the local end of the socket is bound to (see getsockname(2)).  For bound UNIX sockets, it is the socket's filename.  For
+                      other UNIX sockets, it is a right arrow followed by the endpoint's filename, or “??” if the endpoint could not be determined.
 
      FOREIGN ADDRESS  (Internet sockets only) The address the foreign end of the socket is bound to (see getpeername(2)).
 
@@ -68,4 +68,4 @@ AUTHORS
 
      The sockstat command was ported to Linux by William Pitcock <nenolod@nenolod.net>.
 
-BSD                                                                                       May 18, 2008                                                                                      BSD
+BSD                                                                                    May 18, 2008                                                                                    BSD

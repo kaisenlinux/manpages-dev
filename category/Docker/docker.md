@@ -1,4 +1,4 @@
-DOCKER(1)                                                                             Docker User Manuals                                                                             DOCKER(1)
+DOCKER(1)                                                                           Docker User Manuals                                                                          DOCKER(1)
 
 NAME
        docker - Docker image and container command line interface
@@ -64,4 +64,4 @@ EXAMPLES
 HISTORY
        April 2014, Originally compiled by William Henry (whenry at redhat dot com) based on docker.com source material and internal work.
 
-Docker Community                                                                           APRIL 2014                                                                                 DOCKER(1)
+Docker Community                                                                        APRIL 2014                                                                               DOCKER(1)

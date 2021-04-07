@@ -1,4 +1,4 @@
-NAST(8)                                                                             System Manager's Manual                                                                             NAST(8)
+NAST(8)                                                                           System Manager's Manual                                                                          NAST(8)
 
 NAME
        nast - Network Analyzer Sniffer Tool
@@ -9,8 +9,8 @@ SYNOPSIS
 DESCRIPTION
        Nast is a packet sniffer and a LAN analyzer based on Libnet and Libpcap.
 
-       It  can  sniff  in normal mode or in promiscuous mode the packets on a network interface and log it.  It dumps the headers of packets and the payload in ascii or ascii-hex format.  You
-       can apply a filter. The sniffed data can be saved in a separated file.
+       It  can  sniff  in normal mode or in promiscuous mode the packets on a network interface and log it.  It dumps the headers of packets and the payload in ascii or ascii-hex format.
+       You can apply a filter. The sniffed data can be saved in a separated file.
 
        As analyzer tool, it has many features like:
               * Build LAN hosts list
@@ -56,8 +56,8 @@ CMDLINE SNIFFER OPTIONS
 ANALYZER FEATURES
        -P, --check-promisc <ip>
               Check other NIC on the LAN with the promiscuous flag set.
-              By performing a fake ARP broadcast, we can determine if a NIC is in promiscuous mode or not.  If the checked host is in promiscuous mode it will responds with  an  ARP  response
-              otherwise it drop the packet.
+              By performing a fake ARP broadcast, we can determine if a NIC is in promiscuous mode or not.  If the checked host is in promiscuous mode it will responds with  an  ARP  re‐
+              sponse otherwise it drop the packet.
               Note: This method doesn't work with all OS
               Use -P all to query all network NIC
 
@@ -136,10 +136,10 @@ ANALYZER FEATURES
 
        -S, --port-scanner
               Performs a half-open port scanning on the selected host. It tries also to determine some firewall (just iptables) rules.
-              About  this  technique  NMAP says: This technique is often referred to as "half-open" scanning, because you don't open a full TCP  connection.  You send  a SYN packet, as if you
-              are going to open a real connection and you wait for a response. A SYN|ACK indicates the port is listening. A RST is indicative of a non-listener.  If a SYN|ACK is  received,  a
-              RST is immediately sent to tear down  the  connection  (actually  our OS kernel does this for us).  The primary advantage to this scanning technique is that fewer sites will log
-              it.  Unfortunately you need root privileges to build these custom SYN packets.
+              About  this  technique NMAP says: This technique is often referred to as "half-open" scanning, because you don't open a full TCP  connection.  You send  a SYN packet, as if
+              you are going to open a real connection and you wait for a response. A SYN|ACK indicates the port is listening. A RST is indicative of a non-listener.  If a SYN|ACK is  re‐
+              ceived, a RST is immediately sent to tear down  the  connection  (actually  our OS kernel does this for us).  The primary advantage to this scanning technique is that fewer
+              sites will log it.  Unfortunately you need root privileges to build these custom SYN packets.
 
               eg: root@localhost:~/$ nast -S
               NAST "NETWORK ANALYZER SNIFFER TOOL"
@@ -166,8 +166,8 @@ ANALYZER FEATURES
 
        -L, --find-link
               Tries to determine what type of link is used in the LAN (Hub or switch).
-              In the LAN segment is there a HUB or a SWITCH? We can find it by sending a spoofed ICMP echo-request (to work there must be at least 3 host in LAN and at least one of them  must
-              reply with a ICMP echo-replay)
+              In the LAN segment is there a HUB or a SWITCH? We can find it by sending a spoofed ICMP echo-request (to work there must be at least 3 host in LAN and at least one of  them
+              must reply with a ICMP echo-replay)
 
        -b, --daemon-banner
               Checks the most famous daemon banner on the LAN's hosts.
@@ -175,8 +175,8 @@ ANALYZER FEATURES
 
        -c, --check-arp-poisoning
               Control ARP answers to discover possible ARP spoofing attacks like man-in-the-middle
-              When  run,  Nast make a database of all network node (IP and MAC address), then sniff ARP response and verify the correctness of IP-mac address association.  Remember to execute
-              Nast when you are sure that nobody is making ARP-poisoning, than have fun and relax and check program output:).
+              When run, Nast make a database of all network node (IP and MAC address), then sniff ARP response and verify the correctness of IP-mac address association.  Remember to exe‐
+              cute Nast when you are sure that nobody is making ARP-poisoning, than have fun and relax and check program output:).
 
        -C, --byte-counting <"filter">
               Apply traffic counting to <"filter"> (see FILTER SYNTAX section below for syntax)
@@ -206,8 +206,8 @@ GENERAL OPTIONS
               Show version information
 
 NCURSES INTERFACE NOTE
-       Versions later 0.2.0 have a new ncurses interface which has many improvements regarding the correspondent command line version. For example you can select the connection  interactively
-       for tcp stream and reset features and byte counting module show much more information (packets type and connections load).
+       Versions later 0.2.0 have a new ncurses interface which has many improvements regarding the correspondent command line version. For example you can select the connection  interac‐
+       tively for tcp stream and reset features and byte counting module show much more information (packets type and connections load).
 
        Please read NCURSES_README file before using the ncurses interface!
 
@@ -216,34 +216,35 @@ FILTER SYNTAX, WHAT PCAP GIVE US!
        Remeber to enclose filter between apexes ("something like this")
 
         expression
-              selects which packets will be dumped.  If no expression is given, all packets on the net will be dumped.  Otherwise, only packets for which expression is `true' will be dumped.
+              selects  which  packets  will  be dumped.  If no expression is given, all packets on the net will be dumped.  Otherwise, only packets for which expression is `true' will be
+              dumped.
 
-              The  expression consists of one or more primitives.  Primitives usually consist of an id (name or number) preceded by one or more qualifiers.  There are three different kinds of
-              qualifier:
+              The expression consists of one or more primitives.  Primitives usually consist of an id (name or number) preceded by one or more  qualifiers.   There  are  three  different
+              kinds of qualifier:
 
-              type   qualifiers say what kind of thing the id name or number refers to.  Possible types are host, net and port.  E.g., `host foo', `net 128.3', `port 20'.  If there is no type
-                     qualifier, host is assumed.
+              type   qualifiers say what kind of thing the id name or number refers to.  Possible types are host, net and port.  E.g., `host foo', `net 128.3', `port 20'.  If there is no
+                     type qualifier, host is assumed.
 
-              dir    qualifiers  specify  a  particular transfer direction to and/or from id.  Possible directions are src, dst, src or dst and src and dst.  E.g., `src foo', `dst net 128.3',
-                     `src or dst port ftp-data'.  If there is no dir qualifier, src or dst is assumed.  For `null' link layers (i.e. point to point protocols such as  slip)  the  inbound  and
-                     outbound qualifiers can be used to specify a desired direction.
+              dir    qualifiers specify a particular transfer direction to and/or from id.  Possible directions are src, dst, src or dst and src and  dst.   E.g.,  `src  foo',  `dst  net
+                     128.3',  `src  or  dst port ftp-data'.  If there is no dir qualifier, src or dst is assumed.  For `null' link layers (i.e. point to point protocols such as slip) the
+                     inbound and outbound qualifiers can be used to specify a desired direction.
 
-              proto  qualifiers  restrict  the match to a particular protocol.  Possible protos are: ether, fddi, tr, ip, ip6, arp, rarp, decnet, tcp and udp.  E.g., `ether src foo', `arp net
-                     128.3', `tcp port 21'.  If there is no proto qualifier, all protocols consistent with the type are assumed.  E.g., `src foo' means `(ip or arp or rarp) src  foo'  (except
-                     the latter is not legal syntax), `net bar' means `(ip or arp or rarp) net bar' and `port 53' means `(tcp or udp) port 53'.
+              proto  qualifiers restrict the match to a particular protocol.  Possible protos are: ether, fddi, tr, ip, ip6, arp, rarp, decnet, tcp and udp.  E.g., `ether src foo',  `arp
+                     net  128.3', `tcp port 21'.  If there is no proto qualifier, all protocols consistent with the type are assumed.  E.g., `src foo' means `(ip or arp or rarp) src foo'
+                     (except the latter is not legal syntax), `net bar' means `(ip or arp or rarp) net bar' and `port 53' means `(tcp or udp) port 53'.
 
-              [`fddi'  is  actually  an alias for `ether'; the parser treats them identically as meaning ``the data link level used on the specified network interface.''  FDDI headers contain
-              Ethernet-like source and destination addresses, and often contain Ethernet-like packet types, so you can filter on these FDDI fields just as with the analogous Ethernet  fields.
-              FDDI headers also contain other fields, but you cannot name them explicitly in a filter expression.
+              [`fddi' is actually an alias for `ether'; the parser treats them identically as meaning ``the data link level used on the specified network interface.''  FDDI headers  con‐
+              tain  Ethernet-like source and destination addresses, and often contain Ethernet-like packet types, so you can filter on these FDDI fields just as with the analogous Ether‐
+              net fields.  FDDI headers also contain other fields, but you cannot name them explicitly in a filter expression.
 
               Similarly, `tr' is an alias for `ether'; the previous paragraph's statements about FDDI headers also apply to Token Ring headers.]
 
-              In  addition to the above, there are some special `primitive' keywords that don't follow the pattern: gateway, broadcast, less, greater and arithmetic expressions.  All of these
-              are described below.
+              In addition to the above, there are some special `primitive' keywords that don't follow the pattern: gateway, broadcast, less, greater and arithmetic expressions.   All  of
+              these are described below.
 
-              More complex filter expressions are built up by using the words and, or and not to combine primitives.  E.g., `host foo and not port ftp and not port ftp-data'.  To save typing,
-              identical  qualifier  lists can be omitted.  E.g., `tcp dst port ftp or ftp-data or domain' is exactly the same as `tcp dst port ftp or tcp dst port ftp-data or tcp dst port do‐
-              main'.
+              More  complex  filter  expressions are built up by using the words and, or and not to combine primitives.  E.g., `host foo and not port ftp and not port ftp-data'.  To save
+              typing, identical qualifier lists can be omitted.  E.g., `tcp dst port ftp or ftp-data or domain' is exactly the same as `tcp dst port ftp or tcp dst port ftp-data  or  tcp
+              dst port domain'.
 
               Allowable primitives are:
 
@@ -254,8 +255,8 @@ FILTER SYNTAX, WHAT PCAP GIVE US!
                      True if the IPv4/v6 source field of the packet is host.
 
               host host
-                     True if either the IPv4/v6 source or destination of the packet is host.  Any of the above host expressions can be prepended with the keywords, ip, arp, rarp,  or  ip6  as
-                     in:
+                     True  if either the IPv4/v6 source or destination of the packet is host.  Any of the above host expressions can be prepended with the keywords, ip, arp, rarp, or ip6
+                     as in:
                           ip host host
                      which is equivalent to:
                           ether proto \ip and host host
@@ -271,15 +272,15 @@ FILTER SYNTAX, WHAT PCAP GIVE US!
                      True if either the ethernet source or destination address is ehost.
 
               gateway host
-                     True  if  the  packet  used host as a gateway.  I.e., the ethernet source or destination address was host but neither the IP source nor the IP destination was host.  Host
-                     must be a name and must be found both by the machine's host-name-to-IP-address resolution mechanisms (host name file, DNS, NIS, etc.) and by the  machine's  host-name-to-
-                     Ethernet-address resolution mechanism (/etc/ethers, etc.).  (An equivalent expression is
+                     True if the packet used host as a gateway.  I.e., the ethernet source or destination address was host but neither the IP source nor  the  IP  destination  was  host.
+                     Host must be a name and must be found both by the machine's host-name-to-IP-address resolution mechanisms (host name file, DNS, NIS, etc.) and by the machine's host-
+                     name-to-Ethernet-address resolution mechanism (/etc/ethers, etc.).  (An equivalent expression is
                           ether host ehost and not host host
                      which can be used with either names or numbers for host / ehost.)  This syntax does not work in IPv6-enabled configuration at this moment.
 
               dst net net
-                     True  if  the IPv4/v6 destination address of the packet has a network number of net.  Net may be either a name from /etc/networks or a network number (see networks(4) for
-                     details).
+                     True if the IPv4/v6 destination address of the packet has a network number of net.  Net may be either a name from /etc/networks or a network number (see  networks(4)
+                     for details).
 
               src net net
                      True if the IPv4/v6 source address of the packet has a network number of net.
@@ -294,9 +295,9 @@ FILTER SYNTAX, WHAT PCAP GIVE US!
                      True if the IPv4/v6 address matches net with a netmask len bits wide.  May be qualified with src or dst.
 
               dst port port
-                     True if the packet is ip/tcp, ip/udp, ip6/tcp or ip6/udp and has a destination port value of port.  The port can be a number or a name used in /etc/services (see  tcp(4P)
-                     and  udp(4P)).   If a name is used, both the port number and protocol are checked.  If a number or ambiguous name is used, only the port number is checked (e.g., dst port
-                     513 will print both tcp/login traffic and udp/who traffic, and port domain will print both tcp/domain and udp/domain traffic).
+                     True  if  the  packet  is ip/tcp, ip/udp, ip6/tcp or ip6/udp and has a destination port value of port.  The port can be a number or a name used in /etc/services (see
+                     tcp(4P) and udp(4P)).  If a name is used, both the port number and protocol are checked.  If a number or ambiguous name is used, only  the  port  number  is  checked
+                     (e.g., dst port 513 will print both tcp/login traffic and udp/who traffic, and port domain will print both tcp/domain and udp/domain traffic).
 
               src port port
                      True if the packet has a source port value of port.
@@ -315,9 +316,9 @@ FILTER SYNTAX, WHAT PCAP GIVE US!
                           len >= length.
 
               ip proto protocol
-                     True if the packet is an IP packet (see ip(4P)) of protocol type protocol.  Protocol can be a number or one of the names icmp, icmp6, igmp, igrp, pim, ah, esp, vrrp, udp,
-                     or  tcp.  Note that the identifiers tcp, udp, and icmp are also keywords and must be escaped via backslash (\), which is \\ in the C-shell.  Note that this primitive does
-                     not chase the protocol header chain.
+                     True if the packet is an IP packet (see ip(4P)) of protocol type protocol.  Protocol can be a number or one of the names icmp, icmp6, igmp, igrp, pim, ah, esp, vrrp,
+                     udp, or tcp.  Note that the identifiers tcp, udp, and icmp are also keywords and must be escaped via backslash (\), which is \\ in the C-shell.  Note that this prim‐
+                     itive does not chase the protocol header chain.
 
               ip6 proto protocol
                      True if the packet is an IPv6 packet of protocol type protocol.  Note that this primitive does not chase the protocol header chain.
@@ -325,9 +326,9 @@ FILTER SYNTAX, WHAT PCAP GIVE US!
               ip6 protochain protocol
                      True if the packet is IPv6 packet, and contains protocol header with type protocol in its protocol header chain.  For example,
                           ip6 protochain 6
-                     matches any IPv6 packet with TCP protocol header in the protocol header chain.  The packet may contain, for example, authentication header, routing header, or  hop-by-hop
-                     option  header,  between  IPv6 header and TCP header.  The BPF code emitted by this primitive is complex and cannot be optimized by BPF optimizer code in tcpdump, so this
-                     can be somewhat slow.
+                     matches  any  IPv6 packet with TCP protocol header in the protocol header chain.  The packet may contain, for example, authentication header, routing header, or hop-
+                     by-hop option header, between IPv6 header and TCP header.  The BPF code emitted by this primitive is complex and cannot be optimized by BPF optimizer  code  in  tcp‐
+                     dump, so this can be somewhat slow.
 
               ip protochain protocol
                      Equivalent to ip6 protochain protocol, but this is for IPv4.
@@ -348,27 +349,27 @@ FILTER SYNTAX, WHAT PCAP GIVE US!
                      True if the packet is an IPv6 multicast packet.
 
               ether proto protocol
-                     True if the packet is of ether type protocol.  Protocol can be a number or one of the names ip, ip6, arp, rarp, atalk, aarp, decnet, sca, lat,  mopdl,  moprc,  iso,  stp,
-                     ipx, or netbeui.  Note these identifiers are also keywords and must be escaped via backslash (\).
+                     True  if  the  packet  is of ether type protocol.  Protocol can be a number or one of the names ip, ip6, arp, rarp, atalk, aarp, decnet, sca, lat, mopdl, moprc, iso,
+                     stp, ipx, or netbeui.  Note these identifiers are also keywords and must be escaped via backslash (\).
 
-                     [In  the  case of FDDI (e.g., `fddi protocol arp') and Token Ring (e.g., `tr protocol arp'), for most of those protocols, the protocol identification comes from the 802.2
-                     Logical Link Control (LLC) header, which is usually layered on top of the FDDI or Token Ring header.
+                     [In the case of FDDI (e.g., `fddi protocol arp') and Token Ring (e.g., `tr protocol arp'), for most of those protocols, the protocol identification  comes  from  the
+                     802.2 Logical Link Control (LLC) header, which is usually layered on top of the FDDI or Token Ring header.
 
-                     When filtering for most protocol identifiers on FDDI or Token Ring, tcpdump checks only the protocol ID field of an LLC header in so-called SNAP format with an  Organiza‐
-                     tional Unit Identifier (OUI) of 0x000000, for encapsulated Ethernet; it doesn't check whether the packet is in SNAP format with an OUI of 0x000000.
+                     When filtering for most protocol identifiers on FDDI or Token Ring, tcpdump checks only the protocol ID field of an LLC header in so-called SNAP format with an Orga‐
+                     nizational Unit Identifier (OUI) of 0x000000, for encapsulated Ethernet; it doesn't check whether the packet is in SNAP format with an OUI of 0x000000.
 
-                     The  exceptions are iso, for which it checks the DSAP (Destination Service Access Point) and SSAP (Source Service Access Point) fields of the LLC header, stp and netbeui,
-                     where it checks the DSAP of the LLC header, and atalk, where it checks for a SNAP-format packet with an OUI of 0x080007 and the Appletalk etype.
+                     The exceptions are iso, for which it checks the DSAP (Destination Service Access Point) and SSAP (Source Service Access Point) fields of the LLC header, stp and net‐
+                     beui, where it checks the DSAP of the LLC header, and atalk, where it checks for a SNAP-format packet with an OUI of 0x080007 and the Appletalk etype.
 
-                     In the case of Ethernet, tcpdump checks the Ethernet type field for most of those protocols; the exceptions are iso, sap, and netbeui, for which it checks  for  an  802.3
-                     frame  and  then  checks the LLC header as it does for FDDI and Token Ring, atalk, where it checks both for the Appletalk etype in an Ethernet frame and for a SNAP-format
-                     packet as it does for FDDI and Token Ring, aarp, where it checks for the Appletalk ARP etype in either an Ethernet frame or an 802.2 SNAP frame with an OUI  of  0x000000,
-                     and ipx, where it checks for the IPX etype in an Ethernet frame, the IPX DSAP in the LLC header, the 802.3 with no LLC header encapsulation of IPX, and the IPX etype in a
-                     SNAP frame.]
+                     In  the  case  of  Ethernet, tcpdump checks the Ethernet type field for most of those protocols; the exceptions are iso, sap, and netbeui, for which it checks for an
+                     802.3 frame and then checks the LLC header as it does for FDDI and Token Ring, atalk, where it checks both for the Appletalk etype in an Ethernet  frame  and  for  a
+                     SNAP-format  packet  as it does for FDDI and Token Ring, aarp, where it checks for the Appletalk ARP etype in either an Ethernet frame or an 802.2 SNAP frame with an
+                     OUI of 0x000000, and ipx, where it checks for the IPX etype in an Ethernet frame, the IPX DSAP in the LLC header, the 802.3 with no LLC header encapsulation of  IPX,
+                     and the IPX etype in a SNAP frame.]
 
               decnet src host
-                     True if the DECNET source address is host, which may be an address of the form ``10.123'', or a DECNET host name.  [DECNET host name support is only available  on  Ultrix
-                     systems that are configured to run DECNET.]
+                     True if the DECNET source address is host, which may be an address of the form ``10.123'', or a DECNET host name.  [DECNET host name support is only available on Ul‐
+                     trix systems that are configured to run DECNET.]
 
               decnet dst host
                      True if the DECNET destination address is host.
@@ -387,8 +388,8 @@ FILTER SYNTAX, WHAT PCAP GIVE US!
                      where p is one of the above protocols.  Note that tcpdump does not currently know how to parse these protocols.
 
               vlan [vlan_id]
-                     True if the packet is an IEEE 802.1Q VLAN packet.  If [vlan_id] is specified, only true is the packet has the specified vlan_id.  Note that the first vlan keyword encoun‐
-                     tered in expression changes the decoding offsets for the remainder of expression on the assumption that the packet is a VLAN packet.
+                     True if the packet is an IEEE 802.1Q VLAN packet.  If [vlan_id] is specified, only true is the packet has the specified vlan_id.  Note that the  first  vlan  keyword
+                     encountered in expression changes the decoding offsets for the remainder of expression on the assumption that the packet is a VLAN packet.
 
               tcp, udp, icmp
                      Abbreviations for:
@@ -446,4 +447,4 @@ LICENSE
        GNU GENERAL PUBLIC LICENSE Version 2, June 1991
        See COPYING for details.
 
-NAST 0.2.0                                                                                  20040216                                                                                    NAST(8)
+NAST 0.2.0                                                                               20040216                                                                                  NAST(8)

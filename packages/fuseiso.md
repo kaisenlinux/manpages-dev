@@ -1,4 +1,4 @@
-FUSEISO(1)                                                                          General Commands Manual                                                                          FUSEISO(1)
+FUSEISO(1)                                                                        General Commands Manual                                                                       FUSEISO(1)
 
 NAME
        fuseiso - FUSE module to mount ISO filesystem images
@@ -15,8 +15,8 @@ DESCRIPTION
 
        fuseiso can read ISO, BIN and NRG images containing ISO9660 filesystems.  Along with it, it supports some common extensions, like Joliet, RockRidge and zisofs.
 
-       It  also  supports  non-standard  images, like CloneCD's IMGs and Alcohol 120%'s MDFs, as their format looks exactly like BIN images. One major limitation of BIN images is that fuseiso
-       does not handle CUE files in any way, and thus can only work with the first track of those images.
+       It  also  supports  non-standard images, like CloneCD's IMGs and Alcohol 120%'s MDFs, as their format looks exactly like BIN images. One major limitation of BIN images is that fu‐
+       seiso does not handle CUE files in any way, and thus can only work with the first track of those images.
 
        Other formats like CCD and MDS are not supported, since their format is not public and no one knows it.
 
@@ -45,4 +45,4 @@ AUTHOR
 
        This manual page was written by David Paleino <dapal@debian.org>, for the Debian project (and may be used by others).
 
-                                                                                         February 2010                                                                               FUSEISO(1)
+                                                                                       February 2010                                                                            FUSEISO(1)

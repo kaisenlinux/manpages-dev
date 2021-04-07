@@ -1,4 +1,4 @@
-CDPR(8)                                                                             System Manager's Manual                                                                             CDPR(8)
+CDPR(8)                                                                           System Manager's Manual                                                                          CDPR(8)
 
 NAME
        cdpr - Cisco Discovery Protocol Reporter
@@ -7,8 +7,8 @@ SYNOPSIS
        cdpr [-h] [-t seconds ] [-d device | -r pcap-file ] [-u server-config-file ] [-l location ] [-n hostname ] [-s server ] [-p script-path ]
 
 DESCRIPTION
-       cdpr  listens  on  specified network interfaces for Cisco Discovery Protocol packets. It then decodes those packets and outputs the information, optionally sending the information to a
-       server for processing.
+       cdpr listens on specified network interfaces for Cisco Discovery Protocol packets. It then decodes those packets and outputs the information, optionally sending the information to
+       a server for processing.
 
 OPTIONS
        -d device
@@ -44,4 +44,4 @@ AUTHOR
 
        This manual page was written by Matt Zagrabelny <mzagrabe at d dot umn dot edu>, for the Debian system (but may be used by others).
 
-User Manuals                                                                               APRIL 2009                                                                                   CDPR(8)
+User Manuals                                                                            APRIL 2009                                                                                 CDPR(8)

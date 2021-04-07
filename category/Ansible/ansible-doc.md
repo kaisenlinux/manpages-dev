@@ -1,15 +1,15 @@
-ANSIBLE-DOC(1)                                                                   System administration commands                                                                  ANSIBLE-DOC(1)
+ANSIBLE-DOC(1)                                                                System administration commands                                                                ANSIBLE-DOC(1)
 
 NAME
        ansible-doc - plugin documentation tool
 
 SYNOPSIS
        usage: ansible-doc [-h] [--version] [-v] [-M MODULE_PATH]
-              [--playbook-dir  BASEDIR]  [-t  {become,cache,callback,cliconf,connection,httpapi,inventory,lookup,netconf,shell,module,strategy,vars}]  [-j]  [-F  |  -l | -s | --metadata-dump]
+              [--playbook-dir  BASEDIR]  [-t {become,cache,callback,cliconf,connection,httpapi,inventory,lookup,netconf,shell,module,strategy,vars}] [-j] [-F | -l | -s | --metadata-dump]
               [plugin ...]
 
 DESCRIPTION
-       displays information on modules installed in Ansible libraries.  It displays a terse listing of plugins and their  short  descriptions,  provides  a  printout  of  their  DOCUMENTATION
+       displays information on modules installed in Ansible libraries.  It displays a terse listing of plugins and their short descriptions, provides a printout  of  their  DOCUMENTATION
        strings, and it can create a short "snippet" which can be pasted into a playbook.
 
 COMMON OPTIONS
@@ -43,8 +43,8 @@ COMMON OPTIONS
           Show playbook snippet for specified plugin(s)
 
        -t 'TYPE', --type 'TYPE'
-          Choose  which  plugin type (defaults to "module"). Available plugin types are : ('become', 'cache', 'callback', 'cliconf', 'connection', 'httpapi', 'inventory', 'lookup', 'netconf',
-          'shell', 'module', 'strategy', 'vars')
+          Choose  which  plugin type (defaults to "module"). Available plugin types are : ('become', 'cache', 'callback', 'cliconf', 'connection', 'httpapi', 'inventory', 'lookup', 'net‐
+          conf', 'shell', 'module', 'strategy', 'vars')
 
        -v, --verbose
           verbose mode (-vvv for more, -vvvv to enable connection debugging)
@@ -76,7 +76,7 @@ COPYRIGHT
 SEE ALSO
        ansible (1), ansible-config (1), ansible-console (1), ansible-galaxy (1), ansible-inventory (1), ansible-playbook (1), ansible-pull (1), ansible-vault (1)
 
-       Extensive documentation is available in the documentation site: <https://docs.ansible.com>.  IRC and mailing  list  info  can  be  found  in  file  CONTRIBUTING.md,  available  in:  <‐
+       Extensive documentation is available in the documentation site: <https://docs.ansible.com>.  IRC and mailing list info can be found  in  file  CONTRIBUTING.md,  available  in:  <‐
        https://github.com/ansible/ansible>
 
-Ansible 2.9.16                                                                                                                                                                   ANSIBLE-DOC(1)
+Ansible 2.9.16                                                                                                                                                              ANSIBLE-DOC(1)

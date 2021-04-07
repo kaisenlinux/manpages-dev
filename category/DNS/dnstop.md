@@ -1,4 +1,4 @@
-DNSTOP(8)                                                                         BSD System Manager's Manual                                                                         DNSTOP(8)
+DNSTOP(8)                                                                       BSD System Manager's Manual                                                                      DNSTOP(8)
 
 NAME
      dnstop — displays various tables of DNS traffic on your network
@@ -36,8 +36,8 @@ COMMAND LINE OPTIONS
      -l level
              keep counts on names up to level domain name levels.
 
-             For example, with -l 2 (the default), dnstop will keep two tables: one with top-level domain names, and another with second-level domain names.  Increasing the level provides
-             more details, but also requires more memory and CPU.
+             For example, with -l 2 (the default), dnstop will keep two tables: one with top-level domain names, and another with second-level domain names.  Increasing the level pro‐
+             vides more details, but also requires more memory and CPU.
 
      -f      input filter name
 
@@ -124,18 +124,18 @@ RUN TIME OPTIONS
      ?       help
 
 NON-INTERACTIVE MODE
-     If stdout is not a tty, dnstop runs in non-interactive mode.  In this case, you must supply a savefile for reading, instead of capturing live packets.  After reading the entire savefile,
-     dnstop prints the top 50 entries for each table.
+     If stdout is not a tty, dnstop runs in non-interactive mode.  In this case, you must supply a savefile for reading, instead of capturing live packets.  After reading the entire
+     savefile, dnstop prints the top 50 entries for each table.
 
 HOW MESSAGES ARE COUNTED
      By default dnstop examines only query messages and ignores replies.  In this case the response code table is meaningless and will likely show 100% "Noerror."
 
-     If you supply (only) the -R command line option, dnstop examines replies and ignores queries.  This allows you to see meaningful response code values, as well as all the other tables.
-     In this case all the query attributes (such as type and name) are taken from the Question section of the reply.
+     If you supply (only) the -R command line option, dnstop examines replies and ignores queries.  This allows you to see meaningful response code values, as well as all the other ta‐
+     bles.  In this case all the query attributes (such as type and name) are taken from the Question section of the reply.
 
-     Note, however, that it is common for a stream of DNS messages to contain more queries than replies.  This could happen, for example, if the server is too busy to respond to every single
-     query, or if the server is designed to ignore malformed query messages.  Therefore, you might want to examine both queries and replies by giving both -R and -Q command line options.  In
-     this case, only the response code counts are taken from the replies and all other attributes are taken from the queries.
+     Note, however, that it is common for a stream of DNS messages to contain more queries than replies.  This could happen, for example, if the server is too busy to respond to every
+     single query, or if the server is designed to ignore malformed query messages.  Therefore, you might want to examine both queries and replies by giving both -R and -Q command line
+     options.  In this case, only the response code counts are taken from the replies and all other attributes are taken from the queries.
 
 AUTHORS
      Duane Wessels (wessels@measurement-factory.com)
@@ -151,4 +151,4 @@ AUTHORS
 BUGS
      Does not support TCP at this time.
 
-BSD                                                                                      21 March, 2008                                                                                     BSD
+BSD                                                                                   21 March, 2008                                                                                   BSD

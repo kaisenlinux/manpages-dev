@@ -1,4 +1,4 @@
-WAKEONLAN(1)                                                                  User Contributed Perl Documentation                                                                  WAKEONLAN(1)
+WAKEONLAN(1)                                                                User Contributed Perl Documentation                                                               WAKEONLAN(1)
 
 NAME
        wakeonlan - Perl script to wake up computers
@@ -7,10 +7,11 @@ SYNOPSIS
        wakeonlan [-h] [-v] [-i IP_address] [-p port] [-f file] [[hardware_address] ...]
 
 DESCRIPTION
-       This script sends 'magic packets' to wake-on-lan enabled ethernet adapters and motherboards, in order to switch on the called PC. Be sure to connect the NIC with the motherboard if
-       neccesary, and enable the WOL function in the BIOS.
+       This script sends 'magic packets' to wake-on-lan enabled ethernet adapters and motherboards, in order to switch on the called PC. Be sure to connect the NIC with the motherboard
+       if neccesary, and enable the WOL function in the BIOS.
 
-       The 'magic packet' consists of 6 times 0xFF followed by 16 times the hardware address of the NIC. This sequence can be encapsulated in any kind of packet. This script uses UDP packets.
+       The 'magic packet' consists of 6 times 0xFF followed by 16 times the hardware address of the NIC. This sequence can be encapsulated in any kind of packet. This script uses UDP
+       packets.
 
 OPTIONS
        -h  Displays the help information.
@@ -63,4 +64,4 @@ POD ERRORS
        Around line 250:
            Non-ASCII character seen before =encoding in 'José'. Assuming CP1252
 
-perl v5.32.0                                                                               2021-01-01                                                                              WAKEONLAN(1)
+perl v5.32.0                                                                            2021-01-01                                                                            WAKEONLAN(1)

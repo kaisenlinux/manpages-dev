@@ -1,4 +1,4 @@
-bdeinfo                                                                                      LOCAL                                                                                      bdeinfo
+bdeinfo                                                                                    LOCAL                                                                                   bdeinfo
 
 NAME
      bdeinfo — determines information about a BitLocker Drive Encrypted (BDE) volume
@@ -71,10 +71,10 @@ AUTHOR
      These man pages were written by Joachim Metz.
 
 COPYRIGHT
-     Copyright (C) 2011-2019, Joachim Metz <joachim.metz@gmail.com>.  This is free software; see the source for copying conditions. There is NO warranty; not even for MERCHANTABILITY or FIT‐
-     NESS FOR A PARTICULAR PURPOSE.
+     Copyright (C) 2011-2019, Joachim Metz <joachim.metz@gmail.com>.  This is free software; see the source for copying conditions. There is NO warranty; not even for MERCHANTABILITY or
+     FITNESS FOR A PARTICULAR PURPOSE.
 
 SEE ALSO
      bdemount(1)
 
-libbde                                                                                  August 31, 2014                                                                                  libbde
+libbde                                                                                August 31, 2014                                                                               libbde

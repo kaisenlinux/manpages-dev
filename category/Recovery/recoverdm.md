@@ -1,4 +1,4 @@
-recoverdm(1)                                                              recover files on disks with damaged sectors                                                              recoverdm(1)
+recoverdm(1)                                                            recover files on disks with damaged sectors                                                           recoverdm(1)
 
 NAME
        recoverdm - recover files on disks with damaged sectors
@@ -8,11 +8,11 @@ SYNOPSIS
                  [-s rotation_speed] [-r retries] [-b start_offset] [-p skip_blocks_count]
 
 DESCRIPTION
-       recoverdm  recover  disks  with bad sectors. You can recover files as well complete devices. In case it finds sectors which simply cannot be recovered, it writes an empty sector to the
-       output file and continues.
+       recoverdm  recover  disks with bad sectors. You can recover files as well complete devices. In case it finds sectors which simply cannot be recovered, it writes an empty sector to
+       the output file and continues.
 
-       When recovering a CD or a DVD and the program cannot read the sector in "normal mode", then the program will try to read the sector in "RAW mode" (without error  checking  etc.).  This
-       toolkit also has a utility called mergebad which merges multiple images into one.
+       When recovering a CD or a DVD and the program cannot read the sector in "normal mode", then the program will try to read the sector in "RAW mode" (without  error  checking  etc.).
+       This toolkit also has a utility called mergebad which merges multiple images into one.
 
 OPTIONS
        -t <type>
@@ -64,4 +64,4 @@ AUTHOR
 
        This manual page was written by Joao Eriberto Mota Filho <eriberto@debian.org> for the Debian project (but may be used by others).
 
-RECOVERDM 0.20                                                                              Jul 2015                                                                               recoverdm(1)
+RECOVERDM 0.20                                                                           Jul 2015                                                                             recoverdm(1)

@@ -1,4 +1,4 @@
-gfs2_lockcapture(8)                                                                 System Manager's Manual                                                                 gfs2_lockcapture(8)
+gfs2_lockcapture(8)                                                               System Manager's Manual                                                              gfs2_lockcapture(8)
 
 NAME
        gfs2_lockcapture - capture locking information from GFS2 file systems and DLM.
@@ -9,8 +9,8 @@ SYNOPSIS
        gfs2_lockcapture [-dqyi]
 
 DESCRIPTION
-       gfs2_lockcapture  is  used  to capture the GFS2 lockdump data and corresponding DLM data for GFS2 file systems. The number of captures and their frequency can be configured. By default
-       all of the mounted GFS2 file systems will have their data collected unless GFS2 file systems are specified.
+       gfs2_lockcapture  is  used to capture the GFS2 lockdump data and corresponding DLM data for GFS2 file systems. The number of captures and their frequency can be configured. By de‐
+       fault all of the mounted GFS2 file systems will have their data collected unless GFS2 file systems are specified.
 
        Please note that sysrq -t (thread) and -m (memory) dumps and the pid directories in /proc are collected unless they are disabled with the -P option.
 
@@ -84,4 +84,4 @@ FILES
        /var/log/cluster/
 
 SEE ALSO
-                                                                                                                                                                            gfs2_lockcapture(8)
+                                                                                                                                                                       gfs2_lockcapture(8)

@@ -1,4 +1,4 @@
-TESTDISK(8)                                                                           Administration Tools                                                                          TESTDISK(8)
+TESTDISK(8)                                                                        Administration Tools                                                                        TESTDISK(8)
 
 NAME
        testdisk - Scan and repair disk partitions
@@ -59,4 +59,4 @@ AUTHOR
        Christophe GRENIER <grenier@cgsecurity.org>
        https://www.cgsecurity.org
 
-2019                                                                                          July                                                                                  TESTDISK(8)
+2019                                                                                       July                                                                                TESTDISK(8)

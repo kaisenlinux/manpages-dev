@@ -1,4 +1,4 @@
-qtop(1)                                                                                  User Commands                                                                                  qtop(1)
+qtop(1)                                                                                User Commands                                                                               qtop(1)
 
 NAME
        qtop - A graphical alternative to show the running processes.
@@ -52,4 +52,4 @@ SEE ALSO
 
        should give you access to the complete manual.
 
-qtop 2.3.4                                                                                 June 2015                                                                                    qtop(1)
+qtop 2.3.4                                                                               June 2015                                                                                 qtop(1)

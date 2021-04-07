@@ -1,4 +1,4 @@
-xfs_estimate(8)                                                                     System Manager's Manual                                                                     xfs_estimate(8)
+xfs_estimate(8)                                                                   System Manager's Manual                                                                  xfs_estimate(8)
 
 NAME
        xfs_estimate - estimate the space that an XFS filesystem will take
@@ -9,8 +9,8 @@ SYNOPSIS
        xfs_estimate -V
 
 DESCRIPTION
-       For  each directory argument, xfs_estimate estimates the space that directory would take if it were copied to an XFS filesystem.  xfs_estimate does not cross mount points.  The follow‐
-       ing definitions are used:
+       For  each  directory  argument,  xfs_estimate estimates the space that directory would take if it were copied to an XFS filesystem.  xfs_estimate does not cross mount points.  The
+       following definitions are used:
               KB = *1024
               MB = *1024*1024
               GB = *1024*1024*1024
@@ -29,8 +29,8 @@ DESCRIPTION
        -h     Display usage message.
 
        -i, -e logsize
-              Use logsize instead of the default log size of 1000 blocks.  -i refers to an internal log, while -e refers to an external log.  The modifiers k or m can be used after the number
-              to indicate multiplication by 1024 or 1048576, respectively.
+              Use logsize instead of the default log size of 1000 blocks.  -i refers to an internal log, while -e refers to an external log.  The modifiers k or m can be used  after  the
+              number to indicate multiplication by 1024 or 1048576, respectively.
 
               For example,
 
@@ -56,4 +56,4 @@ EXAMPLES
        % xfs_estimate /var/tmp
        /var/tmp will take about 14.0 megabytes
 
-                                                                                                                                                                                xfs_estimate(8)
+                                                                                                                                                                           xfs_estimate(8)

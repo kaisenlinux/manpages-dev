@@ -1,4 +1,4 @@
-BTRFSTUNE(8)                                                                              Btrfs Manual                                                                             BTRFSTUNE(8)
+BTRFSTUNE(8)                                                                           Btrfs Manual                                                                           BTRFSTUNE(8)
 
 NAME
        btrfstune - tune various filesystem parameters
@@ -9,8 +9,9 @@ SYNOPSIS
 DESCRIPTION
        btrfstune can be used to enable, disable, or set various filesystem parameters. The filesystem must be unmounted.
 
-       The common usecase is to enable features that were not enabled at mkfs time. Please make sure that you have kernel support for the features. You can find a complete list of features
-       and kernel version of their introduction at https://btrfs.wiki.kernel.org/index.php/Changelog#By_feature . Also, the manual page mkfs.btrfs(8) contains more details about the features.
+       The common usecase is to enable features that were not enabled at mkfs time. Please make sure that you have kernel support for the features. You can find a complete list of
+       features and kernel version of their introduction at https://btrfs.wiki.kernel.org/index.php/Changelog#By_feature . Also, the manual page mkfs.btrfs(8) contains more details about
+       the features.
 
        Some of the features could be also enabled on a mounted filesystem by other means. Please refer to the FILESYSTEM FEATURES in btrfs(5).
 
@@ -49,11 +50,11 @@ OPTIONS
            A seeding filesystem is forced to be mounted read-only. A new device can be added to the filesystem and will capture all writes keeping the seeding device intact.
 
                Warning
-               Clearing the seeding flag on a device may be dangerous. If a previously-seeding device is changed, all filesystems that used that device will become unmountable. Setting the
-               seeding flag back will not fix that.
+               Clearing the seeding flag on a device may be dangerous. If a previously-seeding device is changed, all filesystems that used that device will become unmountable. Setting
+               the seeding flag back will not fix that.
 
-               A valid usecase is seeding device as a base image. Clear the seeding flag, update the filesystem and make it seeding again, provided that it’s OK to throw away all filesystems
-               built on top of the previous base.
+               A valid usecase is seeding device as a base image. Clear the seeding flag, update the filesystem and make it seeding again, provided that it’s OK to throw away all
+               filesystems built on top of the previous base.
 
        -u
            Change fsid to a randomly generated UUID or continue previous fsid change operation in case it was interrupted.
@@ -61,8 +62,8 @@ OPTIONS
        -U <UUID>
            Change fsid to UUID in all metadata blocks.
 
-           The UUID should be a 36 bytes string in printf(3) format "%08x-%04x-%04x-%04x-%012x". If there is a previous unfinished fsid change, it will continue only if the UUID matches the
-           unfinished one or if you use the option -u.
+           The UUID should be a 36 bytes string in printf(3) format "%08x-%04x-%04x-%04x-%012x". If there is a previous unfinished fsid change, it will continue only if the UUID matches
+           the unfinished one or if you use the option -u.
 
            All metadata blocks are rewritten, this may take some time, but the final filesystem compatibility is unaffected, unlike -M.
 
@@ -80,10 +81,10 @@ EXIT STATUS
        btrfstune returns 0 if no error happened, 1 otherwise.
 
 COMPATIBILITY NOTE
-       This deprecated tool exists for historical reasons but is still in use today. Its functionality will be merged to the main tool, at which time btrfstune will be declared obsolete and
-       scheduled for removal.
+       This deprecated tool exists for historical reasons but is still in use today. Its functionality will be merged to the main tool, at which time btrfstune will be declared obsolete
+       and scheduled for removal.
 
 SEE ALSO
        btrfs(5), btrfs-balance(8), mkfs.btrfs(8)
 
-Btrfs v5.10.1                                                                              02/05/2021                                                                              BTRFSTUNE(8)
+Btrfs v5.10.1                                                                           02/05/2021                                                                            BTRFSTUNE(8)

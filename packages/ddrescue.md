@@ -1,4 +1,4 @@
-DDRESCUE(1)                                                                              User Commands                                                                              DDRESCUE(1)
+DDRESCUE(1)                                                                            User Commands                                                                           DDRESCUE(1)
 
 NAME
        ddrescue - data recovery tool
@@ -9,8 +9,8 @@ SYNOPSIS
 DESCRIPTION
        GNU ddrescue - Data recovery tool.  Copies data from one file or block device to another, trying to rescue the good parts first in case of read errors.
 
-       Always  use a mapfile unless you know you won't need it. Without a mapfile, ddrescue can't resume a rescue, only reinitiate it.  NOTE: In versions of ddrescue prior to 1.20 the mapfile
-       was called 'logfile'. The format is the same; only the name has changed.
+       Always  use  a  mapfile  unless you know you won't need it. Without a mapfile, ddrescue can't resume a rescue, only reinitiate it.  NOTE: In versions of ddrescue prior to 1.20 the
+       mapfile was called 'logfile'. The format is the same; only the name has changed.
 
        If you reboot, check the device names before restarting ddrescue.  Don't use options '-F' or '-G' without reading the manual first.
 
@@ -179,11 +179,11 @@ OPTIONS
        --same-file
               allow infile and outfile to be the same file
 
-       Numbers may be in decimal, hexadecimal or octal, and may be followed by a multiplier: s = sectors, k = 1000, Ki = 1024, M = 10^6, Mi = 2^20, etc...   Time  intervals  have  the  format
+       Numbers may be in decimal, hexadecimal or octal, and may be followed by a multiplier: s = sectors, k = 1000, Ki = 1024, M = 10^6, Mi = 2^20, etc...  Time intervals have the format
        1[.5][smhd] or 1/2[smhd].
 
-       Exit  status:  0 for a normal exit, 1 for environmental problems (file not found, invalid flags, I/O errors, etc), 2 to indicate a corrupt or invalid input file, 3 for an internal con‐
-       sistency error (eg, bug) which caused ddrescue to panic.
+       Exit  status:  0 for a normal exit, 1 for environmental problems (file not found, invalid flags, I/O errors, etc), 2 to indicate a corrupt or invalid input file, 3 for an internal
+       consistency error (eg, bug) which caused ddrescue to panic.
 
 REPORTING BUGS
        Report bugs to bug-ddrescue@gnu.org
@@ -201,4 +201,4 @@ SEE ALSO
 
        should give you access to the complete manual.
 
-ddrescue 1.23                                                                            February 2018                                                                              DDRESCUE(1)
+ddrescue 1.23                                                                          February 2018                                                                           DDRESCUE(1)

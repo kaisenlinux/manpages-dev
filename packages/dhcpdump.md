@@ -1,4 +1,4 @@
-DHCPDUMP(8)                                                                        User Contributed Software                                                                        DHCPDUMP(8)
+DHCPDUMP(8)                                                                      User Contributed Software                                                                     DHCPDUMP(8)
 
 NAME
        dhcpdump - DHCP packet dumper
@@ -43,8 +43,8 @@ OUTPUT
                                                     58 (T1)
                                                     59 (T2)
 
-       At the option field, the first field is the value of the option, the second one (between brackets) is the length of the option-datafield, the third field is the name of the option, the
-       fourth field is the data of the option.
+       At the option field, the first field is the value of the option, the second one (between brackets) is the length of the option-datafield, the third field is the name of the
+       option, the fourth field is the data of the option.
 
 RETURN VALUES
        Always 0.
@@ -53,8 +53,8 @@ NOTES
        Privileged access is often needed for accessing the interface.
 
 BUGS
-       Not all the parameter options are printed verbose, because of lack of documentation. Not all the options are tested, because of lack of clients/servers with these options. If you have
-       a dump of one of them, please send them to me and I'll incorperate them.
+       Not all the parameter options are printed verbose, because of lack of documentation. Not all the options are tested, because of lack of clients/servers with these options. If you
+       have a dump of one of them, please send them to me and I'll incorperate them.
 
 THANKS TO
        Ralph Droms and Ted Lemons "The DHCP Handbook", ISBN 1-57870-137-6.
@@ -67,4 +67,4 @@ AUTHOR
 SEE ALSO
        dhcpd(8), tcpdump(1), RFC2132
 
-perl v5.28.1                                                                              23 June 2008                                                                              DHCPDUMP(8)
+perl v5.28.1                                                                           23 June 2008                                                                            DHCPDUMP(8)

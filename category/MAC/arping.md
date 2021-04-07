@@ -1,4 +1,4 @@
-ARPING(8)                                                                                   iputils                                                                                   ARPING(8)
+ARPING(8)                                                                                 iputils                                                                                ARPING(8)
 
 NAME
        arping - send ARP REQUEST to a neighbour host
@@ -68,4 +68,4 @@ SECURITY
 AVAILABILITY
        arping is part of iputils package.
 
-iputils 20210202                                                                                                                                                                      ARPING(8)
+iputils 20210202                                                                                                                                                                 ARPING(8)

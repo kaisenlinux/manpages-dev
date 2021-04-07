@@ -1,4 +1,4 @@
-fuse-zip(1)                                                             FUSE filesystem to read and modify ZIP archives                                                             fuse-zip(1)
+fuse-zip(1)                                                           FUSE filesystem to read and modify ZIP archives                                                          fuse-zip(1)
 
 NAME
        fuse-zip - a FUSE filesystem for zip archives with write support
@@ -27,13 +27,13 @@ OPTIONS
        See FUSE documentation for details.
 
 DESCRIPTION
-       fuse-zip  is a FUSE filesystem, that enables any program to work with a ZIP archive as though it is a plain directory.  Unlike KIO or Gnome VFS, it can be used in any application with‐
-       out modifications.
+       fuse-zip  is  a FUSE filesystem, that enables any program to work with a ZIP archive as though it is a plain directory.  Unlike KIO or Gnome VFS, it can be used in any application
+       without modifications.
 
        Unlike other FUSE filesystems, only fuse-zip provides write support to ZIP archives.  Also, fuse-zip is faster that all known implementations on large archives with many files.
 
-       Since version 0.3.0 fuse-zip has support for absolute and parent-relative paths in file names, but only in read-only mode (-r command line switch). Absolute paths are  displayed  under
-       "ROOT" directory, every ".." in path replaced by "UP" in directory name and "normal" files are placed under "CUR" directory.
+       Since version 0.3.0 fuse-zip has support for absolute and parent-relative paths in file names, but only in read-only mode (-r command line switch). Absolute  paths  are  displayed
+       under "ROOT" directory, every ".." in path replaced by "UP" in directory name and "normal" files are placed under "CUR" directory.
 
        Support for UNIX file permissions and owner information has been added in version 0.4.0. See PERMISSIONS for details.
 
@@ -60,11 +60,11 @@ SEE ALSO
        fusermount(1), mount.fuse(8).
 
 LICENSE
-       This is Free Software; this software is licensed under the GPL version 3, as published by the Free Software Foundation, or later.  There is NO warranty; not even for MERCHANTABILITY or
-       FITNESS FOR A PARTICULAR PURPOSE.
+       This is Free Software; this software is licensed under the GPL version 3, as published by the Free Software Foundation, or later.  There is NO warranty; not even for MERCHANTABIL‐
+       ITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 AUTHORS
        Alexander Galanin <al@galanin.nnov.ru> http://galanin.nnov.ru/~al
        This manual page was originally written by Kirill Zaitsev <teferiincub@gmail.com>. Updated by Alexander Galanin.
 
-FUSE filesystem to read and modify ZIP archives                                          December 2018                                                                              fuse-zip(1)
+FUSE filesystem to read and modify ZIP archives                                        December 2018                                                                           fuse-zip(1)

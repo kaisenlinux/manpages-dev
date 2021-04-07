@@ -1,4 +1,4 @@
-man(8)                                                                                hfsprescue man page                                                                                man(8)
+man(8)                                                                              hfsprescue man page                                                                             man(8)
 
 NAME
        hfsprescue - recover files from a HFS+ file system
@@ -10,8 +10,8 @@ SYNOPSIS
 
        hfsprescue -s2 [--utf8len <value 1 to 5>] [--future-days <days>] [-d <working directory>]
 
-       hfsprescue -s3 <device node|image file> [-b <block size>] [-o <offset in bytes>] [-d <working directory>] [--vh-file <file name>] [--eof-file <file name>] [--ignore-eof] [-c <file num‐
-       ber>] [--file-list <file name>] [--file-list-csv <file name>] [--alternative] [--ignore-blocks] [--ignore-file-error]
+       hfsprescue -s3 <device node|image file> [-b <block size>] [-o <offset in bytes>] [-d <working directory>] [--vh-file <file name>] [--eof-file <file name>] [--ignore-eof] [-c <file
+       number>] [--file-list <file name>] [--file-list-csv <file name>] [--alternative] [--ignore-blocks] [--ignore-file-error]
 
        hfsprescue -s4 [-d <working directory>]
 
@@ -25,12 +25,13 @@ SYNOPSIS
 
        hfsprescue --csv <file name> [--slash] [-d <working directory>]
 
-       hfsprescue --one-file <device node|image file> <file number> [-b <block size>] [-o <offset in bytes>] [-d <working directory>] [--vh-file <file name>] [--eof-file <file  name>]  [--ig‐
-       nore-eof] [--alternative]
+       hfsprescue --one-file <device node|image file> <file number> [-b <block size>] [-o <offset in bytes>] [-d <working directory>] [--vh-file <file  name>]  [--eof-file  <file  name>]
+       [--ignore-eof] [--alternative]
 
        hfsprescue --find-eof [-b <block size>] [-o <offset in bytes>] [--vh-file <file name>]
 
-       hfsprescue --extract-eof <device node|image file> [ [--start-block <number>] < [--last-block <number>] | [--num-blocks <number>] > ] [--eof-file <output file>] [--vh-file <file name>]
+       hfsprescue  --extract-eof  <device  node|image file> [ [--start-block <number>] < [--last-block <number>] | [--num-blocks <number>] > ] [--eof-file <output file>] [--vh-file <file
+       name>]
 
        hfsprescue --find-vh [-o <offset in bytes>] [--first] [-f|--force] [-v|--verbose]
 
@@ -41,12 +42,12 @@ SYNOPSIS
        hfsprescue --remove-empty-dirs [--dir <directory>] [-f|--force]
 
 DESCRIPTION
-       hfsprescue  scans a damaged image file or partition that is formatted with HFS+. You can restore your files and directories, even when it's not possible to mount it with your operating
-       system. Your files and directories will be stored in the directory './restored' in your current directory. The HFS+ file or partition will not be changed. So you need enough  space  to
-       copy out the files from the HFS+ file system. hfsprescue supports HFS+ compression (resource fork).
+       hfsprescue scans a damaged image file or partition that is formatted with HFS+. You can restore your files and directories, even when it's not possible to mount it with your oper‐
+       ating system. Your files and directories will be stored in the directory './restored' in your current directory. The HFS+ file or partition will not be changed. So you need enough
+       space to copy out the files from the HFS+ file system. hfsprescue supports HFS+ compression (resource fork).
 
-       You  find  a complete reference, depending on your installation, in '/usr/share/hfsprescue', '/usr/local/share/hfsprescue' or '/opt/share/hfsprescue' in English and German as HTML, PDF
-       and TEXT.
+       You find a complete reference, depending on your installation, in '/usr/share/hfsprescue', '/usr/local/share/hfsprescue' or '/opt/share/hfsprescue' in English and German as  HTML,
+       PDF and TEXT.
 
 RESTORING FILES
        You have to complete 6 steps to restore your files:
@@ -61,8 +62,8 @@ RESTORING FILES
 
        3) Restore your files.
 
-       hfsprescue -s3 <device node|image file> [-b <block size>] [-o <offset in bytes>] [-d <working directory>] [--vh-file <file name>] [--eof-file <file name>] [-c <file  number>]  [--file-
-       list <file name>] [--alternative]
+       hfsprescue  -s3  <device  node|image  file>  [-b  <block size>] [-o <offset in bytes>] [-d <working directory>] [--vh-file <file name>] [--eof-file <file name>] [-c <file number>]
+       [--file-list <file name>] [--alternative]
 
        4) Restore your directory structure.
 
@@ -120,11 +121,12 @@ OPTIONS
               Run step 2. Remove duplicate and invalid file entries with wrong chars in the file name or a file date in the future.
 
        --utf8len <value 1 to 5>
-              Set  the  allowed  maximum char length of an UTF-8 char. File names that have invlaid chars will be removed. Values from 1 to 5 are allowed. 1 is the default value and should be
-              fine. For file names with asian chars use 2. The values 3-5 should not be used.
+              Set the allowed maximum char length of an UTF-8 char. File names that have invlaid chars will be removed. Values from 1 to 5 are allowed. 1 is the default value and  should
+              be fine. For file names with asian chars use 2. The values 3-5 should not be used.
 
        --future-days <days>
-              Set the allowed tollerance for future file dates. The default value is 7 days. Files with a date more in the future will be removed. Usually, those files are false detection.
+              Set  the  allowed tollerance for future file dates. The default value is 7 days. Files with a date more in the future will be removed. Usually, those files are false detec‐
+              tion.
 
        -d <working directory>
               Use the directory instead of the current working directory.
@@ -192,8 +194,8 @@ OPTIONS
               This parameter lists all files that have been found. You can run this after you completed Step 2.
 
        --slash
-              Mac OS X allows the char '/' in file names in the GUI. For directory compatibility, '/' is converted to ':'. Use --slash when you want to display the '/' in the  file  name  in‐
-              stead of ':'. Maybe when you search a file name which has '/'.
+              Mac OS X allows the char '/' in file names in the GUI. For directory compatibility, '/' is converted to ':'. Use --slash when you want to display the '/' in the  file  name
+              instead of ':'. Maybe when you search a file name which has '/'.
 
        -d <working directory>
               Use the directory instead of the current working directory.
@@ -204,8 +206,8 @@ OPTIONS
               Export the file list to a CSV file. You can run this after you completed Step 2.
 
        --slash
-              Mac OS X allows the char '/' in file names in the GUI. For directory compatibility, '/' is converted to ':'. Use --slash when you want to export the '/' in the file name instead
-              of ':'.
+              Mac  OS  X  allows the char '/' in file names in the GUI. For directory compatibility, '/' is converted to ':'. Use --slash when you want to export the '/' in the file name
+              instead of ':'.
 
        -d <working directory>
               Use the directory instead of the current working directory.
@@ -287,12 +289,12 @@ SEE ALSO
        hfsprescue.txt hfsprescue.pdf https://www.plop.at
 
 BUGS
-       Unicode to UTF-8 conversion is not fully supported. There are problems with accents on non Mac OS X systems. When you restore on another system than Mac OS X, then the  accents  should
-       be corrected when you copy the restored files to a HFS+ file system.
+       Unicode to UTF-8 conversion is not fully supported. There are problems with accents on non Mac OS X systems. When you restore on another system than Mac OS  X,  then  the  accents
+       should be corrected when you copy the restored files to a HFS+ file system.
 
        This bug will be fixed maybe in a further version.
 
 AUTHOR
        Elmar Hanlhofer (office@plop.at) https://www.plop.at
 
-3.5                                                                                       25 Sep 2020                                                                                    man(8)
+3.5                                                                                     25 Sep 2020                                                                                 man(8)

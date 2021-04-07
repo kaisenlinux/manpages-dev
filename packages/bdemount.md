@@ -1,4 +1,4 @@
-bdemount                                                                                     LOCAL                                                                                     bdemount
+bdemount                                                                                   LOCAL                                                                                  bdemount
 
 NAME
      bdemount — mounts a BitLocker Drive Encryption (BDE) encrypted volume
@@ -59,10 +59,10 @@ AUTHOR
      These man pages were written by Joachim Metz.
 
 COPYRIGHT
-     Copyright (C) 2011-2019, Joachim Metz <joachim.metz@gmail.com>.  This is free software; see the source for copying conditions. There is NO warranty; not even for MERCHANTABILITY or FIT‐
-     NESS FOR A PARTICULAR PURPOSE.
+     Copyright (C) 2011-2019, Joachim Metz <joachim.metz@gmail.com>.  This is free software; see the source for copying conditions. There is NO warranty; not even for MERCHANTABILITY or
+     FITNESS FOR A PARTICULAR PURPOSE.
 
 SEE ALSO
      bdeinfo(1)
 
-libbde                                                                                  August 31, 2014                                                                                  libbde
+libbde                                                                                August 31, 2014                                                                               libbde

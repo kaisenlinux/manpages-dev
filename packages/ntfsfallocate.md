@@ -1,4 +1,4 @@
-NTFSFALLOCATE(8)                                                                    System Manager's Manual                                                                    NTFSFALLOCATE(8)
+NTFSFALLOCATE(8)                                                                  System Manager's Manual                                                                 NTFSFALLOCATE(8)
 
 NAME
        ntfsfallocate - preallocate space to a file on an NTFS volume
@@ -10,9 +10,9 @@ DESCRIPTION
        ntfsfallocate preallocates space for any attribute of a file or directory, thus reserving space before actual contents is written. This is similar to fallocate(1).
 
 OPTIONS
-       Below  is  a summary of all the options that ntfsfallocate accepts.  Nearly all options have two equivalent names.  The short name is preceded by - and the long name is preceded by --.
-       Any single letter options, that don't take an argument, can be combined into a single command, e.g.  -fv is equivalent to -f -v.  Long named options can be abbreviated  to  any  unique
-       prefix of their name.
+       Below  is a summary of all the options that ntfsfallocate accepts.  Nearly all options have two equivalent names.  The short name is preceded by - and the long name is preceded by
+       --.  Any single letter options, that don't take an argument, can be combined into a single command, e.g.  -fv is equivalent to -f -v.  Long named options can be abbreviated to any
+       unique prefix of their name.
 
        -f, --force
               This will override some sensible defaults, such as not using a mounted volume.  Use this option with caution.
@@ -21,19 +21,20 @@ OPTIONS
               Show a list of options with a brief description of each one.
 
        -l, --length LENGTH
-              This  is  a  mandatory option to specify the number of bytes to preallocate.  It will be rounded up to a multiple of the cluster size.  A suffix of K, M, G, T, P or E may be ap‐
-              pended to mean a multiplicative factor of a power of 1000. Similarly a suffix of Ki, Mi, Gi, Ti, Pi or Ei may be appended to mean a multiplicative factor of a power of 1024.
+              This  is  a mandatory option to specify the number of bytes to preallocate.  It will be rounded up to a multiple of the cluster size.  A suffix of K, M, G, T, P or E may be
+              appended to mean a multiplicative factor of a power of 1000. Similarly a suffix of Ki, Mi, Gi, Ti, Pi or Ei may be appended to mean a multiplicative factor of  a  power  of
+              1024.
 
        -n, --no-size-change
-              Do not change the apparent size of the file. The space allocated beyond the apparent size is not zeroed, but subsequent writing beyond the apparent end of file will force  zero‐
-              ing the inner allocated space as it cannot be considered as a hole any more, and this may take significant time.
+              Do  not  change the apparent size of the file. The space allocated beyond the apparent size is not zeroed, but subsequent writing beyond the apparent end of file will force
+              zeroing the inner allocated space as it cannot be considered as a hole any more, and this may take significant time.
 
        -N, --no-action
               Simulate the allocation without actually write to device.
 
        -o, --offset OFFSET
-              Specify  the  offset in the file where preallocation starts. By default, the preallocation is counted from the beginning of the file. Space already allocated in the area defined
-              by offset and length is preserved.
+              Specify the offset in the file where preallocation starts. By default, the preallocation is counted from the beginning of the file. Space already allocated in the area  de‐
+              fined by offset and length is preserved.
 
        -q, --quiet
               Suppress some debug/warning/error messages.
@@ -45,8 +46,8 @@ OPTIONS
               Show the version number, copyright and license of ntfsfallocate.
 
        attr-type
-              Define a particular attribute type to be preallocated (advanced use only).  By default, the unnamed $DATA attribute (the contents of a plain file) will be preallocated. The  at‐
-              tribute has to be specified by a number in decimal or hexadecimal :
+              Define a particular attribute type to be preallocated (advanced use only).  By default, the unnamed $DATA attribute (the contents of a plain file) will be preallocated. The
+              attribute has to be specified by a number in decimal or hexadecimal :
 
               ┌───────────────────────────────────────────┐
               │Hex     Decimal   Name                     │
@@ -77,8 +78,8 @@ EXAMPLES
               ntfsfallocate -l 100M /dev/sda1 Data/database.db
 
 BUGS
-       There  are no known problems with ntfsfallocate, however it can lead to configurations not supported by Windows and Windows may crash (BSOD) when writing to preallocated clusters which
-       were not written to earlier. Files with preallocated space should be fully be written to before they are updated by Windows.
+       There are no known problems with ntfsfallocate, however it can lead to configurations not supported by Windows and Windows may crash (BSOD) when writing to  preallocated  clusters
+       which were not written to earlier. Files with preallocated space should be fully be written to before they are updated by Windows.
 
        If you find a bug in ntfsfallocate proper, please send an email describing the problem to the development team:
        ntfs-3g-devel@lists.sf.net
@@ -93,4 +94,4 @@ AVAILABILITY
 SEE ALSO
        ntfs-3g(8), ntfstruncate(8), ntfsprogs(8), fallocate(1)
 
-ntfs-3g 2017.3.23AR.3                                                                      June 2014                                                                           NTFSFALLOCATE(8)
+ntfs-3g 2017.3.23AR.3                                                                    June 2014                                                                        NTFSFALLOCATE(8)

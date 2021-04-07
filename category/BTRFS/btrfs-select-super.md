@@ -1,4 +1,4 @@
-BTRFS-SELECT-SUPER(8)                                                                     Btrfs Manual                                                                    BTRFS-SELECT-SUPER(8)
+BTRFS-SELECT-SUPER(8)                                                                  Btrfs Manual                                                                  BTRFS-SELECT-SUPER(8)
 
 NAME
        btrfs-select-super - overwrite primary superblock with a backup copy
@@ -7,8 +7,8 @@ SYNOPSIS
        btrfs-select-super -s number <device>
 
 DESCRIPTION
-       Destructively overwrite all copies of the superblock with a specified copy. This helps in certain cases, for example when write barriers were disabled during a power failure and not
-       all superblocks were written, or if the primary superblock is damaged, eg. accidentally overwritten.
+       Destructively overwrite all copies of the superblock with a specified copy. This helps in certain cases, for example when write barriers were disabled during a power failure and
+       not all superblocks were written, or if the primary superblock is damaged, eg. accidentally overwritten.
 
        The filesystem specified by device must not be mounted.
 
@@ -36,4 +36,4 @@ OPTIONS
 SEE ALSO
        btrfs-inspect-internal(8), btrfsck check(8)
 
-Btrfs v5.10.1                                                                              02/05/2021                                                                     BTRFS-SELECT-SUPER(8)
+Btrfs v5.10.1                                                                           02/05/2021                                                                   BTRFS-SELECT-SUPER(8)

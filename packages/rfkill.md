@@ -1,4 +1,4 @@
-RFKILL(8)                                                                            System Administration                                                                            RFKILL(8)
+RFKILL(8)                                                                          System Administration                                                                         RFKILL(8)
 
 NAME
        rfkill - tool for enabling and disabling wireless devices
@@ -9,11 +9,11 @@ SYNOPSIS
 DESCRIPTION
        rfkill lists, enabling and disabling wireless devices.
 
-       The  command  "list"  output  format  is deprecated and maintained for backward compatibility only. The new output format is the default when no command is specified or when the option
+       The command "list" output format is deprecated and maintained for backward compatibility only. The new output format is the default when no command is specified or when the option
        --output is used.
 
-       The default output is subject to change.  So whenever possible, you should avoid using default outputs in your scripts.  Always explicitly define expected columns by using the --output
-       option together with a columns list in environments where a stable output is required.
+       The default output is subject to change.  So whenever possible, you should avoid using default outputs in your scripts.  Always explicitly define expected  columns  by  using  the
+       --output option together with a columns list in environments where a stable output is required.
 
 OPTIONS
        -J, --json
@@ -42,8 +42,8 @@ COMMANDS
        event  Listen for rfkill events and display them on stdout.
 
        list [id|type ...]
-              List  the current state of all available devices.  The command output format is deprecated, see the section DESCRIPTION.  It is a good idea to check with list command id or type
-              scope is appropriate before setting block or unblock.  Special all type string will match everything.  Use of multiple id or type arguments is supported.
+              List  the current state of all available devices.  The command output format is deprecated, see the section DESCRIPTION.  It is a good idea to check with list command id or
+              type scope is appropriate before setting block or unblock.  Special all type string will match everything.  Use of multiple id or type arguments is supported.
 
        block id|type [...]
               Disable the corresponding device.
@@ -58,8 +58,8 @@ EXAMPLE
        rfkill block bluetooth uwb wimax wwan gps fm nfc
 
 AUTHORS
-       rfkill was originally written by Johannes Berg ⟨johannes@sipsolutions.net⟩ and Marcel Holtmann ⟨marcel@holtmann.org⟩.  The code has been later modified by Sami Kerola ⟨kerolasa@iki.fi⟩
-       and Karel Zak ⟨kzak@redhat.com⟩ for util-linux project.
+       rfkill was originally written by Johannes Berg ⟨johannes@sipsolutions.net⟩ and Marcel Holtmann ⟨marcel@holtmann.org⟩.  The code has been later modified by Sami  Kerola  ⟨kerolasa@
+       iki.fi⟩ and Karel Zak ⟨kzak@redhat.com⟩ for util-linux project.
 
        This manual page was written by Darren Salt ⟨linux@youmustbejoking.demon.co.uk⟩, for the Debian project (and may be used by others).
 
@@ -69,4 +69,4 @@ SEE ALSO
 AVAILABILITY
        The rfkill command is part of the util-linux package and is available from Linux Kernel Archive ⟨https://www.kernel.org/pub/linux/utils/util-linux/⟩.
 
-util-linux                                                                                 2017-07-06                                                                                 RFKILL(8)
+util-linux                                                                              2017-07-06                                                                               RFKILL(8)

@@ -1,4 +1,4 @@
-LOGROTATE(8)                                                                     System Administrator's Manual                                                                     LOGROTATE(8)
+LOGROTATE(8)                                                                   System Administrator's Manual                                                                  LOGROTATE(8)
 
 NAME
        logrotate ‐ rotates, compresses, and mails system logs
@@ -7,29 +7,29 @@ SYNOPSIS
        logrotate [--force] [--debug] [--state file] [--skip-state-lock] [--verbose] [--log file] [--mail command] config_file [config_file2 ...]
 
 DESCRIPTION
-       logrotate  is  designed to ease administration of systems that generate large numbers of log files.  It allows automatic rotation, compression, removal, and mailing of log files.  Each
-       log file may be handled daily, weekly, monthly, or when it grows too large.
+       logrotate  is  designed  to ease administration of systems that generate large numbers of log files.  It allows automatic rotation, compression, removal, and mailing of log files.
+       Each log file may be handled daily, weekly, monthly, or when it grows too large.
 
-       Normally, logrotate is run as a daily cron job.  It will not modify a log more than once in one day unless the criterion for that log is based on the log's size and logrotate is  being
-       run more than once each day, or unless the -f or --force option is used.
+       Normally, logrotate is run as a daily cron job.  It will not modify a log more than once in one day unless the criterion for that log is based on the log's size and  logrotate  is
+       being run more than once each day, or unless the -f or --force option is used.
 
-       Any  number  of config files may be given on the command line.  Later config files may override the options given in earlier files, so the order in which the logrotate config files are
-       listed is important.  Normally, a single config file which includes any other config files which are needed should be used.  See below for more information on how to  use  the  include
-       directive to accomplish this.  If a directory is given on the command line, every file in that directory is used as a config file.
+       Any  number of config files may be given on the command line.  Later config files may override the options given in earlier files, so the order in which the logrotate config files
+       are listed is important.  Normally, a single config file which includes any other config files which are needed should be used.  See below for more information on how to  use  the
+       include directive to accomplish this.  If a directory is given on the command line, every file in that directory is used as a config file.
 
-       If  no  command  line arguments are given, logrotate will print version and copyright information, along with a short usage summary.  If any errors occur while rotating logs, logrotate
-       will exit with non-zero status.
+       If  no command line arguments are given, logrotate will print version and copyright information, along with a short usage summary.  If any errors occur while rotating logs, logro‐
+       tate will exit with non-zero status.
 
 OPTIONS
        -f, --force
-              Tells logrotate to force the rotation, even if it doesn't think this is necessary.  Sometimes this is useful after adding new entries to a logrotate config file, or if  old  log
-              files have been removed by hand, as the new files will be created, and logging will continue correctly.
+              Tells logrotate to force the rotation, even if it doesn't think this is necessary.  Sometimes this is useful after adding new entries to a logrotate config file, or if  old
+              log files have been removed by hand, as the new files will be created, and logging will continue correctly.
 
        -d, --debug
               Turn on debug mode, which means that no changes are made to the logs and the logrotate state file is not updated.  Only debug messages are printed.
 
        -s, --state statefile
-              Tells  logrotate  to  use  an  alternate  state file.  This is useful if logrotate is being run as a different user for various sets of log files.  To prevent parallel execution
+              Tells  logrotate to use an alternate state file.  This is useful if logrotate is being run as a different user for various sets of log files.  To prevent parallel execution
               logrotate by default acquires a lock on the state file, if it cannot be acquired logrotate will exit with value 3.  The default state file is /var/lib/logrotate/status.
 
        --skip-state-lock
@@ -39,8 +39,8 @@ OPTIONS
               Turns on verbose mode, for example to display messages during rotation.
 
        -l, --log file
-              Tells logrotate to log verbose output into the log_file.  The verbose output logged to that file is the same as when running logrotate with -v switch.  The log file is overwrit‐
-              ten on every logrotate execution.
+              Tells logrotate to log verbose output into the log_file.  The verbose output logged to that file is the same as when running logrotate with -v  switch.   The  log  file  is
+              overwritten on every logrotate execution.
 
        -m, --mail command
               Tells logrotate which command to use when mailing logs.  This command should accept the following arguments:
@@ -60,9 +60,9 @@ OPTIONS
               Display version information.
 
 CONFIGURATION FILE
-       logrotate  reads  everything about the log files it should be handling from the series of configuration files specified on the command line.  Each configuration file can set global op‐
-       tions (local definitions override global ones, and later definitions override earlier ones) and specify logfiles to rotate.  Global options do not affect preceding include  directives.
-       A simple configuration file looks like this:
+       logrotate  reads everything about the log files it should be handling from the series of configuration files specified on the command line.  Each configuration file can set global
+       options (local definitions override global ones, and later definitions override earlier ones) and specify logfiles to rotate.  Global options do not affect preceding  include  di‐
+       rectives.  A simple configuration file looks like this:
 
        # sample logrotate configuration file
        compress
@@ -99,26 +99,26 @@ CONFIGURATION FILE
 
        ~/log/*.log {}
 
-       The first few lines set global options; in the example, logs are compressed after they are rotated.  Note that comments may appear anywhere in the config file as long as the first non-
-       whitespace character on the line is a #.
+       The first few lines set global options; in the example, logs are compressed after they are rotated.  Note that comments may appear anywhere in the config file as long as the first
+       non-whitespace character on the line is a #.
 
        Values are separated from directives by whitespace and/or an optional =.  Numbers must be specified in a format understood by strtoul(3).
 
-       The next section of the config file defines how to handle the log file /var/log/messages.  The log will go through five weekly rotations before being removed.  After the log  file  has
-       been rotated (but before the old version of the log has been compressed), the command /usr/bin/killall -HUP syslogd will be executed.
+       The next section of the config file defines how to handle the log file /var/log/messages.  The log will go through five weekly rotations before being removed.  After the log  file
+       has been rotated (but before the old version of the log has been compressed), the command /usr/bin/killall -HUP syslogd will be executed.
 
-       The next section defines the parameters for both /var/log/httpd/access.log and /var/log/httpd/error.log.  Each is rotated whenever it grows over 100 kilobytes in size, and the old logs
-       files are mailed (uncompressed) to recipient@example.org after going through 5 rotations, rather than being removed.  The sharedscripts means that the postrotate script  will  only  be
-       run  once  (after  the  old logs have been compressed), not once for each log which is rotated.  Note that log file names may be enclosed in quotes (and that quotes are required if the
-       name contains spaces).  Normal shell quoting rules apply, with ', ", and \ characters supported.
+       The next section defines the parameters for both /var/log/httpd/access.log and /var/log/httpd/error.log.  Each is rotated whenever it grows over 100 kilobytes in size, and the old
+       logs files are mailed (uncompressed) to recipient@example.org after going through 5 rotations, rather than being removed.  The sharedscripts means that the postrotate script  will
+       only  be  run  once (after the old logs have been compressed), not once for each log which is rotated.  Note that log file names may be enclosed in quotes (and that quotes are re‐
+       quired if the name contains spaces).  Normal shell quoting rules apply, with ', ", and \ characters supported.
 
        The next section defines the parameters for all of the files in /var/log/news. Each file is rotated on a monthly basis.
 
-       The last section uses tilde expansion to rotate log files in the home directory of the current user.  This is only available, if your glob library supports tilde expansion.   GNU  glob
-       does support this.
+       The last section uses tilde expansion to rotate log files in the home directory of the current user.  This is only available, if your glob library supports tilde  expansion.   GNU
+       glob does support this.
 
-       Please  use  wildcards  with caution.  If you specify *, logrotate will rotate all files, including previously rotated ones.  A way around this is to use the olddir directive or a more
-       exact wildcard (such as *.log).
+       Please  use  wildcards  with caution.  If you specify *, logrotate will rotate all files, including previously rotated ones.  A way around this is to use the olddir directive or a
+       more exact wildcard (such as *.log).
 
        Here is more information on the directives which may be included in a logrotate configuration file:
 
@@ -127,33 +127,33 @@ CONFIGURATION FILE DIRECTIVES
 
    Rotation
        rotate count
-              Log files are rotated count times before being removed or mailed to the address specified in a mail directive.  If count is 0, old versions are removed rather than rotated.   If
-              count is -1, old logs are not removed at all, except they are affected by maxage (use with caution, may waste performance and disk space).  Default is 0.
+              Log files are rotated count times before being removed or mailed to the address specified in a mail directive.  If count is 0, old versions are removed rather than rotated.
+              If count is -1, old logs are not removed at all, except they are affected by maxage (use with caution, may waste performance and disk space).  Default is 0.
 
        olddir directory
-              Logs  are  moved into directory for rotation.  The directory must be on the same physical device as the log file being rotated, unless copy, copytruncate or renamecopy option is
-              used.  The directory is assumed to be relative to the directory holding the log file unless an absolute path name is specified.  When this option is used all old versions of the
-              log end up in directory.  This option may be overridden by the noolddir option.
+              Logs are moved into directory for rotation.  The directory must be on the same physical device as the log file being rotated, unless copy, copytruncate or renamecopy option
+              is used.  The directory is assumed to be relative to the directory holding the log file unless an absolute path name is specified.  When this option is used  all  old  ver‐
+              sions of the log end up in directory.  This option may be overridden by the noolddir option.
 
        noolddir
               Logs are rotated in the directory they normally reside in (this overrides the olddir option).
 
        su user group
-              Rotate  log files set under this user and group instead of using default user/group (usually root).  user specifies the user used for rotation and group specifies the group used
-              for rotation (see the section USER AND GROUP for details).  If the user/group you specify here does not have sufficient privilege to make files with the ownership you've  speci‐
-              fied  in  a  create directive, it will cause an error.  If logrotate runs with root privileges, it is recommended to use the su directive to rotate files in directories that are
-              directly or indirectly in control of non-privileged users.
+              Rotate  log files set under this user and group instead of using default user/group (usually root).  user specifies the user used for rotation and group specifies the group
+              used for rotation (see the section USER AND GROUP for details).  If the user/group you specify here does not have sufficient privilege to  make  files  with  the  ownership
+              you've specified in a create directive, it will cause an error.  If logrotate runs with root privileges, it is recommended to use the su directive to rotate files in direc‐
+              tories that are directly or indirectly in control of non-privileged users.
 
    Frequency
-       hourly Log files are rotated every hour.  Note that usually logrotate is configured to be run by cron daily.  You have to change this configuration and run logrotate hourly to be  able
-              to really rotate logs hourly.
+       hourly Log files are rotated every hour.  Note that usually logrotate is configured to be run by cron daily.  You have to change this configuration and run logrotate hourly to  be
+              able to really rotate logs hourly.
 
        daily  Log files are rotated every day.
 
        weekly [weekday]
-              Log  files  are  rotated once each weekday, or if the date is advanced by at least 7 days since the last rotation (while ignoring the exact time).  The weekday interpretation is
-              following: 0 means Sunday, 1 means Monday, ..., 6 means Saturday; the special value 7 means each 7 days, irrespectively of weekday.  Defaults to 0 if  the  weekday  argument  is
-              omitted.
+              Log  files are rotated once each weekday, or if the date is advanced by at least 7 days since the last rotation (while ignoring the exact time).  The weekday interpretation
+              is following: 0 means Sunday, 1 means Monday, ..., 6 means Saturday; the special value 7 means each 7 days, irrespectively of weekday.  Defaults to 0 if the  weekday  argu‐
+              ment is omitted.
 
        monthly
               Log files are rotated the first time logrotate is run in a month (this is normally on the first day of the month).
@@ -161,9 +161,10 @@ CONFIGURATION FILE DIRECTIVES
        yearly Log files are rotated if the current year is not the same as the last rotation.
 
        size size
-              Log  files  are rotated only if they grow bigger than size bytes.  If size is followed by k, the size is assumed to be in kilobytes.  If the M is used, the size is in megabytes,
-              and if G is used, the size is in gigabytes. So size 100, size 100k, size 100M and size 100G are all valid.  This option is mutually exclusive with the time interval options, and
-              it causes log files to be rotated without regard for the last rotation time, if specified after the time criteria (the last specified option takes the precedence).
+              Log  files  are  rotated  only  if  they  grow  bigger than size bytes.  If size is followed by k, the size is assumed to be in kilobytes.  If the M is used, the size is in
+              megabytes, and if G is used, the size is in gigabytes. So size 100, size 100k, size 100M and size 100G are all valid.  This option is mutually exclusive with the  time  in‐
+              terval  options,  and it causes log files to be rotated without regard for the last rotation time, if specified after the time criteria (the last specified option takes the
+              precedence).
 
    File selection
        missingok
@@ -182,64 +183,66 @@ CONFIGURATION FILE DIRECTIVES
               Do not rotate logs which are less than <count> days old.
 
        maxage count
-              Remove  rotated  logs older than <count> days.  The age is only checked if the logfile is to be rotated.  rotate -1 does not hinder removal.  The files are mailed to the config‐
-              ured address if maillast and mail are configured.
+              Remove rotated logs older than <count> days.  The age is only checked if the logfile is to be rotated.  rotate -1 does not hinder removal.  The files are mailed to the con‐
+              figured address if maillast and mail are configured.
 
        minsize size
-              Log files are rotated when they grow bigger than size bytes, but not before the additionally specified time interval (daily, weekly, monthly, or yearly).  The related  size  op‐
-              tion  is  similar except that it is mutually exclusive with the time interval options, and it causes log files to be rotated without regard for the last rotation time, if speci‐
-              fied after the time criteria (the last specified option takes the precedence).  When minsize is used, both the size and timestamp of a log file are considered.
+              Log  files are rotated when they grow bigger than size bytes, but not before the additionally specified time interval (daily, weekly, monthly, or yearly).  The related size
+              option is similar except that it is mutually exclusive with the time interval options, and it causes log files to be rotated without regard for the last rotation  time,  if
+              specified after the time criteria (the last specified option takes the precedence).  When minsize is used, both the size and timestamp of a log file are considered.
 
        maxsize size
-              Log files are rotated when they grow bigger than size bytes even before the additionally specified time interval (daily, weekly, monthly, or yearly).  The related size option is
-              similar  except that it is mutually exclusive with the time interval options, and it causes log files to be rotated without regard for the last rotation time, if specified after
-              the time criteria (the last specified option takes the precedence).  When maxsize is used, both the size and timestamp of a log file are considered.
+              Log  files are rotated when they grow bigger than size bytes even before the additionally specified time interval (daily, weekly, monthly, or yearly).  The related size op‐
+              tion is similar except that it is mutually exclusive with the time interval options, and it causes log files to be rotated without regard for the  last  rotation  time,  if
+              specified after the time criteria (the last specified option takes the precedence).  When maxsize is used, both the size and timestamp of a log file are considered.
 
        tabooext [+] list
-              The current taboo extension list is changed (see the include directive for information on the taboo extensions).  If a + precedes the list of extensions, the current  taboo  ex‐
-              tension  list  is  augmented,  otherwise  it  is replaced.  At startup, the taboo extension list ,v, .cfsaved, .disabled, .dpkg-bak, .dpkg-del, .dpkg-dist, .dpkg-new, .dpkg-old,
-              .rhn-cfg-tmp-*, .rpmnew, .rpmorig, .rpmsave, .swp, .ucf-dist, .ucf-new, .ucf-old, ~
+              The  current taboo extension list is changed (see the include directive for information on the taboo extensions).  If a + precedes the list of extensions, the current taboo
+              extension list is augmented, otherwise it is replaced.  At startup, the  taboo  extension  list  ,v,  .cfsaved,  .disabled,  .dpkg-bak,  .dpkg-del,  .dpkg-dist,  .dpkg-new,
+              .dpkg-old, .rhn-cfg-tmp-*, .rpmnew, .rpmorig, .rpmsave, .swp, .ucf-dist, .ucf-new, .ucf-old, ~
 
        taboopat [+] list
-              The current taboo glob pattern list is changed (see the include directive for information on the taboo extensions and patterns).  If a + precedes the list of patterns, the  cur‐
-              rent taboo pattern list is augmented, otherwise it is replaced.  At startup, the taboo pattern list is empty.
+              The  current taboo glob pattern list is changed (see the include directive for information on the taboo extensions and patterns).  If a + precedes the list of patterns, the
+              current taboo pattern list is augmented, otherwise it is replaced.  At startup, the taboo pattern list is empty.
 
    Files and Folders
        create mode owner group, create owner group
-              Immediately  after rotation (before the postrotate script is run) the log file is created (with the same name as the log file just rotated).  mode specifies the mode for the log
-              file in octal (the same as chmod(2)), owner specifies the user who will own the log file, and group specifies the group the log file will belong to (see  the  section  USER  AND
-              GROUP  for  details).   Any  of the log file attributes may be omitted, in which case those attributes for the new file will use the same values as the original log file for the
-              omitted attributes.  This option can be disabled using the nocreate option.
+              Immediately after rotation (before the postrotate script is run) the log file is created (with the same name as the log file just rotated).  mode specifies the mode for the
+              log  file  in  octal  (the same as chmod(2)), owner specifies the user who will own the log file, and group specifies the group the log file will belong to (see the section
+              USER AND GROUP for details).  Any of the log file attributes may be omitted, in which case those attributes for the new file will use the same values as  the  original  log
+              file for the omitted attributes.  This option can be disabled using the nocreate option.
 
        nocreate
               New log files are not created (this overrides the create option).
 
        createolddir mode owner group
-              If the directory specified by olddir directive does not exist, it is created. mode specifies the mode for the olddir directory in octal (the same as chmod(2)),  owner  specifies
-              the user who will own the olddir directory, and group specifies the group the olddir directory will belong to (see the section USER AND GROUP
+              If the directory specified by olddir directive does not exist, it is created. mode specifies the mode for the olddir directory in octal (the same as chmod(2)), owner speci‐
+              fies the user who will own the olddir directory, and group specifies the group the olddir directory will belong to (see the section USER AND GROUP
                for details).  This option can be disabled using the nocreateolddir option.
 
        nocreateolddir
               olddir directory is not created by logrotate when it does not exist.
 
-       copy   Make a copy of the log file, but don't change the original at all.  This option can be used, for instance, to make a snapshot of the current log file, or when some other utility
-              needs to truncate or parse the file.  When this option is used, the create option will have no effect, as the old log file stays in place.
+       copy   Make a copy of the log file, but don't change the original at all.  This option can be used, for instance, to make a snapshot of the current log file, or  when  some  other
+              utility needs to truncate or parse the file.  When this option is used, the create option will have no effect, as the old log file stays in place.
 
        nocopy Do not copy the original log file and leave it in place.  (this overrides the copy option).
 
        copytruncate
-              Truncate the original log file to zero size in place after creating a copy, instead of moving the old log file and optionally creating a new one.  It can be used when some  pro‐
-              gram  cannot be told to close its logfile and thus might continue writing (appending) to the previous log file forever.  Note that there is a very small time slice between copy‐
-              ing the file and truncating it, so some logging data might be lost.  When this option is used, the create option will have no effect, as the old log file stays in place.
+              Truncate  the original log file to zero size in place after creating a copy, instead of moving the old log file and optionally creating a new one.  It can be used when some
+              program cannot be told to close its logfile and thus might continue writing (appending) to the previous log file forever.  Note that there is a very small  time  slice  be‐
+              tween copying the file and truncating it, so some logging data might be lost.  When this option is used, the create option will have no effect, as the old log file stays in
+              place.
 
        nocopytruncate
               Do not truncate the original log file in place after creating a copy (this overrides the copytruncate option).
 
        renamecopy
-              Log file is renamed to temporary filename in the same directory by adding ".tmp" extension to it.  After that, postrotate script is run and log file  is  copied  from  temporary
-              filename to final filename.  This allows storing rotated log files on the different devices using olddir directive. In the end, temporary filename is removed.
+              Log file is renamed to temporary filename in the same directory by adding ".tmp" extension to it.  After that, postrotate script is run and log file is copied  from  tempo‐
+              rary filename to final filename.  This allows storing rotated log files on the different devices using olddir directive. In the end, temporary filename is removed.
 
-       shred  Delete log files using shred -u instead of unlink().  This should ensure that logs are not readable after their scheduled deletion; this is off by default.  See also noshred.
+       shred  Delete  log  files  using  shred  -u  instead  of unlink().  This should ensure that logs are not readable after their scheduled deletion; this is off by default.  See also
+              noshred.
 
        noshred
               Do not use shred when deleting old log files.  See also shred.
@@ -264,49 +267,49 @@ CONFIGURATION FILE DIRECTIVES
               Specifies which extension to use on compressed logfiles, if compression is enabled.  The default follows that of the configured compression command.
 
        compressoptions
-              Command  line  options  may be passed to the compression program, if one is in use.  The default, for gzip(1), is "-6" (biased towards high compression at the expense of speed).
-              If you use a different compression command, you may need to change the compressoptions to match.
+              Command line options may be passed to the compression program, if one is in use.  The default, for gzip(1), is "-6" (biased towards  high  compression  at  the  expense  of
+              speed).  If you use a different compression command, you may need to change the compressoptions to match.
 
        delaycompress
-              Postpone compression of the previous log file to the next rotation cycle.  This only has effect when used in combination with compress.  It can be used when some program  cannot
-              be told to close its logfile and thus might continue writing to the previous log file for some time.
+              Postpone  compression  of  the previous log file to the next rotation cycle.  This only has effect when used in combination with compress.  It can be used when some program
+              cannot be told to close its logfile and thus might continue writing to the previous log file for some time.
 
        nodelaycompress
               Do not postpone compression of the previous log file to the next rotation cycle (this overrides the delaycompress option).
 
    Filenames
        extension ext
-              Log files with ext extension can keep it after the rotation.  If compression is used, the compression extension (normally .gz) appears after ext.  For example you have a logfile
-              named mylog.foo and want to rotate it to mylog.1.foo.gz instead of mylog.foo.1.gz.
+              Log files with ext extension can keep it after the rotation.  If compression is used, the compression extension (normally .gz) appears after ext.  For example  you  have  a
+              logfile named mylog.foo and want to rotate it to mylog.1.foo.gz instead of mylog.foo.1.gz.
 
        addextension ext
-              Log files are given the final extension ext after rotation.  If the original file already ends with ext, the extension is not duplicated, but merely moved to the  end,  that  is
-              both filename and filenameext would get rotated to filename.1ext.  If compression is used, the compression extension (normally .gz) appears after ext.
+              Log  files are given the final extension ext after rotation.  If the original file already ends with ext, the extension is not duplicated, but merely moved to the end, that
+              is both filename and filenameext would get rotated to filename.1ext.  If compression is used, the compression extension (normally .gz) appears after ext.
 
        start count
-              This is the number to use as the base for rotation.  For example, if you specify 0, the logs will be created with a .0 extension as they are rotated from the original log files.
-              If you specify 9, log files will be created with a .9, skipping 0–8.  Files will still be rotated the number of times specified with the rotate directive.
+              This is the number to use as the base for rotation.  For example, if you specify 0, the logs will be created with a .0 extension as they are rotated from the  original  log
+              files.  If you specify 9, log files will be created with a .9, skipping 0–8.  Files will still be rotated the number of times specified with the rotate directive.
 
        dateext
-              Archive old versions of log files adding a date extension like YYYYMMDD instead of simply adding a number.  The extension may be configured using the dateformat and  dateyester‐
-              day options.
+              Archive  old  versions  of  log  files  adding  a  date extension like YYYYMMDD instead of simply adding a number.  The extension may be configured using the dateformat and
+              dateyesterday options.
 
        nodateext
               Do not archive old versions of log files with date extension (this overrides the dateext option).
 
        dateformat format_string
-              Specify the extension for dateext using the notation similar to strftime(3) function.  Only %Y %m %d %H %M %S %V and %s specifiers are allowed.  The default value is -%Y%m%d ex‐
-              cept hourly, which uses -%Y%m%d%H as default value.  Note that also the character separating log name from the extension is part of the dateformat string.  The system clock must
-              be set past Sep 9th 2001 for %s to work correctly.  Note that the datestamps generated by this format must be lexically sortable (that is first the year, then the month then the
-              day.  For example 2001/12/01 is ok, but 01/12/2001 is not, since 01/11/2002 would sort lower while it is later).  This is because when using the rotate option,  logrotate  sorts
-              all rotated filenames to find out which logfiles are older and should be removed.
+              Specify the extension for dateext using the notation similar to strftime(3) function.  Only %Y %m %d %H %M %S %V and %s  specifiers  are  allowed.   The  default  value  is
+              -%Y%m%d  except  hourly,  which uses -%Y%m%d%H as default value.  Note that also the character separating log name from the extension is part of the dateformat string.  The
+              system clock must be set past Sep 9th 2001 for %s to work correctly.  Note that the datestamps generated by this format must be lexically sortable (that is first the  year,
+              then the month then the day.  For example 2001/12/01 is ok, but 01/12/2001 is not, since 01/11/2002 would sort lower while it is later).  This is because when using the ro‐
+              tate option, logrotate sorts all rotated filenames to find out which logfiles are older and should be removed.
 
        dateyesterday
               Use yesterday's instead of today's date to create the dateext extension, so that the rotated log file has a date in its name that is the same as the timestamps within it.
 
        datehourago
-              Use  hour  ago instead of current date to create the dateext extension, so that the rotated log file has a hour in its name that is the same as the timestamps within it.  Useful
-              with rotate hourly.
+              Use hour ago instead of current date to create the dateext extension, so that the rotated log file has a hour in its name that is the same  as  the  timestamps  within  it.
+              Useful with rotate hourly.
 
    Mail
        mail address
@@ -322,63 +325,63 @@ CONFIGURATION FILE DIRECTIVES
 
    Additional config files
        include file_or_directory
-              Reads the file given as an argument as if it was included inline where the include directive appears.  If a directory is given, most of the files in that directory are  read  in
-              alphabetic order before processing of the including file continues.  The only files which are ignored are files which are not regular files (such as directories and named pipes)
-              and files whose names end with one of the taboo extensions or patterns, as specified by the tabooext or taboopat directives, respectively.  The given path may start with  ~/  to
-              make it relative to the home directory of the executing user.  For security reasons configuration files must not be group-writable nor world-writable.
+              Reads the file given as an argument as if it was included inline where the include directive appears.  If a directory is given, most of the files in that directory are read
+              in alphabetic order before processing of the including file continues.  The only files which are ignored are files which are not regular  files  (such  as  directories  and
+              named  pipes) and files whose names end with one of the taboo extensions or patterns, as specified by the tabooext or taboopat directives, respectively.  The given path may
+              start with ~/ to make it relative to the home directory of the executing user.  For security reasons configuration files must not be group-writable nor world-writable.
 
    Scripts
        sharedscripts
-              Normally,  prerotate  and postrotate scripts are run for each log which is rotated and the absolute path to the log file is passed as first argument to the script.  That means a
-              single script may be run multiple times for log file entries which match multiple files (such as the /var/log/news/* example).  If sharedscripts is specified,  the  scripts  are
-              only  run  once,  no  matter  how many logs match the wildcarded pattern, and whole pattern is passed to them.  However, if none of the logs in the pattern require rotating, the
-              scripts will not be run at all.  If the scripts exit with error (or any log fails to rotate), the remaining actions will not be executed for any logs.  This option overrides the
-              nosharedscripts option.
+              Normally, prerotate and postrotate scripts are run for each log which is rotated and the absolute path to the log file is passed as first  argument  to  the  script.   That
+              means  a  single script may be run multiple times for log file entries which match multiple files (such as the /var/log/news/* example).  If sharedscripts is specified, the
+              scripts are only run once, no matter how many logs match the wildcarded pattern, and whole pattern is passed to them.  However, if none of the logs in the  pattern  require
+              rotating,  the  scripts will not be run at all.  If the scripts exit with error (or any log fails to rotate), the remaining actions will not be executed for any logs.  This
+              option overrides the nosharedscripts option.
 
        nosharedscripts
-              Run  prerotate  and  postrotate  scripts for every log file which is rotated (this is the default, and overrides the sharedscripts option).  The absolute path to the log file is
-              passed as first argument to the script.  The absolute path to the final rotated log file is passed as the second argument to the postrotate script.  If the scripts exit with er‐
-              ror, the remaining actions will not be executed for the affected log only.
+              Run prerotate and postrotate scripts for every log file which is rotated (this is the default, and overrides the sharedscripts option).  The absolute path to the  log  file
+              is  passed as first argument to the script.  The absolute path to the final rotated log file is passed as the second argument to the postrotate script.  If the scripts exit
+              with error, the remaining actions will not be executed for the affected log only.
 
        firstaction
            script
        endscript
-              The  script is executed once before all log files that match the wildcarded pattern are rotated, before the prerotate script is run and only if at least one log will actually be
-              rotated.  These directives may only appear inside a log file definition.  The whole pattern is passed to the script as its first argument. If the script exits with an error,  no
-              further processing is done.  See also lastaction and the SCRIPTS section.
+              The script is executed once before all log files that match the wildcarded pattern are rotated, before the prerotate script is run and only if at least one log  will  actu‐
+              ally  be rotated.  These directives may only appear inside a log file definition.  The whole pattern is passed to the script as its first argument. If the script exits with
+              an error, no further processing is done.  See also lastaction and the SCRIPTS section.
 
        lastaction
            script
        endscript
-              The script is executed once after all log files that match the wildcarded pattern are rotated, after the postrotate script is run and only if at least one log is rotated.  These
-              directives may only appear inside a log file definition.  The whole pattern is passed to the script as its first argument.  If the script exits with an error, just an error mes‐
-              sage is shown (as this is the last action).  See also firstaction and the SCRIPTS section.
+              The script is executed once after all log files that match the wildcarded pattern are rotated, after the postrotate script is run and only if at least one log  is  rotated.
+              These directives may only appear inside a log file definition.  The whole pattern is passed to the script as its first argument.  If the script exits with an error, just an
+              error message is shown (as this is the last action).  See also firstaction and the SCRIPTS section.
 
        prerotate
            script
        endscript
-              The  script  is  executed before the log file is rotated and only if the log will actually be rotated.  These directives may only appear inside a log file definition.  Normally,
-              the absolute path to the log file is passed as the first argument to the script.  If sharedscripts is specified, the whole pattern is passed to the script.  See also  postrotate
-              and the SCRIPTS section.  See sharedscripts and nosharedscripts for error handling.
+              The script is executed before the log file is rotated and only if the log will actually be rotated.  These directives may only appear inside a log  file  definition.   Nor‐
+              mally, the absolute path to the log file is passed as the first argument to the script.  If sharedscripts is specified, the whole pattern is passed to the script.  See also
+              postrotate and the SCRIPTS section.  See sharedscripts and nosharedscripts for error handling.
 
        postrotate
            script
        endscript
-              The  script  is executed after the log file is rotated.  These directives may only appear inside a log file definition.  Normally, the absolute path to the log file is passed as
-              the first argument to the script and the absolute path to the final rotated log file is passed as the second argument to the script.  If sharedscripts is  specified,  the  whole
-              pattern  is  passed  as the first argument to the script, and the second argument is omitted.  See also prerotate and the SCRIPTS section.  See sharedscripts and nosharedscripts
-              for error handling.
+              The script is executed after the log file is rotated.  These directives may only appear inside a log file definition.  Normally, the absolute path to the log file is passed
+              as  the first argument to the script and the absolute path to the final rotated log file is passed as the second argument to the script.  If sharedscripts is specified, the
+              whole pattern is passed as the first argument to the script, and the second argument is omitted.  See also  prerotate  and  the  SCRIPTS  section.   See  sharedscripts  and
+              nosharedscripts for error handling.
 
        preremove
            script
        endscript
-              The script is executed once just before removal of a log file.  logrotate will pass the name of file which is soon to be removed as the first argument to the  script.  See  also
-              firstaction and the SCRIPTS section.
+              The  script  is  executed once just before removal of a log file.  logrotate will pass the name of file which is soon to be removed as the first argument to the script. See
+              also firstaction and the SCRIPTS section.
 
 SCRIPTS
-       The  lines between the starting keyword (e.g. prerotate) and endscript (both of which must appear on lines by themselves) are executed (using /bin/sh).  The script inherits some traits
-       from the logrotate process, including stderr, stdout, the current directory, the environment, and the umask.  Scripts are run as the invoking user and group, irrespective of any su di‐
-       rective.  If the --log flag was specified, file descriptor 3 is the log file.
+       The lines between the starting keyword (e.g. prerotate) and endscript (both of which must appear on lines by themselves) are executed (using /bin/sh).  The  script  inherits  some
+       traits  from  the logrotate process, including stderr, stdout, the current directory, the environment, and the umask.  Scripts are run as the invoking user and group, irrespective
+       of any su directive.  If the --log flag was specified, file descriptor 3 is the log file.
 
 USER AND GROUP
        User and group identifiers are resolved first by trying the textual representation and, in case it fails, afterwards by the numeric value.
@@ -395,4 +398,4 @@ AUTHORS
 
        <https://github.com/logrotate/logrotate>
 
-Linux                                                                                        3.18.0                                                                                LOGROTATE(8)
+Linux                                                                                     3.18.0                                                                              LOGROTATE(8)

@@ -1,4 +1,4 @@
-AIRCRACK-NG(1)                                                                      General Commands Manual                                                                      AIRCRACK-NG(1)
+AIRCRACK-NG(1)                                                                    General Commands Manual                                                                   AIRCRACK-NG(1)
 
 NAME
        aircrack-ng - a 802.11 WEP / WPA-PSK key cracker
@@ -9,11 +9,12 @@ SYNOPSIS
 DESCRIPTION
        aircrack-ng is an 802.11 WEP, 802.11i WPA/WPA2, and 802.11w WPA2 key cracking program.
 
-       It  can  recover the WEP key once enough encrypted packets have been captured with airodump-ng. This part of the aircrack-ng suite determines the WEP key using two fundamental methods.
-       The first method is via the PTW approach (Pyshkin, Tews, Weinmann). The main advantage of the PTW approach is that very few data packets are required to crack the WEP key.  The  second
-       method is the FMS/KoreK method. The FMS/KoreK method incorporates various statistical attacks to discover the WEP key and uses these in combination with brute forcing.
+       It can recover the WEP key once enough encrypted packets have been captured with airodump-ng. This part of the aircrack-ng suite determines the WEP key using two fundamental meth‐
+       ods. The first method is via the PTW approach (Pyshkin, Tews, Weinmann). The main advantage of the PTW approach is that very few data packets are required to crack  the  WEP  key.
+       The second method is the FMS/KoreK method. The FMS/KoreK method incorporates various statistical attacks to discover the WEP key and uses these in combination with brute forcing.
 
-       Additionally, the program offers a dictionary method for determining the WEP key. For cracking WPA/WPA2 pre-shared keys, a wordlist (file or stdin) or an airolib-ng has to be used.
+       Additionally,  the  program  offers  a  dictionary method for determining the WEP key. For cracking WPA/WPA2 pre-shared keys, a wordlist (file or stdin) or an airolib-ng has to be
+       used.
 
 INPUT FILES
        Capture files (.cap, .pcap), IVS (.ivs) or Hashcat HCCAPX files (.hccapx)
@@ -25,8 +26,8 @@ OPTIONS
               Force the attack mode: 1 or wep for WEP (802.11) and 2 or wpa for WPA/WPA2 PSK (802.11i and 802.11w).
 
        -e <essid>
-              Select  the target network based on the ESSID. This option is also required for WPA cracking if the SSID is cloaked. For SSID containing special characters, see https://www.air‐
-              crack-ng.org/doku.php?id=faq#how_to_use_spaces_double_quote_and_single_quote_etc_in_ap_names
+              Select the target network based on the ESSID. This option is also required for  WPA  cracking  if  the  SSID  is  cloaked.  For  SSID  containing  special  characters,  see
+              https://www.aircrack-ng.org/doku.php?id=faq#how_to_use_spaces_double_quote_and_single_quote_etc_in_ap_names
 
        -b <bssid> or --bssid <bssid>
               Select the target network based on the access point MAC address.
@@ -54,8 +55,8 @@ OPTIONS
               Specify mask of the key. For example: A1:XX:CF
 
        -m <maddr>
-              Only keep the IVs coming from packets that match this MAC address. Alternatively, use -m ff:ff:ff:ff:ff:ff to use all and every IVs, regardless of the network (this disables ES‐
-              SID and BSSID filtering).
+              Only  keep  the  IVs coming from packets that match this MAC address. Alternatively, use -m ff:ff:ff:ff:ff:ff to use all and every IVs, regardless of the network (this dis‐
+              ables ESSID and BSSID filtering).
 
        -n <nbits>
               Specify the length of the key: 64 for 40-bit WEP, 128 for 104-bit WEP, etc., until 512 bits of length. The default value is 128.
@@ -67,8 +68,8 @@ OPTIONS
               By default, this parameter is set to 2. Use a higher value to increase the bruteforce level: cracking will take more time, but with a higher likelihood of success.
 
        -k <korek>
-              There  are  17 KoreK attacks. Sometimes one attack creates a huge false positive that prevents the key from being found, even with lots of IVs. Try -k 1, -k 2, ... -k 17 to dis‐
-              able each attack selectively.
+              There are 17 KoreK attacks. Sometimes one attack creates a huge false positive that prevents the key from being found, even with lots of IVs. Try -k 1, -k 2, ... -k  17  to
+              disable each attack selectively.
 
        -x or -x0
               Disable last keybytes bruteforce (not advised).
@@ -105,17 +106,17 @@ OPTIONS
        WEP and WPA-PSK cracking options
 
        -w <words>
-              Path to a dictionary file for wpa cracking. Separate filenames with comma  when  using  multiple  dictionaries.  Specify  "-"  to  use  stdin.  Here  is  a  list  of  wordlists:
-              https://www.aircrack-ng.org/doku.php?id=faq#where_can_i_find_good_wordlists  In  order to use a dictionary with hexadecimal values, prefix the dictionary with "h:". Each byte in
-              each key must be separated by ':'. When using with WEP, key length should be specified using -n.
+              Path  to  a  dictionary  file  for  wpa  cracking.  Separate  filenames  with comma when using multiple dictionaries. Specify "-" to use stdin. Here is a list of wordlists:
+              https://www.aircrack-ng.org/doku.php?id=faq#where_can_i_find_good_wordlists In order to use a dictionary with hexadecimal values, prefix the dictionary with "h:". Each byte
+              in each key must be separated by ':'. When using with WEP, key length should be specified using -n.
 
        -N <file> or --new-session <file>
-              Create a new cracking session. It allows one to interrupt cracking session and restart at a later time (using -R or --restore-session). Status files are saved every 10  minutes.
-              It does not overwrite existing session file.
+              Create a new cracking session. It allows one to interrupt cracking session and restart at a later time (using -R or --restore-session). Status files are saved every 10 min‐
+              utes. It does not overwrite existing session file.
 
        -R <file> or --restore-session <file>
-              Restore  and continue a previously saved cracking session. This parameter is to be used alone, no other parameter should be specified when starting aircrack-ng (all the required
-              information is in the session file).
+              Restore and continue a previously saved cracking session. This parameter is to be used alone, no other parameter should be specified when starting aircrack-ng (all the  re‐
+              quired information is in the session file).
 
        WPA-PSK options:
 
@@ -139,13 +140,14 @@ OPTIONS
        SIMD selection:
 
        --simd=<option>
-              Aircrack-ng automatically loads and uses the fastest optimization based on instructions available for your CPU. This options allows one to force  another  optimization.  Choices
-              depend on the CPU and the following are all the possibilities that may be compiled regardless of the CPU type: generic, sse2, avx, avx2, avx512, neon, asimd, altivec, power8.
+              Aircrack-ng  automatically  loads  and  uses  the  fastest optimization based on instructions available for your CPU. This options allows one to force another optimization.
+              Choices depend on the CPU and the following are all the possibilities that may be compiled regardless of the CPU type: generic, sse2, avx, avx2, avx512,  neon,  asimd,  al‐
+              tivec, power8.
 
        --simd-list
-              Shows  a list of the available SIMD architectures, separated by a space character. Aircrack-ng automatically selects the fastest optimization and thus it is rarely needed to use
-              this option. Use case would be for testing purposes or when a "lower" optimization, such as "generic", is faster than the automatically selected one. Before forcing a  SIMD  ar‐
-              chitecture, verify that the instruction is supported by your CPU, using -u.
+              Shows a list of the available SIMD architectures, separated by a space character. Aircrack-ng automatically selects the fastest optimization and thus it is rarely needed to
+              use this option. Use case would be for testing purposes or when a "lower" optimization, such as "generic", is faster than the automatically selected one. Before  forcing  a
+              SIMD architecture, verify that the instruction is supported by your CPU, using -u.
 
        Other options:
 
@@ -156,9 +158,9 @@ OPTIONS
               Provide information on the number of CPUs and SIMD support
 
 AUTHOR
-       This manual page was written by Adam Cecile <gandalf@le-vert.net> for the Debian system (but may be used by others).  Permission is granted to copy, distribute and/or modify this docu‐
-       ment under the terms of the GNU General Public License, Version 2 or any later version published by the Free Software Foundation On Debian systems, the complete text of the GNU General
-       Public License can be found in /usr/share/common-licenses/GPL.
+       This  manual page was written by Adam Cecile <gandalf@le-vert.net> for the Debian system (but may be used by others).  Permission is granted to copy, distribute and/or modify this
+       document under the terms of the GNU General Public License, Version 2 or any later version published by the Free Software Foundation On Debian systems, the complete  text  of  the
+       GNU General Public License can be found in /usr/share/common-licenses/GPL.
 
 SEE ALSO
        airbase-ng(8)
@@ -184,4 +186,4 @@ SEE ALSO
        wpaclean(1)
        airventriloquist(8)
 
-Version 1.6.0                                                                             January 2020                                                                           AIRCRACK-NG(1)
+Version 1.6.0                                                                          January 2020                                                                         AIRCRACK-NG(1)

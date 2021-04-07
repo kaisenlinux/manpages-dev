@@ -1,4 +1,4 @@
-DUPLY(1)                                                                              duply documentation                                                                              DUPLY(1)
+DUPLY(1)                                                                            duply documentation                                                                           DUPLY(1)
 
 NAME
        duply - a shell frontend to duplicity for simplified backups
@@ -115,12 +115,12 @@ COMMANDS
                List outdated backup archives (older than max_age).  Use option --force to actually delete these files.
 
        purgeFull [«max_full_backups»] [--force]
-               List outdated backup files. max_full_backups being the number of full backups and associated incrementals to keep, counting in reverse chronological order. Use option --force
-               to actually delete these files.
+               List outdated backup files. max_full_backups being the number of full backups and associated incrementals to keep, counting in reverse chronological order. Use option
+               --force to actually delete these files.
 
        purgeIncr [«max_fulls_with_incrs»] [--force]
-               List outdated incremental backup files. max_fulls_with_incrs being the number of full backups which associated incrementals  will be kept, counting in reverse chronological
-               order. Use option --force to actually delete these files.
+               List outdated incremental backup files. max_fulls_with_incrs being the number of full backups which associated incrementals  will be kept, counting in reverse
+               chronological order. Use option --force to actually delete these files.
 
        cleanup [--force]
                List broken backup chain files archives (e.g. after unfinished run).  Use option --force to actually delete these files.
@@ -156,8 +156,8 @@ PRE/POST SCRIPTS
           CMD_<PREV|NEXT> (previous/next command),
           CND_<PREV|NEXT> (condition before/after)
 
-       The CMD_* variables were introduced to allow different actions according to the command the scripts were attached to e.g. 'pre_bkp_post_pre_verify_post' will call the pre script two
-       times, with CMD_NEXT variable set to 'bkp' on the first and to 'verify' on the second run.  CMD_ERR holds the exit code of the CMD_PREV.
+       The CMD_* variables were introduced to allow different actions according to the command the scripts were attached to e.g. 'pre_bkp_post_pre_verify_post' will call the pre script
+       two times, with CMD_NEXT variable set to 'bkp' on the first and to 'verify' on the second run.  CMD_ERR holds the exit code of the CMD_PREV.
 
 EXAMPLES
        Create profile 'humbug':
@@ -208,8 +208,8 @@ FILES
        The rules for the exclude file can be found in man duplicity, section FILE SELECTION).
 
 IMPORTANT
-       Copy the whole profile folder after the first backup to a safe place.  It contains everything needed to restore your backups. You will need it if you have to restore the backup from
-       another system (e.g. after a system crash). Keep access to these files restricted as they contain all information (gpg data, ftp data) to access and modify your backups.
+       Copy the whole profile folder after the first backup to a safe place.  It contains everything needed to restore your backups. You will need it if you have to restore the backup
+       from another system (e.g. after a system crash). Keep access to these files restricted as they contain all information (gpg data, ftp data) to access and modify your backups.
 
        Repeat this step after all configuration changes. Some configuration options are crucial for restoration.
 
@@ -222,8 +222,8 @@ AVAILABILITY
 COPYRIGHT and LICENSE
        Copyright (C) 2006 Christiane Ruetten, 2008-2017 Edgar Soldin
 
-       This package is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2
-       of the License, or (at your option) any later version.
+       This package is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either
+       version 2 of the License, or (at your option) any later version.
 
        On Debian systems, the complete text of the GNU General Public License version 2 can be found in the file `/usr/share/common-licenses/GPL-2'.
 
@@ -235,4 +235,4 @@ AUTHOR
 SEE ALSO
        duplicity(1)
 
-Version 2.3                                                                                2020-12-30                                                                                  DUPLY(1)
+Version 2.3                                                                             2020-12-30                                                                                DUPLY(1)

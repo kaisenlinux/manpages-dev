@@ -1,4 +1,4 @@
-BTRFS-SPACE-CALCULATOR(1)                                                            Btrfs Space Calculator                                                           BTRFS-SPACE-CALCULATOR(1)
+BTRFS-SPACE-CALCULATOR(1)                                                         Btrfs Space Calculator                                                         BTRFS-SPACE-CALCULATOR(1)
 
 NAME
        btrfs-space-calculator - calculate usable and wasted space
@@ -7,11 +7,11 @@ SYNOPSIS
        btrfs-space-calculator [args] sizes
 
 DESCRIPTION
-       The btrfs-space-calculator program shows the amount of allocatable space on btrfs physical and virtual level, and the amount of unallocatable space resulting from having differently
-       sized block devices added to the filesystem.
+       The btrfs-space-calculator program shows the amount of allocatable space on btrfs physical and virtual level, and the amount of unallocatable space resulting from having
+       differently sized block devices added to the filesystem.
 
-       In a btrfs filesystem, raw storage is shared by data of different types (System, MetaData and Data) and profiles (e.g. single, DUP, RAID1). Also, a filesystem can have multiple block
-       devices of different sizes attached.
+       In a btrfs filesystem, raw storage is shared by data of different types (System, MetaData and Data) and profiles (e.g. single, DUP, RAID1). Also, a filesystem can have multiple
+       block devices of different sizes attached.
 
        An example:
 
@@ -33,8 +33,8 @@ DESCRIPTION
              Device 2: 0.00B
              Device 3: 0.00B
 
-       Note that most physical disk vendors specify their sizes in GB or TB for deceptive marketing reasons, while partitions created in your average partition table or with lvm2 etc... are
-       usually using MiB, GiB and TiB.
+       Note that most physical disk vendors specify their sizes in GB or TB for deceptive marketing reasons, while partitions created in your average partition table or with lvm2 etc...
+       are usually using MiB, GiB and TiB.
 
 OPTIONS
        -h, --help
@@ -50,12 +50,12 @@ OPTIONS
               Use mixed block groups (data and metadata profile must match).
 
        -r, --ratio RATIO
-              Data to metadata ratio, e.g. 200 (the default), which means allocate 0.5% for metadata. Setting this ratio only makes sense for non-mixed filesystems. When using this option in
-              combination with -M, it will be ignored.
+              Data to metadata ratio, e.g. 200 (the default), which means allocate 0.5% for metadata. Setting this ratio only makes sense for non-mixed filesystems. When using this
+              option in combination with -M, it will be ignored.
 
 SEE ALSO
        This program is an example of what can be done using the python-btrfs library.
 
        Source and documentation on github: https://github.com/knorrie/python-btrfs
 
-                                                                                              2018                                                                    BTRFS-SPACE-CALCULATOR(1)
+                                                                                           2018                                                                  BTRFS-SPACE-CALCULATOR(1)

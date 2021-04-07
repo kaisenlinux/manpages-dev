@@ -1,4 +1,4 @@
-ANSIBLE-CONFIG(1)                                                                System administration commands                                                               ANSIBLE-CONFIG(1)
+ANSIBLE-CONFIG(1)                                                             System administration commands                                                             ANSIBLE-CONFIG(1)
 
 NAME
        ansible-config - View ansible configuration.
@@ -65,7 +65,7 @@ COPYRIGHT
 SEE ALSO
        ansible (1), ansible-console (1), ansible-doc (1), ansible-galaxy (1), ansible-inventory (1), ansible-playbook (1), ansible-pull (1), ansible-vault (1)
 
-       Extensive  documentation  is  available  in  the  documentation  site:  <https://docs.ansible.com>.   IRC  and  mailing list info can be found in file CONTRIBUTING.md, available in: <‐
+       Extensive  documentation  is  available  in  the  documentation site: <https://docs.ansible.com>.  IRC and mailing list info can be found in file CONTRIBUTING.md, available in: <‐
        https://github.com/ansible/ansible>
 
-Ansible 2.9.16                                                                                                                                                                ANSIBLE-CONFIG(1)
+Ansible 2.9.16                                                                                                                                                           ANSIBLE-CONFIG(1)

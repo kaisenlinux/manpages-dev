@@ -1,4 +1,4 @@
-vhdiinfo                                                                                     LOCAL                                                                                     vhdiinfo
+vhdiinfo                                                                                   LOCAL                                                                                  vhdiinfo
 
 NAME
      vhdiinfo — determines information about a Virtual Hard Disk (VHD) image file
@@ -52,4 +52,4 @@ COPYRIGHT
      Copyright (C) 2012-2020, Joachim Metz <joachim.metz@gmail.com>.
 
 SEE ALSO
-libvhdi                                                                                  March 9, 2019                                                                                  libvhdi
+libvhdi                                                                                March 9, 2019                                                                               libvhdi

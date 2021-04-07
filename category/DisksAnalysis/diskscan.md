@@ -1,4 +1,4 @@
-DISKSCAN(1)                                                                              User Commands                                                                              DISKSCAN(1)
+DISKSCAN(1)                                                                            User Commands                                                                           DISKSCAN(1)
 
 NAME
        diskscan - scan a disk for failed and near failure sectors
@@ -7,8 +7,8 @@ SYNOPSIS
        diskscan [options...] block_device
 
 DESCRIPTION
-       diskscan is intended to check a disk and find any bad sectors already present and assess it for any possible sectors that are in the process of going bad.  The operation is all read-
-       only and can cause no direct damage to the data on the disk.
+       diskscan is intended to check a disk and find any bad sectors already present and assess it for any possible sectors that are in the process of going bad.  The operation is all
+       read-only and can cause no direct damage to the data on the disk.
 
        diskscan reads the entire block device and notes the time it took to read a block. When there is an error it is immediately noted and also when there is a higher latency to read a
        block. A histogram of the block latency times is also given to assess the health of the disk.
@@ -47,15 +47,15 @@ OPTIONS
 
        -f, --fix Attempt to fix areas that are nearing failure. This should only be attempted on an unmounted block device and never on an inuse filesystem or corruption is likely.
 
-       -s <mode>, --scan <mode> Scan mode can be either seq or random, random reduces the chance that the disk will be able spend time to recover data before we try to access a sector but the
-       seeks add noise to the latency measurement. Sequential test is the default and random test is still experimental with regard to its usefulness.
+       -s <mode>, --scan <mode> Scan mode can be either seq or random, random reduces the chance that the disk will be able spend time to recover data before we try to access a sector
+       but the seeks add noise to the latency measurement. Sequential test is the default and random test is still experimental with regard to its usefulness.
 
        -e <size>, --size <size> Set the size in which the scan will be done, this must be a multiple of the sector size which is normally 512 bytes.
 
        -o <file>, --output <file> Set the output file that the scan will generate. This is a JSON file with the summary and details about the exceptional events found during the scan.
 
-       -r <file>, --raw-log <file> Set the output file for the raw log which logs everything done and seen during the scan. This is a rather large file but it can help get the finer details
-       of the scan progress and the disk behavior during the scan. This is too a JSON file.
+       -r <file>, --raw-log <file> Set the output file for the raw log which logs everything done and seen during the scan. This is a rather large file but it can help get the finer
+       details of the scan progress and the disk behavior during the scan. This is too a JSON file.
 
 SEE ALSO
        badblocks(1), fsck(1)
@@ -63,4 +63,4 @@ SEE ALSO
 AUTHOR
        Baruch Even \<baruch@ev-en.org>
 
-DiskScan 0.19                                                                              2013-10-25                                                                               DISKSCAN(1)
+DiskScan 0.19                                                                           2013-10-25                                                                             DISKSCAN(1)
