@@ -37,6 +37,7 @@ source ~/.zshrc
 # ending
 echo "Installation done"
 echo "Enter in your terminal :
+zsh
 asdf plugin-add erlang && asdf plugin-add elixir
 asdf install erlang 23.3.1 && asdf install elixir 1.11.4-otp-23
 asdf global erlang 23.3.1 && asdf local elixir 1.11.4-otp-23"
