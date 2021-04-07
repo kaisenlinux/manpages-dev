@@ -37,3 +37,6 @@ mix.log
 
 # ignore .tool-versions
 .tool-versions
+
+# ignore manpages-build output
+/output_fullbuild_*/
