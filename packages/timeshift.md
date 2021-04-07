@@ -1,4 +1,4 @@
-TIMESHIFT(1)                                                                        General Commands Manual                                                                        TIMESHIFT(1)
+TIMESHIFT(1)                                                                      General Commands Manual                                                                     TIMESHIFT(1)
 
 NAME
        timeshift - a system restore utility
@@ -11,8 +11,8 @@ SYNOPSIS
        timeshift --list-{snapshots|devices}[OPTIONS]
 
 DESCRIPTION
-       timeshift  is  a system restore utility which takes snapshots of the system at regular intervals. These snapshots can be restored at a later date to undo system changes. Creates incre‐
-       mental snapshots using rsync or BTRFS snapshots using BTRFS tools.
+       timeshift is a system restore utility which takes snapshots of the system at regular intervals. These snapshots can be restored at a later date to undo system changes. Creates in‐
+       cremental snapshots using rsync or BTRFS snapshots using BTRFS tools.
 
 OPTIONS
        A summary of options is included below.
@@ -69,4 +69,4 @@ NOTES
 AUTHOR
        Written by Tony George.
 
-                                                                                         March  8 2020                                                                             TIMESHIFT(1)
+                                                                                       March  8 2020                                                                          TIMESHIFT(1)

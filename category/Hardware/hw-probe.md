@@ -1,4 +1,4 @@
-HW-PROBE(1)                                                                              User Commands                                                                              HW-PROBE(1)
+HW-PROBE(1)                                                                            User Commands                                                                           HW-PROBE(1)
 
 NAME
        hw-probe - Hardware probe and system info collection tool
@@ -23,8 +23,8 @@ DESCRIPTION
    PRIVACY:
               Private information (including the username, machine's hostname, IP addresses, MAC addresses and serial numbers) is NOT uploaded to the database.
 
-              The  tool  uploads  32-byte  prefix of salted SHA512 hash of MAC addresses and serial numbers to properly identify unique computers and hard drives. All the data is uploaded se‐
-              curely via HTTPS.
+              The  tool  uploads  32-byte prefix of salted SHA512 hash of MAC addresses and serial numbers to properly identify unique computers and hard drives. All the data is uploaded
+              securely via HTTPS.
 
    INFORMATION OPTIONS:
        -h|-help
@@ -72,8 +72,8 @@ DESCRIPTION
 
        -disable LIST
 
-              Comma separated list of logs to disable in current log level. Some logs cannot be disabled. For example, you can disable collecting of 'fstab', but you cannot disable logging of
-              'smartctl'.
+              Comma separated list of logs to disable in current log level. Some logs cannot be disabled. For example, you can disable collecting of 'fstab', but you cannot disable  log‐
+              ging of 'smartctl'.
 
        -printers
 
@@ -207,4 +207,4 @@ DESCRIPTION
 AUTHOR
        This manual page was written by Mathieu Malaterre <malat@debian.org> for the Debian GNU/Linux system (but may be used by others).
 
-hw-probe Probe 1.5                                                                       February 2020                                                                              HW-PROBE(1)
+hw-probe Probe 1.5                                                                     February 2020                                                                           HW-PROBE(1)

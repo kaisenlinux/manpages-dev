@@ -1,4 +1,4 @@
-BTRBK(1)                                                                                  Btrbk Manual                                                                                 BTRBK(1)
+BTRBK(1)                                                                               Btrbk Manual                                                                               BTRBK(1)
 
 NAME
        btrbk - backup tool for btrfs subvolumes
@@ -15,11 +15,11 @@ SYNOPSIS
              <command> [<args>]
 
 DESCRIPTION
-       btrbk is a backup tool for btrfs subvolumes, taking advantage of btrfs specific capabilities to create atomic snapshots and transfer them incrementally to a target btrfs filesystem. It
-       is able to perform backups from one source to multiple destinations.
+       btrbk is a backup tool for btrfs subvolumes, taking advantage of btrfs specific capabilities to create atomic snapshots and transfer them incrementally to a target btrfs
+       filesystem. It is able to perform backups from one source to multiple destinations.
 
-       For most operations, btrbk requires root privileges to run correctly. Alternatively, consider using "btrfs-progs-sudo" or "btrfs-progs-btrbk" backends, both of which allows you to run
-       btrbk as a regular user. Refer to configuration option backend in btrbk.conf(5) for more details.
+       For most operations, btrbk requires root privileges to run correctly. Alternatively, consider using "btrfs-progs-sudo" or "btrfs-progs-btrbk" backends, both of which allows you to
+       run btrbk as a regular user. Refer to configuration option backend in btrbk.conf(5) for more details.
 
    Snapshots and Backups
        Snapshots as well as backup subvolumes are created in form:
@@ -27,13 +27,13 @@ DESCRIPTION
            <snapshot-name>.<timestamp>[_N]
 
        Where <snapshot-name> is identical to the source subvolume name, unless the configuration option snapshot_name is set. The <timestamp> is either "YYYYMMDD" or "YYYYMMDDThhmm"
-       (dependent of the timestamp_format configuration option), where "YYYY" is the year, "MM" is the month, "DD" is the day, "hh" is the hour and "mm" is the minute of the creation time
-       (local time of the host running btrbk). If multiple snapshots/backups are created on the same date/time, N will be incremented on each snapshot, starting at 1.
+       (dependent of the timestamp_format configuration option), where "YYYY" is the year, "MM" is the month, "DD" is the day, "hh" is the hour and "mm" is the minute of the creation
+       time (local time of the host running btrbk). If multiple snapshots/backups are created on the same date/time, N will be incremented on each snapshot, starting at 1.
 
        If a snapshot or backup does not match the naming scheme above (i.e. if it has been renamed manually), btrbk will leave it untouched.
 
-       Note that snapshot is a btrfs terminology for a “read-only subvolume” (showing a parent-uuid, see btrfs-subvolume(8)); backup is a btrbk terminology for a “read-only subvolume created
-       with send/receive” (showing a received-uuid).
+       Note that snapshot is a btrfs terminology for a “read-only subvolume” (showing a parent-uuid, see btrfs-subvolume(8)); backup is a btrbk terminology for a “read-only subvolume
+       created with send/receive” (showing a received-uuid).
 
 OPTIONS
        -h, --help
@@ -46,8 +46,8 @@ OPTIONS
            Read the configuration from <file>.
 
        -n, --dry-run
-           Don’t run anything that would alter the filesystem, just show the snapshots and backup subvolumes that would be created/deleted by the run, snapshot, resume, prune, archive and
-           clean commands. Use in conjunction with -l debug to see the btrfs commands that would be executed.
+           Don’t run anything that would alter the filesystem, just show the snapshots and backup subvolumes that would be created/deleted by the run, snapshot, resume, prune, archive
+           and clean commands. Use in conjunction with -l debug to see the btrfs commands that would be executed.
 
        --exclude <filter>
            Exclude configured sections matching <filter>. See FILTER STATEMENTS below.
@@ -63,8 +63,8 @@ OPTIONS
            Preserve all backups. Skips deletion of any backups, even if specified in the configuration file.
 
        --wipe
-           Ignore configured snapshot retention policy, delete all but latest snapshots instead. All snapshots needed for incremental backup (latest common) are also preserved. Useful if you
-           are getting low on disk space (ENOSPC).
+           Ignore configured snapshot retention policy, delete all but latest snapshots instead. All snapshots needed for incremental backup (latest common) are also preserved. Useful if
+           you are getting low on disk space (ENOSPC).
 
        -v, --verbose
            Increase the logging level, see "--loglevel".
@@ -84,8 +84,8 @@ OPTIONS
        --format table|long|raw|col:[h:]<columns>
            Print output in specified format. If set to "raw", prints space-separated key="value" pairs (machine readable).
 
-           If set to "col:", prints only the <columns> specified (comma-separated list). Header lines are ommitted if the "h:" modifier is present. Columns prefixed with "-" are collapsed if
-           empty. Columns postfixed with ":RALIGN" are right-aligned.
+           If set to "col:", prints only the <columns> specified (comma-separated list). Header lines are ommitted if the "h:" modifier is present. Columns prefixed with "-" are
+           collapsed if empty. Columns postfixed with ":RALIGN" are right-aligned.
 
        --pretty
            Print table output with lowercase, underlined column headings (instead of single-line uppercase headings).
@@ -111,8 +111,8 @@ COMMANDS
        See section RETENTION POLICY in btrbk.conf(5) for information on configuring the retention policy.
 
        run [filter...]
-           Perform snapshot and backup operations as specified in the configuration file. If the optional [filter...] arguments are present, snapshots and backups are only performed for the
-           subvolumes/targets matching a filter statement (see FILTER STATEMENTS below).
+           Perform snapshot and backup operations as specified in the configuration file. If the optional [filter...] arguments are present, snapshots and backups are only performed for
+           the subvolumes/targets matching a filter statement (see FILTER STATEMENTS below).
 
            Step 0: Read Data
                Read information from the source and target btrfs filesystems in order to perform sanity checks and identify parent/child and received-from relationships.
@@ -121,45 +121,45 @@ COMMANDS
                If the checks succeed, btrbk creates snapshots for the source subvolumes specified in the configuration file, according to the snapshot_create option.
 
            Step 2: Create Backups
-               For each specified target, btrbk creates the backups as follows: After comparing the backups to the source snapshots, btrbk transfers all missing snapshots needed to satisfy
-               the configured target retention policy, incrementally from the latest common parent subvolume found. If no common parent subvolume is found (or if the incremental option is set
-               to “no”), a full (non-incremental) backup is created.
+               For each specified target, btrbk creates the backups as follows: After comparing the backups to the source snapshots, btrbk transfers all missing snapshots needed to
+               satisfy the configured target retention policy, incrementally from the latest common parent subvolume found. If no common parent subvolume is found (or if the incremental
+               option is set to “no”), a full (non-incremental) backup is created.
 
            Step 3: Delete Backups
                Unless the -p, --preserve or --preserve-backups option is set, backup subvolumes that are not preserved by their configured retention policy will be deleted. Note that the
                latest snapshot/backup pair are always preserved, regardless of the retention policy.
 
            Step 4: Delete Snapshots
-               Unless the -p, --preserve or --preserve-snapshots option is set, snapshots that are not preserved by their configured retention policy will be deleted. Note that the latest
-               snapshot (the one created in step 1) as well as the latest snapshot/backup pair are always preserved, regardless of the retention policy.
+               Unless the -p, --preserve or --preserve-snapshots option is set, snapshots that are not preserved by their configured retention policy will be deleted. Note that the
+               latest snapshot (the one created in step 1) as well as the latest snapshot/backup pair are always preserved, regardless of the retention policy.
 
        dryrun [filter...]
-           Don’t run any btrfs commands that would alter the filesystem, just show the snapshots and backup subvolumes that would be created/deleted by the run command. Use in conjunction
-           with -l debug to see the btrfs commands that would be executed.
+           Don’t run any btrfs commands that would alter the filesystem, just show the snapshots and backup subvolumes that would be created/deleted by the run command. Use in
+           conjunction with -l debug to see the btrfs commands that would be executed.
 
        snapshot [filter...]
-           Snapshot only: skips backup creation and deletion (steps 2 and 3). Use in conjunction with -p, --preserve (or --preserve-snapshots) if you also want to skip snapshot deletion (step
-           4).
+           Snapshot only: skips backup creation and deletion (steps 2 and 3). Use in conjunction with -p, --preserve (or --preserve-snapshots) if you also want to skip snapshot deletion
+           (step 4).
 
-           Note that snapshot deletion is skipped if the target is not accessible, as it is still required in order to determine the latest snapshot/backup pair (which is always preserved,
-           regardless of the retention policy).
+           Note that snapshot deletion is skipped if the target is not accessible, as it is still required in order to determine the latest snapshot/backup pair (which is always
+           preserved, regardless of the retention policy).
 
        resume [filter...]
            Resume backups: skips snapshot creation (step 1), transfers and deletes snapshots/backups in order to satisfy their configured retention policy. Use in conjunction with -p,
            --preserve, --preserve-backups, --preserve-snapshots if you want to skip backup and/or snapshot deletion (steps 3, 4).
 
        prune [filter...]
-           Prune snapshots and backups: skips snapshot and backup creation (steps 1, 2), only deletes snapshots and backups in order to satisfy their configured retention policy. Useful for
-           cleaning the disk after changing the retention policy. Use in conjunction with --preserve-backups, --preserve-snapshots if you want to skip backup or snapshot deletion (steps 3,
-           4).
+           Prune snapshots and backups: skips snapshot and backup creation (steps 1, 2), only deletes snapshots and backups in order to satisfy their configured retention policy. Useful
+           for cleaning the disk after changing the retention policy. Use in conjunction with --preserve-backups, --preserve-snapshots if you want to skip backup or snapshot deletion
+           (steps 3, 4).
 
            Note that deletion is skipped if source or target is not accessible, as it is still required in order to determine the latest snapshot/backup pair (which is always preserved,
            regardless of the retention policy).
 
        archive <source> <target> [--raw]
-           Recursively copy all subvolumes created by btrbk from <source> to <target> directory, optionally rescheduled using archive_preserve_* configuration options. Also creates directory
-           tree on <target>. Useful for creating extra archive copies (clones) from your backup disks. Note that you can continue using btrbk after swapping your backup disk with the archive
-           disk.
+           Recursively copy all subvolumes created by btrbk from <source> to <target> directory, optionally rescheduled using archive_preserve_* configuration options. Also creates
+           directory tree on <target>. Useful for creating extra archive copies (clones) from your backup disks. Note that you can continue using btrbk after swapping your backup disk
+           with the archive disk.
 
            If you want to use nested subvolumes on the target filesystem, you need to create them by hand (e.g. by running "btrfs subvolume create <target>/dir"). Check the output of
            --dry-run if unsure.
@@ -169,8 +169,8 @@ COMMANDS
            If --raw option is set, creates raw targets (experimental, see btrbk.conf(5), TARGET TYPES).
 
        clean [filter...]
-           Delete incomplete (garbled) backups. Incomplete backups can be left behind on network errors or kill signals while a send/receive operation is ongoing, and are identified by the
-           "received_uuid" flag not being set on a target (backup) subvolume.
+           Delete incomplete (garbled) backups. Incomplete backups can be left behind on network errors or kill signals while a send/receive operation is ongoing, and are identified by
+           the "received_uuid" flag not being set on a target (backup) subvolume.
 
        The following table gives a quick overview of the action commands and resulting snapshot creation (S+), backup creation (B+), snapshot deletion (S-), and backup deletion (B-):
 
@@ -232,8 +232,8 @@ COMMANDS
            estimate of the amount of data that can still be written to the file system.
 
        origin <subvolume>
-           Print the subvolume origin tree: Shows the parent-child relationships as well as the received-from information. Use the --format command line option to switch between different
-           output formats.
+           Print the subvolume origin tree: Shows the parent-child relationships as well as the received-from information. Use the --format command line option to switch between
+           different output formats.
 
        diff <from> <to>
            List the modified files since generation (transid) of subvolume <from> in subvolume <to>. Columns:
@@ -247,8 +247,8 @@ COMMANDS
        extents [diff] <subvolume>... [exclusive <subvolume>...]
            Print accurate disk space usage and diff based on extent data (FIEMAP ioctl, slow!).
 
-           Subvolumes following the exclusive keyword are added to a separate set, and additional set-exclusive data is printed at the end of the list. This gives a hint of how much data will
-           be freed if deleting all subvolumes in the set. Example:
+           Subvolumes following the exclusive keyword are added to a separate set, and additional set-exclusive data is printed at the end of the list. This gives a hint of how much data
+           will be freed if deleting all subvolumes in the set. Example:
 
                btrbk extents diff /backup/data.* exclusive /backup/data.2010*
 
@@ -257,8 +257,8 @@ COMMANDS
 
            The DIFF column shows the data added to the previous subvolume (relative complement of block regions).
 
-           If called with the --related option, btrbk also lists all related subvolumes. This is not recommended for backups, as parent-uuid relations break for received subvolumes as soon as
-           an intermediate subvolume is deleted.
+           If called with the --related option, btrbk also lists all related subvolumes. This is not recommended for backups, as parent-uuid relations break for received subvolumes as
+           soon as an intermediate subvolume is deleted.
 
            Note that reading all extents is a disk-intensive task, expect long execution times and high ram usage. Consider setting cache_dir.
 
@@ -278,8 +278,8 @@ FILTER STATEMENTS
            Matches the hostname portion from <url> of volume or target sections.
 
        <directory>|<url>
-           Matches volume, subvolume or target sections by either relative or absolute path (if starting with "/" or "ssh://" or "<hostname>:/"), accepting wildcard character "*". Relative
-           paths are matched against the end of the pathname. Either:
+           Matches volume, subvolume or target sections by either relative or absolute path (if starting with "/" or "ssh://" or "<hostname>:/"), accepting wildcard character "*".
+           Relative paths are matched against the end of the pathname. Either:
 
            <volume-directory>
                Matches volume sections.
@@ -301,8 +301,8 @@ FILTER STATEMENTS
                ssh://<hostname>[:<port>]/<directory>
                <hostname>:<directory>
 
-       Note that for run and snapshot commands, a filter matching a target configuration section also enables snapshot creation of the surrounding subvolume section. If this is not desired,
-       consider running snapshot and resume commands separately.
+       Note that for run and snapshot commands, a filter matching a target configuration section also enables snapshot creation of the surrounding subvolume section. If this is not
+       desired, consider running snapshot and resume commands separately.
 
 FILES
        /etc/btrbk.conf, /etc/btrbk/btrbk.conf
@@ -340,4 +340,4 @@ SEE ALSO
 AUTHOR
        Axel Burri <axel@tty0.ch>
 
-Btrbk 0.31.2                                                                               2021-03-21                                                                                  BTRBK(1)
+Btrbk 0.31.2                                                                            2021-03-21                                                                                BTRBK(1)

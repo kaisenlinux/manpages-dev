@@ -1,4 +1,4 @@
-DSNIFF(8)                                                                           System Manager's Manual                                                                           DSNIFF(8)
+DSNIFF(8)                                                                         System Manager's Manual                                                                        DSNIFF(8)
 
 NAME
        dsniff - password sniffer
@@ -7,11 +7,11 @@ SYNOPSIS
        dsniff [-c] [-d] [-m] [-n] [-i interface | -p pcapfile] [-s snaplen] [-f services] [-t trigger[,...]]]  [-r|-w savefile] [expression]
 
 DESCRIPTION
-       dsniff is a password sniffer which handles FTP, Telnet, SMTP, HTTP, POP, poppass, NNTP, IMAP, SNMP, LDAP, Rlogin, RIP, OSPF, PPTP MS-CHAP, NFS, VRRP, YP/NIS, SOCKS, X11, CVS, IRC, AIM,
-       ICQ, Napster, PostgreSQL, Meeting Maker, Citrix ICA, Symantec pcAnywhere, NAI Sniffer, Microsoft SMB, Oracle SQL*Net, Sybase and Microsoft SQL protocols.
+       dsniff is a password sniffer which handles FTP, Telnet, SMTP, HTTP, POP, poppass, NNTP, IMAP, SNMP, LDAP, Rlogin, RIP, OSPF, PPTP MS-CHAP, NFS, VRRP, YP/NIS, SOCKS, X11, CVS, IRC,
+       AIM, ICQ, Napster, PostgreSQL, Meeting Maker, Citrix ICA, Symantec pcAnywhere, NAI Sniffer, Microsoft SMB, Oracle SQL*Net, Sybase and Microsoft SQL protocols.
 
-       dsniff automatically detects and minimally parses each application protocol, only saving the interesting bits, and uses Berkeley DB as its output file format, only logging  unique  au‐
-       thentication attempts. Full TCP/IP reassembly is provided by libnids(3).
+       dsniff automatically detects and minimally parses each application protocol, only saving the interesting bits, and uses Berkeley DB as its output file format, only logging  unique
+       authentication attempts. Full TCP/IP reassembly is provided by libnids(3).
 
        I wrote dsniff with honest intentions - to audit my own network, and to demonstrate the insecurity of cleartext network protocols.  Please do not abuse this software.
 
@@ -66,4 +66,4 @@ AUTHOR
 BUGS
        dsniff's automatic protocol detection feature is based on the classic file(1) command by Ian Darwin, and shares its historical limitations and bugs.
 
-                                                                                                                                                                                      DSNIFF(8)
+                                                                                                                                                                                 DSNIFF(8)

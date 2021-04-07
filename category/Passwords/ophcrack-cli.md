@@ -1,4 +1,4 @@
-OPHCRACK(1)                                                                              User Commands                                                                              OPHCRACK(1)
+OPHCRACK(1)                                                                            User Commands                                                                           OPHCRACK(1)
 
 NAME
        Ophcrack - a Microsoft Windows password cracker using rainbow tables.
@@ -88,8 +88,8 @@ SEE ALSO
 
 AUTHOR
        This manual page was written by Adam Cecile <gandalf@le-vert.net> for the Debian system (but may be used by others).
-       Permission  is  granted to copy, distribute and/or modify this document under the terms of the GNU General Public License, Version 2 or any later version published by the Free Software
-       Foundation
+       Permission is granted to copy, distribute and/or modify this document under the terms of the GNU General Public License, Version 2 or any later version published by the Free Soft‐
+       ware Foundation
        On Debian systems, the complete text of the GNU General Public License can be found in /usr/share/common-licenses/GPL.
 
-3.2.0                                                                                      March 2009                                                                               OPHCRACK(1)
+3.2.0                                                                                   March 2009                                                                             OPHCRACK(1)

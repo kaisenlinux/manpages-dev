@@ -1,10 +1,11 @@
+
 # Kaisen Linux | Manpages
 
-This documentation contains 464 manual pages for applications from **kaisen-menu**.
+This documentation contains 525 manual pages for applications from **kaisen-menu**.
 
 ![kaisen-menu](assets/kaisen_menu.png)
 
-You can switch to sorted `A-Z manpages` documentation by clicking on the drodpown in the upper-left navbar.
+You can switch to sorted **A-Z manpages** documentation by clicking on the drodpown in the upper-left navbar.
 
 ## Other Links
 

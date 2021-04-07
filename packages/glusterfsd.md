@@ -1,4 +1,4 @@
-GlusterFS(8)                                                                              Gluster Inc.                                                                             GlusterFS(8)
+GlusterFS(8)                                                                           Gluster Inc.                                                                           GlusterFS(8)
 
 NAME
        GlusterFS - Clustered Filesystem.
@@ -7,10 +7,10 @@ SYNOPSIS
        glusterfsd [options] [mountpoint]
 
 DESCRIPTION
-       GlusterFS is a clustered file-system capable of scaling to several peta-bytes.  It aggregates various storage bricks over Infiniband RDMA or TCP/IP interconnect into one large parallel
-       network file system. Storage bricks can be made of any commodity hardware such as x86-64 server with SATA-II RAID and Infiniband HBA.
+       GlusterFS  is  a  clustered  file-system capable of scaling to several peta-bytes.  It aggregates various storage bricks over Infiniband RDMA or TCP/IP interconnect into one large
+       parallel network file system. Storage bricks can be made of any commodity hardware such as x86-64 server with SATA-II RAID and Infiniband HBA.
 
-       GlusterFS is fully POSIX compliant FileSystem. On client side, it has dependency on FUSE package, on server side, it works  seemlessly  on  different  OSes.   (Currently  supported  on
+       GlusterFS is fully POSIX compliant FileSystem. On client side, it has dependency on FUSE package, on server side, it works seemlessly on different OSes.  (Currently  supported  on
        GNU/Linux, Solaris).
 
 OPTIONS
@@ -83,8 +83,8 @@ OPTIONS
               Resolve all auxiliary groups in fuse translator (max 32 otherwise)
 
        --auto-invalidation=BOOL
-              controls  whether fuse-kernel can auto-invalidate attribute, dentry and page-cache. Disable this only if same files/directories are not accessed across two different mounts con‐
-              currently [default: on]
+              controls  whether fuse-kernel can auto-invalidate attribute, dentry and page-cache. Disable this only if same files/directories are not accessed across two different mounts
+              concurrently [default: on]
 
    Miscellaneous Options
        -?, --help
@@ -102,7 +102,7 @@ FILES
 EXAMPLES
        Start a GlusterFS server on localhost with volume name foo
 
-       glusterfsd -s  localhost  --volfile-id  foo.server.media-disk-1  -p  /var/lib/glusterd/vols/foo/run/server-media-disk-1.pid  -S  /tmp/<uniqueid>.socket  --brick-name  /media/disk-1  -l
+       glusterfsd -s localhost --volfile-id foo.server.media-disk-1 -p /var/lib/glusterd/vols/foo/run/server-media-disk-1.pid  -S  /tmp/<uniqueid>.socket  --brick-name  /media/disk-1  -l
        /var/log/glusterfs/bricks/media-disk-1.log --brick-port 24009 --xlator-option foo-server.listen-port=24009
 
 SEE ALSO
@@ -111,4 +111,4 @@ SEE ALSO
 COPYRIGHT
        Copyright(c) 2006-2011  Gluster, Inc.  <http://www.gluster.com>
 
-19 March 2010                                                                          Cluster Filesystem                                                                          GlusterFS(8)
+19 March 2010                                                                       Cluster Filesystem                                                                        GlusterFS(8)

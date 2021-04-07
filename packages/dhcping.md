@@ -1,4 +1,4 @@
-dhcping(8)                                                                          General Commands Manual                                                                          dhcping(8)
+dhcping(8)                                                                        General Commands Manual                                                                       dhcping(8)
 
 NAME
        dhcping - send a DHCP request to DHCP server to see if it's up and running
@@ -64,7 +64,8 @@ SETUP
 
        Running in DHCPINFORM mode with -i:
 
-       If you see "DHCPINFORM from 192.168.1.1 via xl0: not authoritative for subnet 192.168.1.0", you should add the authoritative statement to the subnet, See dhcpd.conf(5) for details.
+       If you see "DHCPINFORM from 192.168.1.1 via xl0: not authoritative for subnet 192.168.1.0", you should add the authoritative statement to the subnet, See dhcpd.conf(5) for
+       details.
 
        When running in very verbose mode, dhcping tries to dump all data of the send and received DHCP packets. It will first dump the packet in hex-format, then decodes the header and
        finally the options.
@@ -91,4 +92,4 @@ AUTHOR
 SEE ALSO
        dhcpd(8), dhclient(8), dhcpd.conf(5), dhcpdump(8)
 
-3rd Berkeley Distribution                                                               January 27, 2002                                                                             dhcping(8)
+3rd Berkeley Distribution                                                            January 27, 2002                                                                           dhcping(8)

@@ -1,4 +1,4 @@
-BTRFS-ORPHAN-CLEANER-PROGRESS(1)                                                 Btrfs Orphan Cleaner Progress                                                 BTRFS-ORPHAN-CLEANER-PROGRESS(1)
+BTRFS-ORPHAN-CLEANER-PROGRESS(1)                                               Btrfs Orphan Cleaner Progress                                              BTRFS-ORPHAN-CLEANER-PROGRESS(1)
 
 NAME
        btrfs-orphan-cleaner-progress - show progress information about background deletion of btrfs subvolumes
@@ -9,8 +9,8 @@ SYNOPSIS
 DESCRIPTION
        The btrfs-orphan-cleaner-progress program shows live progress of the deletion of subvolumes that is happening in the background.
 
-       Ever deleted too many subvolumes at the same time, resulting in having a kernel thread "btrfs-cleaner" go wild using cpu or writing to disk? There's no way to stop this process any
-       more, but at least we can get a good idea what progress it is making.
+       Ever deleted too many subvolumes at the same time, resulting in having a kernel thread "btrfs-cleaner" go wild using cpu or writing to disk? There's no way to stop this process
+       any more, but at least we can get a good idea what progress it is making.
 
        Because the needed information is retrieved using the btrfs kernel API, it has to be run as root.
 
@@ -80,4 +80,4 @@ SEE ALSO
 
        Source and documentation on github: https://github.com/knorrie/python-btrfs
 
-                                                                                              2017                                                             BTRFS-ORPHAN-CLEANER-PROGRESS(1)
+                                                                                           2017                                                           BTRFS-ORPHAN-CLEANER-PROGRESS(1)

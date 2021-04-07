@@ -1,4 +1,4 @@
-netdiscover(8)                                                               active/passive ARP reconnaissance tool                                                              netdiscover(8)
+netdiscover(8)                                                            active/passive ARP reconnaissance tool                                                            netdiscover(8)
 
 NAME
        netdiscover - active/passive ARP reconnaissance tool
@@ -8,8 +8,8 @@ SYNOPSIS
                    [-s time] [-c count] [-n node] [-dfPLNS]
 
 DESCRIPTION
-       netdiscover  is  an active/passive ARP reconnaissance tool, initially developed to gain information about wireless networks without DHCP servers in wardriving scenarios. It can also be
-       used on switched networks. Built on top of libnet and libpcap, it can passively detect online hosts or search for them by sending ARP requests.
+       netdiscover is an active/passive ARP reconnaissance tool, initially developed to gain information about wireless networks without DHCP servers in wardriving scenarios. It can also
+       be used on switched networks. Built on top of libnet and libpcap, it can passively detect online hosts or search for them by sending ARP requests.
 
        Furthermore, it can be used to inspect your network's ARP traffic, or find network addresses using auto scan mode, which will scan for common local networks.
 
@@ -18,8 +18,8 @@ OPTIONS
               The network interface to sniff and inject packets. If no interface is specified, first available will be used.
 
        -r range
-              Scan a given range instead of auto scan. Valid range values area for example: 192.168.0.0/24, 192.168.0.0/16 or 192.168.0.0/8.  Currently, acceptable ranges are /8, /16 and  /24
-              only.
+              Scan a given range instead of auto scan. Valid range values area for example: 192.168.0.0/24, 192.168.0.0/16 or 192.168.0.0/8.  Currently, acceptable ranges are /8, /16 and
+              /24 only.
 
        -l file
               Scan ranges contained on the given file. It must contain only one range per line.
@@ -41,21 +41,22 @@ OPTIONS
        -n node
               Last IP octet of the source IP used for scanning. You can change it if the default host (x.x.x.67) is already used. (allowed range is 2 to 253, default 67)
 
-       -d     Ignore  configuration  files at home dir (for autoscan and fast mode only). This will use default ranges and IPs for autoscan and fast mode. See below for information about con‐
-              figuration files.
+       -d     Ignore  configuration  files at home dir (for autoscan and fast mode only). This will use default ranges and IPs for autoscan and fast mode. See below for information about
+              configuration files.
 
-       -f     Enable fast mode scan. This will only scan for .1, .100 and .254 on each network. This mode is useful while searching for ranges being used. After you found such range  you  can
-              make a specific range scan to find online boxes.
+       -f     Enable fast mode scan. This will only scan for .1, .100 and .254 on each network. This mode is useful while searching for ranges being used. After you found such range  you
+              can make a specific range scan to find online boxes.
 
-       -P     Produces  an output suitable to be redirected into a file or to be parsed by another program, instead of using interactive mode.  Enabling this option, netdiscover will stop af‐
-              ter scanning given ranges.
+       -P     Produces an output suitable to be redirected into a file or to be parsed by another program, instead of using interactive mode.  Enabling this option, netdiscover will stop
+              after scanning given ranges.
 
        -L     Similar to -P but continue program execution to capture ARP packets passively after the active scan.  phase to capture ARP packets passively.
 
        -N     Do not print header. Only valid when -P or -L is enabled.
 
-       -S     (DEPRECATED) Enable sleep time suppression between each request.  If set, netdiscover will sleep after having scanned 255 hosts instead of sleeping after each one. This mode was
-              used in netdiscover 0.3 beta4 and before. Avoid this option in networks with packet loss, or in wireless networks with low signal level. (also called hardcore mode)
+       -S     (DEPRECATED) Enable sleep time suppression between each request.  If set, netdiscover will sleep after having scanned 255 hosts instead of sleeping  after  each  one.  This
+              mode  was  used  in  netdiscover  0.3 beta4 and before. Avoid this option in networks with packet loss, or in wireless networks with low signal level. (also called hardcore
+              mode)
 
 USAGE
        If passive mode (-p), scan list (-l) or scan range (-r) options aren't enabled, netdiscover will scan for common LAN addresses (192.168.0.0/16, 172.16.0.0/12 and 10.0.0.0/8).
@@ -76,12 +77,12 @@ USAGE
            u  Show unique hosts detected.
 
 CONFIG FILES
-       There are 2 configuration files that netdiscover will look for, each time it is executed. If files doesn't exist, netdiscover will use default values. You can use the -d switch to dis‐
-       able reading and loading configuration files.
+       There are 2 configuration files that netdiscover will look for, each time it is executed. If files doesn't exist, netdiscover will use default values. You can use the -d switch to
+       disable reading and loading configuration files.
 
        ~/.netdiscover/ranges
-              This file contains a list of ranges (one per line) used for auto scan mode instead of default ranges. By default netdiscover will use a list of common ranges used on local  net‐
-              works.
+              This  file contains a list of ranges (one per line) used for auto scan mode instead of default ranges. By default netdiscover will use a list of common ranges used on local
+              networks.
 
        Example:
 
@@ -126,7 +127,7 @@ USAGE EXAMPLES
 AUTHOR
        netdiscover was written by Jaime Penalba Estebanez <jpenalbae@gmail.com>.
 
-       This  manual  page was originally written by Nicolas Weyland, for the Debian project. This man page has been merged into netdiscover project and modified from the original by Jaime Pe‐
-       nalba and Joao Eriberto Mota Filho.
+       This manual page was originally written by Nicolas Weyland, for the Debian project. This man page has been merged into netdiscover project and modified from the original by  Jaime
+       Penalba and Joao Eriberto Mota Filho.
 
-netdiscover-0.7                                                                           29 Jun 2020                                                                            netdiscover(8)
+netdiscover-0.7                                                                         29 Jun 2020                                                                         netdiscover(8)

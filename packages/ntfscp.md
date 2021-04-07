@@ -1,4 +1,4 @@
-NTFSCP(8)                                                                           System Manager's Manual                                                                           NTFSCP(8)
+NTFSCP(8)                                                                         System Manager's Manual                                                                        NTFSCP(8)
 
 NAME
        ntfscp - copy file to an NTFS volume.
@@ -7,14 +7,14 @@ SYNOPSIS
        ntfscp [options] device source_file destination
 
 DESCRIPTION
-       ntfscp  will copy file to an NTFS volume. destination can be either file or directory. In case if destination is directory specified by name then source_file is copied into this direc‐
-       tory, in case if destination is directory and specified by inode number then unnamed data attribute is created for this inode and source_file is copied into it (WARNING:  it's  unusual
-       to have unnamed data streams in the directories, think twice before specifying directory by inode number).
+       ntfscp  will  copy  file to an NTFS volume. destination can be either file or directory. In case if destination is directory specified by name then source_file is copied into this
+       directory, in case if destination is directory and specified by inode number then unnamed data attribute is created for this inode and source_file is copied into it (WARNING: it's
+       unusual to have unnamed data streams in the directories, think twice before specifying directory by inode number).
 
 OPTIONS
-       Below  is  a  summary  of all the options that ntfscp accepts.  Nearly all options have two equivalent names.  The short name is preceded by - and the long name is preceded by --.  Any
-       single letter options, that don't take an argument, can be combined into a single command, e.g.  -fv is equivalent to -f -v.  Long named options can be abbreviated to any unique prefix
-       of their name.
+       Below  is  a  summary  of all the options that ntfscp accepts.  Nearly all options have two equivalent names.  The short name is preceded by - and the long name is preceded by --.
+       Any single letter options, that don't take an argument, can be combined into a single command, e.g.  -fv is equivalent to -f -v.  Long named options  can  be  abbreviated  to  any
+       unique prefix of their name.
 
        -a, --attribute NUM
               Write to this attribute.
@@ -50,10 +50,10 @@ OPTIONS
               Display more debug/warning/error messages.
 
 DATA STREAMS
-       All  data  on  NTFS is stored in streams, which can have names. A file can have more than one data streams, but exactly one must have no name. The size of a file is the size of its un‐
-       named data stream. Usually when you don't specify stream name you are access to unnamed data stream. If you want access to named data stream you need to add ":stream_name" to the file‐
-       name.  For  example:  by opening "some.mp3:artist" you will open stream "artist" in "some.mp3". But windows usually prevent you from accessing to named data streams, so you need to use
-       some program like FAR or utils from cygwin to access named data streams.
+       All  data  on NTFS is stored in streams, which can have names. A file can have more than one data streams, but exactly one must have no name. The size of a file is the size of its
+       unnamed data stream. Usually when you don't specify stream name you are access to unnamed data stream. If you want access to named data stream you need to  add  ":stream_name"  to
+       the  filename.  For example: by opening "some.mp3:artist" you will open stream "artist" in "some.mp3". But windows usually prevent you from accessing to named data streams, so you
+       need to use some program like FAR or utils from cygwin to access named data streams.
 
 EXAMPLES
        Copy new_boot.ini from /home/user as boot.ini to the root of an /dev/hda1 NTFS volume:
@@ -81,4 +81,4 @@ AVAILABILITY
 SEE ALSO
        ntfsprogs(8)
 
-ntfs-3g 2017.3.23AR.3                                                                    September 2007                                                                               NTFSCP(8)
+ntfs-3g 2017.3.23AR.3                                                                 September 2007                                                                             NTFSCP(8)

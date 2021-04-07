@@ -1,4 +1,4 @@
-cbm(1)                                                                   display in real time the network traffic speed                                                                  cbm(1)
+cbm(1)                                                                display in real time the network traffic speed                                                                cbm(1)
 
 NAME
        cbm - display in real time the network traffic speed
@@ -32,11 +32,11 @@ INTERACTIVE CONTROL
        -      Decrease the update delay by 100ms.
 
 AUTHOR
-       cbm  was  originally  developed  by  Aaron  Isotton  <aaron@isotton.com>.  You  may  use  it  under  the  terms  of  the GNU General Public License, version 2. The original website was
+       cbm  was  originally  developed  by  Aaron  Isotton  <aaron@isotton.com>.  You  may  use  it under the terms of the GNU General Public License, version 2. The original website was
        http://www.isotton.com/utils/cbm/
 
        Currently, source code and newer versions are available at https://github.com/resurrecting-open-source-projects/cbm
 
        This manpage was written by Aaron Isotton and updated by Joao Eriberto Mota Filho.
 
-cbm-0.3                                                                                   31 Jan. 2021                                                                                   cbm(1)
+cbm-0.3                                                                                31 Jan. 2021                                                                                 cbm(1)

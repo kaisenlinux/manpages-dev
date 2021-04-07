@@ -1,4 +1,4 @@
-lxc-destroy(1)                                                                                                                                                                   lxc-destroy(1)
+lxc-destroy(1)                                                                                                                                                              lxc-destroy(1)
 
 NAME
        lxc-destroy - destroy a container.
@@ -52,14 +52,14 @@ COMMON OPTIONS
 
 DIAGNOSTIC
        The container was not found
-              The  specified container for destruction was not found. It is probable it does not exists and was already destroyed.You can use the lxc-ls command to list the available contain‐
-              ers on the system.
+              The specified container for destruction was not found. It is probable it does not exists and was already destroyed.You can use the lxc-ls command to list the available con‐
+              tainers on the system.
 
 SEE ALSO
-       lxc(7), lxc-create(1), lxc-copy(1), lxc-destroy(1), lxc-start(1), lxc-stop(1), lxc-execute(1), lxc-console(1), lxc-monitor(1), lxc-wait(1), lxc-cgroup(1), lxc-ls(1), lxc-info(1),  lxc-
-       freeze(1), lxc-unfreeze(1), lxc-attach(1), lxc.conf(5)
+       lxc(7), lxc-create(1), lxc-copy(1), lxc-destroy(1), lxc-start(1), lxc-stop(1), lxc-execute(1), lxc-console(1), lxc-monitor(1), lxc-wait(1), lxc-cgroup(1), lxc-ls(1),  lxc-info(1),
+       lxc-freeze(1), lxc-unfreeze(1), lxc-attach(1), lxc.conf(5)
 
 AUTHOR
        Daniel Lezcano <daniel.lezcano@free.fr>
 
-                                                                                           2021-01-31                                                                            lxc-destroy(1)
+                                                                                        2021-01-31                                                                          lxc-destroy(1)

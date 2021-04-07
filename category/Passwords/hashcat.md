@@ -1,4 +1,4 @@
-Hashcat(1)                                                                          General Commands Manual                                                                          Hashcat(1)
+Hashcat(1)                                                                        General Commands Manual                                                                       Hashcat(1)
 
 NAME
        hashcat - Advanced CPU-based password recovery utility
@@ -11,8 +11,8 @@ DESCRIPTION
 
        While it's not as fast as its GPU counterpart oclHashcat, large lists can be easily split in half with a good dictionary and a bit of knowledge of the command switches.
 
-       Hashcat  is  the  self-proclaimed world’s fastest CPU-based password recovery tool, Examples of hashcat supported hashing algorithms are Microsoft LM Hashes, MD4, MD5, SHA-family, Unix
-       Crypt formats, MySQL, Cisco PIX.
+       Hashcat  is  the  self-proclaimed world’s fastest CPU-based password recovery tool, Examples of hashcat supported hashing algorithms are Microsoft LM Hashes, MD4, MD5, SHA-family,
+       Unix Crypt formats, MySQL, Cisco PIX.
 
 OPTIONS
        -h, --help
@@ -486,4 +486,4 @@ AUTHOR
 
        This manual page was written by Daniel Echeverry <epsilon77@gmail.com>, for the Debian project (and may be used by others).
 
-                                                                                        February 20 2020                                                                             Hashcat(1)
+                                                                                     February 20 2020                                                                           Hashcat(1)

@@ -1,4 +1,4 @@
-NETHOGS(8)                                                                          System Manager's Manual                                                                          NETHOGS(8)
+NETHOGS(8)                                                                        System Manager's Manual                                                                       NETHOGS(8)
 
 NAME
        nethogs - Net top tool grouping bandwidth per process
@@ -7,9 +7,9 @@ SYNOPSIS
        nethogs [-h] [-V] [-d] [-v] [-t] [-c] [-p] [-s] [device(s)]
 
 DESCRIPTION
-       NetHogs  is  a  small  'net top' tool. Instead of breaking the traffic down per protocol or per subnet, like most such tools do, it groups bandwidth by process - and does not rely on a
-       special kernel module to be loaded. So if there's suddenly a lot of network traffic, you can fire up NetHogs and immediately see which PID is causing this, and if  it's  some  kind  of
-       spinning process, kill it.
+       NetHogs  is a small 'net top' tool. Instead of breaking the traffic down per protocol or per subnet, like most such tools do, it groups bandwidth by process - and does not rely on
+       a special kernel module to be loaded. So if there's suddenly a lot of network traffic, you can fire up NetHogs and immediately see which PID is causing this, and if it's some kind
+       of spinning process, kill it.
 
    Options
        -h     display available commands usage.
@@ -45,4 +45,4 @@ SEE ALSO
 AUTHOR
        Written by Arnout Engelen <arnouten@bzzt.net>.
 
-                                                                                        14 February 2004                                                                             NETHOGS(8)
+                                                                                     14 February 2004                                                                           NETHOGS(8)

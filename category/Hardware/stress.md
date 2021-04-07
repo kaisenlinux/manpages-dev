@@ -1,4 +1,4 @@
-STRESS(1)                                                                                User Commands                                                                                STRESS(1)
+STRESS(1)                                                                              User Commands                                                                             STRESS(1)
 
 NAME
        stress - tool to impose load on and stress test systems
@@ -68,4 +68,4 @@ SEE ALSO
 
        should give you access to the complete manual.
 
-stress 1.0.4                                                                               March 2010                                                                                 STRESS(1)
+stress 1.0.4                                                                            March 2010                                                                               STRESS(1)

@@ -1,4 +1,4 @@
-vmdkinfo                                                                                     LOCAL                                                                                     vmdkinfo
+vmdkinfo                                                                                   LOCAL                                                                                  vmdkinfo
 
 NAME
      vmdkinfo — determines information about a VMware Virtual Disk (VMDK) file(s)
@@ -49,8 +49,8 @@ AUTHOR
      These man pages were written by Joachim Metz.
 
 COPYRIGHT
-     Copyright (C) 2009-2020, Joachim Metz <joachim.metz@gmail.com>.  This is free software; see the source for copying conditions. There is NO warranty; not even for MERCHANTABILITY or FIT‐
-     NESS FOR A PARTICULAR PURPOSE.
+     Copyright (C) 2009-2020, Joachim Metz <joachim.metz@gmail.com>.  This is free software; see the source for copying conditions. There is NO warranty; not even for MERCHANTABILITY or
+     FITNESS FOR A PARTICULAR PURPOSE.
 
 SEE ALSO
-libvmdk                                                                                  March 10, 2019                                                                                 libvmdk
+libvmdk                                                                               March 10, 2019                                                                               libvmdk

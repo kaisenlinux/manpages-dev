@@ -1,4 +1,4 @@
-rdesktop(1)                                                                         General Commands Manual                                                                         rdesktop(1)
+rdesktop(1)                                                                       General Commands Manual                                                                      rdesktop(1)
 
 NAME
        rdesktop - Remote Desktop Protocol client
@@ -7,8 +7,8 @@ SYNOPSIS
        rdesktop [options] server[:port]
 
 DESCRIPTION
-       rdesktop  is  a client for Remote Desktop Protocol (RDP), used in a number of Microsoft products.  It is known to work with Microsoft Windows server versions ranging from NT 4 terminal
-       server to Windows Server 2012 R2.
+       rdesktop  is a client for Remote Desktop Protocol (RDP), used in a number of Microsoft products.  It is known to work with Microsoft Windows server versions ranging from NT 4 ter‐
+       minal server to Windows Server 2012 R2.
 
 OPTIONS
        -u <username>
@@ -24,60 +24,60 @@ OPTIONS
               The initial working directory for the user.  Often used in combination with -s to set up a fixed login environment.
 
        -p <password>
-              The password to authenticate with.  Note that this may have no effect if "Always prompt for password" is enabled on the server.  WARNING: if you specify a password on  the  com‐
-              mand line it may be visible to other users when they use tools like ps.  Use -p - to make rdesktop request a password at startup (from standard input).
+              The password to authenticate with.  Note that this may have no effect if "Always prompt for password" is enabled on the server.  WARNING: if you specify a password  on  the
+              command line it may be visible to other users when they use tools like ps.  Use -p - to make rdesktop request a password at startup (from standard input).
 
        -n <hostname>
               Client hostname.  Normally rdesktop automatically obtains the hostname of the client.
 
        -k <keyboard-map>
-              Keyboard layout to emulate.  This requires a corresponding keymap file to be installed.  The standard keymaps provided with rdesktop follow the RFC1766 naming scheme: a language
-              code followed by a country code if necessary - e.g.  en-us, en-gb, de, fr, sv, etc.
+              Keyboard  layout  to  emulate.   This requires a corresponding keymap file to be installed.  The standard keymaps provided with rdesktop follow the RFC1766 naming scheme: a
+              language code followed by a country code if necessary - e.g.  en-us, en-gb, de, fr, sv, etc.
 
-              The default keyboard map depends on the current locale (LC_* and LANG environment variables). If the current locale is unknown, the default keyboard map is en-us (a  US  English
-              keyboard).
+              The default keyboard map depends on the current locale (LC_* and LANG environment variables). If the current locale is unknown, the default keyboard map is en-us (a US Eng‐
+              lish keyboard).
 
               The keyboard maps are file names, which means that they are case sensitive. The standard keymaps are all in lowercase.
 
-              The  keyboard maps are searched relative to the directories $HOME/.rdesktop/keymaps, KEYMAP_PATH (specified at build time), and $CWD/keymaps, in this order. The keyboard-map ar‐
-              gument can also be an absolute filename.
+              The keyboard maps are searched relative to the directories $HOME/.rdesktop/keymaps, KEYMAP_PATH (specified at build time), and $CWD/keymaps, in this order. The keyboard-map
+              argument can also be an absolute filename.
 
-              The special value `none' can be used instead of a keyboard map.  In this case, rdesktop will guess the scancodes from the X11 event key codes using an internal  mapping  method.
-              This method only supports the basic alphanumeric keys and may not work properly on all platforms so its use is discouraged.
+              The special value `none' can be used instead of a keyboard map.  In this case, rdesktop will guess the scancodes from the X11 event key  codes  using  an  internal  mapping
+              method. This method only supports the basic alphanumeric keys and may not work properly on all platforms so its use is discouraged.
 
        -g <geometry>
-              Desktop  geometry  (WxH[@DPI][+X[+Y]]).  If  geometry is the special word "workarea", the geometry will be fetched from the extended window manager hints property _NET_WORKAREA,
-              from the root window. The geometry can also be specified as a percentage of the whole screen, e.g. "-g 80%", "-g 80%x70%".
+              Desktop  geometry  (WxH[@DPI][+X[+Y]]).  If  geometry  is  the  special  word  "workarea",  the  geometry  will  be  fetched from the extended window manager hints property
+              _NET_WORKAREA, from the root window. The geometry can also be specified as a percentage of the whole screen, e.g. "-g 80%", "-g 80%x70%".
 
-              If the specified geometry depends on the screen size, and the screen size is changed, rdesktop will automatically reconnect using the new screen size. This requires that  rdesk‐
-              top has been compiled with RandR support.
+              If the specified geometry depends on the screen size, and the screen size is changed, rdesktop will automatically reconnect using the new screen size.  This  requires  that
+              rdesktop has been compiled with RandR support.
 
-              The optional DPI parameter should be specified if the screen rdesktop is being displayed on is too far from 96 DPI for unscaled Windows to be readable. Windows currently accepts
-              values from 96 to 480.
+              The  optional  DPI  parameter should be specified if the screen rdesktop is being displayed on is too far from 96 DPI for unscaled Windows to be readable. Windows currently
+              accepts values from 96 to 480.
 
-              Offset placement of window is optional. Starting point is upper left corner of screen.  Window manager might push into visible area, if a panel would be covered.  The schema  is
-              "-g <value>+<xoff>+<yoff>, f.e. "-g 30%+200+600".
+              Offset placement of window is optional. Starting point is upper left corner of screen.  Window manager might push into visible area, if  a  panel  would  be  covered.   The
+              schema is "-g <value>+<xoff>+<yoff>, f.e. "-g 30%+200+600".
 
-       -i     Use  password  as smartcard pin. If a valid user certificate is matched in smart card reader the password passed with p argument is used as pin for the smart card.  This feature
-              also requires that smart card redirection is used using r scard argument.
+       -i     Use password as smartcard pin. If a valid user certificate is matched in smart card reader the password passed with p argument is used as pin for the smart card.  This fea‐
+              ture also requires that smart card redirection is used using r scard argument.
 
-       -f     Enable fullscreen mode.  This overrides the window manager and causes the rdesktop window to fully cover the current screen.  Fullscreen mode can be toggled at  any  time  using
-              Ctrl-Alt-Enter.
+       -f     Enable fullscreen mode.  This overrides the window manager and causes the rdesktop window to fully cover the current screen.  Fullscreen mode can be toggled at any time us‐
+              ing Ctrl-Alt-Enter.
 
        -b     Force the server to send screen updates as bitmaps rather than using higher-level drawing operations.
 
        -t     Disable use of remote control. This will disable features like seamless connection sharing.
 
        -A <seamlessrdpshell>
-              Enable  SeamlessRDP  by specifying the path to seamless rdp shell.  In this mode, rdesktop creates a X11 window for each window on the server side.  This mode requires the Seam‐
-              lessRDP server side component, which is available from http://www.cendio.com/seamlessrdp/.
+              Enable  SeamlessRDP  by  specifying the path to seamless rdp shell.  In this mode, rdesktop creates a X11 window for each window on the server side.  This mode requires the
+              SeamlessRDP server side component, which is available from http://www.cendio.com/seamlessrdp/.
 
               When using this option, you should normally specify a startup shell which launches the desired application through SeamlessRDP.
 
               Example: rdesktop -A 'c:\seamlessrdp\seamlessrdpshell.exe' -s 'notepad' mywts.domain.com
 
-              Any subsequential call to the above command line example will make use of the seamless connection sharing feature which spawns another notepad in the current connection  to  the
-              specified server and then exit.
+              Any subsequential call to the above command line example will make use of the seamless connection sharing feature which spawns another notepad in the current connection  to
+              the specified server and then exit.
 
        -V <tls version>
               Set the Transport Level Security (also known as SSL) Version used.  Should be one of the following values: 1.0, 1.1, 1.2. By default all versions are supported.
@@ -99,53 +99,55 @@ OPTIONS
        -K     Do not override window manager key bindings.  By default rdesktop attempts to grab all keyboard input when it is in focus.
 
        -S <button size>
-              Enable  single  application  mode. This option can be used when running a single, maximized application (via -s). When the minimize button of the windows application is pressed,
-              the rdesktop window is minimized instead of the remote application. The maximize/restore button is disabled. For this to work, you must specify the correct button size, in  pix‐
-              els. The special word "standard" means 18 pixels.
+              Enable  single  application  mode.  This  option  can  be used when running a single, maximized application (via -s). When the minimize button of the windows application is
+              pressed, the rdesktop window is minimized instead of the remote application. The maximize/restore button is disabled. For this to work, you must specify the correct  button
+              size, in pixels. The special word "standard" means 18 pixels.
 
        -T <title>
               Sets the window title. The title must be specified using an UTF-8 string.
 
-       -N     Enable  numlock  synchronization between the Xserver and the remote RDP session.  This is useful with applications that looks at the numlock state, but might cause problems with
-              some Xservers like Xvnc.
+       -N     Enable  numlock  synchronization between the Xserver and the remote RDP session.  This is useful with applications that looks at the numlock state, but might cause problems
+              with some Xservers like Xvnc.
 
        -X <windowid>
               Embed rdesktop-window in another window. The windowid is expected to be decimal or hexadecimal (prefixed by 0x).
 
        -a <bpp>
-              Sets the colour depth for the connection (8, 15, 16, 24 or 32).  More than 8 bpp are only supported when connecting to Windows XP (up to 16 bpp) or newer.  Note that the  colour
-              depth may also be limited by the server configuration. The default value is the depth of the root window.
+              Sets the colour depth for the connection (8, 15, 16, 24 or 32).  More than 8 bpp are only supported when connecting to Windows XP (up to 16 bpp) or newer.   Note  that  the
+              colour depth may also be limited by the server configuration. The default value is the depth of the root window.
 
        -z     Enable compression of the RDP datastream.
 
        -x <experience>
-              Changes  default bandwidth performance behaviour for RDP5. By default only theming is enabled, and all other options are disabled (corresponding to modem (56 Kbps)). Setting ex‐
-              perience to b[roadband] enables menu animations and full window dragging. Setting experience to l[an] will also enable the desktop wallpaper. Setting experience to m[odem]  dis‐
-              ables all (including themes). Experience can also be a hexadecimal number containing the flags.
+              Changes default bandwidth performance behaviour for RDP5. By default only theming is enabled, and all other options are disabled (corresponding to modem (56 Kbps)). Setting
+              experience to b[roadband] enables menu animations and full window dragging. Setting experience to l[an] will also  enable  the  desktop  wallpaper.  Setting  experience  to
+              m[odem] disables all (including themes). Experience can also be a hexadecimal number containing the flags.
 
-       -P     Enable  caching  of bitmaps to disk (persistent bitmap caching). This generally improves performance (especially on low bandwidth connections) and reduces network traffic at the
-              cost of slightly longer startup and some disk space.  (10MB for 8-bit colour, 20MB for 15/16-bit colour, 30MB for 24-bit colour and 40MB for 32-bit colour sessions)
+       -P     Enable  caching of bitmaps to disk (persistent bitmap caching). This generally improves performance (especially on low bandwidth connections) and reduces network traffic at
+              the cost of slightly longer startup and some disk space.  (10MB for 8-bit colour, 20MB for 15/16-bit colour, 30MB for 24-bit colour and 40MB for 32-bit colour sessions)
 
        -r <device>
-              Enable redirection of the specified device on the client, such that it appears on the server. Note that the allowed redirections may be restricted by the server configuration.
+              Enable redirection of the specified device on the client, such that it appears on the server. Note that the allowed redirections may be restricted by the server  configura‐
+              tion.
 
               Following devices are currently supported:
 
        -r comport:<comport>=<device>,...
-              Redirects serial devices on your client to the server. Note that if you need to change any settings on the serial device(s), do so  with  an  appropriate  tool  before  starting
-              rdesktop.  In  most  OSes  you would use stty. Bidirectional/Read support requires Windows XP or newer.  In Windows 2000 it will create a port, but it's not seamless, most shell
-              programs will not work with it.
+              Redirects  serial devices on your client to the server. Note that if you need to change any settings on the serial device(s), do so with an appropriate tool before starting
+              rdesktop. In most OSes you would use stty. Bidirectional/Read support requires Windows XP or newer.  In Windows 2000 it will create a port,  but  it's  not  seamless,  most
+              shell programs will not work with it.
 
        -r disk:<sharename>=<path>,...
               Redirects a path to the share \\tsclient\<sharename> on the server (requires Windows XP or newer). The share name is limited to 8 characters.
 
        -r lptport:<lptport>=<device>,...
-              Redirects parallel devices on your client to the server.  Bidirectional/Read support requires Windows XP or newer. In Windows 2000 it will create a port, but it's not  seamless,
-              most shell programs will not work with it.
+              Redirects parallel devices on your client to the server.  Bidirectional/Read support requires Windows XP or newer. In Windows 2000 it will create a port, but it's not seam‐
+              less, most shell programs will not work with it.
 
        -r printer:<printername>[=<driver>],...
-              Redirects  a printer queue on the client to the server. The <printername> is the name of the queue in your local system. <driver> defaults to a simple PS-driver unless you spec‐
-              ify one. Keep in mind that you need a 100% match in the server environment, or the driver will fail. The first printer on the command line will be set as your default printer.
+              Redirects a printer queue on the client to the server. The <printername> is the name of the queue in your local system. <driver> defaults to a simple PS-driver  unless  you
+              specify  one.  Keep in mind that you need a 100% match in the server environment, or the driver will fail. The first printer on the command line will be set as your default
+              printer.
 
        -r sound:[local|off|remote]
               Redirects sound generated on the server to the client. "remote" only has any effect when you connect to the console with the -0 option. (Requires Windows XP or newer).
@@ -154,9 +156,9 @@ OPTIONS
               Activates the lspci channel, which allows the server to enumerate the clients PCI devices. See the file lspci-channel.txt in the documentation for more information.
 
        -r scard[:<Scard Name>=<Alias Name>[;<Vendor Name>][,...]]
-              Enables redirection of one or more smart-cards. You can provide static name binding between GNU/Linux and Windows. To do this you  can  use  optional  parameters  as  described:
-              <Scard  Name>  -  device name in GNU/Linux and UNIX environment, <Alias Name> - device name shown in Windows environment <Vendor Name> - optional device vendor name. For list of
-              examples run rdesktop without parameters.
+              Enables redirection of one or more smart-cards. You can provide static name binding between GNU/Linux and Windows. To do this you can use optional parameters as  described:
+              <Scard  Name> - device name in GNU/Linux and UNIX environment, <Alias Name> - device name shown in Windows environment <Vendor Name> - optional device vendor name. For list
+              of examples run rdesktop without parameters.
 
        -r clipboard:[off|PRIMARYCLIPBOARD|CLIPBOARD]
               Enable clipboard redirection. 'PRIMARYCLIPBOARD' looks at both PRIMARY and CLIPBOARD when sending data to server. 'CLIPBOARD' looks at only 'CLIPBOARD'.
@@ -171,8 +173,8 @@ OPTIONS
 
 CredSSP Smartcard options
        --sc-csp-name <name>
-              Specify the CSP (Crypto Service Provider) to use on the windows side for the smartcard authentication. CSP is the driver for your smartcard and it seems like this is required to
-              be specified for CredSSP authentication. For Swedish NetID the following CSP name is used; "Net iD - CSP".
+              Specify the CSP (Crypto Service Provider) to use on the windows side for the smartcard authentication. CSP is the driver for your smartcard and it seems like  this  is  re‐
+              quired to be specified for CredSSP authentication. For Swedish NetID the following CSP name is used; "Net iD - CSP".
 
        --sc-container-name <name>
               Specify the container name, usually this is the username for default container and it seems like this is required to be specified for CredSSP authentication.
@@ -280,4 +282,4 @@ LINKS
        Main website of rdesktop
        http://www.rdesktop.org/
 
-                                                                                           2017-10-28                                                                               rdesktop(1)
+                                                                                        2017-10-28                                                                             rdesktop(1)

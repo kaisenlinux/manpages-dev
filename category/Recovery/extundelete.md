@@ -1,4 +1,4 @@
-EXTUNDELETE(1)                                                                      General Commands Manual                                                                      EXTUNDELETE(1)
+EXTUNDELETE(1)                                                                    General Commands Manual                                                                   EXTUNDELETE(1)
 
 NAME
        extundelete - utility to undelete files from an ext3 or ext4 partition.
@@ -9,8 +9,8 @@ SYNOPSIS
 DESCRIPTION
        extundelete is a utility that can recover deleted files from an ext3 or ext4 partition
        extundelete uses the information stored in the partition's journal to attempt to recover a file that has been deleted from the partition.
-       There  is  no  guarantee  that any particular file will be able to be undeleted, so always try to have a good backup system in place, or at least put one in place after recovering your
-       files!
+       There  is  no  guarantee  that any particular file will be able to be undeleted, so always try to have a good backup system in place, or at least put one in place after recovering
+       your files!
 
 OPTIONS
        --version
@@ -78,4 +78,4 @@ AUTHOR
 
        This manual page was written by Elías Alejandro Año Mendoza <ealmdz@gmail.com>, for the Debian project (and may be used by others).
 
-                                                                                       September 29, 2010                                                                        EXTUNDELETE(1)
+                                                                                    September 29, 2010                                                                      EXTUNDELETE(1)

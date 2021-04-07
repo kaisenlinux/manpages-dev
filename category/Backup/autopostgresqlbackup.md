@@ -1,4 +1,4 @@
-AUTOPOSTGRESQLBACKUP(8)                                                                                                                                                 AUTOPOSTGRESQLBACKUP(8)
+AUTOPOSTGRESQLBACKUP(8)                                                                                                                                            AUTOPOSTGRESQLBACKUP(8)
 
 NAME
        autopostgresqlbackup - backup all of your PostgreSQL databases daily, weekly, and monthly
@@ -14,4 +14,4 @@ DESCRIPTION
 AUTHOR
        This manpage was written by Emmanuel Bouthenot <kolter@debian.org> for Debian GNU/Linux but may be used by others.
 
-                                                                                                                                                                        AUTOPOSTGRESQLBACKUP(8)
+                                                                                                                                                                   AUTOPOSTGRESQLBACKUP(8)

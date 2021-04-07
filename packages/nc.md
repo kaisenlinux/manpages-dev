@@ -1,4 +1,4 @@
-NC(1)                                                                             BSD General Commands Manual                                                                             NC(1)
+NC(1)                                                                           BSD General Commands Manual                                                                          NC(1)
 
 NAME
      nc — arbitrary TCP and UDP connections and listens
@@ -8,9 +8,9 @@ SYNOPSIS
         [-W recvlimit] [-w timeout] [-X proxy_protocol] [-x proxy_address[:port]] [destination] [port]
 
 DESCRIPTION
-     The nc (or netcat) utility is used for just about anything under the sun involving TCP, UDP, or UNIX-domain sockets.  It can open TCP connections, send UDP packets, listen on arbitrary
-     TCP and UDP ports, do port scanning, and deal with both IPv4 and IPv6.  Unlike telnet(1), nc scripts nicely, and separates error messages onto standard error instead of sending them to
-     standard output, as telnet(1) does with some.
+     The nc (or netcat) utility is used for just about anything under the sun involving TCP, UDP, or UNIX-domain sockets.  It can open TCP connections, send UDP packets, listen on arbi‐
+     trary TCP and UDP ports, do port scanning, and deal with both IPv4 and IPv6.  Unlike telnet(1), nc scripts nicely, and separates error messages onto standard error instead of send‐
+     ing them to standard output, as telnet(1) does with some.
 
      Common uses include:
 
@@ -28,15 +28,15 @@ DESCRIPTION
 
      -b      Allow broadcast.
 
-     -C      Send CRLF as line-ending.  Each line feed (LF) character from the input data is translated into CR+LF before being written to the socket.  Line feed characters that are already
-             preceded with a carriage return (CR) are not translated.  Received data is not affected.
+     -C      Send CRLF as line-ending.  Each line feed (LF) character from the input data is translated into CR+LF before being written to the socket.  Line feed characters that are al‐
+             ready preceded with a carriage return (CR) are not translated.  Received data is not affected.
 
      -D      Enable debugging on the socket.
 
      -d      Do not attempt to read from stdin.
 
-     -F      Pass the first connected socket using sendmsg(2) to stdout and exit.  This is useful in conjunction with -X to have nc perform connection setup with a proxy but then leave the
-             rest of the connection to another program (e.g. ssh(1) using the ssh_config(5) ProxyUseFdpass option).  Cannot be used with -U.
+     -F      Pass the first connected socket using sendmsg(2) to stdout and exit.  This is useful in conjunction with -X to have nc perform connection setup with a proxy but then leave
+             the rest of the connection to another program (e.g. ssh(1) using the ssh_config(5) ProxyUseFdpass option).  Cannot be used with -U.
 
      -h      Print out the nc help text and exit.
 
@@ -46,11 +46,11 @@ DESCRIPTION
      -i interval
              Sleep for interval seconds between lines of text sent and received.  Also causes a delay time between connections to multiple ports.
 
-     -k      When a connection is completed, listen for another one.  Requires -l.  When used together with the -u option, the server socket is not connected and it can receive UDP datagrams
-             from multiple hosts.
+     -k      When a connection is completed, listen for another one.  Requires -l.  When used together with the -u option, the server socket is not connected and it can receive UDP data‐
+             grams from multiple hosts.
 
-     -l      Listen for an incoming connection rather than initiating a connection to a remote host.  The destination and port to listen on can be specified either as non-optional arguments,
-             or with options -s and -p respectively.  Cannot be used together with -x or -z.  Additionally, any timeouts specified with the -w option are ignored.
+     -l      Listen for an incoming connection rather than initiating a connection to a remote host.  The destination and port to listen on can be specified either as non-optional argu‐
+             ments, or with options -s and -p respectively.  Cannot be used together with -x or -z.  Additionally, any timeouts specified with the -w option are ignored.
 
      -M ttl  Set the TTL / hop limit of outgoing packets.
 
@@ -65,8 +65,8 @@ DESCRIPTION
              Specify the size of the TCP send buffer.
 
      -P proxy_username
-             Specifies a username to present to a proxy server that requires authentication.  If no username is specified then authentication will not be attempted.  Proxy authentication is
-             only supported for HTTP CONNECT proxies at present.
+             Specifies a username to present to a proxy server that requires authentication.  If no username is specified then authentication will not be attempted.  Proxy authentication
+             is only supported for HTTP CONNECT proxies at present.
 
      -p source_port
              Specify the source port nc should use, subject to privilege restrictions and availability.
@@ -79,19 +79,19 @@ DESCRIPTION
      -S      Enable the RFC 2385 TCP MD5 signature option.
 
      -s sourceaddr
-             Set the source address to send packets from, which is useful on machines with multiple interfaces.  For UNIX-domain datagram sockets, specifies the local temporary socket file to
-             create and use so that datagrams can be received.  Cannot be used together with -x.
+             Set the source address to send packets from, which is useful on machines with multiple interfaces.  For UNIX-domain datagram sockets, specifies the local temporary socket
+             file to create and use so that datagrams can be received.  Cannot be used together with -x.
 
      -T keyword
-             Change the IPv4 TOS/IPv6 traffic class value.  keyword may be one of critical, inetcontrol, lowcost, lowdelay, netcontrol, throughput, reliability, or one of the DiffServ Code
-             Points: ef, af11 ... af43, cs0 ... cs7; or a number in either hex or decimal.
+             Change the IPv4 TOS/IPv6 traffic class value.  keyword may be one of critical, inetcontrol, lowcost, lowdelay, netcontrol, throughput, reliability, or one of the DiffServ
+             Code Points: ef, af11 ... af43, cs0 ... cs7; or a number in either hex or decimal.
 
      -t      Send RFC 854 DON'T and WON'T responses to RFC 854 DO and WILL requests.  This makes it possible to use nc to script telnet sessions.
 
      -U      Use UNIX-domain sockets.  Cannot be used together with -F or -x.
 
-     -u      Use UDP instead of TCP.  Cannot be used together with -x.  For UNIX-domain sockets, use a datagram socket instead of a stream socket.  If a UNIX-domain socket is used, a tempo‐
-             rary receiving socket is created in /tmp unless the -s flag is given.
+     -u      Use UDP instead of TCP.  Cannot be used together with -x.  For UNIX-domain sockets, use a datagram socket instead of a stream socket.  If a UNIX-domain socket is used, a
+             temporary receiving socket is created in /tmp unless the -s flag is given.
 
      -V rtable
              Set the routing table to be used.
@@ -102,23 +102,23 @@ DESCRIPTION
              Terminate after receiving recvlimit packets from the network.
 
      -w timeout
-             Connections which cannot be established or are idle timeout after timeout seconds.  The -w flag has no effect on the -l option, i.e. nc will listen forever for a connection, with
-             or without the -w flag.  The default is no timeout.
+             Connections which cannot be established or are idle timeout after timeout seconds.  The -w flag has no effect on the -l option, i.e. nc will listen forever for a connection,
+             with or without the -w flag.  The default is no timeout.
 
      -X proxy_protocol
-             Use proxy_protocol when talking to the proxy server.  Supported protocols are 4 (SOCKS v.4), 5 (SOCKS v.5) and connect (HTTPS proxy).  If the protocol is not specified, SOCKS
-             version 5 is used.
+             Use proxy_protocol when talking to the proxy server.  Supported protocols are 4 (SOCKS v.4), 5 (SOCKS v.5) and connect (HTTPS proxy).  If the protocol is not specified,
+             SOCKS version 5 is used.
 
      -x proxy_address[:port]
-             Connect to destination using a proxy at proxy_address and port.  If port is not specified, the well-known port for the proxy protocol is used (1080 for SOCKS, 3128 for HTTPS).
-             An IPv6 address can be specified unambiguously by enclosing proxy_address in square brackets.  A proxy cannot be used with any of the options -lsuU.
+             Connect to destination using a proxy at proxy_address and port.  If port is not specified, the well-known port for the proxy protocol is used (1080 for SOCKS, 3128 for
+             HTTPS).  An IPv6 address can be specified unambiguously by enclosing proxy_address in square brackets.  A proxy cannot be used with any of the options -lsuU.
 
      -Z      DCCP mode.
 
      -z      Only scan for listening daemons, without sending any data to them.  Cannot be used together with -l.
 
-     destination can be a numerical IP address or a symbolic hostname (unless the -n option is given).  In general, a destination must be specified, unless the -l option is given (in which
-     case the local host is used).  For UNIX-domain sockets, a destination is required and is the socket path to connect to (or listen on if the -l option is given).
+     destination can be a numerical IP address or a symbolic hostname (unless the -n option is given).  In general, a destination must be specified, unless the -l option is given (in
+     which case the local host is used).  For UNIX-domain sockets, a destination is required and is the socket path to connect to (or listen on if the -l option is given).
 
      port can be specified as a numeric port number or as a service name.  Port ranges may be specified as numeric port numbers of the form nn-mm.  In general, a destination port must be
      specified, unless the -U option is given.
@@ -132,11 +132,11 @@ CLIENT/SERVER MODEL
 
            $ nc 127.0.0.1 1234
 
-     There should now be a connection between the ports.  Anything typed at the second console will be concatenated to the first, and vice-versa.  After the connection has been set up, nc
-     does not really care which side is being used as a ‘server’ and which side is being used as a ‘client’.  The connection may be terminated using an EOF (‘^D’).
+     There should now be a connection between the ports.  Anything typed at the second console will be concatenated to the first, and vice-versa.  After the connection has been set up,
+     nc does not really care which side is being used as a ‘server’ and which side is being used as a ‘client’.  The connection may be terminated using an EOF (‘^D’).
 
-     There is no -c or -e option in this netcat, but you still can execute a command after connection being established by redirecting file descriptors. Be cautious here because opening a
-     port and let anyone connected execute arbitrary command on your site is DANGEROUS. If you really need to do this, here is an example:
+     There is no -c or -e option in this netcat, but you still can execute a command after connection being established by redirecting file descriptors. Be cautious here because opening
+     a port and let anyone connected execute arbitrary command on your site is DANGEROUS. If you really need to do this, here is an example:
 
      On ‘server’ side:
 
@@ -151,14 +151,14 @@ CLIENT/SERVER MODEL
      By doing this, you create a fifo at /tmp/f and make nc listen at port 1234 of address 127.0.0.1 on ‘server’ side, when a ‘client’ establishes a connection successfully to that port,
      /bin/sh gets executed on ‘server’ side and the shell prompt is given to ‘client’ side.
 
-     When connection is terminated, nc quits as well. Use -k if you want it keep listening, but if the command quits this option won't restart it or keep nc running. Also don't forget to re‐
-     move the file descriptor once you don't need it anymore:
+     When connection is terminated, nc quits as well. Use -k if you want it keep listening, but if the command quits this option won't restart it or keep nc running. Also don't forget to
+     remove the file descriptor once you don't need it anymore:
 
            $ rm -f /tmp/f
 
 DATA TRANSFER
-     The example in the previous section can be expanded to build a basic data transfer model.  Any information input into one end of the connection will be output to the other end, and input
-     and output can be easily captured in order to emulate file transfer.
+     The example in the previous section can be expanded to build a basic data transfer model.  Any information input into one end of the connection will be output to the other end, and
+     input and output can be easily captured in order to emulate file transfer.
 
      Start by using nc to listen on a specific port, with output captured into a file:
 
@@ -171,8 +171,8 @@ DATA TRANSFER
      After the file has been transferred, the connection will close automatically.
 
 TALKING TO SERVERS
-     It is sometimes useful to talk to servers “by hand” rather than through a user interface.  It can aid in troubleshooting, when it might be necessary to verify what data a server is send‐
-     ing in response to commands issued by the client.  For example, to retrieve the home page of a web site:
+     It is sometimes useful to talk to servers “by hand” rather than through a user interface.  It can aid in troubleshooting, when it might be necessary to verify what data a server is
+     sending in response to commands issued by the client.  For example, to retrieve the home page of a web site:
 
            $ printf "GET / HTTP/1.0\r\n\r\n" | nc host.example.com 80
 
@@ -191,8 +191,8 @@ TALKING TO SERVERS
            EOF
 
 PORT SCANNING
-     It may be useful to know which ports are open and running services on a target machine.  The -z flag can be used to tell nc to report open ports, rather than initiate a connection. Usu‐
-     ally it's useful to turn on verbose output to stderr by use this option in conjunction with -v option.
+     It may be useful to know which ports are open and running services on a target machine.  The -z flag can be used to tell nc to report open ports, rather than initiate a connection.
+     Usually it's useful to turn on verbose output to stderr by use this option in conjunction with -v option.
 
      For example:
 
@@ -212,9 +212,9 @@ PORT SCANNING
 
      The ports are scanned by the order you given (unless the -r flag is set).
 
-     Alternatively, it might be useful to know which server software is running, and which versions.  This information is often contained within the greeting banners.  In order to retrieve
-     these, it is necessary to first make a connection, and then break the connection when the banner has been retrieved.  This can be accomplished by specifying a small timeout with the -w
-     flag, or perhaps by issuing a "QUIT" command to the server:
+     Alternatively, it might be useful to know which server software is running, and which versions.  This information is often contained within the greeting banners.  In order to re‐
+     trieve these, it is necessary to first make a connection, and then break the connection when the banner has been retrieved.  This can be accomplished by specifying a small timeout
+     with the -w flag, or perhaps by issuing a "QUIT" command to the server:
 
            $ echo "QUIT" | nc host.example.com 20-30
            SSH-1.99-OpenSSH_3.6.1p2
@@ -238,8 +238,8 @@ EXAMPLES
 
            $ nc -lU /var/tmp/dsocket
 
-     Connect to port 42 of host.example.com via an HTTP proxy at 10.2.3.4, port 8080.  This example could also be used by ssh(1); see the ProxyCommand directive in ssh_config(5) for more in‐
-     formation.
+     Connect to port 42 of host.example.com via an HTTP proxy at 10.2.3.4, port 8080.  This example could also be used by ssh(1); see the ProxyCommand directive in ssh_config(5) for more
+     information.
 
            $ nc -x10.2.3.4:8080 -Xconnect host.example.com 42
 
@@ -257,8 +257,8 @@ AUTHORS
      Modified for Debian port by Aron Xu ⟨aron@debian.org⟩.
 
 CAVEATS
-     UDP port scans using the -uz combination of flags will always report success irrespective of the target machine's state.  However, in conjunction with a traffic sniffer either on the
-     target machine or an intermediary device, the -uz combination could be useful for communications diagnostics.  Note that the amount of UDP traffic generated may be limited either due to
-     hardware resources and/or configuration settings.
+     UDP port scans using the -uz combination of flags will always report success irrespective of the target machine's state.  However, in conjunction with a traffic sniffer either on
+     the target machine or an intermediary device, the -uz combination could be useful for communications diagnostics.  Note that the amount of UDP traffic generated may be limited ei‐
+     ther due to hardware resources and/or configuration settings.
 
-BSD                                                                                    February 12, 2020                                                                                    BSD
+BSD                                                                                  February 12, 2020                                                                                 BSD

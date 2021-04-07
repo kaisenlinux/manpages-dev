@@ -1,4 +1,4 @@
-lxc-console(1)                                                                                                                                                                   lxc-console(1)
+lxc-console(1)                                                                                                                                                              lxc-console(1)
 
 NAME
        lxc-console - Launch a console for the specified container
@@ -9,8 +9,8 @@ SYNOPSIS
 DESCRIPTION
        If the tty service has been configured and is available for the container specified as parameter, this command will launch a console allowing to log on the container.
 
-       The  available  tty  are free slots taken by this command. That means if the container has four ttys available and the command has been launched four times each taking a different tty,
-       the fifth command will fail because no console will be available.
+       The  available  tty  are free slots taken by this command. That means if the container has four ttys available and the command has been launched four times each taking a different
+       tty, the fifth command will fail because no console will be available.
 
        The command will connect to a tty. If the connection is lost or broken, the command can be launched again and regain the tty at the state it was before the disconnection.
 
@@ -20,7 +20,7 @@ DESCRIPTION
 
 OPTIONS
        -e, --escape escape character
-              Specify the escape sequence prefix to use instead of <Ctrl a>.  This may be given as '^letter' or just 'letter'. For example to use <Ctrl+b q> as  the  escape  sequence  use  -e
+              Specify the escape sequence prefix to use instead of <Ctrl a>.  This may be given as '^letter' or just 'letter'. For example to use <Ctrl+b q> as the escape sequence use -e
               '^b'.
 
        -t, --tty ttynum
@@ -65,10 +65,10 @@ DIAGNOSTIC
               No tty is available or there is not enough privilege to use the console. For example, the container belongs to user "foo" and "bar" is trying to open a console to it.
 
 SEE ALSO
-       lxc(7),  lxc-create(1), lxc-copy(1), lxc-destroy(1), lxc-start(1), lxc-stop(1), lxc-execute(1), lxc-console(1), lxc-monitor(1), lxc-wait(1), lxc-cgroup(1), lxc-ls(1), lxc-info(1), lxc-
-       freeze(1), lxc-unfreeze(1), lxc-attach(1), lxc.conf(5)
+       lxc(7),  lxc-create(1), lxc-copy(1), lxc-destroy(1), lxc-start(1), lxc-stop(1), lxc-execute(1), lxc-console(1), lxc-monitor(1), lxc-wait(1), lxc-cgroup(1), lxc-ls(1), lxc-info(1),
+       lxc-freeze(1), lxc-unfreeze(1), lxc-attach(1), lxc.conf(5)
 
 AUTHOR
        Daniel Lezcano <daniel.lezcano@free.fr>
 
-                                                                                           2021-01-31                                                                            lxc-console(1)
+                                                                                        2021-01-31                                                                          lxc-console(1)

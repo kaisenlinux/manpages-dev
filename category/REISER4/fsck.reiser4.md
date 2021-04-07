@@ -1,4 +1,4 @@
-fsck.reiser4(8)                                                                       reiser4progs manual                                                                       fsck.reiser4(8)
+fsck.reiser4(8)                                                                     reiser4progs manual                                                                    fsck.reiser4(8)
 
 NAME
        fsck.reiser4 - the program for checking and repairing reiser4 filesystem.
@@ -37,8 +37,8 @@ CHECK OPTIONS
 
 PLUGIN OPTIONS
        --print-profile
-              prints  the  plugin profile. This is the set of default plugins used for all parts of a filesystem -- format, nodes, files, directories, hashes, etc. If --override is specified,
-              then prints modified plugins.
+              prints  the plugin profile. This is the set of default plugins used for all parts of a filesystem -- format, nodes, files, directories, hashes, etc. If --override is speci‐
+              fied, then prints modified plugins.
 
        -l, --print-plugins
               prints all plugins libreiser4 know about.
@@ -77,4 +77,4 @@ SEE ALSO
 AUTHOR
        This manual page was written by Vitaly Fertman <vitaly@namesys.com>
 
-reiser4progs                                                                           05 February, 2004                                                                        fsck.reiser4(8)
+reiser4progs                                                                         05 February, 2004                                                                     fsck.reiser4(8)

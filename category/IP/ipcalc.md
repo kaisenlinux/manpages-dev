@@ -1,4 +1,4 @@
-ipcalc(1)                                                                           General Commands Manual                                                                           ipcalc(1)
+ipcalc(1)                                                                         General Commands Manual                                                                        ipcalc(1)
 
 NAME
        ipcalc - An IPv4 Netmask/broadcast/etc calculator
@@ -7,8 +7,8 @@ SYNOPSIS
         ipcalc  [options] ADDRESS[[/]NETMASK] [NETMASK]
 
 DESCRIPTION
-       ipcalc  takes  an IPv4 address and netmask and calculates the resulting broadcast, network, Cisco wildcard mask, and host range. By giving a second netmask, you can design sub- and su‐
-       pernetworks. It is also intended to be a teaching tool and presents the results as easy-to-understand binary values.
+       ipcalc  takes an IPv4 address and netmask and calculates the resulting broadcast, network, Cisco wildcard mask, and host range. By giving a second netmask, you can design sub- and
+       supernetworks. It is also intended to be a teaching tool and presents the results as easy-to-understand binary values.
 
        --help Display help usage
 
@@ -56,4 +56,4 @@ SEE ALSO
 
        The ipcalc website: http://jodies.de/ipcalc
 
-                                                                                               .                                                                                      ipcalc(1)
+                                                                                             .                                                                                   ipcalc(1)

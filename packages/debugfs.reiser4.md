@@ -1,4 +1,4 @@
-debugfs.reiser4(8)                                                                    reiser4progs manual                                                                    debugfs.reiser4(8)
+debugfs.reiser4(8)                                                                  reiser4progs manual                                                                 debugfs.reiser4(8)
 
 NAME
        debugfs.reiser4 - the program for debugging reiser4 filesystem.
@@ -59,13 +59,13 @@ METADATA OPTIONS
               fetches filesystem metadata and writes them to the standard output.
 
        -U, --unpack-metadata
-              reads  filesystem  metadata  stream from the stdandard input and constructs a new filesystem based on the metadata. debugfs.reiser4 --pack-metadata <FS1> | debugfs.reiser4 --un‐
-              pack-metadata <FS2> and then debugfs.reiser4 --pack-metadata <FS2> produces a stream equivalent to the first one.
+              reads  filesystem  metadata  stream  from the stdandard input and constructs a new filesystem based on the metadata. debugfs.reiser4 --pack-metadata <FS1> | debugfs.reiser4
+              --unpack-metadata <FS2> and then debugfs.reiser4 --pack-metadata <FS2> produces a stream equivalent to the first one.
 
 PLUGIN OPTIONS
        -p, --print-profile
-              prints the plugin profile. This is the set of default plugins used for all parts of a filesystem -- format, nodes, files, directories, hashes, etc. If --override  is  specified,
-              then prints modified plugins.
+              prints the plugin profile. This is the set of default plugins used for all parts of a filesystem -- format, nodes, files, directories, hashes, etc. If --override is  speci‐
+              fied, then prints modified plugins.
 
        -l, --print-plugins
               prints all plugins libreiser4 knows about.
@@ -85,4 +85,4 @@ SEE ALSO
 AUTHOR
        This manual page was written by Yury Umanets <umka@namesys.com>
 
-reiser4progs                                                                              02 Oct, 2002                                                                       debugfs.reiser4(8)
+reiser4progs                                                                           02 Oct, 2002                                                                     debugfs.reiser4(8)

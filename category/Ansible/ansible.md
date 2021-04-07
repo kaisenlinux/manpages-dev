@@ -1,14 +1,14 @@
-ANSIBLE(1)                                                                       System administration commands                                                                      ANSIBLE(1)
+ANSIBLE(1)                                                                    System administration commands                                                                    ANSIBLE(1)
 
 NAME
        ansible - Define and run a single task 'playbook' against a set of hosts
 
 SYNOPSIS
        usage: ansible [-h] [--version] [-v] [-b] [--become-method BECOME_METHOD]
-              [--become-user  BECOME_USER] [-K] [-i INVENTORY] [--list-hosts] [-l SUBSET] [-P POLL_INTERVAL] [-B SECONDS] [-o] [-t TREE] [-k] [--private-key PRIVATE_KEY_FILE] [-u REMOTE_USER]
-              [-c CONNECTION] [-T TIMEOUT] [--ssh-common-args SSH_COMMON_ARGS] [--sftp-extra-args SFTP_EXTRA_ARGS] [--scp-extra-args  SCP_EXTRA_ARGS]  [--ssh-extra-args  SSH_EXTRA_ARGS]  [-C]
-              [--syntax-check] [-D] [-e EXTRA_VARS] [--vault-id VAULT_IDS] [--ask-vault-pass | --vault-password-file VAULT_PASSWORD_FILES] [-f FORKS] [-M MODULE_PATH] [--playbook-dir BASEDIR]
-              [-a MODULE_ARGS] [-m MODULE_NAME] pattern
+              [--become-user  BECOME_USER]  [-K]  [-i  INVENTORY]  [--list-hosts] [-l SUBSET] [-P POLL_INTERVAL] [-B SECONDS] [-o] [-t TREE] [-k] [--private-key PRIVATE_KEY_FILE] [-u RE‐
+              MOTE_USER] [-c CONNECTION] [-T TIMEOUT] [--ssh-common-args SSH_COMMON_ARGS] [--sftp-extra-args SFTP_EXTRA_ARGS] [--scp-extra-args SCP_EXTRA_ARGS] [--ssh-extra-args  SSH_EX‐
+              TRA_ARGS]  [-C]  [--syntax-check]  [-D]  [-e  EXTRA_VARS] [--vault-id VAULT_IDS] [--ask-vault-pass | --vault-password-file VAULT_PASSWORD_FILES] [-f FORKS] [-M MODULE_PATH]
+              [--playbook-dir BASEDIR] [-a MODULE_ARGS] [-m MODULE_NAME] pattern
 
 DESCRIPTION
        is an extra-simple tool/framework/API for doing 'remote things'.  this command allows you to define and run a single task 'playbook' against a set of hosts
@@ -148,7 +148,7 @@ COPYRIGHT
 SEE ALSO
        ansible-config (1), ansible-console (1), ansible-doc (1), ansible-galaxy (1), ansible-inventory (1), ansible-playbook (1), ansible-pull (1), ansible-vault (1)
 
-       Extensive documentation is available in the documentation site: <https://docs.ansible.com>.  IRC and mailing  list  info  can  be  found  in  file  CONTRIBUTING.md,  available  in:  <‐
+       Extensive documentation is available in the documentation site: <https://docs.ansible.com>.  IRC and mailing list info can be found  in  file  CONTRIBUTING.md,  available  in:  <‐
        https://github.com/ansible/ansible>
 
-Ansible 2.9.16                                                                                                                                                                       ANSIBLE(1)
+Ansible 2.9.16                                                                                                                                                                  ANSIBLE(1)

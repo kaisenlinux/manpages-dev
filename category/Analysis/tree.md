@@ -1,16 +1,16 @@
-TREE(1)                                                                             General Commands Manual                                                                             TREE(1)
+TREE(1)                                                                           General Commands Manual                                                                          TREE(1)
 
 NAME
        tree - list contents of directories in a tree-like format.
 
 SYNOPSIS
-       tree [-acdfghilnpqrstuvxACDFQNSUX] [-L level [-R]] [-H baseHREF] [-T title] [-o filename] [--nolinks] [-P pattern] [-I pattern] [--inodes] [--device] [--noreport] [--dirsfirst] [--ver‐
-       sion] [--help] [--filelimit #] [--si] [--prune] [--du] [--timefmt format] [--matchdirs] [--fromfile] [--] [directory ...]
+       tree  [-acdfghilnpqrstuvxACDFQNSUX]  [-L  level [-R]] [-H baseHREF] [-T title] [-o filename] [--nolinks] [-P pattern] [-I pattern] [--inodes] [--device] [--noreport] [--dirsfirst]
+       [--version] [--help] [--filelimit #] [--si] [--prune] [--du] [--timefmt format] [--matchdirs] [--fromfile] [--] [directory ...]
 
 DESCRIPTION
-       Tree is a recursive directory listing program that produces a depth indented listing of files, which is colorized ala dircolors if the LS_COLORS environment variable is set and  output
-       is to tty.  With no arguments, tree lists the files in the current directory.  When directory arguments are given, tree lists all the files and/or directories found in the given direc‐
-       tories each in turn.  Upon completion of listing all files/directories found, tree returns the total number of files and/or directories listed.
+       Tree is a recursive directory listing program that produces a depth indented listing of files, which is colorized ala dircolors if the LS_COLORS environment variable  is  set  and
+       output  is to tty.  With no arguments, tree lists the files in the current directory.  When directory arguments are given, tree lists all the files and/or directories found in the
+       given directories each in turn.  Upon completion of listing all files/directories found, tree returns the total number of files and/or directories listed.
 
        By default, when a symbolic link is encountered, the path that the symbolic link refers to is printed after the name of the link in the format:
 
@@ -22,8 +22,8 @@ OPTIONS
        Tree understands the following command line switches:
 
 LISTING OPTIONS
-       -a     All files are printed.  By default tree does not print hidden files (those beginning with a dot `.').  In no event does tree print the file system constructs `.' (current direc‐
-              tory) and `..' (previous directory).
+       -a     All files are printed.  By default tree does not print hidden files (those beginning with a dot `.').  In no event does tree print the file system constructs  `.'  (current
+              directory) and `..' (previous directory).
 
        -d     List directories only.
 
@@ -39,9 +39,9 @@ LISTING OPTIONS
        -R     Recursively cross down the tree each level directories (see -L option), and at each of them execute tree again adding `-o 00Tree.html' as a new option.
 
        -P pattern
-              List  only  those  files that match the wild-card pattern.  Note: you must use the -a option to also consider those files beginning with a dot `.'  for matching.  Valid wildcard
-              operators are `*' (any zero or more characters), `?' (any single character), `[...]' (any single character listed between brackets (optional - (dash) for character range may  be
-              used: ex: [A-Z]), and `[^...]' (any single character not listed in brackets) and `|' separates alternate patterns.
+              List  only those files that match the wild-card pattern.  Note: you must use the -a option to also consider those files beginning with a dot `.'  for matching.  Valid wild‐
+              card operators are `*' (any zero or more characters), `?' (any single character), `[...]' (any single character listed between brackets (optional  -  (dash)  for  character
+              range may be used: ex: [A-Z]), and `[^...]' (any single character not listed in brackets) and `|' separates alternate patterns.
 
        -I pattern
               Do not list those files that match the wild-card pattern.
@@ -50,8 +50,8 @@ LISTING OPTIONS
               If a match pattern is specified by the -P or -I option, this will cause the pattern to match without regards to the case of each letter.
 
        --matchdirs
-              If a match pattern is specified by the -P option, this will cause the pattern to be applied to directory names (in addition to filenames).  In the event of a match on the direc‐
-              tory name, matching is disabled for the directory's contents. If the --prune option is used, empty folders that match the pattern will not be pruned.
+              If  a  match pattern is specified by the -P option, this will cause the pattern to be applied to directory names (in addition to filenames).  In the event of a match on the
+              directory name, matching is disabled for the directory's contents. If the --prune option is used, empty folders that match the pattern will not be pruned.
 
        --prune
               Makes tree prune empty directories from the output, useful when used in conjunction with -P or -I.  See BUGS AND NOTES below for more information on this option.
@@ -86,13 +86,13 @@ FILE OPTIONS
 
        -s     Print the size of each file in bytes along with the name.
 
-       -h     Print the size of each file but in a more human readable way, e.g. appending a size letter for kilobytes (K), megabytes (M), gigabytes (G), terabytes (T), petabytes (P) and  ex‐
-              abytes (E).
+       -h     Print the size of each file but in a more human readable way, e.g. appending a size letter for kilobytes (K), megabytes (M), gigabytes (G), terabytes (T), petabytes (P) and
+              exabytes (E).
 
        --si   Like -h but use SI units (powers of 1000) instead.
 
-       --du   For  each directory report its size as the accumulation of sizes of all its files and sub-directories (and their files, and so on).  The total amount of used space is also given
-              in the final report (like the 'du -c' command.) This option requires tree to read the entire directory tree before emitting it, see BUGS AND NOTES below.  Implies -s.
+       --du   For  each  directory report its size as the accumulation of sizes of all its files and sub-directories (and their files, and so on).  The total amount of used space is also
+              given in the final report (like the 'du -c' command.) This option requires tree to read the entire directory tree before emitting it, see BUGS AND NOTES below.  Implies -s.
 
        -D     Print the date of the last modification time or if -c is used, the last status change time for the file listed.
 
@@ -122,7 +122,8 @@ SORTING OPTIONS
               Sort the output by type instead of name. Possible values are: ctime (-c), mtime (-t), size, or version (-v).
 
 GRAPHICS OPTIONS
-       -i     Makes tree not print the indentation lines, useful when used in conjunction with the -f option.  Also removes as much whitespace as possible when used with the -J or -x options.
+       -i     Makes tree not print the indentation lines, useful when used in conjunction with the -f option.  Also removes as much whitespace as possible when used with the -J or -x op‐
+              tions.
 
        -A     Turn on ANSI line graphics hack when printing the indentation lines.
 
@@ -138,10 +139,10 @@ XML/JSON/HTML OPTIONS
        -J     Turn on JSON output. Outputs the directory tree as an JSON formatted array.
 
        -H baseHREF
-              Turn on HTML output, including HTTP references. Useful for ftp sites.  baseHREF gives the base ftp location when using HTML output. That is, the local  directory  may  be  `/lo‐
-              cal/ftp/pub',  but  it  must be referenced as `ftp://hostname.organization.domain/pub' (baseHREF should be `ftp://hostname.organization.domain'). Hint: don't use ANSI lines with
-              this option, and don't give more than one directory in the directory list. If you wish to use colors via CSS style-sheet, use the -C option in addition to this option  to  force
-              color output.
+              Turn  on  HTML  output,  including  HTTP references. Useful for ftp sites.  baseHREF gives the base ftp location when using HTML output. That is, the local directory may be
+              `/local/ftp/pub', but it must be referenced as `ftp://hostname.organization.domain/pub' (baseHREF should be  `ftp://hostname.organization.domain').  Hint:  don't  use  ANSI
+              lines  with  this option, and don't give more than one directory in the directory list. If you wish to use colors via CSS style-sheet, use the -C option in addition to this
+              option to force color output.
 
        -T title
               Sets the title and H1 header string in HTML output mode.
@@ -150,8 +151,8 @@ XML/JSON/HTML OPTIONS
               Turns off hyperlinks in HTML output.
 
 INPUT OPTIONS
-       --fromfile Reads a directory listing from a file rather than the file-system.  Paths provided on the command line are files to read from rather than directories to search.  The dot (.)
-       directory indicates that tree should read paths from standard input.
+       --fromfile Reads a directory listing from a file rather than the file-system.  Paths provided on the command line are files to read from rather than directories  to  search.   The
+       dot (.) directory indicates that tree should read paths from standard input.
 
 MISC OPTIONS
        --help Outputs a verbose usage listing.
@@ -187,11 +188,11 @@ BUGS AND NOTES
 
        Pruning files and directories with the -I, -P and --filelimit options will lead to incorrect file/directory count reports.
 
-       The --prune and --du options cause tree to accumulate the entire tree in memory before emitting it. For large directory trees this can cause a significant delay in output and  the  use
-       of large amounts of memory.
+       The  --prune and --du options cause tree to accumulate the entire tree in memory before emitting it. For large directory trees this can cause a significant delay in output and the
+       use of large amounts of memory.
 
-       The timefmt expansion buffer is limited to a ridiculously large 255 characters.  Output of time strings longer than this will be undefined, but are guaranteed to not exceed 255 charac‐
-       ters.
+       The timefmt expansion buffer is limited to a ridiculously large 255 characters.  Output of time strings longer than this will be undefined, but are guaranteed to  not  exceed  255
+       characters.
 
        XML/JSON trees are not colored, which is a bit of a shame.
 
@@ -200,4 +201,4 @@ BUGS AND NOTES
 SEE ALSO
        dircolors(1), ls(1), find(1), du(1), strftime(3)
 
-Tree 1.8.0                                                                                                                                                                              TREE(1)
+Tree 1.8.0                                                                                                                                                                         TREE(1)

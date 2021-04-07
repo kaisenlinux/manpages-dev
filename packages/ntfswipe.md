@@ -1,4 +1,4 @@
-NTFSWIPE(8)                                                                         System Manager's Manual                                                                         NTFSWIPE(8)
+NTFSWIPE(8)                                                                       System Manager's Manual                                                                      NTFSWIPE(8)
 
 NAME
        ntfswipe - overwrite unused space on an NTFS volume
@@ -10,20 +10,20 @@ DESCRIPTION
        ntfswipe clears all or part of unused space on an NTFS volume by overwriting with zeroes or random bytes.
 
 OPTIONS
-       Below  is  a summary of all the options that ntfswipe accepts.  Nearly all options have two equivalent names.  The short name is preceded by - and the long name is preceded by --.  Any
-       single letter options, that don't take an argument, can be combined into a single command, e.g.  -fv is equivalent to -f -v.  Long named options can be abbreviated to any unique prefix
-       of their name.
+       Below  is  a summary of all the options that ntfswipe accepts.  Nearly all options have two equivalent names.  The short name is preceded by - and the long name is preceded by --.
+       Any single letter options, that don't take an argument, can be combined into a single command, e.g.  -fv is equivalent to -f -v.  Long named options  can  be  abbreviated  to  any
+       unique prefix of their name.
 
        -a, --all
               Wipe all unused space. This may take significant time. If the option --unused-fast (or -U) is also present, the faster wiping method is used.
 
        -b, --bytes BYTE-LIST
-              Define  the  allowed  replacement  bytes which are drawn randomly to overwrite the unused space. BYTE-LIST is a comma-separated list of values in range 0-255 expressed in octal,
-              decimal or hexadecimal base.
+              Define  the  allowed replacement bytes which are drawn randomly to overwrite the unused space. BYTE-LIST is a comma-separated list of values in range 0-255 expressed in oc‐
+              tal, decimal or hexadecimal base.
 
        -c, --count NUM
-              Define the number of times the unused space is to be overwritten. If both options --bytes and --count are set, the space is repeatedly overwritten this number of times  by  each
-              of the values in the list.
+              Define the number of times the unused space is to be overwritten. If both options --bytes and --count are set, the space is repeatedly overwritten this number of  times  by
+              each of the values in the list.
 
        -d, --directory
               Wipe all the directory indexes, which may contain names of deleted files.
@@ -53,8 +53,8 @@ OPTIONS
               Suppress some debug/warning/error messages.
 
        -s, --undel
-              Overwrite  the  space which had been allocated to a file which has been deleted recently and is still undeletable. This option is not compatible with --bytes and the replacement
-              bytes are random ones or taken from a standard list.
+              Overwrite the space which had been allocated to a file which has been deleted recently and is still undeletable. This option is not compatible with --bytes and the replace‐
+              ment bytes are random ones or taken from a standard list.
 
        -t, --tails
               Overwrite the space at the end of files which is unused, but allocated because the allocations are always done by full clusters.
@@ -94,4 +94,4 @@ AVAILABILITY
 SEE ALSO
        ntfs-3g(8), ntfsls(8), ntfsprogs(8)
 
-ntfs-3g 2017.3.23AR.3                                                                      June 2014                                                                                NTFSWIPE(8)
+ntfs-3g 2017.3.23AR.3                                                                    June 2014                                                                             NTFSWIPE(8)

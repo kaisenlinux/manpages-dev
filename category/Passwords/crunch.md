@@ -1,5 +1,5 @@
 
-CRUNCH(1)                                                                           General Commands Manual                                                                           CRUNCH(1)
+CRUNCH(1)                                                                         General Commands Manual                                                                        CRUNCH(1)
 
 NAME
        crunch - generate wordlists from a character set
@@ -17,28 +17,28 @@ DESCRIPTION
               The maximum length string you want crunch to end at.  This option is required even for parameters that won't use the value.
 
        charset string
-              You  may  specify character sets for crunch to use on the command line or if you leave it blank crunch will use the default character sets.  The order MUST BE lower case charac‐
-              ters, upper case characters, numbers, and then symbols.  If you don't follow this order you will not get the results you want.  You MUST specify either values for the  character
-              type  or  a  plus  sign.  NOTE: If you want to include the space character in your character set you must escape it using the \ character or enclose your character set in quotes
-              i.e. "abc ".  See the examples 3, 11, 12, and 13 for examples.
+              You  may  specify  character  sets  for crunch to use on the command line or if you leave it blank crunch will use the default character sets.  The order MUST BE lower case
+              characters, upper case characters, numbers, and then symbols.  If you don't follow this order you will not get the results you want.  You MUST specify either values for the
+              character  type  or  a plus sign.  NOTE: If you want to include the space character in your character set you must escape it using the \ character or enclose your character
+              set in quotes i.e. "abc ".  See the examples 3, 11, 12, and 13 for examples.
 
 OPTIONS
        -b number[type]
-              Specifies the size of the output file, only works if -o START is used, i.e.: 60MB  The output files will be in the format of starting letter-ending letter for example:  ./crunch
-              4  5  -b  20mib  -o  START will generate 4 files: aaaa-gvfed.txt, gvfee-ombqy.txt, ombqz-wcydt.txt, wcydu-zzzzz.txt valid values for type are kb, mb, gb, kib, mib, and gib.  The
-              first three types are based on 1000 while the last three types are based on 1024.  NOTE There is no space between the number and type.  For example 500mb is correct  500  mb  is
-              NOT correct.
+              Specifies the size of the output file, only works if -o START is used, i.e.: 60MB  The output files will be in the format of  starting  letter-ending  letter  for  example:
+              ./crunch  4 5 -b 20mib -o START will generate 4 files: aaaa-gvfed.txt, gvfee-ombqy.txt, ombqz-wcydt.txt, wcydu-zzzzz.txt valid values for type are kb, mb, gb, kib, mib, and
+              gib.  The first three types are based on 1000 while the last three types are based on 1024.  NOTE There is no space between the number and type.  For example 500mb is  cor‐
+              rect 500 mb is NOT correct.
 
        -c number
-              Specifies  the number of lines to write to output file, only works if -o START is used, i.e.: 60  The output files will be in the format of starting letter-ending letter for ex‐
-              ample: ./crunch 1 1 -f /pentest/password/crunch/charset.lst mixalpha-numeric-all-space -o START -c 60 will result in 2 files: a-7.txt and 8-\ .txt  The reason for the  slash  in
-              the  second filename is the ending character is space and ls has to escape it to print it.  Yes you will need to put in the \ when specifying the filename because the last char‐
-              acter is a space.
+              Specifies the number of lines to write to output file, only works if -o START is used, i.e.: 60  The output files will be in the format of starting letter-ending letter for
+              example: ./crunch 1 1 -f /pentest/password/crunch/charset.lst mixalpha-numeric-all-space -o START -c 60 will result in 2 files: a-7.txt and 8-\ .txt   The  reason  for  the
+              slash  in  the second filename is the ending character is space and ls has to escape it to print it.  Yes you will need to put in the \ when specifying the filename because
+              the last character is a space.
 
        -d numbersymbol
-              Limits the number of duplicate characters.  -d 2@ limits the lower case alphabet to output like aab and aac.  aaa would not be generated as that is 3 consecutive letters  of  a.
-              The format is number then symbol where number is the maximum number of consecutive characters and symbol is the symbol of the the character set you want to limit i.e. @,%^   See
-              examples 17-19.
+              Limits the number of duplicate characters.  -d 2@ limits the lower case alphabet to output like aab and aac.  aaa would not be generated as that is 3 consecutive letters of
+              a.   The  format is number then symbol where number is the maximum number of consecutive characters and symbol is the symbol of the the character set you want to limit i.e.
+              @,%^   See examples 17-19.
 
        -e string
               Specifies when crunch should stop early
@@ -48,8 +48,8 @@ OPTIONS
 
        -i Inverts the output so instead of aaa,aab,aac,aad, etc you get aaa,baa,caa,daa,aba,bba, etc
 
-       -l When you use the -t option this option tells crunch which symbols should be treated as literals.  This will allow you to use the placeholders as letters in the pattern.  The -l  op‐
-              tion should be the same length as the -t option.  See example 15.
+       -l When you use the -t option this option tells crunch which symbols should be treated as literals.  This will allow you to use the placeholders as letters in the pattern.  The -l
+              option should be the same length as the -t option.  See example 15.
 
        -m Merged with -p.  Please use -p instead.
 
@@ -57,17 +57,17 @@ OPTIONS
               Specifies the file to write the output to, eg: wordlist.txt
 
        -p charset OR -p word1 word2 ...
-              Tells crunch to generate words that don't have repeating characters.  By default crunch will generate a wordlist size of #of_chars_in_charset ^ max_length.  This option will in‐
-              stead generate #of_chars_in_charset!.  The ! stands for factorial.  For example say the charset is abc and max length is 4..  Crunch will by default generate  3^4  =  81  words.
-              This  option will instead generate 3! = 3x2x1 = 6 words (abc, acb, bac, bca, cab, cba).  THIS MUST BE THE LAST OPTION!  This option CANNOT be used with -s and it ignores min and
-              max length however you must still specify two numbers.
+              Tells  crunch  to  generate  words that don't have repeating characters.  By default crunch will generate a wordlist size of #of_chars_in_charset ^ max_length.  This option
+              will instead generate #of_chars_in_charset!.  The ! stands for factorial.  For example say the charset is abc and max length is 4..  Crunch will by default generate  3^4  =
+              81  words.  This option will instead generate 3! = 3x2x1 = 6 words (abc, acb, bac, bca, cab, cba).  THIS MUST BE THE LAST OPTION!  This option CANNOT be used with -s and it
+              ignores min and max length however you must still specify two numbers.
 
        -q filename.txt
               Tells crunch to read filename.txt and permute what is read.  This is like the -p option except it gets the input from filename.txt.
 
-       -r Tells crunch to resume generate words from where it left off.  -r only works if you use -o.  You must use the same command as the original command used to generate the  words.   The
-              only  exception  to this is the -s option.  If your original command used the -s option you MUST remove it before you resume the session.  Just add -r to the end of the original
-              command.
+       -r Tells crunch to resume generate words from where it left off.  -r only works if you use -o.  You must use the same command as the original command used to generate  the  words.
+              The  only  exception to this is the -s option.  If your original command used the -s option you MUST remove it before you resume the session.  Just add -r to the end of the
+              original command.
 
        -s startblock
               Specifies a starting string, eg: 03god22fs
@@ -97,23 +97,23 @@ EXAMPLES
 
        Example 3
        crunch 1 6 abcdefg\
-       there is a space at the end of the character string.  In order for crunch to use the space you will need to escape it using the \ character.  In this example you could also put  quotes
-       around the letters and not need the \, i.e. "abcdefg ".  Crunch will display a wordlist using the character set abcdefg  that starts at a and ends at (6 spaces)
+       there is a space at the end of the character string.  In order for crunch to use the space you will need to escape it using the \ character.  In this example you  could  also  put
+       quotes around the letters and not need the \, i.e. "abcdefg ".  Crunch will display a wordlist using the character set abcdefg  that starts at a and ends at (6 spaces)
 
        Example 4
        crunch 1 8 -f charset.lst mixalpha-numeric-all-space -o wordlist.txt
-       crunch  will  use  the  mixalpha-numeric-all-space  character  set from charset.lst and will write the wordlist to a file named wordlist.txt.  The file will start with a and end with "
+       crunch  will use the mixalpha-numeric-all-space character set from charset.lst and will write the wordlist to a file named wordlist.txt.  The file will start with a and end with "
        "
 
        Example 5
        crunch 8 8 -f charset.lst mixalpha-numeric-all-space -o wordlist.txt -t @@dog@@@ -s cbdogaaa
-       crunch should generate a 8 character wordlist using the mixalpha-number-all-space character set from charset.lst and will write the wordlist to a file  named  wordlist.txt.   The  file
-       will start at cbdogaaa and end at "  dog   "
+       crunch should generate a 8 character wordlist using the mixalpha-number-all-space character set from charset.lst and will write the wordlist to a  file  named  wordlist.txt.   The
+       file will start at cbdogaaa and end at "  dog   "
 
        Example 6
        crunch 2 3 -f charset.lst ualpha -s BB
-       crunch with start generating a wordlist at BB and end with ZZZ.  This is useful if you have to stop generating a wordlist in the middle.  Just do a tail wordlist.txt and set the -s pa‐
-       rameter to the next word in the sequence.  Be sure to rename the original wordlist BEFORE you begin as crunch will overwrite the existing wordlist.
+       crunch  with  start generating a wordlist at BB and end with ZZZ.  This is useful if you have to stop generating a wordlist in the middle.  Just do a tail wordlist.txt and set the
+       -s parameter to the next word in the sequence.  Be sure to rename the original wordlist BEFORE you begin as crunch will overwrite the existing wordlist.
 
        Example 7
        crunch 4 5 -p abc
@@ -157,10 +157,10 @@ EXAMPLES
 
        Example 11
        crunch 3 3 abc + 123 !@# -t @%^
-       will generate a 3 character long word with a character as the first character, and number as the second character, and a symbol for the third character.  The order in which you specify
-       the  characters you want is important.  You must specify the order as lower case character, upper case character, number, and symbol.  If you aren't going to use a particular character
-       set you use a plus sign as a placeholder.  As you can see I am not using the upper case character set so I am using the plus sign placeholder.  The above will start at a1! and  end  at
-       c3#
+       will generate a 3 character long word with a character as the first character, and number as the second character, and a symbol for the third character.  The order  in  which  you
+       specify the characters you want is important.  You must specify the order as lower case character, upper case character, number, and symbol.  If you aren't going to use a particu‐
+       lar character set you use a plus sign as a placeholder.  As you can see I am not using the upper case character set so I am using the plus sign placeholder.  The above will  start
+       at a1! and end at c3#
 
        Example 12
        crunch 3 3 abc + 123 !@# -t ^%@
@@ -168,9 +168,9 @@ EXAMPLES
 
        Example 13
        crunch 4 4  + + 123 + -t %%@^
-       the  plus sign (+) is a place holder so you can specify a character set for the character type.  crunch will use the default character set for the character type when crunch encounters
-       a + (plus sign) on the command line.  You must either specify values for each character type or use the plus sign.  I.E. if you have two characters types you MUST either specify values
-       for each type or use a plus sign.  So in this example the character sets will be:
+       the  plus  sign  (+) is a place holder so you can specify a character set for the character type.  crunch will use the default character set for the character type when crunch en‐
+       counters a + (plus sign) on the command line.  You must either specify values for each character type or use the plus sign.  I.E. if you have two characters types you MUST  either
+       specify values for each type or use a plus sign.  So in this example the character sets will be:
        abcdefghijklmnopqrstuvwxyz
        ABCDEFGHIJKLMNOPQRSTUVWXYZ
        123
@@ -228,23 +228,23 @@ REDIRECTION
        crunch 10 10 12345 --stdout | airolib-ng testdb -import passwd -
 
 NOTES
-       1.  Starting  in  version 2.6 crunch will display how much data is about to be generated.  In 2.7 it will also display how many lines will be generated.  Crunch will now wait 3 seconds
-       BEFORE it begins generating data to give you time to press Ctrl-C to abort crunch if you find the values are too large for your application.
+       1.  Starting in version 2.6 crunch will display how much data is about to be generated.  In 2.7 it will also display how many lines will be generated.  Crunch will now wait 3 sec‐
+       onds BEFORE it begins generating data to give you time to press Ctrl-C to abort crunch if you find the values are too large for your application.
 
        2. I have added hex-lower (0123456789abcdef) and hex-upper (0123456789ABCDEF) to charset.lst.
 
-       3. Several people have requested that I add support for the space character to crunch.  crunch has always supported the space character on the command line and in the charset.lst.   To
-       add  a space on the command line you must escape it using the / character.  See example 3 for the syntax.  You may need to escape other characters like ! or # depending on your operat‐
-       ing system.
+       3. Several people have requested that I add support for the space character to crunch.  crunch has always supported the space character on the command line and in the charset.lst.
+       To  add a space on the command line you must escape it using the / character.  See example 3 for the syntax.  You may need to escape other characters like ! or # depending on your
+       operating system.
 
        4. Starting in 2.7 if you are generating a file then every 10 seconds you will receive the % done.
 
-       5. Starting in 3.0 I had to change the -t * character to a , as the * is a reserved character.  You could still use it if you put a \ in front of the *.  Yes it breaks crunch's  syntax
-       and I do my best to avoid doing that, but in this instance it is easier to make the change for long term support.
+       5. Starting in 3.0 I had to change the -t * character to a , as the * is a reserved character.  You could still use it if you put a \ in front of the *.  Yes  it  breaks  crunch's
+       syntax and I do my best to avoid doing that, but in this instance it is easier to make the change for long term support.
 
        6. Some output is missing.  A file didn't get generated.
-       The  mostly  explanation  is you ran out of disk space.  If you have verified you have plenty of disk space then the problem is most likely the filename begins with a period.  In Linux
-       filenames that begin with a period are hidden.  To view them do a ls -l .*
+       The  mostly  explanation  is  you ran out of disk space.  If you have verified you have plenty of disk space then the problem is most likely the filename begins with a period.  In
+       Linux filenames that begin with a period are hidden.  To view them do a ls -l .*
 
        7. Crunch says The maximum and minimum length should be the same size as the pattern you specified, however the length is set correctly.
        This usually means your pattern contains a character that needs to be escaped. In bash you need to escape the followings: &, *, space, \, (, ), |, ', ", ;, <, >.
@@ -253,8 +253,8 @@ NOTES
        An alternative to escaping characters is to wrap your string with quotes.  For example:
        crunch 4 4 -t "&*d@"
        If you want to use the " in your pattern you will need to escape it like this: crunch 4 4 -t "&*\"@"
-       Please note that different terminals have different escape characters and probably have different characters that will need escaping.  Please check the manpage of your terminal for the
-       escape characters and characters that need escaping.
+       Please note that different terminals have different escape characters and probably have different characters that will need escaping.  Please check the manpage  of  your  terminal
+       for the escape characters and characters that need escaping.
 
        8. When using the -z 7z option, 7z does not delete the original file.  You will have to delete those files by hand.
 
@@ -275,12 +275,12 @@ COPYRIGHT
 
        This file is a part of Crunch.
 
-       Crunch  is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2 only of the
-       License.
+       Crunch is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2 only of
+       the License.
 
-       Crunch is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   See  the
-       GNU General Public License for more details.
+       Crunch is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   See
+       the GNU General Public License for more details.
 
        You should have received a copy of the GNU General Public License along with Crunch.  If not, see <http://www.gnu.org/licenses/>.
 
-Version 3.6                                                                                 May 2014                                                                                  CRUNCH(1)
+Version 3.6                                                                              May 2014                                                                                CRUNCH(1)

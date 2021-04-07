@@ -1,4 +1,4 @@
-ARPTABLES(8)                                                                        System Manager's Manual                                                                        ARPTABLES(8)
+ARPTABLES(8)                                                                      System Manager's Manual                                                                     ARPTABLES(8)
 
 NAME
        arptables - ARP table administration (nft-based)
@@ -13,54 +13,54 @@ SYNOPSIS
        arptables [-t table] -P chain target [options]
 
 DESCRIPTION
-       arptables  is  a user space tool, it is used to set up and maintain the tables of ARP rules in the Linux kernel. These rules inspect the ARP frames which they see.  arptables is analo‐
-       gous to the iptables user space tool, but arptables is less complicated.
+       arptables  is  a  user  space tool, it is used to set up and maintain the tables of ARP rules in the Linux kernel. These rules inspect the ARP frames which they see.  arptables is
+       analogous to the iptables user space tool, but arptables is less complicated.
 
    CHAINS
-       The kernel table is used to divide functionality into different sets of rules. Each set of rules is called a chain.  Each chain is an ordered list of rules that can match  ARP  frames.
-       If a rule matches an ARP frame, then a processing specification tells what to do with that matching frame. The processing specification is called a 'target'. However, if the frame does
-       not match the current rule in the chain, then the next rule in the chain is examined and so forth.  The user can create new (user-defined) chains which can be used as the 'target' of a
-       rule.
+       The kernel table is used to divide functionality into different sets of rules. Each set of rules is called a chain.  Each chain is an ordered list of  rules  that  can  match  ARP
+       frames.  If  a rule matches an ARP frame, then a processing specification tells what to do with that matching frame. The processing specification is called a 'target'. However, if
+       the frame does not match the current rule in the chain, then the next rule in the chain is examined and so forth.  The user can create new (user-defined) chains which can be  used
+       as the 'target' of a rule.
 
    TARGETS
-       A  firewall rule specifies criteria for an ARP frame and a frame processing specification called a target.  When a frame matches a rule, then the next action performed by the kernel is
-       specified by the target.  The target can be one of these values: ACCEPT, DROP, CONTINUE, RETURN, an 'extension' (see below) or a user-defined chain.
+       A  firewall rule specifies criteria for an ARP frame and a frame processing specification called a target.  When a frame matches a rule, then the next action performed by the ker‐
+       nel is specified by the target.  The target can be one of these values: ACCEPT, DROP, CONTINUE, RETURN, an 'extension' (see below) or a user-defined chain.
 
-       ACCEPT means to let the frame through.  DROP means the frame has to be dropped.  CONTINUE means the next rule has to be checked. This can be handy to know how many frames pass  a  cer‐
-       tain  point in the chain or to log those frames.  RETURN means stop traversing this chain and resume at the next rule in the previous (calling) chain.  For the extension targets please
-       see the TARGET EXTENSIONS section of this man page.
+       ACCEPT means to let the frame through.  DROP means the frame has to be dropped.  CONTINUE means the next rule has to be checked. This can be handy to know how many frames  pass  a
+       certain point in the chain or to log those frames.  RETURN means stop traversing this chain and resume at the next rule in the previous (calling) chain.  For the extension targets
+       please see the TARGET EXTENSIONS section of this man page.
 
    TABLES
-       There is only one ARP table in the Linux kernel.  The table is filter.  You can drop the '-t filter' argument to the arptables command.  The -t argument must be the first  argument  on
-       the arptables command line, if used.
+       There is only one ARP table in the Linux kernel.  The table is filter.  You can drop the '-t filter' argument to the arptables command.  The -t argument must be the first argument
+       on the arptables command line, if used.
 
        -t, --table
               filter, is the only table and contains two built-in chains: INPUT (for frames destined for the host) and OUTPUT (for locally-generated frames).
 
 ARPTABLES COMMAND LINE ARGUMENTS
-       After the initial arptables command line argument, the remaining arguments can be divided into several different groups.  These groups are commands, miscellaneous commands, rule-speci‐
-       fications, match-extensions, and watcher-extensions.
+       After  the initial arptables command line argument, the remaining arguments can be divided into several different groups.  These groups are commands, miscellaneous commands, rule-
+       specifications, match-extensions, and watcher-extensions.
 
    COMMANDS
-       The arptables command arguments specify the actions to perform on the table defined with the -t argument.  If you do not use the -t argument to name a table, the commands apply to  the
-       default filter table.  With the exception of the -Z command, only one command may be used on the command line at a time.
+       The arptables command arguments specify the actions to perform on the table defined with the -t argument.  If you do not use the -t argument to name a table, the commands apply to
+       the default filter table.  With the exception of the -Z command, only one command may be used on the command line at a time.
 
        -A, --append
               Append a rule to the end of the selected chain.
 
        -D, --delete
-              Delete  the  specified  rule  from  the  selected  chain.  There  are  two  ways  to  use this command. The first is by specifying an interval of rule numbers to delete, syntax:
-              start_nr[:end_nr]. Using negative numbers is allowed, for more details about using negative numbers, see the -I command. The second usage is by specifying the complete  rule  as
-              it would have been specified when it was added.
+              Delete  the  specified  rule  from  the  selected  chain.  There are two ways to use this command. The first is by specifying an interval of rule numbers to delete, syntax:
+              start_nr[:end_nr]. Using negative numbers is allowed, for more details about using negative numbers, see the -I command. The second usage is by specifying the complete rule
+              as it would have been specified when it was added.
 
        -I, --insert
-              Insert  the  specified  rule into the selected chain at the specified rule number.  If the current number of rules equals N, then the specified number can be between -N and N+1.
-              For a positive number i, it holds that i and i-N-1 specify the same place in the chain where the rule should be inserted. The number 0 specifies the place past the last rule  in
-              the chain and using this number is therefore equivalent with using the -A command.
+              Insert  the  specified  rule into the selected chain at the specified rule number.  If the current number of rules equals N, then the specified number can be between -N and
+              N+1. For a positive number i, it holds that i and i-N-1 specify the same place in the chain where the rule should be inserted. The number 0 specifies  the  place  past  the
+              last rule in the chain and using this number is therefore equivalent with using the -A command.
 
        -R, --replace
-              Replaces  the  specified rule into the selected chain at the specified rule number.  If the current number of rules equals N, then the specified number can be between 1 and N. i
-              specifies the place in the chain where the rule should be replaced.
+              Replaces  the  specified rule into the selected chain at the specified rule number.  If the current number of rules equals N, then the specified number can be between 1 and
+              N. i specifies the place in the chain where the rule should be replaced.
 
        -P, --policy
               Set the policy for the chain to the given target. The policy can be ACCEPT, DROP or RETURN.
@@ -69,8 +69,8 @@ ARPTABLES COMMAND LINE ARGUMENTS
               Flush the selected chain. If no chain is selected, then every chain will be flushed. Flushing the chain does not change the policy of the chain, however.
 
        -Z, --zero
-              Set the counters of the selected chain to zero. If no chain is selected, all the counters are set to zero. The -Z command can be used in conjunction with the -L  command.   When
-              both the -Z and -L commands are used together in this way, the rule counters are printed on the screen before they are set to zero.
+              Set the counters of the selected chain to zero. If no chain is selected, all the counters are set to zero. The -Z command can be used in conjunction with  the  -L  command.
+              When both the -Z and -L commands are used together in this way, the rule counters are printed on the screen before they are set to zero.
 
        -L, --list
               List all rules in the selected chain. If no chain is selected, all chains are listed.
@@ -79,14 +79,14 @@ ARPTABLES COMMAND LINE ARGUMENTS
               Create a new user-defined chain with the given name. The number of user-defined chains is unlimited. A user-defined chain name has maximum length of 31 characters.
 
        -X, --delete-chain
-              Delete  the  specified  user-defined chain. There must be no remaining references to the specified chain, otherwise arptables will refuse to delete it. If no chain is specified,
-              all user-defined chains that aren't referenced will be removed.
+              Delete  the  specified user-defined chain. There must be no remaining references to the specified chain, otherwise arptables will refuse to delete it. If no chain is speci‐
+              fied, all user-defined chains that aren't referenced will be removed.
 
        -E, --rename-chain
-              Rename the specified chain to a new name.  Besides renaming a user-defined chain, you may rename a standard chain name to a name that suits your taste. For example, if you  like
-              PREBRIDGING  more  than PREROUTING, then you can use the -E command to rename the PREROUTING chain. If you do rename one of the standard arptables chain names, please be sure to
-              mention this fact should you post a question on the arptables mailing lists.  It would be wise to use the standard name in your post. Renaming a standard arptables chain in this
-              fashion has no effect on the structure or function of the arptables kernel table.
+              Rename the specified chain to a new name.  Besides renaming a user-defined chain, you may rename a standard chain name to a name that suits your taste. For example, if  you
+              like PREBRIDGING more than PREROUTING, then you can use the -E command to rename the PREROUTING chain. If you do rename one of the standard arptables chain names, please be
+              sure to mention this fact should you post a question on the arptables mailing lists.  It would be wise to use the standard name in your post. Renaming a standard  arptables
+              chain in this fashion has no effect on the structure or function of the arptables kernel table.
 
    MISCELLANOUS COMMANDS
        -V, --version
@@ -102,8 +102,8 @@ ARPTABLES COMMAND LINE ARGUMENTS
               This enables the administrator to initialize the packet and byte counters of a rule (during INSERT, APPEND, REPLACE operations).
 
    RULE-SPECIFICATIONS
-       The  following  command line arguments make up a rule specification (as used in the add and delete commands). A "!" option before the specification inverts the test for that specifica‐
-       tion. Apart from these standard rule specifications there are some other command line arguments of interest.
+       The  following command line arguments make up a rule specification (as used in the add and delete commands). A "!" option before the specification inverts the test for that speci‐
+       fication. Apart from these standard rule specifications there are some other command line arguments of interest.
 
        -s, --source-ip [!] address[/mask]
               The Source IP specification.
@@ -127,7 +127,8 @@ ARPTABLES COMMAND LINE ARGUMENTS
               The hardware length (nr of bytes)
 
        --opcode code[/mask]
-              The operation code (2 bytes). Available values are: 1=Request 2=Reply 3=Request_Reverse 4=Reply_Reverse 5=DRARP_Request 6=DRARP_Reply 7=DRARP_Error 8=InARP_Request 9=ARP_NAK.
+              The operation code (2 bytes). Available values  are:  1=Request  2=Reply  3=Request_Reverse  4=Reply_Reverse  5=DRARP_Request  6=DRARP_Reply  7=DRARP_Error  8=InARP_Request
+              9=ARP_NAK.
 
        --h-type type[/mask]
               The hardware type (2 bytes, hexadecimal). Available values are: 1=Ethernet.
@@ -136,8 +137,8 @@ ARPTABLES COMMAND LINE ARGUMENTS
               The protocol type (2 bytes). Available values are: 0x800=IPv4.
 
    TARGET-EXTENSIONS
-       arptables extensions are precompiled into the userspace tool. So there is no need to explicitly load them with a -m option like in iptables.  However, these extensions deal with  func‐
-       tionality supported by supplemental kernel modules.
+       arptables  extensions  are precompiled into the userspace tool. So there is no need to explicitly load them with a -m option like in iptables.  However, these extensions deal with
+       functionality supported by supplemental kernel modules.
 
    mangle
        --mangle-ip-s IP address
@@ -175,8 +176,8 @@ ARPTABLES COMMAND LINE ARGUMENTS
               Binary OR the mark with bits.
 
 NOTES
-       In this nft-based version of arptables, support for FORWARD chain has not been implemented. Since ARP packets are "forwarded" only by Linux bridges, the same may be achieved using FOR‐
-       WARD chain in ebtables.
+       In this nft-based version of arptables, support for FORWARD chain has not been implemented. Since ARP packets are "forwarded" only by Linux bridges, the same may be achieved using
+       FORWARD chain in ebtables.
 
 MAILINGLISTS
        See http://netfilter.org/mailinglists.html
@@ -186,4 +187,4 @@ SEE ALSO
 
        See https://wiki.nftables.org
 
-                                                                                           March 2019                                                                              ARPTABLES(8)
+                                                                                        March 2019                                                                            ARPTABLES(8)

@@ -1,4 +1,4 @@
-EXFATFSCK(8)                                                                        System Manager's Manual                                                                        EXFATFSCK(8)
+EXFATFSCK(8)                                                                      System Manager's Manual                                                                     EXFATFSCK(8)
 
 NAME
        exfatfsck - check an exFAT file system
@@ -32,4 +32,4 @@ AUTHOR
 SEE ALSO
        fsck(8)
 
-                                                                                         September 2018                                                                            EXFATFSCK(8)
+                                                                                      September 2018                                                                          EXFATFSCK(8)

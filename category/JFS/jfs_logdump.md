@@ -1,4 +1,4 @@
-jfs_logdump(8)                                                                   JFS utility - journal log dump                                                                  jfs_logdump(8)
+jfs_logdump(8)                                                                JFS utility - journal log dump                                                                jfs_logdump(8)
 
 NAME
        jfs_logdump - dump a JFS formatted device's journal log
@@ -38,4 +38,4 @@ AUTHORS
        See the JFS project web site for more details:
        http://jfs.sourceforge.net/
 
-                                                                                        October 29, 2002                                                                         jfs_logdump(8)
+                                                                                     October 29, 2002                                                                       jfs_logdump(8)

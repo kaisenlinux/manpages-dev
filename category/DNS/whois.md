@@ -1,11 +1,11 @@
-WHOIS(1)                                                                                Debian GNU/Linux                                                                               WHOIS(1)
+WHOIS(1)                                                                             Debian GNU/Linux                                                                             WHOIS(1)
 
 NAME
        whois - client for the whois directory service
 
 SYNOPSIS
-       whois  [  {  -h | --host } HOST ] [ { -p | --port } PORT ] [ -abBcdGHIKlLmMrRx ] [ -g SOURCE:FIRST-LAST ] [ -i ATTR[,ATTR]... ] [ -s SOURCE[,SOURCE]... ] [ -T TYPE[,TYPE]... ] [ --ver‐
-       bose ] OBJECT
+       whois  [  {  -h  |  --host  }  HOST ] [ { -p | --port } PORT ] [ -abBcdGHIKlLmMrRx ] [ -g SOURCE:FIRST-LAST ] [ -i ATTR[,ATTR]... ] [ -s SOURCE[,SOURCE]... ] [ -T TYPE[,TYPE]... ]
+       [ --verbose ] OBJECT
 
        whois -q KEYWORD
 
@@ -20,8 +20,8 @@ SYNOPSIS
 DESCRIPTION
        whois searches for an object in a RFC 3912 database.
 
-       This version of the whois client tries to guess the right server to ask for the specified object. If no guess can be made it will connect to whois.networksolutions.com for NIC  handles
-       or whois.arin.net for IPv4 addresses and network names.
+       This version of the whois client tries to guess the right server to ask for the specified object. If no guess can be made it will connect  to  whois.networksolutions.com  for  NIC
+       handles or whois.arin.net for IPv4 addresses and network names.
 
 OPTIONS
        -h HOST, --host=HOST
@@ -32,8 +32,8 @@ OPTIONS
        -p PORT, --port=PORT
                Connect to PORT.
 
-       -I      First  query  whois.iana.org and then follow its referral to the whois server authoritative for that request. This works for IP addresses, AS numbers and domains.  BEWARE: this
-               implies that the IANA server will receive your complete query.
+       -I      First  query  whois.iana.org and then follow its referral to the whois server authoritative for that request. This works for IP addresses, AS numbers and domains.  BEWARE:
+               this implies that the IANA server will receive your complete query.
 
        --verbose
                Be verbose.
@@ -63,8 +63,8 @@ OPTIONS
        -i ATTR[,ATTR]...
                Inverse-search objects having associated attributes.  ATTR is the attribute name, while the positional OBJECT argument is the attribute value.
 
-       -K      Return primary key attributes only. An exception is the members attribute of set objects, which is always returned. Another exception are all attributes of the objects  organi‐
-               sation, person and role, that are never returned.
+       -K      Return primary key attributes only. An exception is the members attribute of set objects, which is always returned. Another exception are all attributes of the objects or‐
+               ganisation, person and role, that are never returned.
 
        -l      Return the one level less specific object.
 
@@ -75,15 +75,16 @@ OPTIONS
        -M      Return all levels of more specific objects.
 
        -q KEYWORD
-               Return information about the server.  KEYWORD can be version for the server version, sources for the list of database sources or types for the list of supported object types.
+               Return  information  about  the  server.  KEYWORD can be version for the server version, sources for the list of database sources or types for the list of supported object
+               types.
 
        -r      Disable recursive lookups for contact information.
 
        -R      Disable following referrals and force showing the object from the local copy in the server.
 
        -s SOURCE[,SOURCE]...
-               Request  the server to search for objects mirrored from SOURCE.  Sources are delimited by comma, and the order is significant.  Use the -q sources parameter to obtain a list of
-               valid sources.
+               Request the server to search for objects mirrored from SOURCE.  Sources are delimited by comma, and the order is significant.  Use the -q sources  parameter  to  obtain  a
+               list of valid sources.
 
        -t TYPE Return the template for a object of TYPE.
 
@@ -95,8 +96,8 @@ OPTIONS
        -x      Search for only exact match on network address prefix.
 
 NOTES
-       When querying the Verisign gTLDs (e.g. .com, .net...) thin registry servers for a domain, the program will automatically prepend the domain keyword to only show  domain  records.   The
-       nameserver or registrar keywords must be used to show other kinds of records.
+       When  querying  the  Verisign gTLDs (e.g. .com, .net...) thin registry servers for a domain, the program will automatically prepend the domain keyword to only show domain records.
+       The nameserver or registrar keywords must be used to show other kinds of records.
 
        When querying whois.arin.net for IPv4 or IPv6 networks, the CIDR netmask length will be automatically removed from the query string.
 
@@ -106,14 +107,14 @@ NOTES
 
        When querying whois.dk-hostmaster.dk for domain names and no other flags have been specified, the program will automatically add the flag --show-handles.
 
-       RIPE-specific command line options are ignored when querying non-RIPE servers. This may or may not be the behaviour intended by the user.  When using non-standard query parameters then
-       the command line options which are not to be interpreted by the client must follow the -- separator (which marks the beginning of the query string).
+       RIPE-specific command line options are ignored when querying non-RIPE servers. This may or may not be the behaviour intended by the user.  When using non-standard query parameters
+       then the command line options which are not to be interpreted by the client must follow the -- separator (which marks the beginning of the query string).
 
-       If the /etc/whois.conf configuration file exists, it will be consulted to find a server before applying the normal rules. Each line of the file should contain a regular  expression  to
-       be matched against the query text and the whois server to use, separated by white space.  IDN domains must use the ACE format.
+       If the /etc/whois.conf configuration file exists, it will be consulted to find a server before applying the normal rules. Each line of the file should contain a regular expression
+       to be matched against the query text and the whois server to use, separated by white space.  IDN domains must use the ACE format.
 
-       The whois protocol does not specify an encoding for characters which cannot be represented by ASCII and implementations vary wildly.  If the program knows that a specific server uses a
-       certain encoding, if needed it will transcode the server output to the encoding specified by the current system locale.
+       The whois protocol does not specify an encoding for characters which cannot be represented by ASCII and implementations vary wildly.  If the program knows that a  specific  server
+       uses a certain encoding, if needed it will transcode the server output to the encoding specified by the current system locale.
 
        Command line arguments will always be interpreted accordingly to the current system locale and converted to the IDN ASCII Compatible Encoding.
 
@@ -145,4 +146,4 @@ HISTORY
 AUTHOR
        Whois and this man page were written by Marco d'Itri <md@linux.it> and are licensed under the terms of the GNU General Public License, version 2 or higher.
 
-Marco d'Itri                                                                               2019-12-30                                                                                  WHOIS(1)
+Marco d'Itri                                                                            2019-12-30                                                                                WHOIS(1)

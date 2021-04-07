@@ -1,4 +1,4 @@
-SFILL(1)                                                                            General Commands Manual                                                                            SFILL(1)
+SFILL(1)                                                                          General Commands Manual                                                                         SFILL(1)
 
 NAME
        sfill - secure free disk and inode space wiper (secure_deletion toolkit)
@@ -7,9 +7,9 @@ SYNOPSIS
        sfill [-f] [-i] [-I] [-l] [-l] [-v] [-z] directory/mountpoint
 
 DESCRIPTION
-       sfill is designed to delete data which lies on available diskspace on mediums in a secure manner which can not be recovered by thiefs, law enforcement or other threats.  The wipe algo‐
-       rithm is based on the paper "Secure Deletion of Data from Magnetic and Solid-State Memory" presented at the 6th Usenix Security Symposium by Peter Gutmann, one of the leading  civilian
-       cryptographers.
+       sfill  is designed to delete data which lies on available diskspace on mediums in a secure manner which can not be recovered by thiefs, law enforcement or other threats.  The wipe
+       algorithm is based on the paper "Secure Deletion of Data from Magnetic and Solid-State Memory" presented at the 6th Usenix Security Symposium by Peter Gutmann, one of the  leading
+       civilian cryptographers.
 
        The secure data deletion process of sfill goes like this:
 
@@ -42,8 +42,8 @@ COMMANDLINE OPTIONS
 
 LIMITATIONS
        FILESYSTEM INTELLIGENCE
-              Most  filesystems  (ext2,  ffs,  etc.) have several features included to enhance performance, which will result in that sfill might not receive all available free space. Sad but
-              true. Nothing can be done about that ...
+              Most  filesystems  (ext2,  ffs, etc.) have several features included to enhance performance, which will result in that sfill might not receive all available free space. Sad
+              but true. Nothing can be done about that ...
 
        NFS    Beware of NFS. You can't ensure you really completely wiped your data from the remote disks. (especially because of caching)
 
@@ -64,10 +64,10 @@ DISTRIBUTION
 
        This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; Version 2.
 
-       This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See
-       the GNU General Public License for more details.
+       This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+       See the GNU General Public License for more details.
 
 SEE ALSO
        srm (1), sswap (1), sdmem (1)
 
-                                                                                                                                                                                       SFILL(1)
+                                                                                                                                                                                  SFILL(1)

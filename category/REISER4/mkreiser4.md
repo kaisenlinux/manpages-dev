@@ -1,4 +1,4 @@
-mkfs.reiser4(8)                                                                       reiser4progs manual                                                                       mkfs.reiser4(8)
+mkfs.reiser4(8)                                                                     reiser4progs manual                                                                    mkfs.reiser4(8)
 
 NAME
        mkfs.reiser4 - the program for creating reiser4 filesystem.
@@ -7,8 +7,8 @@ SYNOPSIS
        mkfs.reiser4 [ options ] FILE1 FILE2 ... [ size[K|M|G] ]
 
 DESCRIPTION
-       mkfs.reiser4  is  reiser4  filesystem  creation program. It is based on new libreiser4 library. Since libreiser4 is fully plugin-based, we have the potential to create not just reiser4
-       partitions, but any filesystem or database format, which is based on balanced trees.
+       mkfs.reiser4  is  reiser4  filesystem  creation  program.  It  is based on new libreiser4 library. Since libreiser4 is fully plugin-based, we have the potential to create not just
+       reiser4 partitions, but any filesystem or database format, which is based on balanced trees.
 
 COMMON OPTIONS
        -V, --version
@@ -41,8 +41,8 @@ MKFS OPTIONS
 
 PLUGIN OPTIONS
        -p, --print-profile
-              prints the plugin profile. This is the set of default plugins used for all parts of a filesystem -- format, nodes, files, directories, hashes, etc. If --override  is  specified,
-              then prints modified plugins.
+              prints the plugin profile. This is the set of default plugins used for all parts of a filesystem -- format, nodes, files, directories, hashes, etc. If --override is  speci‐
+              fied, then prints modified plugins.
 
        -l, --print-plugins
               prints all plugins libreiser4 know about.
@@ -65,4 +65,4 @@ SEE ALSO
 AUTHOR
        This manual page was written by Yury Umanets <umka@namesys.com>
 
-reiser4progs                                                                              02 Oct, 2002                                                                          mkfs.reiser4(8)
+reiser4progs                                                                           02 Oct, 2002                                                                        mkfs.reiser4(8)

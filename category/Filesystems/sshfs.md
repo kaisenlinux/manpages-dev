@@ -1,4 +1,4 @@
-SSHFS(1)                                                                                 User Commands                                                                                 SSHFS(1)
+SSHFS(1)                                                                               User Commands                                                                              SSHFS(1)
 
 NAME
        SSHFS - filesystem client based on SSH
@@ -16,18 +16,18 @@ SYNOPSIS
           umount mountpoint           # OS X, FreeBSD
 
 DESCRIPTION
-       SSHFS  allows  you to mount a remote filesystem using SSH (more precisely, the SFTP subsystem). Most SSH servers support and enable this SFTP access by default, so SSHFS is very simple
-       to use - there's nothing to do on the server-side.
+       SSHFS  allows  you  to  mount a remote filesystem using SSH (more precisely, the SFTP subsystem). Most SSH servers support and enable this SFTP access by default, so SSHFS is very
+       simple to use - there's nothing to do on the server-side.
 
-       By default, file permissions are ignored by SSHFS. Any user that can access the filesystem will be able to perform any operation that the remote server permits - based on  the  creden‐
-       tials that were used to connect to the server. If this is undesired, local permission checking can be enabled with -o default_permissions.
+       By default, file permissions are ignored by SSHFS. Any user that can access the filesystem will be able to perform any operation that the remote server permits - based on the cre‐
+       dentials that were used to connect to the server. If this is undesired, local permission checking can be enabled with -o default_permissions.
 
-       By default, only the mounting user will be able to access the filesystem. Access for other users can be enabled by passing -o allow_other. In this case you most likely also want to use
-       -o default_permissions.
+       By  default,  only the mounting user will be able to access the filesystem. Access for other users can be enabled by passing -o allow_other. In this case you most likely also want
+       to use -o default_permissions.
 
-       It is recommended to run SSHFS as regular user (not as root).  For this to work the mountpoint must be owned by the user.  If username is omitted SSHFS will use the local username.  If
-       the  directory is omitted, SSHFS will mount the (remote) home directory.  If you need to enter a password sshfs will ask for it (actually it just runs ssh which ask for the password if
-       needed).
+       It is recommended to run SSHFS as regular user (not as root).  For this to work the mountpoint must be owned by the user.  If username is omitted SSHFS will use  the  local  user‐
+       name.  If  the  directory is omitted, SSHFS will mount the (remote) home directory.  If you need to enter a password sshfs will ask for it (actually it just runs ssh which ask for
+       the password if needed).
 
 OPTIONS
        -o opt,[opt...]
@@ -125,19 +125,19 @@ OPTIONS
               directly connect to PORT bypassing ssh
 
        -o passive
-              communicate over stdin  and  stdout  bypassing  network.  Useful  for  mounting  local  filesystem  on  the  remote  side.   An  example  using  dpipe  command  would  be  dpipe
+              communicate over stdin and stdout bypassing network. Useful  for  mounting  local  filesystem  on  the  remote  side.   An  example  using  dpipe  command  would  be  dpipe
               /usr/lib/openssh/sftp-server = ssh RemoteHostname sshfs :/directory/to/be/shared ~/mnt/src -o passive
 
        -o disable_hardlink
               With this option set, attempts to call link(2) will fail with error code ENOSYS.
 
        -o transform_symlinks
-              transform absolute symlinks on remote side to relative symlinks. This means that if e.g. on the server side /foo/bar/com is a symlink to /foo/blub, SSHFS will transform the link
-              target to ../blub on the client side.
+              transform absolute symlinks on remote side to relative symlinks. This means that if e.g. on the server side /foo/bar/com is a symlink to /foo/blub, SSHFS will transform the
+              link target to ../blub on the client side.
 
        -o follow_symlinks
-              follow symlinks on the server, i.e. present them as regular files on the client. If a symlink is dangling (i.e, the target does not exist) the behavior  depends  on  the  remote
-              server - the entry may appear as a symlink on the client, or it may appear as a regular file that cannot be accessed.
+              follow symlinks on the server, i.e. present them as regular files on the client. If a symlink is dangling (i.e, the target does not exist) the behavior depends on  the  re‐
+              mote server - the entry may appear as a symlink on the client, or it may appear as a regular file that cannot be accessed.
 
        -o no_check_root
               don't check for existence of 'dir' on server
@@ -146,8 +146,8 @@ OPTIONS
               read password from stdin (only for pam_mount!)
 
        -o dir_cache=BOOL
-              Enables  (yes)  or disables (no) the SSHFS directory cache.  The directory cache holds the names of directory entries. Enabling it allows readdir(3) system calls to be processed
-              without network access.
+              Enables  (yes)  or disables (no) the SSHFS directory cache.  The directory cache holds the names of directory entries. Enabling it allows readdir(3) system calls to be pro‐
+              cessed without network access.
 
        -o dcache_max_size=N
               sets the maximum size of the directory cache.
@@ -169,50 +169,50 @@ OPTIONS
 
               1. Each read() or write() system call will initiate one or more read or write operations, data will not be cached in the kernel.
 
-              2. The return value of the read() and write() system calls will correspond to the return values of the read and write operations. This is useful for example if the file size  is
-                 not known in advance (before reading it).  e.g. /proc filesystem
+              2. The return value of the read() and write() system calls will correspond to the return values of the read and write operations. This is useful for  example  if  the  file
+                 size is not known in advance (before reading it).  e.g. /proc filesystem
 
        -o max_conns=N
-              sets  the  maximum  number of simultaneous SSH connections to use. Each connection is established with a separate SSH process.  The primary purpose of this feature is to improve
-              the responsiveness of the file system during large file transfers. When using more than once connection, the password_stdin and passive options can not be used, and the buflimit
-              workaround is not supported.
+              sets  the  maximum number of simultaneous SSH connections to use. Each connection is established with a separate SSH process.  The primary purpose of this feature is to im‐
+              prove the responsiveness of the file system during large file transfers. When using more than once connection, the password_stdin and passive options can not be  used,  and
+              the buflimit workaround is not supported.
 
-       In  addition, SSHFS accepts several options common to all FUSE file systems. These are described in the mount.fuse manpage (look for "general", "libfuse specific", and "high-level API"
-       options).
+       In  addition, SSHFS accepts several options common to all FUSE file systems. These are described in the mount.fuse manpage (look for "general", "libfuse specific", and "high-level
+       API" options).
 
 CAVEATS / WORKAROUNDS
    Hardlinks
-       If the SSH server supports the hardlinks extension, SSHFS will allow you to create hardlinks. However, hardlinks will always appear as individual  files  when  seen  through  an  SSHFS
+       If the SSH server supports the hardlinks extension, SSHFS will allow you to create hardlinks. However, hardlinks will always appear as individual files when seen through an  SSHFS
        mount, i.e. they will appear to have different inodes and an st_nlink value of 1.
 
    Rename
-       Some  SSH  servers  do not support atomically overwriting the destination when renaming a file. In this case you will get an error when you attempt to rename a file and the destination
-       already exists. A workaround is to first remove the destination file, and then do the rename. SSHFS can do this automatically if you call it with -o workaround=rename. However, in this
-       case it is still possible that someone (or something) recreates the destination file after SSHFS has removed it, but before SSHFS had the time to rename the old file. In this case, the
-       rename will still fail.
+       Some  SSH servers do not support atomically overwriting the destination when renaming a file. In this case you will get an error when you attempt to rename a file and the destina‐
+       tion already exists. A workaround is to first remove the destination file, and then do the rename. SSHFS can do this automatically if you call it with -o  workaround=rename.  How‐
+       ever,  in  this  case  it  is still possible that someone (or something) recreates the destination file after SSHFS has removed it, but before SSHFS had the time to rename the old
+       file. In this case, the rename will still fail.
 
    Permission denied when moving files across remote filesystems
-       Most SFTP servers return only a generic "failure" when failing to rename across filesystem boundaries (EXDEV).  sshfs normally converts this generic failure to a permission denied  er‐
-       ror  (EPERM).   If  the option -o workaround=renamexdev is given, generic failures will be considered EXDEV errors which will make programs like mv(1) attempt to actually move the file
-       after the failed rename.
+       Most SFTP servers return only a generic "failure" when failing to rename across filesystem boundaries (EXDEV).  sshfs normally converts this generic failure to a permission denied
+       error  (EPERM).  If the option -o workaround=renamexdev is given, generic failures will be considered EXDEV errors which will make programs like mv(1) attempt to actually move the
+       file after the failed rename.
 
    SSHFS hangs for no apparent reason
-       In some cases, attempts to access the SSHFS mountpoint may freeze if no filesystem activity has occured for some time. This is typically caused by the SSH connection being dropped  be‐
-       cause of inactivity without SSHFS being informed about that. As a workaround, you can try to mount with -o ServerAliveInterval=15. This will force the SSH connection to stay alive even
-       if you have no activity.
+       In some cases, attempts to access the SSHFS mountpoint may freeze if no filesystem activity has occured for some time. This is typically caused by the SSH connection being dropped
+       because  of  inactivity  without  SSHFS being informed about that. As a workaround, you can try to mount with -o ServerAliveInterval=15. This will force the SSH connection to stay
+       alive even if you have no activity.
 
    SSHFS hangs after the connection was interrupted
-       By default, network operations in SSHFS run without timeouts, mirroring the default behavior of SSH itself. As a consequence, if the connection to the remote host is interrupted  (e.g.
-       because  a  network cable was removed), operations on files or directories under the mountpoint will block until the connection is either restored or closed altogether (e.g. manually).
-       Applications that try to access such files or directories will generally appear to "freeze" when this happens.
+       By default, network operations in SSHFS run without timeouts, mirroring the default behavior of SSH itself. As a consequence, if the connection to the remote host  is  interrupted
+       (e.g.  because  a network cable was removed), operations on files or directories under the mountpoint will block until the connection is either restored or closed altogether (e.g.
+       manually).  Applications that try to access such files or directories will generally appear to "freeze" when this happens.
 
-       If it is acceptable to discard data being read or written, a quick workaround is to kill the responsible sshfs process, which will make any blocking operations on the mounted  filesys‐
-       tem  error out and thereby "unfreeze" the relevant applications. Note that force unmounting with fusermount -zu, on the other hand, does not help in this case and will leave read/write
-       operations in the blocking state.
+       If it is acceptable to discard data being read or written, a quick workaround is to kill the responsible sshfs process, which will make any  blocking  operations  on  the  mounted
+       filesystem error out and thereby "unfreeze" the relevant applications. Note that force unmounting with fusermount -zu, on the other hand, does not help in this case and will leave
+       read/write operations in the blocking state.
 
-       For a more automatic solution, one can use the -o ServerAliveInterval=15 option mentioned above, which will drop the connection after not receiving a response for 3 * 15 =  45  seconds
-       from  the  remote host. By also supplying -o reconnect, one can ensure that the connection is re-established as soon as possible afterwards. As before, this will naturally lead to loss
-       of data that was in the process of being read or written at the time when the connection was interrupted.
+       For a more automatic solution, one can use the -o ServerAliveInterval=15 option mentioned above, which will drop the connection after not receiving a response for 3 * 15 = 45 sec‐
+       onds from the remote host. By also supplying -o reconnect, one can ensure that the connection is re-established as soon as possible afterwards. As before, this will naturally lead
+       to loss of data that was in the process of being read or written at the time when the connection was interrupted.
 
 MOUNTING FROM /ETC/FSTAB
        To mount an SSHFS filesystem from /etc/fstab, simply use sshfs` as the file system type. (For backwards compatibility, you may also use ``fuse.sshfs).
@@ -230,4 +230,4 @@ AUTHORS
 
        This man page was originally written by Bartosz Fenski <fenio@debian.org> for the Debian GNU/Linux distribution (but it may be used by others).
 
-                                                                                                                                                                                       SSHFS(1)
+                                                                                                                                                                                  SSHFS(1)
