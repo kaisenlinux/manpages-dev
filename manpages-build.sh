@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# DESCRIPTION   : Generate manpages for kaisen-linux system (https://kaisenlinux.org) in output/ folder.
-# REQUIREMENTS  : kaisen-linux with MATE
+# DESCRIPTION   : Generate manpages for Kaisen Linux system (https://kaisenlinux.org) in output/ folder.
+# REQUIREMENTS  : Kaisen Linux with MATE desktop
 # AUTHOR        : Arnaud Cormier
 # DATE          : 02042021
 #
@@ -52,7 +52,7 @@ fi
 func_usage() {
 
     cat << EOF
-DESCRIPTION   : Generate manpages md files with category of an installed kaisen linux system (for new release)
+DESCRIPTION   : Generate manpages md files with category of an installed Kaisen Linux system (for new release)
 USAGE         : ./manpages-build [OPTIONS]
 OPTIONS       : --fullbuild           : generate manpages-dev updated repo (ready for execution of ./mix_build.sh)
               : --fullbuild clean     : Remove generated output_fullbuild_* directory
