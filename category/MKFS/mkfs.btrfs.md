@@ -32,16 +32,20 @@ OPTIONS
            On multiple devices, the default was raid0 until version 5.7, while it is single since version 5.8. You can still select raid0 manually, but it was not suitable as default.
 
        -m|--metadata <profile>
-           Specify the profile for the metadata block groups. Valid values are raid0, raid1, raid1c3, raid1c4, raid5, raid6, gaid10, single or dup (case does not matter).
+           Specify the profile for the metadata block groups. Valid values are raid0, raid1, raid1c3, raid1c4, raid5, raid6, raid10, single or dup (case does not matter).
 
-           Default on a single device filesystem is DUP, unless an SSD is detected, in which case it will default to single. The detection is based on the value of
-           /sys/block/DEV/queue/rotational, where DEV is the short name of the device.
+           Default on a single device filesystem is DUP and is recommended for metadata in general. The duplication might not be necessary in some use cases and it’s up to the user to
+           changed that at mkfs time or later. This depends on hardware that could potentially deduplicate the blocks again but this cannot be detected at mkfs time.
 
-           Note that the rotational status can be arbitrarily set by the underlying block device driver and may not reflect the true status (network block device, memory-backed SCSI
-           devices etc). It’s recommended to options --data/--metadata to avoid confusion.
+               NOTE
+               Up to version 5.14 there was a detection of a SSD device (more precisely if it’s a rotational device, determined by the contents of file /sys/block/DEV/queue/rotational)
+               that used to select single. This has changed in version 5.15 to be always dup.
 
-           See DUP PROFILES ON A SINGLE DEVICE for more details.
+               Note that the rotational status can be arbitrarily set by the underlying block device driver and may not reflect the true status (network block device, memory-backed SCSI
+               devices, real block device behind some additonal device mapper layer, etc). It’s recommended to always set the options --data/--metadata to avoid confusion and unexpected
+               results.
 
+               See DUP PROFILES ON A SINGLE DEVICE for more details.
            On multiple devices the default is raid1.
 
        -M|--mixed
@@ -119,10 +123,13 @@ OPTIONS
            Alternatively you can use the wipefs utility to clear the devices.
 
        -q|--quiet
-           Print only error or warning messages. Options --features or --help are unaffected.
+           Print only error or warning messages. Options --features or --help are unaffected. Resets any previous effects of --verbose.
 
        -U|--uuid <UUID>
            Create the filesystem with the given UUID. The UUID must not exist on any filesystem currently present.
+
+       -v|--verbose
+           Increase verbosity level, default is 1.
 
        -V|--version
            Print the mkfs.btrfs version and exit.
@@ -149,7 +156,7 @@ MULTIPLE DEVICES
            that this means only scanning, if the devices do not exist in the system, mount will fail anyway. This can happen on systems without initramfs/initrd and root partition
            created with RAID1/10/5/6 profiles. The mount action can happen before all block devices are discovered. The waiting is usually done on the initramfs/initrd systems.
 
-       As of kernel 4.14, RAID5/6 is still considered experimental and shouldn’t be employed for production use.
+       RAID5/6 has known problems and should not be used in production.
 
 FILESYSTEM FEATURES
        Features that can be enabled during creation time. See also btrfs(5) section FILESYSTEM FEATURES.
@@ -176,9 +183,14 @@ FILESYSTEM FEATURES
            reduced-size metadata for extent references, saves a few percent of metadata
 
        no-holes
-           (kernel support since 3.14)
+           (default since btrfs-progs 5.15, kernel support since 3.14)
 
            improved representation of file extents where holes are not explicitly stored as an extent, saves a few percent of metadata if sparse files are used
+
+       zoned
+           (kernel support since 5.12)
+
+           zoned mode, data allocation and write friendly to zoned/SMR/ZBC/ZNS devices, see ZONED MODE in btrfs(5), the mode is automatically selected when a zoned device is detected
 
 RUNTIME FEATURES
        Features that are typically enabled on a mounted filesystem, eg. by a mount option or by an ioctl. Some of them can be enabled early, at mkfs time. This applies to features that
@@ -190,7 +202,7 @@ RUNTIME FEATURES
            Enable quota support (qgroups). The qgroup accounting will be consistent, can be used together with --rootdir. See also btrfs-quota(8).
 
        free-space-tree
-           (kernel support since 4.5)
+           (default since btrfs-progs 5.15, kernel support since 4.5)
 
            Enable the free space tree (mount option space_cache=v2) for persisting the free space cache.
 
@@ -237,7 +249,7 @@ PROFILES
        │DUP     │ 2 / 1 device │        │          │               50% │ 1/any ^(see note 1) │
        ├────────┼──────────────┼────────┼──────────┼───────────────────┼─────────────────────┤
        │        │              │        │          │                   │                     │
-       │RAID0   │              │        │  1 to N  │              100% │        2/any        │
+       │RAID0   │              │        │  1 to N  │              100% │ 1/any ^(see note 5) │
        ├────────┼──────────────┼────────┼──────────┼───────────────────┼─────────────────────┤
        │        │              │        │          │                   │                     │
        │RAID1   │      2       │        │          │               50% │        2/any        │
@@ -249,7 +261,7 @@ PROFILES
        │RAID1C4 │      4       │        │          │               25% │        4/any        │
        ├────────┼──────────────┼────────┼──────────┼───────────────────┼─────────────────────┤
        │        │              │        │          │                   │                     │
-       │RAID10  │      2       │        │  1 to N  │               50% │        4/any        │
+       │RAID10  │      2       │        │  1 to N  │               50% │ 2/any ^(see note 5) │
        ├────────┼──────────────┼────────┼──────────┼───────────────────┼─────────────────────┤
        │        │              │        │          │                   │                     │
        │RAID5   │      1       │   1    │ 2 to N-1 │           (N-1)/N │ 2/any ^(see note 2) │
@@ -270,6 +282,8 @@ PROFILES
        Note 3: It’s also not recommended to use 3 devices with RAID6, unless you want to get effectively 3 copies in a RAID1-like manner (but not exactly that).
 
        Note 4: Since kernel 5.5 it’s possible to use RAID1C3 as replacement for RAID6, higher space cost but reliable.
+
+       Note 5: Since kernel 5.15 it’s possible to use (mount, convert profiles) RAID0 on one device and RAID10 on two devices.
 
    PROFILE LAYOUT
        For the following examples, assume devices numbered by 1, 2, 3 and 4, data or metadata blocks A, B, C, D, with possible stripes eg. A1, A2 that would be logically A, etc. For
@@ -429,4 +443,4 @@ AVAILABILITY
 SEE ALSO
        btrfs(5), btrfs(8), btrfs-balance(8), wipefs(8)
 
-Btrfs v5.10.1                                                                           02/05/2021                                                                           MKFS.BTRFS(8)
+Btrfs v5.15.1                                                                           11/22/2021                                                                           MKFS.BTRFS(8)

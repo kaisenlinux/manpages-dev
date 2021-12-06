@@ -1,6 +1,6 @@
 guymager(1)                                                                       General Commands Manual                                                                      guymager(1)
 
-0.8.12-1" "guymager manual pages"
+0.8.13-1" "guymager manual pages"
 
 NAME
        guymager - a forensic acquisition program
@@ -47,4 +47,4 @@ EXAMPLES
 AUTHOR
        Guy Voncken (develop (at) faert.net)
 
-version 0.8.12-1                                                                        2020-05-08                                                                             guymager(1)
+version 0.8.13-1                                                                        2021-08-13                                                                             guymager(1)

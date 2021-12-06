@@ -1773,4 +1773,4 @@ AUTHOR
 COPYRIGHT
        Copyright 2016, Adrien Vergé
 
-1.26.0                                                                                 Feb 06, 2021                                                                            YAMLLINT(1)
+1.26.3                                                                                 Aug 29, 2021                                                                            YAMLLINT(1)

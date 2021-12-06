@@ -360,6 +360,14 @@ COMMANDS
        logres Print  transaction  reservation size information for each transaction type.  This makes it easier to find discrepancies in the reservation calculations between xfsprogs and
               the kernel, which will help when diagnosing minimum log size calculation errors.
 
+       ls [-i] [paths]...
+              List the contents of a directory.  If a path resolves to a directory, the directory will be listed.  If no paths are supplied and the IO cursor points at a directory inode,
+              the contents of that directory will be listed.
+
+              The output format is: directory cookie, inode number, file type, hash, name length, name.
+
+                 -i  Resolve each of the given paths to an inode number and print that number.  If no paths are given and the IO cursor points to an inode, print the inode number.
+
        metadump [-egow] filename
               Dumps metadata to a file. See xfs_metadump(8) for more information.
 
@@ -371,6 +379,9 @@ COMMANDS
                  -s  specifies that only setuid and setgid files are printed.
 
        p      See the print command.
+
+       path dir_path
+              Walk the directory tree to an inode using the supplied path.  Absolute and relative paths are supported.
 
        pop    Pop location from the stack.
 
@@ -397,7 +408,7 @@ COMMANDS
 
        type [type]
               Set the current data type to type.  If no argument is given, show the current data type.  The possible data types are: agf, agfl, agi, attr, bmapbta, bmapbtd, bnobt, cntbt,
-              data,  dir,  dir2,  dqblk,  inobt,  inode, log, refcntbt, rmapbt, rtbitmap, rtsummary, sb, symlink and text.  See the TYPES section below for more information on these data
+              data, dir, dir2, dqblk, inobt, inode, log, refcntbt, rmapbt, rtbitmap, rtsummary, sb, symlink and text.  See the TYPES section below for  more  information  on  these  data
               types.
 
        timelimit [OPTIONS]
@@ -416,16 +427,16 @@ COMMANDS
                      Print the timestamps in the current locale's date and time format instead of raw seconds since the Unix epoch.
 
        uuid [uuid | generate | rewrite | restore]
-              Set the filesystem universally unique identifier (UUID).  The filesystem UUID can be used by mount(8) instead of using a device special file.  The uuid can be set  directly
-              to  the  desired  UUID,  or  it  can  be  automatically generated using the generate option. These options will both write the UUID into every copy of the superblock in the
-              filesystem.  On a CRC-enabled filesystem, this will set an incompatible superblock flag, and the filesystem will not be mountable with older kernels.  This can be  reverted
-              with  the restore option, which will copy the original UUID back into place and clear the incompatible flag as needed.  rewrite copies the current UUID from the primary su‐
+              Set  the filesystem universally unique identifier (UUID).  The filesystem UUID can be used by mount(8) instead of using a device special file.  The uuid can be set directly
+              to the desired UUID, or it can be automatically generated using the generate option. These options will both write the UUID  into  every  copy  of  the  superblock  in  the
+              filesystem.   On a CRC-enabled filesystem, this will set an incompatible superblock flag, and the filesystem will not be mountable with older kernels.  This can be reverted
+              with the restore option, which will copy the original UUID back into place and clear the incompatible flag as needed.  rewrite copies the current UUID from the primary  su‐
               perblock to all secondary copies of the superblock.  If no argument is given, the current filesystem UUID is printed.
 
        version [feature | versionnum features2]
               Enable selected features for a filesystem (certain features can be enabled on an unmounted filesystem, after mkfs.xfs(8) has created the filesystem).  Support for unwritten
-              extents  can be enabled using the extflg option. Support for version 2 log format can be enabled using the log2 option. Support for extended attributes can be enabled using
-              the attr1 or attr2 option. Once enabled, extended attributes cannot be disabled, but the user may toggle between attr1 and attr2 at will (older kernels may not support  the
+              extents can be enabled using the extflg option. Support for version 2 log format can be enabled using the log2 option. Support for extended attributes can be enabled  using
+              the  attr1 or attr2 option. Once enabled, extended attributes cannot be disabled, but the user may toggle between attr1 and attr2 at will (older kernels may not support the
               newer version).
 
               If no argument is given, the current version and feature bits are printed.  With one argument, this command will write the updated version number into every copy of the su‐
@@ -433,17 +444,17 @@ COMMANDS
               reported (but no modifications are made).
 
        write [-c|-d] [field value] ...
-              Write  a  value  to  disk.  Specific fields can be set in structures (struct mode), or a block can be set to data values (data mode), or a block can be set to string values
+              Write a value to disk.  Specific fields can be set in structures (struct mode), or a block can be set to data values (data mode), or a block can be  set  to  string  values
               (string mode, for symlink blocks).  The operation happens immediately: there is no buffering.
 
               Struct mode is in effect when the current type is structural, i.e. not data. For struct mode, the syntax is "write field value".
 
-              Data mode is in effect when the current type is data. In this case the contents of the block can be shifted or rotated left or right, or filled with a sequence, a  constant
+              Data  mode is in effect when the current type is data. In this case the contents of the block can be shifted or rotated left or right, or filled with a sequence, a constant
               value, or a random value. In this mode write with no arguments gives more information on the allowed commands.
 
                  -c  Skip write verifiers and CRC recalculation; allows invalid data to be written to disk.
 
-                 -d  Skip  write  verifiers  but  perform CRC recalculation.  This allows invalid data to be written to disk to test detection of invalid data.  (This is not possible for
+                 -d  Skip write verifiers but perform CRC recalculation.  This allows invalid data to be written to disk to test detection of invalid data.  (This  is  not  possible  for
                      some types.)
 
 TYPES
@@ -465,8 +476,8 @@ TYPES
                      longest     longest free space represented in the freespace Btrees.
                      btreeblks   number of blocks held in the AGF Btrees.
 
-       agfl      The AGFL block contains block numbers for use of the block allocator; it is in the fourth 512-byte block of each allocation group.  Each entry in the active  list  is  a
-                 block  number  within the allocation group that can be used for any purpose if space runs low.  The AGF block fields flfirst, fllast, and flcount designate which entries
+       agfl      The  AGFL  block  contains block numbers for use of the block allocator; it is in the fourth 512-byte block of each allocation group.  Each entry in the active list is a
+                 block number within the allocation group that can be used for any purpose if space runs low.  The AGF block fields flfirst, fllast, and flcount designate  which  entries
                  are currently active.  Entry space is allocated in a circular manner within the AGFL block.  Fields defined:
                      bno         array of all block numbers. Even those which are not active are printed.
 
@@ -481,20 +492,20 @@ TYPES
                      freecount   count of allocated inodes that are not in use.
                      newino      last inode number allocated.
                      dirino      unused.
-                     unlinked    an array of inode numbers within the allocation group. The entries in the AGI block are the heads of lists which  run  through  the  inode  next_unlinked
+                     unlinked    an  array  of  inode  numbers  within the allocation group. The entries in the AGI block are the heads of lists which run through the inode next_unlinked
                                  field. These inodes are to be unlinked the next time the filesystem is mounted.
 
-       attr      An  attribute  fork is organized as a Btree with the actual data embedded in the leaf blocks. The root of the Btree is found in block 0 of the fork.  The index (sort or‐
-                 der) of the Btree is the hash value of the attribute name.  All the blocks contain a blkinfo structure at the beginning, see type dir for a description.  Nonleaf  blocks
-                 are  identical in format to those for version 1 and version 2 directories, see type dir for a description. Leaf blocks can refer to "local" or "remote" attribute values.
+       attr      An attribute fork is organized as a Btree with the actual data embedded in the leaf blocks. The root of the Btree is found in block 0 of the fork.  The index  (sort  or‐
+                 der)  of  the Btree is the hash value of the attribute name.  All the blocks contain a blkinfo structure at the beginning, see type dir for a description. Nonleaf blocks
+                 are identical in format to those for version 1 and version 2 directories, see type dir for a description. Leaf blocks can refer to "local" or "remote" attribute  values.
                  Local values are stored directly in the leaf block.  Leaf blocks contain the following fields:
-                     hdr         header containing a blkinfo structure info (magic number 0xfbee), a count of active entries, usedbytes total bytes of names  and  values,  the  firstused
+                     hdr         header  containing  a  blkinfo  structure info (magic number 0xfbee), a count of active entries, usedbytes total bytes of names and values, the firstused
                                  byte in the name area, holes set if the block needs compaction, and array freemap as for dir leaf blocks.
                      entries     array of structures containing a hashval, nameidx (index into the block of the name), and flags incomplete, root, and local.
-                     nvlist      array  of  structures  describing  the attribute names and values. Fields always present: valuelen (length of value in bytes), namelen, and name.  Fields
+                     nvlist      array of structures describing the attribute names and values. Fields always present: valuelen (length of value in bytes),  namelen,  and  name.   Fields
                                  present for local values: value (value string). Fields present for remote values: valueblk (fork block number of containing the value).
 
-                 Remote values are stored in an independent block in the attribute fork.  Prior to v5, value blocks had no structure, but in v5 they acquired a header structure with  the
+                 Remote  values are stored in an independent block in the attribute fork.  Prior to v5, value blocks had no structure, but in v5 they acquired a header structure with the
                  following fields:
                      magic       attr3 remote block magic number, 0x5841524d ('XARM').
                      offset      Byte offset of this data block within the overall attribute value.
@@ -507,7 +518,7 @@ TYPES
                      data        The attribute value data.
 
        bmapbt    Files with many extents in their data or attribute fork will have the extents described by the contents of a Btree for that fork, instead of being stored directly in the
-                 inode.  Each bmap Btree starts with a root block contained within the inode.  The other levels of the Btree are stored in filesystem blocks.  The blocks  are  linked  to
+                 inode.   Each  bmap  Btree starts with a root block contained within the inode.  The other levels of the Btree are stored in filesystem blocks.  The blocks are linked to
                  sibling left and right blocks at each level, as well as by pointers from parent to child blocks.  Each block contains the following fields:
                      magic       bmap Btree block magic number, 0x424d4150 ('BMAP').
                      level       level of this block above the leaf level.
@@ -518,8 +529,8 @@ TYPES
                      keys        [non-leaf blocks only] array of key records. These are the first key value of each block in the level below this one. Each record contains startoff.
                      ptrs        [non-leaf blocks only] array of child block pointers.  Each pointer is a filesystem block number to the next level in the Btree.
 
-       bnobt     There  is  one set of filesystem blocks forming the by-block-number allocation Btree for each allocation group. The root block of this Btree is designated by the bnoroot
-                 field in the corresponding AGF block.  The blocks are linked to sibling left and right blocks at each level, as well as by pointers from parent to  child  blocks.   Each
+       bnobt     There is one set of filesystem blocks forming the by-block-number allocation Btree for each allocation group. The root block of this Btree is designated by  the  bnoroot
+                 field  in  the  corresponding AGF block.  The blocks are linked to sibling left and right blocks at each level, as well as by pointers from parent to child blocks.  Each
                  block has the following fields:
                      magic       BNOBT block magic number, 0x41425442 ('ABTB').
                      level       level number of this block, 0 is a leaf.
@@ -527,12 +538,12 @@ TYPES
                      leftsib     left (logically lower) sibling block, 0 if none.
                      rightsib    right (logically higher) sibling block, 0 if none.
                      recs        [leaf blocks only] array of freespace records. Each record contains startblock and blockcount.
-                     keys        [non-leaf  blocks  only]  array  of key records. These are the first value of each block in the level below this one. Each record contains startblock and
+                     keys        [non-leaf blocks only] array of key records. These are the first value of each block in the level below this one. Each  record  contains  startblock  and
                                  blockcount.
                      ptrs        [non-leaf blocks only] array of child block pointers. Each pointer is a block number within the allocation group to the next level in the Btree.
 
-       cntbt     There is one set of filesystem blocks forming the by-block-count allocation Btree for each allocation group. The root block of this Btree is designated  by  the  cntroot
-                 field  in  the  corresponding  AGF  block. The blocks are linked to sibling left and right blocks at each level, as well as by pointers from parent to child blocks. Each
+       cntbt     There  is  one  set of filesystem blocks forming the by-block-count allocation Btree for each allocation group. The root block of this Btree is designated by the cntroot
+                 field in the corresponding AGF block. The blocks are linked to sibling left and right blocks at each level, as well as by pointers from  parent  to  child  blocks.  Each
                  block has the following fields:
                      magic       CNTBT block magic number, 0x41425443 ('ABTC').
                      level       level number of this block, 0 is a leaf.
@@ -540,7 +551,7 @@ TYPES
                      leftsib     left (logically lower) sibling block, 0 if none.
                      rightsib    right (logically higher) sibling block, 0 if none.
                      recs        [leaf blocks only] array of freespace records. Each record contains startblock and blockcount.
-                     keys        [non-leaf blocks only] array of key records. These are the first value of each block in the level below this one. Each  record  contains  blockcount  and
+                     keys        [non-leaf  blocks  only]  array  of key records. These are the first value of each block in the level below this one. Each record contains blockcount and
                                  startblock.
                      ptrs        [non-leaf blocks only] array of child block pointers. Each pointer is a block number within the allocation group to the next level in the Btree.
 
@@ -553,32 +564,32 @@ TYPES
                      magic       magic number for this block type.
                  The non-leaf (node) blocks have the following fields:
                      hdr         header containing a blkinfo structure info (magic number 0xfebe), the count of active entries, and the level of this block above the leaves.
-                     btree       array of entries containing hashval and before fields. The before value is a block number within the directory file to the child block,  the  hashval  is
+                     btree       array  of  entries  containing hashval and before fields. The before value is a block number within the directory file to the child block, the hashval is
                                  the last hash value in that block.
                  The leaf blocks have the following fields:
-                     hdr         header  containing  a  blkinfo  structure info (magic number 0xfeeb), the count of active entries, namebytes (total name string bytes), holes flag (block
+                     hdr         header containing a blkinfo structure info (magic number 0xfeeb), the count of active entries, namebytes (total name string  bytes),  holes  flag  (block
                                  needs compaction), and freemap (array of base, size entries for free regions).
                      entries     array of structures containing hashval, nameidx (byte index into the block of the name string), and namelen.
                      namelist    array of structures containing inumber and name.
 
-       dir2      A version 2 directory has four kinds of blocks.  Data blocks start at offset 0 in the file.  There are two kinds of data blocks: single-block directories have  the  leaf
+       dir2      A  version  2 directory has four kinds of blocks.  Data blocks start at offset 0 in the file.  There are two kinds of data blocks: single-block directories have the leaf
                  information embedded at the end of the block, data blocks in multi-block directories do not.  Node and leaf blocks start at offset 32GiB (with either a single leaf block
-                 or the root node block).  Freespace blocks start at offset 64GiB.  The node and leaf blocks form a Btree, with references to the data in the data blocks.  The  freespace
+                 or  the root node block).  Freespace blocks start at offset 64GiB.  The node and leaf blocks form a Btree, with references to the data in the data blocks.  The freespace
                  blocks form an index of longest free spaces within the data blocks.
 
                  A single-block directory block contains the following fields:
                      bhdr        header containing magic number 0x58443242 ('XD2B') and an array bestfree of the longest 3 free spaces in the block (offset, length).
                      bu          array of union structures. Each element is either an entry or a freespace.  For entries, there are the following fields: inumber, namelen, name, and tag.
-                                 For freespace, there are the following fields: freetag (0xffff), length, and tag.  The tag value is the byte offset in the block of the start of the  en‐
+                                 For  freespace, there are the following fields: freetag (0xffff), length, and tag.  The tag value is the byte offset in the block of the start of the en‐
                                  try it is contained in.
                      bleaf       array of leaf entries containing hashval and address.  The address is a 64-bit word offset into the file.
                      btail       tail structure containing the total count of leaf entries and stale count of unused leaf entries.
                  A data block contains the following fields:
                      dhdr        header containing magic number 0x58443244 ('XD2D') and an array bestfree of the longest 3 free spaces in the block (offset, length).
                      du          array of union structures as for bu.
-                 Leaf  blocks  have two possible forms. If the Btree consists of a single leaf then the freespace information is in the leaf block, otherwise it is in separate blocks and
+                 Leaf blocks have two possible forms. If the Btree consists of a single leaf then the freespace information is in the leaf block, otherwise it is in separate  blocks  and
                  the root of the Btree is a node block. A leaf block contains the following fields:
-                     lhdr        header containing a blkinfo structure info (magic number 0xd2f1 for the single leaf case, 0xd2ff for the true Btree case), the total count  of  leaf  en‐
+                     lhdr        header  containing  a  blkinfo structure info (magic number 0xd2f1 for the single leaf case, 0xd2ff for the true Btree case), the total count of leaf en‐
                                  tries, and stale count of unused leaf entries.
                      lents       leaf entries, as for bleaf.
                      lbests      [single leaf only] array of values which represent the longest freespace in each data block in the directory.
@@ -586,13 +597,13 @@ TYPES
                  A node block is identical to that for types attr and dir.
 
                  A freespace block contains the following fields:
-                     fhdr        header  containing magic number 0x58443246 ('XD2F'), firstdb first data block number covered by this freespace block, nvalid number of valid entries, and
+                     fhdr        header containing magic number 0x58443246 ('XD2F'), firstdb first data block number covered by this freespace block, nvalid number of valid entries,  and
                                  nused number of entries representing real data blocks.
                      fbests      array of values as for lbests.
 
-       dqblk     The quota information is stored in files referred to by the superblock uquotino and pquotino fields. Each filesystem block in a quota file contains a constant number  of
-                 quota  entries.  The quota entry size is currently 136 bytes, so with a 4KiB filesystem block size there are 30 quota entries per block. The dquot command is used to lo‐
-                 cate these entries in the filesystem.  The file entries are indexed by the user or project identifier to determine the block and offset.  Each quota entry has  the  fol‐
+       dqblk     The  quota information is stored in files referred to by the superblock uquotino and pquotino fields. Each filesystem block in a quota file contains a constant number of
+                 quota entries. The quota entry size is currently 136 bytes, so with a 4KiB filesystem block size there are 30 quota entries per block. The dquot command is used  to  lo‐
+                 cate  these  entries in the filesystem.  The file entries are indexed by the user or project identifier to determine the block and offset.  Each quota entry has the fol‐
                  lowing fields:
                      magic          magic number, 0x4451 ('DQ').
                      version        version number, currently 1.
@@ -614,25 +625,25 @@ TYPES
                      rtbtimer       time when service will be refused if soft limit is violated for realtime blocks.
                      rtbwarns       number of warnings issued about realtime block limit violations.
 
-       inobt     There  is  one set of filesystem blocks forming the inode allocation Btree for each allocation group. The root block of this Btree is designated by the root field in the
-                 corresponding AGI block.  The blocks are linked to sibling left and right blocks at each level, as well as by pointers from parent to child blocks.  Each block  has  the
+       inobt     There is one set of filesystem blocks forming the inode allocation Btree for each allocation group. The root block of this Btree is designated by the root field  in  the
+                 corresponding  AGI  block.  The blocks are linked to sibling left and right blocks at each level, as well as by pointers from parent to child blocks.  Each block has the
                  following fields:
                      magic       INOBT block magic number, 0x49414254 ('IABT').
                      level       level number of this block, 0 is a leaf.
                      numrecs     number of data entries in the block.
                      leftsib     left (logically lower) sibling block, 0 if none.
                      rightsib    right (logically higher) sibling block, 0 if none.
-                     recs        [leaf  blocks  only] array of inode records. Each record contains startino allocation-group relative inode number, freecount count of free inodes in this
+                     recs        [leaf blocks only] array of inode records. Each record contains startino allocation-group relative inode number, freecount count of free inodes  in  this
                                  chunk, and free bitmap, LSB corresponds to inode 0.
                      keys        [non-leaf blocks only] array of key records. These are the first value of each block in the level below this one. Each record contains startino.
                      ptrs        [non-leaf blocks only] array of child block pointers. Each pointer is a block number within the allocation group to the next level in the Btree.
 
        inode     Inodes are allocated in "chunks" of 64 inodes each. Usually a chunk is multiple filesystem blocks, although there are cases with large filesystem blocks where a chunk is
-                 less  than  one  block.  The inode Btree (see inobt above) refers to the inode numbers per allocation group. The inode numbers directly reflect the location of the inode
-                 block on disk. Use the inode command to point xfs_db to a specific inode. Each inode contains four regions: core, next_unlinked, u, and a.  core contains the  fixed  in‐
+                 less than one block. The inode Btree (see inobt above) refers to the inode numbers per allocation group. The inode numbers directly reflect the  location  of  the  inode
+                 block  on  disk. Use the inode command to point xfs_db to a specific inode. Each inode contains four regions: core, next_unlinked, u, and a.  core contains the fixed in‐
                  formation.  next_unlinked is separated from the core due to journaling considerations, see type agi field unlinked.  u is a union structure that is different in size and
-                 format depending on the type and representation of the file data ("data fork").  a is an optional union structure to describe attribute data, that is different in  size,
-                 format,  and  location  depending  on the presence and representation of attribute data, and the size of the u data ("attribute fork").  xfs_db automatically selects the
+                 format  depending on the type and representation of the file data ("data fork").  a is an optional union structure to describe attribute data, that is different in size,
+                 format, and location depending on the presence and representation of attribute data, and the size of the u data ("attribute fork").   xfs_db  automatically  selects  the
                  proper union members based on information in the inode.
 
                  The following are fields in the inode core:
@@ -665,22 +676,22 @@ TYPES
                      bmbt        bmap Btree root. This looks like a bmapbtd block with redundant information removed.
                      bmx         array of extent descriptors.
                      dev         dev_t for the block or character device.
-                     sfdir       shortform (in-inode) version 1 directory. This consists of a hdr containing the parent inode number and a count of active entries in the directory,  fol‐
+                     sfdir       shortform  (in-inode) version 1 directory. This consists of a hdr containing the parent inode number and a count of active entries in the directory, fol‐
                                  lowed by an array list of hdr.count entries. Each such entry contains inumber, namelen, and name string.
-                     sfdir2      shortform  (in-inode) version 2 directory. This consists of a hdr containing a count of active entries in the directory, an i8count of entries with inum‐
-                                 bers that don't fit in a 32-bit value, and the parent inode number, followed by an array list of hdr.count entries. Each such entry contains  namelen,  a
+                     sfdir2      shortform (in-inode) version 2 directory. This consists of a hdr containing a count of active entries in the directory, an i8count of entries with  inum‐
+                                 bers  that  don't fit in a 32-bit value, and the parent inode number, followed by an array list of hdr.count entries. Each such entry contains namelen, a
                                  saved offset used when the directory is converted to a larger form, a name string, and the inumber.
                      symlink     symbolic link string value.
                  The following fields are in the a attribute fork union if it exists:
                      bmbt        bmap Btree root, as above.
                      bmx         array of extent descriptors.
-                     sfattr      shortform  (in-inode)  attribute  values. This consists of a hdr containing a totsize (total size in bytes) and a count of active entries, followed by an
+                     sfattr      shortform (in-inode) attribute values. This consists of a hdr containing a totsize (total size in bytes) and a count of active entries,  followed  by  an
                                  array list of hdr.count entries. Each such entry contains namelen, valuelen, root flag, name, and value.
 
        log       Log blocks contain the journal entries for XFS.  It's not useful to examine these with xfs_db, use xfs_logprint(8) instead.
 
-       refcntbt  There is one set of filesystem blocks forming the reference count Btree for each allocation group. The root block of this Btree is designated by the refcntroot field  in
-                 the  corresponding  AGF block.  The blocks are linked to sibling left and right blocks at each level, as well as by pointers from parent to child blocks.  Each block has
+       refcntbt  There  is one set of filesystem blocks forming the reference count Btree for each allocation group. The root block of this Btree is designated by the refcntroot field in
+                 the corresponding AGF block.  The blocks are linked to sibling left and right blocks at each level, as well as by pointers from parent to child blocks.  Each  block  has
                  the following fields:
                      magic       REFC block magic number, 0x52334643 ('R3FC').
                      level       level number of this block, 0 is a leaf.
@@ -691,8 +702,8 @@ TYPES
                      keys        [non-leaf blocks only] array of key records. These are the first value of each block in the level below this one. Each record contains startblock.
                      ptrs        [non-leaf blocks only] array of child block pointers. Each pointer is a block number within the allocation group to the next level in the Btree.
 
-       rmapbt    There is one set of filesystem blocks forming the reverse mapping Btree for each allocation group. The root block of this Btree is designated by the  rmaproot  field  in
-                 the  corresponding  AGF block.  The blocks are linked to sibling left and right blocks at each level, as well as by pointers from parent to child blocks.  Each block has
+       rmapbt    There  is  one  set of filesystem blocks forming the reverse mapping Btree for each allocation group. The root block of this Btree is designated by the rmaproot field in
+                 the corresponding AGF block.  The blocks are linked to sibling left and right blocks at each level, as well as by pointers from parent to child blocks.  Each  block  has
                  the following fields:
                      magic       RMAP block magic number, 0x524d4233 ('RMB3').
                      level       level number of this block, 0 is a leaf.
@@ -700,22 +711,22 @@ TYPES
                      leftsib     left (logically lower) sibling block, 0 if none.
                      rightsib    right (logically higher) sibling block, 0 if none.
                      recs        [leaf blocks only] array of reference count records. Each record contains startblock, blockcount, owner, offset, attr_fork, bmbt_block, and unwritten.
-                     keys        [non-leaf blocks only] array of double-key records. The first ("low") key contains the first value of each block in the level below this one. The  second
-                                 ("high")  key contains the largest key that can be used to identify any record in the subtree. Each record contains startblock, owner, offset, attr_fork,
+                     keys        [non-leaf  blocks only] array of double-key records. The first ("low") key contains the first value of each block in the level below this one. The second
+                                 ("high") key contains the largest key that can be used to identify any record in the subtree. Each record contains startblock, owner, offset,  attr_fork,
                                  and bmbt_block.
                      ptrs        [non-leaf blocks only] array of child block pointers. Each pointer is a block number within the allocation group to the next level in the Btree.
 
        rtbitmap  If the filesystem has a realtime subvolume, then the rbmino field in the superblock refers to a file that contains the realtime bitmap.  Each bit in the bitmap file con‐
-                 trols  the  allocation  of  a single realtime extent (set == free). The bitmap is processed in 32-bit words, the LSB of a word is used for the first extent controlled by
+                 trols the allocation of a single realtime extent (set == free). The bitmap is processed in 32-bit words, the LSB of a word is used for the  first  extent  controlled  by
                  that bitmap word. The atime field of the realtime bitmap inode contains a counter that is used to control where the next new realtime file will start.
 
-       rtsummary If the filesystem has a realtime subvolume, then the rsumino field in the superblock refers to a file that contains the realtime summary data. The summary file  contains
-                 a  two-dimensional array of 16-bit values.  Each value counts the number of free extent runs (consecutive free realtime extents) of a given range of sizes that starts in
+       rtsummary If  the filesystem has a realtime subvolume, then the rsumino field in the superblock refers to a file that contains the realtime summary data. The summary file contains
+                 a two-dimensional array of 16-bit values.  Each value counts the number of free extent runs (consecutive free realtime extents) of a given range of sizes that starts  in
                  a given bitmap block.  The size ranges are binary buckets (low size in the bucket is a power of 2).  There are as many size ranges as are necessary given the size of the
-                 realtime  subvolume.   The  first dimension is the size range, the second dimension is the starting bitmap block number (adjacent entries are for the same size, adjacent
+                 realtime subvolume.  The first dimension is the size range, the second dimension is the starting bitmap block number (adjacent entries are for the  same  size,  adjacent
                  bitmap blocks).
 
-       sb        There is one sb (superblock) structure per allocation group.  It is the first disk block in the allocation group.  Only the first one (block 0 of the filesystem) is  ac‐
+       sb        There  is one sb (superblock) structure per allocation group.  It is the first disk block in the allocation group.  Only the first one (block 0 of the filesystem) is ac‐
                  tually used; the other blocks are redundant information for xfs_repair(8) to use if the first superblock is damaged. Fields defined:
                      magicnum    superblock magic number, 0x58465342 ('XFSB').
                      blocksize   filesystem block size in bytes.
@@ -732,10 +743,10 @@ TYPES
                      agcount     number of allocation groups.
                      rbmblocks   number of realtime bitmap blocks.
                      logblocks   number of log blocks (filesystem blocks).
-                     versionnum  filesystem  version  information.   This  value  is currently 1, 2, 3, or 4 in the low 4 bits.  If the low bits are 4 then the other bits have additional
-                                 meanings.  1 is the original value.  2 means that attributes were used.  3 means that version 2 inodes (large link counts) were used.  4 is  the  bitmask
+                     versionnum  filesystem version information.  This value is currently 1, 2, 3, or 4 in the low 4 bits.  If the low bits are 4 then  the  other  bits  have  additional
+                                 meanings.   1  is the original value.  2 means that attributes were used.  3 means that version 2 inodes (large link counts) were used.  4 is the bitmask
                                  version of the version number.  In this case, the other bits are used as flags (0x0010: attributes were used, 0x0020: version 2 inodes were used, 0x0040:
-                                 quotas were used, 0x0080: inode cluster alignment is in force, 0x0100: data stripe alignment is in force, 0x0200: the shared_vn field  is  used,  0x1000:
+                                 quotas  were  used,  0x0080: inode cluster alignment is in force, 0x0100: data stripe alignment is in force, 0x0200: the shared_vn field is used, 0x1000:
                                  unwritten extent tracking is on, 0x2000: version 2 directories are in use).
                      sectsize    sector size in bytes, currently always 512.  This is the size of the superblock and the other header blocks.
                      inodesize   inode size in bytes.
@@ -756,7 +767,7 @@ TYPES
                      frextents   number of free realtime extents.
                      uquotino    user quota inode number.
                      pquotino    project quota inode number; this is currently unused.
-                     qflags      quota  status flags (0x01: user quota accounting is on, 0x02: user quota limits are enforced, 0x04: quotacheck has been run on user quotas, 0x08: project
+                     qflags      quota status flags (0x01: user quota accounting is on, 0x02: user quota limits are enforced, 0x04: quotacheck has been run on user quotas, 0x08:  project
                                  quota accounting is on, 0x10: project quota limits are enforced, 0x20: quotacheck has been run on project quotas).
                      flags       random flags. 0x01: only read-only mounts are allowed.
                      shared_vn   shared version number (shared readonly filesystems).
@@ -768,7 +779,7 @@ TYPES
        symlink   Symbolic link blocks are used only when the symbolic link value does not fit inside the inode. The block content is just the string value.  Bytes past the logical end of
                  the symbolic link value have arbitrary values.
 
-       text      User  file blocks, and other blocks whose type is unknown, have this type for display purposes in xfs_db.  The block data is displayed in two columns: Hexadecimal format
+       text      User file blocks, and other blocks whose type is unknown, have this type for display purposes in xfs_db.  The block data is displayed in two columns: Hexadecimal  format
                  and printable ASCII chars.
 
 DIAGNOSTICS
@@ -779,7 +790,7 @@ DIAGNOSTICS
               out of memory
        is printed.
 
-       The following is a description of the most likely problems and the associated messages.  Most of the diagnostics produced are only meaningful with an understanding of  the  struc‐
+       The  following  is a description of the most likely problems and the associated messages.  Most of the diagnostics produced are only meaningful with an understanding of the struc‐
        ture of the filesystem.
 
        agf_freeblks n, counted m in ag a

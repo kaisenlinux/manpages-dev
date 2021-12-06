@@ -5,8 +5,8 @@ NAME
 
 SYNOPSIS
        usage: ansible-doc [-h] [--version] [-v] [-M MODULE_PATH]
-              [--playbook-dir  BASEDIR]  [-t {become,cache,callback,cliconf,connection,httpapi,inventory,lookup,netconf,shell,module,strategy,vars}] [-j] [-F | -l | -s | --metadata-dump]
-              [plugin ...]
+              [--playbook-dir  BASEDIR]  [-t {become,cache,callback,cliconf,connection,httpapi,inventory,lookup,netconf,shell,vars,module,strategy}] [-j] [-F | -l | -s | --metadata-dump]
+              [plugin [plugin ...]]
 
 DESCRIPTION
        displays information on modules installed in Ansible libraries.  It displays a terse listing of plugins and their short descriptions, provides a printout  of  their  DOCUMENTATION
@@ -25,7 +25,7 @@ COMMON OPTIONS
           show program's version number, config file location, configured module search path, module location, executable location and exit
 
        -F, --list_files
-          Show plugin names and their source files without summaries (implies --list)
+          Show plugin names and their source files without summaries (implies --list). A supplied argument will be used for filtering, can be a namespace or full collection name.
 
        -M, --module-path
           prepend colon-separated path(s) to module library (default=~/.ansible/plugins/modules:/usr/share/ansible/plugins/modules)
@@ -37,14 +37,14 @@ COMMON OPTIONS
           Change output into json format.
 
        -l, --list
-          List available plugins
+          List available plugins. A supplied argument will be used for filtering, can be a namespace or full collection name.
 
        -s, --snippet
           Show playbook snippet for specified plugin(s)
 
        -t 'TYPE', --type 'TYPE'
           Choose  which  plugin type (defaults to "module"). Available plugin types are : ('become', 'cache', 'callback', 'cliconf', 'connection', 'httpapi', 'inventory', 'lookup', 'net‐
-          conf', 'shell', 'module', 'strategy', 'vars')
+          conf', 'shell', 'vars', 'module', 'strategy')
 
        -v, --verbose
           verbose mode (-vvv for more, -vvvv to enable connection debugging)
@@ -79,4 +79,4 @@ SEE ALSO
        Extensive documentation is available in the documentation site: <https://docs.ansible.com>.  IRC and mailing list info can be found  in  file  CONTRIBUTING.md,  available  in:  <‐
        https://github.com/ansible/ansible>
 
-Ansible 2.9.16                                                                                                                                                              ANSIBLE-DOC(1)
+Ansible 2.10.8                                                                                                                                                              ANSIBLE-DOC(1)

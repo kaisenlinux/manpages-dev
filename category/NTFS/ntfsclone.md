@@ -204,9 +204,9 @@ AUTHORS
 
 AVAILABILITY
        ntfsclone is part of the ntfs-3g package and is available at:
-       http://www.tuxera.com/community/
+       https://github.com/tuxera/ntfs-3g/wiki/
 
 SEE ALSO
        ntfsresize(8) ntfsprogs(8) xfs_copy(8) debugreiserfs(8) e2image(8)
 
-ntfs-3g 2017.3.23AR.3                                                                  February 2013                                                                          NTFSCLONE(8)
+ntfs-3g 2021.8.22                                                                      February 2013                                                                          NTFSCLONE(8)

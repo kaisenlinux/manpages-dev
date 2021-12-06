@@ -75,7 +75,7 @@ You can now copy doc/* in kaisen-manpages/ folder.
 
 If you have an error when running mix_build.sh with `mix command not found`:
 - enter : asdf global erlang 23.3.1 && asdf local elixir 1.11.4-otp-23                            
-- verify your are in zsh
+- verify your are in zsh (or switch to bash and rereun the script)
 - delete mix.log
 - or you missed the step : ./install_requirements.sh
 
@@ -88,3 +88,4 @@ If you have an error when running mix_build.sh with `mix command not found`:
 	   - Updating asdf command in script  	
 07/04/2021 - Integrating build script of manpages in the manpages-dev repository  
 	   - Adding helper script deploy.sh
+06/12/2021 - fix lib/ dir missing files and build manpages for kaisen 2.0

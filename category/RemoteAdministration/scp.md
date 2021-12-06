@@ -4,21 +4,26 @@ NAME
      scp — OpenSSH secure file copy
 
 SYNOPSIS
-     scp [-346ABCpqrTv] [-c cipher] [-F ssh_config] [-i identity_file] [-J destination] [-l limit] [-o ssh_option] [-P port] [-S program] source ... target
+     scp [-346ABCOpqRrsTv] [-c cipher] [-D sftp_server_path] [-F ssh_config] [-i identity_file] [-J destination] [-l limit] [-o ssh_option] [-P port] [-S program] source ... target
 
 DESCRIPTION
-     scp copies files between hosts on a network.  It uses ssh(1) for data transfer, and uses the same authentication and provides the same security as ssh(1).  scp will ask for pass‐
-     words or passphrases if they are needed for authentication.
+     scp copies files between hosts on a network.
+
+     It uses ssh(1) for data transfer, and uses the same authentication and provides the same security as a login session.  The scp protocol requires execution of the remote user's shell
+     to perform glob(3) pattern matching.
+
+     scp will ask for passwords or passphrases if they are needed for authentication.
 
      The source and target may be specified as a local pathname, a remote host with optional path in the form [user@]host:[path], or a URI in the form scp://[user@]host[:port][/path].
      Local file names can be made explicit using absolute or relative pathnames to avoid scp treating file names containing ‘:’ as host specifiers.
 
-     When copying between two remote hosts, if the URI format is used, a port may only be specified on the target if the -3 option is used.
+     When copying between two remote hosts, if the URI format is used, a port cannot be specified on the target if the -R option is used.
 
      The options are as follows:
 
-     -3      Copies between two remote hosts are transferred through the local host.  Without this option the data is copied directly between the two remote hosts.  Note that this option
-             disables the progress meter and selects batch mode for the second host, since scp cannot ask for passwords or passphrases for both hosts.
+     -3      Copies between two remote hosts are transferred through the local host.  Without this option the data is copied directly between the two remote hosts.  Note that, when using
+             the legacy SCP protocol (the default), this option selects batch mode for the second host as scp cannot ask for passwords or passphrases for both hosts.  This mode is the
+             default.
 
      -4      Forces scp to use IPv4 addresses only.
 
@@ -33,6 +38,10 @@ DESCRIPTION
      -c cipher
              Selects the cipher to use for encrypting the data transfer.  This option is directly passed to ssh(1).
 
+     -D sftp_server_path
+             When using the SFTP protocol support via -M, connect directly to a local SFTP server program rather than a remote one via ssh(1).  This option may be useful in debugging the
+             client and server.
+
      -F ssh_config
              Specifies an alternative per-user configuration file for ssh.  This option is directly passed to ssh(1).
 
@@ -46,6 +55,9 @@ DESCRIPTION
 
      -l limit
              Limits the used bandwidth, specified in Kbit/s.
+
+     -O      Use the legacy SCP protocol for file transfers instead of the SFTP protocol.  Forcing the use of the SCP protocol may be necessary for servers that do not implement SFTP or
+             for backwards-compatibility for particular filename wildcard patterns.  This mode is the default.
 
      -o ssh_option
              Can be used to pass options to ssh in the format used in ssh_config(5).  This is useful for specifying options for which there is no separate scp command-line flag.  For
@@ -62,7 +74,6 @@ DESCRIPTION
                    CanonicalizePermittedCNAMEs
                    CASignatureAlgorithms
                    CertificateFile
-                   ChallengeResponseAuthentication
                    CheckHostIP
                    Ciphers
                    Compression
@@ -76,8 +87,8 @@ DESCRIPTION
                    GSSAPIDelegateCredentials
                    HashKnownHosts
                    Host
+                   HostbasedAcceptedAlgorithms
                    HostbasedAuthentication
-                   HostbasedKeyTypes
                    HostKeyAlgorithms
                    HostKeyAlias
                    Hostname
@@ -88,6 +99,7 @@ DESCRIPTION
                    KbdInteractiveAuthentication
                    KbdInteractiveDevices
                    KexAlgorithms
+                   KnownHostsCommand
                    LogLevel
                    MACs
                    NoHostAuthenticationForLocalhost
@@ -98,7 +110,7 @@ DESCRIPTION
                    PreferredAuthentications
                    ProxyCommand
                    ProxyJump
-                   PubkeyAcceptedKeyTypes
+                   PubkeyAcceptedAlgorithms
                    PubkeyAuthentication
                    RekeyLimit
                    SendEnv
@@ -120,10 +132,18 @@ DESCRIPTION
 
      -q      Quiet mode: disables the progress meter as well as warning and diagnostic messages from ssh(1).
 
+     -R      Copies between two remote hosts are performed by connecting to the origin host and executing scp there.  This requires that scp running on the origin host can authenticate
+             to the destination host without requiring a password.
+
      -r      Recursively copy entire directories.  Note that scp follows symbolic links encountered in the tree traversal.
 
      -S program
              Name of program to use for the encrypted connection.  The program must understand ssh(1) options.
+
+     -s      Use the SFTP protocol for file transfers instead of the legacy SCP protocol.  Using SFTP avoids invoking a shell on the remote side and provides more predictable filename
+             handling, as the SCP protocol relied on the remote shell for expanding glob(3) wildcards.
+
+             A near-future release of OpenSSH will make the SFTP protocol the default.  This option will be deleted before the end of 2022.
 
      -T      Disable strict filename checking.  By default when copying files from a remote host to a local directory scp checks that the received filenames match those requested on the
              command-line to prevent the remote end from sending unexpected or unwanted files.  Because of differences in how various operating systems and shells interpret filename
@@ -136,7 +156,7 @@ EXIT STATUS
      The scp utility exits 0 on success, and >0 if an error occurs.
 
 SEE ALSO
-     sftp(1), ssh(1), ssh-add(1), ssh-agent(1), ssh-keygen(1), ssh_config(5), sshd(8)
+     sftp(1), ssh(1), ssh-add(1), ssh-agent(1), ssh-keygen(1), ssh_config(5), sftp-server(8), sshd(8)
 
 HISTORY
      scp is based on the rcp program in BSD source code from the Regents of the University of California.
@@ -145,4 +165,4 @@ AUTHORS
      Timo Rinne <tri@iki.fi>
      Tatu Ylonen <ylo@cs.hut.fi>
 
-BSD                                                                                   August 3, 2020                                                                                   BSD
+BSD                                                                                   August 11, 2021                                                                                  BSD

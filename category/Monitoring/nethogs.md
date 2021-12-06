@@ -4,7 +4,7 @@ NAME
        nethogs - Net top tool grouping bandwidth per process
 
 SYNOPSIS
-       nethogs [-h] [-V] [-d] [-v] [-t] [-c] [-p] [-s] [device(s)]
+       nethogs [-h] [-V] [-d] [-v] [-t] [-c] [-p] [-a] [-s] [-l] [device(s)]
 
 DESCRIPTION
        NetHogs  is a small 'net top' tool. Instead of breaking the traffic down per protocol or per subnet, like most such tools do, it groups bandwidth by process - and does not rely on
@@ -12,32 +12,44 @@ DESCRIPTION
        of spinning process, kill it.
 
    Options
-       -h     display available commands usage.
+       -h     display available commands usage
 
-       -V     prints Version info.
+       -V     print version info
 
-       -d     delay for refresh rate.
+       -d     delay for refresh rate
 
        -v     select view mode
 
-       -p     sniff in promiscious mode (not recommended).
+       -p     sniff in promiscuous mode (not recommended)
 
-       -t     tracemode.
+       -a     monitor all devices, even loopback/stopped ones
+
+       -t     tracemode
 
        -c     limit number of refreshes
 
        -s     sort by traffic sent
 
-       device(s) to monitor. By default eth0 is being used.
+       -l     display command line
+
+       device(s) to monitor. By default eth0 is being used
 
 INTERACTIVE CONTROL
-       m      cycle between display modes (kb/s, kb, b, mb)
+       m      cycle between display modes (KB/s, KB, B, MB, MB/s, GB/s)
+
+       l      display command line
 
        r      sort by 'received'
 
        s      sort by 'sent'
 
        q      quit
+
+RUNNING WITHOUT ROOT
+       In  order  to  be  run by an unprivileged user, nethogs needs the cap_net_admin and cap_net_raw capabilities. These can be set on the executable by using the setcap(8) command, as
+       follows:
+
+           sudo setcap "cap_net_admin,cap_net_raw+pe" /usr/local/sbin/nethogs
 
 SEE ALSO
        netstat(8) tcpdump(1) pcap(3)

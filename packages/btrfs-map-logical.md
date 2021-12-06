@@ -30,4 +30,4 @@ EXIT STATUS
 SEE ALSO
        mkfs.btrfs(8)
 
-Btrfs v5.10.1                                                                           02/05/2021                                                                    BTRFS-MAP-LOGICAL(8)
+Btrfs v5.15.1                                                                           11/22/2021                                                                    BTRFS-MAP-LOGICAL(8)

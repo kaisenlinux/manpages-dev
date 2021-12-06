@@ -47,7 +47,8 @@ OPTIONS
        -S <0|1>
            Enable seeding on a given device. Value 1 will enable seeding, 0 will disable it.
 
-           A seeding filesystem is forced to be mounted read-only. A new device can be added to the filesystem and will capture all writes keeping the seeding device intact.
+           A seeding filesystem is forced to be mounted read-only. A new device can be added to the filesystem and will capture all writes keeping the seeding device intact. See also
+           section SEEDING DEVICE in btrfs(5).
 
                Warning
                Clearing the seeding flag on a device may be dangerous. If a previously-seeding device is changed, all filesystems that used that device will become unmountable. Setting
@@ -87,4 +88,4 @@ COMPATIBILITY NOTE
 SEE ALSO
        btrfs(5), btrfs-balance(8), mkfs.btrfs(8)
 
-Btrfs v5.10.1                                                                           02/05/2021                                                                            BTRFSTUNE(8)
+Btrfs v5.15.1                                                                           11/22/2021                                                                            BTRFSTUNE(8)

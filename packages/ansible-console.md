@@ -7,8 +7,8 @@ SYNOPSIS
        usage: ansible-console [-h] [--version] [-v] [-b]
               [--become-method  BECOME_METHOD]  [--become-user BECOME_USER] [-K] [-i INVENTORY] [--list-hosts] [-l SUBSET] [-k] [--private-key PRIVATE_KEY_FILE] [-u REMOTE_USER] [-c CON‐
               NECTION] [-T TIMEOUT] [--ssh-common-args SSH_COMMON_ARGS] [--sftp-extra-args  SFTP_EXTRA_ARGS]  [--scp-extra-args  SCP_EXTRA_ARGS]  [--ssh-extra-args  SSH_EXTRA_ARGS]  [-C]
-              [--syntax-check]  [-D]  [--vault-id VAULT_IDS] [--ask-vault-pass | --vault-password-file VAULT_PASSWORD_FILES] [-f FORKS] [-M MODULE_PATH] [--playbook-dir BASEDIR] [--step]
-              [pattern]
+              [--syntax-check]  [-D]  [--vault-id  VAULT_IDS]  [--ask-vault-password  |  --vault-password-file  VAULT_PASSWORD_FILES] [-f FORKS] [-M MODULE_PATH] [--playbook-dir BASEDIR]
+              [--step] [pattern]
 
 DESCRIPTION
        a REPL that allows for running ad-hoc tasks against a chosen inventory (based on dominis' ansible-shell).
@@ -16,11 +16,11 @@ DESCRIPTION
 COMMON OPTIONS
           host pattern
 
-       --ask-vault-pass
+       --ask-vault-password, --ask-vault-pass
           ask for vault password
 
        --become-method 'BECOME_METHOD'
-          privilege escalation method to use (default=%(default)s), use ansible-doc -t become -l to list valid choices.
+          privilege escalation method to use (default=sudo), use ansible-doc -t become -l to list valid choices.
 
        --become-user 'BECOME_USER'
           run operations as this user (default=root)
@@ -55,7 +55,7 @@ COMMON OPTIONS
        --vault-id
           the vault identity to use
 
-       --vault-password-file
+       --vault-password-file, --vault-pass-file
           vault password file
 
        --version
@@ -133,4 +133,4 @@ SEE ALSO
        Extensive documentation is available in the documentation site: <https://docs.ansible.com>.  IRC and mailing list info can be found  in  file  CONTRIBUTING.md,  available  in:  <‐
        https://github.com/ansible/ansible>
 
-Ansible 2.9.16                                                                                                                                                          ANSIBLE-CONSOLE(1)
+Ansible 2.10.8                                                                                                                                                          ANSIBLE-CONSOLE(1)

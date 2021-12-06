@@ -190,6 +190,18 @@ MESSAGES AND EXIT CODES
        -255 , unknown error
 
 HISTORY
+       1.1.7 - 03.07.2021
+            * fixed security issues
+
+       1.1.6 - 13.06.2021
+            * added security boundary checks in pcapng format
+
+       1.1.5 - 05.04.2021
+            * snaplen checks are only performed in soft mode now
+            * fixed repairs for dlt 195 (ieee 802.15.4 with fcs)
+            * fixed (binary) file repair bug under Microsoft Windows
+            * improved compiling on all platforms (thanks to mdeweerd)
+
        1.1.4 - 22.01.2019
             * added support for extended pcap file format (kuznetzov)
             * fixed dtl 113 (linux cooked) handling (thanks to Andre Luyer)
@@ -296,7 +308,7 @@ HISTORY
             * this is the first version, everything has changed thou :-)
 
 COPYRIGHT
-       Copyright (c) 2012-2018 Robert Krause
+       Copyright (c) 2012-2021 Robert Krause
 
        Pcapfix is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3
        of the License, or any later version.
@@ -307,4 +319,4 @@ COPYRIGHT
 AUTHOR
        Written by Robert Krause <ruport@f00l.de>.
 
-                                                                                        22 JAN 2019                                                                             PCAPFIX(1)
+                                                                                        03 JUL 2021                                                                             PCAPFIX(1)

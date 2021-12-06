@@ -4,16 +4,16 @@ NAME
        img2pdf - lossless conversion of raster images to pdf
 
 DESCRIPTION
-       usage: img2pdf [-h] [-v] [-V] [--gui] [-o out] [-C colorspace] [-D]
+       usage: img2pdf [-h] [-v] [-V] [--from-file FILE] [-o out] [-C colorspace]
 
-              [--engine  engine]  [--first-frame-only]  [--pillow-limit-break]  [--pdfa  [PDFA]]  [-S  LxL] [-s LxL] [-b L[:L]] [-f FIT] [-a] [--crop-border L[:L]] [--bleed-border L[:L]]
-              [--trim-border L[:L]] [--art-border L[:L]] [--title title] [--author author] [--creator creator] [--producer producer]  [--creationdate  creationdate]  [--moddate  moddate]
-              [--subject   subject]   [--keywords   kw   [kw  ...]]   [--viewer-panes  PANES]  [--viewer-initial-page  NUM]  [--viewer-magnification  MAG]  [--viewer-page-layout  LAYOUT]
-              [--viewer-fit-window] [--viewer-center-window] [--viewer-fullscreen] [infile [infile ...]]
+              [-D] [--engine engine] [--first-frame-only] [--pillow-limit-break] [--pdfa [PDFA]] [-S LxL] [-s LxL] [-b L[:L]] [-f FIT] [-a] [-r ROT] [--crop-border L[:L]] [--bleed-border
+              L[:L]] [--trim-border L[:L]] [--art-border L[:L]] [--title title] [--author author] [--creator creator] [--producer producer] [--creationdate creationdate] [--moddate  mod‐
+              date]  [--subject  subject]  [--keywords  kw  [kw  ...]]   [--viewer-panes  PANES]  [--viewer-initial-page  NUM]  [--viewer-magnification MAG] [--viewer-page-layout LAYOUT]
+              [--viewer-fit-window] [--viewer-center-window] [--viewer-fullscreen] [infile ...]
 
        Losslessly convert raster images to PDF without re-encoding PNG, JPEG, and JPEG2000 images. This leads to a lossless conversion of PNG, JPEG and  JPEG2000  images  with  the  only
-       added file size coming from the PDF container itself.  Other raster graphics formats are losslessly stored using the same encoding that PNG uses. Since PDF does not support images
-       with transparency and since img2pdf aims to never be lossy, input images with an alpha channel are not supported.
+       added  file  size  coming from the PDF container itself.  Other raster graphics formats are losslessly stored using the same encoding that PNG uses.  For images with transparency,
+       the alpha channel will be stored as a separate soft mask. This is lossless, too.
 
        The output is sent to standard output so that it can be redirected into a file or to another program as part of a shell pipe. To directly write the output into a file, use the  -o
        or --output option.
@@ -21,8 +21,8 @@ DESCRIPTION
 OPTIONS
    positional arguments:
        infile Specifies  the input file(s) in any format that can be read by the Python Imaging Library (PIL). If no input images are given, then a single image is read from standard in‐
-              put. The special filename "-" can be used once to read an image from standard input. To read a file in the current directory with the filename "-", pass it  to  img2pdf  by
-              explicitly stating its relative path like "./-".
+              put. The special filename "-" can be used once to read an image from standard input. To read a file in the current directory with the  filename  "-"  (or  with  a  filename
+              starting with "-"), pass it to img2pdf by explicitly stating its relative path like "./-". Cannot be used together with --from-file.
 
    optional arguments:
        -h, --help
@@ -34,7 +34,10 @@ OPTIONS
        -V, --version
               Prints version information and exits.
 
-       --gui  run experimental tkinter gui
+       --from-file FILE
+              Read  the  list of images from FILE instead of passing them as positional arguments. If this option is used, then the list of positional arguments must be empty.  The paths
+              to the input images in FILE are separated by NUL bytes. If FILE is "-" then the paths are expected on standard input. This option is useful if you want to pass more  images
+              than the maximum command length of your shell permits. This option can be used with commands like `find -print0`.
 
    General output arguments:
               Arguments controlling the output format.
@@ -66,7 +69,7 @@ OPTIONS
               service attacks. If your input image contains more pixels than that, use this option to disable this safety measure during this run of img2pdf
 
        --pdfa [PDFA]
-              Output a PDF/A-1b complient document. By default, this will embed /usr/share/color/icc/sRGB.icc as the color profile.
+              Output a PDF/A-1b compliant document. By default, this will embed /usr/share/color/icc/sRGB.icc as the color profile.
 
    Image and page size and layout arguments:
               Every input image will be placed on its own page. The image size is controlled by the dpi value of the input image or, if unset or missing, the default dpi of 96.00. By de‐
@@ -116,16 +119,22 @@ OPTIONS
               If both dimensions of the page are given via --pagesize, conditionally swaps these dimensions such that the page orientation is the same as the orientation of the input im‐
               age. If the orientation of a page gets flipped, then so do the values set via the --border option.
 
+       -r ROT, --rotation ROT, --orientation ROT
+              Specifies  how  input images should be rotated. ROT can be one of auto, none, ifvalid, 0, 90, 180 and 270. The default value is auto and indicates that input images are ro‐
+              tated according to their EXIF Orientation tag.  The values none and 0 ignore the EXIF Orientation values of the input images. The value ifvalid acts like auto  but  ignores
+              invalid  EXIF  rotation  values  and only issues a warning instead of throwing an error.  This is useful because many devices like Android phones, Canon cameras or scanners
+              emit an invalid Orientation tag value of zero. The values 90, 180 and 270 perform a clockwise rotation of the image.
+
        --crop-border L[:L]
-              Specifies  the  border  between the CropBox and the MediaBox. One, or two length values can be given as an argument, separated by a colon. One value specifies the border on
+              Specifies the border between the CropBox and the MediaBox. One, or two length values can be given as an argument, separated by a colon. One value specifies  the  border  on
               all four sides. Two values specify the border on the top/bottom and left/right, respectively.  It is not possible to specify asymmetric borders.
 
        --bleed-border L[:L]
-              Specifies the border between the BleedBox and the MediaBox. One, or two length values can be given as an argument, separated by a colon. One value specifies the  border  on
+              Specifies  the  border between the BleedBox and the MediaBox. One, or two length values can be given as an argument, separated by a colon. One value specifies the border on
               all four sides. Two values specify the border on the top/bottom and left/right, respectively.  It is not possible to specify asymmetric borders.
 
        --trim-border L[:L]
-              Specifies  the  border  between the TrimBox and the MediaBox. One, or two length values can be given as an argument, separated by a colon. One value specifies the border on
+              Specifies the border between the TrimBox and the MediaBox. One, or two length values can be given as an argument, separated by a colon. One value specifies  the  border  on
               all four sides. Two values specify the border on the top/bottom and left/right, respectively.  It is not possible to specify asymmetric borders.
 
        --art-border L[:L]
@@ -145,14 +154,14 @@ OPTIONS
               Sets the creator metadata value
 
        --producer producer
-              Sets the producer metadata value (default is: img2pdf 0.4.0)
+              Sets the producer metadata value (default is: img2pdf 0.4.2)
 
        --creationdate creationdate
-              Sets  the  UTC  creation date metadata value in YYYY-MMDD or YYYY-MM-DDTHH:MM or YYYY-MM-DDTHH:MM:SS format or any format understood by python dateutil module or any format
+              Sets the UTC creation date metadata value in YYYY-MMDD or YYYY-MM-DDTHH:MM or YYYY-MM-DDTHH:MM:SS format or any format understood by python dateutil module  or  any  format
               understood by `date --date`
 
        --moddate moddate
-              Sets the UTC modification date metadata value in YYYYMM-DD or YYYY-MM-DDTHH:MM or YYYY-MM-DDTHH:MM:SS format or any format understood by python dateutil module or any  for‐
+              Sets  the UTC modification date metadata value in YYYYMM-DD or YYYY-MM-DDTHH:MM or YYYY-MM-DDTHH:MM:SS format or any format understood by python dateutil module or any for‐
               mat understood by `date --date`
 
        --subject subject
@@ -171,7 +180,7 @@ OPTIONS
               Instead of showing the first page, instruct the PDF viewer to show the given page instead. Page numbers start with 1.
 
        --viewer-magnification MAG
-              Instruct  the  PDF  viewer  to open the PDF with a certain zoom level. Valid values are either a floating point number giving the exact zoom level, "fit" (zoom to fit whole
+              Instruct the PDF viewer to open the PDF with a certain zoom level. Valid values are either a floating point number giving the exact zoom level, "fit"  (zoom  to  fit  whole
               page), "fith" (zoom to fit page width) and "fitbh" (zoom to fit visible page width).
 
        --viewer-page-layout LAYOUT
@@ -188,7 +197,7 @@ OPTIONS
               Instruct the PDF viewer to open the PDF in fullscreen mode
 
    Colorspace:
-              Currently,  the  colorspace  must be forced for JPEG 2000 images that are not in the RGB colorspace.  Available colorspace options are based on Python Imaging Library (PIL)
+              Currently, the colorspace must be forced for JPEG 2000 images that are not in the RGB colorspace.  Available colorspace options are based on Python  Imaging  Library  (PIL)
               short handles.
 
        RGB    RGB color
@@ -202,8 +211,8 @@ OPTIONS
        CMYK;I CMYK color with inversion (for CMYK JPEG files from Adobe)
 
    Paper sizes:
-              You can specify the short hand paper size names shown in the first column in the table below as arguments to the --pagesize and --imgsize options.   The  width  and  height
-              they  are mapping to is shown in the second column.  Giving the value in the second column has the same effect as giving the short hand in the first column. Appending ^T (a
+              You  can  specify  the  short hand paper size names shown in the first column in the table below as arguments to the --pagesize and --imgsize options.  The width and height
+              they are mapping to is shown in the second column.  Giving the value in the second column has the same effect as giving the short hand in the first column. Appending ^T  (a
               caret/circumflex followed by the letter T) turns the paper size from portrait into landscape. The postfix thus symbolizes the transpose. The values are case insensitive.
 
        A0     841mmx1189mm
@@ -229,8 +238,8 @@ OPTIONS
 
    Fit options:
               The img2pdf options for the --fit argument are shown in the first column in the table below. The function of these options can be mapped to the geometry operators of image‐
-              magick.  For  users  who are familiar with imagemagick, the corresponding operator is shown in the second column.  The third column shows whether or not the aspect ratio is
-              preserved for that option (same as in imagemagick). Just like imagemagick, img2pdf tries hard to preserve the aspect ratio, so if the --fit argument is not given, then  the
+              magick. For users who are familiar with imagemagick, the corresponding operator is shown in the second column.  The third column shows whether or not the  aspect  ratio  is
+              preserved  for that option (same as in imagemagick). Just like imagemagick, img2pdf tries hard to preserve the aspect ratio, so if the --fit argument is not given, then the
               default is "into" which corresponds to the absence of any operator in imagemagick.  The value of the --fit option is case insensitive.
 
        into   |   | Y | The default. Width and height values specify maximum |   |   | values.
@@ -281,7 +290,7 @@ EXAMPLES
 
               $ img2pdf --output out.pdf page1.jpg page2.jpg
 
-              Convert a directory of JPEG images into a PDF with printable A4 pages in landscape mode. On each page, the photo takes the maximum amount of space while preserving its  as‐
+              Convert  a directory of JPEG images into a PDF with printable A4 pages in landscape mode. On each page, the photo takes the maximum amount of space while preserving its as‐
               pect ratio and a print border of 2 cm on the top and bottom and 2.5 cm on the left and right hand side.
 
               $ img2pdf --output out.pdf --pagesize A4^T --border 2cm:2.5cm *.jpg
@@ -304,4 +313,4 @@ AUTHOR
 REPORTING BUGS
        Report bugs at https://gitlab.mister-muffin.de/josch/img2pdf/issues
 
-img2pdf 0.4.0                                                                           August 2020                                                                             IMG2PDF(1)
+img2pdf 0.4.2                                                                          October 2021                                                                             IMG2PDF(1)

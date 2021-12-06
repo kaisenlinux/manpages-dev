@@ -5,7 +5,7 @@ NAME
 
 SYNOPSIS
        usage: ansible-inventory [-h] [--version] [-v] [-i INVENTORY]
-              [--vault-id  VAULT_IDS]  [--ask-vault-pass  |  --vault-password-file  VAULT_PASSWORD_FILES] [--playbook-dir BASEDIR] [--list] [--host HOST] [--graph] [-y] [--toml] [--vars]
+              [--vault-id  VAULT_IDS] [--ask-vault-password | --vault-password-file VAULT_PASSWORD_FILES] [--playbook-dir BASEDIR] [--list] [--host HOST] [--graph] [-y] [--toml] [--vars]
               [--export] [--output OUTPUT_FILE] [host|group]
 
 DESCRIPTION
@@ -14,7 +14,7 @@ DESCRIPTION
 COMMON OPTIONS
           None
 
-       --ask-vault-pass
+       --ask-vault-password, --ask-vault-pass
           ask for vault password
 
        --export
@@ -47,7 +47,7 @@ COMMON OPTIONS
        --vault-id
           the vault identity to use
 
-       --vault-password-file
+       --vault-password-file, --vault-pass-file
           vault password file
 
        --version
@@ -98,4 +98,4 @@ SEE ALSO
        Extensive documentation is available in the documentation site: <https://docs.ansible.com>.  IRC and mailing list info can be found  in  file  CONTRIBUTING.md,  available  in:  <‐
        https://github.com/ansible/ansible>
 
-Ansible 2.9.16                                                                                                                                                        ANSIBLE-INVENTORY(1)
+Ansible 2.10.8                                                                                                                                                        ANSIBLE-INVENTORY(1)

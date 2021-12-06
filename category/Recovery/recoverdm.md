@@ -64,4 +64,4 @@ AUTHOR
 
        This manual page was written by Joao Eriberto Mota Filho <eriberto@debian.org> for the Debian project (but may be used by others).
 
-RECOVERDM 0.20                                                                           Jul 2015                                                                             recoverdm(1)
+recoverdm-0.20                                                                           Jul 2015                                                                             recoverdm(1)

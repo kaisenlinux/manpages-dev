@@ -101,7 +101,7 @@ FILES
        Etherape will use /etc/ethers if there is one to convert MAC addresses to names and /etc/services to associate TCP/UDP port numbers to protocol names.
 
 SEE ALSO
-       The EtherApe webpage at http://etherape.sourceforge.net/
+       The EtherApe webpage at http://etherape.sourceforge.io/
 
 AUTHORS
        Juan Toledo <toledo@users.sourceforge.net>

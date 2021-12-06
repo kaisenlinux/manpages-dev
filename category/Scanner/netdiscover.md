@@ -130,4 +130,4 @@ AUTHOR
        This manual page was originally written by Nicolas Weyland, for the Debian project. This man page has been merged into netdiscover project and modified from the original by  Jaime
        Penalba and Joao Eriberto Mota Filho.
 
-netdiscover-0.7                                                                         29 Jun 2020                                                                         netdiscover(8)
+netdiscover-0.8.1                                                                       01 Nov 2021                                                                         netdiscover(8)

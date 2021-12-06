@@ -37,4 +37,4 @@ COPYRIGHT
 SEE ALSO
        psensor-server(1), sensors(1), sensors-detect(8), hddtemp(8)
 
-psensor 1.1.5                                                                          February 2021                                                                            PSENSOR(1)
+psensor 1.2.1                                                                          November 2021                                                                            PSENSOR(1)

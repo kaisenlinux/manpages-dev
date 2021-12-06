@@ -52,4 +52,4 @@ SEE ALSO
 AUTHOR
        Daniel Lezcano <daniel.lezcano@free.fr>
 
-                                                                                        2021-01-31                                                                             lxc-stop(1)
+                                                                                        2021-08-27                                                                             lxc-stop(1)

@@ -16,6 +16,8 @@ DESCRIPTION
 
        •   reiserfs — since version 4.13, optionally built, requires libreiserfscore 3.6.27
 
+       •   ntfs — external tool https://github.com/maharmstone/ntfs2btrfs
+
        The list of supported source filesystem by a given binary is listed at the end of help (option --help).
 
            Warning
@@ -31,8 +33,20 @@ DESCRIPTION
        Due to different constraints, it is only possible to convert filesystems that have a supported data block size (ie. the same that would be valid for mkfs.btrfs). This is typically
        the system page size (4KiB on x86_64 machines).
 
-           Note
-           The source filesystem should be clean, you are encouraged to run the fsck tool if you’re not sure.
+       BEFORE YOU START
+
+       The source filesystem must be clean, eg. no journal to replay or no repairs needed. The respective fsck utility must be run on the source filesytem prior to conversion. Please
+       refer to the manual pages in case you encounter problems.
+
+       For ext2/3/4:
+
+           # e2fsck -fvy /dev/sdx
+
+       For reiserfs:
+
+           # reiserfsck -fy /dev/sdx
+
+       Skipping that step could lead to incorrect results on the target filesystem, but it may work.
 
        REMOVE THE ORIGINAL FILESYSTEM METADATA
 
@@ -102,10 +116,19 @@ OPTIONS
        --no-progress
            disable progress and show only the main phases of conversion
 
+       --uuid <SPEC>
+           set the FSID of the new filesystem based on SPEC:
+
+           •   new - (default) generate UUID for the FSID of btrfs
+
+           •   copy - copy UUID from the source filesystem
+
+           •   UUID - a conforming UUID value, the 36 byte string representation
+
 EXIT STATUS
        btrfs-convert will return 0 if no error happened. If any problems happened, 1 will be returned.
 
 SEE ALSO
        mkfs.btrfs(8)
 
-Btrfs v5.10.1                                                                           02/05/2021                                                                        BTRFS-CONVERT(8)
+Btrfs v5.15.1                                                                           11/22/2021                                                                        BTRFS-CONVERT(8)

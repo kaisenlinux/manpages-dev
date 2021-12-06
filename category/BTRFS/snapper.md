@@ -414,4 +414,4 @@ NOTES
         1. RFC 4180
            https://tools.ietf.org/html/rfc4180
 
-0.8.15                                                                                  2020-06-15                                                                              SNAPPER(8)
+0.9.0                                                                                   2020-06-15                                                                              SNAPPER(8)

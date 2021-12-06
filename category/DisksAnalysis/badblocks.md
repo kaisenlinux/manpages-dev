@@ -13,7 +13,7 @@ DESCRIPTION
        test, which allows the testing to start in the middle of the disk.  If it is not specified the first block on the disk is used as a default.
 
        Important note: If the output of badblocks is going to be fed to the e2fsck or mke2fs programs, it is important that the block size is properly specified, since the block  numbers
-       which  are  generated are very dependent on the block size in use by the filesystem.  For this reason, it is strongly recommended that users not run badblocks directly, but rather
+       which  are generated are very dependent on the block size in use by the file system.  For this reason, it is strongly recommended that users not run badblocks directly, but rather
        use the -c option of the e2fsck and mke2fs programs.
 
 OPTIONS
@@ -32,14 +32,14 @@ OPTIONS
               Specify a maximum number of bad blocks before aborting the test.  The default is 0, meaning the test will continue until the end of the test range is reached.
 
        -f     Normally, badblocks will refuse to do a read/write or a non-destructive test on a device which is mounted, since either can cause the system  to  potentially  crash  and/or
-              damage  the  filesystem even if it is mounted read-only.  This can be overridden using the -f flag, but should almost never be used --- if you think you're smarter than the
+              damage  the file system even if it is mounted read-only.  This can be overridden using the -f flag, but should almost never be used --- if you think you're smarter than the
               badblocks program, you almost certainly aren't.  The only time when this option might be safe to use is if the /etc/mtab file is incorrect,  and  the  device  really  isn't
               mounted.
 
        -i input_file
               Read  a  list  of  already existing known bad blocks.  Badblocks will skip testing these blocks since they are known to be bad.  If input_file is specified as "-", the list
               will be read from the standard input.  Blocks listed in this list will be omitted from the list of new bad blocks produced on the standard output or  in  the  output  file.
-              The -b option of dumpe2fs(8) can be used to retrieve the list of blocks currently marked bad on an existing filesystem, in a format suitable for use with this option.
+              The -b option of dumpe2fs(8) can be used to retrieve the list of blocks currently marked bad on an existing file system, in a format suitable for use with this option.
 
        -n     Use  non-destructive  read-write mode.  By default only a non-destructive read-only test is done.  This option must not be combined with the -w option, as they are mutually
               exclusive.
@@ -88,4 +88,4 @@ AVAILABILITY
 SEE ALSO
        e2fsck(8), mke2fs(8)
 
-E2fsprogs version 1.46.2                                                               February 2021                                                                          BADBLOCKS(8)
+E2fsprogs version 1.46.4                                                                August 2021                                                                           BADBLOCKS(8)

@@ -213,7 +213,7 @@ OPTIONS
        -grab-keyboard
            Grab keyboard (default:on)
 
-       /gt:[rpc|http|auto]
+       /gt:[rpc|http[,no-websockets]|auto[,no-websockets]]
            Gateway transport type
 
        /gu:[[domain\]user|user[@domain]]
@@ -564,4 +564,4 @@ LINKS
 AUTHOR
        The FreeRDP Team
 
-freerdp                                                                                 2021-02-25                                                                             XFREERDP(1)
+freerdp                                                                                 2021-05-16                                                                             XFREERDP(1)

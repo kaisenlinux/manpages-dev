@@ -144,8 +144,8 @@ QUERY OPTIONS
               This option attempts to display the contents of messages which are malformed. The default is to not display malformed answers.
 
        +bufsize[=B]
-              This  option  sets  the  UDP message buffer size advertised using EDNS0 to B bytes.  The maximum and minimum sizes of this buffer are 65535 and 0, respectively.  +bufsize=0
-              disables EDNS (use +bufsize=0 +edns to send an EDNS message with an advertised size of 0 bytes). +bufsize restores the default buffer size.
+              This  option  sets the UDP message buffer size advertised using EDNS0 to B bytes.  The maximum and minimum sizes of this buffer are 65535 and 0, respectively.  +bufsize re‐
+              stores the default buffer size.
 
        +[no]cdflag
               This option sets [or does not set] the CD (checking disabled) bit in the query. This requests the server to not perform DNSSEC validation of responses.
@@ -177,6 +177,9 @@ QUERY OPTIONS
 
        +[no]defname
               This option, which is deprecated, is treated as a synonym for +[no]search.
+
+       +[no]dns64prefix
+              Lookup IPV4ONLY.ARPA AAAA and print any DNS64 prefixes found.
 
        +[no]dnssec
               This option requests that DNSSEC records be sent by setting the DNSSEC OK (DO) bit in the OPT record in the additional section of the query.
@@ -214,8 +217,31 @@ QUERY OPTIONS
               This  option  sends  a  query with a DNS header without a question section. The default is to add a question section. The query type and query name are ignored when this is
               set.
 
+       +[no]https[=value]
+              This option indicates whether to use DNS-over-HTTPS (DoH) when querying name servers.  When this option is in use, the port number defaults to 443.  The HTTP  POST  request
+              mode is used when sending the query.
+
+              If  value  is  specified,  it  will  be  used  as  the  HTTP endpoint in the query URI; the default is /dns-query. So, for example, dig @example.com +https will use the URI
+              https://example.com/dns-query.
+
+       +[no]https-get[=value]
+              Similar to +https, except that the HTTP GET request mode is used when sending the query.
+
+       +[no]https-post[=value]
+              Same as +https.
+
+       +[no]http-plain[=value]
+              Similar to +https, except that HTTP queries will be sent over a non-encrypted channel. When this option is in use, the port number defaults to 80 and the HTTP request  mode
+              is POST.
+
+       +[no]http-plain-get[=value]
+              Similar to +http-plain, except that the HTTP request mode is GET.
+
+       +[no]http-plain-post[=value]
+              Same as +http-plain.
+
        +[no]identify
-              This option shows [or does not show] the IP address and port number that supplied the answer, when the +short option is enabled. If short form answers  are  requested,  the
+              This  option  shows  [or does not show] the IP address and port number that supplied the answer, when the +short option is enabled. If short form answers are requested, the
               default is not to show the source address and port number of the server that provided the answer.
 
        +[no]idnin
@@ -227,7 +253,7 @@ QUERY OPTIONS
        +[no]idnout
               This option converts [or does not convert] puny code on output. This requires IDN SUPPORT to have been enabled at compile time.
 
-              The default is to process puny code on output when standard output is a tty. The puny code processing on output is disabled when dig output is redirected to  files,  pipes,
+              The  default  is to process puny code on output when standard output is a tty. The puny code processing on output is disabled when dig output is redirected to files, pipes,
               and other non-tty file descriptors.
 
        +[no]ignore
@@ -243,19 +269,19 @@ QUERY OPTIONS
               This option allows [or does not allow] mapped IPv4-over-IPv6 addresses to be used. The default is +mapped.
 
        +[no]multiline
-              This  option prints [or does not print] records, like the SOA records, in a verbose multi-line format with human-readable comments. The default is to print each record on a
+              This option prints [or does not print] records, like the SOA records, in a verbose multi-line format with human-readable comments. The default is to print each record on  a
               single line to facilitate machine parsing of the dig output.
 
        +ndots=D
-              This option sets the number of dots (D) that must appear in name for it to be considered absolute. The default value is that defined using the ndots statement  in  /etc/re‐
-              solv.conf,  or  1 if no ndots statement is present. Names with fewer dots are interpreted as relative names, and are searched for in the domains listed in the search or do‐
+              This  option  sets the number of dots (D) that must appear in name for it to be considered absolute. The default value is that defined using the ndots statement in /etc/re‐
+              solv.conf, or 1 if no ndots statement is present. Names with fewer dots are interpreted as relative names, and are searched for in the domains listed in the search  or  do‐
               main directive in /etc/resolv.conf if +search is set.
 
        +[no]nsid
               When enabled, this option includes an EDNS name server ID request when sending a query.
 
        +[no]nssearch
-              When this option is set, dig attempts to find the authoritative name servers for the zone containing the name being looked up, and display the SOA  record  that  each  name
+              When  this  option  is  set, dig attempts to find the authoritative name servers for the zone containing the name being looked up, and display the SOA record that each name
               server has for the zone.  Addresses of servers that did not respond are also printed.
 
        +[no]onesoa
@@ -265,9 +291,12 @@ QUERY OPTIONS
               When enabled, this option sets (restores) the DNS message opcode to the specified value. The default value is QUERY (0).
 
        +padding=value
-              This  option  pads  the  size of the query packet using the EDNS Padding option to blocks of value bytes. For example, +padding=32 causes a 48-byte query to be padded to 64
+              This option pads the size of the query packet using the EDNS Padding option to blocks of value bytes. For example, +padding=32 causes a 48-byte query to  be  padded  to  64
               bytes. The default block size is 0, which disables padding; the maximum is 512. Values are ordinarily expected to be powers of two, such as 128; however, this is not manda‐
               tory. Responses to padded queries may also be padded, but only if the query uses TCP or DNS COOKIE.
+
+       +qid=value
+              This option specifies the query ID to use when sending queries.
 
        +[no]qr
               This option toggles the display of the query message as it is sent. By default, the query is not printed.
@@ -282,25 +311,28 @@ QUERY OPTIONS
               This option is a synonym for +[no]recurse.
 
        +[no]recurse
-              This  option toggles the setting of the RD (recursion desired) bit in the query.  This bit is set by default, which means dig normally sends recursive queries. Recursion is
+              This option toggles the setting of the RD (recursion desired) bit in the query.  This bit is set by default, which means dig normally sends recursive queries. Recursion  is
               automatically disabled when the +nssearch or +trace query option is used.
 
        +retry=T
-              This option sets the number of times to retry UDP queries to server to T instead of the default, 2. Unlike +tries, this does not include the initial query.
+              This option sets the number of times to retry UDP and TCP queries to server to T instead of the default, 2.  Unlike +tries, this does not include the initial query.
 
        +[no]rrcomments
-              This option toggles the display of per-record comments in the output (for example, human-readable key information about DNSKEY records). The default is not to print  record
+              This  option toggles the display of per-record comments in the output (for example, human-readable key information about DNSKEY records). The default is not to print record
               comments unless multiline mode is active.
 
        +[no]search
               This option uses [or does not use] the search list defined by the searchlist or domain directive in resolv.conf, if any. The search list is not used by default.
 
-              ndots  from  resolv.conf  (default  1),  which may be overridden by +ndots, determines whether the name is treated as relative and hence whether a search is eventually per‐
+              ndots from resolv.conf (default 1), which may be overridden by +ndots, determines whether the name is treated as relative and hence whether  a  search  is  eventually  per‐
               formed.
 
        +[no]short
               This option toggles whether a terse answer is provided. The default is to print the answer in a verbose form. This option always has a global effect; it cannot be set glob‐
               ally and then overridden on a per-lookup basis.
+
+       +[no]showbadcookie
+              This option toggles whether to show the message containing the BADCOOKIE rcode before retrying the request or not. The default is to not show the messages.
 
        +[no]showsearch
               This option performs [or does not perform] a search showing intermediate results.
@@ -309,35 +341,38 @@ QUERY OPTIONS
               This feature is now obsolete and has been removed; use delv instead.
 
        +split=W
-              This  option  splits  long hex- or base64-formatted fields in resource records into chunks of W characters (where W is rounded up to the nearest multiple of 4). +nosplit or
+              This option splits long hex- or base64-formatted fields in resource records into chunks of W characters (where W is rounded up to the nearest multiple of  4).  +nosplit  or
               +split=0 causes fields not to be split at all. The default is 56 characters, or 44 characters when multiline mode is active.
 
        +[no]stats
-              This option toggles the printing of statistics: when the query was made, the size of the reply, etc. The default behavior is to print the query statistics as a comment  af‐
+              This  option toggles the printing of statistics: when the query was made, the size of the reply, etc. The default behavior is to print the query statistics as a comment af‐
               ter each lookup.
 
        +[no]subnet=addr[/prefix-length]
               This option sends [or does not send] an EDNS CLIENT-SUBNET option with the specified IP address or network prefix.
 
-              dig  +subnet=0.0.0.0/0,  or simply dig +subnet=0 for short, sends an EDNS CLIENT-SUBNET option with an empty address and a source prefix-length of zero, which signals a re‐
+              dig +subnet=0.0.0.0/0, or simply dig +subnet=0 for short, sends an EDNS CLIENT-SUBNET option with an empty address and a source prefix-length of zero, which signals  a  re‐
               solver that the client's address information must not be used when resolving this query.
 
        +[no]tcflag
               This option sets [or does not set] the TC (TrunCation) bit in the query. The default is +notcflag. This bit is ignored by the server for QUERY.
 
        +[no]tcp
-              This option uses [or does not use] TCP when querying name servers. The default behavior is to use UDP unless a type any or ixfr=N query is requested, in which case the  de‐
-              fault is TCP. AXFR queries always use TCP.
+              This  option  indicates whether to use TCP when querying name servers.  The default behavior is to use UDP unless a type any or ixfr=N query is requested, in which case the
+              default is TCP. AXFR queries always use TCP.
 
        +timeout=T
               This option sets the timeout for a query to T seconds. The default timeout is 5 seconds. An attempt to set T to less than 1 is silently set to 1.
+
+       +[no]tls
+              This option indicates whether to use DNS-over-TLS (DoT) when querying name servers. When this option is in use, the port number defaults to 853.
 
        +[no]topdown
               This feature is related to dig +sigchase, which is obsolete and has been removed. Use delv instead.
 
        +[no]trace
-              This  option  toggles  tracing  of the delegation path from the root name servers for the name being looked up. Tracing is disabled by default. When tracing is enabled, dig
-              makes iterative queries to resolve the name being looked up. It follows referrals from the root servers, showing the answer from each server that was used  to  resolve  the
+              This option toggles tracing of the delegation path from the root name servers for the name being looked up. Tracing is disabled by default. When  tracing  is  enabled,  dig
+              makes  iterative  queries  to resolve the name being looked up. It follows referrals from the root servers, showing the answer from each server that was used to resolve the
               lookup.
 
               If @server is also specified, it affects only the initial query for the root zone name servers.
@@ -345,8 +380,8 @@ QUERY OPTIONS
               +dnssec is also set when +trace is set, to better emulate the default queries from a name server.
 
        +tries=T
-              This  option  sets  the  number  of  times  to try UDP queries to server to T instead of the default, 3. If T is less than or equal to zero, the number of tries is silently
-              rounded up to 1.
+              This option sets the number of times to try UDP and TCP queries to server to T instead of the default, 3. If T is less than or  equal  to  zero,  the  number  of  tries  is
+              silently rounded up to 1.
 
        +trusted-key=####
               This option formerly specified trusted keys for use with dig +sigchase. This feature is now obsolete and has been removed; use delv instead.
@@ -355,12 +390,8 @@ QUERY OPTIONS
               This option displays [or does not display] the TTL when printing the record.
 
        +[no]ttlunits
-              This option displays [or does not display] the TTL in friendly human-readable time units of s, m, h, d, and w, representing seconds, minutes, hours, days, and  weeks.  This
+              This  option  displays [or does not display] the TTL in friendly human-readable time units of s, m, h, d, and w, representing seconds, minutes, hours, days, and weeks. This
               implies +ttlid.
-
-       +[no]unexpected
-              This  option  accepts  [or  does not accept] answers from unexpected sources.  By default, dig will not accept a reply from a source other than the one to which it sent the
-              query.
 
        +[no]unknownformat
               This option prints all RDATA in unknown RR type presentation format (RFC 3597).  The default is to print RDATA for known types in the type's presentation format.
@@ -397,6 +428,19 @@ IDN SUPPORT
        name before sending a request to a DNS server or displaying a reply from the server.  To turn off IDN support, use the parameters +noidnin and +noidnout, or define the IDN_DISABLE
        environment variable.
 
+RETURN CODES
+       dig return codes are:
+
+       0      DNS response received, including NXDOMAIN status
+
+       1      Usage error
+
+       8      Couldn't open batch file
+
+       9      No reply from server
+
+       10     Internal error
+
 FILES
        /etc/resolv.conf
 
@@ -414,4 +458,4 @@ AUTHOR
 COPYRIGHT
        2021, Internet Systems Consortium
 
-9.16.13-Debian                                                                          2021-03-11                                                                                  DIG(1)
+9.17.20-3-Debian                                                                        2021-11-05                                                                                  DIG(1)

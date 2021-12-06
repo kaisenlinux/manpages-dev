@@ -36,17 +36,23 @@ OPTIONS
 
        --option <"name value">
               Set option "name" to "value". This command supports exactly the same arguments as the interactive one. For example, use: --option "blksize 1428" to configure block size.
-              Possible Values are:
-                --option "tsize enable"
-                --option "tsize disable"
+              Possible settings are:
+                --option "disable blksize"
                 --option "blksize 8"
                 --option "blksize 65464"
+                --option "timeout 1"
+                --option "disable windowsize"
+                --option "windowsize 4"
 
        --mtftp <"name value">
               Set mtftp possible options. Accepts the same options as the interactive mtftp command. For example, use: --mtftp "client-port 76" to configure client side port to use.
 
        --no-source-port-checking
               See atftpd's man page.
+
+       --prevent-sas
+              Address  the  Sorcerer's  Apprentice Syndrome situation as requested by RFC 1350.  This RFC requires repeated responses to a single packet to be rejected. Thus a block will
+              only get retransmitted on a timeout.  For backward compatibility, the default stays to ignore this RFC.  So blocks get transmitted on every request.
 
        --verbose
               Instruct atftp to be verbose. It will print more information about what's going on.

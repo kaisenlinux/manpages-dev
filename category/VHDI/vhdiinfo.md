@@ -49,7 +49,7 @@ AUTHOR
      These man pages were written by Joachim Metz.
 
 COPYRIGHT
-     Copyright (C) 2012-2020, Joachim Metz <joachim.metz@gmail.com>.
+     Copyright (C) 2012-2021, Joachim Metz <joachim.metz@gmail.com>.
 
 SEE ALSO
 libvhdi                                                                                March 9, 2019                                                                               libvhdi

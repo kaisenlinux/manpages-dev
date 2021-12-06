@@ -40,9 +40,9 @@ AUTHOR
 
 AVAILABILITY
        ntfscmp is part of the ntfs-3g package and is available from:
-       http://www.tuxera.com/community/
+       https://github.com/tuxera/ntfs-3g/wiki/
 
 SEE ALSO
        ntfsinfo(8), ntfscat(8), diff(1), ntfsclone(8), ntfsprogs(8)
 
-ntfs-3g 2017.3.23AR.3                                                                   April 2006                                                                              NTFSCMP(8)
+ntfs-3g 2021.8.22                                                                       April 2006                                                                              NTFSCMP(8)

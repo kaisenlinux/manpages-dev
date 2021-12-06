@@ -5,7 +5,7 @@ NAME
        ngrep - network grep
 
 SYNOPSIS
-       ngrep  <-hNXViwqpevxlDtTRM> <-IO pcap_dump > < -n num > < -d dev > < -A num > < -s snaplen > < -S limitlen > < -W normal|byline|single|none > < -c cols > < -P char > < -F file > <
+       ngrep <-hNXViwqpevxlDtTRMC> <-IO pcap_dump > < -n num > < -d dev > < -A num > < -s snaplen > < -S limitlen > < -W normal|byline|single|none > < -c cols > < -P char > < -F file > <
        match expression > < bpf filter >
 
 DESCRIPTION
@@ -38,6 +38,8 @@ OPTIONS
        -x     Dump packet contents as hexadecimal as well as ASCII.
 
        -l     Make stdout line buffered.
+
+       -C     Colorize matches in ASCII output.
 
        -D     When reading pcap_dump files, replay them at their recorded time intervals (mimic realtime).
 
@@ -94,7 +96,7 @@ OPTIONS
 
         match expression
               A match expression is either an extended regular expression, or if the -X option is specified, a string signifying a hexadecimal value.  An extended regular expression fol‐
-              lows the rules as implemented by the GNU regex library.  Hexadecimal expressions can optionally be preceded by `0x'.  E.g., `DEADBEEF', `0xDEADBEEF'.
+              lows the rules as implemented by the PCRE2 library.  Hexadecimal expressions can optionally be preceded by `0x'.  E.g., `DEADBEEF', `0xDEADBEEF'.
 
         bpf filter
               Selects  a  filter  that  specifies  what packets will be dumped.  If no bpf filter is given, all IP packets seen on the selected interface will be dumped.  Otherwise, only
@@ -239,7 +241,7 @@ OPTIONS
        metacharacters, it is easier to pass it as a single, quoted argument.  Multiple arguments are concatenated with spaces before being parsed.
 
 DIAGNOSTICS
-       Errors from ngrep, libpcap, and the GNU regex library are all output to stderr.
+       Errors from ngrep, libpcap, and the PCRE2 library are all output to stderr.
 
 EXIT STATUS
        The ngrep utility exits with one of the following values:

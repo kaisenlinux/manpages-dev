@@ -1,0 +1,21 @@
+ecryptfs-stat(1)                                                                         eCryptfs                                                                         ecryptfs-stat(1)
+
+NAME
+       ecryptfs-stat - Present statistics on encrypted eCryptfs file attributes
+
+SYNOPSIS
+       ecryptfs-stat filename
+
+DESCRIPTION
+       This program will present statistics on encrypted eCryptfs file and its attributes.
+
+SEE ALSO
+       http://ecryptfs.org/
+
+AUTHOR
+       This  manpage  was  written  by Dustin Kirkland <kirkland@ubuntu.com> for Ubuntu systems (but may be used by others).  Permission is granted to copy, distribute and/or modify this
+       document under the terms of the GNU General Public License, Version 2 or any later version published by the Free Software Foundation.
+
+       On Debian and Ubuntu systems, the complete text of the GNU General Public License can be found in /usr/share/common-licenses/GPL.
+
+ecryptfs-utils                                                                          2009-08-17                                                                        ecryptfs-stat(1)

@@ -116,12 +116,10 @@ OPTIONS
               Detect Possibly Unwanted Applications.
 
        --exclude-pua=CATEGORY
-              Exclude a specific PUA category. This option can be used multiple times. See https://www.clamav.net/documents/potentially-unwanted-applications-pua for the complete list of
-              PUA
+              Exclude a specific PUA category. This option can be used multiple times. See https://docs.clamav.net/faq/faq-pua.html for the complete list of PUA
 
        --include-pua=CATEGORY
-              Only  include  a  specific PUA category. This option can be used multiple times. See https://www.clamav.net/documents/potentially-unwanted-applications-pua for the complete
-              list of PUA
+              Only include a specific PUA category. This option can be used multiple times. See https://docs.clamav.net/faq/faq-pua.html for the complete list of PUA
 
        --detect-structured[=yes/no(*)]
               Use the DLP (Data Loss Prevention) module to detect SSN and Credit Card numbers inside documents/text files.
@@ -142,7 +140,7 @@ OPTIONS
               Enable email signature-based phishing detection.
 
        --phishing-scan-urls[=yes(*)/no]
-              Enable URL signature-based phishing detection (Phishing.Heuristics.Email.*)
+              Enable URL signature-based phishing detection (Heuristics.Phishing.Email.*)
 
        --heuristic-alerts[=yes(*)/no]
               In some cases (eg. complex malware, exploits in graphic files, and others), ClamAV uses special algorithms to provide accurate detection. This option can be used to control
@@ -151,8 +149,8 @@ OPTIONS
        --heuristic-scan-precedence[=yes/no(*)]
               Allow  heuristic  match  to  take  precedence. When enabled, if a heuristic scan (such as phishingScan) detects a possible virus/phish it will stop scan immediately. Recom‐
               mended, saves CPU scan-time. When disabled, virus/phish detected by heuristic scans will be reported only at the end of a scan. If an archive contains both a  heuristically
-              detected   virus/phish,  and  a real malware, the real malware will be reported Keep this disabled if you intend to handle "*.Heuristics.*" viruses  differently from "real"
-              malware. If a non-heuristically-detected virus (signature-based) is found first,  the scan is interrupted immediately, regardless of this config option.
+              detected  virus/phish, and a real malware, the real malware will be reported Keep this disabled if you intend to handle "Heuristics.*" viruses  differently from "real" mal‐
+              ware. If a non-heuristically-detected virus (signature-based) is found first,  the scan is interrupted immediately, regardless of this config option.
 
        --normalize[=yes(*)/no]
               Normalize (compress whitespace, downcase, etc.) html, script, and text files. Use normalize=no for yara compatibility.
@@ -233,7 +231,7 @@ OPTIONS
               (default: 10000)
 
        --max-recursion=#n
-              Set archive recursion level limit. This option protects your system against DoS attacks (default: 16).
+              Set archive recursion level limit. This option protects your system against DoS attacks (default: 17).
 
        --max-dir-recursion=#n
               Maximum depth directories are scanned at (default: 15).
@@ -320,4 +318,4 @@ AUTHOR
 SEE ALSO
        clamdscan(1), freshclam(1), freshclam.conf(5)
 
-ClamAV 0.103.0                                                                       December 4, 2013                                                                          clamscan(1)
+ClamAV 0.103.4                                                                       December 4, 2013                                                                          clamscan(1)

@@ -99,7 +99,7 @@ OPTIONS
        --direct-io-mode=BOOL|auto
               Specify fuse direct I/O strategy (the default is auto).
 
-       --dump-fuse=PATHR
+       --dump-fuse=PATH
               Dump fuse traffic to PATH
 
        --entry-timeout=SECONDS

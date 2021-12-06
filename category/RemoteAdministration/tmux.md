@@ -4,7 +4,7 @@ NAME
      tmux — terminal multiplexer
 
 SYNOPSIS
-     tmux [-2CluvV] [-c shell-command] [-f file] [-L socket-name] [-S socket-path] [command [flags]]
+     tmux [-2CDluvV] [-c shell-command] [-f file] [-L socket-name] [-S socket-path] [-T features] [command [flags]]
 
 DESCRIPTION
      tmux is a terminal multiplexer: it enables a number of terminals to be created, accessed, and controlled from a single screen.  tmux may be detached from a screen and continue run‐
@@ -27,13 +27,15 @@ DESCRIPTION
 
      The options are as follows:
 
-     -2            Force tmux to assume the terminal supports 256 colours.
+     -2            Force tmux to assume the terminal supports 256 colours.  This is equivalent to -T 256.
 
      -C            Start in control mode (see the CONTROL MODE section).  Given twice (-CC) disables echo.
 
      -c shell-command
                    Execute shell-command using the default shell.  If necessary, the tmux server will be started to retrieve the default-shell option.  This option is for compatibility
                    with sh(1) when tmux is used as a login shell.
+
+     -D            Do not start the tmux server as a daemon.  This also turns the exit-empty option off.  With -D, command may not be specified.
 
      -f file       Specify an alternative configuration file.  By default, tmux loads the system configuration file from /etc/tmux.conf, if present, then looks for a user configuration
                    file at ~/.tmux.conf.
@@ -45,17 +47,23 @@ DESCRIPTION
 
      -L socket-name
                    tmux stores the server socket in a directory under TMUX_TMPDIR or /tmp if it is unset.  The default socket is named default.  This option allows a different socket
-                   name to be specified, allowing several independent tmux servers to be run.  Unlike -S a full path is not necessary: the sockets are all created in the same directory.
+                   name to be specified, allowing several independent tmux servers to be run.  Unlike -S a full path is not necessary: the sockets are all created in a directory tmux-UID
+                   under the directory given by TMUX_TMPDIR or in /tmp.  The tmux-UID directory is created by tmux and must not be world readable, writable or executable.
 
                    If the socket is accidentally removed, the SIGUSR1 signal may be sent to the tmux server process to recreate it (note that this will fail if any parent directories are
                    missing).
 
      -l            Behave as a login shell.  This flag currently has no effect and is for compatibility with other shells when using tmux as a login shell.
 
+     -N            Do not start the server even if the command would normally do so (for example new-session or start-server).
+
      -S socket-path
                    Specify a full alternative path to the server socket.  If -S is specified, the default socket directory is not used and any -L flag is ignored.
 
-     -u            Write UTF-8 output to the terminal even if the first environment variable of LC_ALL, LC_CTYPE, or LANG that is set does not contain "UTF-8" or "UTF8".
+     -u            Write UTF-8 output to the terminal even if the first environment variable of LC_ALL, LC_CTYPE, or LANG that is set does not contain "UTF-8" or "UTF8".  This is equiva‐
+                   lent to -T UTF-8.
+
+     -T features   Set terminal features for the client.  This is a comma-separated list of features.  See the terminal-features option.
 
      -v            Request verbose logging.  Log messages will be saved into tmux-client-PID.log and tmux-server-PID.log files in the current directory, where PID is the PID of the
                    server or client process.  If -v is specified twice, an additional tmux-out-PID.log file is generated with a copy of everything tmux writes to the terminal.
@@ -180,6 +188,42 @@ PARSING SYNTAX
      Each command is terminated by a newline or a semicolon (;).  Commands separated by semicolons together form a ‘command sequence’ - if a command in the sequence encounters an error,
      no subsequent commands are executed.
 
+     It is recommended that a semicolon used as a command separator should be written as an individual token, for example from sh(1):
+
+           $ tmux neww \; splitw
+
+     Or:
+
+           $ tmux neww ';' splitw
+
+     Or from the tmux command prompt:
+
+           neww ; splitw
+
+     However, a trailing semicolon is also interpreted as a command separator, for example in these sh(1) commands:
+
+           $ tmux neww\\; splitw
+
+     Or:
+
+           $ tmux 'neww;' splitw
+
+     As in these examples, when running tmux from the shell extra care must be taken to properly quote semicolons:
+
+           1.   Semicolons that should be interpreted as a command separator should be escaped according to the shell conventions.  For sh(1) this typically means quoted (such as ‘neww
+                ';' splitw’) or escaped (such as ‘neww \\\\; splitw’).
+
+           2.   Individual semicolons or trailing semicolons that should be interpreted as arguments should be escaped twice: once according to the shell conventions and a second time
+                for tmux; for example:
+
+                      $ tmux neww 'foo\\;' bar
+                      $ tmux neww foo\\\\; bar
+
+           3.   Semicolons that are not individual tokens or trailing another token should only be escaped once according to shell conventions; for example:
+
+                      $ tmux neww 'foo-;-bar'
+                      $ tmux neww foo-\\;-bar
+
      Comments are marked by the unquoted # character - any remaining text after a comment is ignored until the end of the line.
 
      If the last character of a line is \, the line is joined with the following line (the \ and the newline are completely removed).  This is called line continuation and applies both
@@ -203,15 +247,14 @@ PARSING SYNTAX
            -   Any other characters preceded by \ are replaced by themselves (that is, the \ is removed) and are not treated as having any special meaning - so for example \; will not
                mark a command sequence and \$ will not expand an environment variable.
 
-     Braces are similar to single quotes in that the text inside is taken literally without any replacements but this also includes line continuation.  Braces can span multiple lines in
-     which case a literal newline is included in the string.  They are designed to avoid the need for additional escaping when passing a group of tmux or shell commands as an argument
-     (for example to if-shell or pipe-pane).  These two examples produce an identical command - note that no escaping is needed when using {}:
+     Braces are parsed as a configuration file (so conditions such as ‘%if’ are processed) and then converted into a string.  They are designed to avoid the need for additional escaping
+     when passing a group of tmux commands as an argument (for example to if-shell).  These two examples produce an identical command - note that no escaping is needed when using {}:
 
            if-shell true {
                display -p 'brace-dollar-foo: }$foo'
            }
 
-           if-shell true "\n    display -p 'brace-dollar-foo: }\$foo'\n"
+           if-shell true "display -p 'brace-dollar-foo: }\$foo'"
 
      Braces may be enclosed inside braces, for example:
 
@@ -221,7 +264,12 @@ PARSING SYNTAX
                }
            }
 
-     Environment variables may be set by using the syntax ‘name=value’, for example ‘HOME=/home/user’.  Variables set during parsing are added to the global environment.
+     Environment variables may be set by using the syntax ‘name=value’, for example ‘HOME=/home/user’.  Variables set during parsing are added to the global environment.  A hidden vari‐
+     able may be set with ‘%hidden’, for example:
+
+           %hidden MYVAR=42
+
+     Hidden variables are not passed to the environment of processes created by tmux.  See the GLOBAL AND SESSION ENVIRONMENT section.
 
      Commands may be parsed conditionally by surrounding them with ‘%if’, ‘%elif’, ‘%else’ and ‘%endif’.  The argument to ‘%if’ and ‘%elif’ is expanded as a format (see FORMATS) and if
      it evaluates to false (zero or empty), subsequent text is ignored until the closing ‘%elif’, ‘%else’ or ‘%endif’.  For example:
@@ -323,16 +371,16 @@ COMMANDS
 
      shell-command arguments are sh(1) commands.  This may be a single argument passed to the shell, for example:
 
-           new-window 'vi /etc/passwd'
+           new-window 'vi ~/.tmux.conf'
 
      Will run:
 
-           /bin/sh -c 'vi /etc/passwd'
+           /bin/sh -c 'vi ~/.tmux.conf'
 
      Additionally, the new-window, new-session, split-window, respawn-window and respawn-pane commands allow shell-command to be given as multiple arguments and executed directly (with‐
      out ‘sh -c’).  This can avoid issues with shell quoting.  For example:
 
-           $ tmux new-window vi /etc/passwd
+           $ tmux new-window vi ~/.tmux.conf
 
      Will run vi(1) directly without invoking the shell.
 
@@ -363,7 +411,7 @@ COMMANDS
 
            $ tmux new-window \; split-window -d
 
-           $ tmux new-session -d 'vi /etc/passwd' \; split-window -d \; attach
+           $ tmux new-session -d 'vi ~/.tmux.conf' \; split-window -d \; attach
 
 CLIENTS AND SESSIONS
      The tmux server manages clients, sessions, windows and panes.  Clients are attached to sessions to interact with them, either when they are created with the new-session command, or
@@ -372,11 +420,34 @@ CLIENTS AND SESSIONS
 
      The following commands are available to manage clients and sessions:
 
-     attach-session [-dErx] [-c working-directory] [-t target-session]
+     attach-session [-dErx] [-c working-directory] [-f flags] [-t target-session]
                    (alias: attach)
              If run from outside tmux, create a new client in the current terminal and attach it to target-session.  If used from inside, switch the current client.  If -d is specified,
              any other clients attached to the session are detached.  If -x is given, send SIGHUP to the parent process of the client as well as detaching the client, typically causing
-             it to exit.  -r signifies the client is read-only (only keys bound to the detach-client or switch-client commands have any effect)
+             it to exit.  -f sets a comma-separated list of client flags.  The flags are:
+
+             active-pane
+                     the client has an independent active pane
+
+             ignore-size
+                     the client does not affect the size of other clients
+
+             no-output
+                     the client does not receive pane output in control mode
+
+             pause-after=seconds
+                     output is paused once the pane is seconds behind in control mode
+
+             read-only
+                     the client is read-only
+
+             wait-exit
+                     wait for an empty line input before exiting in control mode
+
+             A leading ‘!’ turns a flag off if the client is already attached.  -r is an alias for -f read-only,ignore-size.  When a client is read-only, only keys bound to the
+             detach-client or switch-client commands have any effect.  A client with the active-pane flag allows the active pane to be selected independently of the window's active pane
+             used by clients without the flag.  This only affects the cursor position and commands issued from the client; other features such as hooks and styles continue to use the
+             window's active pane.
 
              If no server is started, attach-session will attempt to start it; this will fail unless sessions are created in the configuration file.
 
@@ -412,9 +483,10 @@ CLIENTS AND SESSIONS
                    (alias: lscm)
              List the syntax of command or - if omitted - of all commands supported by tmux.
 
-     list-sessions [-F format]
+     list-sessions [-F format] [-f filter]
                    (alias: ls)
-             List all sessions managed by the server.  For the meaning of the -F flag, see the FORMATS section.
+             List all sessions managed by the server.  -F specifies the format of each line and -f a filter.  Only sessions for which the filter is true are shown.  See the FORMATS sec‐
+             tion.
 
      lock-client [-t target-client]
                    (alias: lockc)
@@ -424,13 +496,13 @@ CLIENTS AND SESSIONS
                    (alias: locks)
              Lock all clients attached to target-session.
 
-     new-session [-AdDEPX] [-c start-directory] [-F format] [-n window-name] [-s session-name] [-t group-name] [-x width] [-y height] [shell-command]
+     new-session [-AdDEPX] [-c start-directory] [-e environment] [-f flags] [-F format] [-n window-name] [-s session-name] [-t group-name] [-x width] [-y height] [shell-command]
                    (alias: new)
              Create a new session with name session-name.
 
              The new session is attached to the current terminal unless -d is given.  window-name and shell-command are the name of and shell command to execute in the initial window.
              With -d, the initial size comes from the global default-size option; -x and -y can be used to specify a different size.  ‘-’ uses the size of the current client if any.  If
-             -x or -y is given, the default-size option is set for the session.
+             -x or -y is given, the default-size option is set for the session.  -f sets a comma-separated list of client flags (see attach-session).
 
              If run from a terminal, any termios(4) special characters are saved and used for new windows in the new session.
 
@@ -452,9 +524,10 @@ CLIENTS AND SESSIONS
              The -P option prints information about the new session after it has been created.  By default, it uses the format ‘#{session_name}:’ but a different format may be specified
              with -F.
 
-             If -E is used, the update-environment option will not be applied.
+             If -E is used, the update-environment option will not be applied.  -e takes the form ‘VARIABLE=value’ and sets an environment variable for the newly created session; it may
+             be specified multiple times.
 
-     refresh-client [-cDlLRSU] [-C XxY] [-F flags] [-t target-client] [adjustment]
+     refresh-client [-cDlLRSU] [-A pane:state] [-B name:what:format] [-C XxY] [-f flags] [-t target-client] [adjustment]
                    (alias: refresh)
              Refresh the current client if bound to a key, or a single client if one is given with -t.  If -S is specified, only update the client's status line.
 
@@ -462,8 +535,17 @@ CLIENTS AND SESSIONS
              down, -L left by adjustment columns and -R right.  -c returns to tracking the cursor automatically.  If adjustment is omitted, 1 is used.  Note that the visible position is
              a property of the client not of the window, changing the current window in the attached session will reset it.
 
-             -C sets the width and height of a control client and -F sets a comma-separated list of flags.  Currently the only flag available is ‘no-output’ to disable receiving pane
-             output.
+             -C sets the width and height of a control mode client.  -A allows a control mode client to trigger actions on a pane.  The argument is a pane ID (with leading ‘%’), a colon,
+             then one of ‘on’, ‘off’, ‘continue’ or ‘pause’.  If ‘off’, tmux will not send output from the pane to the client and if all clients have turned the pane off, will stop read‐
+             ing from the pane.  If ‘continue’, tmux will return to sending output to the pane if it was paused (manually or with the pause-after flag).  If ‘pause’, tmux will pause the
+             pane.  -A may be given multiple times for different panes.
+
+             -B sets a subscription to a format for a control mode client.  The argument is split into three items by colons: name is a name for the subscription; what is a type of item
+             to subscribe to; format is the format.  After a subscription is added, changes to the format are reported with the %subscription-changed notification, at most once a second.
+             If only the name is given, the subscription is removed.  what may be empty to check the format only for the attached session, or one of: a pane ID such as ‘%0’; ‘%*’ for all
+             panes in the attached session; a window ID such as ‘@0’; or ‘@*’ for all windows in the attached session.
+
+             -f sets a comma-separated list of client flags, see attach-session.
 
              -l requests the clipboard from the client using the xterm(1) escape sequence and stores it in a new paste buffer.
 
@@ -476,13 +558,13 @@ CLIENTS AND SESSIONS
 
      show-messages [-JT] [-t target-client]
                    (alias: showmsgs)
-             Show client messages or server information.  Any messages displayed on the status line are saved in a per-client message log, up to a maximum of the limit set by the
-             message-limit server option.  With -t, display the log for target-client.  -J and -T show debugging information about jobs and terminals.
+             Show server messages or information.  Messages are stored, up to a maximum of the limit set by the message-limit server option.  -J and -T show debugging information about
+             jobs and terminals.
 
-     source-file [-nqv] path ...
+     source-file [-Fnqv] path ...
                    (alias: source)
-             Execute commands from one or more files specified by path (which may be glob(7) patterns).  If -q is given, no error will be returned if path does not exist.  With -n, the
-             file is parsed but no commands are executed.  -v shows the parsed commands and line numbers if possible.
+             Execute commands from one or more files specified by path (which may be glob(7) patterns).  If -F is present, then path is expanded as a format.  If -q is given, no error
+             will be returned if path does not exist.  With -n, the file is parsed but no commands are executed.  -v shows the parsed commands and line numbers if possible.
 
      start-server
                    (alias: start)
@@ -501,7 +583,7 @@ CLIENTS AND SESSIONS
                    (alias: switchc)
              Switch the current session for client target-client to target-session.  As a special case, -t may refer to a pane (a target that contains ‘:’, ‘.’ or ‘%’), to change ses‐
              sion, window and pane.  In that case, -Z keeps the window zoomed if it was zoomed.  If -l, -n or -p is used, the client is moved to the last, next or previous session re‐
-             spectively.  -r toggles whether a client is read-only (see the attach-session command).
+             spectively.  -r toggles the client read-only and ignore-size flags (see the attach-session command).
 
              If -E is used, update-environment option will not be applied.
 
@@ -521,7 +603,7 @@ WINDOWS AND PANES
      By default, a tmux pane permits direct access to the terminal contained in the pane.  A pane may also be put into one of several modes:
 
            -   Copy mode, which permits a section of a window or its history to be copied to a paste buffer for later insertion into another window.  This mode is entered with the
-               copy-mode command, bound to ‘[’ by default.
+               copy-mode command, bound to ‘[’ by default.  Copied text can be pasted with the paste-buffer command, bound to ‘]’.
 
            -   View mode, which is like copy mode but is entered when a command that produces output, such as list-keys, is executed from a key binding.
 
@@ -545,9 +627,9 @@ WINDOWS AND PANES
            clear-selection                              Escape          C-g
            copy-end-of-line [<prefix>]                  D               C-k
            copy-line [<prefix>]
-           copy-pipe <command> [<prefix>]
-           copy-pipe-no-clear <command> [<prefix>]
-           copy-pipe-and-cancel <command> [<prefix>]
+           copy-pipe [<command>] [<prefix>]
+           copy-pipe-no-clear [<command>] [<prefix>]
+           copy-pipe-and-cancel [<command>] [<prefix>]
            copy-selection [<prefix>]
            copy-selection-no-clear [<prefix>]
            copy-selection-and-cancel [<prefix>]         Enter           M-w
@@ -569,6 +651,7 @@ WINDOWS AND PANES
            jump-reverse                                 ,               ,
            jump-to-backward <to>                        T
            jump-to-forward <to>                         t
+           jump-to-mark                                 M-x             M-x
            middle-line                                  M               M-r
            next-matching-bracket                        %               M-C-f
            next-paragraph                               }               M-}
@@ -580,11 +663,17 @@ WINDOWS AND PANES
            page-down                                    C-f             PageDown
            page-down-and-cancel
            page-up                                      C-b             PageUp
+           pipe [<command>] [<prefix>]
+           pipe-no-clear [<command>] [<prefix>]
+           pipe-and-cancel [<command>] [<prefix>]
            previous-matching-bracket                                    M-C-b
            previous-paragraph                           {               M-{
            previous-space                               B
            previous-word                                b               M-b
+           rectangle-on
+           rectangle-off
            rectangle-toggle                             v               R
+           refresh-from-pane                            r               r
            scroll-down                                  C-e             C-Down
            scroll-down-and-cancel
            scroll-up                                    C-y             C-Up
@@ -598,6 +687,7 @@ WINDOWS AND PANES
            search-reverse                               N               N
            select-line                                  V
            select-word
+           set-mark                                     X               X
            start-of-line                                0               C-a
            stop-selection
            top-line                                     H               M-R
@@ -607,8 +697,9 @@ WINDOWS AND PANES
      and ‘search-reverse’ does the same but reverses the direction (forward becomes backward and backward becomes forward).
 
      Copy commands may take an optional buffer prefix argument which is used to generate the buffer name (the default is ‘buffer’ so buffers are named ‘buffer0’, ‘buffer1’ and so on).
-     Pipe commands take a command argument which is the command to which the copied text is piped.  The ‘-and-cancel’ variants of some commands exit copy mode after they have completed
-     (for copy commands) or when the cursor reaches the bottom (for scrolling commands).  ‘-no-clear’ variants do not clear the selection.
+     Pipe commands take a command argument which is the command to which the selected text is piped.  ‘copy-pipe’ variants also copy the selection.  The ‘-and-cancel’ variants of some
+     commands exit copy mode after they have completed (for copy commands) or when the cursor reaches the bottom (for scrolling commands).  ‘-no-clear’ variants do not clear the selec‐
+     tion.
 
      The next and previous word keys use space and the ‘-’, ‘_’ and ‘@’ characters as word delimiters by default, but this can be adjusted by setting the word-separators session option.
      Next word moves to the start of the next word, next word end to the end of the next word and previous word to the start of the previous word.  The three next and previous space keys
@@ -622,9 +713,9 @@ WINDOWS AND PANES
 
      The synopsis for the copy-mode command is:
 
-     copy-mode [-eHMqu] [-t target-pane]
+     copy-mode [-eHMqu] [-s src-pane] [-t target-pane]
              Enter copy mode.  The -u option scrolls one page up.  -M begins a mouse drag (only valid if bound to a mouse key binding, see MOUSE SUPPORT).  -H hides the position indica‐
-             tor in the top right.  -q cancels copy mode and any other modes.
+             tor in the top right.  -q cancels copy mode and any other modes.  -s copies from src-pane instead of target-pane.
 
              -e specifies that scrolling to the bottom of the history (to the visible screen) should exit copy mode.  While in copy mode, pressing a key other than those used for
              scrolling will disable this behaviour.  This is intended to allow fast scrolling through a pane's history, for example with:
@@ -664,11 +755,11 @@ WINDOWS AND PANES
 
      Commands related to windows and panes are as follows:
 
-     break-pane [-dP] [-F format] [-n window-name] [-s src-pane] [-t dst-window]
+     break-pane [-abdP] [-F format] [-n window-name] [-s src-pane] [-t dst-window]
                    (alias: breakp)
-             Break src-pane off from its containing window to make it the only pane in dst-window.  If -d is given, the new window does not become the current window.  The -P option
-             prints information about the new window after it has been created.  By default, it uses the format ‘#{session_name}:#{window_index}’ but a different format may be specified
-             with -F.
+             Break src-pane off from its containing window to make it the only pane in dst-window.  With -a or -b, the window is moved to the next index after or before (existing windows
+             are moved if necessary).  If -d is given, the new window does not become the current window.  The -P option prints information about the new window after it has been cre‐
+             ated.  By default, it uses the format ‘#{session_name}:#{window_index}.#{pane_index}’ but a different format may be specified with -F.
 
      capture-pane [-aepPqCJN] [-b buffer-name] [-E end-line] [-S start-line] [-t target-pane]
                    (alias: capturep)
@@ -680,8 +771,10 @@ WINDOWS AND PANES
              -S and -E specify the starting and ending line numbers, zero is the first line of the visible pane and negative numbers are lines in the history.  ‘-’ to -S is the start of
              the history and to -E the end of the visible pane.  The default is to capture only the visible contents of the pane.
 
-     choose-client [-NrZ] [-F format] [-f filter] [-O sort-order] [-t target-pane] [template]
-             Put a pane into client mode, allowing a client to be selected interactively from a list.  -Z zooms the pane.  The following keys may be used in client mode:
+     choose-client [-NrZ] [-F format] [-f filter] [-K key-format] [-O sort-order] [-t target-pane] [template]
+             Put a pane into client mode, allowing a client to be selected interactively from a list.  Each client is shown on one line.  A shortcut key is shown on the left in brackets
+             allowing for immediate choice, or the list may be navigated and an item chosen or otherwise manipulated using the keys below.  -Z zooms the pane.  The following keys may be
+             used in client mode:
 
                    Key    Function
                    Enter  Choose selected client
@@ -708,27 +801,36 @@ WINDOWS AND PANES
 
              -O specifies the initial sort field: one of ‘name’, ‘size’, ‘creation’, or ‘activity’.  -r reverses the sort order.  -f specifies an initial filter: the filter is a format -
              if it evaluates to zero, the item in the list is not shown, otherwise it is shown.  If a filter would lead to an empty list, it is ignored.  -F specifies the format for each
-             item in the list.  -N starts without the preview.  This command works only if at least one client is attached.
+             item in the list and -K a format for each shortcut key; both are evaluated once for each line.  -N starts without the preview.  This command works only if at least one
+             client is attached.
 
-     choose-tree [-GNrswZ] [-F format] [-f filter] [-O sort-order] [-t target-pane] [template]
-             Put a pane into tree mode, where a session, window or pane may be chosen interactively from a list.  -s starts with sessions collapsed and -w with windows collapsed.  -Z
-             zooms the pane.  The following keys may be used in tree mode:
+     choose-tree [-GNrswZ] [-F format] [-f filter] [-K key-format] [-O sort-order] [-t target-pane] [template]
+             Put a pane into tree mode, where a session, window or pane may be chosen interactively from a tree.  Each session, window or pane is shown on one line.  A shortcut key is
+             shown on the left in brackets allowing for immediate choice, or the tree may be navigated and an item chosen or otherwise manipulated using the keys below.  -s starts with
+             sessions collapsed and -w with windows collapsed.  -Z zooms the pane.  The following keys may be used in tree mode:
 
                    Key    Function
                    Enter  Choose selected item
                    Up     Select previous item
                    Down   Select next item
+                   +      Expand selected item
+                   -      Collapse selected item
+                   M-+    Expand all items
+                   M--    Collapse all items
                    x      Kill selected item
                    X      Kill tagged items
                    <      Scroll list of previews left
                    >      Scroll list of previews right
                    C-s    Search by name
+                   m      Set the marked pane
+                   M      Clear the marked pane
                    n      Repeat last search
                    t      Toggle if item is tagged
                    T      Tag no items
                    C-t    Tag all items
                    :      Run a command for each tagged item
                    f      Enter a format to filter items
+                   H      Jump to the starting pane
                    O      Change sort field
                    r      Reverse sort order
                    v      Toggle preview
@@ -739,20 +841,53 @@ WINDOWS AND PANES
 
              -O specifies the initial sort field: one of ‘index’, ‘name’, or ‘time’.  -r reverses the sort order.  -f specifies an initial filter: the filter is a format - if it evalu‐
              ates to zero, the item in the list is not shown, otherwise it is shown.  If a filter would lead to an empty list, it is ignored.  -F specifies the format for each item in
-             the tree.  -N starts without the preview.  -G includes all sessions in any session groups in the tree rather than only the first.  This command works only if at least one
-             client is attached.
+             the tree and -K a format for each shortcut key; both are evaluated once for each line.  -N starts without the preview.  -G includes all sessions in any session groups in the
+             tree rather than only the first.  This command works only if at least one client is attached.
 
-     display-panes [-b] [-d duration] [-t target-client] [template]
+     customize-mode [-NZ] [-F format] [-f filter] [-t target-pane] [template]
+             Put a pane into customize mode, where options and key bindings may be browsed and modified from a list.  Option values in the list are shown for the active pane in the cur‐
+             rent window.  -Z zooms the pane.  The following keys may be used in customize mode:
+
+                   Key    Function
+                   Enter  Set pane, window, session or global option value
+                   Up     Select previous item
+                   Down   Select next item
+                   +      Expand selected item
+                   -      Collapse selected item
+                   M-+    Expand all items
+                   M--    Collapse all items
+                   s      Set option value or key attribute
+                   S      Set global option value
+                   w      Set window option value, if option is for pane and window
+                   d      Set an option or key to the default
+                   D      Set tagged options and tagged keys to the default
+                   u      Unset an option (set to default value if global) or unbind a key
+                   U      Unset tagged options and unbind tagged keys
+                   C-s    Search by name
+                   n      Repeat last search
+                   t      Toggle if item is tagged
+                   T      Tag no items
+                   C-t    Tag all items
+                   f      Enter a format to filter items
+                   v      Toggle option information
+                   q      Exit mode
+
+             -f specifies an initial filter: the filter is a format - if it evaluates to zero, the item in the list is not shown, otherwise it is shown.  If a filter would lead to an
+             empty list, it is ignored.  -F specifies the format for each item in the tree.  -N starts without the option information.  This command works only if at least one client is
+             attached.
+
+     display-panes [-bN] [-d duration] [-t target-client] [template]
                    (alias: displayp)
              Display a visible indicator of each pane shown by target-client.  See the display-panes-colour and display-panes-active-colour session options.  The indicator is closed when
-             a key is pressed or duration milliseconds have passed.  If -d is not given, display-panes-time is used.  A duration of zero means the indicator stays until a key is pressed.
-             While the indicator is on screen, a pane may be chosen with the ‘0’ to ‘9’ keys, which will cause template to be executed as a command with ‘%%’ substituted by the pane ID.
-             The default template is "select-pane -t '%%'".  With -b, other commands are not blocked from running until the indicator is closed.
+             a key is pressed (unless -N is given) or duration milliseconds have passed.  If -d is not given, display-panes-time is used.  A duration of zero means the indicator stays
+             until a key is pressed.  While the indicator is on screen, a pane may be chosen with the ‘0’ to ‘9’ keys, which will cause template to be executed as a command with ‘%%’
+             substituted by the pane ID.  The default template is "select-pane -t '%%'".  With -b, other commands are not blocked from running until the indicator is closed.
 
-     find-window [-rCNTZ] [-t target-pane] match-string
+     find-window [-iCNrTZ] [-t target-pane] match-string
                    (alias: findw)
              Search for a fnmatch(3) pattern or, with -r, regular expression match-string in window names, titles, and visible content (but not history).  The flags control matching be‐
-             havior: -C matches only visible window contents, -N matches only the window name and -T matches only the window title.  The default is -CNT.  -Z zooms the pane.
+             havior: -C matches only visible window contents, -N matches only the window name and -T matches only the window title.  -i makes the search ignore case.  The default is
+             -CNT.  -Z zooms the pane.
 
              This command works only if at least one client is attached.
 
@@ -779,39 +914,42 @@ WINDOWS AND PANES
                    (alias: last)
              Select the last (previously selected) window.  If no target-session is specified, select the last window of the current session.
 
-     link-window [-adk] [-s src-window] [-t dst-window]
+     link-window [-abdk] [-s src-window] [-t dst-window]
                    (alias: linkw)
-             Link the window at src-window to the specified dst-window.  If dst-window is specified and no such window exists, the src-window is linked there.  With -a, the window is
-             moved to the next index up (following windows are moved if necessary).  If -k is given and dst-window exists, it is killed, otherwise an error is generated.  If -d is given,
-             the newly linked window is not selected.
+             Link the window at src-window to the specified dst-window.  If dst-window is specified and no such window exists, the src-window is linked there.  With -a or -b the window
+             is moved to the next index after or before dst-window (existing windows are moved if necessary).  If -k is given and dst-window exists, it is killed, otherwise an error is
+             generated.  If -d is given, the newly linked window is not selected.
 
-     list-panes [-as] [-F format] [-t target]
+     list-panes [-as] [-F format] [-f filter] [-t target]
                    (alias: lsp)
              If -a is given, target is ignored and all panes on the server are listed.  If -s is given, target is a session (or the current session).  If neither is given, target is a
-             window (or the current window).  For the meaning of the -F flag, see the FORMATS section.
+             window (or the current window).  -F specifies the format of each line and -f a filter.  Only panes for which the filter is true are shown.  See the FORMATS section.
 
-     list-windows [-a] [-F format] [-t target-session]
+     list-windows [-a] [-F format] [-f filter] [-t target-session]
                    (alias: lsw)
-             If -a is given, list all windows on the server.  Otherwise, list windows in the current session or in target-session.  For the meaning of the -F flag, see the FORMATS sec‐
-             tion.
+             If -a is given, list all windows on the server.  Otherwise, list windows in the current session or in target-session.  -F specifies the format of each line and -f a filter.
+             Only windows for which the filter is true are shown.  See the FORMATS section.
 
-     move-pane [-bdhv] [-l size] [-s src-pane] [-t dst-pane]
+     move-pane [-bdfhv] [-l size] [-s src-pane] [-t dst-pane]
                    (alias: movep)
-             Like join-pane, but src-pane and dst-pane may belong to the same window.
+             Does the same as join-pane.
 
-     move-window [-ardk] [-s src-window] [-t dst-window]
+     move-window [-abrdk] [-s src-window] [-t dst-window]
                    (alias: movew)
              This is similar to link-window, except the window at src-window is moved to dst-window.  With -r, all windows in the session are renumbered in sequential order, respecting
              the base-index option.
 
-     new-window [-adkP] [-c start-directory] [-e environment] [-F format] [-n window-name] [-t target-window] [shell-command]
+     new-window [-abdkPS] [-c start-directory] [-e environment] [-F format] [-n window-name] [-t target-window] [shell-command]
                    (alias: neww)
-             Create a new window.  With -a, the new window is inserted at the next index up from the specified target-window, moving windows up if necessary, otherwise target-window is
-             the new window location.
+             Create a new window.  With -a or -b, the new window is inserted at the next index after or before the specified target-window, moving windows up if necessary; otherwise
+             target-window is the new window location.
 
              If -d is given, the session does not make the new window the current window.  target-window represents the window to be created; if the target already exists an error is
-             shown, unless the -k flag is used, in which case it is destroyed.  shell-command is the command to execute.  If shell-command is not specified, the value of the
-             default-command option is used.  -c specifies the working directory in which the new window is created.
+             shown, unless the -k flag is used, in which case it is destroyed.  If -S is given and a window named window-name already exists, it is selected (unless -d is also given in
+             which case the command does nothing).
+
+             shell-command is the command to execute.  If shell-command is not specified, the value of the default-command option is used.  -c specifies the working directory in which
+             the new window is created.
 
              When the shell command completes, the window closes.  See the remain-on-exit option to change this behaviour.
 
@@ -856,13 +994,15 @@ WINDOWS AND PANES
                    (alias: renamew)
              Rename the current window, or the window at target-window if specified, to new-name.
 
-     resize-pane [-DLMRUZ] [-t target-pane] [-x width] [-y height] [adjustment]
+     resize-pane [-DLMRTUZ] [-t target-pane] [-x width] [-y height] [adjustment]
                    (alias: resizep)
              Resize a pane, up, down, left or right by adjustment with -U, -D, -L or -R, or to an absolute size with -x or -y.  The adjustment is given in lines or columns (the default
              is 1); -x and -y may be a given as a number of lines or columns or followed by ‘%’ for a percentage of the window size (for example ‘-x 10%’).  With -Z, the active pane is
              toggled between zoomed (occupying the whole of the window) and unzoomed (its normal position in the layout).
 
              -M begins mouse resizing (only valid if bound to a mouse key binding, see MOUSE SUPPORT).
+
+             -T trims all lines below the current cursor position and moves lines out of the history to replace them.
 
      resize-window [-aADLRU] [-t target-window] [-x width] [-y height] [adjustment]
                    (alias: resizew)
@@ -872,15 +1012,15 @@ WINDOWS AND PANES
 
      respawn-pane [-k] [-c start-directory] [-e environment] [-t target-pane] [shell-command]
                    (alias: respawnp)
-             Reactivate a pane in which the command has exited (see the remain-on-exit window option).  If shell-command is not given, the command used when the pane was created is exe‐
-             cuted.  The pane must be already inactive, unless -k is given, in which case any existing command is killed.  -c specifies a new working directory for the pane.  The -e op‐
-             tion has the same meaning as for the new-window command.
+             Reactivate a pane in which the command has exited (see the remain-on-exit window option).  If shell-command is not given, the command used when the pane was created or last
+             respawned is executed.  The pane must be already inactive, unless -k is given, in which case any existing command is killed.  -c specifies a new working directory for the
+             pane.  The -e option has the same meaning as for the new-window command.
 
      respawn-window [-k] [-c start-directory] [-e environment] [-t target-window] [shell-command]
                    (alias: respawnw)
-             Reactivate a window in which the command has exited (see the remain-on-exit window option).  If shell-command is not given, the command used when the window was created is
-             executed.  The window must be already inactive, unless -k is given, in which case any existing command is killed.  -c specifies a new working directory for the window.  The
-             -e option has the same meaning as for the new-window command.
+             Reactivate a window in which the command has exited (see the remain-on-exit window option).  If shell-command is not given, the command used when the window was created or
+             last respawned is executed.  The window must be already inactive, unless -k is given, in which case any existing command is killed.  -c specifies a new working directory for
+             the window.  The -e option has the same meaning as for the new-window command.
 
      rotate-window [-DUZ] [-t target-window]
                    (alias: rotatew)
@@ -894,24 +1034,23 @@ WINDOWS AND PANES
 
      select-pane [-DdeLlMmRUZ] [-T title] [-t target-pane]
                    (alias: selectp)
-             Make pane target-pane the active pane in window target-window.  If one of -D, -L, -R, or -U is used, respectively the pane below, to the left, to the right, or above the
-             target pane is used.  -Z keeps the window zoomed if it was zoomed.  -l is the same as using the last-pane command.  -e enables or -d disables input to the pane.  -T sets the
-             pane title.
+             Make pane target-pane the active pane in its window.  If one of -D, -L, -R, or -U is used, respectively the pane below, to the left, to the right, or above the target pane
+             is used.  -Z keeps the window zoomed if it was zoomed.  -l is the same as using the last-pane command.  -e enables or -d disables input to the pane.  -T sets the pane title.
 
              -m and -M are used to set and clear the marked pane.  There is one marked pane at a time, setting a new marked pane clears the last.  The marked pane is the default target
-             for -s to join-pane, swap-pane and swap-window.
+             for -s to join-pane, move-pane, swap-pane and swap-window.
 
      select-window [-lnpT] [-t target-window]
                    (alias: selectw)
              Select the window at target-window.  -l, -n and -p are equivalent to the last-window, next-window and previous-window commands.  If -T is given and the selected window is
              already the current window, the command behaves like last-window.
 
-     split-window [-bdfhIvP] [-c start-directory] [-e environment] [-l size] [-t target-pane] [shell-command] [-F format]
+     split-window [-bdfhIvPZ] [-c start-directory] [-e environment] [-l size] [-t target-pane] [shell-command] [-F format]
                    (alias: splitw)
              Create a new pane by splitting target-pane: -h does a horizontal split and -v a vertical split; if neither is specified, -v is assumed.  The -l option specifies the size of
              the new pane in lines (for vertical split) or in columns (for horizontal split); size may be followed by ‘%’ to specify a percentage of the available space.  The -b option
              causes the new pane to be created to the left of or above target-pane.  The -f option creates a new pane spanning the full window height (with -h) or full window width (with
-             -v), instead of splitting the active pane.
+             -v), instead of splitting the active pane.  -Z zooms if the window is not zoomed, or keeps it zoomed if already zoomed.
 
              An empty shell-command ('') will create a pane with no command running in it.  Output can be sent to such a pane with the display-message command.  The -I flag (if
              shell-command is not specified or empty) will create an empty pane and forward any output from stdin to it.  For example:
@@ -941,8 +1080,9 @@ WINDOWS AND PANES
 
 KEY BINDINGS
      tmux allows a command to be bound to most keys, with or without a prefix key.  When specifying keys, most represent themselves (for example ‘A’ to ‘Z’).  Ctrl keys may be prefixed
-     with ‘C-’ or ‘^’, and Alt (meta) with ‘M-’.  In addition, the following special key names are accepted: Up, Down, Left, Right, BSpace, BTab, DC (Delete), End, Enter, Escape, F1 to
-     F12, Home, IC (Insert), NPage/PageDown/PgDn, PPage/PageUp/PgUp, Space, and Tab.  Note that to bind the ‘"’ or ‘'’ keys, quotation marks are necessary, for example:
+     with ‘C-’ or ‘^’, Shift keys with ‘S-’ and Alt (meta) with ‘M-’.  In addition, the following special key names are accepted: Up, Down, Left, Right, BSpace, BTab, DC (Delete), End,
+     Enter, Escape, F1 to F12, Home, IC (Insert), NPage/PageDown/PgDn, PPage/PageUp/PgUp, Space, and Tab.  Note that to bind the ‘"’ or ‘'’ keys, quotation marks are necessary, for exam‐
+     ple:
 
            bind-key '"' split-window
            bind-key "'" new-window
@@ -968,7 +1108,7 @@ KEY BINDINGS
              With the default form, all key tables are listed by default.  -T lists only keys in key-table.
 
              With the -N form, only keys in the root and prefix key tables are listed by default; -T also lists only keys in key-table.  -P specifies a prefix to print before each key
-             and -1 lists only the first matching key.  -a lists the command for keys that do have a note rather than skipping them.
+             and -1 lists only the first matching key.  -a lists the command for keys that do not have a note rather than skipping them.
 
      send-keys [-FHlMRX] [-N repeat-count] [-t target-pane] key ...
                    (alias: send)
@@ -986,12 +1126,12 @@ KEY BINDINGS
      send-prefix [-2] [-t target-pane]
              Send the prefix key, or with -2 the secondary prefix key, to a window as if it was pressed.
 
-     unbind-key [-an] [-T key-table] key
+     unbind-key [-anq] [-T key-table] key
                    (alias: unbind)
-             Unbind the command bound to key.  -n and -T are the same as for bind-key.  If -a is present, all key bindings are removed.
+             Unbind the command bound to key.  -n and -T are the same as for bind-key.  If -a is present, all key bindings are removed.  The -q option prevents errors being returned.
 
 OPTIONS
-     The appearance and behaviour of tmux may be modified by changing the value of various options.  There are four types of option: server options, session options window options and
+     The appearance and behaviour of tmux may be modified by changing the value of various options.  There are four types of option: server options, session options, window options, and
      pane options.
 
      The tmux server has a set of global server options which do not apply to any particular window or session or pane.  These are altered with the set-option -s command, or displayed
@@ -1013,19 +1153,20 @@ OPTIONS
 
      tmux also supports user options which are prefixed with a ‘@’.  User options may have any name, so long as they are prefixed with ‘@’, and be set to any string.  For example:
 
-           $ tmux setw -q @foo "abc123"
-           $ tmux showw -v @foo
+           $ tmux set -wq @foo "abc123"
+           $ tmux show -wv @foo
            abc123
 
      Commands which set options are as follows:
 
-     set-option [-aFgopqsuw] [-t target-pane] option value
+     set-option [-aFgopqsuUw] [-t target-pane] option value
                    (alias: set)
              Set a pane option with -p, a window option with -w, a server option with -s, otherwise a session option.  If the option is not a user option, -w or -s may be unnecessary -
              tmux will infer the type from the option name, assuming -w for pane options.  If -g is given, the global session or window option is set.
 
              -F expands formats in the option value.  The -u flag unsets an option, so a session inherits the option from the global options (or with -g, restores a global option to the
-             default).
+             default).  -U unsets an option (like -u) but if the option is a pane option also unsets the option on any panes in the window.  value depends on the option and may be a num‐
+             ber, a string, or a flag (on, off, or omitted to toggle).
 
              The -o flag prevents setting an option that is already set and the -q flag suppresses errors about unknown or ambiguous options.
 
@@ -1046,8 +1187,7 @@ OPTIONS
              Show the pane options (or a single option if option is provided) with -p, the window options with -w, the server options with -s, otherwise the session options.  If the op‐
              tion is not a user option, -w or -s may be unnecessary - tmux will infer the type from the option name, assuming -w for pane options.  Global session or window options are
              listed if -g is used.  -v shows only the option value, not the name.  If -q is set, no error will be returned if option is unset.  -H includes hooks (omitted by default).
-             -A includes options inherited from a parent set of options, such options are marked with an asterisk.  value depends on the option and may be a number, a string, or a flag
-             (on, off, or omitted to toggle).
+             -A includes options inherited from a parent set of options, such options are marked with an asterisk.
 
      Available server options are:
 
@@ -1076,14 +1216,24 @@ OPTIONS
              Set the default terminal for new windows created in this session - the default value of the TERM environment variable.  For tmux to work correctly, this must be set to
              ‘screen’, ‘tmux’ or a derivative of them.
 
+     copy-command shell-command
+             Give the command to pipe to if the copy-pipe copy mode command is used without arguments.
+
      escape-time time
              Set the time in milliseconds for which tmux waits after an escape is input to determine if it is part of a function or meta key sequences.  The default is 500 milliseconds.
+
+     editor shell-command
+             Set the command used when tmux runs an editor.
 
      exit-empty [on | off]
              If enabled (the default), the server will exit when there are no active sessions.
 
      exit-unattached [on | off]
              If enabled, the server will exit when there are no attached clients.
+
+     extended-keys [on | off | always]
+             When on or always, the escape sequence to enable extended keys is sent to the terminal, if tmux knows that it is supported.  tmux always recognises extended keys itself.  If
+             this option is on, tmux will only forward extended keys to applications when they request them; if always, tmux will always forward the keys.
 
      focus-events [on | off]
              When enabled, focus events are requested from the terminal if supported and passed through to applications running in tmux.  Attached clients should be detached and attached
@@ -1107,6 +1257,55 @@ OPTIONS
                    disallowedWindowOps: 20,21,SetXprop
 
              Or changing this property from the xterm(1) interactive menu when required.
+
+     terminal-features[] string
+             Set terminal features for terminal types read from terminfo(5).  tmux has a set of named terminal features.  Each will apply appropriate changes to the terminfo(5) entry in
+             use.
+
+             tmux can detect features for a few common terminals; this option can be used to easily tell tmux about features supported by terminals it cannot detect.  The
+             terminal-overrides option allows individual terminfo(5) capabilities to be set instead, terminal-features is intended for classes of functionality supported in a standard
+             way but not reported by terminfo(5).  Care must be taken to configure this only with features the terminal actually supports.
+
+             This is an array option where each entry is a colon-separated string made up of a terminal type pattern (matched using fnmatch(3)) followed by a list of terminal features.
+             The available features are:
+
+             256     Supports 256 colours with the SGR escape sequences.
+
+             clipboard
+                     Allows setting the system clipboard.
+
+             ccolour
+                     Allows setting the cursor colour.
+
+             cstyle  Allows setting the cursor style.
+
+             extkeys
+                     Supports extended keys.
+
+             focus   Supports focus reporting.
+
+             margins
+                     Supports DECSLRM margins.
+
+             mouse   Supports xterm(1) mouse sequences.
+
+             overline
+                     Supports the overline SGR attribute.
+
+             rectfill
+                     Supports the DECFRA rectangle fill escape sequence.
+
+             RGB     Supports RGB colour with the SGR escape sequences.
+
+             strikethrough
+                     Supports the strikethrough SGR escape sequence.
+
+             sync    Supports synchronized updates.
+
+             title   Supports xterm(1) title setting.
+
+             usstyle
+                     Allows underscore style and colour to be set.
 
      terminal-overrides[] string
              Allow terminal descriptions read using terminfo(5) to be overridden.  Each entry is a colon-separated string made up of a terminal type pattern (matched using fnmatch(3))
@@ -1159,9 +1358,9 @@ OPTIONS
      destroy-unattached [on | off]
              If enabled and the session is no longer attached to any clients, it is destroyed.
 
-     detach-on-destroy [on | off]
+     detach-on-destroy [off | on | no-detached]
              If on (the default), the client is detached when the session it is attached to is destroyed.  If off, the client is switched to the most recently active of the remaining
-             sessions.
+             sessions.  If no-detached, the client is detached only if there are no detached sessions; if detached sessions exist, the client is switched to the most recently active.
 
      display-panes-active-colour colour
              Set the colour used by the display-panes command to show the indicator for the active pane.
@@ -1190,10 +1389,10 @@ OPTIONS
              Command to run when locking each client.  The default is to run lock(1) with -np.
 
      message-command-style style
-             Set status line message command style.  For how to specify style, see the STYLES section.
+             Set status line message command style.  This is used for the command prompt with vi(1) keys when in command mode.  For how to specify style, see the STYLES section.
 
      message-style style
-             Set status line message style.  For how to specify style, see the STYLES section.
+             Set status line message style.  This is used for messages and for the command prompt.  For how to specify style, see the STYLES section.
 
      mouse [on | off]
              If on, tmux captures the mouse and allows mouse events to be bound as key bindings.  See the MOUSE SUPPORT section for details.
@@ -1231,8 +1430,9 @@ OPTIONS
      status-interval interval
              Update the status line every interval seconds.  By default, updates will occur every 15 seconds.  A setting of zero disables redrawing at interval.
 
-     status-justify [left | centre | right]
-             Set the position of the window list component of the status line: left, centre or right justified.
+     status-justify [left | centre | right | absolute-centre]
+             Set the position of the window list in the status line: left, centre or right.  centre puts the window list in the relative centre of the available free space; absolute-cen‐
+             tre uses the centre of the entire horizontal space.
 
      status-keys [vi | emacs]
              Use vi or emacs-style key bindings in the status line, for example at the command prompt.  The default is emacs, unless the VISUAL or EDITOR environment variables are set
@@ -1317,7 +1517,16 @@ OPTIONS
 
      main-pane-height height
      main-pane-width width
-             Set the width or height of the main (left or top) pane in the main-horizontal or main-vertical layouts.
+             Set the width or height of the main (left or top) pane in the main-horizontal or main-vertical layouts.  If suffixed by ‘%’, this is a percentage of the window size.
+
+     copy-mode-match-style style
+             Set the style of search matches in copy mode.  For how to specify style, see the STYLES section.
+
+     copy-mode-mark-style style
+             Set the style of the line containing the mark in copy mode.  For how to specify style, see the STYLES section.
+
+     copy-mode-current-match-style style
+             Set the style of the current search match in copy mode.  For how to specify style, see the STYLES section.
 
      mode-keys [vi | emacs]
              Use vi or emacs-style key bindings in copy mode.  The default is emacs, unless VISUAL or EDITOR contains ‘vi’.
@@ -1337,7 +1546,8 @@ OPTIONS
 
      other-pane-height height
              Set the height of the other panes (not the main pane) in the main-horizontal layout.  If this option is set to 0 (the default), it will have no effect.  If both the
-             main-pane-height and other-pane-height options are set, the main pane will grow taller to make the other panes the specified height, but will never shrink to do so.
+             main-pane-height and other-pane-height options are set, the main pane will grow taller to make the other panes the specified height, but will never shrink to do so.  If suf‐
+             fixed by ‘%’, this is a percentage of the window size.
 
      other-pane-width width
              Like other-pane-height, but set the width of other panes in the main-vertical layout.
@@ -1351,14 +1561,26 @@ OPTIONS
      pane-border-format format
              Set the text shown in pane border status lines.
 
+     pane-border-lines type
+             Set the type of characters used for drawing pane borders.  type may be one of:
+
+             single  single lines using ACS or UTF-8 characters
+
+             double  double lines using UTF-8 characters
+
+             heavy   heavy lines using UTF-8 characters
+
+             simple  simple ASCII characters
+
+             number  the pane number
+
+             ‘double’ and ‘heavy’ will fall back to standard ACS line drawing when UTF-8 is not supported.
+
      pane-border-status [off | top | bottom]
              Turn pane border status lines off or set their position.
 
      pane-border-style style
              Set the pane border style for panes aside from the active pane.  For how to specify style, see the STYLES section.  Attributes are ignored.
-
-     synchronize-panes [on | off]
-             Duplicate input to any pane to all other panes in the same window (only for panes that are not in any special mode).
 
      window-status-activity-style style
              Set status line style for windows with an activity alert.  For how to specify style, see the STYLES section.
@@ -1392,9 +1614,6 @@ OPTIONS
      wrap-search [on | off]
              If this option is set, searches will wrap around the end of the pane contents.  The default is on.
 
-     xterm-keys [on | off]
-             If this option is set, tmux will generate xterm(1) -style function key sequences; these have a number included to indicate modifiers such as Shift, Alt or Ctrl.
-
      Available pane options are:
 
      allow-rename [on | off]
@@ -1405,8 +1624,12 @@ OPTIONS
              The alternate screen feature preserves the contents of the window when an interactive application starts and restores it on exit, so that any output visible before the ap‐
              plication starts reappears unchanged after it exits.
 
-     remain-on-exit [on | off]
-             A pane with this flag set is not destroyed when the program running in it exits.  The pane may be reactivated with the respawn-pane command.
+     remain-on-exit [on | off | failed]
+             A pane with this flag set is not destroyed when the program running in it exits.  If set to failed, then only when the program exit status is not zero.  The pane may be re‐
+             activated with the respawn-pane command.
+
+     synchronize-panes [on | off]
+             Duplicate input to all other panes in the same window where this option is also on (only for panes that are not in any mode).
 
      window-active-style style
              Set the pane style when it is the active pane.  For how to specify style, see the STYLES section.
@@ -1417,8 +1640,8 @@ OPTIONS
 HOOKS
      tmux allows commands to run on various triggers, called hooks.  Most tmux commands have an after hook and there are a number of hooks not associated with commands.
 
-     Hooks are stored as array options, members of the array are executed in order when the hook is triggered.  Hooks may be configured with the set-hook or set-option commands and dis‐
-     played with show-hooks or show-options -H.  The following two commands are equivalent:
+     Hooks are stored as array options, members of the array are executed in order when the hook is triggered.  Like options different hooks may be global or belong to a session, window
+     or pane.  Hooks may be configured with the set-hook or set-option commands and displayed with show-hooks or show-options -H.  The following two commands are equivalent:
 
             set-hook -g pane-mode-changed[42] 'set -g status-left-style bg=red'
             set-option -g pane-mode-changed[42] 'set -g status-left-style bg=red'
@@ -1470,14 +1693,13 @@ HOOKS
 
      Hooks are managed with these commands:
 
-     set-hook [-agRu] [-t target-session] hook-name command
-             Without -R, sets (or with -u unsets) hook hook-name to command.  If -g is given, hook-name is added to the global list of hooks, otherwise it is added to the session hooks
-             (for target-session with -t).  -a appends to a hook.  Like options, session hooks inherit from the global ones.
+     set-hook [-agpRuw] [-t target-pane] hook-name command
+             Without -R, sets (or with -u unsets) hook hook-name to command.  The flags are the same as for set-option.
 
              With -R, run hook-name immediately.
 
-     show-hooks [-g] [-t target-session]
-             Shows the global list of hooks with -g, otherwise the session hooks.
+     show-hooks [-gpw] [-t target-pane]
+             Shows hooks.  The flags are the same as for show-options.
 
 MOUSE SUPPORT
      If the mouse option is on (the default is off), tmux allows mouse events to be bound as keys.  The name of each key is made up of a mouse event (such as ‘MouseUp1’) and a location
@@ -1496,8 +1718,11 @@ MOUSE SUPPORT
            MouseDown1    MouseUp1      MouseDrag1   MouseDragEnd1
            MouseDown2    MouseUp2      MouseDrag2   MouseDragEnd2
            MouseDown3    MouseUp3      MouseDrag3   MouseDragEnd3
+           SecondClick1  SecondClick2  SecondClick3
            DoubleClick1  DoubleClick2  DoubleClick3
            TripleClick1  TripleClick2  TripleClick3
+
+     The ‘SecondClick’ events are fired for the second click of a double click, even if there may be a third click which will fire ‘TripleClick’ instead of ‘DoubleClick’.
 
      Each should be suffixed with a location, for example ‘MouseDown1Status’.
 
@@ -1526,24 +1751,36 @@ FORMATS
      placed by ‘1’ if running on ‘myhost’, otherwise by ‘0’.  ‘||’ and ‘&&’ evaluate to true if either or both of two comma-separated alternatives are true, for example
      ‘#{||:#{pane_in_mode},#{alternate_on}}’.
 
-     An ‘m’ specifies an fnmatch(3) or regular expression comparison.  The first argument is the pattern and the second the string to compare.  An optional third argument specifies
-     flags: ‘r’ means the pattern is a regular expression instead of the default fnmatch(3) pattern, and ‘i’ means to ignore case.  For example: ‘#{m:*foo*,#{host}}’ or
-     ‘#{m/ri:^A,MYVAR}’.  A ‘C’ performs a search for an fnmatch(3) pattern or regular expression in the pane content and evaluates to zero if not found, or a line number if found.  Like
-     ‘m’, an ‘r’ flag means search for a regular expression and ‘i’ ignores case.  For example: ‘#{C/r:^Start}’
+     An ‘m’ specifies an fnmatch(3) or regular expression comparison.  The first argument is the pattern and the second the string to compare.  An optional argument specifies flags: ‘r’
+     means the pattern is a regular expression instead of the default fnmatch(3) pattern, and ‘i’ means to ignore case.  For example: ‘#{m:*foo*,#{host}}’ or ‘#{m/ri:^A,MYVAR}’.  A ‘C’
+     performs a search for an fnmatch(3) pattern or regular expression in the pane content and evaluates to zero if not found, or a line number if found.  Like ‘m’, an ‘r’ flag means
+     search for a regular expression and ‘i’ ignores case.  For example: ‘#{C/r:^Start}’
+
+     Numeric operators may be performed by prefixing two comma-separated alternatives with an ‘e’ and an operator.  An optional ‘f’ flag may be given after the operator to use floating
+     point numbers, otherwise integers are used.  This may be followed by a number giving the number of decimal places to use for the result.  The available operators are: addition ‘+’,
+     subtraction ‘-’, multiplication ‘*’, division ‘/’, modulus ‘m’ or ‘%’ (note that ‘%’ must be escaped as ‘%%’ in formats which are also expanded by strftime(3)) and numeric compari‐
+     son operators ‘==’, ‘!=’, ‘<’, ‘<=’, ‘>’ and ‘>=’.  For example, ‘#{e|*|f|4:5.5,3}’ multiplies 5.5 by 3 for a result with four decimal places and ‘#{e|%%:7,3}’ returns the modulus
+     of 7 and 3.  ‘a’ replaces a numeric argument by its ASCII equivalent, so ‘#{a:98}’ results in ‘b’.
 
      A limit may be placed on the length of the resultant string by prefixing it by an ‘=’, a number and a colon.  Positive numbers count from the start of the string and negative from
      the end, so ‘#{=5:pane_title}’ will include at most the first five characters of the pane title, or ‘#{=-5:pane_title}’ the last five characters.  A suffix or prefix may be given as
      a second argument - if provided then it is appended or prepended to the string if the length has been trimmed, for example ‘#{=/5/...:pane_title}’ will append ‘...’ if the pane ti‐
      tle is more than five characters.  Similarly, ‘p’ pads the string to a given width, for example ‘#{p10:pane_title}’ will result in a width of at least 10 characters.  A positive
-     width pads on the left, a negative on the right.
+     width pads on the left, a negative on the right.  ‘n’ expands to the length of the variable and ‘w’ to its width when displayed, for example ‘#{n:window_name}’.
 
-     Prefixing a time variable with ‘t:’ will convert it to a string, so if ‘#{window_activity}’ gives ‘1445765102’, ‘#{t:window_activity}’ gives ‘Sun Oct 25 09:25:02 2015’.  The ‘b:’
-     and ‘d:’ prefixes are basename(3) and dirname(3) of the variable respectively.  ‘q:’ will escape sh(1) special characters.  ‘E:’ will expand the format twice, for example
-     ‘#{E:status-left}’ is the result of expanding the content of the status-left option rather than the option itself.  ‘T:’ is like ‘E:’ but also expands strftime(3) specifiers.  ‘S:’,
-     ‘W:’ or ‘P:’ will loop over each session, window or pane and insert the format once for each.  For windows and panes, two comma-separated formats may be given: the second is used
-     for the current window or active pane.  For example, to get a list of windows formatted like the status line:
+     Prefixing a time variable with ‘t:’ will convert it to a string, so if ‘#{window_activity}’ gives ‘1445765102’, ‘#{t:window_activity}’ gives ‘Sun Oct 25 09:25:02 2015’.  Adding ‘p
+     (’ ‘`t/p`’) will use shorter but less accurate time format for times in the past.  A custom format may be given using an ‘f’ suffix (note that ‘%’ must be escaped as ‘%%’ if the
+     format is separately being passed through strftime(3), for example in the status-left option): ‘#{t/f/%%H#:%%M:window_activity}’, see strftime(3).
+
+     The ‘b:’ and ‘d:’ prefixes are basename(3) and dirname(3) of the variable respectively.  ‘q:’ will escape sh(1) special characters or with a ‘h’ suffix, escape hash characters (so
+     ‘#’ becomes ‘##’).  ‘E:’ will expand the format twice, for example ‘#{E:status-left}’ is the result of expanding the content of the status-left option rather than the option itself.
+     ‘T:’ is like ‘E:’ but also expands strftime(3) specifiers.  ‘S:’, ‘W:’ or ‘P:’ will loop over each session, window or pane and insert the format once for each.  For windows and
+     panes, two comma-separated formats may be given: the second is used for the current window or active pane.  For example, to get a list of windows formatted like the status line:
 
            #{W:#{E:window-status-format} ,#{E:window-status-current-format} }
+
+     ‘N:’ checks if a window (without any suffix or with the ‘w’ suffix) or a session (with the ‘s’ suffix) name exists, for example ‘`N/w:foo`’ is replaced with 1 if a window named
+     ‘foo’ exists.
 
      A prefix of the form ‘s/foo/bar/:’ will substitute ‘foo’ with ‘bar’ throughout.  The first argument may be an extended regular expression and a final argument may be ‘i’ to ignore
      case, for example ‘s/a(.)/\1x/i:’ would change ‘abABab’ into ‘bxBxbx’.
@@ -1558,6 +1795,7 @@ FORMATS
      The following variables are available, where appropriate:
 
      Variable name          Alias    Replaced with
+     active_window_index             Index of active window in session
      alternate_on                    1 if pane is in alternate screen
      alternate_saved_x               Saved cursor X in alternate screen
      alternate_saved_y               Saved cursor Y in alternate screen
@@ -1571,6 +1809,7 @@ FORMATS
      client_control_mode             1 if client is in control mode
      client_created                  Time client created
      client_discarded                Bytes discarded when client behind
+     client_flags                    List of client flags
      client_height                   Height of client
      client_key_table                Current key table
      client_last_session             Name of the client's last session
@@ -1579,7 +1818,9 @@ FORMATS
      client_prefix                   1 if prefix key has been pressed
      client_readonly                 1 if client is readonly
      client_session                  Name of the client's session
+     client_termfeatures             Terminal features of client, if any
      client_termname                 Terminal name of client
+     client_termtype                 Terminal type of client, if available
      client_tty                      Pseudo terminal of client
      client_utf8                     1 if client supports UTF-8
      client_width                    Width of client
@@ -1588,10 +1829,12 @@ FORMATS
      command_list_alias              Command alias if listing commands
      command_list_name               Command name if listing commands
      command_list_usage              Command usage if listing commands
+     config_files                    List of configuration files loaded
      copy_cursor_line                Line the cursor is on in copy mode
      copy_cursor_word                Word under cursor in copy mode
      copy_cursor_x                   Cursor X position in copy mode
      copy_cursor_y                   Cursor Y position in copy mode
+     current_file                    Current configuration file
      cursor_character                Character at cursor in pane
      cursor_flag                     Pane cursor flag
      cursor_x                        Cursor X position in pane
@@ -1610,6 +1853,7 @@ FORMATS
      insert_flag                     Pane insert flag
      keypad_cursor_flag              Pane keypad cursor flag
      keypad_flag                     Pane keypad flag
+     last_window_index               Index of last window in session
      line                            Line number in the list
      mouse_all_flag                  Pane mouse all flag
      mouse_any_flag                  Pane mouse any flag
@@ -1627,22 +1871,25 @@ FORMATS
      pane_at_left                    1 if pane is at the left of window
      pane_at_right                   1 if pane is at the right of window
      pane_at_top                     1 if pane is at the top of window
+     pane_bg                         Pane background colour
      pane_bottom                     Bottom of pane
      pane_current_command            Current command if available
      pane_current_path               Current path if available
      pane_dead                       1 if pane is dead
      pane_dead_status                Exit status of process in dead pane
+     pane_fg                         Pane foreground colour
      pane_format                     1 if format is for a pane
      pane_height                     Height of pane
      pane_id                #D       Unique pane ID
      pane_in_mode                    1 if pane is in a mode
      pane_index             #P       Index of pane
      pane_input_off                  1 if input to pane is disabled
+     pane_last                       1 if last pane
      pane_left                       Left of pane
      pane_marked                     1 if this is the marked pane
      pane_marked_set                 1 if a marked pane is set
      pane_mode                       Name of pane mode, if any
-     pane_path              #T       Path of pane (can be set by application)
+     pane_path                       Path of pane (can be set by application)
      pane_pid                        PID of first process in pane
      pane_pipe                       1 if pane is being piped
      pane_right                      Right of pane
@@ -1659,6 +1906,8 @@ FORMATS
      scroll_position                 Scroll position in copy mode
      scroll_region_lower             Bottom of scroll region in pane
      scroll_region_upper             Top of scroll region in pane
+     search_match                    Search match if any
+     search_present                  1 if search started in copy mode
      selection_active                1 if selection started and changes with the cursor in copy mode
      selection_end_x                 X position of the end of the selection
      selection_end_y                 Y position of the end of the selection
@@ -1681,7 +1930,9 @@ FORMATS
      session_id                      Unique session ID
      session_last_attached           Time session last attached
      session_many_attached           1 if multiple clients attached
+     session_marked                  1 if this session contains the marked pane
      session_name           #S       Name of session
+     session_path                    Working directory of session
      session_stack                   Window indexes in most recent order
      session_windows                 Number of windows in session
      socket_path                     Server socket path
@@ -1699,7 +1950,8 @@ FORMATS
      window_cell_height              Height of each cell in pixels
      window_cell_width               Width of each cell in pixels
      window_end_flag                 1 if window has the highest index
-     window_flags           #F       Window flags
+     window_flags           #F       Window flags with # escaped as ##
+     window_raw_flags                Window flags with nothing escaped
      window_format                   1 if format is for a window
      window_height                   Height of window
      window_id                       Unique window ID
@@ -1739,8 +1991,8 @@ STYLES
 
      none    Set no attributes (turn off any active attributes).
 
-     bright (or bold), dim, underscore, blink, reverse, hidden, italics, overline, strikethrough, double-underscore, curly-underscore, dotted-underscore, dashed-underscore
-             Set an attribute.  Any of the attributes may be prefixed with ‘no’ to unset.
+     acs, bright (or bold), dim, underscore, blink, reverse, hidden, italics, overline, strikethrough, double-underscore, curly-underscore, dotted-underscore, dashed-underscore
+             Set an attribute.  Any of the attributes may be prefixed with ‘no’ to unset.  acs is the terminal alternate character set.
 
      align=left (or noalign), align=centre, align=right
              Align text to the left, centre or right of the available space if appropriate.
@@ -1795,17 +2047,21 @@ GLOBAL AND SESSION ENVIRONMENT
      The update-environment session option may be used to update the session environment from the client when a new session is created or an old reattached.  tmux also initialises the
      TMUX variable with some internal information to allow commands to be executed from inside, and the TERM variable with the correct terminal setting of ‘screen’.
 
+     Variables in both session and global environments may be marked as hidden.  Hidden variables are not passed into the environment of new processes and instead can only be used by
+     tmux itself (for example in formats, see the FORMATS section).
+
      Commands to alter and view the environment are:
 
-     set-environment [-gru] [-t target-session] name [value]
+     set-environment [-Fhgru] [-t target-session] name [value]
                    (alias: setenv)
              Set or unset an environment variable.  If -g is used, the change is made in the global environment; otherwise, it is applied to the session environment for target-session.
-             The -u flag unsets a variable.  -r indicates the variable is to be removed from the environment before starting a new process.
+             If -F is present, then value is expanded as a format.  The -u flag unsets a variable.  -r indicates the variable is to be removed from the environment before starting a new
+             process.  -h marks the variable as hidden.
 
-     show-environment [-gs] [-t target-session] [variable]
+     show-environment [-hgs] [-t target-session] [variable]
                    (alias: showenv)
              Display the environment for target-session or the global environment with -g.  If variable is omitted, all variables are shown.  Variables removed from the environment are
-             prefixed with ‘-’.  If -s is used, the output is formatted as a set of Bourne shell commands.
+             prefixed with ‘-’.  If -s is used, the output is formatted as a set of Bourne shell commands.  -h shows hidden variables (omitted by default).
 
 STATUS LINE
      tmux includes an optional status line which is displayed in the bottom line of each terminal.
@@ -1836,7 +2092,7 @@ STATUS LINE
 
      Commands related to the status line are as follows:
 
-     command-prompt [-1ikN] [-I inputs] [-p prompts] [-t target-client] [template]
+     command-prompt [-1ikNTW] [-I inputs] [-p prompts] [-t target-client] [template]
              Open the command prompt in a client.  This may be used from inside tmux to execute commands interactively.
 
              If template is specified, it is used as the command.  If present, -I is a comma-separated list of the initial text for each prompt.  If -p is given, prompts is a comma-sepa‐
@@ -1847,12 +2103,13 @@ STATUS LINE
              marks are escaped.
 
              -1 makes the prompt only accept one key press, in this case the resulting input is a single character.  -k is like -1 but the key press is translated to a key name.  -N
-             makes the prompt only accept numeric key presses.  -i executes the command every time the prompt input changes instead of when the user exits the command prompt.
+             makes the prompt only accept numeric key presses.  -i executes the command every time the prompt input changes instead of when the user exits the command prompt.  -T tells
+             tmux that the prompt is for a target which affects what completions are offered when Tab is pressed; -W is similar but indicates the prompt is for a window.
 
              The following keys have a special meaning in the command prompt, depending on the value of the status-keys option:
 
                    Function                             vi        emacs
-                   Cancel command prompt                Escape    Escape
+                   Cancel command prompt                q         Escape
                    Delete from cursor to start of word            C-w
                    Delete entire command                d         C-u
                    Delete from cursor to end            D         C-k
@@ -1876,7 +2133,7 @@ STATUS LINE
 
              This command works only from inside tmux.
 
-     display-menu [-c target-client] [-t target-pane] [-T title] [-x position] [-y position] name key command ...
+     display-menu [-O] [-c target-client] [-t target-pane] [-T title] [-x position] [-y position] name key command ...
                    (alias: menu)
              Display a menu on target-client.  target-pane gives the target for any commands run from the menu.
 
@@ -1889,15 +2146,40 @@ STATUS LINE
              -x and -y give the position of the menu.  Both may be a row or column number, or one of the following special values:
 
                    Value    Flag    Meaning
+                   C        Both    The centre of the terminal
                    R        -x      The right side of the terminal
                    P        Both    The bottom left of the pane
                    M        Both    The mouse position
-                   W        -x      The window position on the status line
+                   W        Both    The window position on the status line
                    S        -y      The line above or below the status line
 
+             Or a format, which is expanded including the following additional variables:
+
+                   Variable name                 Replaced with
+                   popup_centre_x                Centered in the client
+                   popup_centre_y                Centered in the client
+                   popup_height                  Height of menu or popup
+                   popup_mouse_bottom            Bottom of at the mouse
+                   popup_mouse_centre_x          Horizontal centre at the mouse
+                   popup_mouse_centre_y          Vertical centre at the mouse
+                   popup_mouse_top               Top at the mouse
+                   popup_mouse_x                 Mouse X position
+                   popup_mouse_y                 Mouse Y position
+                   popup_pane_bottom             Bottom of the pane
+                   popup_pane_left               Left of the pane
+                   popup_pane_right              Right of the pane
+                   popup_pane_top                Top of the pane
+                   popup_status_line_y           Above or below the status line
+                   popup_width                   Width of menu or popup
+                   popup_window_status_line_x    At the window position in status line
+                   popup_window_status_line_y    At the status line showing the window
+
              Each menu consists of items followed by a key shortcut shown in brackets.  If the menu is too large to fit on the terminal, it is not displayed.  Pressing the key shortcut
-             chooses the corresponding item.  If the mouse is enabled and the menu is opened from a mouse key binding, releasing the mouse button with an item selected will choose that
-             item.  The following keys are also available:
+             chooses the corresponding item.  If the mouse is enabled and the menu is opened from a mouse key binding, releasing the mouse button with an item selected chooses that item
+             and releasing the mouse button without an item selected closes the menu.  -O changes this behaviour so that the menu does not close when the mouse button is released without
+             an item selected the menu is not closed and a mouse button must be clicked to choose an item.
+
+             The following keys are also available:
 
                    Key    Function
                    Enter  Choose selected item
@@ -1905,14 +2187,26 @@ STATUS LINE
                    Down   Select next item
                    q      Exit menu
 
-     display-message [-aIpv] [-c target-client] [-t target-pane] [message]
+     display-message [-aINpv] [-c target-client] [-d delay] [-t target-pane] [message]
                    (alias: display)
-             Display a message.  If -p is given, the output is printed to stdout, otherwise it is displayed in the target-client status line.  The format of message is described in the
-             FORMATS section; information is taken from target-pane if -t is given, otherwise the active pane.
+             Display a message.  If -p is given, the output is printed to stdout, otherwise it is displayed in the target-client status line for up to delay milliseconds.  If delay is
+             not given, the message-time option is used; a delay of zero waits for a key press.  ‘N’ ignores key presses and closes only after the delay expires.  The format of message
+             is described in the FORMATS section; information is taken from target-pane if -t is given, otherwise the active pane.
 
              -v prints verbose logging as the format is parsed and -a lists the format variables and their values.
 
              -I forwards any input read from stdin to the empty pane given by target-pane.
+
+     display-popup [-CE] [-c target-client] [-d start-directory] [-h height] [-t target-pane] [-w width] [-x position] [-y position] [shell-command]
+                   (alias: popup)
+             Display a popup running shell-command on target-client.  A popup is a rectangular box drawn over the top of any panes.  Panes are not updated while a popup is present.
+
+             -E closes the popup automatically when shell-command exits.  Two -E closes the popup only if shell-command exited with success.
+
+             -x and -y give the position of the popup, they have the same meaning as for the display-menu command.  -w and -h give the width and height - both may be a percentage (fol‐
+             lowed by ‘%’).  If omitted, half of the terminal size is used.
+
+             The -C flag closes any popup on the client.
 
 BUFFERS
      tmux maintains a set of named paste buffers.  Each buffer may be either explicitly or automatically named.  Explicitly named buffers are named when created with the set-buffer or
@@ -1928,8 +2222,10 @@ BUFFERS
 
      The buffer commands are as follows:
 
-     choose-buffer [-NZr] [-F format] [-f filter] [-O sort-order] [-t target-pane] [template]
-             Put a pane into buffer mode, where a buffer may be chosen interactively from a list.  -Z zooms the pane.  The following keys may be used in buffer mode:
+     choose-buffer [-NZr] [-F format] [-f filter] [-K key-format] [-O sort-order] [-t target-pane] [template]
+             Put a pane into buffer mode, where a buffer may be chosen interactively from a list.  Each buffer is shown on one line.  A shortcut key is shown on the left in brackets al‐
+             lowing for immediate choice, or the list may be navigated and an item chosen or otherwise manipulated using the keys below.  -Z zooms the pane.  The following keys may be
+             used in buffer mode:
 
                    Key    Function
                    Enter  Paste selected buffer
@@ -1944,6 +2240,7 @@ BUFFERS
                    P      Paste tagged buffers
                    d      Delete selected buffer
                    D      Delete tagged buffers
+                   e      Open the buffer in an editor
                    f      Enter a format to filter items
                    O      Change sort field
                    r      Reverse sort order
@@ -1954,7 +2251,8 @@ BUFFERS
 
              -O specifies the initial sort field: one of ‘time’, ‘name’ or ‘size’.  -r reverses the sort order.  -f specifies an initial filter: the filter is a format - if it evaluates
              to zero, the item in the list is not shown, otherwise it is shown.  If a filter would lead to an empty list, it is ignored.  -F specifies the format for each item in the
-             list.  -N starts without the preview.  This command works only if at least one client is attached.
+             list and -K a format for each shortcut key; both are evaluated once for each line.  -N starts without the preview.  This command works only if at least one client is at‐
+             tached.
 
      clear-history [-t target-pane]
                    (alias: clearhist)
@@ -1964,13 +2262,14 @@ BUFFERS
                    (alias: deleteb)
              Delete the buffer named buffer-name, or the most recently added automatically named buffer if not specified.
 
-     list-buffers [-F format]
+     list-buffers [-F format] [-f filter]
                    (alias: lsb)
-             List the global buffers.  For the meaning of the -F flag, see the FORMATS section.
+             List the global buffers.  -F specifies the format of each line and -f a filter.  Only buffers for which the filter is true are shown.  See the FORMATS section.
 
-     load-buffer [-b buffer-name] path
+     load-buffer [-w] [-b buffer-name] [-t target-client] path
                    (alias: loadb)
-             Load the contents of the specified paste buffer from path.
+             Load the contents of the specified paste buffer from path.  If -w is given, the buffer is also sent to the clipboard for target-client using the xterm(1) escape sequence, if
+             possible.
 
      paste-buffer [-dpr] [-b buffer-name] [-s separator] [-t target-pane]
                    (alias: pasteb)
@@ -1983,9 +2282,10 @@ BUFFERS
                    (alias: saveb)
              Save the contents of the specified paste buffer to path.  The -a option appends to rather than overwriting the file.
 
-     set-buffer [-a] [-b buffer-name] [-n new-buffer-name] data
+     set-buffer [-aw] [-b buffer-name] [-t target-client] [-n new-buffer-name] data
                    (alias: setb)
-             Set the contents of the specified buffer to data.  The -a option appends to rather than overwriting the buffer.  The -n option renames the buffer to new-buffer-name.
+             Set the contents of the specified buffer to data.  If -w is given, the buffer is also sent to the clipboard for target-client using the xterm(1) escape sequence, if possi‐
+             ble.  The -a option appends to rather than overwriting the buffer.  The -n option renames the buffer to new-buffer-name.
 
      show-buffer [-b buffer-name]
                    (alias: showb)
@@ -2008,11 +2308,11 @@ MISCELLANEOUS
                    (alias: lock)
              Lock each client individually by running the command specified by the lock-command option.
 
-     run-shell [-b] [-t target-pane] shell-command
+     run-shell [-bC] [-d delay] [-t target-pane] [shell-command]
                    (alias: run)
-             Execute shell-command in the background without creating a window.  Before being executed, shell-command is expanded using the rules specified in the FORMATS section.  With
-             -b, the command is run in the background.  After it finishes, any output to stdout is displayed in copy mode (in the pane specified by -t or the current pane if omitted).
-             If the command doesn't return success, the exit status is also displayed.
+             Execute shell-command or (with -C) a tmux command in the background without creating a window.  Before being executed, shell-command is expanded using the rules specified in
+             the FORMATS section.  With -b, the command is run in the background.  -d waits for delay seconds before starting the command.  If -C is not given, any output to stdout is
+             displayed in view mode (in the pane specified by -t or the current pane if omitted) after the command finishes.  If the command fails, the exit status is also displayed.
 
      wait-for [-L | -S | -U] channel
                    (alias: wait)
@@ -2022,48 +2322,62 @@ MISCELLANEOUS
 EXIT MESSAGES
      When a tmux client detaches, it prints a message.  This may be one of:
 
-     [detached (from session ...)]
+     detached (from session ...)
              The client was detached normally.
 
-     [detached and SIGHUP]
+     detached and SIGHUP
              The client was detached and its parent sent the SIGHUP signal (for example with detach-client -P).
 
-     [lost tty]
+     lost tty
              The client's tty(4) or pty(4) was unexpectedly destroyed.
 
-     [terminated]
+     terminated
              The client was killed with SIGTERM.
 
-     [exited]
-             The server exited when it had no sessions.
+     too far behind
+             The client is in control mode and became unable to keep up with the data from tmux.
 
-     [server exited]
+     exited  The server exited when it had no sessions.
+
+     server exited
              The server exited when it received SIGTERM.
 
-     [server exited unexpectedly]
+     server exited unexpectedly
              The server crashed or otherwise exited without telling the client the reason.
 
 TERMINFO EXTENSIONS
-     tmux understands some unofficial extensions to terminfo(5):
+     tmux understands some unofficial extensions to terminfo(5).  It is not normally necessary to set these manually, instead the terminal-features option should be used.
+
+     AX      An existing extension that tells tmux the terminal supports default colours.
+
+     Bidi    Tell tmux that the terminal supports the VTE bidirectional text extensions.
 
      Cs, Cr  Set the cursor colour.  The first takes a single string argument and is used to set the colour; the second takes no arguments and restores the default cursor colour.  If
              set, a sequence such as this may be used to change the cursor colour from inside tmux:
 
                    $ printf '\033]12;red\033\\'
 
-     Smol    Enable the overline attribute.  The capability is usually SGR 53 and can be added to terminal-overrides as:
+     Cmg, Clmg, Dsmg, Enmg
+             Set, clear, disable or enable DECSLRM margins.  These are set automatically if the terminal reports it is VT420 compatible.
 
-                   Smol=\E[53m
+     Dsbp, Enbp
+             Disable and enable bracketed paste.  These are set automatically if the XT capability is present.
+
+     Dseks, Eneks
+             Disable and enable extended keys.
+
+     Dsfcs, Enfcs
+             Disable and enable focus reporting.  These are set automatically if the XT capability is present.
+
+     Rect    Tell tmux that the terminal supports rectangle operations.
+
+     Smol    Enable the overline attribute.
 
      Smulx   Set a styled underscore.  The single parameter is one of: 0 for no underscore, 1 for normal underscore, 2 for double underscore, 3 for curly underscore, 4 for dotted under‐
-             score and 5 for dashed underscore.  The capability can typically be added to terminal-overrides as:
+             score and 5 for dashed underscore.
 
-                   Smulx=\E[4::%p1%dm
-
-     Setulc  Set the underscore colour.  The argument is (red * 65536) + (green * 256) + blue where each is between 0 and 255.  The capability can typically be added to
-             terminal-overrides as:
-
-                   Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m
+     Setulc, ol
+             Set the underscore colour or reset to the default.  The argument is (red * 65536) + (green * 256) + blue where each is between 0 and 255.
 
      Ss, Se  Set or reset the cursor style.  If set, a sequence such as this may be used to change the cursor to an underline:
 
@@ -2071,22 +2385,29 @@ TERMINFO EXTENSIONS
 
              If Se is not set, Ss with argument 0 will be used to reset the cursor style instead.
 
+     Sync    Start (parameter is 1) or end (parameter is 2) a synchronized update.
+
      Tc      Indicate that the terminal supports the ‘direct colour’ RGB escape sequence (for example, \e[38;2;255;255;255m).
 
              If supported, this is used for the initialize colour escape sequence (which may be enabled by adding the ‘initc’ and ‘ccc’ capabilities to the tmux terminfo(5) entry).
 
+             This is equivalent to the RGB terminfo(5) capability.
+
      Ms      Store the current buffer in the host terminal's selection (clipboard).  See the set-clipboard option above and the xterm(1) man page.
+
+     XT      This is an existing extension capability that tmux uses to mean that the terminal supports the xterm(1) title set sequences and to automatically set some of the capabilities
+             above.
 
 CONTROL MODE
      tmux offers a textual interface called control mode.  This allows applications to communicate with tmux using a simple text-only protocol.
 
      In control mode, a client sends tmux commands or command sequences terminated by newlines on standard input.  Each command will produce one block of output on standard output.  An
-     output block consists of a %begin line followed by the output (which may be empty).  The output block ends with a %end or %error.  %begin and matching %end or %error have two argu‐
-     ments: an integer time (as seconds from epoch) and command number.  For example:
+     output block consists of a %begin line followed by the output (which may be empty).  The output block ends with a %end or %error.  %begin and matching %end or %error have three ar‐
+     guments: an integer time (as seconds from epoch), command number and flags (currently not used).  For example:
 
-           %begin 1363006971 2
+           %begin 1363006971 2 1
            0: ksh* (1 panes) [80x24] [layout b25f,80x24,0,0,2] @2 (active)
-           %end 1363006971 2
+           %end 1363006971 2 1
 
      The refresh-client -C command may be used to set the size of a client in control mode.
 
@@ -2094,11 +2415,21 @@ CONTROL MODE
 
      The following notifications are defined:
 
+     %client-detached client
+             The client has detached.
+
      %client-session-changed client session-id name
              The client is now attached to the session with ID session-id, which is named name.
 
+     %continue pane-id
+             The pane has been continued after being paused (if the pause-after flag is set, see refresh-client -A).
+
      %exit [reason]
              The tmux client is exiting immediately, either because it is not attached to any session or an error occurred.  If present, reason describes why the client exited.
+
+     %extended-output pane-id age ... : value
+             New form of %output sent when the pause-after flag is set.  age is the time in milliseconds for which tmux had buffered the output before it was sent.  Any subsequent argu‐
+             ments up until a single ‘:’ are for future use and should be ignored.
 
      %layout-change window-id window-layout window-visible-layout window-flags
              The layout of a window with ID window-id changed.  The new layout is window-layout.  The window's visible layout is window-visible-layout and the window flags are
@@ -2109,6 +2440,9 @@ CONTROL MODE
 
      %pane-mode-changed pane-id
              The pane with ID pane-id has changed mode.
+
+     %pause pane-id
+             The pane has been paused (if the pause-after flag is set).
 
      %session-changed session-id name
              The client is now attached to the session with ID session-id, which is named name.
@@ -2121,6 +2455,10 @@ CONTROL MODE
 
      %sessions-changed
              A session was created or destroyed.
+
+     %subscription-changed name session-id window-id window-index pane-id ... : value
+             The value of the format associated with subscription name has changed to value.  See refresh-client -B.  Any arguments after pane-id up until a single ‘:’ are for future use
+             and should be ignored.
 
      %unlinked-window-add window-id
              The window with ID window-id was created but is not linked to the current session.
@@ -2219,4 +2557,4 @@ SEE ALSO
 AUTHORS
      Nicholas Marriott <nicholas.marriott@gmail.com>
 
-BSD                                                                                    April 7, 2021                                                                                   BSD
+BSD                                                                                  December 6, 2021                                                                                  BSD

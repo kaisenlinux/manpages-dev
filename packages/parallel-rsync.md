@@ -4,7 +4,7 @@ NAME
        parallel-rsync — parallel file sync program
 
 SYNOPSIS
-       parallel-rsync [-vAraz] [-h hosts_file] [-H [user@]host[:port]] [-l user] [-p par] [-o outdir] [-e errdir] [-t timeout] [-O options] [-x args] [-X arg] [-S args] local remote
+       parallel-rsync [-vAraz] [-h hosts_file] [-H [user@]host[:port]] [-l user] [-p par] [-o outdir] [-e errdir] [-t timeout] [-O options] [-x args] [-X arg] [-S args] local ...  remote
 
 DESCRIPTION
        parallel-rsync  is  a  program  for copying files in parallel to a number of hosts using the popular rsync program.  It provides features such as passing a password to ssh, saving
@@ -86,7 +86,7 @@ OPTIONS
 
 TIPS
        The  ssh_config file can include an arbitrary number of Host sections.  Each host entry specifies ssh options which apply only to the given host.  Host definitions can even behave
-       like aliases if the HostName option is included.  This ssh feature, in combination with pssh host files, provides a tremendous amount of flexibility.
+       like aliases if the HostName option is included.  This ssh feature, in combination with parallel-ssh host files, provides a tremendous amount of flexibility.
 
 EXIT STATUS
        The exit status codes from parallel-rsync are as follows:
@@ -104,7 +104,7 @@ EXIT STATUS
 AUTHORS
        Written by Brent N. Chun <bnc@theether.org> and Andrew McNabb <amcnabb@mcnabbs.org>.
 
-       http://code.google.com/p/parallel-ssh/
+       https://github.com/lilydjwg/parallel-ssh
 
 SEE ALSO
        rsync(1), ssh(1), ssh_config(5), parallel-ssh(1), parallel-rsync(1), parallel-slurp(1), parallel-nuke(1),

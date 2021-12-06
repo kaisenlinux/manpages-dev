@@ -77,7 +77,7 @@ OPTIONS
 
 TIPS
        The ssh_config file can include an arbitrary number of Host sections.  Each host entry specifies ssh options which apply only to the given host.  Host definitions can even  behave
-       like aliases if the HostName option is included.  This ssh feature, in combination with pssh host files, provides a tremendous amount of flexibility.
+       like aliases if the HostName option is included.  This ssh feature, in combination with parallel-ssh host files, provides a tremendous amount of flexibility.
 
 EXIT STATUS
        The exit status codes from parallel-slurp are as follows:
@@ -95,7 +95,7 @@ EXIT STATUS
 AUTHORS
        Written by Brent N. Chun <bnc@theether.org> and Andrew McNabb <amcnabb@mcnabbs.org>.
 
-       http://code.google.com/p/parallel-ssh/
+       https://github.com/lilydjwg/parallel-ssh
 
 SEE ALSO
        ssh(1), ssh_config(5), parallel-ssh(1), parallel-scp(1), parallel-rsync(1), parallel-nuke(1),

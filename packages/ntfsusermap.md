@@ -39,15 +39,13 @@ EXAMPLES
 
               ntfsusermap /dev/sda1
 
-       A detailed example, with screen displays is available on http://jp-andre.pagesperso-orange.fr/ntfsusermap.html
-
 EXIT CODES
        ntfsusermap exits with a value of 0 when no error was detected, and with a value of 1 when an error was detected.
 
 KNOWN ISSUES
        Please see
 
-              http://www.tuxera.com/community/ntfs-3g-faq/
+              https://github.com/tuxera/ntfs-3g/wiki/NTFS-3G-FAQ/
 
        for common questions and known issues.  If you would find a new one in the latest release of the software then please send an email describing it in detail. You  can  contact  the
        development team on the ntfs-3g-devel@lists.sf.net address.

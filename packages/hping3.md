@@ -1,254 +1,239 @@
 HPING3(8)                                                                         System Manager's Manual                                                                        HPING3(8)
 
-NOM
-       hping3 - envoie des paquets TCP/IP (presque) arbitraires  des systmes rseaux
+NAME
+       hping3 - send (almost) arbitrary TCP/IP packets to network hosts
 
-RESUME
+SYNOPSIS
        hping3  [  -hvnqVDzZ012WrfxykQbFSRPAUXYjJBuTG  ]  [ -c count ] [ -i wait ] [ --fast ] [ -I interface ] [ -9 signature ] [ -a host ] [ -t ttl ] [ -N ip id ] [ -H ip protocol ] [ -g
        fragoff ] [ -m mtu ] [ -o tos ] [ -C icmp type ] [ -K icmp code ] [ -s source port ] [ -p[+][+] dest port ] [ -w tcp window ] [ -O tcp offset ] [ -M tcp sequence number ] [ -L tcp
        ack  ] [ -d data size ] [ -E filename ] [ -e signature ] [ --icmp-ipver version ] [ --icmp-iphlen length ] [ --icmp-iplen length ] [ --icmp-ipid id ] [ --icmp-ipproto protocol ] [
        --icmp-cksum checksum ] [ --icmp-ts ] [ --icmp-addr ] [ --tcpexitcode ] [ --tcp-mss ] [ --tcp-timestamp ] [ --tr-stop ] [ --tr-keep-ttl ] [ --tr-no-rtt ] [ --rand-dest ] [ --rand-
-       source ] ] [ --beep ] hostname
+       source ] [ --beep ] hostname
 
 DESCRIPTION
-       hping3  est  un  outil  rseau capable d'envoyer des paquets TCP/IP sur commande et d'afficher les rponses de la cible comme le programme ping le fait avec les rponses ICMP. hping3
-       traite la fragmentation, les contenus de paquets et les tailles arbitraires, et peut tre utilis dans le but de transfrer des fichiers encapsuls dans les  protocoles  supports.  En
-       utilisant hping3 vous tes capable d'effectuer au moins les tches suivantes :
+       hping3  is a network tool able to send custom TCP/IP packets and to display target replies like ping program does with ICMP replies. hping3 handle fragmentation, arbitrary packets
+       body and size and can be used in order to transfer files encapsulated under supported protocols. Using hping3 you are able to perform at least the following stuff:
 
-        - Tester les rgles d'un firewall
-        - Scanner des ports de faon avance
-        - Tester les performances rseau en utilisant diffrents protocoles, tailles de paquets, TOS (type de service) et fragmentation.
-        - Dcouverte de "Path MTU"
-        - Transfrer des fichiers mme au travers de rgles de firewall vraiment fascistes.
-        - Comme traceroute avec diffrents protocoles.
-        - Utilisation comme Firewalk.
-        - Dtermination d'OS  distance.
-        - Audit de pile TCP/IP.
-        - Beaucoup d'autres.
+        - Test firewall rules
+        - Advanced port scanning
+        - Test net performance using different protocols,
+          packet size, TOS (type of service) and fragmentation.
+        - Path MTU discovery
+        - Transferring files between even really fascist firewall
+          rules.
+        - Traceroute-like under different protocols.
+        - Firewalk-like usage.
+        - Remote OS fingerprinting.
+        - TCP/IP stack auditing.
+        - A lot of others.
 
-       C'est galement un bon outil didactique pour apprendre TCP/IP. hping3 est dvelopp et maintenu par antirez@invece.org et est sous la version 2 de la licence GPL. Le dveloppement est
-       ouvert donc vous pouvez m'envoyer des patches, suggestions et affronts sans inhibition.
+       It's also a good didactic tool to learn TCP/IP.  hping3 is developed and maintained by antirez@invece.org and is licensed under GPL version 2. Development is open so you can  send
+       me patches, suggestion and affronts without inhibitions.
 
-SITE DE HPING
-       site primaire sur http://www.hping.org. Vous pouvez trouver  la fois la version stable et les instructions pour tlcharger le dernier  code  source  sur  http://www.hping.org/down‐
-       load.html
+HPING SITE
+       primary site at http://www.hping.org.  You can found both the stable release and the instruction to download the latest source code at http://www.hping.org/download.html
 
-OPTIONS DE BASE
+BASE OPTIONS
        -h --help
-              Montre l'cran d'aide sur la sortie standard, donc vous pouvez rediriger vers less.
+              Show an help screen on standard output, so you can pipe to less.
 
        -v --version
-              Montre l'information de version et l'API utilise pour accder au niveau donnes (data link layer), linux sock packet ou libpcap.
+              Show version information and API used to access to data link layer, linux sock packet or libpcap.
 
        -c --count count
-              Arrte  aprs  avoir  envoy  (et reu) count paquets rponse. Aprs que le dernier paquet a t envoy hping3 attend COUNTREACHED_TIMEOUT secondes les rponses du systme cible. Vous
-              avez la possibilit de rgler COUNTREACHED_TIMEOUT en ditant hping3.h
+              Stop  after  sending  (and  receiving) count response packets. After last packet was send hping3 wait COUNTREACHED_TIMEOUT seconds target host replies. You are able to tune
+              COUNTREACHED_TIMEOUT editing hping2.h
 
        -i --interval
-              Attend le nombre spcifi de secondes ou de micro secondes entre l'envoie de chaque paquet. --interval X fixe wait
-               X secondes, --interval uX fixe wait
-               X micro secondes. Le dfaut est d'attendre une seconde entre chaque paquet. En utilisant hping3 pour transfrer des fichiers fixer cette option est trs important  pour  aug‐
-              menter le taux de transfert. Mme en utilisant hping3 pour effectuer des scans passifs/avec usurpation d'adresse vous devriez fixer cette option, voir HPING3-HOWTO pour plus
-              d'informations.
+              Wait the specified number of seconds or micro seconds between sending each packet.  --interval X set wait to X seconds, --interval uX set wait to X micro seconds.  The  de‐
+              fault  is  to wait one second between each packet. Using hping3 to transfer files tune this option is really important in order to increase transfer rate. Even using hping3
+              to perform idle/spoofing scanning you should tune this option, see HPING3-HOWTO for more information.
 
-       --fast Alias pour -i u10000. Hping enverra 10 paquets par seconde.
+       --fast Alias for -i u10000. Hping will send 10 packets for second.
 
        --faster
-              Alias pour -i u1. Plus rapide que --fast ;) (mais pas aussi rapide que votre ordinateur peut envoyer des paquets  cause de la conception base sur les signaux).
+              Alias for -i u1. Faster then --fast ;) (but not as fast as your computer can send packets due to the signal-driven design).
 
        --flood
-              Envoi les paquets aussi vite que possible sans prendre en compte les rponses de retour. Cette mthode est encore plus rapide que l'option -i u0.
+              Sent packets as fast as possible, without taking care to show incoming replies.  This is ways faster than to specify the -i u0 option.
 
        -n --numeric
-              Sortie numrique seulement, aucune tentative ne sera faite pour chercher les noms symboliques pour les adresses systme.
+              Numeric output only, No attempt will be made to lookup symbolic names for host addresses.
 
        -q --quiet
-              Sortie silencieuse. Rien n'est affiche except les lignes de rsume au moment du dmarrage et quand c'est fini.
+              Quiet output. Nothing is displayed except the summary lines at startup time and when finished.
 
        -I --interface interface name
-              Par dfaut sur les systmes linux et BSD hping3 utilise l'interface de routage par dfaut. Sur d'autres systmes ou quand il n'y a pas d'interface de routage par  dfaut  hping3
-              utilise  la  premire  interface non loopback. Quoi qu'il en soit vous avez la possibilit de forcer hping3  utiliser l'interface dont vous avez besoin en utilisant cette op‐
-              tion. Note : vous n'avez pas besoin de spcifier le nom complet, par exemple -I et va correspondre  eth0 ethernet0 myet1 et cetera. Si aucune interface ne correspond  hping3
-              essayera d'utiliser lo.
+              By default on linux and BSD systems hping3 uses default routing interface.  In other systems or when there is no default route hping3 uses the first non-loopback interface.
+              However you are able to force hping3 to use the interface you need using this option. Note: you don't need to specify the whole name, for example -I et will match eth0 eth‐
+              ernet0 myet1 et cetera. If no interfaces match hping3 will try to use lo.
 
        -V --verbose
-              Active la sortie verbeuse. Les rponses TCP seront affiches comme suit :
+              Enable verbose output. TCP replies will be shown as follows:
 
               len=46 ip=192.168.1.1 flags=RA DF seq=0 ttl=255 id=0 win=0 rtt=0.4 ms tos=0 iplen=40 seq=0 ack=1380893504 sum=2010 urp=0
 
        -D --debug
-              Active  le  mode de dbogage, c'est utile quand vous rencontrez quelques problmes avec hping3. Quand le mode de dbogage est activ vous obtiendrez plus d'informations  propos
-              de la dtection des interfaces, de l'accs au niveau donnes, du rglage des interfaces, des options d'analyse, de la fragmentation, du protocole HCMP et d'autres choses.
+              Enable debug mode, it's useful when you experience some problem with hping3. When debug mode is enabled you will get more information about interface detection,  data  link
+              layer access, interface settings, options parsing, fragmentation, HCMP protocol and other stuff.
 
        -z --bind
-              Lie CTRL+Z au time to live (TTL) ainsi vous serez capable d'incrmenter/dcrmenter le ttl des paquets sortant en pressant CTRL+Z une ou deux fois.
+              Bind CTRL+Z to time to live (TTL) so you will able to increment/decrement ttl of outgoing packets pressing CTRL+Z once or twice.
 
        -Z --unbind
-              D-lie CTRL+Z ainsi vous serez capable d'arrter hping3
+              Unbind CTRL+Z so you will able to stop hping3.
 
-       --beep Emet un  bip  pour tous les paquets correspondants reus (mais pas pour les erreurs ICMP).
+       --beep Beep for every matching received packet (but not for ICMP errors).
 
-SELECTION DE PROTOCOLE
-       Le protocole par dfaut est TCP, par dfaut hping3 enverra des enttes TCP sur le port 0 du systme cible avec une winsize (ndt : taille de fentre) de 64 sans aucun drapeau TCP activ.
-       Souvent  c'est  la meilleure manire de faire un 'ping cach', utile quand la cible est derrire un firewall qui jette ICMP. De plus un paquet TCP null-flag (ndt : sans drapeau) vers
-       le port 0 a de bonnes probabilits de ne pas tre journalis.
+PROTOCOL SELECTION
+       Default  protocol  is  TCP, by default hping3 will send tcp headers to target host's port 0 with a winsize of 64 without any tcp flag on. Often this is the best way to do an 'hide
+       ping', useful when target is behind a firewall that drop ICMP. Moreover a tcp null-flag to port 0 has a good probability of not being logged.
 
        -0 --rawip
-              Mode RAW IP, dans ce mode hping3 enverra une entte IP avec les donnes ajoutes avec --signature et/ou --file, voir galement --ipproto qui vous autorise  fixer le champ  pro‐
-              tocole IP.
+              RAW IP mode, in this mode hping3 will send IP header with data appended with --signature and/or --file, see also --ipproto that allows you to set the ip protocol field.
 
        -1 --icmp
-              Mode ICMP, par dfaut hping3 enverra un paquet ICMP echo-request, vous pouvez fixer un autre type/code ICMP en utilisant les options --icmptype --icmpcode
+              ICMP mode, by default hping3 will send ICMP echo-request, you can set other ICMP type/code using --icmptype --icmpcode options.
 
        -2 --udp
-              Mode UDP, par dfaut hping3 enverra des paquets UDP vers le port 0 du systme cible. Les options rglables des enttes UDP sont les suivantes : --baseport, --destport, --keep.
+              UDP mode, by default hping3 will send udp to target host's port 0.  UDP header tunable options are the following: --baseport, --destport, --keep.
 
        -8 --scan
-              Mode  scan, l'option attend un argument qui dcrit des groupes de ports scanner. Les groupes de ports sont spars par des virgules : un nombre dcrit seulement un port unique,
-              donc 1,2,3 signifie ports 1, 2 et 3. Les intervalles sont spcifis en utilisant une notation dbut-fin, comme 1-1000, qui dit  hping de scanner les ports entre 1 et 1000 (in‐
-              clus). Le mot spcial all est un alors pour 0-65535, pendant que le mot spcial known inclut tous les ports lists dans /etc/services.
-              Les  groupes  peuvent  tre  combins,  donc  la  commande  suivante  scannera  les  ports entre 1 et 1000 ET le port 8888 ET les ports lists dans /etc/services: hping --scan
-              1-1000,8888,known -S target.host.com
-              Les groupes peuvent tre nis (soustraits) en utilisant un caractre ! comme prfix, donc la ligne de commande suivante scannera tous les ports  NON  lists  dans  /etc/services
-              dans l'intervalle 1-1024 : hping --scan '1-1024,!known' -S target.host.com
-              Gardez   l'esprit que pendant que hping apparat beaucoup plus comme un scanneur de ports dans ce mode, la plupart des options sont toujours honores, donc pour effectuer par
-              exemple un scan SYN vous avez besoin de spcifier l'option -S, vous pouvez changer la taille de la fentre TCP, le TTL, contrler la fragmentation IP comme habituellement,  et
-              ainsi de suite. La seule diffrence relle est que le comportement standard de hping est encapsul dans un algorithme de scan.
-              Note  technique  :  Le mode scan utilise une conception base sur deux processus, avec de la mmoire partage pour la synchronisation. L'algorithlme de scan n'est toujours pas
-              optimal, mais dj assez rapide.
-              Conseil :  la diffrence de la plupart des scanneurs, hping montre quelques informations intressantes  propos des paquets reus, les champs IP ID, TCP win, TTL, et  ainsi  de
-              suite, n'oubliez pas de regarder ces informations additionnelles quand vous effectuez un scan! Quelques fois elles montrent des dtails intressants.
+              Scan mode, the option expects an argument that describes groups of ports to scan. port groups are comma separated: a number describes just a single  port,  so  1,2,3  means
+              port 1, 2 and 3. ranges are specified using a start-end notation, like 1-1000, that tell hping to scan ports between 1 and 1000 (included). the special word all is an alias
+              for 0-65535, while the special word known includes all the ports listed in /etc/services.
+              Groups can be combined, so the following command line will scan ports between 1 and 1000 AND port 8888 AND ports listed in /etc/services: hping --scan 1-1000,8888,known  -S
+              target.host.com
+              Groups  can  be  negated  (subtracted) using a ! character as prefix, so the following command line will scan all the ports NOT listed in /etc/services in the range 1-1024:
+              hping --scan '1-1024,!known' -S target.host.com
+              Keep in mind that while hping seems much more like a port scanner in this mode, most of the hping switches are still honored, so for example to perform a SYN scan you  need
+              to  specify the -S option, you can change the TCP windows size, TTL, control the IP fragmentation as usually, and so on. The only real difference is that the standard hping
+              behaviors are encapsulated into a scanning algorithm.
+              Tech note: The scan mode uses a two-processes design, with shared memory for synchronization. The scanning algorithm is still not optimal, but already quite fast.
+              Hint: unlike most scanners, hping shows some interesting info about received packets, the IP ID, TCP win, TTL, and so on, don't forget to look at this  additional  informa‐
+              tion when you perform a scan! Sometimes they shows interesting details.
 
        -9 --listen signature
-              Mode d'coute de HPING3, en utilisant cette option hping3 attend les paquets qui contiennent signature et exporte de la fin de la signature
-               la fin du paquet. Par exemple si hping3 --listen TEST lit un paquet qui contient 234-09sdflkjs45-TESThello_world il affichera hello_world.
+              HPING3  listen mode, using this option hping3 waits for packet that contain signature and dump from signature end to packet's end. For example if hping3 --listen TEST reads
+              a packet that contain 234-09sdflkjs45-TESThello_world it will display hello_world.
 
-OPTIONS IP
+IP RELATED OPTIONS
        -a --spoof hostname
-              Utiliser  cette  option  dans le but de fixer une fausse adresse source, cette option assure que le systme cible n'obtiendra pas votre adresse relle. Quoi qu'il en soit les
-              rponses seront envoyes  l'adresse usurpe, ainsi vous ne serez pas capable de les voir. Afin de voir comment  il  est  possible  d'effectuer  des  scans  avec  des  adresses
-              usurpes/passifs voir le fichier HPING3-HOWTO.
+              Use this option in order to set a fake IP source address, this option ensures that target will not gain your real address. However replies will be sent to spoofed  address,
+              so you will can't see them. In order to see how it's possible to perform spoofed/idle scanning see the HPING3-HOWTO.
 
        --rand-source
-              Cette  option  active  le  mode  source alatoire. hping enverra des paquets avec des adresses sources alatoires. Il est intressant d'utiliser cette option pour stresser les
-              tables d'tt d'un firewall, et d'autres tables dynamiques bases sur les IP dans les piles TCP/IP et les firewall logiciels.
+              This  option  enables the random source mode.  hping will send packets with random source address. It is interesting to use this option to stress firewall state tables, and
+              other per-ip basis dynamic tables inside the TCP/IP stacks and firewall software.
 
        --rand-dest
-              Cette option active le mode destination alatoire. hping enverra des paquets  des adresses alatoires obtenues en suivant la rgle que vous avez spcifie  comme  systme  cible.
-              Vous  avez  besoin  de  spcifier  une adresse IP numrique en tant que systme cible comme 10.0.0.x. Toutes les occurrences de x seront remplaces avec un nombre alatoire dans
-              l'intervalle 0-255. Ainsi pour obtenir des adresses IP internet dans l'espace IPv4 complet utilisez quelque chose comme hping x.x.x.x --rand-dest. Si vous n'tes pas srs  du
-              genre d'adresses que votre rgle gnre essayez d'utiliser l'option --debug pour afficher chaque nouvelle adresse destination gnre.
-              Attention : quand cette option est active hping ne peut pas dtecter la bonne interface de sortie pour les paquets, ainsi vous devez utiliser l'option --interface pour slec‐
-              tionner l'interface de sortie.
+              This option enables the random destination mode.  hping will send the packets to random addresses obtained following the rule you specify as the target host.  You  need  to
+              specify  a  numerical  IP address as target host like 10.0.0.x.  All the occurrences of x will be replaced with a random number in the range 0-255. So to obtain Internet IP
+              addresses in the whole IPv4 space use something like hping x.x.x.x --rand-dest.  If you are not sure about what kind of addresses your rule is generating  try  to  use  the
+              --debug switch to display every new destination address generated.  When this option is turned on, matching packets will be accept from all the destinations.
+              Warning:  when this option is enabled hping can't detect the right outgoing interface for the packets, so you should use the --interface option to select the desired outgo‐
+              ing interface.
 
        -t --ttl time to live
-              En utilisant cette option vous pouvez fixer le TTL (time to live) des paquets sortant, il est vraisemblable que vous utiliserez ceci avec les options --traceroute ou --bind
-              Dans le doute essayez `hping3 some.host.com -t 1 --traceroute'.
+              Using this option you can set TTL (time to live) of outgoing packets, it's likely that you will use this with --traceroute or  --bind  options.  If  in  doubt  try  `hping3
+              some.host.com -t 1 --traceroute'.
 
        -N --id
-              Fixe  le  champ  ip->id  . La valeur du champ id par dfaut est alatoire mais si la fragmentation est active et que le champ id n'est pas spcifi alors il sera gal getpid() &
-              0xFF, mettre en oeuvre une meilleure solution est dans la liste TODO (ndt :  faire).
+              Set  ip->id  field.  Default  id  is random but if fragmentation is turned on and id isn't specified it will be getpid() & 0xFFFF, to implement a better solution is in TODO
+              list.
 
        -H --ipproto
-              Fixe le protocole IP dans le mode RAW IP.
+              Set the ip protocol in RAW IP mode.
 
        -W --winid
-              Le champ id des systmes Windows* avant Win2k ont un byte ordering (ndt : ordre des octets) diffrent, si cette option est active hping3 affichera proprement  les  champs  id
-              des rponses de ces Windows.
+              id from Windows* systems before Win2k has different byte ordering, if this option is enable hping3 will properly display id replies from those Windows.
 
        -r --rel
-              Affiche  les incrments du champ id au lieu du champ id. Voir le fichier HPING3-HOWTO pour plus d'informations. Les incrments ne sont pas calculs comme id[N]-id[N-1] mais en
-              utilisant une compensation de pertes de paquets. Voir le fichier relid.c pour plus d'informations.
+              Display id increments instead of id. See the HPING3-HOWTO for more information. Increments aren't computed as id[N]-id[N-1] but using packet loss compensation. See  relid.c
+              for more information.
 
        -f --frag
-              Dcoupe les paquets en fragments, ceci peut tre utile afin de tester les performances de la fragmentation des piles IP et de tester si certains filtres de  paquets  sont  si
-              faibles  qu'ils  peuvent  tre passs en utilisant de petits fragments (anachronique). Par dfaut le 'mtu virtuel' (ndt : taille des fragments) est de 16 octets. Voir galement
-              l'option --mtu.
+              Split packets in more fragments, this may be useful in order to test IP stacks fragmentation performance and to test if some packet filter is so weak that can be passed us‐
+              ing tiny fragments (anachronistic). Default 'virtual mtu' is 16 bytes. see also --mtu option.
 
        -x --morefrag
-              Fixe le drapeau IP "more fragments" (ndt : d'autres fragments), utilisez cette option si vous voulez que le systme cible envoie un paquet ICMP time-exceeded during reassem‐
-              bly (ndt : dlai dpass durant le r-assemblage).
+              Set more fragments IP flag, use this option if you want that target host send an ICMP time-exceeded during reassembly.
 
        -y --dontfrag
-              Fixe  le  drapeau  IP  "don't  fragment"  (ndt  : ne pas fragmenter), ceci peut tre utilis pour effectuer un MTU path discovery (ndt : dcouverte de la valeur minimale de la
-              "taille maximale des paquets" sur le chemin).
+              Set don't fragment IP flag, this can be used to perform MTU path discovery.
 
        -g --fragoff fragment offset value
-              Fixe l'offset du fragment.
+              Set the fragment offset.
 
        -m --mtu mtu value
-              Fixe un 'mtu virtuel' diffrent de 16 quand la fragmentation est active. Si la taille des paquets est suprieure au 'mtu virtuel' alors la fragmentation  est  automatiquement
-              active.
+              Set different 'virtual mtu' than 16 when fragmentation is enabled. If packets size is greater that 'virtual mtu' fragmentation is automatically turned on.
 
        -o --tos hex_tos
-              Fixe Type Of Service (TOS) (ndt : le type de service), pour plus d'informations essayez --tos help.
+              Set Type Of Service (TOS), for more information try --tos help.
 
        -G --rroute
-              Enregistrer  la route. Inclut l'option RECORD_ROUTE dans chaque paquet envoy et affiche la route prsente dans le tampon du paquet retourn. Notez que l'entte IP n'est suffi‐
-              samment large que pour neuf routes. Beaucoup de systmes ignorent ou suppriment cette option. Notez galement qu'en utilisant hping vous tes capable d'utiliser  l'enregistre‐
-              ment  de  la route mme si le systme cible filtre ICMP. Enregistrer la route est une option IP, non pas une option ICMP, ainsi vous pouvez utiliser l'option d'enregistrement
-              de la route mme dans les modes TCP et UDP.
+              Record route. Includes the RECORD_ROUTE option in each packet sent and displays the route buffer of returned packets. Note that the IP header is only large enough for  nine
+              such  routes.  Many  hosts ignore or discard this option. Also note that using hping you are able to use record route even if target host filter ICMP. Record route is an IP
+              option, not an ICMP option, so you can use record route option even in TCP and UDP mode.
 
-OPTIONS ICMP
+ICMP RELATED OPTIONS
        -C --icmptype type
-              Fixe le type ICMP, le dfaut est ICMP echo request.
+              Set icmp type, default is ICMP echo request (implies --icmp).
 
        -K --icmpcode code
-              Fixe le code ICMP, le dfaut est 0 (implique --icmp).
+              Set icmp code, default is 0 (implies --icmp).
 
        --icmp-ipver
-              Fixe la version IP de l'entte IP contenue dans les donnes ICMP, le dfaut est 4.
+              Set IP version of IP header contained into ICMP data, default is 4.
 
        --icmp-iphlen
-              Fixe la longueur de l'entte IP contenue dans les donnes ICMP, le dfaut est 5 (5 mots de 32 bits).
+              Set IP header length of IP header contained into ICMP data, default is 5 (5 words of 32 bits).
 
        --icmp-iplen
-              Fixe la longueur du paquet IP de l'entte IP contenue dans les donnes ICMP, le dfaut est la taille relle.
+              Set IP packet length of IP header contained into ICMP data, default is the real length.
 
        --icmp-ipid
-              Fixe le champ IP id de l'entte IP contenue dans les donnes ICMP, le dfaut est alatoire.
+              Set IP id of IP header contained into ICMP data, default is random.
 
        --icmp-ipproto
-              Fixe le protocole IP de l'entte IP contenue dans les donnes ICMP, le dfaut est TCP.
+              Set IP protocol of IP header contained into ICMP data, default is TCP.
 
        --icmp-cksum
-              Fixe la somme de contrle ICMP, le dfaut est la somme de contrle valide.
+              Set ICMP checksum, for default is the valid checksum.
 
        --icmp-ts
-              Alias pour --icmptype 13 (pour envoyer des requtes ICMP timestamp).
+              Alias for --icmptype 13 (to send ICMP timestamp requests).
 
        --icmp-addr
-              Alias pour --icmptype 17 (pour envoyer des requtes ICMP masque rseau).
+              Alias for --icmptype 17 (to send ICMP address mask requests).
 
-OPTIONS TCP/UDP
+TCP/UDP RELATED OPTIONS
        -s --baseport source port
-              hping3 utilise le port source afin de deviner les numros de squence des rponses. Il commence avec un numro de port source de base, et incrmente ce numro pour chaque  paquet
-              envoy.  Quand  un paquet est reu alors le numro de squence peut tre calcul comme port.source.rponse - port.source.de.base. Le port source de base par dfaut est alatoire, en
-              utilisant cette option vous tes capable de fixer un numro diffrent. Si vous avez besoin que le port source ne soit pas incrment pour chaque paquet envoy  utilisez  l'option
-              -k --keep.
+              hping3 uses source port in order to guess replies sequence number. It starts with a base source port number, and increase this number for each packet sent. When  packet  is
+              received  sequence number can be computed as replies.dest.port - base.source.port.  Default base source port is random, using this option you are able to set different num‐
+              ber. If you need that source port not be increased for each sent packet use the -k --keep option.
 
        -p --destport [+][+]dest port
-              Fixe  le  port  destination, le dfaut est 0. Si le caractre '+' prcde le numro de port destination (i.e. +1024) le port destination sera incrment pour chaque paquet reu. Si
-              deux '+' prcdent le numro de port destination (i.e. ++1024), le port destination sera incrment pour chaque paquet envoy. Par dfaut le port destination peut tre  modifi  in‐
-              teractivement en utilisant CTRL+z.
+              Set destination port, default is 0. If '+' character precedes dest port number (i.e. +1024) destination port will be increased for each reply received. If double  '+'  pre‐
+              cedes dest port number (i.e. ++1024), destination port will be increased for each packet sent.  By default destination port can be modified interactively using CTRL+z.
 
-       --keep Garde constant le port source, voir --baseport pour plus d'informations.
+       --keep keep still source port, see --baseport for more information.
 
        -w --win
-              Fixe la taille de la fentre TCP. Le dfaut est 64.
+              Set TCP window size. Default is 64.
 
        -O --tcpoff
-              Fixe un faux offset (ndt : dcalage) des donnes TCP. L'offset normal des donnes est tcphdrlen / 4.
+              Set fake tcp data offset. Normal data offset is tcphdrlen / 4.
 
        -M --tcpseq
-              Fixe le numro de squence TCP.
+              Set the TCP sequence number.
 
        -L --tcpack
-              Fixe le drapeau TCP ack.
+              Set the TCP ack.
 
        -Q --seqnum
-              Cette  option  peut  tre  utilise  afin  de collecter les numros de squence gnrs par le systme cible. Ceci peut tre utile quand vous avez besoin d'analyser si les numros de
-              squence TCP sont prvisibles. Exemple de sortie :
+              This  option  can be used in order to collect sequence numbers generated by target host. This can be useful when you need to analyze whether TCP sequence number is predict‐
+              able. Output example:
 
               #hping3 win98 --seqnum -p 139 -S -i u1 -I eth0
               HPING uaz (eth0 192.168.4.41): S set, 40 headers + 0 data bytes
@@ -266,166 +251,161 @@ OPTIONS TCP/UDP
               4055793664 +167772160
               4223565824 +167772160
 
-              La premire colonne reporte les numros de squence, la seconde la diffrence entre le numro de squence courant et le dernier. Comme vous pouvez le voir les numros  de  squence
-              du systme cible sont prvisibles.
+              The first column reports the sequence number, the second difference between current and last sequence number. As you can see target host's sequence numbers are predictable.
 
        -b --badcksum
-              Envoie des paquets avec une mauvaise somme de contrle UDP/TCP
+              Send packets with a bad UDP/TCP checksum.
 
        --tcp-mss
-              Active l'option TCP MSS et la fixe avec la valeur donne.
+              Enable the TCP MSS option and set it to the given value.
 
        --tcp-timestamp
-              Active l'option TCP timestamp, et essaye de deviner la frquence de mise jour du timestamp et l'uptime du systme distant.
+              Enable the TCP timestamp option, and try to guess the timestamp update frequency and the remote system uptime.
 
        -F --fin
-              Fixe le drapeau TCP FIN.
+              Set FIN tcp flag.
 
        -S --syn
-              Fixe le drapeau TCP SYN.
+              Set SYN tcp flag.
 
        -R --rst
-              Fixe le drapeau TCP RST.
+              Set RST tcp flag.
 
        -P --push
-              Fixe le drapeau TCP PUSH.
+              Set PUSH tcp flag.
 
        -A --ack
-              Fixe le drapeau TCP ACK.
+              Set ACK tcp flag.
 
        -U --urg
-              Fixe le drapeau TCP URG.
+              Set URG tcp flag.
 
        -X --xmas
-              Fixe le drapeau TCP Xmas.
+              Set Xmas tcp flag.
 
        -Y --ymas
-              Fixe le drapeau TCP Ymas.
+              Set Ymas tcp flag.
 
-OPTIONS COMMUNES
+COMMON OPTIONS
        -d --data data size
-              Fixe  la  taille du corps du paquet. Attention, en utilisant --data 40 hping3 ne gnrera pas des paquets de 0 octet mais de entte_de_protocole+40 octets. hping3 affichera en
-              information la taille des paquets comme premire ligne de sortie, comme ceci : HPING www.yahoo.com (ppp0 204.71.200.67): NO FLAGS are set, 40 headers + 40 data bytes
+              Set packet body size. Warning, using --data 40 hping3 will not generate 0 byte packets but protocol_header+40 bytes. hping3 will display packet size  information  as  first
+              line output, like this: HPING www.yahoo.com (ppp0 204.71.200.67): NO FLAGS are set, 40 headers + 40 data bytes
 
        -E --file filename
-              Utilise le contenu du  fichier filename pour remplir les donnes du paquet.
+              Use filename contents to fill packet's data.
 
        -e --sign signature
-              Remplit d'abord longueur de signature octets de donnes avec signature. Si longueur de signature est plus grand que la taille des donnes alors un message d'erreur  sera  af‐
-              fich.  Si  vous ne spcifiez pas la taille des donnes hping utilisera la taille de la signature comme taille des donnes. Cette option peut tre utilise sans risque avec l'op‐
-              tion --file filename, l'espace de donnes restant sera rempli en utilisant le fichier filename.
+              Fill  first  signature  length bytes of data with signature.  If the signature length is bigger than data size an error message will be displayed.  If you don't specify the
+              data size hping will use the signature size as data size.  This option can be used safely with --file filename option, remainder data space will be filled using filename.
 
        -j --dump
-              Affiche les paquets en hexadcimal.
+              Dump received packets in hex.
 
        -J --print
-              Affiche les caractres imprimables des paquets reus.
+              Dump received packets' printable characters.
 
        -B --safe
-              Active le protocole safe, en utilisant cette option les paquets perdus dans un transfert de fichier seront renvoys. Par exemple afin d'envoyer le fichier /etc/passwd depuis
-              le systme A au systme B vous pouvez utiliser ce qui suit :
+              Enable safe protocol, using this option lost packets in file transfers will be resent. For example in order to send file /etc/passwd from host A to host B you may  use  the
+              following:
               [host_a]
               # hping3 host_b --udp -p 53 -d 100 --sign signature --safe --file /etc/passwd
               [host_b]
               # hping3 host_a --listen signature --safe --icmp
 
        -u --end
-              Si  vous  utilisez  l'option  --file filename, cela vous dit quand la fin du fichier a t atteinte. D'ailleurs cela prvient que l'autre ct accepte plus de paquets. S'il vous
-              plat, pour plus d'informations voir le fichier HPING3-HOWTO.
+              If  you  are  using  --file  filename  option, tell you when EOF has been reached. Moreover prevent that other end accept more packets. Please, for more information see the
+              HPING3-HOWTO.
 
        -T --traceroute
-              Mode traceroute. En utilisant cette option hping3 incrmentera le ttl pour chaque paquet ICMP time to live 0 during transit reu. Essayez hping3 host --traceroute. Cette  op‐
-              tion  implique  --bind  et  --ttl  1. Vous pouvez l'emporter sur le ttl 1 en utilisant l'option --ttl. Depuis 2.0.0 stable il affiche les informations de RTT. --tr-keep-ttl
-              garde le ttl fixe en mode traceroute, ainsi vous pouvez contrler simplement un noeud sur la route. Par exemple, pour contrler comment le 5me noeud change ou comment son RTT
-              change vous pouvez essayer hping3 host --traceroute --ttl 5 --tr-keep-ttl.
+              Traceroute mode. Using this option hping3 will increase ttl for each ICMP time to live 0 during transit received. Try hping3 host --traceroute.  This option implies  --bind
+              and --ttl 1. You can override the ttl of 1 using the --ttl option. Since 2.0.0 stable it prints RTT information.
+
+       --tr-keep-ttl
+              Keep  the  TTL  fixed  in  traceroute mode, so you can monitor just one hop in the route. For example, to monitor how the 5th hop changes or how its RTT changes you can try
+              hping3 host --traceroute --ttl 5 --tr-keep-ttl.
 
        --tr-stop
-              Si cette option est spcifie hping quittera ds que le premier paquet qui n'est pas un ICMP time exceeded est reu. Ceci mule mieux le comportement de traceroute.
+              If this option is specified hping will exit once the first packet that isn't an ICMP time exceeded is received. This better emulates the traceroute behavior.
 
        --tr-no-rtt
-              Ne montre pas l'information RTT en mode traceroute. L'information du RTT des ICMP time exceeded n'est mme pas calcule si cette option est positionne.
+              Don't show RTT information in traceroute mode. The ICMP time exceeded RTT information aren't even calculated if this option is set.
 
        --tcpexitcode
-              Quitte avec le champ tcp->th_flag du dernier paquet reu comme code de retour. Utile pour les scripts qui ont besoin, par exemple, de savoir si le port 999 de quelque systme
-              rpond avec SYN/ACK ou avec RST en rponse  un SYN, i.e. le service est lanc ou arrt.
+              Exit with last received packet tcp->th_flag as exit code. Useful for scripts that need, for example, to known if the port 999 of some host reply with SYN/ACK or with RST in
+              response to SYN, i.e. the service is up or down.
 
-FORMAT DE SORTIE TCP
-       Le format standard de sortie TCP est le suivant :
+TCP OUTPUT FORMAT
+       The standard TCP output format is the following:
 
        len=46 ip=192.168.1.1 flags=RA DF seq=0 ttl=255 id=0 win=0 rtt=0.4 ms
 
-       len est la taille, en octets, des donnes captures dans la couche liaison de donnes en excluant la taille de l'entte de liaison de donnes. Ceci peut ne pas correspondre  la  taille
-       du datagramme IP  cause du rembourrage bas niveau de la couche liaison de donnes.
+       len  is  the  size, in bytes, of the data captured from the data link layer excluding the data link header size. This may not match the IP datagram size due to low level transport
+       layer padding.
 
-       ip est l'adresse ip source.
+       ip is the source ip address.
 
-       flags sont les drapeaux TCP, R pour RESET, S pour SYN, A pour ACK, F pour FIN, P pour PUSH, U pour URGENT, X pour 0x40 non standard, Y pour 0x80 non standard.
+       flags are the TCP flags, R for RESET, S for SYN, A for ACK, F for FIN, P for PUSH, U for URGENT, X for not standard 0x40, Y for not standard 0x80.
 
-       Si la rponse contient DF l'entte IP possde le bit don't fragment (ndt : ne pas fragmenter) positionn.
+       If the reply contains DF the IP header has the don't fragment bit set.
 
-       seq est le numro de squence du paquet, obtenu en utilisant le port source pour les paquets TCP/UDP, le champ squence pour les paquets ICMP.
+       seq is the sequence number of the packet, obtained using the source port for TCP/UDP packets, the sequence field for ICMP packets.
 
-       id est le champ IP ID.
+       id is the IP ID field.
 
-       win est la taille de la fentre TCP
+       win is the TCP window size.
 
-       rtt est le "round trip time" (ndt : temps aller-retour) en millisecondes.
+       rtt is the round trip time in milliseconds.
 
-       Si vous excutez hping en utilisant l'option -V de la ligne de commande il affichera des informations supplmentaires propos du paquet, par exemple :
+       If you run hping using the -V command line switch it will display additional information about the packet, example:
 
        len=46 ip=192.168.1.1 flags=RA DF seq=0 ttl=255 id=0 win=0 rtt=0.4 ms tos=0 iplen=40 seq=0 ack=1223672061 sum=e61d urp=0
 
-       tos est le champ type de service de l'entte IP.
+       tos is the type of service field of the IP header.
 
-       iplen est le champ IP longueur totale.
+       iplen is the IP total len field.
 
-       seq et ack sont les numros de squence et d'acquittement sur 32 bits dans l'entte TCP.
+       seq and ack are the sequence and acknowledge 32bit numbers in the TCP header.
 
-       sum est la valeur de la somme de contrle de l'entte TCP.
+       sum is the TCP header checksum value.
 
-       urp est la valeur du pointeur urgent TCP.
+       urp is the TCP urgent pointer value.
 
-FORMAT DE SORTIE UDP
-       Le format standard de sortie est :
+UDP OUTPUT FORMAT
+       The standard output format is:
 
        len=46 ip=192.168.1.1 seq=0 ttl=64 id=0 rtt=6.0 ms
 
-       La signification des champs est la mme que celle de la sortie TCP pour les champs de mme nom.
+       The field meaning is just the same as the TCP output meaning of the same fields.
 
-FORMAT DE SORTIE ICMP
-       Un exemple de sortie ICMP est :
+ICMP OUTPUT FORMAT
+       An example of ICMP output is:
 
        ICMP Port Unreachable from ip=192.168.1.1 name=nano.marmoc.net
 
-       Il  est  trs facile  comprendre. Il commence avec la chane "ICMP" suivie par la description de l'erreur ICMP, dans l'exemple Port Unreachable (ndt : port non accessible). Le champ
-       ip est l'adresse IP source du datagramme IP contenant l'erreur ICMP, le champ name est simplement l'adresse numrique rsolue en un nom (une requte dns PTR) ou UNKNOWN si la  rsolu‐
-       tion a chou.
+       It is very simple to understand. It starts with the string "ICMP" followed by the description of the ICMP error, Port Unreachable in the example. The ip field is the IP source ad‐
+       dress of the IP datagram containing the ICMP error, the name field is just the numerical address resolved to a name (a dns PTR request) or UNKNOWN if the resolution failed.
 
-       Le format ICMP de Time exceeded during ou de reassembly est un peu diffrent :
+       The ICMP Time exceeded during transit or reassembly format is a bit different:
 
        TTL 0 during transit from ip=192.168.1.1 name=nano.marmoc.net
 
        TTL 0 during reassembly from ip=192.70.106.25 name=UNKNOWN
 
-       La seule diffrence est la description de l'erreur, elle commence avec TTL 0.
+       The only difference is the description of the error, it starts with TTL 0.
 
-AUTEUR
-       Salvatore Sanfilippo <antirez@invece.org>, avec l'aide des personnes mentionnes dans le fichier AUTHORS et sur http://www.hping.org/authors.html
+AUTHOR
+       Salvatore Sanfilippo <antirez@invece.org>, with the help of the people mentioned in AUTHORS file and at http://www.hping.org/authors.html
 
-BOGUES
-       Mme en utilisant les options --end et --safe pour transfrer des fichiers, le paquet final sera rembourr avec des octets 0x00.
+BUGS
+       Even using the --end and --safe options to transfer files the final packet will be padded with 0x00 bytes.
 
-       Les  donnes  sont lues sans tenir compte de l'alignement, mais l'alignement est impos dans les structures de donnes. Ceci ne sera pas un problme sous i386 mais, alors que normale‐
-       ment les enttes TCP/IP sont naturellement alignes, cela peut crer des problmes avec divers processeurs et des paquets mal-forms si il y a des accs non aligns quelque part dans  le
-       code (aucun avec un peu de chance).
+       Data is read without care about alignment, but alignment is enforced in the data structures.  This will not be a problem under i386 but, while usually the TCP/IP headers are natu‐
+       rally aligned, may create problems with different processors and bogus packets if there is some unaligned access around the code (hopefully none).
 
-       Sur  Solaris hping ne fonctionne pas sur l'interface loopback. Ceci semble tre un problme solaris, comme expos dans la liste de diffusion tcpdump-workers, ainsi la libpcap ne peut
-       rien faire pour la supporter correctement.
+       On solaris hping does not work on the loopback interface. This seems a solaris problem, as stated in the tcpdump-workers mailing list, so the libpcap can't do nothing to handle it
+       properly.
 
-VOIR AUSSI
+SEE ALSO
        ping(8), traceroute(8), ifconfig(8), nmap(1)
-
-TRADUCTEUR
-       Denis Ducamp <Denis.Ducamp@groar.org>
 
                                                                                         2001 Aug 14                                                                              HPING3(8)

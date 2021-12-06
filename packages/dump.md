@@ -194,7 +194,7 @@ OPTIONS
        After several months or so, the daily and weekly tapes should get rotated out of the dump cycle and fresh tapes brought in.
 
        Another backup strategy is the Tower of Hanoi sequence, which reuses older tapes in a way that for newer dates the available restore points are more frequent, then for older dates
-       (see http://en.wikipedia.org/wiki/Backup_rotation_scheme for additional information).
+       (see https://en.wikipedia.org/wiki/Backup_rotation_scheme for additional information).
 
        (The 4.3BSD option syntax is implemented for backward compatibility but is not documented here.)
 
@@ -262,9 +262,9 @@ AUTHOR
        Starting with 0.4b5, the new maintainer is Stelian Pop <stelian@popies.net>.
 
 AVAILABILITY
-       The dump/restore backup suite is available from <http://dump.sourceforge.net>
+       The dump/restore backup suite is available from <https://dump.sourceforge.io>
 
 HISTORY
        A dump command appeared in Version 6 AT&T UNIX.
 
-BSD                                                                                 version 0.4b46 of                                                                              DUMP(8)
+BSD                                                                            version 0.4b47 of 1 Jan 2021                                                                        DUMP(8)

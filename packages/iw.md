@@ -35,8 +35,8 @@ IW - COMMAND SYNTAX
        print the help for all matching commands.
 
 SEE ALSO
-       ip(8), crda(8), regdbdump(8), regulatory.bin(5)
+       ip(8), crda(8), regdbdump(8), regulatory.bin(5).
 
-       http://wireless.kernel.org/en/users/Documentation/iw
+       Documentation at kernel wiki ⟨https://wireless.wiki.kernel.org/en/users/Documentation/iw⟩.
 
-iw                                                                                      7 June 2012                                                                                  IW(8)
+iw                                                                                   22 November 2020                                                                                IW(8)

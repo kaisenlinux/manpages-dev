@@ -92,6 +92,10 @@ OPTIONS
 
                           By default, mkfs.xfs will enable metadata CRCs.
 
+                          Formatting a filesystem without CRCs selects the V4 format, which is deprecated and will be removed from upstream in September 2030.  Distributors may choose to
+                          withdraw support for the V4 format earlier than this date.  Several other options, noted below, are only tunable on V4 formats, and will be removed  along  with
+                          the V4 format itself.
+
                    finobt=value
                           This  option  enables the use of a separate free inode btree index in each allocation group. The value is either 0 to disable the feature, or 1 to create a free
                           inode btree in each allocation group.
@@ -253,15 +257,21 @@ OPTIONS
                           filesystem needs to be mountable by a version of IRIX that does not have the inode alignment feature (any release of IRIX before 6.2, and IRIX 6.2  without  XFS
                           patches).
 
+                          This option is only tunable on the deprecated V4 format.
+
                    attr=value
                           This  is  used  to  specify the version of extended attribute inline allocation policy to be used.  By default, this is 2, which uses an efficient algorithm for
                           managing the available inline inode space between attribute and extent data.
 
                           The previous version 1, which has fixed regions for attribute and extent data, is kept for backwards compatibility with kernels older than version 2.6.16.
 
+                          This option is only tunable on the deprecated V4 format.
+
                    projid32bit[=value]
                           This is used to enable 32bit quota project identifiers. The value is either 0 or 1, with 1 signifying that 32bit projid are to be  enabled.   If  the  value  is
                           omitted, 1 is assumed.  (This default changed in release version 3.2.0.)
+
+                          This option is only tunable on the deprecated V4 format.
 
                    sparse[=value]
                           Enable  sparse  inode chunk allocation. The value is either 0 or 1, with 1 signifying that sparse allocation is enabled.  If the value is omitted, 1 is assumed.
@@ -303,6 +313,8 @@ OPTIONS
                           The previous version 1, which is limited to 32k log buffers and does not support stripe-aligned writes, is kept for backwards compatibility with  very  old  2.4
                           kernels.
 
+                          This option is only tunable on the deprecated V4 format.
+
                    sunit=value
                           This  specifies  the  alignment to be used for log writes. The value has to be specified in 512-byte block units. Use the su suboption to specify the log stripe
                           unit size in bytes.  Log writes will be aligned on this boundary, and rounded up to this boundary.  This gives major improvements in performance on some config‐
@@ -323,6 +335,8 @@ OPTIONS
                           the  filesystem to be able to maintain the persistent counter values without needed to keep them in the superblock.  This gives significant improvements in per‐
                           formance on some configurations.  The default value is 1 (on) so you must specify lazy-count=0 if you want to disable this feature for older kernels which don't
                           support it.
+
+                          This option is only tunable on the deprecated V4 format.
 
        -n naming_options
        Section Name: [naming]
@@ -349,6 +363,8 @@ OPTIONS
                           The value is either 0 or 1, with 1 signifying that filetype information will be stored in the directory structure.  The default value is 1.
 
                           When CRCs are enabled (the default), the ftype functionality is always enabled, and cannot be turned off.
+
+                          In other words, this option is only tunable on the deprecated V4 format.
 
        -p protofile
               If the optional -p protofile argument is given, mkfs.xfs uses protofile as a prototype file and takes its directions from that file.  The blocks and  inodes  specifiers  in

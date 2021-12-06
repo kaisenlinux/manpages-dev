@@ -73,10 +73,10 @@ AUTHORS
 
 AVAILABILITY
        ntfsdecrypt is part of the ntfs-3g package and is available from:
-       http://www.tuxera.com/community/
+       https://github.com/tuxera/ntfs-3g/wiki/
 
 SEE ALSO
        Read ntfs-3g(8) for details on option efs_raw,
        ntfscat(8), ntfsprogs(8)
 
-ntfs-3g 2017.3.23AR.3                                                                    June 2014                                                                          NTFSDECRYPT(8)
+ntfs-3g 2021.8.22                                                                        June 2014                                                                          NTFSDECRYPT(8)

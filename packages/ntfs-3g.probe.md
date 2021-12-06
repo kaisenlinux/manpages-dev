@@ -57,10 +57,12 @@ EXIT CODES
 KNOWN ISSUES
        Please see
 
-              http://tuxera.com/community/ntfs-3g-faq/
+              https://github.com/tuxera/ntfs-3g/wiki/NTFS-3G-FAQ
 
-       for common questions and known issues.  If you think you have found an undocumented problem in the latest release of the software then please send an email describing  it  in  de‐
-       tail.  You can contact the development team on the ntfs-3g-devel@lists.sf.net address.
+       for common questions and known issues.  If you think you have found an undocumented problem in the latest release of the software then please post an ntfs-3g issue  describing  it
+       in detail so that the development team can be aware of the issue and take care of it:
+
+              https://github.com/tuxera/ntfs-3g/issues
 
 AUTHORS
        ntfs-3g.probe was written by Szabolcs Szakacsits.
@@ -71,4 +73,4 @@ THANKS
 SEE ALSO
        ntfs-3g(8)
 
-ntfs-3g.probe 2017.3.23AR.3                                                            January 2008                                                                       NTFS-3G.PROBE(8)
+ntfs-3g.probe 2021.8.22                                                                January 2008                                                                       NTFS-3G.PROBE(8)

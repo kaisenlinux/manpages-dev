@@ -1,35 +1,31 @@
-EXFATFSCK(8)                                                                      System Manager's Manual                                                                     EXFATFSCK(8)
+fsck.exfat(8)                                                                     System Manager's Manual                                                                    fsck.exfat(8)
 
 NAME
-       exfatfsck - check an exFAT file system
+       fsck.exfat - check an exFAT filesystem
 
 SYNOPSIS
-       exfatfsck [ -a | -n | -p | -y ] device
-       exfatfsck [ -V ]
+       fsck.exfat [ -a ] [ -n ] [ -r ] [ -v ] [ -y ] [ -v ] device
+       fsck.exfat -V
 
 DESCRIPTION
-       exfatfsck checks an exFAT file system for errors. It can repair some of them.
+       fsck.exfat checks an exFAT filesystem and repairs the filesystem depending on the options passed.
 
-COMMAND LINE OPTIONS
-       Command line options available:
+OPTIONS
+       -a     This  option  does  the same thing as the -p option.  It is provided for backwards compatibility only;  it  is  suggested  that people use -p option whenever possible.
 
-       -a     Automatically repair the file system. No user intervention required.
+       -n     Check the filesystem but do not attempt to repair the filesystem.
 
-       -n     No-operation mode: non-interactively check for errors, but don't write anything to the file system.
+       -p     Repair the filesystem without user interaction if it can be done safely.
 
-       -p     Same as -a for compatibility with other *fsck.
+       -r     Repair the filesystem interactively.
 
-       -V     Print version and copyright.
+       -v     Prints verbose debugging information while checking the exFAT filesystem.
 
-       -y     Same as -a for compatibility with other *fsck.
+       -V     Prints the version number and exits.
 
-EXIT CODES
-       Zero is returned if errors were not found. Any other code means an error.
-
-AUTHOR
-       Andrew Nayenko
+       -y     Repair the filesystem answering yes to all questions.
 
 SEE ALSO
-       fsck(8)
+       fsck(8), fstab(5),
 
-                                                                                      September 2018                                                                          EXFATFSCK(8)
+                                                                                                                                                                             fsck.exfat(8)

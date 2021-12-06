@@ -48,6 +48,6 @@ COPYRIGHT
        Ave, Cambridge, MA 02139, USA.
 
 VERSION
-       0.6.75
+       0.6.76
 
-pst2dii 0.6.75                                                                          2017-12-07                                                                              PST2DII(1)
+pst2dii 0.6.76                                                                          2017-12-07                                                                              PST2DII(1)

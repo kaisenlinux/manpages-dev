@@ -123,9 +123,9 @@ AUTHORS
 
 AVAILABILITY
        mkntfs is part of the ntfs-3g package and is available from:
-       http://www.tuxera.com/community/
+       https://github.com/tuxera/ntfs-3g/wiki/
 
 SEE ALSO
        badblocks(8), ntfsprogs(8)
 
-ntfs-3g 2017.3.23AR.3                                                                  January 2006                                                                              MKNTFS(8)
+ntfs-3g 2021.8.22                                                                      January 2006                                                                              MKNTFS(8)

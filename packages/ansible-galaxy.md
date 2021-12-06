@@ -55,4 +55,4 @@ SEE ALSO
        Extensive  documentation  is  available  in  the  documentation site: <https://docs.ansible.com>.  IRC and mailing list info can be found in file CONTRIBUTING.md, available in: <‐
        https://github.com/ansible/ansible>
 
-Ansible 2.9.16                                                                                                                                                           ANSIBLE-GALAXY(1)
+Ansible 2.10.8                                                                                                                                                           ANSIBLE-GALAXY(1)

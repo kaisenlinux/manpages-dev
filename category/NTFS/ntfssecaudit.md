@@ -102,7 +102,7 @@ EXIT CODES
 KNOWN ISSUES
        Please see
 
-              http://www.tuxera.com/community/ntfs-3g-faq/
+              https://github.com/tuxera/ntfs-3g/wiki/NTFS-3G-FAQ/
 
        for common questions and known issues.  If you would find a new one in the latest release of the software then please send an email describing it in detail. You  can  contact  the
        development team on the ntfs-3g-devel@lists.sf.net address.

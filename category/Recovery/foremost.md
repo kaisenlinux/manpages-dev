@@ -104,7 +104,7 @@ DESCRIPTION
 
               Any line that begins with a pound sign is considered a comment and ignored. Thus, to skip a file type just put a pound sign at the beginning of that line
 
-              Headers and footers are decoded before use. To specify a value in hexadecimal use \x[0-f][0-f], and for octal use \[1-9][1-9][1-9].  Spaces can be represented by \s.  Exam‐
+              Headers and footers are decoded before use. To specify a value in hexadecimal use \x[0-f][0-f], and for octal use \[0-7][0-7][0-7].  Spaces can be represented by \s.  Exam‐
               ple: "\x4F\123\I\sCCI" decodes to "OSI CCI".
 
               To  match  any single character (aka a wildcard) use a ?. If you need to search for the ? character, you will need to change the wildcard line *and* every occurrence of the

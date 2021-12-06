@@ -86,11 +86,11 @@ AUTHORS
 
 AVAILABILITY
        ntfscat is part of the ntfs-3g package and is available from:
-       http://www.tuxera.com/community/
+       https://github.com/tuxera/ntfs-3g/wiki/
 
 SEE ALSO
        Read libntfs(8) for details how to access encrypted files.
 
        libntfs(8), ntfsls(8), ntfsprogs(8)
 
-ntfs-3g 2017.3.23AR.3                                                                 September 2007                                                                            NTFSCAT(8)
+ntfs-3g 2021.8.22                                                                     September 2007                                                                            NTFSCAT(8)

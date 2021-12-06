@@ -117,4 +117,4 @@ AUTHOR
 
        This manual page was written by Daniel Echeverry <epsilon77@gmail.com>, for the Debian project (and may be used by others).
 
-                                                                                        01/01/2020                                                                                HYDRA(1)
+                                                                                        01/01/2021                                                                                HYDRA(1)

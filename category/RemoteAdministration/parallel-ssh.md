@@ -4,18 +4,18 @@ NAME
        parallel-ssh — parallel ssh program
 
 SYNOPSIS
-       parallel-ssh [-vAiIP] [-h hosts_file] [-H [user@]host[:port]] [-l user] [-p par] [-o outdir] [-e errdir] [-t timeout] [-O options] [-x args] [-X arg] command ...
+       parallel-ssh [-vAiIP] [-h hosts_file] [-H [user@]host[:port]] [-g pattern] [-l user] [-p par] [-o outdir] [-e errdir] [-t timeout] [-O options] [-x args] [-X arg] command ...
 
-       parallel-ssh -I [-vAiIP] [-h hosts_file] [-H [user@]host[:port]] [-l user] [-p par] [-o outdir] [-e errdir] [-t timeout] [-O options] [-x args] [-X arg] [command ...]
+       parallel-ssh -I [-vAiIP] [-h hosts_file] [-H [user@]host[:port]] [-g pattern] [-l user] [-p par] [-o outdir] [-e errdir] [-t timeout] [-O options] [-x args] [-X arg] [command ...]
 
 DESCRIPTION
        parallel-ssh  is a program for executing ssh in parallel on a number of hosts.  It provides features such as sending input to all of the processes, passing a password to ssh, sav‐
        ing output to files, and timing out.
 
-       The PSSH_NODENUM and PSSH_HOST environment variables are sent to the remote host.  The PSSH_NODENUM variable is assigned a unique number for each ssh connection, starting  with  0
-       and counting up.  The PSSH_HOST variable is assigned the name of the host as specified in the hosts list.  Note that sshd drops environment variables by default, so sshd_config on
-       the remote host must include the line:
-              AcceptEnv PSSH_NODENUM PSSH_HOST
+       The PSSH_NODENUM, PSSH_NUMNODES, PSSH_HOST environment variables are sent to the remote host.  The PSSH_NODENUM variable is assigned a  unique  number  for  each  ssh  connection,
+       starting  with 0 and counting up.  The PSSH_NUMNODES variable is assigned the total number of node being used. The PSSH_HOST variable is assigned the name of the host as specified
+       in the hosts list.  Note that sshd drops environment variables by default, so sshd_config on the remote host must include the line:
+              AcceptEnv PSSH_NODENUM PSSH_NUMNODES PSSH_HOST
 
 OPTIONS
        -h host_file
@@ -29,6 +29,11 @@ OPTIONS
        -H     "[user@]host[:port] [ [user@]host[:port ] ... ]"
        --host "[user@]host[:port] [ [user@]host[:port ] ... ]"
               Add the given host strings to the list of hosts.  This option may be given multiple times, and may be used in conjunction with the -h option.
+
+       -g pattern
+       --host-glob pattern
+              Filter hosts with glob pattern pattern.  This uses the same syntax as shell globs. Make sure to quote the pattern to prevent shell from expanding it. Examples  are  "*web*"
+              and "company_*".
 
        -l user
        --user user
@@ -44,7 +49,7 @@ OPTIONS
 
        -o outdir
        --outdir outdir
-              Save standard output to files in the given directory.  Filenames are of the form [user@]host[:port][.num] where the user and port are only included for hosts  that  explic‐
+              Save  standard  output to files in the given directory.  Filenames are of the form [user@]host[:port][.num] where the user and port are only included for hosts that explic‐
               itly specify them.  The number is a counter that is incremented each time for hosts that are specified more than once.
 
        -e errdir
@@ -67,7 +72,7 @@ OPTIONS
 
        -A
        --askpass
-              Prompt  for a password and pass it to ssh.  The password may be used for either to unlock a key or for password authentication.  The password is transferred in a fairly se‐
+              Prompt for a password and pass it to ssh.  The password may be used for either to unlock a key or for password authentication.  The password is transferred in a fairly  se‐
               cure manner (e.g., it will not show up in argument lists).  However, be aware that a root user on your system could potentially intercept the password.
 
        -i
@@ -113,9 +118,17 @@ EXAMPLES
 
 TIPS
        If you have a set of hosts that you connect to frequently with specific options, it may be helpful to create an alias such as:
-              alias pssh_servers="parallel-ssh -h /path/to/server_list.txt -l root -A"
+              alias parallel-ssh_servers="parallel-ssh -h /path/to/server_list.txt -l root -A"
 
-       The ssh_config file can include an arbitrary number of Host sections.  Each host entry specifies ssh options which apply only to the given host.  Host definitions can even  behave
+       Note  that  when  an  ssh  command  is  terminated, it does not kill remote processes (OpenSSH bug #396 has been open since 2002).  One workaround is to instruct ssh to allocate a
+       pseudo-terminal, which makes it behave more like a normal interactive ssh session.  To do this, use parallel-ssh's "-x" option to pass "-tt" to ssh.  For example:
+              parallel-ssh -i -x "-tt" -h hosts.txt -t 10 sleep 1000
+       will ensure that all of the sleep commands will terminate (with SIGHUP) after the 10 second timeout.
+
+       By default, ssh uses full buffering for non-interactive commands.  Line buffering may be preferable to full buffering if you intend to look at the files in an output directory  as
+       a command is running.  To switch ssh to use line buffering, use its "-tt" option (which allocates a pseudo-terminal) using the "-x" option in parallel-ssh.
+
+       The  ssh_config file can include an arbitrary number of Host sections.  Each host entry specifies ssh options which apply only to the given host.  Host definitions can even behave
        like aliases if the HostName option is included.  This ssh feature, in combination with parallel-ssh host files, provides a tremendous amount of flexibility.
 
 EXIT STATUS
@@ -136,7 +149,7 @@ EXIT STATUS
 AUTHORS
        Written by Brent N. Chun <bnc@theether.org> and Andrew McNabb <amcnabb@mcnabbs.org>.
 
-       http://code.google.com/p/parallel-ssh/
+       https://github.com/lilydjwg/parallel-ssh
 
 SEE ALSO
        ssh(1), ssh_config(5), parallel-scp(1), parallel-rsync(1), parallel-slurp(1), parallel-nuke(1),

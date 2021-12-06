@@ -6,12 +6,12 @@ NAME
 SYNOPSIS
        usage: ansible-pull [-h] [--version] [-v] [-k]
               [--private-key  PRIVATE_KEY_FILE]  [-u  REMOTE_USER]  [-c CONNECTION] [-T TIMEOUT] [--ssh-common-args SSH_COMMON_ARGS] [--sftp-extra-args SFTP_EXTRA_ARGS] [--scp-extra-args
-              SCP_EXTRA_ARGS] [--ssh-extra-args SSH_EXTRA_ARGS]  [--vault-id  VAULT_IDS]  [--ask-vault-pass  |  --vault-password-file  VAULT_PASSWORD_FILES]  [-e  EXTRA_VARS]  [-t  TAGS]
+              SCP_EXTRA_ARGS] [--ssh-extra-args SSH_EXTRA_ARGS] [--vault-id VAULT_IDS] [--ask-vault-password |  --vault-password-file  VAULT_PASSWORD_FILES]  [-e  EXTRA_VARS]  [-t  TAGS]
               [--skip-tags  SKIP_TAGS]  [-i  INVENTORY]  [--list-hosts]  [-l SUBSET] [-M MODULE_PATH] [-K] [--purge] [-o] [-s SLEEP] [-f] [-d DEST] [-U URL] [--full] [-C CHECKOUT] [--ac‐
-              cept-host-key] [-m MODULE_NAME] [--verify-commit] [--clean] [--track-subs] [--check] [--diff] [playbook.yml ...]
+              cept-host-key] [-m MODULE_NAME] [--verify-commit] [--clean] [--track-subs] [--check] [--diff] [playbook.yml [playbook.yml ...]]
 
 DESCRIPTION
-       is used to up a remote copy of ansible on each managed node, each set to run via cron and update playbook source via a source repository.  This inverts the default push  architec‐
+       Used to pull a remote copy of ansible on each managed node, each set to run via cron and update playbook source via a source repository.  This inverts the default  push  architec‐
        ture of ansible into a pull architecture, which has near-limitless scaling potential.
 
        The setup playbook can be tuned to change the cron frequency, logging locations, and parameters to ansible-pull.  This is useful both for extreme scale-out as well as periodic re‐
@@ -23,7 +23,7 @@ COMMON OPTIONS
        --accept-host-key
           adds the hostkey for the repo url if not already added
 
-       --ask-vault-pass
+       --ask-vault-password, --ask-vault-pass
           ask for vault password
 
        --check
@@ -68,7 +68,7 @@ COMMON OPTIONS
        --vault-id
           the vault identity to use
 
-       --vault-password-file
+       --vault-password-file, --vault-pass-file
           vault password file
 
        --verify-commit
@@ -164,4 +164,4 @@ SEE ALSO
        Extensive documentation is available in the documentation site: <https://docs.ansible.com>.  IRC and mailing list info can be found  in  file  CONTRIBUTING.md,  available  in:  <‐
        https://github.com/ansible/ansible>
 
-Ansible 2.9.16                                                                                                                                                             ANSIBLE-PULL(1)
+Ansible 2.10.8                                                                                                                                                             ANSIBLE-PULL(1)

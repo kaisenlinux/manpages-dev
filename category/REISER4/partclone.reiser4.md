@@ -39,12 +39,12 @@ OPTIONS
        The program follows the usual GNU command line syntax, with long options starting with two dashes (`-'). A summary of options is included below.
 
        -s FILE, --source FILE
-           Source FILE. The FILE could be a image file(made by partclone) or device depend on your action. Normanly, backup source is device, restore source is image file.
+           Source FILE. The FILE could be a image file(made by partclone) or device depend on your action. Normally, backup source is device, restore source is image file.
 
            Receving data from pipe line is supported ONLY for restoring, just ignore -s option or use '-' means receive data from stdin.
 
        -o FILE, --output FILE
-           Output FILE. The FILE could be a image file(partclone will generate) or device depend on your action. Normanly, backup output to image file and restore output to device.
+           Output FILE. The FILE could be a image file(partclone will generate) or device depend on your action. Normally, backup output to image file and restore output to device.
 
            Sending data to pipe line is also supported ONLY for back-up, just ignore -o option or use '-' means send data to stdout.
 
@@ -53,9 +53,6 @@ OPTIONS
 
        -c, --clone
            Save partition to the special image format.
-
-       -x, --compresscmd CMD
-           Execute CMD in a write-only pipe to compress the output image. Applicable to cloning. The output file is always overwritten.
 
        -r, --restore
            Restore partition from the special image format.
@@ -158,4 +155,4 @@ COPYRIGHT
 
        On Debian systems, the complete text of the GNU General Public License can be found in /usr/share/common-licenses/GPL.
 
-partclone                                                                               12/24/2015                                                                            PARTCLONE(8)
+partclone                                                                               10/25/2020                                                                            PARTCLONE(8)

@@ -39,4 +39,4 @@ AUTHOR
 
        This manpage was written by Aaron Isotton and updated by Joao Eriberto Mota Filho.
 
-cbm-0.3                                                                                31 Jan. 2021                                                                                 cbm(1)
+cbm-0.3.2                                                                              15 Aug. 2021                                                                                 cbm(1)

@@ -5,7 +5,7 @@ NAME
 
 SYNOPSIS
        usage: ansible-vault [-h] [--version] [-v]
-              {create,decrypt,edit,view,encrypt,encrypt_string,rekey} ...
+              {create,decrypt,edit,view,encrypt,encrypt_string,rekey}
 
 DESCRIPTION
        can  encrypt any structured data file used by Ansible.  This can include group_vars/ or host_vars/ inventory variables, variables loaded by include_vars or vars_files, or variable
@@ -27,22 +27,22 @@ COMMON OPTIONS
 ACTIONS
        create create and open a file in an editor that will be encrypted with the provided vault secret when closed
 
-              --ask-vault-pass
+              --ask-vault-password,   --ask-vault-pass
                  ask for vault password
 
               --encrypt-vault-id 'ENCRYPT_VAULT_ID'
-                 the vault id used to encrypt (required if more than vault-id is provided)
+                 the vault id used to encrypt (required if more than one vault-id is provided)
 
               --vault-id
                  the vault identity to use
 
-              --vault-password-file
+              --vault-password-file,   --vault-pass-file
                  vault password file
 
        decrypt
               decrypt the supplied file using the provided vault secret
 
-              --ask-vault-pass
+              --ask-vault-password,   --ask-vault-pass
                  ask for vault password
 
               --output 'OUTPUT_FILE'
@@ -51,42 +51,42 @@ ACTIONS
               --vault-id
                  the vault identity to use
 
-              --vault-password-file
+              --vault-password-file,   --vault-pass-file
                  vault password file
 
        edit   open and decrypt an existing vaulted file in an editor, that will be encrypted again when closed
 
-              --ask-vault-pass
+              --ask-vault-password,   --ask-vault-pass
                  ask for vault password
 
               --encrypt-vault-id 'ENCRYPT_VAULT_ID'
-                 the vault id used to encrypt (required if more than vault-id is provided)
+                 the vault id used to encrypt (required if more than one vault-id is provided)
 
               --vault-id
                  the vault identity to use
 
-              --vault-password-file
+              --vault-password-file,   --vault-pass-file
                  vault password file
 
        view   open, decrypt and view an existing vaulted file using a pager using the supplied vault secret
 
-              --ask-vault-pass
+              --ask-vault-password,   --ask-vault-pass
                  ask for vault password
 
               --vault-id
                  the vault identity to use
 
-              --vault-password-file
+              --vault-password-file,   --vault-pass-file
                  vault password file
 
        encrypt
               encrypt the supplied file using the provided vault secret
 
-              --ask-vault-pass
+              --ask-vault-password,   --ask-vault-pass
                  ask for vault password
 
               --encrypt-vault-id 'ENCRYPT_VAULT_ID'
-                 the vault id used to encrypt (required if more than vault-id is provided)
+                 the vault id used to encrypt (required if more than one vault-id is provided)
 
               --output 'OUTPUT_FILE'
                  output file name for encrypt or decrypt; use - for stdout
@@ -94,17 +94,17 @@ ACTIONS
               --vault-id
                  the vault identity to use
 
-              --vault-password-file
+              --vault-password-file,   --vault-pass-file
                  vault password file
 
        encrypt_string
               encrypt the supplied string using the provided vault secret
 
-              --ask-vault-pass
+              --ask-vault-password,   --ask-vault-pass
                  ask for vault password
 
               --encrypt-vault-id 'ENCRYPT_VAULT_ID'
-                 the vault id used to encrypt (required if more than vault-id is provided)
+                 the vault id used to encrypt (required if more than one vault-id is provided)
 
               --output 'OUTPUT_FILE'
                  output file name for encrypt or decrypt; use - for stdout
@@ -115,7 +115,7 @@ ACTIONS
               --vault-id
                  the vault identity to use
 
-              --vault-password-file
+              --vault-password-file,   --vault-pass-file
                  vault password file
 
               -n,   --name
@@ -126,11 +126,11 @@ ACTIONS
 
        rekey  re-encrypt a vaulted file with a new secret, the previous secret is required
 
-              --ask-vault-pass
+              --ask-vault-password,   --ask-vault-pass
                  ask for vault password
 
               --encrypt-vault-id 'ENCRYPT_VAULT_ID'
-                 the vault id used to encrypt (required if more than vault-id is provided)
+                 the vault id used to encrypt (required if more than one vault-id is provided)
 
               --new-vault-id 'NEW_VAULT_ID'
                  the new vault identity to use for rekey
@@ -141,7 +141,7 @@ ACTIONS
               --vault-id
                  the vault identity to use
 
-              --vault-password-file
+              --vault-password-file,   --vault-pass-file
                  vault password file
 
 ENVIRONMENT
@@ -174,4 +174,4 @@ SEE ALSO
        Extensive  documentation  is  available  in  the  documentation site: <https://docs.ansible.com>.  IRC and mailing list info can be found in file CONTRIBUTING.md, available in: <‐
        https://github.com/ansible/ansible>
 
-Ansible 2.9.16                                                                                                                                                            ANSIBLE-VAULT(1)
+Ansible 2.10.8                                                                                                                                                            ANSIBLE-VAULT(1)

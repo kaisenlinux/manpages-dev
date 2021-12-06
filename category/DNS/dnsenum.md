@@ -153,4 +153,4 @@ COPYRIGHT
 SCRIPT CATEGORIES
        Networking DNS
 
-perl v5.30.3                                                                            2020-09-17                                                                              DNSENUM(1)
+perl v5.32.1                                                                            2021-08-15                                                                              DNSENUM(1)

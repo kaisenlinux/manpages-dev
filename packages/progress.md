@@ -11,8 +11,8 @@ SYNOPSIS
 DESCRIPTION
        This manual page briefly documents the progress command.
 
-       This  tool can be described as a Tiny, Dirty, Linux-Only C command that looks for coreutils basic commands (cp, mv, dd, tar, gzip/gunzip, cat, etc.) currently running on your sys‐
-       tem and displays the percentage of copied data.
+       This  tool can be described as a Tiny, Dirty, C command that looks for coreutils basic commands (cp, mv, dd, tar, gzip/gunzip, cat, etc.) currently running on your system and dis‐
+       plays the percentage of copied data.
 
        It can now also estimate throughput (using flag -w).
 

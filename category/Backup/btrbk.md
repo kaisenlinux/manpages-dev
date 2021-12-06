@@ -8,7 +8,8 @@ SYNOPSIS
              [-c|--config <file>] [-n|--dry-run] [--exclude <filter>]
              [-p|--preserve] [--preserve-snapshots] [--preserve-backups]
              [-v|--verbose] [-q|--quiet] [-l|--loglevel <level>]
-             [-t|--table] [-L|--long] [--format <output-format>] [--pretty]
+             [-t|--table] [-L|--long] [-1|--single-column]
+             [--format <output-format>] [--pretty]
              [-S|--print-schedule] [--progress]
              [--lockfile <file>]
              [--override <config_option>=<value>]
@@ -81,6 +82,9 @@ OPTIONS
        -L, --long
            Print output in long table format (shortcut for "--format=long").
 
+       -1, --single-column
+           Print output as single column (not available for all commands).
+
        --format table|long|raw|col:[h:]<columns>
            Print output in specified format. If set to "raw", prints space-separated key="value" pairs (machine readable).
 
@@ -131,7 +135,8 @@ COMMANDS
 
            Step 4: Delete Snapshots
                Unless the -p, --preserve or --preserve-snapshots option is set, snapshots that are not preserved by their configured retention policy will be deleted. Note that the
-               latest snapshot (the one created in step 1) as well as the latest snapshot/backup pair are always preserved, regardless of the retention policy.
+               latest snapshot (the one created in step 1) as well as the latest snapshot/backup pair are always preserved, regardless of the retention policy. If any target is
+               unreachable or has errors, all snapshots are preserved in order not to break the incremental chain.
 
        dryrun [filter...]
            Don’t run any btrfs commands that would alter the filesystem, just show the snapshots and backup subvolumes that would be created/deleted by the run command. Use in
@@ -340,4 +345,4 @@ SEE ALSO
 AUTHOR
        Axel Burri <axel@tty0.ch>
 
-Btrbk 0.31.2                                                                            2021-03-21                                                                                BTRBK(1)
+Btrbk 0.31.3                                                                            2021-08-07                                                                                BTRBK(1)

@@ -461,7 +461,11 @@ FILESYSTEM COMMANDS
               By default, the filesystem will not attempt to flush completed transactions to disk before shutting down the filesystem.  This simulates a disk failure or crash.
                  -f  Force the filesystem to flush all completed transactions to disk before shutting down, matching XFS behavior when critical corruption is encountered.
 
-       statfs Selected statistics from statfs(2) and the XFS_IOC_FSGEOMETRY system call on the filesystem where the current file resides.
+       statfs [ -c ] [ -g ] [ -s ]
+              Report selected statistics on the filesystem where the current file resides.  The default behavior is to enable all three reporting options:
+                 -c     Display XFS_IOC_FSCOUNTERS summary counter data.
+                 -g     Display XFS_IOC_FSGEOMETRY filesystem geometry data.
+                 -s     Display statfs(2) data.
 
        inode  [ [ -n ] number ] [ -v ]
               The inode command queries physical information about an inode. With no arguments, it will return 1 or 0, indicating whether or not any inode numbers greater  than  32  bits

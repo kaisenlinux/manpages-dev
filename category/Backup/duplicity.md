@@ -442,8 +442,6 @@ OPTIONS
               Chunk size (in MB) used for S3 multipart uploads. Make this smaller than --volsize to maximize the use of your bandwidth. For example, a chunk size of 10MB with a volsize
               of 30MB will result in 3 chunks per volume upload.
 
-              This has no effect when using the newer boto3 backend.
-
               See also A NOTE ON AMAZON S3 below.
 
        --s3-multipart-max-procs
@@ -522,7 +520,8 @@ OPTIONS
 
               duplicity --ssh-options="-oProtocol=2" --ssh-options="-oIdentityFile='/my/backup/id'" /home/me scp://user@host/some_dir
 
-              NOTE: The ssh paramiko backend currently supports only the -i or -oIdentityFile setting. If needed provide more host specific options via ssh_config file.
+              NOTE: The ssh paramiko backend currently supports only the -i or -oIdentityFile or -oUserKnownHostsFile or -oGlobalKnownHostsFile settings. If needed provide more host
+              specific options via ssh_config file.
 
        --ssl-cacert-file file
               (only webdav & lftp backend) Provide a cacert file for ssl certificate verification.
@@ -597,6 +596,8 @@ ENVIRONMENT VARIABLES
               The passphrase to be used for --sign-key.  If ommitted and sign key is also one of the keys to encrypt against PASSPHRASE will be reused instead.  Otherwise, if passphrase
               is needed but not set the user will be prompted for it.
 
+              Other environment variables may be used to configure specific backends.  See the notes for the particular backend.
+
 URL FORMAT
        Duplicity uses the URL format (as standard as possible) to define data locations.  The generic format for a URL is:
 
@@ -630,6 +631,12 @@ URL FORMAT
        B2
 
               b2://account_id[:application_key]@bucket_name/[folder/]
+
+       Box
+
+              box:///some_dir[?config=path_to_config]
+
+              See also A NOTE ON BOX ACCESS
 
        Cloud Files (Rackspace)
 
@@ -691,7 +698,7 @@ URL FORMAT
 
        MEGA.nz cloud storage (works for all MEGA accounts, uses "MEGAcmd" tools)
 
-              megav2://user[:password]@mega.nz/some_dir
+              megav2://user[:password]@mega.nz/some_dir megav3://user[:password]@mega.nz/some_dir[?no_logout=1] (For latest MEGAcmd)
 
               NOTE: despite "MEGAcmd" no longer uses a configuration file, for convenience storing the user password this backend searches it in the $HOME/.megav2rc file (same syntax as
               the old $HOME/.megarc)
@@ -768,6 +775,12 @@ URL FORMAT
               pydrive://<service account' email address>@developer.gserviceaccount.com/some_dir
 
               See also A NOTE ON PYDRIVE BACKEND below.
+
+       gdrive
+
+              gdrive://<service account' email address>@developer.gserviceaccount.com/some_dir
+
+              See also A NOTE ON GDRIVE BACKEND below.
 
        multi
 
@@ -930,12 +943,14 @@ A NOTE ON AMAZON S3
        details.
 
 A NOTE ON AZURE ACCESS
-       The Azure backend requires the Microsoft Azure Storage SDK for Python to be installed on the system.  See REQUIREMENTS above.
+       The Azure backend requires the Microsoft Azure Storage Blobs client library for Python to be installed on the system.  See REQUIREMENTS.
 
-       It uses environment variables for authentification: AZURE_ACCOUNT_NAME (required), AZURE_ACCOUNT_KEY (optional), AZURE_SHARED_ACCESS_SIGNATURE (optional).  One of
-       AZURE_ACCOUNT_KEY or AZURE_SHARED_ACCESS_SIGNATURE is required.
+       It uses the environment variable AZURE_CONNECTION_STRING (required).  This string contains all necessary information such as Storage Account name and the key for authentication.
+       You can find it under Access Keys for the storage account.
 
-       A container name must be a valid DNS name, conforming to the following naming rules:
+       Duplicity will take care to create the container when performing the backup.  Do not create it manually before.
+
+       A container name (as given as the backup url) must be a valid DNS name, conforming to the following naming rules:
 
               1.     Container names must start with a letter or number, and can contain only letters, numbers, and the dash (-) character.
 
@@ -945,14 +960,36 @@ A NOTE ON AZURE ACCESS
 
               4.     Container names must be from 3 through 63 characters long.
 
+       These rules come from Azure; see https://docs.microsoft.com/en-us/rest/api/storageservices/naming-and-referencing-containers--blobs--and-metadata
+
+A NOTE ON BOX ACCESS
+       The box backend requires boxsdk with jwt support to be installed on the system.  See REQUIREMENTS.
+
+       It uses the environment variable BOX_CONFIG_PATH (optional).  This string contains the path to box custom app's config.json. Either this environment variable or the config query
+       parameter in the url need to be specified, if both are specified, query paramter takes precedence.
+
+   Create a Box custom app
+       In order to use box backend, user need to create a box custom app in the box developer console (https://app.box.com/developers/console).
+
+       After create a new custom app, please make sure it is configured as follow:
+
+              1.     Choose "App Access Only" for "App Access Level"
+
+              2.     Check "Write all files and folders stored in Box"
+
+              3.     Generate a Public/Private Keypair
+
+       The user also need to grant the created custom app permission in the admin console (https://app.box.com/master/custom-apps) by clicking the "+" button and enter the client_id
+       which can be found on the custom app's configuration page.
+
 A NOTE ON CLOUD FILES ACCESS
        Pyrax is Rackspace's next-generation Cloud management API, including Cloud Files access.  The cfpyrax backend requires the pyrax library to be installed on the system.  See
-       REQUIREMENTS above.
+       REQUIREMENTS.
 
        Cloudfiles is Rackspace's now deprecated implementation of OpenStack Object Storage protocol.  Users wishing to use Duplicity with Rackspace Cloud Files should migrate to the new
        Pyrax plugin to ensure support.
 
-       The backend requires python-cloudfiles to be installed on the system.  See REQUIREMENTS above.
+       The backend requires python-cloudfiles to be installed on the system.  See REQUIREMENTS.
 
        It uses three environment variables for authentification: CLOUDFILES_USERNAME (required), CLOUDFILES_APIKEY (required), CLOUDFILES_AUTHURL (optional)
 
@@ -1008,7 +1045,7 @@ A NOTE ON GOOGLE CLOUD STORAGE
        Create Access Keys: https://code.google.com/apis/console#:storage:legacy
 
 A NOTE ON HUBIC
-       The hubic backend requires the pyrax library to be installed on the system. See REQUIREMENTS above.  You will need to set your credentials for hubiC in a file called
+       The hubic backend requires the pyrax library to be installed on the system. See REQUIREMENTS.  You will need to set your credentials for hubiC in a file called
        ~/.hubic_credentials, following this pattern:
 
               [hubic]
@@ -1085,7 +1122,7 @@ A NOTE ON PAR2 WRAPPER BACKEND
        Use --par2-redundancy percent to adjust the size (and redundancy) of recovery files in percent.
 
 A NOTE ON PYDRIVE BACKEND
-       The pydrive backend requires Python PyDrive package to be installed on the system. See REQUIREMENTS above.
+       The pydrive backend requires Python PyDrive package to be installed on the system. See REQUIREMENTS.
 
        There are two ways to use PyDrive: with a regular account or with a "service account". With a service account, a separate account is created, that is only accessible with Google
        APIs and not a web login.  With a regular account, you can store backups in your normal Google Drive.
@@ -1115,6 +1152,42 @@ A NOTE ON PYDRIVE BACKEND
        In this scenario, the username and host parts of the URL play no role; only the path matters. During the first run, you will be prompted to visit an URL in your browser to grant
        access to your drive. Once granted, you will receive a verification code to paste back into Duplicity. The credentials are then cached in the file references above for future use.
 
+A NOTE ON GDRIVE BACKEND
+       GDrive: is a rewritten PyDrive: backend with less dependencies, and a simpler setup - it uses the JSON keys downloaded directly from Google Cloud Console.
+
+       Note Google has 2 drive methods, `Shared(previously Team) Drives` and `My Drive`, both can be shared but require different addressing
+
+       For a Google Shared Drives folder
+
+       Share Drive ID specified as a query parameter, driveID,  in the backend URL.  Example:
+             gdrive://developer.gserviceaccount.com/target-folder/?driveID=<SHARED DRIVE ID>
+
+       For a Google My Drive based shared folder
+
+       MyDrive folder ID specified as a query parameter, myDriveFolderID, in the backend URL Example
+             export GOOGLE_SERVICE_ACCOUNT_URL=<serviceaccount-name>@<serviceaccount-name>.iam.gserviceaccount.com
+             gdrive://${GOOGLE_SERVICE_ACCOUNT_URL}/<target-folder-name-in-myDriveFolder>?myDriveFolderID=<google-myDrive-folder-id>
+
+       There are also two ways to authenticate to use GDrive: with a regular account or with a "service account". With a service account, a separate account is created, that is only
+       accessible with Google APIs and not a web login.  With a regular account, you can store backups in your normal Google Drive.
+
+       To use a service account, go to the Google developers console at https://console.developers.google.com. Create a project, and make sure Drive API is enabled for the project. In
+       the "Credentials" section, click "Create credentials", then select Service Account with JSON key.
+
+       The GOOGLE_SERVICE_JSON_FILE environment variable needs to contain the path to the JSON file on duplicity invocation.
+
+       export GOOGLE_SERVICE_JSON_FILE=<path-to-serviceaccount-credentials.json>
+
+       The alternative is to use a regular account. To do this, start as above, but when creating a new Client ID, select "Create OAuth client ID", with application type of "Desktop
+       app". Download the client_secret.json file for the new client, and set the GOOGLE_CLIENT_SECRET_JSON_FILE environment variable to the path to this file, and
+       GOOGLE_CREDENTIALS_FILE to a path to a file where duplicity will keep the authentication token - this location must be writable.
+
+       During the first run, you will be prompted to visit an URL in your browser to grant access to your drive. Once granted, you will receive a verification code to paste back into
+       Duplicity. The credentials are then cached in the file references above for future use.
+
+       As a sanity check, GDrive checks the host and username from the URL against the JSON key, and refuses to proceed if the addresses do not match. Either the email (for the service
+       accounts) or Client ID (for regular OAuth accounts) must be present in the URL. See URL FORMAT above.
+
 A NOTE ON RCLONE BACKEND
        Rclone is a powerful command line program to sync files and directories to and from various cloud storage providers.
 
@@ -1140,8 +1213,8 @@ A NOTE ON SSH BACKENDS
        paramiko & pexpect support --use-scp, --ssh-askpass and --ssh-options.  Only the pexpect backend allows to define --scp-command and --sftp-command.
 
        SSH paramiko backend (default) is a complete reimplementation of ssh protocols natively in python. Advantages are speed and maintainability. Minor disadvantage is that extra
-       packages are needed as listed in REQUIREMENTS above. In sftp (default) mode all operations are done via the according sftp commands. In scp mode ( --use-scp ) though scp access is
-       used for put/get operations but listing is done via ssh remote shell.
+       packages are needed as listed in REQUIREMENTS.  In sftp (default) mode all operations are done via the according sftp commands. In scp mode ( --use-scp ) though scp access is used
+       for put/get operations but listing is done via ssh remote shell.
 
        SSH pexpect backend is the legacy ssh backend using the command line ssh binaries via pexpect.  Older versions used scp for get and put operations and sftp for list and delete
        operations.  The current version uses sftp for all four supported operations, unless the --use-scp option is used to revert to old behavior.
@@ -1176,7 +1249,7 @@ A NOTE ON SSL CERTIFICATE VERIFICATION
 
 A NOTE ON SWIFT (OPENSTACK OBJECT STORAGE) ACCESS
        Swift is the OpenStack Object Storage service.
-       The backend requires python-switclient to be installed on the system.  python-keystoneclient is also needed to use OpenStack's Keystone Identity service.  See REQUIREMENTS above.
+       The backend requires python-switclient to be installed on the system.  python-keystoneclient is also needed to use OpenStack's Keystone Identity service.  See REQUIREMENTS.
 
        It uses following environment variables for authentification: SWIFT_USERNAME (required), SWIFT_PASSWORD (required), SWIFT_AUTHURL (required), SWIFT_USERID (required, only for IBM
        Bluemix ObjectStorage), SWIFT_TENANTID (required, only for IBM Bluemix ObjectStorage), SWIFT_REGIONNAME (required, only for IBM Bluemix ObjectStorage), SWIFT_TENANTNAME (optional,
@@ -1191,7 +1264,7 @@ A NOTE ON PCA ACCESS
        a multi backend configuration where receiving volumes while an other backend is used to store manifests and signatures.
 
        The backend requires python-switclient to be installed on the system.  python-keystoneclient is also needed to interact with OpenStack's Keystone Identity service.  See
-       REQUIREMENTS above.
+       REQUIREMENTS.
 
        It uses following environment variables for authentification: PCA_USERNAME (required), PCA_PASSWORD (required), PCA_AUTHURL (required), PCA_USERID (optional), PCA_TENANTID
        (optional, but either the tenant name or tenant id must be supplied) PCA_REGIONNAME (optional), PCA_TENANTNAME (optional, but either the tenant name or tenant id must be supplied)
@@ -1255,11 +1328,14 @@ REQUIREMENTS
               python-requests - http://python-requests.org
               python-requests-oauthlib - https://github.com/requests/requests-oauthlib
 
-       azure backend (Azure Blob Storage Service)
-              Microsoft Azure Storage SDK for Python - https://pypi.python.org/pypi/azure-storage/
+       azure backend (Azure Storage Blob Service)
+              Microsoft Azure Storage Blobs client library for Python - https://pypi.org/project/azure-storage-blob/
 
        boto backend (S3 Amazon Web Services, Google Cloud Storage)
               boto version 2.0+ - http://github.com/boto/boto
+
+       box backend (box.com)
+              boxsdk - https://github.com/box/box-python-sdk
 
        cfpyrax backend (Rackspace Cloud) and hubic backend (hubic.com)
               Rackspace CloudFiles Pyrax API - http://docs.rackspace.com/sdks/guide/content/python.html
@@ -1283,7 +1359,7 @@ REQUIREMENTS
        MEGA backend (only works for accounts created prior to November 2018) (mega.nz)
               megatools client - https://github.com/megous/megatools
 
-       MEGA v2 backend (works for all MEGA accounts) (mega.nz)
+       MEGA v2 and v3 backend (works for all MEGA accounts) (mega.nz)
               MEGAcmd client - https://mega.nz/cmd
 
        multi backend
@@ -1349,4 +1425,4 @@ AUTHOR
 SEE ALSO
        rdiffdir(1), python(1), rdiff(1), rdiff-backup(1).
 
-Version 0.8.17                                                                       November 11, 2020                                                                        DUPLICITY(1)
+Version 0.8.20                                                                         June 26, 2021                                                                          DUPLICITY(1)

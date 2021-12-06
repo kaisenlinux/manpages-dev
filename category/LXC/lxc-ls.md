@@ -69,7 +69,7 @@ COMMON OPTIONS
               Output to an alternate log FILE. The default is no log.
 
        -l, --logpriority=LEVEL
-              Set log priority to LEVEL. The default log priority is ERROR. Possible values are : FATAL, CRIT, WARN, ERROR, NOTICE, INFO, DEBUG.
+              Set log priority to LEVEL. The default log priority is ERROR. Possible values are : FATAL, ALERT, CRIT, WARN, ERROR, NOTICE, INFO, DEBUG, TRACE.
 
               Note that this option is setting the priority of the events log in the alternate log file. It do not have effect on the ERROR events log on stderr.
 
@@ -95,4 +95,4 @@ HISTORY
 AUTHOR
        Christian Brauner <christian.brauner@mailbox.org>, Stéphane Graber <stgraber@ubuntu.com>
 
-                                                                                        2021-01-31                                                                               lxc-ls(1)
+                                                                                        2021-08-27                                                                               lxc-ls(1)

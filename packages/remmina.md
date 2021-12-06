@@ -8,8 +8,7 @@ SYNOPSIS
 
 DESCRIPTION
      Remmina is a remote desktop client written in GTK+, aiming to be useful for system administrators and travellers, who need to work with lots of remote computers in front of either
-     large monitors or tiny netbooks. Remmina supports multiple network protocols in an integrated and consistent user interface.  Currently RDP, VNC, SSH, SPICE, NX, XDMCP, and WWW are
-     supported.
+     large monitors or tiny netbooks. Remmina supports multiple network protocols in an integrated and consistent user interface.  Currently RDP, VNC, SSH, SPICE, and WWW are supported.
 
      Remmina is released in separated source packages:
 
@@ -121,4 +120,4 @@ COPYRIGHT
      This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either ver‐
      sion 2, or (at your option) any later version.
 
-                                                                                       April 7, 2021
+                                                                                     December 6, 2021

@@ -76,9 +76,9 @@ DEDICATION
 
 AVAILABILITY
        ntfscp is part of the ntfs-3g package and is available from:
-       http://www.tuxera.com/community/
+       https://github.com/tuxera/ntfs-3g
 
 SEE ALSO
        ntfsprogs(8)
 
-ntfs-3g 2017.3.23AR.3                                                                 September 2007                                                                             NTFSCP(8)
+ntfs-3g 2021.8.22                                                                     September 2007                                                                             NTFSCP(8)

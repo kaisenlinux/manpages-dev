@@ -19,10 +19,7 @@ DESCRIPTION
 OPTIONS
        -a     If this option is specified, information about the file's attribute fork is printed instead of the default data fork.
 
-       -d     If  portions  of  the file have been migrated offline by a DMAPI application, a DMAPI read event will be generated to bring those portions back online before the disk block
-              map is printed.  However if the -d option is used, no DMAPI read event will be generated for a DMAPI file and offline portions will be reported as holes.
-
-       -e     If this option is used, xfs_bmap obtains all delayed allocation extents, and does not flush dirty pages to disk before querying extent data. With the -v option,  the  flags
+       -e     If  this  option is used, xfs_bmap obtains all delayed allocation extents, and does not flush dirty pages to disk before querying extent data. With the -v option, the flags
               column will show which extents have not yet been allocated.
 
        -l     If this option is used, then

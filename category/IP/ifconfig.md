@@ -1,142 +1,135 @@
-IFCONFIG(8)                                                                  Manuel de l'administrateur Linux                                                                  IFCONFIG(8)
+IFCONFIG(8)                                                                 Linux System Administrator's Manual                                                                IFCONFIG(8)
 
-NOM
-       ifconfig - Configurer une interface réseau.
+NAME
+       ifconfig - configure a network interface
 
 SYNOPSIS
        ifconfig [-v] [-a] [-s] [interface]
-       ifconfig [-v] interface [aftype] options | adresse ...
+       ifconfig [-v] interface [aftype] options | address ...
 
 DESCRIPTION
-       ifconfig  permet  de  configurer les interfaces réseau présentes dans le noyau. On peut les configurer lors du démarrage quand c'est nécessaire. Ensuite, on l'utilise généralement
-       pour le débogage ou pour d'éventuels réglages.
+       Ifconfig  is  used to configure the kernel-resident network interfaces.  It is used at boot time to set up interfaces as necessary.  After that, it is usually only needed when de‐
+       bugging or when system tuning is needed.
 
-       Si aucun argument n'est donné, ifconfig affiche l'état des interfaces actives. Si seul le paramètre interface est donné, il affiche  seulement  l'état  de  l'interface  correspon‐
-       dante ; si seul le paramètre -a est fourni, il affiche l'état de toutes les interfaces, même celles qui sont inactives. Autrement, il permet de configurer une interface.
+       If no arguments are given, ifconfig displays the status of the currently active interfaces.  If a single interface argument is given, it displays the status of the given interface
+       only; if a single -a argument is given, it displays the status of all interfaces, even those that are down.  Otherwise, it configures an interface.
 
-Familles d'Adresses
-       Si  le premier argument après le nom d'interface est reconnu comme le nom d'une famille d'adresses prise en charge, alors cette famille d'adresses est utilisée pour décoder et af‐
-       ficher toutes les adresses du protocole. Les familles d'adresses actuellement prises en charge comprennent inet (TCP/IP, par défaut), inet6 (IPv6), ax25 (AMPR Packet  Radio),  ddp
-       (Appletalk Phase 2), ipx (Novell IPX) et netrom (AMPR Packet Radio).
+Address Families
+       If  the  first  argument after the interface name is recognized as the name of a supported address family, that address family is used for decoding and displaying all protocol ad‐
+       dresses.  Currently supported address families include inet (TCP/IP, default), inet6 (IPv6), ax25 (AMPR Packet Radio), ddp (Appletalk Phase 2), ipx (Novell IPX) and  netrom  (AMPR
+       Packet  radio).   All numbers supplied as parts in IPv4 dotted decimal notation may be decimal, octal, or hexadecimal, as specified in the ISO C standard (that is, a leading 0x or
+       0X implies hexadecimal; otherwise, a leading '0' implies octal; otherwise, the number is interpreted as decimal). Use of hexadecimal and octal numbers  is  not  RFC-compliant  and
+       therefore its use is discouraged.
 
 OPTIONS
-       -a     Afficher toutes les interfaces actuellement disponibles, même celles qui sont inactives.
+       -a     display all interfaces which are currently available, even if down
 
-       -s     Afficher un résumé (comme netstat -i).
+       -s     display a short list (like netstat -i)
 
-       -v     Mode volubile pour certains types d'erreurs.
+       -v     be more verbose for some error conditions
 
        interface
-              Correspond  au  nom de l'interface de réseau. C'est généralement un nom de pilote suivi d'un chiffre, comme eth0 pour la première interface Ethernet. Si votre noyau accepte
-              les alias d'interfaces, vous pouvez les spécifier avec eth0:0 pour le premier alias de eth0. On peut les utiliser pour les affecter à une seconde adresse. Pour supprimer un
-              alias d'interface, utilisez ifconfig eth0:0 down. Note : pour chaque groupe (un même noeud donné par une combinaison adresse/masque de réseau), si vous supprimez le premier
-              alias (le principal), tous les alias sont supprimés.
+              The name of the interface.  This is usually a driver name followed by a unit number, for example eth0 for the first Ethernet interface. If your kernel supports alias inter‐
+              faces, you can specify them with syntax like eth0:0 for the first alias of eth0. You can use them to assign more addresses. To delete an alias interface use ifconfig eth0:0
+              down.  Note: for every scope (i.e. same net with address/netmask combination) all aliases are deleted, if you delete the first (primary).
 
-       up     Activer l'interface donnée. Cette option est implicite si une adresse est affectée à l'interface.
+       up     This  flag  causes the interface to be activated.  It is implicitly specified if an address is assigned to the interface; you can suppress this behavior when using an alias
+              interface by appending an - to the alias (e.g.  eth0:0-).  It is also suppressed when using the IPv4 0.0.0.0 address as the kernel will use this to implicitly delete  alias
+              interfaces.
 
-       down   Désactiver le pilote pour l'interface donnée.
+       down   This flag causes the driver for this interface to be shut down.
 
-       [-]arp Activer ou désactiver l'utilisation du protocole ARP sur une interface.
+       [-]arp Enable or disable the use of the ARP protocol on this interface.
 
        [-]promisc
-              Activer ou désactiver le mode promiscuous. S'il est activé, tous les paquets circulant sur le réseau seront reçus par l'interface.
+              Enable or disable the promiscuous mode of the interface.  If selected, all packets on the network will be received by the interface.
 
        [-]allmulti
-              Activer ou désactiver le mode all-multicast. S'il est activé, l'interface recevra tous les paquets de multidiffusion circulant sur le réseau.
+              Enable or disable all-multicast mode.  If selected, all multicast packets on the network will be received by the interface.
 
-       metric N
-              Définir la métrique de l'interface.
+       mtu N  This parameter sets the Maximum Transfer Unit (MTU) of an interface.
 
-       mtu N  Définir l'unité de transfert maximum ou MTU (« Maximum Transfer Unit ») d'une interface.
+       dstaddr addr
+              Set the remote IP address for a point-to-point link (such as PPP).  This keyword is now obsolete; use the pointopoint keyword instead.
 
-       dstaddr adresse
-              Définir l'adresse IP distante dans le cas d'un lien point-à-point (comme PPP). Cette option est obsolète ; utilisez à la place l'option pointopoint.
+       netmask addr
+              Set  the IP network mask for this interface.  This value defaults to the usual class A, B or C network mask (as derived from the interface IP address), but it can be set to
+              any value.
 
-       netmask adresse
-              Définir le masque de réseau IP pour cette interface. La valeur par défaut correspond au masque de réseau usuel pour les classes A, B ou C (déduite de  l'adresse  IP),  mais
-              une autre valeur peut être définie.
+       add addr/prefixlen
+              Add an IPv6 address to an interface.
 
-       add adresse/long_préfixe
-              Ajouter une adresse IPv6 à une interface.
+       del addr/prefixlen
+              Remove an IPv6 address from an interface.
 
-       del adresse/long_préfixe
-              Supprimer une adresse IPv6 d'une interface.
+       tunnel ::aa.bb.cc.dd
+              Create a new SIT (IPv6-in-IPv4) device, tunnelling to the given destination.
 
-       tunnel aa.bb.cc.dd
-              Créer un nouveau périphérique SIT (IPv6-dans-IPv4), fonctionnant en mode tunnel jusqu'à la destination donnée.
+       irq addr
+              Set the interrupt line used by this device.  Not all devices can dynamically change their IRQ setting.
 
-       irq adresse
-              Définir la ligne d'interruption utilisée par un périphérique. Certains périphériques ne sont pas capables de changer dynamiquement d'IRQ.
+       io_addr addr
+              Set the start address in I/O space for this device.
 
-       io_addr adresse
-              Définir l'adresse de début dans l'espace d'entrée-sortie pour un périphérique.
-
-       mem_start adresse
-              Définir l'adresse de début de la mémoire partagée utilisée par un périphérique. Peu de périphériques ont besoin de ce paramètre.
+       mem_start addr
+              Set the start address for shared memory used by this device.  Only a few devices need this.
 
        media type
-              Définir  le  port physique ou le type de médium utilisé par le périphérique. Tous les périphériques ne peuvent pas changer cette configuration et les types acceptés varient
-              de l'un à l'autre. Les valeurs habituelles du type sont 10base2 (Ethernet fin), 10baseT (Ethernet 10Mbps en paire torsadée), AUI (émetteur-récepteur externe), etc.  Le  mé‐
-              dium spécial de type auto permet d'indiquer au pilote de détecter automatiquement le médium utilisé. Une fois de plus, tous les pilotes n'acceptent pas cette option.
+              Set the physical port or medium type to be used by the device.  Not all devices can change this setting, and those that can vary in what values they support.  Typical  val‐
+              ues for type are 10base2 (thin Ethernet), 10baseT (twisted-pair 10Mbps Ethernet), AUI (external transceiver) and so on.  The special medium type of auto can be used to tell
+              the driver to auto-sense the media.  Again, not all drivers can do this.
 
-       [-]broadcast [adresse]
-              Si l'adresse est donnée, elle définit l'adresse de diffusion du protocole pour cette interface. Autrement, on arme (ou désarme) l'indicateur IFF_BROADCAST de l'interface.
+       [-]broadcast [addr]
+              If the address argument is given, set the protocol broadcast address for this interface.  Otherwise, set (or clear) the IFF_BROADCAST flag for the interface.
 
-       [-]pointopoint [adresse]
-              Valider le mode point-à-point d'une interface, signifiant qu'il existe un lien direct entre 2 machines, sans que personne d'autre ne puisse être à l'écoute.
-              Si l'adresse est également donnée, cela définit l'adresse de protocole de l'autre machine, de la même manière que l'option obsolète dstaddr. Autrement, il arme (ou désarme)
-              l'indicateur IFF_POINTOPOINT de l'interface.
+       [-]pointopoint [addr]
+              This keyword enables the point-to-point mode of an interface, meaning that it is a direct link between two machines with nobody else listening on it.
+              If the address argument is also given, set the protocol address of the other side of the link, just like the obsolete dstaddr keyword does.  Otherwise,  set  or  clear  the
+              IFF_POINTOPOINT flag for the interface.
 
-       hw classe adresse
-              Définir l'adresse matérielle de l'interface, si le pilote du périphérique accepte cette opération. L'option doit être suivie du nom de la classe matérielle et de  l'adresse
-              matérielle  en  caractères  ASCII affichables. Les classes matérielles actuellement prises en charge comprennent ether (Ethernet), ax25 (AMPR AX.25), ARCnet et netrom (AMPR
-              NET/ROM).
+       hw class address
+              Set  the hardware address of this interface, if the device driver supports this operation.  The keyword must be followed by the name of the hardware class and the printable
+              ASCII equivalent of the hardware address.  Hardware classes currently supported include ether (Ethernet), ax25 (AMPR AX.25), ARCnet and netrom (AMPR NET/ROM).
 
        multicast
-              Positionner l'indicateur de multidiffusion sur l'interface. Ce n'est généralement pas nécessaire puisque les pilotes positionnent correctement l'option eux-mêmes.
+              Set the multicast flag on the interface. This should not normally be needed as the drivers set the flag correctly themselves.
 
-       adresse
-              Correspond à l'adresse IP affectée à cette interface.
+       address
+              The IP address to be assigned to this interface.
 
-       txqueuelen longueur
-              Définir la longueur de la file d'attente de transmission du périphérique. Il est utile de la fixer à des valeurs faibles pour les périphériques lents avec  un  temps  d'at‐
-              tente important (modems, ISDN), pour empêcher d'être perturbé par de rapides transferts de masse issus des trafics interactifs, comme telnet.
+       txqueuelen length
+              Set the length of the transmit queue of the device. It is useful to set this to small values for slower devices with a high latency (modem links, ISDN) to prevent fast bulk
+              transfers from disturbing interactive traffic like telnet too much.
 
 NOTES
-       Depuis  la version 2.2 du noyau, il n'y a plus de statistiques d'interface explicites pour les alias d'interfaces. Les statistiques affichées pour la véritable adresse sont parta‐
-       gées avec toutes les adresses d'alias du même périphérique. Pour avoir des statistiques par adresse, il faut ajouter des règles de comptabilité  particulières  pour  l'adresse  en
-       utilisant la commande ipchains(8) ou iptables(8).
+       Since  kernel  release  2.2  there are no explicit interface statistics for alias interfaces anymore. The statistics printed for the original address are shared with all alias ad‐
+       dresses on the same device. If you want per-address statistics you should add explicit accounting rules for the address using the iptables(8) command.
 
-       Depuis net-tools 1.61, ifconfig affiche les compteurs d'octets et ceux lisibles par un utilisateur en unités IEC 60027-2. Ainsi, 1 KiB vaut 2^10 octets. Notez que les nombres sont
-       tronqués à la première décimale (ce qui peut être une erreur importante si vous considérez que 0,1 PiB vaut 112.589.990.684.262 octets :)
+       Since net-tools 1.60-4 ifconfig is printing byte counters and human readable counters with IEC 60027-2 units. So 1 KiB are 2^10 byte. Note, the numbers are truncated to one  deci‐
+       mal (which can by quite a large error if you consider 0.1 PiB is 112.589.990.684.262 bytes :)
 
-       Des problèmes d'interruption avec les pilotes de périphériques Ethernet apparaissent avec EAGAIN (SIOCSIIFLAGS : Ressource temporairement indisponible)  il  s'agit  sûrement  d'un
-       conflit d'interruptions. Voir http://www.scyld.com/expert/irq-conflict.html pour plus d'informations.
+       Interrupt   problems   with  Ethernet  device  drivers  fail  with  EAGAIN  (SIOCSIIFLAGS:  Resource  temporarily  unavailable)  it  is  most  likely  a  interrupt  conflict.  See
+       http://www.scyld.com/expert/irq-conflict.html for more information.
 
-FICHIERS
-       /proc/net/socket
+FILES
        /proc/net/dev
        /proc/net/if_inet6
 
-BOGUES
-       Même si les adresses appletalk DDP et IPX peuvent être affichées, elles ne peuvent être modifiées avec cette commande.
+BUGS
+       Ifconfig uses the ioctl access method to get the full address information, which limits hardware addresses to 8 bytes.  Because Infiniband hardware address has 20 bytes, only  the
+       first 8 bytes are displayed correctly.  Please use ip link command from iproute2 package to display link layer informations including the hardware address.
 
-VOIR AUSSI
-       route(8), netstat(8), arp(8), rarp(8), ipchains(8), iptables(8)
-       http://physics.nist.gov/cuu/Units/binary.html - Préfixes pour les multiples binaires.
+       While appletalk DDP and IPX addresses will be displayed they cannot be altered by this command.
 
-AUTEURS
+SEE ALSO
+       route(8), netstat(8), arp(8), rarp(8), iptables(8), ifup(8), interfaces(5).
+       http://physics.nist.gov/cuu/Units/binary.html - Prefixes for binary multiples
+
+AUTHORS
        Fred N. van Kempen, <waltje@uwalt.nl.mugnet.org>
        Alan Cox, <Alan.Cox@linux.org>
        Phil Blundell, <Philip.Blundell@pobox.com>
-       Andi Kleen,
+       Andi Kleen
        Bernd Eckenfels, <net-tools@lina.inka.de>
 
-TRADUCTION
-       Ce  document  est  une  traduction  réalisée  par  Jean  Michel  Vansteene  <vanstee AT worldnet DOT fr> en août 1997, mise à jour par Guillaume Audirac en août 2004 et révisée le
-       17 août 2006.
-
-       L'équipe de traduction a fait le maximum pour réaliser une adaptation française de qualité. La version anglaise la plus à jour de ce document est toujours consultable via la  com‐
-       mande : « LANG=C man 8 ifconfig ». N'hésitez pas à signaler à l'auteur ou au traducteur, selon le cas, toute erreur dans cette page de manuel.
-
-net-tools                                                                              30 juin 2005                                                                            IFCONFIG(8)
+net-tools                                                                               2008-10-03                                                                             IFCONFIG(8)

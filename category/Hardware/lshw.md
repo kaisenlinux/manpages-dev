@@ -11,7 +11,7 @@ SYNOPSIS
        lshw [ -X ]
 
        lshw  [  [ -html ]  [ -short ]  [ -xml ]  [ -json ]  [ -businfo ]  ]  [ -dump filename ]  [ -class class... ]  [ -disable test... ]  [ -enable test... ]  [ -sanitize ]  [ -numeric
-       ]  [ -quiet ]
+       ]  [ -quiet ]  [ -notime ]
 
 DESCRIPTION
        lshw is a small tool to extract detailed information on the hardware configuration of the machine. It can report exact memory configuration, firmware version, mainboard configura‐
@@ -38,7 +38,7 @@ DESCRIPTION
               Outputs the device list showing bus information, detailing SCSI, USB, IDE and PCI addresses.
 
        -dump filename
-              Dump collected information into a file (SQLite database).
+              Display output and dump collected information into a file (SQLite database).
 
        -class class
               Only show the given class of hardware. class can be found using lshw -short or lshw -businfo.
@@ -61,6 +61,9 @@ DESCRIPTION
        -numeric
               Also display numeric IDs (for PCI and USB devices).
 
+       -notime
+              Exclude volatile attributes (timestamps) from output.
+
 BUGS
        lshw currently does not detect Firewire(IEEE1394) devices.
 
@@ -82,10 +85,10 @@ FILES
               A list of all known PCI ID's (vendors, devices, classes and subclasses).  If compiled with zlib support, lshw will look for pci.ids.gz first, then for pci.ids.
 
        /proc/bus/pci/*
-              Used to access the configuration of installed PCI busses and devices.
+              Used to access the configuration of installed PCI buses and devices.
 
        /proc/ide/*
-              Used to access the configuration of installed IDE busses and devices.
+              Used to access the configuration of installed IDE buses and devices.
 
        /proc/scsi/*, /dev/sg*
               Used to access the configuration of installed SCSI devices.
@@ -97,7 +100,7 @@ FILES
               Used on PowerPC platforms to access OpenFirmware configuration.
 
        /proc/bus/usb/*
-              Used to access the configuration of installed USB busses and devices.
+              Used to access the configuration of installed USB buses and devices.
 
        /sys/* Used on 2.6 kernels to access hardware/driver configuration information.
 
@@ -127,4 +130,4 @@ OTHER INFO
        The webpage for lshw is at
         <URL:http://lshw.ezix.org/>
 
-$Rev$                                                                                 28 January 2018                                                                              LSHW(1)
+$Rev$                                                                                 15 October 2020                                                                              LSHW(1)

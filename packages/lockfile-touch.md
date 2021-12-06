@@ -55,7 +55,7 @@ OPTIONS
 
        -r retry-count, --retry retry-count
            Try  to  lock  filename retry-count times before giving up.  Each attempt will be delayed a bit longer than the last (in 5 second increments) until reaching a maximum delay of
-           one minute between retries.  If retry-count is unspecified, the default is 9 which will give up after 180 seconds (3 minutes) if all 9 lock attempts fail.
+           one minute between retries.  If retry-count is unspecified, the default is 9 which will give up after 225 seconds if all 9 lock attempts fail.
 
 EXAMPLES
        Locking a file during a lengthy process:
@@ -87,4 +87,4 @@ SEE ALSO
 AUTHOR
        Written by Rob Browning <rlb@defaultvalue.org>
 
-0.1.12                                                                                  2008-02-10                                                                       lockfile-progs(1)
+0.1.19                                                                                  2021-09-03                                                                       lockfile-progs(1)

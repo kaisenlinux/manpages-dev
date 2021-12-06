@@ -123,6 +123,10 @@ DEBUGGING INFORMATION
 
            # modprobe wireguard && echo module wireguard +p > /sys/kernel/debug/dynamic_debug/control
 
+       On OpenBSD and FreeBSD, debugging information can be written into dmesg(1) on a per-interface basis by using ifconfig(1):
+
+           # ifconfig wg0 debug
+
        On userspace implementations, it is customary to set the LOG_LEVEL environment variable to verbose.
 
 ENVIRONMENT VARIABLES

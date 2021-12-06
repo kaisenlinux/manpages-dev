@@ -21,4 +21,4 @@ SEE ALSO
 AUTHOR
        Stéphane Graber <stgraber@ubuntu.com>
 
-                                                                                        2021-01-31                                                                           lxc-config(1)
+                                                                                        2021-08-27                                                                           lxc-config(1)

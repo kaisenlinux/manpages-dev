@@ -14,6 +14,8 @@ SYNOPSIS
 
        ethtool [--json] args
 
+       ethtool [-I | --include-statistics] args
+
        ethtool --monitor [ command ] [ devname ]
 
        ethtool -a|--show-pause devname
@@ -24,7 +26,7 @@ SYNOPSIS
 
        ethtool -C|--coalesce devname [adaptive-rx on|off] [adaptive-tx on|off] [rx-usecs N] [rx-frames N] [rx-usecs-irq N] [rx-frames-irq N] [tx-usecs N] [tx-frames N] [tx-usecs-irq N]
               [tx-frames-irq N] [stats-block-usecs N] [pkt-rate-low N] [rx-usecs-low N] [rx-frames-low N] [tx-usecs-low N] [tx-frames-low N] [pkt-rate-high N] [rx-usecs-high N]
-              [rx-frames-high N] [tx-usecs-high N] [tx-frames-high N] [sample-interval N]
+              [rx-frames-high N] [tx-usecs-high N] [tx-frames-high N] [sample-interval N] [cqe-mode-rx on|off] [cqe-mode-tx on|off]
 
        ethtool -g|--show-ring devname
 
@@ -48,13 +50,13 @@ SYNOPSIS
 
        ethtool -r|--negotiate devname
 
-       ethtool -S|--statistics devname
+       ethtool -S|--statistics devname [--all-groups|--groups [eth-phy] [eth-mac] [eth-ctrl] ]
 
        ethtool --phy-statistics devname
 
        ethtool -t|--test devname [offline|online|external_lb]
 
-       ethtool -s devname [speed N] [duplex half|full] [port tp|aui|bnc|mii] [mdix auto|on|off] [autoneg on|off] [advertise N[/M] | advertise mode on|off ...]  [phyad N]
+       ethtool -s devname [speed N] [lanes N] [duplex half|full] [port tp|aui|bnc|mii] [mdix auto|on|off] [autoneg on|off] [advertise N[/M] | advertise mode on|off ...]  [phyad N]
               [xcvr internal|external] [wol N[/M] | wol p|u|m|b|a|g|s|f|d...]  [sopass xx:yy:zz:aa:bb:cc] [master-slave preferred-master|preferred-slave|forced-master|forced-slave]
               [msglvl N[/M] | msglvl type on|off ...]
 
@@ -83,7 +85,7 @@ SYNOPSIS
 
        ethtool -L|--set-channels devname [rx N] [tx N] [other N] [combined N]
 
-       ethtool -m|--dump-module-eeprom|--module-info devname [raw on|off] [hex on|off] [offset N] [length N]
+       ethtool -m|--dump-module-eeprom|--module-info devname [raw on|off] [hex on|off] [offset N] [length N] [page N] [bank N] [i2c N]
 
        ethtool --show-priv-flags devname
 
@@ -138,6 +140,9 @@ OPTIONS
 
        --json Output results in JavaScript Object Notation (JSON). Only a subset of options support this. Those which do not will continue to output plain text in the  presence  of  this
               option.
+
+       -I --include-statistics
+              Include command-related statistics in the output. This option allows displaying relevant device statistics for selected get commands.
 
        -a --show-pause
               Queries the specified Ethernet device for pause parameter information.
@@ -253,7 +258,16 @@ OPTIONS
               Restarts auto-negotiation on the specified Ethernet device, if auto-negotiation is enabled.
 
        -S --statistics
-              Queries the specified network device for NIC- and driver-specific statistics.
+              Queries the specified network device for standard (IEEE, IETF, etc.), or NIC- and driver-specific statistics. NIC- and driver-specific  statistics  are  requested  when  no
+              group of statistics is specified.
+
+              NIC-  and driver-specific statistics and standard statistics are independent, devices may implement either, both or none. There is little commonality between naming of NIC-
+              and driver-specific statistics across vendors.
+
+           --all-groups
+
+           --groups [eth-phy] [eth-mac] [eth-ctrl] [rmon]
+                  Request groups of standard device statistics.
 
        --phy-statistics
               Queries the specified network device for PHY specific statistics.
@@ -274,6 +288,9 @@ OPTIONS
 
            speed N
                   Set speed in Mb/s.  ethtool with just the device name as an argument will show you the supported device speeds.
+
+           lanes N
+                  Set number of lanes.
 
            duplex half|full
                   Sets full or half duplex mode.
@@ -620,7 +637,8 @@ OPTIONS
 
        -m --dump-module-eeprom --module-info
               Retrieves and if possible decodes the EEPROM from plugin modules, e.g SFP+, QSFP.  If the driver and module support it, the optical diagnostic information is also read  and
-              decoded.
+              decoded.   When  either one of page, bank or i2c parameters is specified, dumps only of a single page or its portion is allowed. In such a case offset and length parameters
+              are treated relatively to EEPROM page boundaries.
 
        --show-priv-flags
               Queries the specified network device for its private flags.  The names and meanings of private flags (if any) are defined by each network device driver.
@@ -665,8 +683,8 @@ OPTIONS
                       the closest supported value. Only on reading back the tunable do you get the actual value.
 
            energy-detect-power-down on|off
-                  Specifies  whether Energy Detect Power Down (EDPD) should be enabled (if supported).  This will put the RX and TX circuit blocks into a low power mode, and the PHY will
-                  wake up periodically to send link pulses to avoid any lock-up situation with a peer PHY that may also have EDPD enabled. By default, this setting will also  enable  the
+                  Specifies whether Energy Detect Power Down (EDPD) should be enabled (if supported).  This will put the RX and TX circuit blocks into a low power mode, and the PHY  will
+                  wake  up  periodically to send link pulses to avoid any lock-up situation with a peer PHY that may also have EDPD enabled. By default, this setting will also enable the
                   periodic transmission of TX pulses.
 
                   msecs N
@@ -680,13 +698,13 @@ OPTIONS
               Gets the PHY tunable parameters.
 
            downshift
-                  For  operation in cabling environments that are incompatible with 1000BASE-T, PHY device provides an automatic link speed downshift operation.  Link speed downshift af‐
+                  For operation in cabling environments that are incompatible with 1000BASE-T, PHY device provides an automatic link speed downshift operation.  Link speed downshift  af‐
                   ter N failed 1000BASE-T auto-negotiation attempts.  Downshift is useful where cable does not have the 4 pairs instance.
 
                   Gets the PHY downshift count/status.
 
            fast-link-down
-                  Depending on the mode it may take 0.5s - 1s until a broken link is reported as down.  In certain use cases a link-down event needs to be reported as soon  as  possible.
+                  Depending  on  the mode it may take 0.5s - 1s until a broken link is reported as down.  In certain use cases a link-down event needs to be reported as soon as possible.
                   Some PHYs support a Fast Link Down Feature and may allow configuration of the delay before a broken link is reported as being down.
 
                   Gets the PHY Fast Link Down status / period.
@@ -752,7 +770,7 @@ OPTIONS
        --set-fec
               Configures Forward Error Correction for the specified network device.
 
-              Forward  Error Correction modes selected by a user are expected to be persisted after any hotplug events. If a module is swapped that does not support the current FEC mode,
+              Forward Error Correction modes selected by a user are expected to be persisted after any hotplug events. If a module is swapped that does not support the current FEC  mode,
               the driver or firmware must take the link down administratively and report the problem in the system logs for users to correct.
 
            encoding auto|off|rs|baser|llrs [...]
@@ -775,14 +793,14 @@ OPTIONS
                   Sub command to apply. The supported sub commands include --show-coalesce and --coalesce.
 
        q.B --cable-test
-              Perform a cable test and report the results. What results are returned depends on the capabilities of the network interface. Typically open pairs and shorted pairs  can  be
+              Perform  a  cable test and report the results. What results are returned depends on the capabilities of the network interface. Typically open pairs and shorted pairs can be
               reported, along with pairs being O.K. When a fault is detected the approximate distance to the fault may be reported.
 
        --cable-test-tdr
               Perform a cable test and report the raw Time Domain Reflectometer data.  A pulse is sent down a cable pair and the amplitude of the reflection, for a given distance, is re‐
               ported. A break in the cable returns a big reflection. Minor damage to the cable returns a small reflection. If the cable is shorted, the amplitude of the reflection can be
-              negative.  By  default,  data is returned for lengths between 0 and 150m at 1m steps, for all pairs. However parameters can be passed to restrict the collection of data. It
-              should be noted, that the interface will round the distances to whatever granularity is actually implemented. This is often 0.8 of a meter. The results should  include  the
+              negative. By default, data is returned for lengths between 0 and 150m at 1m steps, for all pairs. However parameters can be passed to restrict the collection  of  data.  It
+              should  be  noted, that the interface will round the distances to whatever granularity is actually implemented. This is often 0.8 of a meter. The results should include the
               actual rounded first and last distance and step size.
 
            first  N
@@ -815,10 +833,10 @@ BUGS
 AUTHOR
        ethtool was written by David Miller.
 
-       Modifications  by  Jeff  Garzik,  Tim  Hockin,  Jakub Jelinek, Andre Majorel, Eli Kupermann, Scott Feldman, Andi Kleen, Alexander Duyck, Sucheta Chakraborty, Jesse Brandeburg, Ben
+       Modifications by Jeff Garzik, Tim Hockin, Jakub Jelinek, Andre Majorel, Eli Kupermann, Scott Feldman, Andi Kleen, Alexander  Duyck,  Sucheta  Chakraborty,  Jesse  Brandeburg,  Ben
        Hutchings, Scott Branden.
 
 AVAILABILITY
        ethtool is available from ⟨http://www.kernel.org/pub/software/network/ethtool/⟩
 
-Ethtool version 5.9                                                                      Oct 2020                                                                               ETHTOOL(8)
+Ethtool version 5.15                                                                   November 2021                                                                            ETHTOOL(8)

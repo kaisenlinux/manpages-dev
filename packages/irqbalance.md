@@ -89,13 +89,21 @@ ENVIRONMENT VARIABLES
 
        IRQBALANCE_BANNED_CPUS
               Provides a mask of CPUs which irqbalance should ignore and never assign interrupts to.  If not specified, irqbalance use mask of isolated and  adaptive-ticks  CPUs  on  the
-              system as the default value.
+              system  as  the  default  value.   This is a hexmask without the leading ’0x’. On systems with large numbers of processors, each group of eight hex digits is separated by a
+              comma  ’,’.  i.e.   ‘export  IRQBALANCE_BANNED_CPUS=fc0‘  would  prevent  irqbalance  from  assigning  irqs  to  the  7th-12th  cpus   (cpu6-cpu11)   or   ‘export   IRQBAL‐
+              ANCE_BANNED_CPUS=ff000000,00000001‘  would prevent irqbalance from assigning irqs to the 1st (cpu0) and 57th-64th cpus (cpu56-cpu63).  Notes: This environment variable will
+              be discarded, please use IRQBALANCE_BANNED_CPULIST instead. Before deleting this environment variable, Introduce a deprecation period first for the consider of  compatibil‐
+              ity.
+
+       IRQBALANCE_BANNED_CPULIST
+              Provides  a  cpulist which irqbalance should ignore and never assign interrupts to.  If not specified, irqbalance use mask of isolated and adaptive-ticks CPUs on the system
+              as the default value.
 
 SIGNALS
        SIGHUP Forces a rescan of the available IRQs and system topology.
 
 API
-       irqbalance  is  able to communicate via socket and return it's current assignment tree and setup, as well as set new settings based on sent values. Socket is abstract, with a name
+       irqbalance is able to communicate via socket and return it's current assignment tree and setup, as well as set new settings based on sent values. Socket is abstract, with  a  name
        in form of irqbalance<PID>.sock , where <PID> is the process ID of irqbalance instance to communicate with.  Possible values to send:
 
        stats  Retrieve assignment tree of IRQs to CPUs, in recursive manner. For each CPU node in tree, it's type, number, load and whether the save mode is active are sent. For each as‐

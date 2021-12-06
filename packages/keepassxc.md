@@ -47,13 +47,13 @@ NOTES
            https://github.com/keepassxreboot/keepassxc.git
 
 AUTHOR
-       This manual page was originally written by Janek Bevendorff <janek@jbev.net>.
+       This manual page was originally written by Janek Bevendorff janek@jbev.net.
 
 REPORTING BUGS
        Bugs and feature requests can be reported on GitHub at https://github.com/keepassxreboot/keepassxc/issues.
 
 COPYRIGHT
-       Copyright (C) 2016-2020 KeePassXC Team <team@keepassxc.org>
+       Copyright (C) 2016-2020 KeePassXC Team team@keepassxc.org
 
        KeePassXC code is licensed under GPL-2 or GPL-3.
 

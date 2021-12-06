@@ -28,4 +28,4 @@ SEE ALSO
 AUTHOR
        Christian Brauner <christian.brauner@ubuntu.com>
 
-                                                                                        2021-01-31                                                                    lxc-update-config(1)
+                                                                                        2021-08-27                                                                    lxc-update-config(1)

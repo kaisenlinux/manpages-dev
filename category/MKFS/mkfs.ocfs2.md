@@ -280,4 +280,4 @@ AUTHORS
 COPYRIGHT
        Copyright © 2004, 2012 Oracle. All rights reserved.
 
-Version 1.8.6                                                                          January 2012                                                                          mkfs.ocfs2(8)
+Version 1.8.7                                                                          January 2012                                                                          mkfs.ocfs2(8)

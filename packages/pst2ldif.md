@@ -80,6 +80,6 @@ COPYRIGHT
        Ave, Cambridge, MA 02139, USA.
 
 VERSION
-       0.6.75
+       0.6.76
 
-pst2ldif 0.6.75                                                                         2017-12-07                                                                             PST2LDIF(1)
+pst2ldif 0.6.76                                                                         2017-12-07                                                                             PST2LDIF(1)
