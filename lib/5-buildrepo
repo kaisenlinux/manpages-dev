@@ -1,0 +1,28 @@
+
+# buildrepo: clone manpages-dev repo with updated manpages and mix files
+#*********************************
+
+func_buildrepo () {
+
+for dir in "category" "packages"; do
+	if [[ -d $dir ]]; then
+	rm -Rf $dir
+	echo "* Deleted old folders : category/ and packages/"
+	fi
+done
+
+for exs in "mix_packages.exs" "mix_category.exs"; do
+	if [[ -e $exs ]]; then
+	rm -f $exs
+	echo "* Deleted old files : mix_category.exs and mix_packages.exs"
+	fi
+done
+
+  cp -Rf $base_dir/postgen-5/* .
+  echo "* Copy $base_dir/postgen-5 in root manpages-dev folder"
+  echo "elixir 1.11.4-otp-23" > .tool-versions
+
+  echo "you can now run install_requirements.sh and mix_build.sh !"
+}
+
+

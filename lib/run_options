@@ -1,0 +1,109 @@
+
+func_options() {
+
+##############
+# --help option
+##############
+
+if [[ "$1" = "--help" ]]; then
+func_usage
+fi
+
+##############
+# --scan options
+##############
+
+if [[ "$1" = "--scan" ]] && [[ "$#" -eq 2  ]]; then
+    shift
+    option="$1"
+    base_dir="$base_dir_scan"
+
+    case $option in
+
+            step1)
+                    echo "Running $0 --scan $1"
+                    func_scan_step_1
+                    
+                    ;;
+            step2)
+                    echo "Running $0 --scan $1"
+                    func_scan_step_2
+                    ;;
+            step3)
+                    echo "Running $0 --scan $1"
+                    func_scan_step_3
+                    ;;
+            step4)
+                    echo "Running $0 --scan $1"
+                    func_scan_step_4
+                    ;;
+            step5)
+                    echo "Running $0 --scan $1"
+                    func_scan_step_5
+                    ;;
+            full)
+                    echo "Running $0 --scan $1"
+                    func_scan_full
+                    echo "16 Scans generated in : $base_dir"
+                    ;;
+            clean)
+                    echo "Running $0 --scan $1"
+                    func_scan_clean
+                    ;;
+            *)
+            echo -e "$error_option"
+            func_usage
+            exit
+            ;;
+        
+    esac
+
+fi
+
+
+###############
+# --parse options
+###############
+
+if [[ "$1" = "--parse" ]] && [[ "$#" -eq 2  ]]; then
+    shift
+    option="$1"
+    base_dir="$base_dir_parse"
+
+    case $option in
+
+            kaisen-apps)
+                    echo "Running $0 --parse $1"
+                    func_scan_step_2
+                    func_parse_kaisen_apps               
+                    ;;
+            kaisen-categories)
+                    echo "Running $0 --parse $1"
+                    func_scan_step_2
+                    func_parse_kaisen_apps
+                    func_parse_kaisen_categories 2>/dev/null                   
+                    ;;
+            full)
+                    echo "Running $0 --parse $1"
+                    func_scan_step_2
+                    func_parse_kaisen_apps
+                    func_parse_kaisen_categories 2>/dev/null
+                    ;;
+            clean)
+                    echo "* Running $0 --parse $1"
+                    func_parse_clean
+                    ;;
+            *)
+            echo -e "$error_option"
+            func_usage
+            exit
+            ;;
+        
+    esac
+
+fi
+
+}
+
+
+

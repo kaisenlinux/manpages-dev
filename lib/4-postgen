@@ -1,0 +1,295 @@
+
+#post_gen_1: remove empty manpages/folders and services files
+#****************************************
+
+func_post_gen_1() {
+    dir="$base_dir/postgen-1"
+    cp -r $base_dir/gen-3 $dir
+
+    echo "* Total kaisen-services md files" 
+    find $dir/ -name "*able.md" -type f -empty | wc -l;
+    echo "* Removed kaisen-services md files" 
+    find $dir/ -name "*able.md" -type f -empty -delete;
+    echo "* Total empty md manpages files" 
+    find $dir/ -name "*.md" -type f -empty |wc -l;
+    echo "* Removed empty md manpages files " 
+    find $dir/ -name "*.md" -type f -empty -delete;
+    echo "* Removed empty folders " 
+    find $dir/ -type d -empty -exec rm -rf {} \;
+    echo "* Total remaining manpages md files " 
+    find $dir/ -name "*.md" -type f|wc -l;
+    echo "See listing of all manpages by categories generated:"
+    sleep 5
+    find "$dir/" -name "*.md" -type f |sort -u;
+
+}
+
+# post_gen_2 : Remove category folders with ";"
+#****************************************
+
+func_post_gen_2() {
+    cp -r $base_dir/postgen-1 $base_dir/postgen-2
+    find $base_dir/postgen-2 -type d -name "*;*" -exec rm -Rf {} \;
+    echo "* Deleted useless category folders"
+}
+
+# post_gen_3: generating wireguard manpages & optionnaly generate no-manual list
+#************************************
+
+func_post_gen_3() {
+    # mannually generating missing manual in $dir/no-manual.log
+    # cat output_fullbuild_05042021/postgen-2/no-manual.log | grep "Aucune"| awk -F " " '{print $6}'
+    # generating supplementary manpages for wireguard :
+    man wg > $base_dir/postgen-2/VPN/wg.md
+    man wg-quick > $base_dir/postgen-2/VPN/wg-quick.md
+    cp -r $base_dir/postgen-2  $base_dir/postgen-3
+    rm -f $base_dir/postgen-3/*.log
+    echo "Total categories for kaisen linux menu :"
+    find $base_dir/postgen-3/ -type d |wc -l
+    echo "Total manpages generated for kaisen linux :"
+    find $base_dir/postgen-3/ -name "*.md" -type f |wc -l
+}
+
+# post_gen_4: generate conf elixir mix files for category and packages
+#***********************************
+
+func_post_gen_4() {
+    
+    mkdir $base_dir/postgen-4
+
+    # generating elixir mix file : mix_category.exs
+
+    # creating section extras with md files
+    find $base_dir/postgen-3 -type f |sed 1d|awk -F "/" '{print $3"/"$4}' > $base_dir/postgen-4/md_category.list
+    for md in  $(more $base_dir/postgen-4/md_category.list); do
+            echo "\"category/$md\"," >> $base_dir/postgen-4/md_extras.list
+    done
+    sed -i '$s/,/ /' $base_dir/postgen-4/md_extras.list
+
+    # creating section groups for extras
+    find $base_dir/postgen-3 -type d | sed 1d|awk -F "/" '{print $3}' > $base_dir/postgen-4/category.list
+
+    for category in $(more $base_dir/postgen-4/category.list); do
+        echo  "\"$category\": Path.wildcard(\"category/$category/*.md\")," >> $base_dir/postgen-4/category_group_extras.list
+    done
+    sed -i '$s/,/ /' $base_dir/postgen-4/category_group_extras.list
+
+    # to fix use an empty mix_category from repo, wget and update with new values
+cat <<EOF > $base_dir/postgen-4/mix_category.exs
+defmodule KaisenManpages.MixProject do
+  use Mix.Project
+
+  def project do
+    [
+      app: :kaisen_manpages,
+      version: "$kaisen_release.0",
+      elixir: "~> 1.11",
+      start_permanent: Mix.env() == :prod,
+      deps: deps(),
+
+      # Docs
+      name: "Manpages",
+      homepage_url: "https://kaisenlinux.org/manpages/",
+      authors: "Arnaud Cormier & Kevin Chevreuil",
+      docs: [
+         main: "readme",
+         source_ref: "sort by category",
+         api_reference: false,
+         logo: "priv/assets/kaisen-logo.jpg",
+         assets: "priv/assets",
+         before_closing_head_tag: &docs_before_closing_head_tag/1,
+         formatters: ["html"],
+         extra_section: "MANUALS",
+    javascript_config_path: "doc-versions.js",
+         extras: [
+          "category/README.md",
+         $(cat $base_dir/postgen-4/md_extras.list)
+
+
+#: ["",
+#	title: ""start with tcp dump"",
+     ],
+      #],"",
+      groups_for_extras: [
+   $(cat $base_dir/postgen-4/category_group_extras.list)
+   ],
+
+    ],
+    ]
+  end
+
+  # Run mix help compile.app" to learn about applications.
+  def application do
+    [
+      extra_applications: [:logger]
+    ]
+  end
+
+  # Run "mix help deps" to learn about dependencies.
+  defp deps do
+    [
+    {:ex_doc, "~> 0.23.0", only: :dev, runtime: false},
+    {:earmark, "~> 1.4.13"}
+      # {:"dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
+    ]
+  end
+
+  # adding custom stylesheet
+  defp docs_before_closing_head_tag(:html) do
+    ~s{<link rel="stylesheet" href="assets/doc.css">}
+  end
+  defp docs_before_closing_head_tag(_), do: ""
+end
+EOF
+
+   # generating elixir mix file : mix_packages.exs
+    find $base_dir/postgen-3 -type f |sed 1d|awk -F "/" '{print $4}'|sort > $base_dir/postgen-4/md_packages.list
+
+    for package in $(more $base_dir/postgen-4/md_packages.list); do
+        echo  "\"packages/$package\"," >> $base_dir/postgen-4/packages_extras.list
+    done
+    sed -i '$s/,/ /' $base_dir/postgen-4/packages_extras.list
+
+cat <<EOF > $base_dir/postgen-4/mix_packages.exs  
+    defmodule KaisenManpages.MixProject do
+  use Mix.Project
+
+  def project do
+    [
+      app: :kaisen_manpages,
+      version: "$kaisen_release.0",
+      elixir: "~> 1.11",
+      start_permanent: Mix.env() == :prod,
+      deps: deps(),
+
+      # Docs
+      name: "Manpages",
+      homepage_url: "https://kaisenlinux.org/manpages/",
+      authors: "Arnaud Cormier & Kevin Chevreuil",
+      docs: [
+         main: "readme",
+         source_ref: "sort A-Z",
+         api_reference: false,
+         logo: "priv/assets/kaisen-logo.jpg",
+         assets: "priv/assets",
+         before_closing_head_tag: &docs_before_closing_head_tag/1,
+         formatters: ["html"],
+         extra_section: "MANUALS",
+ 	 javascript_config_path: "doc-versions.js",
+    output: "doc/packages",
+         extras: [
+          #"packages/README.md": [ title: "Manpages by packages"],
+          "packages/README.md",
+          $(cat $base_dir/postgen-4/packages_extras.list)
+   
+#: ["",
+#	title: ""start with tcp dump"",
+     ],
+      #],"",
+      groups_for_extras: [
+     # "SubMenu SysOps": [~r"/ansible", ~r"/docker", ~r"/jmeter", ~r"/kube", ~r"/lxc", ~r"/packer", ~r"/puppet", ~r"/vagrant"],
+      "Menu Packages": Path.wildcard("packages/*.md")
+   ],
+
+    ],
+    ]
+  end
+
+  # Run mix help compile.app" to learn about applications.
+  def application do
+    [
+      extra_applications: [:logger]
+    ]
+  end
+
+  # Run "mix help deps" to learn about dependencies.
+  defp deps do
+    [
+    {:ex_doc, "~> 0.23.0", only: :dev, runtime: false},
+    {:earmark, "~> 1.4.13"}
+      # {:"dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
+    ]
+  end
+
+  # adding custom stylesheet
+  defp docs_before_closing_head_tag(:html) do
+    ~s{<link rel="stylesheet" href="assets/doc.css">}
+  end
+  defp docs_before_closing_head_tag(_), do: ""
+end
+EOF
+
+}
+
+# post_gen_5: copy mix files / packages folder / category folder in postgen-5
+#*********************************************
+
+func_post_gen_5() {
+    mkdir $base_dir/postgen-5
+    cp -r $base_dir/postgen-3/ $base_dir/postgen-5/category 2>/dev/null
+    mkdir $base_dir/postgen-5/packages
+    cp -f $base_dir/postgen-3/*/*.md $base_dir/postgen-5/packages 2>/dev/null
+    cp $base_dir/postgen-4/*.exs $base_dir/postgen-5 2>/dev/null
+    echo "* Create mix_category.exs"
+    echo "* Create mix_packages.exs"
+    echo "* Create category folder with all manpages"
+    echo "* Create packages folder with all manpages"
+    echo "Project files are ready to be copied from: $base_dir/postgen-5"
+}
+
+# post_gen_5 bis: create readme for packages and category with updated count of manpages
+#***************************************
+
+func_post_gen_5bis() {
+
+tot_man_category=$(find $base_dir/postgen-5/category/ -name "*.md"|wc -l)
+tot_man_packages=$(find $base_dir/postgen-5/packages/ -name "*.md"|wc -l)
+readme_category="A-Z manpages"
+readme_packages="by category"
+
+cat <<EOF > $base_dir/postgen-5/category/README.md 
+
+# Kaisen Linux | Manpages
+
+This documentation contains $tot_man_category manual pages for applications from **kaisen-menu**.
+
+![kaisen-menu](assets/kaisen_menu.png)
+
+You can switch to sorted **$readme_category** documentation by clicking on the drodpown in the upper-left navbar.
+
+## Other Links
+
+* Check the [official Kaisen Linux](https://kaisenlinux.org/) website.
+* Check the [official Kaisen Linux documentation](https://kaisenlinux.org/documentation/).
+* Check [Debian testing manpages](https://manpages.debian.org/contents-testing.html) for additionnal help. 
+
+## Contributor
+
+Manpages for Kaisen Linux made by Arnaud Cormier - freelance at [magiklabs](https://www.magiklabs.xyz)
+EOF
+
+cat <<EOF > $base_dir/postgen-5/packages/README.md 
+
+# Kaisen Linux | Manpages
+
+This documentation contains $tot_man_packages manual pages for applications from **kaisen-menu**.
+
+![kaisen-menu](assets/kaisen_menu.png)
+
+You can switch to sorted **$readme_packages** documentation by clicking on the drodpown in the upper-left navbar.
+
+## Other Links
+
+* Check the [official Kaisen Linux](https://kaisenlinux.org/) website.
+* Check the [official Kaisen Linux documentation](https://kaisenlinux.org/documentation/).
+* Check [Debian testing manpages](https://manpages.debian.org/contents-testing.html) for additionnal help. 
+
+## Contributor
+
+Manpages for Kaisen Linux made by Arnaud Cormier - freelance at [magiklabs](https://www.magiklabs.xyz)
+EOF
+
+echo "* Adding updated README for category & packages folder in $base_dir/postgen-5"
+}
+
+

@@ -1,0 +1,70 @@
+
+# DATE : 28012021
+# GOAL : Parse desktop files of kaisen-menu to generate a quick help
+# RELEASE : 0.2 - 02042021 
+
+
+# BUT HOW GENERATE KAISEN MENU CATEGORIE AND HELP FOR EACH CATEGORY ?
+#-------------------
+
+# Finds all category of kaisen-menu
+
+
+# parse_kaisen_apps : parse applications to list all apps
+#************************************************************
+func_parse_kaisen_apps() {
+
+# init clean folder
+if [[ -d "$base_dir/parse-1" ]]; then
+rm -Rf $base_dir/parse-1
+echo "* cleaned old parse directory.."
+echo "Start parsing..."
+else 
+echo "Start parsing..."
+fi
+# set output dir
+dir="$base_dir/parse-1"
+mkdir -p $dir
+
+# generate list of of all kaisen-menu apps
+cat $base_dir/scan-2/applications.list | awk '{print $9}' > $dir/kaisen_apps.list
+sed -i '1d' $dir/kaisen_apps.list
+
+# generate total of all kaisen-menu apps
+cat $dir/kaisen_apps.list | wc -l > $dir/total_kaisen_apps.log
+
+## Report
+echo "* Total kaisen-apps : $(cat $dir/total_kaisen_apps.log)"
+echo "* Total kaisen-apps [only kaisen linux menu] : $(cat $dir/kaisen_apps.list|grep "kaisen"|wc -l)"
+
+echo "1 parse kaisen-apps generated in : $dir"
+}
+
+
+# parse_kaisen_categories : List all categories of kaisen apps
+#************************************************************
+func_parse_kaisen_categories() {
+
+for file in $(more $dir/kaisen_apps.list); do
+cat /usr/share/kaisen-menu/applications/$file 2>/dev/null| grep "Categories=" >> $dir/categories.list
+done
+
+cat $dir/categories.list |awk -F "=" '{ print $2 }'|sort -u > $dir/categories_cleaned.list
+mv -f $dir/categories_cleaned.list $dir/categories.list
+
+## Report
+echo "* Total kaisen-categories : $(cat $dir/categories.list|wc -l)"
+
+echo "1 parse kaisen-categories generated in : $dir"
+
+}
+
+func_parse_full() {
+    func_parse_kaisen_apps
+    func_parse_kaisen_categories
+}
+
+func_parse_clean() {
+    rm -Rf output_parse_*
+    echo "* all folders prefixed output_parse_ deleted."
+}

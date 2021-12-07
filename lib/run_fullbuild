@@ -1,0 +1,57 @@
+###############
+# FULL BUILD
+###############
+
+    if [[ "$#" -eq 0 ]] || ([[ "$#" -eq 1 ]] && [[ "$1" = "--fullbuild" ]]); then
+    echo ""
+    read -p "Do you want to run a full build ? [Y/N] : " build_confirmation
+    read -p "Which kaisen version do you want to release ? [1.6|1.7|...] : " kaisen_release
+
+        case $build_confirmation in
+            Y|y)
+                if [[ -d "$base_dir" ]]; then
+                    rm -Rf "$base_dir/"
+                    echo "cleaned old dir.."
+                    echo "Start scanning..."
+                    func_scan_full
+                    func_parse_full # to fix or not 2>/dev/null
+                    func_gen_1
+                    func_gen_2
+                    func_gen_3
+                    func_post_gen_1
+                    func_post_gen_2
+                    func_post_gen_3
+                    func_post_gen_4
+                    func_post_gen_5
+                    func_post_gen_5bis
+                    func_buildrepo
+                    echo "Files generated in : $base_dir/"
+                    
+                else 
+                    echo "Start scanning..."
+                    func_scan_full
+                    func_parse_full # to fix
+                    func_gen_1
+                    func_gen_2
+                    func_gen_3
+                    func_post_gen_1
+                    func_post_gen_2
+                    func_post_gen_3
+                    func_post_gen_4
+                    func_post_gen_5
+                    func_post_gen_5bis
+                    func_buildrepo
+                    echo "Files generated in : $base_dir/"
+                fi
+                ;;
+            *)
+                    echo "Exiting $0"
+                ;;
+        esac
+    fi
+
+    if [[ "$#" -eq 2 ]] && [[ "$1" = "--fullbuild" ]] && [[ "$2" = "clean" ]]; then
+        echo "Running $0 --fullbuild $2"
+        rm -Rf output_fullbuild_*
+        echo "* all folders prefixed output_scan_ deleted."
+    fi

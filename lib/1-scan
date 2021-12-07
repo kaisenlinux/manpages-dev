@@ -1,0 +1,151 @@
+
+# DATE : 23012021
+# GOAL : Build an help website
+# HOW : List extensive or only useful packages ?
+# DESCRIPTION : generate listing and total in an output directory for each drafts below (5 drafts, see comments)
+# RELEASE : 0.2 - 02042021
+
+## BUT WHAT TO LIST FOR BUILD HELP ?
+##-------------------
+## man pages / desktop files / kaisen-menu / doc / repos ?
+
+
+# full : Scanning all steps below for running a full build
+# (function func_scan_full at bottom of this file)
+
+# step1 : Scanning system for manpages files (all sections)
+#************************************************************
+
+func_scan_step_1() {
+    
+## Scan this kaisen-linux machine to find manpages
+dir="$base_dir/scan-1"
+mkdir -p $dir
+for i in $(seq 1 9); do 
+ls -l /usr/share/man/man$i|sed '1d' > $dir/man$i.list
+# clean first line for good count
+ls -l /usr/share/man/man$i |sed '1d'| wc -l >> $dir/total-man$i.log
+done
+
+## Report
+for section in  $(seq 1 9); do
+echo "* Total manpages ($section) : $(cat $dir/total-man$section.log)"
+done
+
+echo "* 9 Scans generated in : $dir"
+
+}
+
+# step2 : Scanning system for desktop files (applications and kaisen-menu)
+#**************************************************************************
+
+func_scan_step_2() {
+
+## second draft : kaisen menu
+## Scan default kaisen-menu to list packages on kaisen-linux mate
+dir="$base_dir/scan-2"
+# find .desktop on applications folder
+mkdir -p $dir
+ls -l /usr/share/applications|sed '1d' > $dir/applications.list
+ls -l /usr/share/applications|sed '1d' | wc -l > $dir/total-application.log
+
+#find .desktop on kaisen-menu folder
+ls -l /usr/share/kaisen-menu/applications|sed '1d' > $dir/kaisen-menu.list
+ls -l /usr/share/kaisen-menu/applications|sed '1d' | wc -l > $dir/total-kaisen-menu.log 
+
+## Report
+for desktop in  $(ls $dir/*.log); do
+echo "* Total desktop ${desktop:39:-4}: $(cat $desktop)"
+done
+
+echo "* 2 Scans generated in : $dir"
+
+}
+
+# step3 : Scanning system for docs files
+#*****************************************
+
+func_scan_step_3() {
+
+## third draft : lists docs
+# /usr/share/doc
+dir="$base_dir/scan-3"
+mkdir -p $dir
+ls -l /usr/share/doc|sed '1d' > $dir/docs.list
+ls -l /usr/share/doc|sed '1d' | wc -l > $dir/total-docs.log 
+
+## Report
+echo "* Total installed docs : $(cat $dir/total-docs.log)"
+echo "* 1 Scan generated in : $dir"
+
+}
+
+# step4 : Scanning system for packages installed
+#**************************************************
+
+func_scan_step_4() {
+
+## fourth draft:
+## list installed packages on this machine
+dir="$base_dir/scan-4"
+mkdir -p $dir
+dpkg-query -f '${binary:Package}\n' -W > $dir/packages_installed.list
+dpkg-query -f '${binary:Package}\n' -W | wc -l > $dir/total_packages_installed.log
+
+## Report
+echo "* Total installed packages : $(cat $dir/total_packages_installed.log)"
+echo "* 1 Scan generated in : $dir"
+
+}
+
+# step5 : Scanning repository main contrib non-free for packages
+#******************************************************************
+
+func_scan_step_5() {
+
+## fifth draft: list packages from a repo
+
+# define output dir
+dir="$base_dir/scan-5"
+mkdir -p $dir
+
+# define repos packages
+repos_dir="/var/lib/apt/lists"
+main="deb.kaisenlinux.org_dists_kaisen-rolling_main_binary-amd64_Packages"
+contrib="deb.kaisenlinux.org_dists_kaisen-rolling_contrib_binary-amd64_Packages"
+non_free="deb.kaisenlinux.org_dists_kaisen-rolling_non-free_binary-amd64_Packages"
+
+# count unique package in repo
+grep ^Package $repos_dir/$main | awk '{print $2}' | sort -u | wc -l > $dir/total-main.log
+grep ^Package $repos_dir/$contrib | awk '{print $2}' | sort -u | wc -l > $dir/total-contrib.log
+grep ^Package $repos_dir/$non_free | awk '{print $2}' | sort -u | wc -l > $dir/total-non_free.log
+#sudo grep ^Package $repos_dir/$teamviewer | awk '{print $2}' | sort -u | wc -l > $dir_5/total-teamviewer.log
+
+# list packages in repo
+grep ^Package $repos_dir/$main | awk '{print $2}' | sort -u  > $dir/main.list
+grep ^Package $repos_dir/$contrib | awk '{print $2}' | sort -u  > $dir/contrib.list
+grep ^Package $repos_dir/$non_free | awk '{print $2}' | sort -u  > $dir/non_free.list
+#sudo grep ^Package $repos_dir/$teamviewer | awk '{print $2}' | sort -u  > $dir_5/teamviewer.list
+
+## Report
+for deb in  $(ls $dir/*.log); do
+echo "* Total packages in ${deb:39:-4}: $(cat $deb)"
+done
+
+echo "* 3 Scans generated in : $dir"
+
+}
+
+# full : Scanning all steps below for running a full build
+func_scan_full() {
+    func_scan_step_1
+    func_scan_step_2
+    func_scan_step_3
+    func_scan_step_4
+    func_scan_step_5
+}
+
+func_scan_clean() {
+    rm -Rf output_scan_*
+    echo "* all folders prefixed output_scan_ deleted."
+}

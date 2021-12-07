@@ -1,0 +1,82 @@
+
+# gen_1 : Find all desktop entry for each category of kaisen-menu
+#***************************************************************
+
+func_gen_1() {
+
+ dir="$base_dir/parse-1"
+ mkdir -p $base_dir/gen-1 
+ echo "Be patient...wait a big minute..."  
+ for category in $(more $dir/categories.list); do
+ 
+    for file in $(more $dir/kaisen_apps.list|grep "kaisen"); do
+        if cat /usr/share/kaisen-menu/applications/$file | grep -q "$category"; then
+            cat /usr/share/kaisen-menu/applications/$file 2>/dev/null >> $base_dir/gen-1/${category}.list
+        fi
+    done
+ done  
+
+# generate total of all kaisen-menu apps
+grep -rc "Desktop Entry" $base_dir/gen-1/*.list > $base_dir/gen-1/a_total_kaisen_apps_in_cat.log
+
+## Report
+echo -e "* Total kaisen desktop entry for each menu categories:\n"
+sleep 3
+echo -e "$(cat $base_dir/gen-1/a_total_kaisen_apps_in_cat.log|awk -F "/" '{print $3}')"
+echo "* kaisen categories with each desktop entries generated in : $base_dir/gen-1/"
+}
+
+# gen_2 : generate name of apps for each category list
+# gen_2 bis : name of apps in lowercase for each category list
+#************************************************************
+
+func_gen_2() {
+
+mkdir -p $base_dir/gen-2
+
+mkdir -p $base_dir/gen-2bis
+
+for list in $(find $base_dir/gen-1/*.list -type f|awk -F "/" '{print $3}'); do
+ cat "$base_dir/gen-1/$list" | grep "Name=" >> $base_dir/gen-2/${list::-5}.list
+ sed -i "s/^Name=//g" $base_dir/gen-2/${list::-5}.list
+ # Add gen-2bis for lowercase and uniq name
+ cat $base_dir/gen-2/${list::-5}.list |tr '[:upper:]' '[:lower:]'|sort|uniq >> $base_dir/gen-2bis/${list::-5}.list
+done
+
+## Report
+echo "* kaisen categories with each app name lowercase generated in : $base_dir/gen-2bis"
+}
+
+# gen_3 : Create a category folder name with each manual apps
+#**************************************************************
+
+func_gen_3() {
+
+mkdir -p $base_dir/gen-3
+
+for list in $(find $base_dir/gen-2bis/*.list -type f| awk -F "/" '{print $3}'); do
+    mkdir $base_dir/gen-3/${list::-5}
+    for line in $(more $base_dir/gen-2bis/$list); do
+        mkdir -p $base_dir/gen-3/${list::-5}
+        # man generation : to change for better display
+        man $line 2>> $base_dir/gen-3/no-manual.log > $base_dir/gen-3/${list::-5}/$line.md
+       
+       # generating apropos for each packages : DEBUGGING/IMPROVING
+       # man -k $line >> $base_dir/gen-3/apropos.log
+    done
+done
+ # forgot app name with space
+ # manpage for service app name ending by *able ?
+
+## Report
+echo "* Total categories folders generated:"
+find $base_dir/gen-3/ -type d | wc -l;
+echo "* Total manpages md files generated: "
+find $base_dir/gen-3/ -name "*.md" -type f | wc -l;
+echo "* Total manpages md files empty : "
+find $base_dir/gen-3/ -nshow ame "*.md" -type f -empty|wc -l;
+echo "* Total missing manpages found: " 
+grep -c "Aucune entr" $base_dir/gen-3/no-manual.log
+echo "* kaisen categories with md manpages for each app generated in : $base_dir/gen-3"
+}
+
