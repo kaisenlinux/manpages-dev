@@ -16,21 +16,17 @@
 # If the VM crashes, it generates a dump, let's ignore it too.
 erl_crash.dump
 
-# Also ignore archive artifacts (built via "mix 
-archive.build
-").
+# Also ignore archive artifacts (built via "mix archive.build").
 *.ez
 
-# Ignore package tarball (built via "mix 
-hex.build
-").
+# Ignore package tarball (built via "mix hex.build").
 kaisen_manpages-*.tar
 
 # Ignore elixir ls
 /.elixir_ls/
 
 # ignore lib because no elixir here
-/lib/
+#/lib/
 
 # ignore mix.log for deps check
 mix.log
