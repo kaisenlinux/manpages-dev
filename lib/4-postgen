@@ -7,20 +7,20 @@ func_post_gen_1() {
     cp -r $base_dir/gen-3 $dir
 
     echo "* Total kaisen-services md files" 
-    find $dir/ -name "*able.md" -type f -empty | wc -l;
+    find $dir/ -iname "*able.md" -type f -empty | wc -l;
     echo "* Removed kaisen-services md files" 
-    find $dir/ -name "*able.md" -type f -empty -delete;
+    find $dir/ -iname "*able.md" -type f -empty -delete;
     echo "* Total empty md manpages files" 
-    find $dir/ -name "*.md" -type f -empty |wc -l;
+    find $dir/ -iname "*.md" -type f -empty |wc -l;
     echo "* Removed empty md manpages files " 
-    find $dir/ -name "*.md" -type f -empty -delete;
+    find $dir/ -iname "*.md" -type f -empty -delete;
     echo "* Removed empty folders " 
     find $dir/ -type d -empty -exec rm -rf {} \;
     echo "* Total remaining manpages md files " 
-    find $dir/ -name "*.md" -type f|wc -l;
+    find $dir/ -iname "*.md" -type f ! -name README.md |wc -l;
     echo "See listing of all manpages by categories generated:"
     sleep 5
-    find "$dir/" -name "*.md" -type f |sort -u;
+    find "$dir/" -iname "*.md" -type f ! -name README.md |sort -u;
 
 }
 
@@ -47,7 +47,7 @@ func_post_gen_3() {
     echo "Total categories for kaisen linux menu :"
     find $base_dir/postgen-3/ -type d |wc -l
     echo "Total manpages generated for kaisen linux :"
-    find $base_dir/postgen-3/ -name "*.md" -type f |wc -l
+    find $base_dir/postgen-3/ -iname "*.md" -type f ! -name README.md |wc -l
 }
 
 # post_gen_4: generate conf elixir mix files for category and packages
@@ -164,7 +164,7 @@ cat <<EOF > $base_dir/postgen-4/mix_packages.exs
 
       # Docs
       name: "Manpages",
-      homepage_url: "file:///opt/kaisen-manpages/readme.html",
+      homepage_url: "https://kaisenlinux.org/manpages/",
       authors: "Arnaud Cormier & Kevin Chevreuil",
       docs: [
          main: "readme",
@@ -242,8 +242,7 @@ func_post_gen_5() {
 
 func_post_gen_5bis() {
 
-tot_man_category=$(find $base_dir/postgen-5/category/ -name "*.md"|wc -l)
-tot_man_packages=$(find $base_dir/postgen-5/packages/ -name "*.md"|wc -l)
+total_manpages=$(find $base_dir/postgen-5/packages/ -iname "*.md" ! -name README.md | wc -l)
 readme_category="A-Z manpages"
 readme_packages="by category"
 
@@ -251,7 +250,7 @@ cat <<EOF > $base_dir/postgen-5/category/README.md
 
 # Kaisen Linux | Manpages
 
-This documentation contains $tot_man_category manual pages for applications from **kaisen-menu**.
+This documentation contains $total_manpages manual pages for applications from **kaisen menu** sorted by category.
 
 ![kaisen-menu](assets/kaisen_menu.png)
 
@@ -272,7 +271,7 @@ cat <<EOF > $base_dir/postgen-5/packages/README.md
 
 # Kaisen Linux | Manpages
 
-This documentation contains $tot_man_packages manual pages for applications from **kaisen-menu**.
+This documentation contains $total_manpages manual pages for applications from **kaisen menu** sorted by package name.
 
 ![kaisen-menu](assets/kaisen_menu.png)
 

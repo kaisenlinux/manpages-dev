@@ -72,7 +72,7 @@ done
 echo "* Total categories folders generated:"
 find $base_dir/gen-3/ -type d | wc -l;
 echo "* Total manpages md files generated: "
-find $base_dir/gen-3/ -name "*.md" -type f | wc -l;
+find $base_dir/gen-3/ -iname "*.md" -type f ! -name README.md | wc -l;
 echo "* Total manpages md files empty : "
 find $base_dir/gen-3/ -nshow ame "*.md" -type f -empty|wc -l;
 echo "* Total missing manpages found: " 
