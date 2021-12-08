@@ -164,7 +164,7 @@ cat <<EOF > $base_dir/postgen-4/mix_packages.exs
 
       # Docs
       name: "Manpages",
-      homepage_url: "https://kaisenlinux.org/manpages/",
+      homepage_url: "file:///opt/kaisen-manpages/readme.html",
       authors: "Arnaud Cormier & Kevin Chevreuil",
       docs: [
          main: "readme",
