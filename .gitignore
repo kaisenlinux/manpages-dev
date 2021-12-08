@@ -25,14 +25,23 @@ kaisen_manpages-*.tar
 # Ignore elixir ls
 /.elixir_ls/
 
-# ignore lib because no elixir here
-#/lib/
-
-# ignore mix.log for deps check
-mix.log
-
 # ignore .tool-versions
 .tool-versions
 
+# ignore mix.lock file
+mix.lock
+
 # ignore manpages-build output
 /output_fullbuild_*/
+
+# ignore *.exs files
+*.exs
+
+# ignore category folder generated after build
+/category/
+
+# ignore packages folder generated after build
+/packages/
+
+# ignore log folder
+/log/
