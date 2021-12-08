@@ -20,7 +20,7 @@ done
 
   cp -Rf $base_dir/postgen-5/* .
   echo "* Copy $base_dir/postgen-5 in root manpages-dev folder"
-  echo "elixir 1.11.4-otp-23" > .tool-versions
+  echo "elixir 1.13.0-otp-24" > .tool-versions
 
   echo "you can now run install_requirements.sh and mix_build.sh !"
 }
