@@ -21,18 +21,18 @@ func_scan_step_1() {
 ## Scan this kaisen-linux machine to find manpages
 dir="$base_dir/scan-1"
 mkdir -p $dir
-for i in $(seq 1 9); do 
+for i in $(seq 1 8); do 
 ls -l /usr/share/man/man$i|sed '1d' > $dir/man$i.list
 # clean first line for good count
 ls -l /usr/share/man/man$i |sed '1d'| wc -l >> $dir/total-man$i.log
 done
 
 ## Report
-for section in  $(seq 1 9); do
+for section in  $(seq 1 8); do
 echo "* Total manpages ($section) : $(cat $dir/total-man$section.log)"
 done
 
-echo "* 9 Scans generated in : $dir"
+echo "* 8 Scans generated in : $dir"
 
 }
 
