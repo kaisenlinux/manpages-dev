@@ -31,6 +31,9 @@ kaisen_manpages-*.tar
 # ignore mix.lock file
 mix.lock
 
+# ignore mix.log file
+mix.log
+
 # ignore manpages-build output
 /output_fullbuild_*/
 

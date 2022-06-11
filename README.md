@@ -28,11 +28,11 @@ chmod +x install-requirements.sh && ./install-requirements.sh
 ```bash
 # then enter the following command to install erlang and elixir via asdf
 asdf plugin-add erlang && asdf plugin-add elixir
-asdf install erlang 23.3.1
-asdf install elixir 1.11.4-otp-23
+asdf install erlang 25.0.1
+asdf install elixir 1.13.4-otp-25
 # you have to define a global version for erlang and elixir
-asdf global elixir 1.11.4-otp-23
-asdf global erlang 23.3.1 
+asdf global elixir 1.13.4-otp-25
+asdf global erlang 25.0.1 
 ```
 
 ### Step 3
@@ -74,7 +74,7 @@ You can now copy doc/* in kaisen-manpages/ folder.
 ## Troubleshooting
 
 If you have an error when running mix_build.sh with `mix command not found`:
-- enter : asdf global erlang 23.3.1 && asdf local elixir 1.11.4-otp-23                            
+- enter : asdf global erlang 25.0.1 && asdf local elixir 1.13.4-otp-25                            
 - verify your are in zsh (or switch to bash and rereun the script)
 - delete mix.log
 - or you missed the step : ./install_requirements.sh
