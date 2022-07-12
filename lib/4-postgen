@@ -33,15 +33,24 @@ func_post_gen_2() {
     echo "* Deleted useless category folders"
 }
 
-# post_gen_3: generating wireguard manpages & optionnaly generate no-manual list
+# post_gen_3: generating wireguard/docker manpages & optionnaly generate no-manual list
 #************************************
 
 func_post_gen_3() {
     # mannually generating missing manual in $dir/no-manual.log
     # cat output_fullbuild_05042021/postgen-2/no-manual.log | grep "Aucune"| awk -F " " '{print $6}'
     # generating supplementary manpages for wireguard :
+    echo "* Generating missing wireguard manpages"
     man wg > $base_dir/postgen-2/VPN/wg.md
     man wg-quick > $base_dir/postgen-2/VPN/wg-quick.md
+    # generating supplementary manpages for docker :
+    echo "* Generating extra docker manpages"
+    find /usr/share/man/ -iname "docker*" -printf '%f\n'|cut -d "." -f1 >  $base_dir/postgen-2/Docker/docker.list
+    for dockeritem in $(more $base_dir/postgen-2/Docker/docker.list); do
+    man $dockeritem 2> /dev/null > $base_dir/postgen-2/Docker/$dockeritem.md
+    done
+    rm -f $base_dir/postgen-2/Docker/docker.list
+    # update
     cp -r $base_dir/postgen-2  $base_dir/postgen-3
     rm -f $base_dir/postgen-3/*.log
     echo "Total categories for kaisen linux menu :"

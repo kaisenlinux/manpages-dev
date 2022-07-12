@@ -81,6 +81,7 @@ If you have an error when running mix_build.sh with `mix command not found`:
 
 ## version
 
+12/07/2022 - Add more docker manpages that are not in kaisen-menu
 28/03/2021 - upgrade to v1.6 in mix*.exs  
 06/04/2021 - fix install_requirements.sh for adding asdf to zsh and bash.  
 	   - Adding commands to run after launching this script.  
