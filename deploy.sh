@@ -2,7 +2,7 @@
 set -x
 # DESCRIPTION  : Quickly update local kaisenlinux.org website repo OR kaisen-webdocs package repo
 # USAGE	       : ./deploy.sh --website OR ./deploy.sh --package
-# REQUIREMENTS : 
+# REQUIREMENTS :
 #		- manual cloning of kaisenlinux.org & kaisen-webdocs
 #		- manual build of manpages-dev repo with ./mix_build.sh OR mix_build.sh --package
 
@@ -11,7 +11,7 @@ func_website() {
 read -p "What is the absolute path of kaisenlinux.org repo on your system ? :" kaisenlinuxorg
 if [[ -d $kaisenlinuxorg ]]; then
   rm -Rf $kaisenlinuxorg/manpages/*
-  cp -r doc/* $kaisenlinuxorg/manpages/ 
+  cp -r doc/* $kaisenlinuxorg/manpages/
   echo "* Copied manpages generated with ./mix_build.sh to kaisen linux website repo."
 else
   echo "ERROR : kaisenlinux.org repo not found !"

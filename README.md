@@ -28,11 +28,11 @@ chmod +x install-requirements.sh && ./install-requirements.sh
 ```bash
 # then enter the following command to install erlang and elixir via asdf
 asdf plugin-add erlang && asdf plugin-add elixir
-asdf install erlang 25.0.1
+asdf install erlang 25.0.2
 asdf install elixir 1.13.4-otp-25
 # you have to define a global version for erlang and elixir
 asdf global elixir 1.13.4-otp-25
-asdf global erlang 25.0.1 
+asdf global erlang 25.0.2
 ```
 
 ### Step 3
