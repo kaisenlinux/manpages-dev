@@ -30,14 +30,14 @@ func_post_gen_1() {
 func_post_gen_2() {
     cp -r $base_dir/postgen-1 $base_dir/postgen-2
     find $base_dir/postgen-2 -type d -name "*;*" -exec rm -Rf {} \;
-    echo "* Deleted useless category folders"
+    echo "* Deleted useless categories folders"
 }
 
 # post_gen_3: generating wireguard/docker manpages & optionnaly generate no-manual list
 #************************************
 
 func_post_gen_3() {
-    # mannually generating missing manual in $dir/no-manual.log
+    # manually generating missing manual in $dir/no-manual.log
     # cat output_fullbuild_05042021/postgen-2/no-manual.log | grep "Aucune"| awk -F " " '{print $6}'
     # generating supplementary manpages for wireguard :
     echo "* Generating missing wireguard manpages"
@@ -52,6 +52,59 @@ func_post_gen_3() {
     rm -f $base_dir/postgen-2/Docker/docker.list
     #Remove docker-compose.md of development category
     rm -f $base_dir/postgen-2/Development/docker-compose.md
+    #Add all kubectl manpages
+    echo "* Generating extra kubectl manpages"
+    find /usr/share/man/ -iname "kubectl*" -printf '%f\n'|cut -d "." -f1 >  $base_dir/postgen-2/Kubernetes/kubernetes.list
+    for kubectlitem in $(more $base_dir/postgen-2/Kubernetes/kubernetes.list); do
+    man $kubectlitem 2> /dev/null > $base_dir/postgen-2/Kubernetes/$kubectlitem.md
+    done
+    rm -f $base_dir/postgen-2/Kubernetes/kubernetes.list
+    #Add all borg manpages
+    echo "* Generating extra borg manpages"
+    rm -f $base_dir/postgen-2/Backup/borg.md
+    find /usr/share/man/ -iname "borg*" -printf '%f\n'|cut -d "." -f1 >  $base_dir/postgen-2/Borg/borg.list
+    for borgitem in $(more $base_dir/postgen-2/Borg/borg.list); do
+    man $borgitem 2> /dev/null > $base_dir/postgen-2/Borg/$borgitem.md
+    done
+    rm -f $base_dir/postgen-2/Borg/borg.list
+    #Add all buildah manpages
+    echo "* Generating extra buildah manpages"
+    mkdir -p $base_dir/postgen-2/Buildah
+    find /usr/share/man/ -iname "buildah*" -printf '%f\n'|cut -d "." -f1 >  $base_dir/postgen-2/Buildah/buildah.list
+    for buildahitem in $(more $base_dir/postgen-2/Buildah/buildah.list); do
+    man $buildahitem 2> /dev/null > $base_dir/postgen-2/Buildah/$buildahitem.md
+    done
+    rm -f $base_dir/postgen-2/Buildah/buildah.list
+    #Move the buildah command manpage in the buildah category
+    mv $base_dir/postgen-2/DevOps/buildah.md $base_dir/postgen-2/Buildah/
+    #Add all nvme manpages
+    echo "* Generating extra nvme manpages"
+    mkdir -p $base_dir/postgen-2/NVME
+    find /usr/share/man/ -iname "nvme*" -printf '%f\n'|cut -d "." -f1 >  $base_dir/postgen-2/NVME/nvme.list
+    for nvmeitem in $(more $base_dir/postgen-2/NVME/nvme.list); do
+    man $nvmeitem 2> /dev/null > $base_dir/postgen-2/NVME/$nvmeitem.md
+    done
+    rm -f $base_dir/postgen-2/NVME/nvme.list
+    #Move the nvme command manpage in the nvme category
+    mv $base_dir/postgen-2/DisksAnalysis/nvme.md $base_dir/postgen-2/NVME/
+    mv $base_dir/postgen-2/PartitioningErasing/nvme.md $base_dir/postgen-2/NVME/
+    #Add all podman manpages
+    echo "* Generating extra podman manpages"
+    mkdir -p $base_dir/postgen-2/Podman
+    find /usr/share/man/ -iname "podman*" -printf '%f\n'|cut -d "." -f1 >  $base_dir/postgen-2/Podman/podman.list
+    for podmanitem in $(more $base_dir/postgen-2/Podman/podman.list); do
+    man $podmanitem 2> /dev/null > $base_dir/postgen-2/Podman/$podmanitem.md
+    done
+    rm -f $base_dir/postgen-2/Podman/podman.list
+    #Move the podman command manpage in the podman category
+    mv $base_dir/postgen-2/DevOps/podman.md $base_dir/postgen-2/Podman/
+    #Add openstack manpage
+    echo "* Generating openstack manpage"
+    find /usr/share/man/ -iname "openstack*" -printf '%f\n'|cut -d "." -f1 >  $base_dir/postgen-2/DevOps/openstack.list
+    for openstackitem in $(more $base_dir/postgen-2/DevOps/openstack.list); do
+    man $openstackitem 2> /dev/null > $base_dir/postgen-2/DevOps/$openstackitem.md
+    done
+    rm -f $base_dir/postgen-2/DevOps/openstack.list
     # update
     cp -r $base_dir/postgen-2  $base_dir/postgen-3
     rm -f $base_dir/postgen-3/*.log
@@ -59,9 +112,12 @@ func_post_gen_3() {
     find $base_dir/postgen-3/ -type d |wc -l
     echo "Total manpages generated for kaisen linux :"
     find $base_dir/postgen-3/ -iname "*.md" -type f ! -name README.md |wc -l
+    #Remove non-uniq files
+    echo "* Remove non-uniq manpages"
+    find $base_dir/postgen-3 -type f -print0 | xargs -0 md5sum | awk 'h[$1]{ printf "%s\0", $2; next }{ h[$1] = $2 }' | xargs -0 rm
 }
 
-# post_gen_4: generate conf elixir mix files for category and packages
+# post_gen_4: generate conf elixir mix files for categories and commands
 #***********************************
 
 func_post_gen_4() {
@@ -71,22 +127,28 @@ func_post_gen_4() {
     # generating elixir mix file : mix_category.exs
 
     # creating section extras with md files
-    find $base_dir/postgen-3 -type f |sed 1d|awk -F "/" '{print $3"/"$4}' > $base_dir/postgen-4/md_category.list
-    for md in  $(more $base_dir/postgen-4/md_category.list); do
-            echo "\"category/$md\"," >> $base_dir/postgen-4/md_extras.list
+    find $base_dir/postgen-3 -type f |sed 1d|awk -F "/" '{print $3"/"$4}' > $base_dir/postgen-4/md_categories.list
+    sort $base_dir/postgen-4/md_categories.list > $base_dir/postgen-4/md_categories.list.sort
+    mv $base_dir/postgen-4/md_categories.list.sort $base_dir/postgen-4/md_categories.list
+    for md in  $(more $base_dir/postgen-4/md_categories.list); do
+            echo "\"categories/$md\"," >> $base_dir/postgen-4/md_extras.list
     done
     sed -i '$s/,/ /' $base_dir/postgen-4/md_extras.list
 
     # creating section groups for extras
-    find $base_dir/postgen-3 -type d | sed 1d|awk -F "/" '{print $3}' > $base_dir/postgen-4/category.list
+    find $base_dir/postgen-3 -type d | sed 1d|awk -F "/" '{print $3}' > $base_dir/postgen-4/categories.list
+    sort $base_dir/postgen-4/categories.list > $base_dir/postgen-4/categories.list.sort                                                                                  
+    mv $base_dir/postgen-4/categories.list.sort $base_dir/postgen-4/categories.list
 
-    for category in $(more $base_dir/postgen-4/category.list); do
-        echo  "\"$category\": Path.wildcard(\"category/$category/*.md\")," >> $base_dir/postgen-4/category_group_extras.list
+    for category in $(more $base_dir/postgen-4/categories.list); do
+        echo  "\"$category\": Path.wildcard(\"categories/$category/*.md\")," >> $base_dir/postgen-4/categories_group_extras.list
     done
-    sed -i '$s/,/ /' $base_dir/postgen-4/category_group_extras.list
+    sed -i '$s/,/ /' $base_dir/postgen-4/categories_group_extras.list
+    sort $base_dir/postgen-4/categories_group_extras.list > $base_dir/postgen-4/categories_group_extras.list.sort                                                                                  
+    mv $base_dir/postgen-4/categories_group_extras.list.sort $base_dir/postgen-4/categories_group_extras.list
 
     # to fix use an empty mix_category from repo, wget and update with new values
-cat <<EOF > $base_dir/postgen-4/mix_category.exs
+cat <<EOF > $base_dir/postgen-4/mix_categories.exs
 defmodule KaisenManpages.MixProject do
   use Mix.Project
 
@@ -104,7 +166,7 @@ defmodule KaisenManpages.MixProject do
       authors: "Arnaud Cormier & Kevin Chevreuil",
       docs: [
          main: "readme",
-         source_ref: "sort by category",
+         source_ref: "sort by categories",
          api_reference: false,
          logo: "priv/assets/kaisen-logo.jpg",
          assets: "priv/assets",
@@ -113,7 +175,7 @@ defmodule KaisenManpages.MixProject do
          extra_section: "MANUALS",
     javascript_config_path: "doc-versions.js",
          extras: [
-          "category/README.md",
+          "categories/README.md",
          $(cat $base_dir/postgen-4/md_extras.list)
 
 
@@ -122,7 +184,7 @@ defmodule KaisenManpages.MixProject do
      ],
       #],"",
       groups_for_extras: [
-   $(cat $base_dir/postgen-4/category_group_extras.list)
+   $(cat $base_dir/postgen-4/categories_group_extras.list)
    ],
 
     ],
@@ -153,15 +215,18 @@ defmodule KaisenManpages.MixProject do
 end
 EOF
 
-   # generating elixir mix file : mix_packages.exs
-    find $base_dir/postgen-3 -type f |sed 1d|awk -F "/" '{print $4}'|sort > $base_dir/postgen-4/md_packages.list
-
-    for package in $(more $base_dir/postgen-4/md_packages.list); do
-        echo  "\"packages/$package\"," >> $base_dir/postgen-4/packages_extras.list
+   # generating elixir mix file : mix_commands.exs
+    find $base_dir/postgen-3 -type f |sed 1d|awk -F "/" '{print $4}'|sort > $base_dir/postgen-4/md_commands.list
+    sort $base_dir/postgen-4/md_commands.list > $base_dir/postgen-4/md_commands.list.sort
+    mv $base_dir/postgen-4/md_commands.list.sort $base_dir/postgen-4/md_commands.list
+    for command in $(more $base_dir/postgen-4/md_commands.list); do
+        echo  "\"commands/$command\"," >> $base_dir/postgen-4/commands_extras.list
     done
-    sed -i '$s/,/ /' $base_dir/postgen-4/packages_extras.list
+    sed -i '$s/,/ /' $base_dir/postgen-4/commands_extras.list
+    sort $base_dir/postgen-4/commands_extras.list > $base_dir/postgen-4/commands_extras.list.sort
+    mv $base_dir/postgen-4/commands_extras.list.sort $base_dir/postgen-4/commands_extras.list
 
-cat <<EOF > $base_dir/postgen-4/mix_packages.exs  
+cat <<EOF > $base_dir/postgen-4/mix_commands.exs  
     defmodule KaisenManpages.MixProject do
   use Mix.Project
 
@@ -187,11 +252,10 @@ cat <<EOF > $base_dir/postgen-4/mix_packages.exs
          formatters: ["html"],
          extra_section: "MANUALS",
  	 javascript_config_path: "doc-versions.js",
-    output: "doc/packages",
+    output: "doc/commands",
          extras: [
-          #"packages/README.md": [ title: "Manpages by packages"],
-          "packages/README.md",
-          $(cat $base_dir/postgen-4/packages_extras.list)
+          "commands/README.md",
+          $(cat $base_dir/postgen-4/commands_extras.list)
    
 #: ["",
 #	title: ""start with tcp dump"",
@@ -199,7 +263,7 @@ cat <<EOF > $base_dir/postgen-4/mix_packages.exs
       #],"",
       groups_for_extras: [
      # "SubMenu SysOps": [~r"/ansible", ~r"/docker", ~r"/jmeter", ~r"/kube", ~r"/lxc", ~r"/packer", ~r"/puppet", ~r"/vagrant"],
-      "Menu Packages": Path.wildcard("packages/*.md")
+      "Menu Commands": Path.wildcard("commands/*.md")
    ],
 
     ],
@@ -232,40 +296,41 @@ EOF
 
 }
 
-# post_gen_5: copy mix files / packages folder / category folder in postgen-5
+# post_gen_5: copy mix files / commands folder / categories folder in postgen-5
 #*********************************************
 
 func_post_gen_5() {
     mkdir $base_dir/postgen-5
-    cp -r $base_dir/postgen-3/ $base_dir/postgen-5/category 2>/dev/null
-    mkdir $base_dir/postgen-5/packages
-    cp -f $base_dir/postgen-3/*/*.md $base_dir/postgen-5/packages 2>/dev/null
+    cp -r $base_dir/postgen-3/ $base_dir/postgen-5/categories 2>/dev/null
+    mkdir $base_dir/postgen-5/commands
+    cp -f $base_dir/postgen-3/*/*.md $base_dir/postgen-5/commands 2>/dev/null
     cp $base_dir/postgen-4/*.exs $base_dir/postgen-5 2>/dev/null
-    echo "* Create mix_category.exs"
-    echo "* Create mix_packages.exs"
-    echo "* Create category folder with all manpages"
-    echo "* Create packages folder with all manpages"
+    echo "* Create mix_categories.exs"
+    echo "* Create mix_commands.exs"
+    echo "* Create categories folder with all manpages"
+    echo "* Create commands folder with all manpages"
     echo "Project files are ready to be copied from: $base_dir/postgen-5"
 }
 
-# post_gen_5 bis: create readme for packages and category with updated count of manpages
+# post_gen_5 bis: create readme for commands and categories with updated count of manpages
 #***************************************
 
 func_post_gen_5bis() {
 
-total_manpages=$(find $base_dir/postgen-5/packages/ -iname "*.md" ! -name README.md | wc -l)
-readme_category="A-Z manpages"
-readme_packages="by category"
+total_manpages=$(find $base_dir/postgen-5/commands/ -iname "*.md" ! -name README.md | wc -l)
+readme_commands="A-Z manpages"
+readme_categories="by categories"
 
-cat <<EOF > $base_dir/postgen-5/category/README.md 
+cat <<EOF > $base_dir/postgen-5/categories/README.md 
 
 # Kaisen Linux | Manpages
 
-This documentation contains $total_manpages manual pages for applications from **kaisen menu** sorted by category.
+This documentation contains $total_manpages manual pages for applications from **kaisen menu** sorted by categories.  
+Some tools such as Podman and Buildah have many manpages for all their commands. They have therefore been classified as categories in their own right and are not placed in the same category as on the Kaisen Linux menu.
 
 ![kaisen-menu](assets/kaisen_menu.png)
 
-You can switch to sorted **$readme_category** documentation by clicking on the drodpown in the upper-left navbar.
+You can switch to sorted **$readme_commands** documentation by clicking on the drodpown in the upper-left navbar.
 
 ## Other Links
 
@@ -278,15 +343,15 @@ You can switch to sorted **$readme_category** documentation by clicking on the d
 Manpages for Kaisen Linux made by Arnaud Cormier - freelance at [magiklabs](https://www.magiklabs.xyz)
 EOF
 
-cat <<EOF > $base_dir/postgen-5/packages/README.md 
+cat <<EOF > $base_dir/postgen-5/commands/README.md 
 
 # Kaisen Linux | Manpages
 
-This documentation contains $total_manpages manual pages for applications from **kaisen menu** sorted by package name.
+This documentation contains $total_manpages manual pages for applications from **kaisen menu** sorted by command name.
 
 ![kaisen-menu](assets/kaisen_menu.png)
 
-You can switch to sorted **$readme_packages** documentation by clicking on the drodpown in the upper-left navbar.
+You can switch to sorted **$readme_categories** documentation by clicking on the drodpown in the upper-left navbar.
 
 ## Other Links
 
@@ -299,7 +364,7 @@ You can switch to sorted **$readme_packages** documentation by clicking on the d
 Manpages for Kaisen Linux made by Arnaud Cormier - freelance at [magiklabs](https://www.magiklabs.xyz)
 EOF
 
-echo "* Adding updated README for category & packages folder in $base_dir/postgen-5"
+echo "* Adding updated README for categories & commands folder in $base_dir/postgen-5"
 }
 
 

@@ -1,6 +1,6 @@
 var versionNodes = [
   {
-  version: "sort by category", 
+  version: "Sort by categories", 
   url: "https://kaisenlinux.org/manpages/readme.html"
   }
 ]

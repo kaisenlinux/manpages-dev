@@ -4,10 +4,10 @@
 # USAGE : mix_build.sh or mix_build.sh --package 
 # DATE : 18/03/2021
 
-function build_category () {
-    if [[ -f mix_category.exs ]]; then
-        echo "Build of category"
-        cp mix_category.exs mix.exs
+function build_categories () {
+    if [[ -f mix_categories.exs ]]; then
+        echo "Build of categories"
+        cp mix_categories.exs mix.exs
 
         # Check mix dependancy the first time
         if [[ ! -f mix.log ]]; then
@@ -20,32 +20,32 @@ function build_category () {
     fi
 }
 
-function build_packages () {
-    if [[ -f mix_packages.exs ]]; then
-        echo "Build of packages"
-        cp mix_packages.exs mix.exs
+function build_commands () {
+    if [[ -f mix_commands.exs ]]; then
+        echo "Build of commands"
+        cp mix_commands.exs mix.exs
         mix docs
         rm -f mix.exs
     fi
 }
-build_category
-build_packages
+build_categories
+build_commands
 
 
 case $# in
 	0)
         cp -f priv/assets/doc-versions.js doc/
-        cp -f priv/assets/packages/doc-versions.js doc/packages/
+        cp -f priv/assets/commands/doc-versions.js doc/commands/
 	;;   
  	1)
-        cp -f priv/assets/doc-versions-packages.js doc/doc-versions.js
-        cp -f priv/assets/packages/doc-versions-packages.js doc/packages/doc-versions.js
+        cp -f priv/assets/doc-versions-commands.js doc/doc-versions.js
+        cp -f priv/assets/commands/doc-versions-commands.js doc/commands/doc-versions.js
     	;;
 	*)
 	exit
 	;;
 esac
 
-echo "Doc category builded in doc/ folder and Doc packages builded in doc/packages/ folder"
+echo "Doc categories builded in doc/ folder and Doc commands builded in doc/commands/ folder"
 echo ""
-echo "Run firefox doc/index.html or firefox doc/packages/readme.html to verify changes"
+echo "Run firefox doc/index.html or firefox doc/commands/readme.html to verify changes"

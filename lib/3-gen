@@ -6,7 +6,7 @@ func_gen_1() {
 
  dir="$base_dir/parse-1"
  mkdir -p $base_dir/gen-1 
- echo "Be patient...wait a big minute..."  
+ echo "Please wait..."  
  for category in $(more $dir/categories.list); do
  
     for file in $(more $dir/kaisen_apps.list|grep "kaisen"); do
