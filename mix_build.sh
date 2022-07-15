@@ -35,11 +35,11 @@ build_commands
 case $# in
 	0)
         cp -f priv/assets/doc-versions.js doc/
-        cp -f priv/assets/commands/doc-versions.js doc/commands/
+        cp -f priv/assets/packages/doc-versions.js doc/commands/
 	;;   
  	1)
-        cp -f priv/assets/doc-versions-commands.js doc/doc-versions.js
-        cp -f priv/assets/commands/doc-versions-commands.js doc/commands/doc-versions.js
+        cp -f priv/assets/doc-versions-packages.js doc/doc-versions.js
+        cp -f priv/assets/packages/doc-versions-packages.js doc/commands/doc-versions.js
     	;;
 	*)
 	exit

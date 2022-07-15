@@ -105,6 +105,174 @@ func_post_gen_3() {
     man $openstackitem 2> /dev/null > $base_dir/postgen-2/DevOps/$openstackitem.md
     done
     rm -f $base_dir/postgen-2/DevOps/openstack.list
+    #Add all lockfile manpages
+    echo "* Generating extra lockfile manpages"
+    find /usr/share/man/ -iname "lockfile-*" -printf '%f\n'|cut -d "." -f1 >  $base_dir/postgen-2/Dataprotection/lockfile.list
+    for lockfileitem in $(more $base_dir/postgen-2/Dataprotection/lockfile.list); do
+    man $lockfileitem 2> /dev/null > $base_dir/postgen-2/Dataprotection/$lockfileitem.md
+    done
+    rm -f $base_dir/postgen-2/Dataprotection/lockfile.list
+    #Add all ClamAV manpages
+    echo "* Generating extra clamav manpages"
+    find /usr/share/man/ -iname "clam*" -printf '%f\n'|cut -d "." -f1 >  $base_dir/postgen-2/MalwareScan/clamav.list
+    find /usr/share/man/ -iname "freshclam*" -printf '%f\n'|cut -d "." -f1 >>  $base_dir/postgen-2/MalwareScan/clamav.list
+    for clamavitem in $(more $base_dir/postgen-2/MalwareScan/clamav.list); do
+    man $clamavitem 2> /dev/null > $base_dir/postgen-2/MalwareScan/$clamavitem.md
+    done
+    rm -f $base_dir/postgen-2/MalwareScan/clamav.list
+    #Add all ddrescue manpages
+    echo "* Generating extra ddrescue manpages"
+    find /usr/share/man/ -iname "dd_rescue*" -printf '%f\n'|cut -d "." -f1 >  $base_dir/postgen-2/Recovery/ddrescue.list
+    find /usr/share/man/ -iname "ddr_*" -printf '%f\n'|cut -d "." -f1 >>  $base_dir/postgen-2/Recovery/ddrescue.list
+    for ddrescueitem in $(more $base_dir/postgen-2/Recovery/ddrescue.list); do
+    man $ddrescueitem 2> /dev/null > $base_dir/postgen-2/Recovery/$ddrescueitem.md
+    done
+    rm -f $base_dir/postgen-2/Recovery/ddrescue.list
+    #Add ddrescuelog manpage
+    echo "* Generating the ddrescuelog manpage"
+    find /usr/share/man/ -iname "ddrescuelog*" -printf '%f\n'|cut -d "." -f1 >  $base_dir/postgen-2/Recovery/ddrescuelog.list
+    for ddrescuelogitem in $(more $base_dir/postgen-2/Recovery/ddrescuelog.list); do
+    man $ddrescuelogitem 2> /dev/null > $base_dir/postgen-2/Recovery/$ddrescuelogitem.md
+    done
+    rm -f $base_dir/postgen-2/Recovery/ddrescuelog.list
+    #Add discover-config manpage
+    echo "* Generating the discover-config manpage"
+    find /usr/share/man/ -iname "discover-config*" -printf '%f\n'|cut -d "." -f1 >  $base_dir/postgen-2/Hardware/discover-config.list
+    for discoverconfigitem in $(more $base_dir/postgen-2/Hardware/discover-config.list); do
+    man $discoverconfigitem 2> /dev/null > $base_dir/postgen-2/Hardware/$discoverconfigitem.md
+    done
+    rm -f $base_dir/postgen-2/Hardware/discover-config.list
+    #Add gpg and gpg-agent manpages
+    echo "* Generating gpg and gpg-agent manpages"
+    find /usr/share/man/ -iname "gpg.1*" -printf '%f\n'|cut -d "." -f1 >  $base_dir/postgen-2/Miscellaneous/gpg.list
+    find /usr/share/man/ -iname "gpg-agent*" -printf '%f\n'|cut -d "." -f1 >>  $base_dir/postgen-2/Miscellaneous/gpg.list
+    for gpgitem in $(more $base_dir/postgen-2/Miscellaneous/gpg.list); do
+    man $gpgitem 2> /dev/null > $base_dir/postgen-2/Miscellaneous/$gpgitem.md
+    done
+    rm -f $base_dir/postgen-2/Miscellaneous/gpg.list
+    #Add the hfs manpage
+    echo "* Generating the hfs manpage"
+    find /usr/share/man/ -iname "hfs.*" -printf '%f\n'|cut -d "." -f1 >  $base_dir/postgen-2/Filesystems/hfs.list
+    find /usr/share/man/ -iname "hfsplus*" -printf '%f\n'|cut -d "." -f1 >  $base_dir/postgen-2/Filesystems/hfs.list
+    for hfsitem in $(more $base_dir/postgen-2/Filesystems/hfs.list); do
+    man $hfsitem 2> /dev/null > $base_dir/postgen-2/Filesystems/$hfsitem.md
+    done
+    rm -f $base_dir/postgen-2/Filesystems/hfs.list
+    #Add the mc manpage
+    echo "* Generating mc and mcedit manpages"
+    find /usr/share/man/ -iname "mc.1*" -printf '%f\n'|cut -d "." -f1 >  $base_dir/postgen-2/Miscellaneous/mc.list
+    find /usr/share/man/ -iname "mcedit*" -printf '%f\n'|cut -d "." -f1 >>  $base_dir/postgen-2/Miscellaneous/mc.list
+    find /usr/share/man/ -iname "mcview*" -printf '%f\n'|cut -d "." -f1 >>  $base_dir/postgen-2/Miscellaneous/mc.list
+    for mcitem in $(more $base_dir/postgen-2/Miscellaneous/mc.list); do
+    man $mcitem 2> /dev/null > $base_dir/postgen-2/Miscellaneous/$mcitem.md
+    done
+    rm -f $base_dir/postgen-2/Miscellaneous/mc.list
+    #Add all restic manpages
+    echo "* Generating all restic manpages"
+    mkdir -p $base_dir/postgen-2/Restic
+    find /usr/share/man/ -iname "restic*" -printf '%f\n'|cut -d "." -f1 >  $base_dir/postgen-2/Restic/restic.list
+    for resticitem in $(more $base_dir/postgen-2/Restic/restic.list); do
+    man $resticitem 2> /dev/null > $base_dir/postgen-2/Restic/$resticitem.md
+    done
+    rm -f $base_dir/postgen-2/Restic/restic.list
+    rm -f $base_dir/postgen-2/Backup/restic.md
+    #Add all rsbackup manpages
+    echo "* Generating all rsbackup manpages"
+    mkdir -p $base_dir/postgen-2/Rsbackup
+    find /usr/share/man/ -iname "rsbackup*" -printf '%f\n'|cut -d "." -f1 >  $base_dir/postgen-2/Rsbackup/rsbackup.list
+    for rsbackupitem in $(more $base_dir/postgen-2/Rsbackup/rsbackup.list); do
+    man $rsbackupitem 2> /dev/null > $base_dir/postgen-2/Rsbackup/$rsbackupitem.md
+    done
+    rm -f $base_dir/postgen-2/Rsbackup/rsbackup.list
+    rm -f $base_dir/postgen-2/Backup/rsbackup.md
+    #Add all zulu manpages
+    echo "* Generating all zulu manpages"
+    find /usr/share/man/ -iname "zuluC*" -printf '%f\n'|cut -d "." -f1 >  $base_dir/postgen-2/Dataprotection/zulu.list
+    find /usr/share/man/ -iname "zuluM*" -printf '%f\n'|cut -d "." -f1 >>  $base_dir/postgen-2/Dataprotection/zulu.list
+    for zuluitem in $(more $base_dir/postgen-2/Dataprotection/zulu.list); do
+    man $zuluitem 2> /dev/null > $base_dir/postgen-2/Dataprotection/$zuluitem.md
+    done
+    rm -f $base_dir/postgen-2/Dataprotection/zulu.list
+    #Add all arp tools manpages
+    echo "* Generating all arp tools manpages"
+    find /usr/share/man/man1 -iname "arp*" -printf '%f\n'|cut -d "." -f1 >  $base_dir/postgen-2/MAC/arp.list
+    find /usr/share/man/man8 -iname "arp*" -printf '%f\n'|cut -d "." -f1 >>  $base_dir/postgen-2/MAC/arp.list
+    for arpitem in $(more $base_dir/postgen-2/MAC/arp.list); do
+    man $arpitem 2> /dev/null > $base_dir/postgen-2/MAC/$arpitem.md
+    done
+    rm -f $base_dir/postgen-2/MAC/arp.list
+    #Add all bacula manpages
+    echo "* Generating all bacula manpages"
+    find /usr/share/man -iname "bacula*" -printf '%f\n'|cut -d "." -f1 >  $base_dir/postgen-2/Backup/bacula.list
+    for baculaitem in $(more $base_dir/postgen-2/Backup/bacula.list); do
+    man $baculaitem 2> /dev/null > $base_dir/postgen-2/Backup/$baculaitem.md
+    done
+    rm -f $base_dir/postgen-2/Backup/bacula.list
+    #Add all btrfs manpages
+    echo "* Generating all btrfs manpages"
+    find /usr/share/man -iname "btrfs*" -printf '%f\n'|cut -d "." -f1 >  $base_dir/postgen-2/BTRFS/btrfs.list
+    for btrfsitem in $(more $base_dir/postgen-2/BTRFS/btrfs.list); do
+    man $btrfsitem 2> /dev/null > $base_dir/postgen-2/BTRFS/$btrfsitem.md
+    done
+    rm -f $base_dir/postgen-2/BTRFS/btrfs.list
+    #Add dhclient manpage
+    echo "* Generating the dhclient manpage"
+    find /usr/share/man -iname "dhclient.*" -printf '%f\n'|cut -d "." -f1 >  $base_dir/postgen-2/DHCP/dhclient.list
+    for dhclientitem in $(more $base_dir/postgen-2/DHCP/dhclient.list); do
+    man $dhclientitem 2> /dev/null > $base_dir/postgen-2/DHCP/$dhclientitem.md
+    done
+    rm -f $base_dir/postgen-2/DHCP/dhclient.list
+    #Add all fsck manpages
+    echo "* Generating all fsck manpages"
+    find /usr/share/man -iname "fsck*" -printf '%f\n'|cut -d "." -f1 >  $base_dir/postgen-2/FSCK/fsck.list
+    for fsckitem in $(more $base_dir/postgen-2/FSCK/fsck.list); do
+    man $fsckitem 2> /dev/null > $base_dir/postgen-2/FSCK/$fsckitem.md
+    done
+    rm -f $base_dir/postgen-2/FSCK/fsck.list
+    #Add few iptables manpages
+    echo "* Generating few iptables manpages"
+    find /usr/share/man -iname "iptables.*" -printf '%f\n'|cut -d "." -f1 >  $base_dir/postgen-2/Firewalling/iptables.list
+    find /usr/share/man -iname "iptables-restore.*" -printf '%f\n'|cut -d "." -f1 >>  $base_dir/postgen-2/Firewalling/iptables.list
+    find /usr/share/man -iname "iptables-save.*" -printf '%f\n'|cut -d "." -f1 >>  $base_dir/postgen-2/Firewalling/iptables.list
+    for iptablesitem in $(more $base_dir/postgen-2/Firewalling/iptables.list); do
+    man $iptablesitem 2> /dev/null > $base_dir/postgen-2/Firewalling/$iptablesitem.md
+    done
+    rm -f $base_dir/postgen-2/Firewalling/iptables.list
+    #Add all mkfs manpages
+    echo "* Generating all mkfs manpages"
+    find /usr/share/man -iname "mkfs*" -printf '%f\n'|cut -d "." -f1 >  $base_dir/postgen-2/MKFS/mkfs.list
+    for mkfsitem in $(more $base_dir/postgen-2/MKFS/mkfs.list); do
+    man $mkfsitem 2> /dev/null > $base_dir/postgen-2/MKFS/$mkfsitem.md
+    done
+    rm -f $base_dir/postgen-2/MKFS/mkfs.list
+    #Add the nilfs manpage
+    echo "* Generating the nilfs manpage"
+    find /usr/share/man -iname "nilfs.*" -printf '%f\n'|cut -d "." -f1 >  $base_dir/postgen-2/NILFS/nilfs.list
+    for nilfsitem in $(more $base_dir/postgen-2/NILFS/nilfs.list); do
+    man $nilfsitem 2> /dev/null > $base_dir/postgen-2/NILFS/$nilfsitem.md
+    done
+    rm -f $base_dir/postgen-2/NILFS/nilfs.list
+    #Remove manpages
+    rm -f $base_dir/postgen-2/RemoteAdministration/connect.md
+    rm -f $base_dir/postgen-2/RemoteAdministration/edit.md
+    rm -f $base_dir/postgen-2/Scanner/full.md
+    rm -f $base_dir/postgen-2/DisksAnalysis/fsck.md
+    rm -f $base_dir/postgen-2/DisksAnalysis/sensors-detect.md
+    rm -f $base_dir/postgen-2/Hardware/sensors-detect.md
+    rm -f $base_dir/postgen-2/Backup/dirvish.md
+    rm -f $base_dir/postgen-2/Backup/rdiff-backup-fs.md
+    rm -f $base_dir/postgen-2/ConsolePort/port.md
+    rm -f $base_dir/postgen-2/Ethernet/arpwatch.md
+    rm -f $base_dir/postgen-2/IP/arpwatch.md
+    rm -f $base_dir/postgen-2/Ethernet/wakeonlan.md
+    rm -f $base_dir/postgen-2/Filesystems/lxcfs.md
+    rm -f $base_dir/postgen-2/FTP/atftp.md
+    rm -f $base_dir/postgen-2/FTP/smbclient.md
+    rm -f $base_dir/postgen-2/Hardware/xsensors.md
+    rm -f $base_dir/postgen-2/IP/nmap.md
+    rm -f $base_dir/postgen-2/IP/ssmping.md
+    rm -f $base_dir/postgen-2/PartitioningErasing/xfsrestore.md
+    rm -f $base_dir/postgen-2/Backup/snapper.md
     # update
     cp -r $base_dir/postgen-2  $base_dir/postgen-3
     rm -f $base_dir/postgen-3/*.log
@@ -244,7 +412,7 @@ cat <<EOF > $base_dir/postgen-4/mix_commands.exs
       authors: "Arnaud Cormier & Kevin Chevreuil",
       docs: [
          main: "readme",
-         source_ref: "sort A-Z",
+         source_ref: "sort by commands",
          api_reference: false,
          logo: "priv/assets/kaisen-logo.jpg",
          assets: "priv/assets",
@@ -318,7 +486,7 @@ func_post_gen_5() {
 func_post_gen_5bis() {
 
 total_manpages=$(find $base_dir/postgen-5/commands/ -iname "*.md" ! -name README.md | wc -l)
-readme_commands="A-Z manpages"
+readme_commands="by commands"
 readme_categories="by categories"
 
 cat <<EOF > $base_dir/postgen-5/categories/README.md 
