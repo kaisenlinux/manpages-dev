@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 # DESCRIPTION : Rename mix files to build doc for category then doc for packages. And check mix dependancy the first time.
-# USAGE : mix_build.sh or mix_build.sh --package 
+# USAGE : mix_build.sh or mix_build.sh --package
 # DATE : 18/03/2021
 
 function build_categories () {

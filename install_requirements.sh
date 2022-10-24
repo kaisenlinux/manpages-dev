@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# DESCRIPTION : install asdf manager 
+# DESCRIPTION : install asdf manager
 # REQUIREMENTS : sudo (don't run this script with sudo)
 # USAGE1 : chmod +x install-asdf.sh && ./install-asdf.sh
 
@@ -23,8 +23,8 @@ echo ". $HOME/.asdf/completions/asdf.bash" >> ~/.bashrc
 echo "Installation done"
 echo "Enter in your terminal :
 asdf plugin-add erlang && asdf plugin-add elixir
-asdf install erlang 25.0.2 && asdf install elixir 1.13.4-otp-25
-asdf global erlang 25.0.2 && asdf local elixir 1.13.4-otp-25"
+asdf install erlang 25.1.1 && asdf install elixir 1.14.1-otp-25
+asdf global erlang 25.1.1 && asdf local elixir 1.14.1-otp-25"
 exec bash
 else
 # asdf zsh
@@ -39,8 +39,8 @@ echo "Installation done"
 echo "Enter in your terminal :
 zsh
 asdf plugin-add erlang && asdf plugin-add elixir
-asdf install erlang 25.0.2 && asdf install elixir 1.13.4-otp-25
-asdf global erlang 25.0.2 && asdf local elixir 1.13.4-otp-25"
+asdf install erlang 25.1.1 && asdf install elixir 1.14.1-otp-25
+asdf global erlang 25.1.1 && asdf local elixir 1.14.1-otp-25"
 exec zsh
 fi
 
