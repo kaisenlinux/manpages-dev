@@ -6,7 +6,7 @@
 
 # set asdf git url & versions
 asdf_git="https://github.com/asdf-vm/asdf.git"
-asdf_version="v0.8.0"
+asdf_version="v0.10.2"
 # requirements on linux (git or minimal with git-core)
 sudo apt install curl git libssl-dev automake autoconf libncurses5-dev make gcc unzip -y
 
@@ -23,8 +23,8 @@ echo ". $HOME/.asdf/completions/asdf.bash" >> ~/.bashrc
 echo "Installation done"
 echo "Enter in your terminal :
 asdf plugin-add erlang && asdf plugin-add elixir
-asdf install erlang 25.1.1 && asdf install elixir 1.14.1-otp-25
-asdf global erlang 25.1.1 && asdf local elixir 1.14.1-otp-25"
+asdf install erlang 25.1.2 && asdf install elixir 1.14.2-otp-25
+asdf global erlang 25.1.2 && asdf local elixir 1.14.2-otp-25"
 exec bash
 else
 # asdf zsh
@@ -39,8 +39,8 @@ echo "Installation done"
 echo "Enter in your terminal :
 zsh
 asdf plugin-add erlang && asdf plugin-add elixir
-asdf install erlang 25.1.1 && asdf install elixir 1.14.1-otp-25
-asdf global erlang 25.1.1 && asdf local elixir 1.14.1-otp-25"
+asdf install erlang 25.1.2 && asdf install elixir 1.14.2-otp-25
+asdf global erlang 25.1.2 && asdf local elixir 1.14.2-otp-25"
 exec zsh
 fi
 

@@ -40,11 +40,11 @@ mix.log
 # ignore *.exs files
 *.exs
 
-# ignore category folder generated after build
-/category/
+# ignore the categories folder generated after build
+/categories/
 
-# ignore packages folder generated after build
-/packages/
+# ignore the commands folder generated after build
+/commands/
 
 # ignore log folder
 /log/
