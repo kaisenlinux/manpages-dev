@@ -251,6 +251,23 @@ func_post_gen_3() {
     for nilfsitem in $(more $base_dir/postgen-2/NILFS/nilfs.list); do
     man $nilfsitem 2> /dev/null > $base_dir/postgen-2/NILFS/$nilfsitem.md
     done
+
+
+    ## EXTRA : ADD MANPAGES 5 ; CONFIGURATION FILES SECTION####
+    mkdir -p $base_dir/postgen-2/Configuration_files
+    echo "* Generating manpages 5"
+    apropos -s 5 . >> $base_dir/postgen-2/Configuration_files/man5.list
+    
+    cut -d " " -f1 $base_dir/postgen-2/Configuration_files/man5.list > $base_dir/postgen-2/Configuration_files/Configuration_files.list
+    rm $base_dir/postgen-2/Configuration_files/man5.list
+    # remove . files
+    sed -i '/^\./d' $base_dir/postgen-2/Configuration_files/Configuration_files.list
+
+    for man5item in $(more $base_dir/postgen-2/Configuration_files/Configuration_files.list); do
+    man $man5item 2> /dev/null > $base_dir/postgen-2/Configuration_files/$man5item.md
+    done
+    ## EXTRA : END MANPAGES 5 ####
+
     rm -f $base_dir/postgen-2/NILFS/nilfs.list
     #Remove manpages
     rm -f $base_dir/postgen-2/RemoteAdministration/connect.md
@@ -273,6 +290,8 @@ func_post_gen_3() {
     rm -f $base_dir/postgen-2/IP/ssmping.md
     rm -f $base_dir/postgen-2/PartitioningErasing/xfsrestore.md
     rm -f $base_dir/postgen-2/Backup/snapper.md
+    # man5
+    rm -f $base_dir/postgen-2/Configuration_files/Configuration_files.list
     # update
     cp -r $base_dir/postgen-2  $base_dir/postgen-3
     rm -f $base_dir/postgen-3/*.log
