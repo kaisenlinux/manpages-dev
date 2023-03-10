@@ -253,21 +253,6 @@ func_post_gen_3() {
     done
 
 
-    ## EXTRA : ADD MANPAGES 5 ; CONFIGURATION FILES SECTION####
-    mkdir -p $base_dir/postgen-2/Configuration_files
-    echo "* Generating manpages 5"
-    apropos -s 5 . >> $base_dir/postgen-2/Configuration_files/man5.list
-    
-    cut -d " " -f1 $base_dir/postgen-2/Configuration_files/man5.list > $base_dir/postgen-2/Configuration_files/Configuration_files.list
-    rm $base_dir/postgen-2/Configuration_files/man5.list
-    # remove . files
-    sed -i '/^\./d' $base_dir/postgen-2/Configuration_files/Configuration_files.list
-
-    for man5item in $(more $base_dir/postgen-2/Configuration_files/Configuration_files.list); do
-    man $man5item 2> /dev/null > $base_dir/postgen-2/Configuration_files/$man5item.md
-    done
-    ## EXTRA : END MANPAGES 5 ####
-
     rm -f $base_dir/postgen-2/NILFS/nilfs.list
     #Remove manpages
     rm -f $base_dir/postgen-2/RemoteAdministration/connect.md
@@ -290,8 +275,6 @@ func_post_gen_3() {
     rm -f $base_dir/postgen-2/IP/ssmping.md
     rm -f $base_dir/postgen-2/PartitioningErasing/xfsrestore.md
     rm -f $base_dir/postgen-2/Backup/snapper.md
-    # man5
-    rm -f $base_dir/postgen-2/Configuration_files/Configuration_files.list
     # update
     cp -r $base_dir/postgen-2  $base_dir/postgen-3
     rm -f $base_dir/postgen-3/*.log
@@ -481,6 +464,109 @@ cat <<EOF > $base_dir/postgen-4/mix_commands.exs
 end
 EOF
 
+
+
+## BEGIN : generate MIX MANPAGES 5 : Configuration files
+
+## Prepare manpages in postgen-man5
+    mkdir -p $base_dir/postgen-man5/configuration_files
+    echo "* Generating manpages 5"
+    apropos -s 5 . >> $base_dir/postgen-man5/configuration_files/man5.list
+    
+    cut -d " " -f1 $base_dir/postgen-man5/configuration_files/man5.list > $base_dir/postgen-man5/configuration_files/configuration_files.list
+    rm $base_dir/postgen-man5/configuration_files/man5.list
+    # remove . files
+    sed -i '/^\./d' $base_dir/postgen-man5/configuration_files/configuration_files.list
+
+    for man5item in $(more $base_dir/postgen-man5/configuration_files/configuration_files.list); do
+    man $man5item 2> /dev/null > $base_dir/postgen-man5/configuration_files/$man5item.md
+    done
+    # remove files staring with .
+    find $base_dir/postgen-man5/ -name ".*.md" -exec rm -f {} \;
+    
+    
+ 
+ ## Generate mix files
+    # mv man5 list in postegn4
+    mv $base_dir/postgen-man5/configuration_files/configuration_files.list $base_dir/postgen-4/configuration_files.list
+    # generate list of files in .md
+    sed -i 's/$/.md/g' $base_dir/postgen-4/configuration_files.list
+    # prepare mix dir for extras 
+     for cfg in $(more $base_dir/postgen-4/configuration_files.list); do
+        echo  "\"configuration_files/$cfg\"," >> $base_dir/postgen-4/configuration_files_extras.list
+    done
+    sed -i '$s/,/ /' $base_dir/postgen-4/configuration_files_extras.list
+
+    ## extras file generation
+    cat <<EOF > $base_dir/postgen-4/mix_configuration_files.exs  
+    defmodule KaisenManpages.MixProject do
+  use Mix.Project
+
+  def project do
+    [
+      app: :kaisen_manpages,
+      version: "$kaisen_release.0",
+      elixir: "~> 1.14.2",
+      start_permanent: Mix.env() == :prod,
+      deps: deps(),
+
+      # Docs
+      name: "Manpages",
+      homepage_url: "https://kaisenlinux.org/manpages/",
+      authors: "Arnaud Cormier & Kevin Chevreuil",
+      docs: [
+         main: "readme",
+         source_ref: "sort by configuration files",
+         api_reference: false,
+         logo: "priv/assets/kaisen-logo.jpg",
+         assets: "priv/assets",
+         before_closing_head_tag: &docs_before_closing_head_tag/1,
+         formatters: ["html"],
+         extra_section: "MANUALS",
+ 	 javascript_config_path: "doc-versions.js",
+    output: "doc/configuration_files",
+         extras: [
+          "configuration_files/README.md",
+          $(cat $base_dir/postgen-4/configuration_files_extras.list)
+   
+     ],
+      groups_for_extras: [
+      "Menu Commands": Path.wildcard("configuration_files/*.md")
+   ],
+
+    ],
+    ]
+  end
+
+  # Run mix help compile.app" to learn about applications.
+  def application do
+    [
+      extra_applications: [:logger]
+    ]
+  end
+
+  # Run "mix help deps" to learn about dependencies.
+  defp deps do
+    [
+    {:ex_doc, "~> 0.29.1", only: :dev, runtime: false},
+    {:earmark, "~> 1.4.34"}
+      # {:"dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
+    ]
+  end
+
+  # adding custom stylesheet
+  defp docs_before_closing_head_tag(:html) do
+    ~s{<link rel="stylesheet" href="assets/doc.css">}
+  end
+  defp docs_before_closing_head_tag(_), do: ""
+end
+EOF
+   
+
+
+
+## END : generate MIX MANPAGES 5 : Configuration files
+
 }
 
 # post_gen_5: copy mix files / commands folder / categories folder in postgen-5
@@ -491,11 +577,17 @@ func_post_gen_5() {
     cp -r $base_dir/postgen-3/ $base_dir/postgen-5/categories 2>/dev/null
     mkdir $base_dir/postgen-5/commands
     cp -f $base_dir/postgen-3/*/*.md $base_dir/postgen-5/commands 2>/dev/null
-    cp $base_dir/postgen-4/*.exs $base_dir/postgen-5 2>/dev/null
+    cp -f $base_dir/postgen-4/*.exs $base_dir/postgen-5 2>/dev/null
+    # generation for man 5 configuration files
+    mkdir $base_dir/postgen-5/configuration_files
+    cp -r $base_dir/postgen-man5/configuration_files/*.md $base_dir/postgen-5/configuration_files 2>/dev/null
+    #
     echo "* Create mix_categories.exs"
     echo "* Create mix_commands.exs"
+    echo "* Create mix_configuration_files.exs"
     echo "* Create categories folder with all manpages"
     echo "* Create commands folder with all manpages"
+    echo "* Create configuration_files folder with all manpages"
     echo "Project files are ready to be copied from: $base_dir/postgen-5"
 }
 
@@ -507,13 +599,19 @@ func_post_gen_5bis() {
 total_manpages=$(find $base_dir/postgen-5/commands/ -iname "*.md" ! -name README.md | wc -l)
 readme_commands="by commands"
 readme_categories="by categories"
+# man 5
+total_manpages5=$(find $base_dir/postgen-5/configuration_files/ -iname "*.md" ! -name README.md | wc -l)
+readme_configuration_files="by configuration files"
+read
 
 cat <<EOF > $base_dir/postgen-5/categories/README.md 
 
 # Kaisen Linux | Manpages
 
 This documentation contains $total_manpages manual pages for applications from **kaisen menu** sorted by categories.  
-Some tools such as Podman and Buildah have many manpages for all their commands. They have therefore been classified as categories in their own right and are not placed in the same category as on the Kaisen Linux menu.
+Some tools such as Podman and Buildah have many manpages for all their commands. They have therefore been classified as categories in their own right and are not placed in the same category as on the Kaisen Linux menu. 
+
+There is also **$total_manpages5 manpages for configuration files** (man section 5) in the upper right dropdown menu.
 
 ![kaisen-menu](assets/kaisen_menu.png)
 
@@ -527,7 +625,7 @@ You can switch to sorted **$readme_commands** documentation by clicking on the d
 
 ## Contributor
 
-Manpages for Kaisen Linux made by Arnaud Cormier - freelance at [magiklabs](https://www.magiklabs.xyz)
+Manpages for Kaisen Linux made by Arnaud Cormier - freelance at [htop](https://htop.fr)
 EOF
 
 cat <<EOF > $base_dir/postgen-5/commands/README.md 
@@ -548,10 +646,33 @@ You can switch to sorted **$readme_categories** documentation by clicking on the
 
 ## Contributor
 
-Manpages for Kaisen Linux made by Arnaud Cormier - freelance at [magiklabs](https://www.magiklabs.xyz)
+Manpages for Kaisen Linux made by Arnaud Cormier - freelance at [htop](https://htop.fr)
 EOF
 
-echo "* Adding updated README for categories & commands folder in $base_dir/postgen-5"
+cat <<EOF > $base_dir/postgen-5/configuration_files/README.md 
+
+# Kaisen Linux | Manpages
+
+This documentation contains $total_manpages5 configuration manual pages for manpages section 5 from **kaisenlinux**.
+
+![kaisen-menu](assets/kaisen_menu.png)
+
+You can switch to sorted **$readme_categories** documentation by clicking on the drodpown in the upper-left navbar.
+
+## Other Links
+
+* Check the [official Kaisen Linux](https://kaisenlinux.org/) website.
+* Check the [official Kaisen Linux documentation](https://kaisenlinux.org/documentation/).
+* Check [Debian testing manpages](https://manpages.debian.org/contents-testing.html) for additionnal help. 
+
+## Contributor
+
+Manpages for Kaisen Linux made by Arnaud Cormier - freelance at [htop](https://htop.fr)
+EOF
+
+echo "* Adding updated README for categories & commands & configuration_files folder in $base_dir/postgen-5"
+
+
 }
 
 

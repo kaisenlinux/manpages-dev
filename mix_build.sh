@@ -28,24 +28,38 @@ function build_commands () {
         rm -f mix.exs
     fi
 }
+function build_configuration_files () {
+    if [[ -f mix_configuration_files.exs ]]; then
+        echo "Build of configuration_files"
+        cp mix_configuration_files.exs mix.exs
+        mix docs
+        rm -f mix.exs
+    fi
+}
 build_categories
 build_commands
+build_configuration_files
 
 
 case $# in
 	0)
         cp -f priv/assets/doc-versions.js doc/
         cp -f priv/assets/packages/doc-versions.js doc/commands/
+        cp -f priv/assets/doc-versions-conf.js doc/configuration_files/doc-versions.js
+
 	;;   
  	1)
         cp -f priv/assets/doc-versions-packages.js doc/doc-versions.js
         cp -f priv/assets/packages/doc-versions-packages.js doc/commands/doc-versions.js
+        cp -f priv/assets/packages/doc-versions-conf.js doc/configuration_files/doc-versions.js
     	;;
 	*)
 	exit
 	;;
 esac
 
-echo "Doc categories builded in doc/ folder and Doc commands builded in doc/commands/ folder"
+echo "Doc categories builded in doc/ folder"
+echo "Doc commands builded in doc/ folder"
+echo "Doc configuration files builded in doc/ folder 
 echo ""
-echo "Run firefox doc/index.html or firefox doc/commands/readme.html to verify changes"
+echo "Run firefox doc/index.html or firefox doc/commands/readme.html or doc/configuration_files/readme.html to verify changes"
