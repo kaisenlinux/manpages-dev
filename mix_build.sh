@@ -59,7 +59,9 @@ case $# in
 esac
 
 echo "Doc categories builded in doc/ folder"
-echo "Doc commands builded in doc/ folder"
-echo "Doc configuration files builded in doc/ folder 
+echo "Doc commands builded in doc/commandes folder"
+echo "Doc configuration_files builded in doc/configuration_files folder"
 echo ""
-echo "Run firefox doc/index.html or firefox doc/commands/readme.html or doc/configuration_files/readme.html to verify changes"
+echo "Run firefox doc/index.html to verify changes"
+echo "Run firefox doc/commands/index.html to verify changes"
+echo "Run firefox doc/configuration_files/index.html to verify changes"

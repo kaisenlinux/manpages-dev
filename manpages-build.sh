@@ -21,6 +21,8 @@
 #
 #                  --parse [kaisen-apps] | [kaisen-categories] | [full] | [clean]
 
+# DEBUG
+#set -x
 
 # base folders where all files are generated when :
 ## running full build

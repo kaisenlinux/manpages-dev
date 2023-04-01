@@ -602,20 +602,20 @@ readme_categories="by categories"
 # man 5
 total_manpages5=$(find $base_dir/postgen-5/configuration_files/ -iname "*.md" ! -name README.md | wc -l)
 readme_configuration_files="by configuration files"
-read
+
 
 cat <<EOF > $base_dir/postgen-5/categories/README.md 
 
 # Kaisen Linux | Manpages
 
-This documentation contains $total_manpages manual pages for applications from **kaisen menu** sorted by categories.  
+This documentation contains **$total_manpages manual pages** for applications from **kaisen menu** sorted by categories.  
 Some tools such as Podman and Buildah have many manpages for all their commands. They have therefore been classified as categories in their own right and are not placed in the same category as on the Kaisen Linux menu. 
 
 There is also **$total_manpages5 manpages for configuration files** (man section 5) in the upper right dropdown menu.
 
-![kaisen-menu](assets/kaisen_menu.png)
-
 You can switch to sorted **$readme_commands** documentation by clicking on the drodpown in the upper-left navbar.
+
+![kaisen-menu](assets/kaisen_menu.png)
 
 ## Other Links
 
@@ -632,11 +632,13 @@ cat <<EOF > $base_dir/postgen-5/commands/README.md
 
 # Kaisen Linux | Manpages
 
-This documentation contains $total_manpages manual pages for applications from **kaisen menu** sorted by command name.
+This documentation contains **$total_manpages manual pages** for applications from **kaisen menu** sorted by command name.  
+
+There is also **$total_manpages5 manpages for configuration files** (man section 5) in the upper right dropdown menu.
+
+You can switch to sorted **$readme_commands** documentation by clicking on the drodpown in the upper-left navbar.
 
 ![kaisen-menu](assets/kaisen_menu.png)
-
-You can switch to sorted **$readme_categories** documentation by clicking on the drodpown in the upper-left navbar.
 
 ## Other Links
 
@@ -653,11 +655,11 @@ cat <<EOF > $base_dir/postgen-5/configuration_files/README.md
 
 # Kaisen Linux | Manpages
 
-This documentation contains $total_manpages5 configuration manual pages for manpages section 5 from **kaisenlinux**.
+This documentation contains **$total_manpages5** configuration manual pages for manpages section 5 from **kaisenlinux**.
+
+You can switch to sorted **$readme_categories** or **$readme_commands** documentation by clicking on the drodpown in the upper-left navbar.
 
 ![kaisen-menu](assets/kaisen_menu.png)
-
-You can switch to sorted **$readme_categories** documentation by clicking on the drodpown in the upper-left navbar.
 
 ## Other Links
 
