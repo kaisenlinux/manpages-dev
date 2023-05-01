@@ -46,5 +46,8 @@ mix.log
 # ignore the commands folder generated after build
 /commands/
 
+# ignore the configuration_files folder generated after build
+/configuration_files/
+
 # ignore log folder
 /log/

@@ -251,9 +251,15 @@ func_post_gen_3() {
     for nilfsitem in $(more $base_dir/postgen-2/NILFS/nilfs.list); do
     man $nilfsitem 2> /dev/null > $base_dir/postgen-2/NILFS/$nilfsitem.md
     done
-
-
     rm -f $base_dir/postgen-2/NILFS/nilfs.list
+    #Add all LXC/LXD manpages
+    echo "* Generating all LXC/LXD manpages"
+    find /usr/share/man -iname "lx[c|d].*" -printf '%f\n' | grep -v -E '.[2-7].[g|x]z$' | sed "s/.[1|8].[g|x]z$//" > $base_dir/postgen-2/LXC/LXC.list
+    for lxcitem in $(more $base_dir/postgen-2/LXC/LXC.list); do
+    man $lxcitem 2> /dev/null > $base_dir/postgen-2/LXC/$lxcitem.md
+    done
+    rm -f $base_dir/postgen-2/LXC/LXC.list
+
     #Remove manpages
     rm -f $base_dir/postgen-2/RemoteAdministration/connect.md
     rm -f $base_dir/postgen-2/RemoteAdministration/edit.md
@@ -326,7 +332,7 @@ defmodule KaisenManpages.MixProject do
     [
       app: :kaisen_manpages,
       version: "$kaisen_release.0",
-      elixir: "~> 1.14.2",
+      elixir: "~> 1.14.4",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
 
@@ -371,8 +377,8 @@ defmodule KaisenManpages.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-    {:ex_doc, "~> 0.29.1", only: :dev, runtime: false},
-    {:earmark, "~> 1.4.34"}
+    {:ex_doc, "~> 0.29.4", only: :dev, runtime: false},
+    {:earmark, "~> 1.4.38"}
       # {:"dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
     ]
   end
@@ -404,7 +410,7 @@ cat <<EOF > $base_dir/postgen-4/mix_commands.exs
     [
       app: :kaisen_manpages,
       version: "$kaisen_release.0",
-      elixir: "~> 1.14.2",
+      elixir: "~> 1.14.4",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
 
@@ -450,8 +456,8 @@ cat <<EOF > $base_dir/postgen-4/mix_commands.exs
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-    {:ex_doc, "~> 0.29.1", only: :dev, runtime: false},
-    {:earmark, "~> 1.4.34"}
+    {:ex_doc, "~> 0.29.4", only: :dev, runtime: false},
+    {:earmark, "~> 1.4.38"}
       # {:"dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
     ]
   end
@@ -506,7 +512,7 @@ EOF
     [
       app: :kaisen_manpages,
       version: "$kaisen_release.0",
-      elixir: "~> 1.14.2",
+      elixir: "~> 1.14.4",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
 
@@ -548,8 +554,8 @@ EOF
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-    {:ex_doc, "~> 0.29.1", only: :dev, runtime: false},
-    {:earmark, "~> 1.4.34"}
+    {:ex_doc, "~> 0.29.4", only: :dev, runtime: false},
+    {:earmark, "~> 1.4.38"}
       # {:"dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
     ]
   end
