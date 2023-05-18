@@ -254,7 +254,7 @@ func_post_gen_3() {
     rm -f $base_dir/postgen-2/NILFS/nilfs.list
     #Add all LXC/LXD manpages
     echo "* Generating all LXC/LXD manpages"
-    find /usr/share/man -iname "lx[c|d].*" -printf '%f\n' | grep -v -E '.[2-7].[g|x]z$' | sed "s/.[1|8].[g|x]z$//" > $base_dir/postgen-2/LXC/LXC.list
+    find /usr/share/man/man[18] -iname "lx[c|d].*" -printf '%f\n' | sed "s/.[1|8].[g|x]z$//" > $base_dir/postgen-2/LXC/LXC.list
     for lxcitem in $(more $base_dir/postgen-2/LXC/LXC.list); do
     man $lxcitem 2> /dev/null > $base_dir/postgen-2/LXC/$lxcitem.md
     done
@@ -617,7 +617,7 @@ cat <<EOF > $base_dir/postgen-5/categories/README.md
 This documentation contains **$total_manpages manual pages** for applications from **kaisen menu** sorted by categories.  
 Some tools such as Podman and Buildah have many manpages for all their commands. They have therefore been classified as categories in their own right and are not placed in the same category as on the Kaisen Linux menu. 
 
-There is also **$total_manpages5 manpages for configuration files** (man section 5) in the upper right dropdown menu.
+There is also **$total_manpages5 manpages for configuration files** (man5) in the upper right dropdown menu.
 
 You can switch to sorted **$readme_commands** documentation by clicking on the drodpown in the upper-left navbar.
 
@@ -640,7 +640,7 @@ cat <<EOF > $base_dir/postgen-5/commands/README.md
 
 This documentation contains **$total_manpages manual pages** for applications from **kaisen menu** sorted by command name.  
 
-There is also **$total_manpages5 manpages for configuration files** (man section 5) in the upper right dropdown menu.
+There is also **$total_manpages5 manpages for configuration files** (man5) in the upper right dropdown menu.
 
 You can switch to sorted **$readme_commands** documentation by clicking on the drodpown in the upper-left navbar.
 
@@ -661,7 +661,7 @@ cat <<EOF > $base_dir/postgen-5/configuration_files/README.md
 
 # Kaisen Linux | Manpages
 
-This documentation contains **$total_manpages5** configuration manual pages for manpages section 5 from **kaisenlinux**.
+This documentation contains **$total_manpages5** of configuration manuals from section 5 of **kaisenlinux** manpages.
 
 You can switch to sorted **$readme_categories** or **$readme_commands** documentation by clicking on the drodpown in the upper-left navbar.
 
