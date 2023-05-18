@@ -1,4 +1,3 @@
-
 #post_gen_1: remove empty manpages/folders and services files
 #****************************************
 
@@ -470,8 +469,6 @@ cat <<EOF > $base_dir/postgen-4/mix_commands.exs
 end
 EOF
 
-
-
 ## BEGIN : generate MIX MANPAGES 5 : Configuration files
 
 ## Prepare manpages in postgen-man5
@@ -480,6 +477,8 @@ EOF
     apropos -s 5 . >> $base_dir/postgen-man5/configuration_files/man5.list
     
     cut -d " " -f1 $base_dir/postgen-man5/configuration_files/man5.list > $base_dir/postgen-man5/configuration_files/configuration_files.list
+    sort $base_dir/postgen-man5/configuration_files.list > $base_dir/postgen-man5/configuration_files.list.sort
+    mv $base_dir/postgen-man5/configuration_files.list.sort $base_dir/postgen-man5/configuration_files.list
     rm $base_dir/postgen-man5/configuration_files/man5.list
     # remove . files
     sed -i '/^\./d' $base_dir/postgen-man5/configuration_files/configuration_files.list
@@ -489,12 +488,12 @@ EOF
     done
     # remove files staring with .
     find $base_dir/postgen-man5/ -name ".*.md" -exec rm -f {} \;
-    
-    
  
  ## Generate mix files
-    # mv man5 list in postegn4
+    # mv man5 list in postgen4
     mv $base_dir/postgen-man5/configuration_files/configuration_files.list $base_dir/postgen-4/configuration_files.list
+    sort $base_dir/postgen-4/configuration_files.list > $base_dir/postgen-4/configuration_files.list.sort
+    mv $base_dir/postgen-4/configuration_files.list.sort $base_dir/postgen-4/configuration_files.list
     # generate list of files in .md
     sed -i 's/$/.md/g' $base_dir/postgen-4/configuration_files.list
     # prepare mix dir for extras 
@@ -502,6 +501,8 @@ EOF
         echo  "\"configuration_files/$cfg\"," >> $base_dir/postgen-4/configuration_files_extras.list
     done
     sed -i '$s/,/ /' $base_dir/postgen-4/configuration_files_extras.list
+    sort $base_dir/postgen-4/configuration_files_extras.list > $base_dir/postgen-4/configuration_files_extras.list.sort
+    mv $base_dir/postgen-4/configuration_files_extras.list.sort $base_dir/postgen-4/configuration_files_extras.list
 
     ## extras file generation
     cat <<EOF > $base_dir/postgen-4/mix_configuration_files.exs  
@@ -567,9 +568,6 @@ EOF
   defp docs_before_closing_head_tag(_), do: ""
 end
 EOF
-   
-
-
 
 ## END : generate MIX MANPAGES 5 : Configuration files
 
@@ -682,5 +680,3 @@ echo "* Adding updated README for categories & commands & configuration_files fo
 
 
 }
-
-
