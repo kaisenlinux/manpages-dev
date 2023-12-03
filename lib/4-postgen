@@ -331,7 +331,7 @@ defmodule KaisenManpages.MixProject do
     [
       app: :kaisen_manpages,
       version: "$kaisen_release.0",
-      elixir: "~> 1.14.4",
+      elixir: "~> 1.15.7",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
 
@@ -343,7 +343,7 @@ defmodule KaisenManpages.MixProject do
          main: "readme",
          source_ref: "sort by categories",
          api_reference: false,
-         logo: "priv/assets/kaisen-logo.jpg",
+         logo: "priv/assets/kaisen.png",
          assets: "priv/assets",
          before_closing_head_tag: &docs_before_closing_head_tag/1,
          formatters: ["html"],
@@ -376,8 +376,8 @@ defmodule KaisenManpages.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-    {:ex_doc, "~> 0.29.4", only: :dev, runtime: false},
-    {:earmark, "~> 1.4.38"}
+    {:ex_doc, "~> 0.30.9", only: :dev, runtime: false},
+    {:earmark, "~> 1.4.46"}
       # {:"dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
     ]
   end
@@ -409,7 +409,7 @@ cat <<EOF > $base_dir/postgen-4/mix_commands.exs
     [
       app: :kaisen_manpages,
       version: "$kaisen_release.0",
-      elixir: "~> 1.14.4",
+      elixir: "~> 1.15.7",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
 
@@ -421,7 +421,7 @@ cat <<EOF > $base_dir/postgen-4/mix_commands.exs
          main: "readme",
          source_ref: "sort by commands",
          api_reference: false,
-         logo: "priv/assets/kaisen-logo.jpg",
+         logo: "priv/assets/kaisen.png",
          assets: "priv/assets",
          before_closing_head_tag: &docs_before_closing_head_tag/1,
          formatters: ["html"],
@@ -455,8 +455,8 @@ cat <<EOF > $base_dir/postgen-4/mix_commands.exs
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-    {:ex_doc, "~> 0.29.4", only: :dev, runtime: false},
-    {:earmark, "~> 1.4.38"}
+    {:ex_doc, "~> 0.30.9", only: :dev, runtime: false},
+    {:earmark, "~> 1.4.46"}
       # {:"dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
     ]
   end
@@ -513,7 +513,7 @@ EOF
     [
       app: :kaisen_manpages,
       version: "$kaisen_release.0",
-      elixir: "~> 1.14.4",
+      elixir: "~> 1.15.7",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
 
@@ -525,7 +525,7 @@ EOF
          main: "readme",
          source_ref: "sort by configuration files",
          api_reference: false,
-         logo: "priv/assets/kaisen-logo.jpg",
+         logo: "priv/assets/kaisen.png",
          assets: "priv/assets",
          before_closing_head_tag: &docs_before_closing_head_tag/1,
          formatters: ["html"],
@@ -555,8 +555,8 @@ EOF
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-    {:ex_doc, "~> 0.29.4", only: :dev, runtime: false},
-    {:earmark, "~> 1.4.38"}
+    {:ex_doc, "~> 0.30.9", only: :dev, runtime: false},
+    {:earmark, "~> 1.4.46"}
       # {:"dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
     ]
   end
