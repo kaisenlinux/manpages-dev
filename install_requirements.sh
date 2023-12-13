@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 # DESCRIPTION : install asdf manager
 # REQUIREMENTS : sudo (don't run this script with sudo)
 # USAGE1 : chmod +x install-asdf.sh && ./install-asdf.sh
