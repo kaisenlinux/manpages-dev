@@ -26,7 +26,7 @@ echo "Installation done"
 echo "Enter in your terminal :
 asdf plugin-add erlang && asdf plugin-add elixir
 asdf install erlang 26.2 && asdf install elixir 1.15.7-otp-26
-asdf global erlang 26.2 && asdf local elixir 1.15.7-otp-26
+asdf global erlang 26.2 && asdf local elixir 1.15.7-otp-26"
 exec bash
 else
 # asdf zsh
