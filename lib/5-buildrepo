@@ -21,7 +21,7 @@ done
   cp -Rf $base_dir/postgen-5/* .
   echo "* Copy $base_dir/postgen-5 in root manpages-dev folder"
   echo "elixir 1.15.7-otp-26" > .tool-versions
-  echo "erlang 26.1.2" >> .tool-versions
+  echo "erlang 26.2" >> .tool-versions
 
   echo "you can now run install_requirements.sh and mix_build.sh !"
 }
