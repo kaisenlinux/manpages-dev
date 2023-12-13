@@ -8,7 +8,7 @@
 asdf_git="https://github.com/asdf-vm/asdf.git"
 asdf_version="v0.13.1"
 # requirements on linux (git or minimal with git-core)
-sudo apt install curl git libssl-dev automake autoconf libncurses5-dev make gcc unzip -y
+sudo apt install curl git libssl-dev automake autoconf libncurses-dev make gcc unzip -y
 
 # clone the latest branch via git
 git clone $asdf_git ~/.asdf --branch $asdf_version
