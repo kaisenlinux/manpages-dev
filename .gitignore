@@ -25,9 +25,6 @@ kaisen_manpages-*.tar
 # Ignore elixir ls
 /.elixir_ls/
 
-# ignore .tool-versions
-.tool-versions
-
 # ignore mix.lock file
 mix.lock
 
