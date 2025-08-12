@@ -331,7 +331,7 @@ defmodule KaisenManpages.MixProject do
     [
       app: :kaisen_manpages,
       version: "$kaisen_release.0",
-      elixir: "~> 1.15.7",
+      elixir: "~> 1.18.4",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
 
@@ -341,14 +341,13 @@ defmodule KaisenManpages.MixProject do
       authors: "Arnaud Cormier & Kevin Chevreuil",
       docs: [
          main: "readme",
-         source_ref: "sort by categories",
+         source_ref: "Tools categories manpages",
          api_reference: false,
          logo: "priv/assets/kaisen.png",
          assets: "priv/assets",
          before_closing_head_tag: &docs_before_closing_head_tag/1,
          formatters: ["html"],
          extra_section: "MANUALS",
-    javascript_config_path: "doc-versions.js",
          extras: [
           "categories/README.md",
          $(cat $base_dir/postgen-4/md_extras.list)
@@ -376,8 +375,8 @@ defmodule KaisenManpages.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-    {:ex_doc, "~> 0.31.0", only: :dev, runtime: false},
-    {:earmark, "~> 1.4.46"}
+    {:ex_doc, "~> 0.38.2", only: :dev, runtime: false},
+    {:earmark, "~> 1.4.48"}
       # {:"dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
     ]
   end
@@ -409,7 +408,7 @@ cat <<EOF > $base_dir/postgen-4/mix_commands.exs
     [
       app: :kaisen_manpages,
       version: "$kaisen_release.0",
-      elixir: "~> 1.15.7",
+      elixir: "~> 1.18.4",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
 
@@ -419,15 +418,14 @@ cat <<EOF > $base_dir/postgen-4/mix_commands.exs
       authors: "Arnaud Cormier & Kevin Chevreuil",
       docs: [
          main: "readme",
-         source_ref: "sort by commands",
+         source_ref: "Commands",
          api_reference: false,
          logo: "priv/assets/kaisen.png",
          assets: "priv/assets",
          before_closing_head_tag: &docs_before_closing_head_tag/1,
          formatters: ["html"],
          extra_section: "MANUALS",
- 	 javascript_config_path: "doc-versions.js",
-    output: "doc/commands",
+         output: "doc/commands",
          extras: [
           "commands/README.md",
           $(cat $base_dir/postgen-4/commands_extras.list)
@@ -438,7 +436,7 @@ cat <<EOF > $base_dir/postgen-4/mix_commands.exs
       #],"",
       groups_for_extras: [
      # "SubMenu SysOps": [~r"/ansible", ~r"/docker", ~r"/jmeter", ~r"/kube", ~r"/lxc", ~r"/packer", ~r"/puppet", ~r"/vagrant"],
-      "Menu Commands": Path.wildcard("commands/*.md")
+      "Command name manpages": Path.wildcard("commands/*.md")
    ],
 
     ],
@@ -455,8 +453,8 @@ cat <<EOF > $base_dir/postgen-4/mix_commands.exs
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-    {:ex_doc, "~> 0.31.0", only: :dev, runtime: false},
-    {:earmark, "~> 1.4.46"}
+    {:ex_doc, "~> 0.38.2", only: :dev, runtime: false},
+    {:earmark, "~> 1.4.48"}
       # {:"dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
     ]
   end
@@ -496,7 +494,7 @@ EOF
     mv $base_dir/postgen-4/configuration_files.list.sort $base_dir/postgen-4/configuration_files.list
     # generate list of files in .md
     sed -i 's/$/.md/g' $base_dir/postgen-4/configuration_files.list
-    # prepare mix dir for extras 
+    # prepare mix dir for extras 
      for cfg in $(more $base_dir/postgen-4/configuration_files.list); do
         echo  "\"configuration_files/$cfg\"," >> $base_dir/postgen-4/configuration_files_extras.list
     done
@@ -513,7 +511,7 @@ EOF
     [
       app: :kaisen_manpages,
       version: "$kaisen_release.0",
-      elixir: "~> 1.15.7",
+      elixir: "~> 1.18.4",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
 
@@ -523,22 +521,21 @@ EOF
       authors: "Arnaud Cormier & Kevin Chevreuil",
       docs: [
          main: "readme",
-         source_ref: "sort by configuration files",
+         source_ref: "Configuration files manpages",
          api_reference: false,
          logo: "priv/assets/kaisen.png",
          assets: "priv/assets",
          before_closing_head_tag: &docs_before_closing_head_tag/1,
          formatters: ["html"],
          extra_section: "MANUALS",
- 	 javascript_config_path: "doc-versions.js",
-    output: "doc/configuration_files",
+         output: "doc/configuration_files",
          extras: [
           "configuration_files/README.md",
           $(cat $base_dir/postgen-4/configuration_files_extras.list)
    
      ],
       groups_for_extras: [
-      "Menu Commands": Path.wildcard("configuration_files/*.md")
+      "Configurations files manpages": Path.wildcard("configuration_files/*.md")
    ],
 
     ],
@@ -555,8 +552,8 @@ EOF
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-    {:ex_doc, "~> 0.31.0", only: :dev, runtime: false},
-    {:earmark, "~> 1.4.46"}
+    {:ex_doc, "~> 0.38.2", only: :dev, runtime: false},
+    {:earmark, "~> 1.4.48"}
       # {:"dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
     ]
   end
@@ -601,25 +598,29 @@ func_post_gen_5() {
 func_post_gen_5bis() {
 
 total_manpages=$(find $base_dir/postgen-5/commands/ -iname "*.md" ! -name README.md | wc -l)
-readme_commands="by commands"
-readme_categories="by categories"
+readme_commands="command name"
+readme_categories="tools categories"
 # man 5
 total_manpages5=$(find $base_dir/postgen-5/configuration_files/ -iname "*.md" ! -name README.md | wc -l)
-readme_configuration_files="by configuration files"
+readme_configuration_files="configuration files manpages"
 
 
-cat <<EOF > $base_dir/postgen-5/categories/README.md 
+cat <<EOF > $base_dir/postgen-5/categories/README.md
 
 # Kaisen Linux | Manpages
 
 This documentation contains **$total_manpages manual pages** for applications from **kaisen menu** sorted by categories.  
 Some tools such as Podman and Buildah have many manpages for all their commands. They have therefore been classified as categories in their own right and are not placed in the same category as on the Kaisen Linux menu. 
 
-There is also **$total_manpages5 manpages for configuration files** (man5) in the upper right dropdown menu.
-
-You can switch to sorted **$readme_commands** documentation by clicking on the drodpown in the upper-left navbar.
-
 ![kaisen-menu](assets/kaisen_menu.png)
+
+## Manpages by command name
+
+You can switch to sorted manpages by **$readme_commands** [by clicking here](./commands/readme.html)
+
+## Configuration files manpages
+
+There is also **$total_manpages5 manpages for configuration files** (man5) [by clicking here](./configuration_files/readme.html)
 
 ## Other Links
 
@@ -627,9 +628,9 @@ You can switch to sorted **$readme_commands** documentation by clicking on the d
 * Check the [official Kaisen Linux documentation](https://kaisenlinux.org/documentation/).
 * Check [Debian testing manpages](https://manpages.debian.org/contents-testing.html) for additionnal help. 
 
-## Contributor
+## Contributors
 
-Manpages for Kaisen Linux made by Arnaud Cormier - freelance at [htop](https://htop.fr)
+Manpages for Kaisen Linux made by Arnaud Cormier and Kevin Chevreuil
 EOF
 
 cat <<EOF > $base_dir/postgen-5/commands/README.md 
@@ -638,11 +639,15 @@ cat <<EOF > $base_dir/postgen-5/commands/README.md
 
 This documentation contains **$total_manpages manual pages** for applications from **kaisen menu** sorted by command name.  
 
-There is also **$total_manpages5 manpages for configuration files** (man5) in the upper right dropdown menu.
-
-You can switch to sorted **$readme_commands** documentation by clicking on the drodpown in the upper-left navbar.
-
 ![kaisen-menu](assets/kaisen_menu.png)
+
+## Tools by categories manpages
+
+You can switch to sorted manpages by **$readme_categories** [by clicking here](../readme.html)
+
+## Configuration files manpages
+
+There is also **$total_manpages5 manpages for configuration files** (man5) [by clicking here](../configuration_files/readme.html)
 
 ## Other Links
 
@@ -650,9 +655,9 @@ You can switch to sorted **$readme_commands** documentation by clicking on the d
 * Check the [official Kaisen Linux documentation](https://kaisenlinux.org/documentation/).
 * Check [Debian testing manpages](https://manpages.debian.org/contents-testing.html) for additionnal help. 
 
-## Contributor
+## Contributors
 
-Manpages for Kaisen Linux made by Arnaud Cormier - freelance at [htop](https://htop.fr)
+Manpages for Kaisen Linux made by Arnaud Cormier and Kevin Chevreuil
 EOF
 
 cat <<EOF > $base_dir/postgen-5/configuration_files/README.md 
@@ -661,9 +666,15 @@ cat <<EOF > $base_dir/postgen-5/configuration_files/README.md
 
 This documentation contains **$total_manpages5** of configuration manuals from section 5 of **kaisenlinux** manpages.
 
-You can switch to sorted **$readme_categories** or **$readme_commands** documentation by clicking on the drodpown in the upper-left navbar.
-
 ![kaisen-menu](assets/kaisen_menu.png)
+
+## Manpages by command name
+
+You can switch to sorted manpages by **$readme_commands** [by clicking here](../commands/readme.html)
+
+## Tools by categories manpages
+
+You can also switch to sorted manpages **$readme_categories** [by clicking here](../readme.html)
 
 ## Other Links
 
@@ -671,12 +682,10 @@ You can switch to sorted **$readme_categories** or **$readme_commands** document
 * Check the [official Kaisen Linux documentation](https://kaisenlinux.org/documentation/).
 * Check [Debian testing manpages](https://manpages.debian.org/contents-testing.html) for additionnal help. 
 
-## Contributor
+## Contributors
 
-Manpages for Kaisen Linux made by Arnaud Cormier - freelance at [htop](https://htop.fr)
+Manpages for Kaisen Linux made by Arnaud Cormier and Kevin Chevreuil
 EOF
 
 echo "* Adding updated README for categories & commands & configuration_files folder in $base_dir/postgen-5"
-
-
 }

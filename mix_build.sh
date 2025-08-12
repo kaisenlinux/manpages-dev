@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
+set -e
+
 # DESCRIPTION : Rename mix files to build doc for category then doc for packages. And check mix dependancy the first time.
 # USAGE : mix_build.sh or mix_build.sh --package
 # DATE : 18/03/2021
@@ -39,24 +41,6 @@ function build_configuration_files () {
 build_categories
 build_commands
 build_configuration_files
-
-
-case $# in
-	0)
-        cp -f priv/assets/doc-versions.js doc/
-        cp -f priv/assets/packages/doc-versions.js doc/commands/
-        cp -f priv/assets/doc-versions-conf.js doc/configuration_files/doc-versions.js
-
-	;;   
- 	1)
-        cp -f priv/assets/doc-versions-packages.js doc/doc-versions.js
-        cp -f priv/assets/packages/doc-versions-packages.js doc/commands/doc-versions.js
-        cp -f priv/assets/packages/doc-versions-conf.js doc/configuration_files/doc-versions.js
-    	;;
-	*)
-	exit
-	;;
-esac
 
 echo "Doc categories builded in doc/ folder"
 echo "Doc commands builded in doc/commandes folder"

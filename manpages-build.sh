@@ -38,6 +38,9 @@ base_dir_parse="output_parse_$(date +%d%m%Y_%HH%M)"
 error_option="ERROR : Command not found, see help below\n"
 
 
+#Clean environment
+rm -rfv categories/ commands/ configuration_files/ output_fullbuild* _build doc *.exs mix.log mix.lock
+
 func_init() {
 
 if [[ -d "lib/" ]]; then
